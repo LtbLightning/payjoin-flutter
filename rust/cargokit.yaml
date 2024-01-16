@@ -1,0 +1,9 @@
+cargo:
+  release:
+    toolchain: nightly
+    extra_flags:
+      - -Z
+      - build-std=panic_abort,std
+precompiled_binaries:
+  url_prefix: https://github.com/LtbLightning/payjoin-flutter/releases/download/precompiled_
+  public_key: ae4d768a1222880207888dc13790e1542815243276ee770fea8e147c79ac7709
