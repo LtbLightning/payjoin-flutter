@@ -1929,19 +1929,6 @@ checksum = "8835116a5c179084a830efb3adc117ab007512b535bc1a21c991d3b32a6b44dd"
 [[package]]
 name = "payjoin"
 version = "0.13.0"
-dependencies = [
- "anyhow",
- "flutter_rust_bridge",
- "flutter_rust_bridge_codegen",
- "lazy_static",
- "payjoin_ffi",
- "serde",
- "serde_json",
-]
-
-[[package]]
-name = "payjoin"
-version = "0.13.0"
 source = "git+https://github.com/payjoin/rust-payjoin?branch=master#e60930c8dd197489abc876d2e828ca389a5cd6bb"
 dependencies = [
  "bhttp",
@@ -1963,10 +1950,23 @@ source = "git+https://github.com/LtbLightning/payjoin-ffi?branch=v0.13#7ec14222c
 dependencies = [
  "bdk",
  "ohttp",
- "payjoin 0.13.0 (git+https://github.com/payjoin/rust-payjoin?branch=master)",
+ "payjoin",
  "thiserror",
  "uniffi",
  "url",
+]
+
+[[package]]
+name = "payjoin_flutter"
+version = "0.13.0"
+dependencies = [
+ "anyhow",
+ "flutter_rust_bridge",
+ "flutter_rust_bridge_codegen",
+ "lazy_static",
+ "payjoin_ffi",
+ "serde",
+ "serde_json",
 ]
 
 [[package]]
