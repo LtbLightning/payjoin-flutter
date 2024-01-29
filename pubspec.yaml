@@ -1,4 +1,4 @@
-name: payjoin
+name: payjoin_flutter
 description: "A new Flutter FFI plugin project."
 version: 0.13.0
 homepage:
@@ -7,7 +7,7 @@ environment:
   sdk: '>=3.2.3 <4.0.0'
   flutter: '>=3.3.0'
 
-ddependencies:
+dependencies:
   flutter:
     sdk: flutter
   collection: ^1.17.1
