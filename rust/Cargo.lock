@@ -1946,7 +1946,6 @@ dependencies = [
 [[package]]
 name = "payjoin_ffi"
 version = "0.13.0"
-source = "git+https://github.com/LtbLightning/payjoin-ffi?branch=v0.13#7ec14222cadaa1983437656eee478700029cb5d4"
 dependencies = [
  "bdk",
  "ohttp",
@@ -1967,6 +1966,7 @@ dependencies = [
  "payjoin_ffi",
  "serde",
  "serde_json",
+ "tokio",
 ]
 
 [[package]]
