@@ -6,14 +6,14 @@ use std::sync::Arc;
 
 use super::receive::PayjoinError;
 
-pub struct RequestBuilder(pub RustOpaque<Arc<payjoin_ffi::send::RequestBuilder>>);
-impl From<Arc<payjoin_ffi::send::RequestBuilder>> for RequestBuilder {
-    fn from(value: Arc<payjoin_ffi::send::RequestBuilder>) -> Self {
+pub struct RequestBuilder(pub RustOpaque<Arc<payjoin_ffi::send::v1::RequestBuilder>>);
+impl From<Arc<payjoin_ffi::send::v1::RequestBuilder>> for RequestBuilder {
+    fn from(value: Arc<payjoin_ffi::send::v1::RequestBuilder>) -> Self {
         Self(RustOpaque::new(value))
     }
 }
-impl From<payjoin_ffi::send::RequestBuilder> for RequestBuilder {
-    fn from(value: payjoin_ffi::send::RequestBuilder) -> Self {
+impl From<payjoin_ffi::send::v1::RequestBuilder> for RequestBuilder {
+    fn from(value: payjoin_ffi::send::v1::RequestBuilder) -> Self {
         Self(RustOpaque::new(Arc::from(value)))
     }
 }
@@ -23,7 +23,10 @@ impl RequestBuilder {
         psbt_base64: String,
         uri: Uri,
     ) -> anyhow::Result<RequestBuilder, PayjoinError> {
-        match payjoin_ffi::send::RequestBuilder::from_psbt_and_uri(psbt_base64, (*uri.0).clone()) {
+        match payjoin_ffi::send::v1::RequestBuilder::from_psbt_and_uri(
+            psbt_base64,
+            (*uri.0).clone(),
+        ) {
             Ok(e) => Ok(e.into()),
             Err(e) => Err(e.into()),
         }
@@ -67,19 +70,19 @@ impl RequestBuilder {
         }
     }
 }
-pub struct RequestContext(pub RustOpaque<Arc<payjoin_ffi::send::RequestContext>>);
-impl From<payjoin_ffi::send::RequestContext> for RequestContext {
-    fn from(value: payjoin_ffi::send::RequestContext) -> Self {
+pub struct RequestContext(pub RustOpaque<Arc<payjoin_ffi::send::v1::RequestContext>>);
+impl From<payjoin_ffi::send::v1::RequestContext> for RequestContext {
+    fn from(value: payjoin_ffi::send::v1::RequestContext) -> Self {
         Self(RustOpaque::new(Arc::from(value)))
     }
 }
 
-impl From<Arc<payjoin_ffi::send::RequestContext>> for RequestContext {
-    fn from(value: Arc<payjoin_ffi::send::RequestContext>) -> Self {
+impl From<Arc<payjoin_ffi::send::v1::RequestContext>> for RequestContext {
+    fn from(value: Arc<payjoin_ffi::send::v1::RequestContext>) -> Self {
         Self(RustOpaque::new(value))
     }
 }
-impl From<RequestContext> for payjoin_ffi::send::RequestContext {
+impl From<RequestContext> for payjoin_ffi::send::v1::RequestContext {
     fn from(value: RequestContext) -> Self {
         (**value.0).clone()
     }
@@ -135,8 +138,8 @@ pub struct RequestContextV1 {
     pub context_v1: ContextV1,
 }
 
-impl From<Arc<payjoin_ffi::send::RequestContextV1>> for RequestContextV1 {
-    fn from(value: Arc<payjoin_ffi::send::RequestContextV1>) -> Self {
+impl From<Arc<payjoin_ffi::send::v1::RequestContextV1>> for RequestContextV1 {
+    fn from(value: Arc<payjoin_ffi::send::v1::RequestContextV1>) -> Self {
         Self {
             request: value.request.clone().into(),
             context_v1: value.context_v1.clone().into(),
@@ -144,8 +147,8 @@ impl From<Arc<payjoin_ffi::send::RequestContextV1>> for RequestContextV1 {
     }
 }
 
-impl From<payjoin_ffi::send::RequestContextV1> for RequestContextV1 {
-    fn from(value: payjoin_ffi::send::RequestContextV1) -> Self {
+impl From<payjoin_ffi::send::v1::RequestContextV1> for RequestContextV1 {
+    fn from(value: payjoin_ffi::send::v1::RequestContextV1) -> Self {
         Self {
             request: value.request.into(),
             context_v1: value.context_v1.into(),
@@ -157,8 +160,8 @@ pub struct RequestContextV2 {
     pub context_v2: ContextV2,
 }
 
-impl From<payjoin_ffi::send::RequestContextV2> for RequestContextV2 {
-    fn from(value: payjoin_ffi::send::RequestContextV2) -> Self {
+impl From<payjoin_ffi::send::v1::RequestContextV2> for RequestContextV2 {
+    fn from(value: payjoin_ffi::send::v1::RequestContextV2) -> Self {
         Self {
             request: value.request.into(),
             context_v2: value.context_v2.into(),
@@ -166,14 +169,14 @@ impl From<payjoin_ffi::send::RequestContextV2> for RequestContextV2 {
     }
 }
 #[derive(Clone)]
-pub struct ContextV1(pub RustOpaque<Arc<payjoin_ffi::send::ContextV1>>);
-impl From<Arc<payjoin_ffi::send::ContextV1>> for ContextV1 {
-    fn from(value: Arc<payjoin_ffi::send::ContextV1>) -> Self {
+pub struct ContextV1(pub RustOpaque<Arc<payjoin_ffi::send::v1::ContextV1>>);
+impl From<Arc<payjoin_ffi::send::v1::ContextV1>> for ContextV1 {
+    fn from(value: Arc<payjoin_ffi::send::v1::ContextV1>) -> Self {
         Self(RustOpaque::new(value))
     }
 }
-impl From<payjoin_ffi::send::ContextV1> for ContextV1 {
-    fn from(value: payjoin_ffi::send::ContextV1) -> Self {
+impl From<payjoin_ffi::send::v1::ContextV1> for ContextV1 {
+    fn from(value: payjoin_ffi::send::v1::ContextV1) -> Self {
         Self(RustOpaque::new(Arc::new(value)))
     }
 }
