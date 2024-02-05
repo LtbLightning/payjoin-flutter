@@ -65,7 +65,6 @@ pub enum PayjoinError {
     },
 }
 
-
 macro_rules! from_payjoin_ffi_error {
     ($($variant:ident),*) => {
         impl From<payjoin_ffi::error::PayjoinError> for PayjoinError {
