@@ -1,32 +1,33 @@
 use crate::frb_generated::RustOpaque;
 pub use crate::utils::error::PayjoinError;
+use flutter_rust_bridge::DartFnFuture;
 use std::collections::HashMap;
 use std::sync::Arc;
 
 #[derive(Clone)]
 pub struct Headers(pub HashMap<String, String>);
 
-impl From<Headers> for payjoin_ffi::receive::Headers {
+impl From<Headers> for payjoin_ffi::receive::v1::Headers {
     fn from(value: Headers) -> Self {
-        payjoin_ffi::receive::Headers(value.0)
+        payjoin_ffi::receive::v1::Headers(value.0)
     }
 }
 
-impl From<payjoin_ffi::receive::Headers> for Headers {
-    fn from(value: payjoin_ffi::receive::Headers) -> Self {
+impl From<payjoin_ffi::receive::v1::Headers> for Headers {
+    fn from(value: payjoin_ffi::receive::v1::Headers) -> Self {
         Headers(value.0)
     }
 }
 
 impl Headers {
     pub fn from_vec(body: Vec<u8>) -> Headers {
-        payjoin_ffi::receive::Headers::from_vec(body).into()
+        payjoin_ffi::receive::v1::Headers::from_vec(body).into()
     }
 }
 
-pub struct UncheckedProposal(pub RustOpaque<payjoin_ffi::receive::UncheckedProposal>);
-impl From<payjoin_ffi::receive::UncheckedProposal> for UncheckedProposal {
-    fn from(value: payjoin_ffi::receive::UncheckedProposal) -> Self {
+pub struct UncheckedProposal(pub RustOpaque<payjoin_ffi::receive::v1::UncheckedProposal>);
+impl From<payjoin_ffi::receive::v1::UncheckedProposal> for UncheckedProposal {
+    fn from(value: payjoin_ffi::receive::v1::UncheckedProposal) -> Self {
         Self(RustOpaque::new(value))
     }
 }
@@ -37,7 +38,7 @@ impl UncheckedProposal {
         query: String,
         headers: Headers,
     ) -> Result<UncheckedProposal, PayjoinError> {
-        match payjoin_ffi::receive::UncheckedProposal::from_request(
+        match payjoin_ffi::receive::v1::UncheckedProposal::from_request(
             body,
             query,
             Arc::new(headers.into()),
@@ -59,33 +60,27 @@ impl UncheckedProposal {
     /// Do this check if you generate bitcoin uri to receive Payjoin on sender request without manual human approval, like a payment processor. Such so called “non-interactive” receivers are otherwise vulnerable to probing attacks. If a sender can make requests at will, they can learn which bitcoin the receiver owns at no cost. Broadcasting the Original PSBT after some time in the failure case makes incurs sender cost and prevents probing.
     ///
     /// Call this after checking downstream.
-    pub async fn check_broadcast_suitability(
+    pub fn check_broadcast_suitability(
         &self,
         min_fee_rate: Option<u64>,
-        can_broadcast: Box<dyn Fn(Vec<u8>) -> Result<bool, PayjoinError> + Send + Sync>,
+        can_broadcast: impl Fn(Vec<u8>) -> DartFnFuture<bool>,
     ) -> Result<MaybeInputsOwned, PayjoinError> {
+        let runtime = tokio::runtime::Runtime::new().unwrap();
+
         match self
             .0
-            .check_broadcast_suitability(min_fee_rate, Box::new(CanBroadcast(can_broadcast)))
-        {
+            .check_broadcast_suitability_with_callback(min_fee_rate, |x| {
+                Ok(runtime.block_on(can_broadcast(x.clone())))
+            }) {
             Ok(e) => Ok(e.into()),
             Err(e) => Err(e.into()),
         }
     }
 }
 
-pub struct MaybeInputsOwned(pub RustOpaque<Arc<payjoin_ffi::receive::MaybeInputsOwned>>);
-impl From<Arc<payjoin_ffi::receive::MaybeInputsOwned>> for MaybeInputsOwned {
-    fn from(value: Arc<payjoin_ffi::receive::MaybeInputsOwned>) -> Self {
+pub struct MaybeInputsOwned(pub RustOpaque<Arc<payjoin_ffi::receive::v1::MaybeInputsOwned>>);
+impl From<Arc<payjoin_ffi::receive::v1::MaybeInputsOwned>> for MaybeInputsOwned {
+    fn from(value: Arc<payjoin_ffi::receive::v1::MaybeInputsOwned>) -> Self {
         Self(RustOpaque::new(value))
     }
 }
-
-pub struct CanBroadcast(Box<dyn Fn(Vec<u8>) -> Result<bool, PayjoinError> + Send + Sync>);
-impl payjoin_ffi::receive::CanBroadcast for CanBroadcast {
-    fn callback(&self, tx: Vec<u8>) -> Result<bool, payjoin_ffi::error::PayjoinError> {
-        self.0(tx).map_err(|e| e.into())
-    }
-}
-
-
