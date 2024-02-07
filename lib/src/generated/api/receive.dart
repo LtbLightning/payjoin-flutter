@@ -7,62 +7,43 @@ import '../frb_generated.dart';
 import '../utils/error.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
-// Rust type: RustOpaqueMoi<Arc < payjoin_ffi :: receive :: MaybeInputsOwned >>
+// Rust type: RustOpaqueNom<Arc < payjoin_ffi :: receive :: v1 :: MaybeInputsOwned >>
 @sealed
-class ArcPayjoinFfiReceiveMaybeInputsOwned extends RustOpaque {
-  ArcPayjoinFfiReceiveMaybeInputsOwned.dcoDecode(List<dynamic> wire)
+class ArcPayjoinFfiReceiveV1MaybeInputsOwned extends RustOpaque {
+  ArcPayjoinFfiReceiveV1MaybeInputsOwned.dcoDecode(List<dynamic> wire)
       : super.dcoDecode(wire, _kStaticData);
 
-  ArcPayjoinFfiReceiveMaybeInputsOwned.sseDecode(
+  ArcPayjoinFfiReceiveV1MaybeInputsOwned.sseDecode(
       int ptr, int externalSizeOnNative)
       : super.sseDecode(ptr, externalSizeOnNative, _kStaticData);
 
   static final _kStaticData = RustArcStaticData(
-    rustArcIncrementStrongCount: RustLib.instance.api
-        .rust_arc_increment_strong_count_ArcPayjoinFfiReceiveMaybeInputsOwned,
-    rustArcDecrementStrongCount: RustLib.instance.api
-        .rust_arc_decrement_strong_count_ArcPayjoinFfiReceiveMaybeInputsOwned,
-    rustArcDecrementStrongCountPtr: RustLib.instance.api
-        .rust_arc_decrement_strong_count_ArcPayjoinFfiReceiveMaybeInputsOwnedPtr,
+    rustArcIncrementStrongCount: PayjoinCore.instance.api
+        .rust_arc_increment_strong_count_ArcPayjoinFfiReceiveV1MaybeInputsOwned,
+    rustArcDecrementStrongCount: PayjoinCore.instance.api
+        .rust_arc_decrement_strong_count_ArcPayjoinFfiReceiveV1MaybeInputsOwned,
+    rustArcDecrementStrongCountPtr: PayjoinCore.instance.api
+        .rust_arc_decrement_strong_count_ArcPayjoinFfiReceiveV1MaybeInputsOwnedPtr,
   );
 }
 
-// Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::rust_async::RwLock<Box < dyn Fn (Vec < u8 >) -> Result < bool , PayjoinError > + Send + Sync >>>
+// Rust type: RustOpaqueNom<payjoin_ffi :: receive :: v1 :: UncheckedProposal>
 @sealed
-class BoxFnVecU8ResultBoolPayjoinError extends RustOpaque {
-  BoxFnVecU8ResultBoolPayjoinError.dcoDecode(List<dynamic> wire)
+class PayjoinFfiReceiveV1UncheckedProposal extends RustOpaque {
+  PayjoinFfiReceiveV1UncheckedProposal.dcoDecode(List<dynamic> wire)
       : super.dcoDecode(wire, _kStaticData);
 
-  BoxFnVecU8ResultBoolPayjoinError.sseDecode(int ptr, int externalSizeOnNative)
-      : super.sseDecode(ptr, externalSizeOnNative, _kStaticData);
-
-  static final _kStaticData = RustArcStaticData(
-    rustArcIncrementStrongCount: RustLib.instance.api
-        .rust_arc_increment_strong_count_BoxFnVecU8ResultBoolPayjoinError,
-    rustArcDecrementStrongCount: RustLib.instance.api
-        .rust_arc_decrement_strong_count_BoxFnVecU8ResultBoolPayjoinError,
-    rustArcDecrementStrongCountPtr: RustLib.instance.api
-        .rust_arc_decrement_strong_count_BoxFnVecU8ResultBoolPayjoinErrorPtr,
-  );
-}
-
-// Rust type: RustOpaqueMoi<payjoin_ffi :: receive :: UncheckedProposal>
-@sealed
-class PayjoinFfiReceiveUncheckedProposal extends RustOpaque {
-  PayjoinFfiReceiveUncheckedProposal.dcoDecode(List<dynamic> wire)
-      : super.dcoDecode(wire, _kStaticData);
-
-  PayjoinFfiReceiveUncheckedProposal.sseDecode(
+  PayjoinFfiReceiveV1UncheckedProposal.sseDecode(
       int ptr, int externalSizeOnNative)
       : super.sseDecode(ptr, externalSizeOnNative, _kStaticData);
 
   static final _kStaticData = RustArcStaticData(
-    rustArcIncrementStrongCount: RustLib.instance.api
-        .rust_arc_increment_strong_count_PayjoinFfiReceiveUncheckedProposal,
-    rustArcDecrementStrongCount: RustLib.instance.api
-        .rust_arc_decrement_strong_count_PayjoinFfiReceiveUncheckedProposal,
-    rustArcDecrementStrongCountPtr: RustLib.instance.api
-        .rust_arc_decrement_strong_count_PayjoinFfiReceiveUncheckedProposalPtr,
+    rustArcIncrementStrongCount: PayjoinCore.instance.api
+        .rust_arc_increment_strong_count_PayjoinFfiReceiveV1UncheckedProposal,
+    rustArcDecrementStrongCount: PayjoinCore.instance.api
+        .rust_arc_decrement_strong_count_PayjoinFfiReceiveV1UncheckedProposal,
+    rustArcDecrementStrongCountPtr: PayjoinCore.instance.api
+        .rust_arc_decrement_strong_count_PayjoinFfiReceiveV1UncheckedProposalPtr,
   );
 }
 
@@ -74,7 +55,7 @@ class Headers {
   });
 
   static Future<Headers> fromVec({required List<int> body, dynamic hint}) =>
-      RustLib.instance.api.headersFromVec(body: body, hint: hint);
+      PayjoinCore.instance.api.headersFromVec(body: body, hint: hint);
 
   @override
   int get hashCode => field0.hashCode;
@@ -88,7 +69,7 @@ class Headers {
 }
 
 class MaybeInputsOwned {
-  final ArcPayjoinFfiReceiveMaybeInputsOwned field0;
+  final ArcPayjoinFfiReceiveV1MaybeInputsOwned field0;
 
   const MaybeInputsOwned({
     required this.field0,
@@ -106,7 +87,7 @@ class MaybeInputsOwned {
 }
 
 class UncheckedProposal {
-  final PayjoinFfiReceiveUncheckedProposal field0;
+  final PayjoinFfiReceiveV1UncheckedProposal field0;
 
   const UncheckedProposal({
     required this.field0,
@@ -121,9 +102,9 @@ class UncheckedProposal {
   /// Call this after checking downstream.
   Future<MaybeInputsOwned> checkBroadcastSuitability(
           {int? minFeeRate,
-          required BoxFnVecU8ResultBoolPayjoinError canBroadcast,
+          required FutureOr<bool> Function(Uint8List) canBroadcast,
           dynamic hint}) =>
-      RustLib.instance.api.uncheckedProposalCheckBroadcastSuitability(
+      PayjoinCore.instance.api.uncheckedProposalCheckBroadcastSuitability(
         that: this,
         minFeeRate: minFeeRate,
         canBroadcast: canBroadcast,
@@ -131,7 +112,7 @@ class UncheckedProposal {
 
   /// The Sender’s Original PSBT
   Future<Uint8List> extractTxToScheduleBroadcast({dynamic hint}) =>
-      RustLib.instance.api.uncheckedProposalExtractTxToScheduleBroadcast(
+      PayjoinCore.instance.api.uncheckedProposalExtractTxToScheduleBroadcast(
         that: this,
       );
 
@@ -140,7 +121,7 @@ class UncheckedProposal {
           required String query,
           required Headers headers,
           dynamic hint}) =>
-      RustLib.instance.api.uncheckedProposalFromRequest(
+      PayjoinCore.instance.api.uncheckedProposalFromRequest(
           body: body, query: query, headers: headers, hint: hint);
 
   @override

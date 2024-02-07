@@ -8,64 +8,64 @@ import '../utils/error.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'uri.dart';
 
-// Rust type: RustOpaqueMoi<Arc < payjoin_ffi :: send :: ContextV1 >>
+// Rust type: RustOpaqueNom<Arc < payjoin_ffi :: send :: v1 :: ContextV1 >>
 @sealed
-class ArcPayjoinFfiSendContextV1 extends RustOpaque {
-  ArcPayjoinFfiSendContextV1.dcoDecode(List<dynamic> wire)
+class ArcPayjoinFfiSendV1ContextV1 extends RustOpaque {
+  ArcPayjoinFfiSendV1ContextV1.dcoDecode(List<dynamic> wire)
       : super.dcoDecode(wire, _kStaticData);
 
-  ArcPayjoinFfiSendContextV1.sseDecode(int ptr, int externalSizeOnNative)
+  ArcPayjoinFfiSendV1ContextV1.sseDecode(int ptr, int externalSizeOnNative)
       : super.sseDecode(ptr, externalSizeOnNative, _kStaticData);
 
   static final _kStaticData = RustArcStaticData(
-    rustArcIncrementStrongCount: RustLib.instance.api
-        .rust_arc_increment_strong_count_ArcPayjoinFfiSendContextV1,
-    rustArcDecrementStrongCount: RustLib.instance.api
-        .rust_arc_decrement_strong_count_ArcPayjoinFfiSendContextV1,
-    rustArcDecrementStrongCountPtr: RustLib.instance.api
-        .rust_arc_decrement_strong_count_ArcPayjoinFfiSendContextV1Ptr,
+    rustArcIncrementStrongCount: PayjoinCore.instance.api
+        .rust_arc_increment_strong_count_ArcPayjoinFfiSendV1ContextV1,
+    rustArcDecrementStrongCount: PayjoinCore.instance.api
+        .rust_arc_decrement_strong_count_ArcPayjoinFfiSendV1ContextV1,
+    rustArcDecrementStrongCountPtr: PayjoinCore.instance.api
+        .rust_arc_decrement_strong_count_ArcPayjoinFfiSendV1ContextV1Ptr,
   );
 }
 
-// Rust type: RustOpaqueMoi<Arc < payjoin_ffi :: send :: RequestBuilder >>
+// Rust type: RustOpaqueNom<Arc < payjoin_ffi :: send :: v1 :: RequestBuilder >>
 @sealed
-class ArcPayjoinFfiSendRequestBuilder extends RustOpaque {
-  ArcPayjoinFfiSendRequestBuilder.dcoDecode(List<dynamic> wire)
+class ArcPayjoinFfiSendV1RequestBuilder extends RustOpaque {
+  ArcPayjoinFfiSendV1RequestBuilder.dcoDecode(List<dynamic> wire)
       : super.dcoDecode(wire, _kStaticData);
 
-  ArcPayjoinFfiSendRequestBuilder.sseDecode(int ptr, int externalSizeOnNative)
+  ArcPayjoinFfiSendV1RequestBuilder.sseDecode(int ptr, int externalSizeOnNative)
       : super.sseDecode(ptr, externalSizeOnNative, _kStaticData);
 
   static final _kStaticData = RustArcStaticData(
-    rustArcIncrementStrongCount: RustLib.instance.api
-        .rust_arc_increment_strong_count_ArcPayjoinFfiSendRequestBuilder,
-    rustArcDecrementStrongCount: RustLib.instance.api
-        .rust_arc_decrement_strong_count_ArcPayjoinFfiSendRequestBuilder,
-    rustArcDecrementStrongCountPtr: RustLib.instance.api
-        .rust_arc_decrement_strong_count_ArcPayjoinFfiSendRequestBuilderPtr,
+    rustArcIncrementStrongCount: PayjoinCore.instance.api
+        .rust_arc_increment_strong_count_ArcPayjoinFfiSendV1RequestBuilder,
+    rustArcDecrementStrongCount: PayjoinCore.instance.api
+        .rust_arc_decrement_strong_count_ArcPayjoinFfiSendV1RequestBuilder,
+    rustArcDecrementStrongCountPtr: PayjoinCore.instance.api
+        .rust_arc_decrement_strong_count_ArcPayjoinFfiSendV1RequestBuilderPtr,
   );
 }
 
-// Rust type: RustOpaqueMoi<Arc < payjoin_ffi :: send :: RequestContext >>
+// Rust type: RustOpaqueNom<Arc < payjoin_ffi :: send :: v1 :: RequestContext >>
 @sealed
-class ArcPayjoinFfiSendRequestContext extends RustOpaque {
-  ArcPayjoinFfiSendRequestContext.dcoDecode(List<dynamic> wire)
+class ArcPayjoinFfiSendV1RequestContext extends RustOpaque {
+  ArcPayjoinFfiSendV1RequestContext.dcoDecode(List<dynamic> wire)
       : super.dcoDecode(wire, _kStaticData);
 
-  ArcPayjoinFfiSendRequestContext.sseDecode(int ptr, int externalSizeOnNative)
+  ArcPayjoinFfiSendV1RequestContext.sseDecode(int ptr, int externalSizeOnNative)
       : super.sseDecode(ptr, externalSizeOnNative, _kStaticData);
 
   static final _kStaticData = RustArcStaticData(
-    rustArcIncrementStrongCount: RustLib.instance.api
-        .rust_arc_increment_strong_count_ArcPayjoinFfiSendRequestContext,
-    rustArcDecrementStrongCount: RustLib.instance.api
-        .rust_arc_decrement_strong_count_ArcPayjoinFfiSendRequestContext,
-    rustArcDecrementStrongCountPtr: RustLib.instance.api
-        .rust_arc_decrement_strong_count_ArcPayjoinFfiSendRequestContextPtr,
+    rustArcIncrementStrongCount: PayjoinCore.instance.api
+        .rust_arc_increment_strong_count_ArcPayjoinFfiSendV1RequestContext,
+    rustArcDecrementStrongCount: PayjoinCore.instance.api
+        .rust_arc_decrement_strong_count_ArcPayjoinFfiSendV1RequestContext,
+    rustArcDecrementStrongCountPtr: PayjoinCore.instance.api
+        .rust_arc_decrement_strong_count_ArcPayjoinFfiSendV1RequestContextPtr,
   );
 }
 
-// Rust type: RustOpaqueMoi<Arc < payjoin_ffi :: send :: v2 :: ContextV2 >>
+// Rust type: RustOpaqueNom<Arc < payjoin_ffi :: send :: v2 :: ContextV2 >>
 @sealed
 class ArcPayjoinFfiSendV2ContextV2 extends RustOpaque {
   ArcPayjoinFfiSendV2ContextV2.dcoDecode(List<dynamic> wire)
@@ -75,16 +75,16 @@ class ArcPayjoinFfiSendV2ContextV2 extends RustOpaque {
       : super.sseDecode(ptr, externalSizeOnNative, _kStaticData);
 
   static final _kStaticData = RustArcStaticData(
-    rustArcIncrementStrongCount: RustLib.instance.api
+    rustArcIncrementStrongCount: PayjoinCore.instance.api
         .rust_arc_increment_strong_count_ArcPayjoinFfiSendV2ContextV2,
-    rustArcDecrementStrongCount: RustLib.instance.api
+    rustArcDecrementStrongCount: PayjoinCore.instance.api
         .rust_arc_decrement_strong_count_ArcPayjoinFfiSendV2ContextV2,
-    rustArcDecrementStrongCountPtr: RustLib.instance.api
+    rustArcDecrementStrongCountPtr: PayjoinCore.instance.api
         .rust_arc_decrement_strong_count_ArcPayjoinFfiSendV2ContextV2Ptr,
   );
 }
 
-// Rust type: RustOpaqueMoi<Arc < payjoin_ffi :: uri :: Uri >>
+// Rust type: RustOpaqueNom<Arc < payjoin_ffi :: uri :: Uri >>
 @sealed
 class ArcPayjoinFfiUriUri extends RustOpaque {
   ArcPayjoinFfiUriUri.dcoDecode(List<dynamic> wire)
@@ -94,16 +94,16 @@ class ArcPayjoinFfiUriUri extends RustOpaque {
       : super.sseDecode(ptr, externalSizeOnNative, _kStaticData);
 
   static final _kStaticData = RustArcStaticData(
-    rustArcIncrementStrongCount: RustLib
+    rustArcIncrementStrongCount: PayjoinCore
         .instance.api.rust_arc_increment_strong_count_ArcPayjoinFfiUriUri,
-    rustArcDecrementStrongCount: RustLib
+    rustArcDecrementStrongCount: PayjoinCore
         .instance.api.rust_arc_decrement_strong_count_ArcPayjoinFfiUriUri,
-    rustArcDecrementStrongCountPtr: RustLib
+    rustArcDecrementStrongCountPtr: PayjoinCore
         .instance.api.rust_arc_decrement_strong_count_ArcPayjoinFfiUriUriPtr,
   );
 }
 
-// Rust type: RustOpaqueMoi<Arc < payjoin_ffi :: uri :: Url >>
+// Rust type: RustOpaqueNom<Arc < payjoin_ffi :: uri :: Url >>
 @sealed
 class ArcPayjoinFfiUriUrl extends RustOpaque {
   ArcPayjoinFfiUriUrl.dcoDecode(List<dynamic> wire)
@@ -113,24 +113,24 @@ class ArcPayjoinFfiUriUrl extends RustOpaque {
       : super.sseDecode(ptr, externalSizeOnNative, _kStaticData);
 
   static final _kStaticData = RustArcStaticData(
-    rustArcIncrementStrongCount: RustLib
+    rustArcIncrementStrongCount: PayjoinCore
         .instance.api.rust_arc_increment_strong_count_ArcPayjoinFfiUriUrl,
-    rustArcDecrementStrongCount: RustLib
+    rustArcDecrementStrongCount: PayjoinCore
         .instance.api.rust_arc_decrement_strong_count_ArcPayjoinFfiUriUrl,
-    rustArcDecrementStrongCountPtr: RustLib
+    rustArcDecrementStrongCountPtr: PayjoinCore
         .instance.api.rust_arc_decrement_strong_count_ArcPayjoinFfiUriUrlPtr,
   );
 }
 
 class ContextV1 {
-  final ArcPayjoinFfiSendContextV1 field0;
+  final ArcPayjoinFfiSendV1ContextV1 field0;
 
   const ContextV1({
     required this.field0,
   });
 
   Future<String> processResponse({required List<int> response, dynamic hint}) =>
-      RustLib.instance.api.contextV1ProcessResponse(
+      PayjoinCore.instance.api.contextV1ProcessResponse(
         that: this,
         response: response,
       );
@@ -155,7 +155,7 @@ class ContextV2 {
 
   Future<String?> processResponse(
           {required List<int> response, dynamic hint}) =>
-      RustLib.instance.api.contextV2ProcessResponse(
+      PayjoinCore.instance.api.contextV2ProcessResponse(
         that: this,
         response: response,
       );
@@ -202,7 +202,7 @@ class Request {
 }
 
 class RequestBuilder {
-  final ArcPayjoinFfiSendRequestBuilder field0;
+  final ArcPayjoinFfiSendV1RequestBuilder field0;
 
   const RequestBuilder({
     required this.field0,
@@ -210,19 +210,19 @@ class RequestBuilder {
 
   Future<RequestBuilder> alwaysDisableOutputSubstitution(
           {required bool disable, dynamic hint}) =>
-      RustLib.instance.api.requestBuilderAlwaysDisableOutputSubstitution(
+      PayjoinCore.instance.api.requestBuilderAlwaysDisableOutputSubstitution(
         that: this,
         disable: disable,
       );
 
   Future<RequestContext> buildNonIncentivizing({dynamic hint}) =>
-      RustLib.instance.api.requestBuilderBuildNonIncentivizing(
+      PayjoinCore.instance.api.requestBuilderBuildNonIncentivizing(
         that: this,
       );
 
   Future<RequestContext> buildRecommended(
           {required int minFeeRate, dynamic hint}) =>
-      RustLib.instance.api.requestBuilderBuildRecommended(
+      PayjoinCore.instance.api.requestBuilderBuildRecommended(
         that: this,
         minFeeRate: minFeeRate,
       );
@@ -233,7 +233,7 @@ class RequestBuilder {
           required int minFeeRate,
           required bool clampFeeContribution,
           dynamic hint}) =>
-      RustLib.instance.api.requestBuilderBuildWithAdditionalFee(
+      PayjoinCore.instance.api.requestBuilderBuildWithAdditionalFee(
         that: this,
         maxFeeContribution: maxFeeContribution,
         changeIndex: changeIndex,
@@ -243,11 +243,11 @@ class RequestBuilder {
 
   static Future<RequestBuilder> fromPsbtAndUri(
           {required String psbtBase64, required Uri uri, dynamic hint}) =>
-      RustLib.instance.api.requestBuilderFromPsbtAndUri(
+      PayjoinCore.instance.api.requestBuilderFromPsbtAndUri(
           psbtBase64: psbtBase64, uri: uri, hint: hint);
 
   static Future<void> newRequestBuilder({dynamic hint}) =>
-      RustLib.instance.api.requestBuilderNew(hint: hint);
+      PayjoinCore.instance.api.requestBuilderNew(hint: hint);
 
   @override
   int get hashCode => field0.hashCode;
@@ -261,20 +261,20 @@ class RequestBuilder {
 }
 
 class RequestContext {
-  final ArcPayjoinFfiSendRequestContext field0;
+  final ArcPayjoinFfiSendV1RequestContext field0;
 
   const RequestContext({
     required this.field0,
   });
 
   Future<RequestContextV1> extractV1({dynamic hint}) =>
-      RustLib.instance.api.requestContextExtractV1(
+      PayjoinCore.instance.api.requestContextExtractV1(
         that: this,
       );
 
   Future<RequestContextV2> extractV2(
           {required String ohttpProxyUrl, dynamic hint}) =>
-      RustLib.instance.api.requestContextExtractV2(
+      PayjoinCore.instance.api.requestContextExtractV2(
         that: this,
         ohttpProxyUrl: ohttpProxyUrl,
       );

@@ -13,15 +13,16 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'utils/error.dart';
 
 /// Main entrypoint of the Rust API
-class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
+class PayjoinCore extends BaseEntrypoint<PayjoinCoreApi, PayjoinCoreApiImpl,
+    PayjoinCoreWire> {
   @internal
-  static final instance = RustLib._();
+  static final instance = PayjoinCore._();
 
-  RustLib._();
+  PayjoinCore._();
 
   /// Initialize flutter_rust_bridge
   static Future<void> init({
-    RustLibApi? api,
+    PayjoinCoreApi? api,
     BaseHandler? handler,
     ExternalLibrary? externalLibrary,
   }) async {
@@ -39,12 +40,12 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
   static void dispose() => instance.disposeImpl();
 
   @override
-  ApiImplConstructor<RustLibApiImpl, RustLibWire> get apiImplConstructor =>
-      RustLibApiImpl.new;
+  ApiImplConstructor<PayjoinCoreApiImpl, PayjoinCoreWire>
+      get apiImplConstructor => PayjoinCoreApiImpl.new;
 
   @override
-  WireConstructor<RustLibWire> get wireConstructor =>
-      RustLibWire.fromExternalLibrary;
+  WireConstructor<PayjoinCoreWire> get wireConstructor =>
+      PayjoinCoreWire.fromExternalLibrary;
 
   @override
   Future<void> executeRustInitializers() async {}
@@ -64,13 +65,13 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
   );
 }
 
-abstract class RustLibApi extends BaseApi {
+abstract class PayjoinCoreApi extends BaseApi {
   Future<Headers> headersFromVec({required List<int> body, dynamic hint});
 
   Future<MaybeInputsOwned> uncheckedProposalCheckBroadcastSuitability(
       {required UncheckedProposal that,
       int? minFeeRate,
-      required BoxFnVecU8ResultBoolPayjoinError canBroadcast,
+      required FutureOr<bool> Function(Uint8List) canBroadcast,
       dynamic hint});
 
   Future<Uint8List> uncheckedProposalExtractTxToScheduleBroadcast(
@@ -129,40 +130,40 @@ abstract class RustLibApi extends BaseApi {
   Future<String?> urlQuery({required Url that, dynamic hint});
 
   RustArcIncrementStrongCountFnType
-      get rust_arc_increment_strong_count_ArcPayjoinFfiReceiveMaybeInputsOwned;
+      get rust_arc_increment_strong_count_ArcPayjoinFfiReceiveV1MaybeInputsOwned;
 
   RustArcDecrementStrongCountFnType
-      get rust_arc_decrement_strong_count_ArcPayjoinFfiReceiveMaybeInputsOwned;
+      get rust_arc_decrement_strong_count_ArcPayjoinFfiReceiveV1MaybeInputsOwned;
 
   CrossPlatformFinalizerArg
-      get rust_arc_decrement_strong_count_ArcPayjoinFfiReceiveMaybeInputsOwnedPtr;
+      get rust_arc_decrement_strong_count_ArcPayjoinFfiReceiveV1MaybeInputsOwnedPtr;
 
   RustArcIncrementStrongCountFnType
-      get rust_arc_increment_strong_count_ArcPayjoinFfiSendContextV1;
+      get rust_arc_increment_strong_count_ArcPayjoinFfiSendV1ContextV1;
 
   RustArcDecrementStrongCountFnType
-      get rust_arc_decrement_strong_count_ArcPayjoinFfiSendContextV1;
+      get rust_arc_decrement_strong_count_ArcPayjoinFfiSendV1ContextV1;
 
   CrossPlatformFinalizerArg
-      get rust_arc_decrement_strong_count_ArcPayjoinFfiSendContextV1Ptr;
+      get rust_arc_decrement_strong_count_ArcPayjoinFfiSendV1ContextV1Ptr;
 
   RustArcIncrementStrongCountFnType
-      get rust_arc_increment_strong_count_ArcPayjoinFfiSendRequestBuilder;
+      get rust_arc_increment_strong_count_ArcPayjoinFfiSendV1RequestBuilder;
 
   RustArcDecrementStrongCountFnType
-      get rust_arc_decrement_strong_count_ArcPayjoinFfiSendRequestBuilder;
+      get rust_arc_decrement_strong_count_ArcPayjoinFfiSendV1RequestBuilder;
 
   CrossPlatformFinalizerArg
-      get rust_arc_decrement_strong_count_ArcPayjoinFfiSendRequestBuilderPtr;
+      get rust_arc_decrement_strong_count_ArcPayjoinFfiSendV1RequestBuilderPtr;
 
   RustArcIncrementStrongCountFnType
-      get rust_arc_increment_strong_count_ArcPayjoinFfiSendRequestContext;
+      get rust_arc_increment_strong_count_ArcPayjoinFfiSendV1RequestContext;
 
   RustArcDecrementStrongCountFnType
-      get rust_arc_decrement_strong_count_ArcPayjoinFfiSendRequestContext;
+      get rust_arc_decrement_strong_count_ArcPayjoinFfiSendV1RequestContext;
 
   CrossPlatformFinalizerArg
-      get rust_arc_decrement_strong_count_ArcPayjoinFfiSendRequestContextPtr;
+      get rust_arc_decrement_strong_count_ArcPayjoinFfiSendV1RequestContextPtr;
 
   RustArcIncrementStrongCountFnType
       get rust_arc_increment_strong_count_ArcPayjoinFfiSendV2ContextV2;
@@ -192,26 +193,18 @@ abstract class RustLibApi extends BaseApi {
       get rust_arc_decrement_strong_count_ArcPayjoinFfiUriUrlPtr;
 
   RustArcIncrementStrongCountFnType
-      get rust_arc_increment_strong_count_BoxFnVecU8ResultBoolPayjoinError;
+      get rust_arc_increment_strong_count_PayjoinFfiReceiveV1UncheckedProposal;
 
   RustArcDecrementStrongCountFnType
-      get rust_arc_decrement_strong_count_BoxFnVecU8ResultBoolPayjoinError;
+      get rust_arc_decrement_strong_count_PayjoinFfiReceiveV1UncheckedProposal;
 
   CrossPlatformFinalizerArg
-      get rust_arc_decrement_strong_count_BoxFnVecU8ResultBoolPayjoinErrorPtr;
-
-  RustArcIncrementStrongCountFnType
-      get rust_arc_increment_strong_count_PayjoinFfiReceiveUncheckedProposal;
-
-  RustArcDecrementStrongCountFnType
-      get rust_arc_decrement_strong_count_PayjoinFfiReceiveUncheckedProposal;
-
-  CrossPlatformFinalizerArg
-      get rust_arc_decrement_strong_count_PayjoinFfiReceiveUncheckedProposalPtr;
+      get rust_arc_decrement_strong_count_PayjoinFfiReceiveV1UncheckedProposalPtr;
 }
 
-class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
-  RustLibApiImpl({
+class PayjoinCoreApiImpl extends PayjoinCoreApiImplPlatform
+    implements PayjoinCoreApi {
+  PayjoinCoreApiImpl({
     required super.handler,
     required super.wire,
     required super.generalizedFrbRustBinding,
@@ -222,13 +215,11 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   Future<Headers> headersFromVec({required List<int> body, dynamic hint}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_list_prim_u_8_loose(body, serializer);
-        pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 1, port: port_);
+        var arg0 = cst_encode_list_prim_u_8_loose(body);
+        return wire.wire_Headers_from_vec(port_, arg0);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_headers,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_headers,
         decodeErrorData: null,
       ),
       constMeta: kHeadersFromVecConstMeta,
@@ -247,21 +238,20 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   Future<MaybeInputsOwned> uncheckedProposalCheckBroadcastSuitability(
       {required UncheckedProposal that,
       int? minFeeRate,
-      required BoxFnVecU8ResultBoolPayjoinError canBroadcast,
+      required FutureOr<bool> Function(Uint8List) canBroadcast,
       dynamic hint}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_box_autoadd_unchecked_proposal(that, serializer);
-        sse_encode_opt_box_autoadd_u_64(minFeeRate, serializer);
-        sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockBoxdynFnVecu8ResultboolPayjoinErrorSendSync(
-            canBroadcast, serializer);
-        pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 4, port: port_);
+        var arg0 = cst_encode_box_autoadd_unchecked_proposal(that);
+        var arg1 = cst_encode_opt_box_autoadd_u_64(minFeeRate);
+        var arg2 = cst_encode_DartFn_Inputs_list_prim_u_8_strict_Output_bool(
+            canBroadcast);
+        return wire.wire_UncheckedProposal_check_broadcast_suitability(
+            port_, arg0, arg1, arg2);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_maybe_inputs_owned,
-        decodeErrorData: sse_decode_payjoin_error,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_maybe_inputs_owned,
+        decodeErrorData: dco_decode_payjoin_error,
       ),
       constMeta: kUncheckedProposalCheckBroadcastSuitabilityConstMeta,
       argValues: [that, minFeeRate, canBroadcast],
@@ -281,13 +271,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       {required UncheckedProposal that, dynamic hint}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_box_autoadd_unchecked_proposal(that, serializer);
-        pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 3, port: port_);
+        var arg0 = cst_encode_box_autoadd_unchecked_proposal(that);
+        return wire.wire_UncheckedProposal_extract_tx_to_schedule_broadcast(
+            port_, arg0);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_list_prim_u_8_strict,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_list_prim_u_8_strict,
         decodeErrorData: null,
       ),
       constMeta: kUncheckedProposalExtractTxToScheduleBroadcastConstMeta,
@@ -311,16 +300,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       dynamic hint}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_list_prim_u_8_loose(body, serializer);
-        sse_encode_String(query, serializer);
-        sse_encode_box_autoadd_headers(headers, serializer);
-        pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 2, port: port_);
+        var arg0 = cst_encode_list_prim_u_8_loose(body);
+        var arg1 = cst_encode_String(query);
+        var arg2 = cst_encode_box_autoadd_headers(headers);
+        return wire.wire_UncheckedProposal_from_request(
+            port_, arg0, arg1, arg2);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_unchecked_proposal,
-        decodeErrorData: sse_decode_payjoin_error,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_unchecked_proposal,
+        decodeErrorData: dco_decode_payjoin_error,
       ),
       constMeta: kUncheckedProposalFromRequestConstMeta,
       argValues: [body, query, headers],
@@ -340,15 +328,13 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       {required ContextV1 that, required List<int> response, dynamic hint}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_box_autoadd_context_v_1(that, serializer);
-        sse_encode_list_prim_u_8_loose(response, serializer);
-        pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 13, port: port_);
+        var arg0 = cst_encode_box_autoadd_context_v_1(that);
+        var arg1 = cst_encode_list_prim_u_8_loose(response);
+        return wire.wire_ContextV1_process_response(port_, arg0, arg1);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_String,
-        decodeErrorData: sse_decode_payjoin_error,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_String,
+        decodeErrorData: dco_decode_payjoin_error,
       ),
       constMeta: kContextV1ProcessResponseConstMeta,
       argValues: [that, response],
@@ -367,15 +353,13 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       {required ContextV2 that, required List<int> response, dynamic hint}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_box_autoadd_context_v_2(that, serializer);
-        sse_encode_list_prim_u_8_loose(response, serializer);
-        pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 14, port: port_);
+        var arg0 = cst_encode_box_autoadd_context_v_2(that);
+        var arg1 = cst_encode_list_prim_u_8_loose(response);
+        return wire.wire_ContextV2_process_response(port_, arg0, arg1);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_opt_String,
-        decodeErrorData: sse_decode_payjoin_error,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_opt_String,
+        decodeErrorData: dco_decode_payjoin_error,
       ),
       constMeta: kContextV2ProcessResponseConstMeta,
       argValues: [that, response],
@@ -394,14 +378,13 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       {required RequestBuilder that, required bool disable, dynamic hint}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_box_autoadd_request_builder(that, serializer);
-        sse_encode_bool(disable, serializer);
-        pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 7, port: port_);
+        var arg0 = cst_encode_box_autoadd_request_builder(that);
+        var arg1 = cst_encode_bool(disable);
+        return wire.wire_RequestBuilder_always_disable_output_substitution(
+            port_, arg0, arg1);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_request_builder,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_request_builder,
         decodeErrorData: null,
       ),
       constMeta: kRequestBuilderAlwaysDisableOutputSubstitutionConstMeta,
@@ -422,14 +405,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       {required RequestBuilder that, dynamic hint}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_box_autoadd_request_builder(that, serializer);
-        pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 10, port: port_);
+        var arg0 = cst_encode_box_autoadd_request_builder(that);
+        return wire.wire_RequestBuilder_build_non_incentivizing(port_, arg0);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_request_context,
-        decodeErrorData: sse_decode_payjoin_error,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_request_context,
+        decodeErrorData: dco_decode_payjoin_error,
       ),
       constMeta: kRequestBuilderBuildNonIncentivizingConstMeta,
       argValues: [that],
@@ -449,15 +430,13 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       {required RequestBuilder that, required int minFeeRate, dynamic hint}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_box_autoadd_request_builder(that, serializer);
-        sse_encode_u_64(minFeeRate, serializer);
-        pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 8, port: port_);
+        var arg0 = cst_encode_box_autoadd_request_builder(that);
+        var arg1 = cst_encode_u_64(minFeeRate);
+        return wire.wire_RequestBuilder_build_recommended(port_, arg0, arg1);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_request_context,
-        decodeErrorData: sse_decode_payjoin_error,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_request_context,
+        decodeErrorData: dco_decode_payjoin_error,
       ),
       constMeta: kRequestBuilderBuildRecommendedConstMeta,
       argValues: [that, minFeeRate],
@@ -482,18 +461,17 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       dynamic hint}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_box_autoadd_request_builder(that, serializer);
-        sse_encode_u_64(maxFeeContribution, serializer);
-        sse_encode_opt_box_autoadd_u_8(changeIndex, serializer);
-        sse_encode_u_64(minFeeRate, serializer);
-        sse_encode_bool(clampFeeContribution, serializer);
-        pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 9, port: port_);
+        var arg0 = cst_encode_box_autoadd_request_builder(that);
+        var arg1 = cst_encode_u_64(maxFeeContribution);
+        var arg2 = cst_encode_opt_box_autoadd_u_8(changeIndex);
+        var arg3 = cst_encode_u_64(minFeeRate);
+        var arg4 = cst_encode_bool(clampFeeContribution);
+        return wire.wire_RequestBuilder_build_with_additional_fee(
+            port_, arg0, arg1, arg2, arg3, arg4);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_request_context,
-        decodeErrorData: sse_decode_payjoin_error,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_request_context,
+        decodeErrorData: dco_decode_payjoin_error,
       ),
       constMeta: kRequestBuilderBuildWithAdditionalFeeConstMeta,
       argValues: [
@@ -525,15 +503,13 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       {required String psbtBase64, required Uri uri, dynamic hint}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_String(psbtBase64, serializer);
-        sse_encode_box_autoadd_uri(uri, serializer);
-        pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 6, port: port_);
+        var arg0 = cst_encode_String(psbtBase64);
+        var arg1 = cst_encode_box_autoadd_uri(uri);
+        return wire.wire_RequestBuilder_from_psbt_and_uri(port_, arg0, arg1);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_request_builder,
-        decodeErrorData: sse_decode_payjoin_error,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_request_builder,
+        decodeErrorData: dco_decode_payjoin_error,
       ),
       constMeta: kRequestBuilderFromPsbtAndUriConstMeta,
       argValues: [psbtBase64, uri],
@@ -552,12 +528,10 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   Future<void> requestBuilderNew({dynamic hint}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 5, port: port_);
+        return wire.wire_RequestBuilder_new(port_);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_unit,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_unit,
         decodeErrorData: null,
       ),
       constMeta: kRequestBuilderNewConstMeta,
@@ -577,14 +551,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       {required RequestContext that, dynamic hint}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_box_autoadd_request_context(that, serializer);
-        pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 11, port: port_);
+        var arg0 = cst_encode_box_autoadd_request_context(that);
+        return wire.wire_RequestContext_extract_v1(port_, arg0);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_request_context_v_1,
-        decodeErrorData: sse_decode_payjoin_error,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_request_context_v_1,
+        decodeErrorData: dco_decode_payjoin_error,
       ),
       constMeta: kRequestContextExtractV1ConstMeta,
       argValues: [that],
@@ -605,15 +577,13 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       dynamic hint}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_box_autoadd_request_context(that, serializer);
-        sse_encode_String(ohttpProxyUrl, serializer);
-        pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 12, port: port_);
+        var arg0 = cst_encode_box_autoadd_request_context(that);
+        var arg1 = cst_encode_String(ohttpProxyUrl);
+        return wire.wire_RequestContext_extract_v2(port_, arg0, arg1);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_request_context_v_2,
-        decodeErrorData: sse_decode_payjoin_error,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_request_context_v_2,
+        decodeErrorData: dco_decode_payjoin_error,
       ),
       constMeta: kRequestContextExtractV2ConstMeta,
       argValues: [that, ohttpProxyUrl],
@@ -631,13 +601,11 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   Future<String> uriAddress({required Uri that, dynamic hint}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_box_autoadd_uri(that, serializer);
-        pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 18, port: port_);
+        var arg0 = cst_encode_box_autoadd_uri(that);
+        return wire.wire_Uri_address(port_, arg0);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_String,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_String,
         decodeErrorData: null,
       ),
       constMeta: kUriAddressConstMeta,
@@ -656,13 +624,11 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   Future<int?> uriAmount({required Uri that, dynamic hint}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_box_autoadd_uri(that, serializer);
-        pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 19, port: port_);
+        var arg0 = cst_encode_box_autoadd_uri(that);
+        return wire.wire_Uri_amount(port_, arg0);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_opt_box_autoadd_u_64,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_opt_box_autoadd_u_64,
         decodeErrorData: null,
       ),
       constMeta: kUriAmountConstMeta,
@@ -681,14 +647,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   Future<Uri> uriFromStr({required String uri, dynamic hint}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_String(uri, serializer);
-        pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 17, port: port_);
+        var arg0 = cst_encode_String(uri);
+        return wire.wire_Uri_from_str(port_, arg0);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_uri,
-        decodeErrorData: sse_decode_payjoin_error,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_uri,
+        decodeErrorData: dco_decode_payjoin_error,
       ),
       constMeta: kUriFromStrConstMeta,
       argValues: [uri],
@@ -706,14 +670,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   Future<Url> urlNew({required String input, dynamic hint}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_String(input, serializer);
-        pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 15, port: port_);
+        var arg0 = cst_encode_String(input);
+        return wire.wire_Url_new(port_, arg0);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_url,
-        decodeErrorData: sse_decode_payjoin_error,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_url,
+        decodeErrorData: dco_decode_payjoin_error,
       ),
       constMeta: kUrlNewConstMeta,
       argValues: [input],
@@ -731,13 +693,11 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   Future<String?> urlQuery({required Url that, dynamic hint}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_box_autoadd_url(that, serializer);
-        pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 16, port: port_);
+        var arg0 = cst_encode_box_autoadd_url(that);
+        return wire.wire_Url_query(port_, arg0);
       },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_opt_String,
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_opt_String,
         decodeErrorData: null,
       ),
       constMeta: kUrlQueryConstMeta,
@@ -752,37 +712,57 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         argNames: ["that"],
       );
 
-  RustArcIncrementStrongCountFnType
-      get rust_arc_increment_strong_count_ArcPayjoinFfiReceiveMaybeInputsOwned =>
-          wire.rust_arc_increment_strong_count_RustOpaque_Arcpayjoin_ffireceiveMaybeInputsOwned;
+  Future<void> Function(int, dynamic)
+      encode_DartFn_Inputs_list_prim_u_8_strict_Output_bool(
+          FutureOr<bool> Function(Uint8List) raw) {
+    return (callId, rawArg0) async {
+      final arg0 = dco_decode_list_prim_u_8_strict(rawArg0);
 
-  RustArcDecrementStrongCountFnType
-      get rust_arc_decrement_strong_count_ArcPayjoinFfiReceiveMaybeInputsOwned =>
-          wire.rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffireceiveMaybeInputsOwned;
+      final rawOutput = await raw(arg0);
 
-  RustArcIncrementStrongCountFnType
-      get rust_arc_increment_strong_count_ArcPayjoinFfiSendContextV1 => wire
-          .rust_arc_increment_strong_count_RustOpaque_Arcpayjoin_ffisendContextV1;
+      final serializer = SseSerializer(generalizedFrbRustBinding);
+      sse_encode_bool(rawOutput, serializer);
+      final output = serializer.intoRaw();
 
-  RustArcDecrementStrongCountFnType
-      get rust_arc_decrement_strong_count_ArcPayjoinFfiSendContextV1 => wire
-          .rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffisendContextV1;
-
-  RustArcIncrementStrongCountFnType
-      get rust_arc_increment_strong_count_ArcPayjoinFfiSendRequestBuilder => wire
-          .rust_arc_increment_strong_count_RustOpaque_Arcpayjoin_ffisendRequestBuilder;
-
-  RustArcDecrementStrongCountFnType
-      get rust_arc_decrement_strong_count_ArcPayjoinFfiSendRequestBuilder => wire
-          .rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffisendRequestBuilder;
+      generalizedFrbRustBinding.dartFnDeliverOutput(
+          callId: callId,
+          ptr: output.ptr,
+          rustVecLen: output.rustVecLen,
+          dataLen: output.dataLen);
+    };
+  }
 
   RustArcIncrementStrongCountFnType
-      get rust_arc_increment_strong_count_ArcPayjoinFfiSendRequestContext => wire
-          .rust_arc_increment_strong_count_RustOpaque_Arcpayjoin_ffisendRequestContext;
+      get rust_arc_increment_strong_count_ArcPayjoinFfiReceiveV1MaybeInputsOwned =>
+          wire.rust_arc_increment_strong_count_RustOpaque_Arcpayjoin_ffireceivev1MaybeInputsOwned;
 
   RustArcDecrementStrongCountFnType
-      get rust_arc_decrement_strong_count_ArcPayjoinFfiSendRequestContext => wire
-          .rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffisendRequestContext;
+      get rust_arc_decrement_strong_count_ArcPayjoinFfiReceiveV1MaybeInputsOwned =>
+          wire.rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffireceivev1MaybeInputsOwned;
+
+  RustArcIncrementStrongCountFnType
+      get rust_arc_increment_strong_count_ArcPayjoinFfiSendV1ContextV1 => wire
+          .rust_arc_increment_strong_count_RustOpaque_Arcpayjoin_ffisendv1ContextV1;
+
+  RustArcDecrementStrongCountFnType
+      get rust_arc_decrement_strong_count_ArcPayjoinFfiSendV1ContextV1 => wire
+          .rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffisendv1ContextV1;
+
+  RustArcIncrementStrongCountFnType
+      get rust_arc_increment_strong_count_ArcPayjoinFfiSendV1RequestBuilder => wire
+          .rust_arc_increment_strong_count_RustOpaque_Arcpayjoin_ffisendv1RequestBuilder;
+
+  RustArcDecrementStrongCountFnType
+      get rust_arc_decrement_strong_count_ArcPayjoinFfiSendV1RequestBuilder => wire
+          .rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffisendv1RequestBuilder;
+
+  RustArcIncrementStrongCountFnType
+      get rust_arc_increment_strong_count_ArcPayjoinFfiSendV1RequestContext => wire
+          .rust_arc_increment_strong_count_RustOpaque_Arcpayjoin_ffisendv1RequestContext;
+
+  RustArcDecrementStrongCountFnType
+      get rust_arc_decrement_strong_count_ArcPayjoinFfiSendV1RequestContext => wire
+          .rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffisendv1RequestContext;
 
   RustArcIncrementStrongCountFnType
       get rust_arc_increment_strong_count_ArcPayjoinFfiSendV2ContextV2 => wire
@@ -809,27 +789,24 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           wire.rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffiuriUrl;
 
   RustArcIncrementStrongCountFnType
-      get rust_arc_increment_strong_count_BoxFnVecU8ResultBoolPayjoinError => wire
-          .rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockBoxdynFnVecu8ResultboolPayjoinErrorSendSync;
+      get rust_arc_increment_strong_count_PayjoinFfiReceiveV1UncheckedProposal =>
+          wire.rust_arc_increment_strong_count_RustOpaque_payjoin_ffireceivev1UncheckedProposal;
 
   RustArcDecrementStrongCountFnType
-      get rust_arc_decrement_strong_count_BoxFnVecU8ResultBoolPayjoinError => wire
-          .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockBoxdynFnVecu8ResultboolPayjoinErrorSendSync;
-
-  RustArcIncrementStrongCountFnType
-      get rust_arc_increment_strong_count_PayjoinFfiReceiveUncheckedProposal =>
-          wire.rust_arc_increment_strong_count_RustOpaque_payjoin_ffireceiveUncheckedProposal;
-
-  RustArcDecrementStrongCountFnType
-      get rust_arc_decrement_strong_count_PayjoinFfiReceiveUncheckedProposal =>
-          wire.rust_arc_decrement_strong_count_RustOpaque_payjoin_ffireceiveUncheckedProposal;
+      get rust_arc_decrement_strong_count_PayjoinFfiReceiveV1UncheckedProposal =>
+          wire.rust_arc_decrement_strong_count_RustOpaque_payjoin_ffireceivev1UncheckedProposal;
 
   @protected
-  BoxFnVecU8ResultBoolPayjoinError
-      dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockBoxdynFnVecu8ResultboolPayjoinErrorSendSync(
-          dynamic raw) {
+  FutureOr<bool> Function(Uint8List)
+      dco_decode_DartFn_Inputs_list_prim_u_8_strict_Output_bool(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
-    return BoxFnVecU8ResultBoolPayjoinError.dcoDecode(raw as List<dynamic>);
+    throw UnimplementedError('');
+  }
+
+  @protected
+  Object dco_decode_DartOpaque(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return decodeDartOpaque(raw, generalizedFrbRustBinding);
   }
 
   @protected
@@ -840,31 +817,33 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  ArcPayjoinFfiReceiveMaybeInputsOwned
-      dco_decode_RustOpaque_Arcpayjoin_ffireceiveMaybeInputsOwned(dynamic raw) {
+  ArcPayjoinFfiReceiveV1MaybeInputsOwned
+      dco_decode_RustOpaque_Arcpayjoin_ffireceivev1MaybeInputsOwned(
+          dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
-    return ArcPayjoinFfiReceiveMaybeInputsOwned.dcoDecode(raw as List<dynamic>);
+    return ArcPayjoinFfiReceiveV1MaybeInputsOwned.dcoDecode(
+        raw as List<dynamic>);
   }
 
   @protected
-  ArcPayjoinFfiSendContextV1 dco_decode_RustOpaque_Arcpayjoin_ffisendContextV1(
-      dynamic raw) {
+  ArcPayjoinFfiSendV1ContextV1
+      dco_decode_RustOpaque_Arcpayjoin_ffisendv1ContextV1(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
-    return ArcPayjoinFfiSendContextV1.dcoDecode(raw as List<dynamic>);
+    return ArcPayjoinFfiSendV1ContextV1.dcoDecode(raw as List<dynamic>);
   }
 
   @protected
-  ArcPayjoinFfiSendRequestBuilder
-      dco_decode_RustOpaque_Arcpayjoin_ffisendRequestBuilder(dynamic raw) {
+  ArcPayjoinFfiSendV1RequestBuilder
+      dco_decode_RustOpaque_Arcpayjoin_ffisendv1RequestBuilder(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
-    return ArcPayjoinFfiSendRequestBuilder.dcoDecode(raw as List<dynamic>);
+    return ArcPayjoinFfiSendV1RequestBuilder.dcoDecode(raw as List<dynamic>);
   }
 
   @protected
-  ArcPayjoinFfiSendRequestContext
-      dco_decode_RustOpaque_Arcpayjoin_ffisendRequestContext(dynamic raw) {
+  ArcPayjoinFfiSendV1RequestContext
+      dco_decode_RustOpaque_Arcpayjoin_ffisendv1RequestContext(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
-    return ArcPayjoinFfiSendRequestContext.dcoDecode(raw as List<dynamic>);
+    return ArcPayjoinFfiSendV1RequestContext.dcoDecode(raw as List<dynamic>);
   }
 
   @protected
@@ -887,18 +866,10 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  BoxFnVecU8ResultBoolPayjoinError
-      dco_decode_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockBoxdynFnVecu8ResultboolPayjoinErrorSendSync(
-          dynamic raw) {
+  PayjoinFfiReceiveV1UncheckedProposal
+      dco_decode_RustOpaque_payjoin_ffireceivev1UncheckedProposal(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
-    return BoxFnVecU8ResultBoolPayjoinError.dcoDecode(raw as List<dynamic>);
-  }
-
-  @protected
-  PayjoinFfiReceiveUncheckedProposal
-      dco_decode_RustOpaque_payjoin_ffireceiveUncheckedProposal(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return PayjoinFfiReceiveUncheckedProposal.dcoDecode(raw as List<dynamic>);
+    return PayjoinFfiReceiveV1UncheckedProposal.dcoDecode(raw as List<dynamic>);
   }
 
   @protected
@@ -980,7 +951,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     if (arr.length != 1)
       throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
     return ContextV1(
-      field0: dco_decode_RustOpaque_Arcpayjoin_ffisendContextV1(arr[0]),
+      field0: dco_decode_RustOpaque_Arcpayjoin_ffisendv1ContextV1(arr[0]),
     );
   }
 
@@ -1032,7 +1003,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
     return MaybeInputsOwned(
       field0:
-          dco_decode_RustOpaque_Arcpayjoin_ffireceiveMaybeInputsOwned(arr[0]),
+          dco_decode_RustOpaque_Arcpayjoin_ffireceivev1MaybeInputsOwned(arr[0]),
     );
   }
 
@@ -1163,7 +1134,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     if (arr.length != 1)
       throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
     return RequestBuilder(
-      field0: dco_decode_RustOpaque_Arcpayjoin_ffisendRequestBuilder(arr[0]),
+      field0: dco_decode_RustOpaque_Arcpayjoin_ffisendv1RequestBuilder(arr[0]),
     );
   }
 
@@ -1174,7 +1145,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     if (arr.length != 1)
       throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
     return RequestContext(
-      field0: dco_decode_RustOpaque_Arcpayjoin_ffisendRequestContext(arr[0]),
+      field0: dco_decode_RustOpaque_Arcpayjoin_ffisendv1RequestContext(arr[0]),
     );
   }
 
@@ -1221,7 +1192,8 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     if (arr.length != 1)
       throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
     return UncheckedProposal(
-      field0: dco_decode_RustOpaque_payjoin_ffireceiveUncheckedProposal(arr[0]),
+      field0:
+          dco_decode_RustOpaque_payjoin_ffireceivev1UncheckedProposal(arr[0]),
     );
   }
 
@@ -1260,12 +1232,10 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  BoxFnVecU8ResultBoolPayjoinError
-      sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockBoxdynFnVecu8ResultboolPayjoinErrorSendSync(
-          SseDeserializer deserializer) {
+  Object sse_decode_DartOpaque(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    return BoxFnVecU8ResultBoolPayjoinError.sseDecode(
-        sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
+    var inner = sse_decode_usize(deserializer);
+    return decodeDartOpaque(inner, generalizedFrbRustBinding);
   }
 
   @protected
@@ -1277,37 +1247,38 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  ArcPayjoinFfiReceiveMaybeInputsOwned
-      sse_decode_RustOpaque_Arcpayjoin_ffireceiveMaybeInputsOwned(
+  ArcPayjoinFfiReceiveV1MaybeInputsOwned
+      sse_decode_RustOpaque_Arcpayjoin_ffireceivev1MaybeInputsOwned(
           SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    return ArcPayjoinFfiReceiveMaybeInputsOwned.sseDecode(
+    return ArcPayjoinFfiReceiveV1MaybeInputsOwned.sseDecode(
         sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
   }
 
   @protected
-  ArcPayjoinFfiSendContextV1 sse_decode_RustOpaque_Arcpayjoin_ffisendContextV1(
-      SseDeserializer deserializer) {
+  ArcPayjoinFfiSendV1ContextV1
+      sse_decode_RustOpaque_Arcpayjoin_ffisendv1ContextV1(
+          SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    return ArcPayjoinFfiSendContextV1.sseDecode(
+    return ArcPayjoinFfiSendV1ContextV1.sseDecode(
         sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
   }
 
   @protected
-  ArcPayjoinFfiSendRequestBuilder
-      sse_decode_RustOpaque_Arcpayjoin_ffisendRequestBuilder(
+  ArcPayjoinFfiSendV1RequestBuilder
+      sse_decode_RustOpaque_Arcpayjoin_ffisendv1RequestBuilder(
           SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    return ArcPayjoinFfiSendRequestBuilder.sseDecode(
+    return ArcPayjoinFfiSendV1RequestBuilder.sseDecode(
         sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
   }
 
   @protected
-  ArcPayjoinFfiSendRequestContext
-      sse_decode_RustOpaque_Arcpayjoin_ffisendRequestContext(
+  ArcPayjoinFfiSendV1RequestContext
+      sse_decode_RustOpaque_Arcpayjoin_ffisendv1RequestContext(
           SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    return ArcPayjoinFfiSendRequestContext.sseDecode(
+    return ArcPayjoinFfiSendV1RequestContext.sseDecode(
         sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
   }
 
@@ -1337,20 +1308,11 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  BoxFnVecU8ResultBoolPayjoinError
-      sse_decode_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockBoxdynFnVecu8ResultboolPayjoinErrorSendSync(
+  PayjoinFfiReceiveV1UncheckedProposal
+      sse_decode_RustOpaque_payjoin_ffireceivev1UncheckedProposal(
           SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    return BoxFnVecU8ResultBoolPayjoinError.sseDecode(
-        sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
-  }
-
-  @protected
-  PayjoinFfiReceiveUncheckedProposal
-      sse_decode_RustOpaque_payjoin_ffireceiveUncheckedProposal(
-          SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return PayjoinFfiReceiveUncheckedProposal.sseDecode(
+    return PayjoinFfiReceiveV1UncheckedProposal.sseDecode(
         sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
   }
 
@@ -1434,7 +1396,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ContextV1 sse_decode_context_v_1(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var var_field0 =
-        sse_decode_RustOpaque_Arcpayjoin_ffisendContextV1(deserializer);
+        sse_decode_RustOpaque_Arcpayjoin_ffisendv1ContextV1(deserializer);
     return ContextV1(field0: var_field0);
   }
 
@@ -1484,7 +1446,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   MaybeInputsOwned sse_decode_maybe_inputs_owned(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var var_field0 =
-        sse_decode_RustOpaque_Arcpayjoin_ffireceiveMaybeInputsOwned(
+        sse_decode_RustOpaque_Arcpayjoin_ffireceivev1MaybeInputsOwned(
             deserializer);
     return MaybeInputsOwned(field0: var_field0);
   }
@@ -1605,7 +1567,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   RequestBuilder sse_decode_request_builder(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var var_field0 =
-        sse_decode_RustOpaque_Arcpayjoin_ffisendRequestBuilder(deserializer);
+        sse_decode_RustOpaque_Arcpayjoin_ffisendv1RequestBuilder(deserializer);
     return RequestBuilder(field0: var_field0);
   }
 
@@ -1613,7 +1575,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   RequestContext sse_decode_request_context(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var var_field0 =
-        sse_decode_RustOpaque_Arcpayjoin_ffisendRequestContext(deserializer);
+        sse_decode_RustOpaque_Arcpayjoin_ffisendv1RequestContext(deserializer);
     return RequestContext(field0: var_field0);
   }
 
@@ -1652,7 +1614,8 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var var_field0 =
-        sse_decode_RustOpaque_payjoin_ffireceiveUncheckedProposal(deserializer);
+        sse_decode_RustOpaque_payjoin_ffireceivev1UncheckedProposal(
+            deserializer);
     return UncheckedProposal(field0: var_field0);
   }
 
@@ -1688,11 +1651,122 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void
-      sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockBoxdynFnVecu8ResultboolPayjoinErrorSendSync(
-          BoxFnVecU8ResultBoolPayjoinError self, SseSerializer serializer) {
+  PlatformPointer cst_encode_DartFn_Inputs_list_prim_u_8_strict_Output_bool(
+      FutureOr<bool> Function(Uint8List) raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return cst_encode_DartOpaque(
+        encode_DartFn_Inputs_list_prim_u_8_strict_Output_bool(raw));
+  }
+
+  @protected
+  PlatformPointer cst_encode_DartOpaque(Object raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return encodeDartOpaque(
+        raw, portManager.dartHandlerPort, generalizedFrbRustBinding);
+  }
+
+  @protected
+  int cst_encode_RustOpaque_Arcpayjoin_ffireceivev1MaybeInputsOwned(
+      ArcPayjoinFfiReceiveV1MaybeInputsOwned raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+// ignore: invalid_use_of_internal_member
+    return raw.cstEncode();
+  }
+
+  @protected
+  int cst_encode_RustOpaque_Arcpayjoin_ffisendv1ContextV1(
+      ArcPayjoinFfiSendV1ContextV1 raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+// ignore: invalid_use_of_internal_member
+    return raw.cstEncode();
+  }
+
+  @protected
+  int cst_encode_RustOpaque_Arcpayjoin_ffisendv1RequestBuilder(
+      ArcPayjoinFfiSendV1RequestBuilder raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+// ignore: invalid_use_of_internal_member
+    return raw.cstEncode();
+  }
+
+  @protected
+  int cst_encode_RustOpaque_Arcpayjoin_ffisendv1RequestContext(
+      ArcPayjoinFfiSendV1RequestContext raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+// ignore: invalid_use_of_internal_member
+    return raw.cstEncode();
+  }
+
+  @protected
+  int cst_encode_RustOpaque_Arcpayjoin_ffisendv2ContextV2(
+      ArcPayjoinFfiSendV2ContextV2 raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+// ignore: invalid_use_of_internal_member
+    return raw.cstEncode();
+  }
+
+  @protected
+  int cst_encode_RustOpaque_Arcpayjoin_ffiuriUri(ArcPayjoinFfiUriUri raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+// ignore: invalid_use_of_internal_member
+    return raw.cstEncode();
+  }
+
+  @protected
+  int cst_encode_RustOpaque_Arcpayjoin_ffiuriUrl(ArcPayjoinFfiUriUrl raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+// ignore: invalid_use_of_internal_member
+    return raw.cstEncode();
+  }
+
+  @protected
+  int cst_encode_RustOpaque_payjoin_ffireceivev1UncheckedProposal(
+      PayjoinFfiReceiveV1UncheckedProposal raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+// ignore: invalid_use_of_internal_member
+    return raw.cstEncode();
+  }
+
+  @protected
+  bool cst_encode_bool(bool raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return raw;
+  }
+
+  @protected
+  int cst_encode_u_8(int raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return raw;
+  }
+
+  @protected
+  void cst_encode_unit(void raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return raw;
+  }
+
+  @protected
+  int cst_encode_usize(int raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return raw;
+  }
+
+  @protected
+  void sse_encode_DartFn_Inputs_list_prim_u_8_strict_Output_bool(
+      FutureOr<bool> Function(Uint8List) self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_usize(self.sseEncode(move: true), serializer);
+    sse_encode_DartOpaque(
+        encode_DartFn_Inputs_list_prim_u_8_strict_Output_bool(self),
+        serializer);
+  }
+
+  @protected
+  void sse_encode_DartOpaque(Object self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+        PlatformPointerUtil.ptrToInt(encodeDartOpaque(
+            self, portManager.dartHandlerPort, generalizedFrbRustBinding)),
+        serializer);
   }
 
   @protected
@@ -1704,29 +1778,29 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_RustOpaque_Arcpayjoin_ffireceiveMaybeInputsOwned(
-      ArcPayjoinFfiReceiveMaybeInputsOwned self, SseSerializer serializer) {
+  void sse_encode_RustOpaque_Arcpayjoin_ffireceivev1MaybeInputsOwned(
+      ArcPayjoinFfiReceiveV1MaybeInputsOwned self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_usize(self.sseEncode(move: null), serializer);
   }
 
   @protected
-  void sse_encode_RustOpaque_Arcpayjoin_ffisendContextV1(
-      ArcPayjoinFfiSendContextV1 self, SseSerializer serializer) {
+  void sse_encode_RustOpaque_Arcpayjoin_ffisendv1ContextV1(
+      ArcPayjoinFfiSendV1ContextV1 self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_usize(self.sseEncode(move: null), serializer);
   }
 
   @protected
-  void sse_encode_RustOpaque_Arcpayjoin_ffisendRequestBuilder(
-      ArcPayjoinFfiSendRequestBuilder self, SseSerializer serializer) {
+  void sse_encode_RustOpaque_Arcpayjoin_ffisendv1RequestBuilder(
+      ArcPayjoinFfiSendV1RequestBuilder self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_usize(self.sseEncode(move: null), serializer);
   }
 
   @protected
-  void sse_encode_RustOpaque_Arcpayjoin_ffisendRequestContext(
-      ArcPayjoinFfiSendRequestContext self, SseSerializer serializer) {
+  void sse_encode_RustOpaque_Arcpayjoin_ffisendv1RequestContext(
+      ArcPayjoinFfiSendV1RequestContext self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_usize(self.sseEncode(move: null), serializer);
   }
@@ -1753,16 +1827,8 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void
-      sse_encode_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockBoxdynFnVecu8ResultboolPayjoinErrorSendSync(
-          BoxFnVecU8ResultBoolPayjoinError self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_usize(self.sseEncode(move: null), serializer);
-  }
-
-  @protected
-  void sse_encode_RustOpaque_payjoin_ffireceiveUncheckedProposal(
-      PayjoinFfiReceiveUncheckedProposal self, SseSerializer serializer) {
+  void sse_encode_RustOpaque_payjoin_ffireceivev1UncheckedProposal(
+      PayjoinFfiReceiveV1UncheckedProposal self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_usize(self.sseEncode(move: null), serializer);
   }
@@ -1847,7 +1913,8 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   @protected
   void sse_encode_context_v_1(ContextV1 self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_RustOpaque_Arcpayjoin_ffisendContextV1(self.field0, serializer);
+    sse_encode_RustOpaque_Arcpayjoin_ffisendv1ContextV1(
+        self.field0, serializer);
   }
 
   @protected
@@ -1894,7 +1961,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   void sse_encode_maybe_inputs_owned(
       MaybeInputsOwned self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_RustOpaque_Arcpayjoin_ffireceiveMaybeInputsOwned(
+    sse_encode_RustOpaque_Arcpayjoin_ffireceivev1MaybeInputsOwned(
         self.field0, serializer);
   }
 
@@ -2005,7 +2072,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   void sse_encode_request_builder(
       RequestBuilder self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_RustOpaque_Arcpayjoin_ffisendRequestBuilder(
+    sse_encode_RustOpaque_Arcpayjoin_ffisendv1RequestBuilder(
         self.field0, serializer);
   }
 
@@ -2013,7 +2080,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   void sse_encode_request_context(
       RequestContext self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_RustOpaque_Arcpayjoin_ffisendRequestContext(
+    sse_encode_RustOpaque_Arcpayjoin_ffisendv1RequestContext(
         self.field0, serializer);
   }
 
@@ -2049,7 +2116,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   void sse_encode_unchecked_proposal(
       UncheckedProposal self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_RustOpaque_payjoin_ffireceiveUncheckedProposal(
+    sse_encode_RustOpaque_payjoin_ffireceivev1UncheckedProposal(
         self.field0, serializer);
   }
 

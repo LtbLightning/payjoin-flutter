@@ -15,17 +15,17 @@ class Uri {
     required this.field0,
   });
 
-  Future<String> address({dynamic hint}) => RustLib.instance.api.uriAddress(
+  Future<String> address({dynamic hint}) => PayjoinCore.instance.api.uriAddress(
         that: this,
       );
 
   ///Gets the amount in satoshis.
-  Future<int?> amount({dynamic hint}) => RustLib.instance.api.uriAmount(
+  Future<int?> amount({dynamic hint}) => PayjoinCore.instance.api.uriAmount(
         that: this,
       );
 
   static Future<Uri> fromStr({required String uri, dynamic hint}) =>
-      RustLib.instance.api.uriFromStr(uri: uri, hint: hint);
+      PayjoinCore.instance.api.uriFromStr(uri: uri, hint: hint);
 
   @override
   int get hashCode => field0.hashCode;
@@ -46,9 +46,9 @@ class Url {
   });
 
   static Future<Url> newUrl({required String input, dynamic hint}) =>
-      RustLib.instance.api.urlNew(input: input, hint: hint);
+      PayjoinCore.instance.api.urlNew(input: input, hint: hint);
 
-  Future<String?> query({dynamic hint}) => RustLib.instance.api.urlQuery(
+  Future<String?> query({dynamic hint}) => PayjoinCore.instance.api.urlQuery(
         that: this,
       );
 

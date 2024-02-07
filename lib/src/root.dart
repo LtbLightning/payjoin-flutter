@@ -5,7 +5,7 @@ import 'generated/frb_generated.dart';
 class Payjoin {
   static Future<void> initialize() async {
     try {
-      await RustLib.init();
+      await PayjoinCore.init();
     } catch (e) {
       debugPrint(e.toString());
       throw Exception(
