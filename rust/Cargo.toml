@@ -10,6 +10,7 @@ crate-type = ["cdylib", "staticlib"]
 flutter_rust_bridge_codegen = { version = "=2.0.0-dev.24"  }
 anyhow = "1.0.68"
 [dependencies]
+ohttp = { version = "0.5.1" }
 payjoin_ffi = {git = "https://github.com/LtbLightning/payjoin-ffi", branch = "v0.13"}
 flutter_rust_bridge = { version = "=2.0.0-dev.24"  }
 serde = "1.0.89"

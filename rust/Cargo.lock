@@ -1946,14 +1946,13 @@ dependencies = [
 [[package]]
 name = "payjoin_ffi"
 version = "0.13.0"
-source = "git+https://github.com/LtbLightning/payjoin-ffi?branch=v0.13#c464dd6e6740ed87ea6ebf7077caeed8942e377b"
+source = "git+https://github.com/LtbLightning/payjoin-ffi?branch=v0.13#373127df6035db627e58d9f0a6a6970bc33c11b3"
 dependencies = [
  "bdk",
  "ohttp",
  "payjoin",
  "thiserror",
  "uniffi",
- "url",
 ]
 
 [[package]]
@@ -1964,6 +1963,7 @@ dependencies = [
  "flutter_rust_bridge",
  "flutter_rust_bridge_codegen",
  "lazy_static",
+ "ohttp",
  "payjoin_ffi",
  "serde",
  "serde_json",

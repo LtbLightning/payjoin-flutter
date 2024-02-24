@@ -21,7 +21,7 @@ class _MyAppState extends State<MyApp> {
 
   Future<Uri> buildPjUri(double amount, String address, String pj) async {
     try {
-      final pjUri = "${address}amount=${amount / 100000000.0}&pj=$pj";
+      final pjUri = "bitcoin:$address?amount=${amount / 100000000.0}&pj=$pj";
       return await Uri.fromStr(uri: pjUri);
     } catch (e) {
       debugPrint(e.toString());
@@ -46,8 +46,8 @@ class _MyAppState extends State<MyApp> {
                     onPressed: () async {
                       final uri = await buildPjUri(
                           10000000,
-                          "bcrt1qaux734vuhykww9632v8cmdnk7z2mw5lsf74v6k",
-                          "https://example.com");
+                          "12c6DSiU4Rq3P4ZxziKxzrL5LmMBrzjrJX",
+                          "https://testnet.demo.btcpayserver.org/BTC/pj");
                       print(await uri.address());
                     },
                     child: const Text("Build PjUri"))
