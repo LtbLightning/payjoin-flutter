@@ -6,6 +6,7 @@
 import '../frb_generated.dart';
 import '../utils/error.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
+import 'receive.dart';
 import 'send.dart';
 
 class Uri {

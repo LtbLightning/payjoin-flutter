@@ -6,6 +6,8 @@
 import '../frb_generated.dart';
 import '../utils/error.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
+import 'send.dart';
+import 'uri.dart';
 
 // Rust type: RustOpaqueNom<Arc < payjoin_ffi :: receive :: v1 :: MaybeInputsOwned >>
 @sealed
@@ -27,6 +29,321 @@ class ArcPayjoinFfiReceiveV1MaybeInputsOwned extends RustOpaque {
   );
 }
 
+// Rust type: RustOpaqueNom<Arc < payjoin_ffi :: receive :: v1 :: MaybeInputsSeen >>
+@sealed
+class ArcPayjoinFfiReceiveV1MaybeInputsSeen extends RustOpaque {
+  ArcPayjoinFfiReceiveV1MaybeInputsSeen.dcoDecode(List<dynamic> wire)
+      : super.dcoDecode(wire, _kStaticData);
+
+  ArcPayjoinFfiReceiveV1MaybeInputsSeen.sseDecode(
+      int ptr, int externalSizeOnNative)
+      : super.sseDecode(ptr, externalSizeOnNative, _kStaticData);
+
+  static final _kStaticData = RustArcStaticData(
+    rustArcIncrementStrongCount: PayjoinCore.instance.api
+        .rust_arc_increment_strong_count_ArcPayjoinFfiReceiveV1MaybeInputsSeen,
+    rustArcDecrementStrongCount: PayjoinCore.instance.api
+        .rust_arc_decrement_strong_count_ArcPayjoinFfiReceiveV1MaybeInputsSeen,
+    rustArcDecrementStrongCountPtr: PayjoinCore.instance.api
+        .rust_arc_decrement_strong_count_ArcPayjoinFfiReceiveV1MaybeInputsSeenPtr,
+  );
+}
+
+// Rust type: RustOpaqueNom<Arc < payjoin_ffi :: receive :: v1 :: MaybeMixedInputScripts >>
+@sealed
+class ArcPayjoinFfiReceiveV1MaybeMixedInputScripts extends RustOpaque {
+  ArcPayjoinFfiReceiveV1MaybeMixedInputScripts.dcoDecode(List<dynamic> wire)
+      : super.dcoDecode(wire, _kStaticData);
+
+  ArcPayjoinFfiReceiveV1MaybeMixedInputScripts.sseDecode(
+      int ptr, int externalSizeOnNative)
+      : super.sseDecode(ptr, externalSizeOnNative, _kStaticData);
+
+  static final _kStaticData = RustArcStaticData(
+    rustArcIncrementStrongCount: PayjoinCore.instance.api
+        .rust_arc_increment_strong_count_ArcPayjoinFfiReceiveV1MaybeMixedInputScripts,
+    rustArcDecrementStrongCount: PayjoinCore.instance.api
+        .rust_arc_decrement_strong_count_ArcPayjoinFfiReceiveV1MaybeMixedInputScripts,
+    rustArcDecrementStrongCountPtr: PayjoinCore.instance.api
+        .rust_arc_decrement_strong_count_ArcPayjoinFfiReceiveV1MaybeMixedInputScriptsPtr,
+  );
+}
+
+// Rust type: RustOpaqueNom<Arc < payjoin_ffi :: receive :: v1 :: OutputsUnknown >>
+@sealed
+class ArcPayjoinFfiReceiveV1OutputsUnknown extends RustOpaque {
+  ArcPayjoinFfiReceiveV1OutputsUnknown.dcoDecode(List<dynamic> wire)
+      : super.dcoDecode(wire, _kStaticData);
+
+  ArcPayjoinFfiReceiveV1OutputsUnknown.sseDecode(
+      int ptr, int externalSizeOnNative)
+      : super.sseDecode(ptr, externalSizeOnNative, _kStaticData);
+
+  static final _kStaticData = RustArcStaticData(
+    rustArcIncrementStrongCount: PayjoinCore.instance.api
+        .rust_arc_increment_strong_count_ArcPayjoinFfiReceiveV1OutputsUnknown,
+    rustArcDecrementStrongCount: PayjoinCore.instance.api
+        .rust_arc_decrement_strong_count_ArcPayjoinFfiReceiveV1OutputsUnknown,
+    rustArcDecrementStrongCountPtr: PayjoinCore.instance.api
+        .rust_arc_decrement_strong_count_ArcPayjoinFfiReceiveV1OutputsUnknownPtr,
+  );
+}
+
+// Rust type: RustOpaqueNom<Arc < payjoin_ffi :: receive :: v1 :: PayjoinProposal >>
+@sealed
+class ArcPayjoinFfiReceiveV1PayjoinProposal extends RustOpaque {
+  ArcPayjoinFfiReceiveV1PayjoinProposal.dcoDecode(List<dynamic> wire)
+      : super.dcoDecode(wire, _kStaticData);
+
+  ArcPayjoinFfiReceiveV1PayjoinProposal.sseDecode(
+      int ptr, int externalSizeOnNative)
+      : super.sseDecode(ptr, externalSizeOnNative, _kStaticData);
+
+  static final _kStaticData = RustArcStaticData(
+    rustArcIncrementStrongCount: PayjoinCore.instance.api
+        .rust_arc_increment_strong_count_ArcPayjoinFfiReceiveV1PayjoinProposal,
+    rustArcDecrementStrongCount: PayjoinCore.instance.api
+        .rust_arc_decrement_strong_count_ArcPayjoinFfiReceiveV1PayjoinProposal,
+    rustArcDecrementStrongCountPtr: PayjoinCore.instance.api
+        .rust_arc_decrement_strong_count_ArcPayjoinFfiReceiveV1PayjoinProposalPtr,
+  );
+}
+
+// Rust type: RustOpaqueNom<Arc < payjoin_ffi :: receive :: v1 :: ProvisionalProposal >>
+@sealed
+class ArcPayjoinFfiReceiveV1ProvisionalProposal extends RustOpaque {
+  ArcPayjoinFfiReceiveV1ProvisionalProposal.dcoDecode(List<dynamic> wire)
+      : super.dcoDecode(wire, _kStaticData);
+
+  ArcPayjoinFfiReceiveV1ProvisionalProposal.sseDecode(
+      int ptr, int externalSizeOnNative)
+      : super.sseDecode(ptr, externalSizeOnNative, _kStaticData);
+
+  static final _kStaticData = RustArcStaticData(
+    rustArcIncrementStrongCount: PayjoinCore.instance.api
+        .rust_arc_increment_strong_count_ArcPayjoinFfiReceiveV1ProvisionalProposal,
+    rustArcDecrementStrongCount: PayjoinCore.instance.api
+        .rust_arc_decrement_strong_count_ArcPayjoinFfiReceiveV1ProvisionalProposal,
+    rustArcDecrementStrongCountPtr: PayjoinCore.instance.api
+        .rust_arc_decrement_strong_count_ArcPayjoinFfiReceiveV1ProvisionalProposalPtr,
+  );
+}
+
+// Rust type: RustOpaqueNom<Arc < payjoin_ffi :: receive :: v2 :: Enrolled >>
+@sealed
+class ArcPayjoinFfiReceiveV2Enrolled extends RustOpaque {
+  ArcPayjoinFfiReceiveV2Enrolled.dcoDecode(List<dynamic> wire)
+      : super.dcoDecode(wire, _kStaticData);
+
+  ArcPayjoinFfiReceiveV2Enrolled.sseDecode(int ptr, int externalSizeOnNative)
+      : super.sseDecode(ptr, externalSizeOnNative, _kStaticData);
+
+  static final _kStaticData = RustArcStaticData(
+    rustArcIncrementStrongCount: PayjoinCore.instance.api
+        .rust_arc_increment_strong_count_ArcPayjoinFfiReceiveV2Enrolled,
+    rustArcDecrementStrongCount: PayjoinCore.instance.api
+        .rust_arc_decrement_strong_count_ArcPayjoinFfiReceiveV2Enrolled,
+    rustArcDecrementStrongCountPtr: PayjoinCore.instance.api
+        .rust_arc_decrement_strong_count_ArcPayjoinFfiReceiveV2EnrolledPtr,
+  );
+}
+
+// Rust type: RustOpaqueNom<Arc < payjoin_ffi :: receive :: v2 :: V2MaybeInputsOwned >>
+@sealed
+class ArcPayjoinFfiReceiveV2V2MaybeInputsOwned extends RustOpaque {
+  ArcPayjoinFfiReceiveV2V2MaybeInputsOwned.dcoDecode(List<dynamic> wire)
+      : super.dcoDecode(wire, _kStaticData);
+
+  ArcPayjoinFfiReceiveV2V2MaybeInputsOwned.sseDecode(
+      int ptr, int externalSizeOnNative)
+      : super.sseDecode(ptr, externalSizeOnNative, _kStaticData);
+
+  static final _kStaticData = RustArcStaticData(
+    rustArcIncrementStrongCount: PayjoinCore.instance.api
+        .rust_arc_increment_strong_count_ArcPayjoinFfiReceiveV2V2MaybeInputsOwned,
+    rustArcDecrementStrongCount: PayjoinCore.instance.api
+        .rust_arc_decrement_strong_count_ArcPayjoinFfiReceiveV2V2MaybeInputsOwned,
+    rustArcDecrementStrongCountPtr: PayjoinCore.instance.api
+        .rust_arc_decrement_strong_count_ArcPayjoinFfiReceiveV2V2MaybeInputsOwnedPtr,
+  );
+}
+
+// Rust type: RustOpaqueNom<Arc < payjoin_ffi :: receive :: v2 :: V2MaybeInputsSeen >>
+@sealed
+class ArcPayjoinFfiReceiveV2V2MaybeInputsSeen extends RustOpaque {
+  ArcPayjoinFfiReceiveV2V2MaybeInputsSeen.dcoDecode(List<dynamic> wire)
+      : super.dcoDecode(wire, _kStaticData);
+
+  ArcPayjoinFfiReceiveV2V2MaybeInputsSeen.sseDecode(
+      int ptr, int externalSizeOnNative)
+      : super.sseDecode(ptr, externalSizeOnNative, _kStaticData);
+
+  static final _kStaticData = RustArcStaticData(
+    rustArcIncrementStrongCount: PayjoinCore.instance.api
+        .rust_arc_increment_strong_count_ArcPayjoinFfiReceiveV2V2MaybeInputsSeen,
+    rustArcDecrementStrongCount: PayjoinCore.instance.api
+        .rust_arc_decrement_strong_count_ArcPayjoinFfiReceiveV2V2MaybeInputsSeen,
+    rustArcDecrementStrongCountPtr: PayjoinCore.instance.api
+        .rust_arc_decrement_strong_count_ArcPayjoinFfiReceiveV2V2MaybeInputsSeenPtr,
+  );
+}
+
+// Rust type: RustOpaqueNom<Arc < payjoin_ffi :: receive :: v2 :: V2MaybeMixedInputScripts >>
+@sealed
+class ArcPayjoinFfiReceiveV2V2MaybeMixedInputScripts extends RustOpaque {
+  ArcPayjoinFfiReceiveV2V2MaybeMixedInputScripts.dcoDecode(List<dynamic> wire)
+      : super.dcoDecode(wire, _kStaticData);
+
+  ArcPayjoinFfiReceiveV2V2MaybeMixedInputScripts.sseDecode(
+      int ptr, int externalSizeOnNative)
+      : super.sseDecode(ptr, externalSizeOnNative, _kStaticData);
+
+  static final _kStaticData = RustArcStaticData(
+    rustArcIncrementStrongCount: PayjoinCore.instance.api
+        .rust_arc_increment_strong_count_ArcPayjoinFfiReceiveV2V2MaybeMixedInputScripts,
+    rustArcDecrementStrongCount: PayjoinCore.instance.api
+        .rust_arc_decrement_strong_count_ArcPayjoinFfiReceiveV2V2MaybeMixedInputScripts,
+    rustArcDecrementStrongCountPtr: PayjoinCore.instance.api
+        .rust_arc_decrement_strong_count_ArcPayjoinFfiReceiveV2V2MaybeMixedInputScriptsPtr,
+  );
+}
+
+// Rust type: RustOpaqueNom<Arc < payjoin_ffi :: receive :: v2 :: V2OutputsUnknown >>
+@sealed
+class ArcPayjoinFfiReceiveV2V2OutputsUnknown extends RustOpaque {
+  ArcPayjoinFfiReceiveV2V2OutputsUnknown.dcoDecode(List<dynamic> wire)
+      : super.dcoDecode(wire, _kStaticData);
+
+  ArcPayjoinFfiReceiveV2V2OutputsUnknown.sseDecode(
+      int ptr, int externalSizeOnNative)
+      : super.sseDecode(ptr, externalSizeOnNative, _kStaticData);
+
+  static final _kStaticData = RustArcStaticData(
+    rustArcIncrementStrongCount: PayjoinCore.instance.api
+        .rust_arc_increment_strong_count_ArcPayjoinFfiReceiveV2V2OutputsUnknown,
+    rustArcDecrementStrongCount: PayjoinCore.instance.api
+        .rust_arc_decrement_strong_count_ArcPayjoinFfiReceiveV2V2OutputsUnknown,
+    rustArcDecrementStrongCountPtr: PayjoinCore.instance.api
+        .rust_arc_decrement_strong_count_ArcPayjoinFfiReceiveV2V2OutputsUnknownPtr,
+  );
+}
+
+// Rust type: RustOpaqueNom<Arc < payjoin_ffi :: receive :: v2 :: V2PayjoinProposal >>
+@sealed
+class ArcPayjoinFfiReceiveV2V2PayjoinProposal extends RustOpaque {
+  ArcPayjoinFfiReceiveV2V2PayjoinProposal.dcoDecode(List<dynamic> wire)
+      : super.dcoDecode(wire, _kStaticData);
+
+  ArcPayjoinFfiReceiveV2V2PayjoinProposal.sseDecode(
+      int ptr, int externalSizeOnNative)
+      : super.sseDecode(ptr, externalSizeOnNative, _kStaticData);
+
+  static final _kStaticData = RustArcStaticData(
+    rustArcIncrementStrongCount: PayjoinCore.instance.api
+        .rust_arc_increment_strong_count_ArcPayjoinFfiReceiveV2V2PayjoinProposal,
+    rustArcDecrementStrongCount: PayjoinCore.instance.api
+        .rust_arc_decrement_strong_count_ArcPayjoinFfiReceiveV2V2PayjoinProposal,
+    rustArcDecrementStrongCountPtr: PayjoinCore.instance.api
+        .rust_arc_decrement_strong_count_ArcPayjoinFfiReceiveV2V2PayjoinProposalPtr,
+  );
+}
+
+// Rust type: RustOpaqueNom<Arc < payjoin_ffi :: receive :: v2 :: V2ProvisionalProposal >>
+@sealed
+class ArcPayjoinFfiReceiveV2V2ProvisionalProposal extends RustOpaque {
+  ArcPayjoinFfiReceiveV2V2ProvisionalProposal.dcoDecode(List<dynamic> wire)
+      : super.dcoDecode(wire, _kStaticData);
+
+  ArcPayjoinFfiReceiveV2V2ProvisionalProposal.sseDecode(
+      int ptr, int externalSizeOnNative)
+      : super.sseDecode(ptr, externalSizeOnNative, _kStaticData);
+
+  static final _kStaticData = RustArcStaticData(
+    rustArcIncrementStrongCount: PayjoinCore.instance.api
+        .rust_arc_increment_strong_count_ArcPayjoinFfiReceiveV2V2ProvisionalProposal,
+    rustArcDecrementStrongCount: PayjoinCore.instance.api
+        .rust_arc_decrement_strong_count_ArcPayjoinFfiReceiveV2V2ProvisionalProposal,
+    rustArcDecrementStrongCountPtr: PayjoinCore.instance.api
+        .rust_arc_decrement_strong_count_ArcPayjoinFfiReceiveV2V2ProvisionalProposalPtr,
+  );
+}
+
+// Rust type: RustOpaqueNom<Arc < payjoin_ffi :: uri :: Url >>
+@sealed
+class ArcPayjoinFfiUriUrl extends RustOpaque {
+  ArcPayjoinFfiUriUrl.dcoDecode(List<dynamic> wire)
+      : super.dcoDecode(wire, _kStaticData);
+
+  ArcPayjoinFfiUriUrl.sseDecode(int ptr, int externalSizeOnNative)
+      : super.sseDecode(ptr, externalSizeOnNative, _kStaticData);
+
+  static final _kStaticData = RustArcStaticData(
+    rustArcIncrementStrongCount: PayjoinCore
+        .instance.api.rust_arc_increment_strong_count_ArcPayjoinFfiUriUrl,
+    rustArcDecrementStrongCount: PayjoinCore
+        .instance.api.rust_arc_decrement_strong_count_ArcPayjoinFfiUriUrl,
+    rustArcDecrementStrongCountPtr: PayjoinCore
+        .instance.api.rust_arc_decrement_strong_count_ArcPayjoinFfiUriUrlPtr,
+  );
+}
+
+// Rust type: RustOpaqueNom<Mutex < Option < ohttp :: ClientResponse > >>
+@sealed
+class MutexOptionOhttpClientResponse extends RustOpaque {
+  MutexOptionOhttpClientResponse.dcoDecode(List<dynamic> wire)
+      : super.dcoDecode(wire, _kStaticData);
+
+  MutexOptionOhttpClientResponse.sseDecode(int ptr, int externalSizeOnNative)
+      : super.sseDecode(ptr, externalSizeOnNative, _kStaticData);
+
+  static final _kStaticData = RustArcStaticData(
+    rustArcIncrementStrongCount: PayjoinCore.instance.api
+        .rust_arc_increment_strong_count_MutexOptionOhttpClientResponse,
+    rustArcDecrementStrongCount: PayjoinCore.instance.api
+        .rust_arc_decrement_strong_count_MutexOptionOhttpClientResponse,
+    rustArcDecrementStrongCountPtr: PayjoinCore.instance.api
+        .rust_arc_decrement_strong_count_MutexOptionOhttpClientResponsePtr,
+  );
+}
+
+// Rust type: RustOpaqueNom<flutter_rust_bridge::for_generated::rust_async::RwLock<Arc < V2MaybeInputsOwned >>>
+@sealed
+class ArcV2MaybeInputsOwned extends RustOpaque {
+  ArcV2MaybeInputsOwned.dcoDecode(List<dynamic> wire)
+      : super.dcoDecode(wire, _kStaticData);
+
+  ArcV2MaybeInputsOwned.sseDecode(int ptr, int externalSizeOnNative)
+      : super.sseDecode(ptr, externalSizeOnNative, _kStaticData);
+
+  static final _kStaticData = RustArcStaticData(
+    rustArcIncrementStrongCount: PayjoinCore
+        .instance.api.rust_arc_increment_strong_count_ArcV2MaybeInputsOwned,
+    rustArcDecrementStrongCount: PayjoinCore
+        .instance.api.rust_arc_decrement_strong_count_ArcV2MaybeInputsOwned,
+    rustArcDecrementStrongCountPtr: PayjoinCore
+        .instance.api.rust_arc_decrement_strong_count_ArcV2MaybeInputsOwnedPtr,
+  );
+}
+
+// Rust type: RustOpaqueNom<flutter_rust_bridge::for_generated::rust_async::RwLock<Arc < V2MaybeInputsSeen >>>
+@sealed
+class ArcV2MaybeInputsSeen extends RustOpaque {
+  ArcV2MaybeInputsSeen.dcoDecode(List<dynamic> wire)
+      : super.dcoDecode(wire, _kStaticData);
+
+  ArcV2MaybeInputsSeen.sseDecode(int ptr, int externalSizeOnNative)
+      : super.sseDecode(ptr, externalSizeOnNative, _kStaticData);
+
+  static final _kStaticData = RustArcStaticData(
+    rustArcIncrementStrongCount: PayjoinCore
+        .instance.api.rust_arc_increment_strong_count_ArcV2MaybeInputsSeen,
+    rustArcDecrementStrongCount: PayjoinCore
+        .instance.api.rust_arc_decrement_strong_count_ArcV2MaybeInputsSeen,
+    rustArcDecrementStrongCountPtr: PayjoinCore
+        .instance.api.rust_arc_decrement_strong_count_ArcV2MaybeInputsSeenPtr,
+  );
+}
+
 // Rust type: RustOpaqueNom<payjoin_ffi :: receive :: v1 :: UncheckedProposal>
 @sealed
 class PayjoinFfiReceiveV1UncheckedProposal extends RustOpaque {
@@ -45,6 +362,160 @@ class PayjoinFfiReceiveV1UncheckedProposal extends RustOpaque {
     rustArcDecrementStrongCountPtr: PayjoinCore.instance.api
         .rust_arc_decrement_strong_count_PayjoinFfiReceiveV1UncheckedProposalPtr,
   );
+}
+
+// Rust type: RustOpaqueNom<payjoin_ffi :: receive :: v2 :: Enroller>
+@sealed
+class PayjoinFfiReceiveV2Enroller extends RustOpaque {
+  PayjoinFfiReceiveV2Enroller.dcoDecode(List<dynamic> wire)
+      : super.dcoDecode(wire, _kStaticData);
+
+  PayjoinFfiReceiveV2Enroller.sseDecode(int ptr, int externalSizeOnNative)
+      : super.sseDecode(ptr, externalSizeOnNative, _kStaticData);
+
+  static final _kStaticData = RustArcStaticData(
+    rustArcIncrementStrongCount: PayjoinCore.instance.api
+        .rust_arc_increment_strong_count_PayjoinFfiReceiveV2Enroller,
+    rustArcDecrementStrongCount: PayjoinCore.instance.api
+        .rust_arc_decrement_strong_count_PayjoinFfiReceiveV2Enroller,
+    rustArcDecrementStrongCountPtr: PayjoinCore.instance.api
+        .rust_arc_decrement_strong_count_PayjoinFfiReceiveV2EnrollerPtr,
+  );
+}
+
+// Rust type: RustOpaqueNom<payjoin_ffi :: receive :: v2 :: V2UncheckedProposal>
+@sealed
+class PayjoinFfiReceiveV2V2UncheckedProposal extends RustOpaque {
+  PayjoinFfiReceiveV2V2UncheckedProposal.dcoDecode(List<dynamic> wire)
+      : super.dcoDecode(wire, _kStaticData);
+
+  PayjoinFfiReceiveV2V2UncheckedProposal.sseDecode(
+      int ptr, int externalSizeOnNative)
+      : super.sseDecode(ptr, externalSizeOnNative, _kStaticData);
+
+  static final _kStaticData = RustArcStaticData(
+    rustArcIncrementStrongCount: PayjoinCore.instance.api
+        .rust_arc_increment_strong_count_PayjoinFfiReceiveV2V2UncheckedProposal,
+    rustArcDecrementStrongCount: PayjoinCore.instance.api
+        .rust_arc_decrement_strong_count_PayjoinFfiReceiveV2V2UncheckedProposal,
+    rustArcDecrementStrongCountPtr: PayjoinCore.instance.api
+        .rust_arc_decrement_strong_count_PayjoinFfiReceiveV2V2UncheckedProposalPtr,
+  );
+}
+
+class ClientResponse {
+  final MutexOptionOhttpClientResponse field0;
+
+  const ClientResponse({
+    required this.field0,
+  });
+
+  @override
+  int get hashCode => field0.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ClientResponse &&
+          runtimeType == other.runtimeType &&
+          field0 == other.field0;
+}
+
+class Enrolled {
+  final ArcPayjoinFfiReceiveV2Enrolled field0;
+
+  const Enrolled({
+    required this.field0,
+  });
+
+  Future<RequestResponse> extractReq({dynamic hint}) =>
+      PayjoinCore.instance.api.enrolledExtractReq(
+        that: this,
+      );
+
+  Future<String> fallbackTarget({dynamic hint}) =>
+      PayjoinCore.instance.api.enrolledFallbackTarget(
+        that: this,
+      );
+
+  Future<V2UncheckedProposal?> processRes(
+          {required List<int> body,
+          required ClientResponse ctx,
+          dynamic hint}) =>
+      PayjoinCore.instance.api.enrolledProcessRes(
+        that: this,
+        body: body,
+        ctx: ctx,
+      );
+
+  Future<Uint8List> subdirectory({dynamic hint}) =>
+      PayjoinCore.instance.api.enrolledSubdirectory(
+        that: this,
+      );
+
+  @override
+  int get hashCode => field0.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Enrolled &&
+          runtimeType == other.runtimeType &&
+          field0 == other.field0;
+}
+
+class Enroller {
+  final PayjoinFfiReceiveV2Enroller field0;
+
+  const Enroller({
+    required this.field0,
+  });
+
+  Future<RequestResponse> extractReq({dynamic hint}) =>
+      PayjoinCore.instance.api.enrollerExtractReq(
+        that: this,
+      );
+
+  static Future<Enroller> fromRelayConfig(
+          {required String relayUrl,
+          required String ohttpConfigBase64,
+          required String ohttpProxyUrl,
+          dynamic hint}) =>
+      PayjoinCore.instance.api.enrollerFromRelayConfig(
+          relayUrl: relayUrl,
+          ohttpConfigBase64: ohttpConfigBase64,
+          ohttpProxyUrl: ohttpProxyUrl,
+          hint: hint);
+
+  Future<String> payjoinSubdir({dynamic hint}) =>
+      PayjoinCore.instance.api.enrollerPayjoinSubdir(
+        that: this,
+      );
+
+  Future<Enrolled> processRes(
+          {required List<int> body,
+          required ClientResponse ctx,
+          dynamic hint}) =>
+      PayjoinCore.instance.api.enrollerProcessRes(
+        that: this,
+        body: body,
+        ctx: ctx,
+      );
+
+  Future<String> subdirectory({dynamic hint}) =>
+      PayjoinCore.instance.api.enrollerSubdirectory(
+        that: this,
+      );
+
+  @override
+  int get hashCode => field0.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Enroller &&
+          runtimeType == other.runtimeType &&
+          field0 == other.field0;
 }
 
 class Headers {
@@ -75,6 +546,14 @@ class MaybeInputsOwned {
     required this.field0,
   });
 
+  Future<MaybeMixedInputScripts> checkInputsNotOwned(
+          {required FutureOr<bool> Function(Uint8List) isOwned,
+          dynamic hint}) =>
+      PayjoinCore.instance.api.maybeInputsOwnedCheckInputsNotOwned(
+        that: this,
+        isOwned: isOwned,
+      );
+
   @override
   int get hashCode => field0.hashCode;
 
@@ -86,12 +565,268 @@ class MaybeInputsOwned {
           field0 == other.field0;
 }
 
+class MaybeInputsSeen {
+  final ArcPayjoinFfiReceiveV1MaybeInputsSeen field0;
+
+  const MaybeInputsSeen({
+    required this.field0,
+  });
+
+  Future<OutputsUnknown> checkNoInputsSeenBefore(
+          {required FutureOr<bool> Function(OutPoint) isKnown, dynamic hint}) =>
+      PayjoinCore.instance.api.maybeInputsSeenCheckNoInputsSeenBefore(
+        that: this,
+        isKnown: isKnown,
+      );
+
+  @override
+  int get hashCode => field0.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is MaybeInputsSeen &&
+          runtimeType == other.runtimeType &&
+          field0 == other.field0;
+}
+
+class MaybeMixedInputScripts {
+  final ArcPayjoinFfiReceiveV1MaybeMixedInputScripts field0;
+
+  const MaybeMixedInputScripts({
+    required this.field0,
+  });
+
+  /// Verify the original transaction did not have mixed input types Call this after checking downstream.
+  ///
+  /// Note: mixed spends do not necessarily indicate distinct wallet fingerprints. This check is intended to prevent some types of wallet fingerprinting.
+  Future<MaybeInputsSeen> checkNoMixedInputScripts({dynamic hint}) =>
+      PayjoinCore.instance.api.maybeMixedInputScriptsCheckNoMixedInputScripts(
+        that: this,
+      );
+
+  @override
+  int get hashCode => field0.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is MaybeMixedInputScripts &&
+          runtimeType == other.runtimeType &&
+          field0 == other.field0;
+}
+
+/// A reference to a transaction output.
+class OutPoint {
+  /// The referenced transaction's txid.
+  final String txid;
+
+  /// The index of the referenced output in its transaction's vout.
+  final int vout;
+
+  const OutPoint({
+    required this.txid,
+    required this.vout,
+  });
+
+  @override
+  int get hashCode => txid.hashCode ^ vout.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is OutPoint &&
+          runtimeType == other.runtimeType &&
+          txid == other.txid &&
+          vout == other.vout;
+}
+
+class OutputsUnknown {
+  final ArcPayjoinFfiReceiveV1OutputsUnknown field0;
+
+  const OutputsUnknown({
+    required this.field0,
+  });
+
+  Future<ProvisionalProposal> identifyReceiverOutputs(
+          {required FutureOr<bool> Function(Uint8List) isReceiverOutput,
+          dynamic hint}) =>
+      PayjoinCore.instance.api.outputsUnknownIdentifyReceiverOutputs(
+        that: this,
+        isReceiverOutput: isReceiverOutput,
+      );
+
+  @override
+  int get hashCode => field0.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is OutputsUnknown &&
+          runtimeType == other.runtimeType &&
+          field0 == other.field0;
+}
+
+class PayjoinProposal {
+  final ArcPayjoinFfiReceiveV1PayjoinProposal field0;
+
+  const PayjoinProposal({
+    required this.field0,
+  });
+
+  Future<bool> isOutputSubstitutionDisabled({dynamic hint}) =>
+      PayjoinCore.instance.api.payjoinProposalIsOutputSubstitutionDisabled(
+        that: this,
+      );
+
+  Future<Uint64List> ownedVouts({dynamic hint}) =>
+      PayjoinCore.instance.api.payjoinProposalOwnedVouts(
+        that: this,
+      );
+
+  Future<String> psbt({dynamic hint}) =>
+      PayjoinCore.instance.api.payjoinProposalPsbt(
+        that: this,
+      );
+
+  Future<List<OutPoint>> utxosToBeLocked({dynamic hint}) =>
+      PayjoinCore.instance.api.payjoinProposalUtxosToBeLocked(
+        that: this,
+      );
+
+  @override
+  int get hashCode => field0.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is PayjoinProposal &&
+          runtimeType == other.runtimeType &&
+          field0 == other.field0;
+}
+
+class ProvisionalProposal {
+  final ArcPayjoinFfiReceiveV1ProvisionalProposal field0;
+
+  const ProvisionalProposal({
+    required this.field0,
+  });
+
+  Future<void> contributeNonWitnessInput(
+          {required List<int> tx, required OutPoint outpoint, dynamic hint}) =>
+      PayjoinCore.instance.api.provisionalProposalContributeNonWitnessInput(
+        that: this,
+        tx: tx,
+        outpoint: outpoint,
+      );
+
+  Future<void> contributeWitnessInput(
+          {required TxOut txo, required OutPoint outpoint, dynamic hint}) =>
+      PayjoinCore.instance.api.provisionalProposalContributeWitnessInput(
+        that: this,
+        txo: txo,
+        outpoint: outpoint,
+      );
+
+  Future<PayjoinProposal> finalizeProposal(
+          {required FutureOr<String> Function(String) processPsbt,
+          int? minFeerateSatPerVb,
+          dynamic hint}) =>
+      PayjoinCore.instance.api.provisionalProposalFinalizeProposal(
+        that: this,
+        processPsbt: processPsbt,
+        minFeerateSatPerVb: minFeerateSatPerVb,
+      );
+
+  Future<void> substituteOutputAddress(
+          {required String address, dynamic hint}) =>
+      PayjoinCore.instance.api.provisionalProposalSubstituteOutputAddress(
+        that: this,
+        address: address,
+      );
+
+  /// Select receiver input such that the payjoin avoids surveillance. Return the input chosen that has been applied to the Proposal.
+  ///
+  /// Proper coin selection allows payjoin to resemble ordinary transactions. To ensure the resemblance, a number of heuristics must be avoided.
+  ///
+  /// UIH “Unnecessary input heuristic” is one class of them to avoid. We define UIH1 and UIH2 according to the BlockSci practice BlockSci UIH1 and UIH2:
+  Future<OutPoint> tryPreservingPrivacy(
+          {required Map<int, OutPoint> candidateInputs, dynamic hint}) =>
+      PayjoinCore.instance.api.provisionalProposalTryPreservingPrivacy(
+        that: this,
+        candidateInputs: candidateInputs,
+      );
+
+  @override
+  int get hashCode => field0.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ProvisionalProposal &&
+          runtimeType == other.runtimeType &&
+          field0 == other.field0;
+}
+
+class RequestResponse {
+  final Request request;
+  final ClientResponse clientResponse;
+
+  const RequestResponse({
+    required this.request,
+    required this.clientResponse,
+  });
+
+  @override
+  int get hashCode => request.hashCode ^ clientResponse.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is RequestResponse &&
+          runtimeType == other.runtimeType &&
+          request == other.request &&
+          clientResponse == other.clientResponse;
+}
+
+class TxOut {
+  /// The value of the output, in satoshis.
+  final int value;
+
+  /// The address of the output.
+  final Uint8List scriptPubkey;
+
+  const TxOut({
+    required this.value,
+    required this.scriptPubkey,
+  });
+
+  @override
+  int get hashCode => value.hashCode ^ scriptPubkey.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is TxOut &&
+          runtimeType == other.runtimeType &&
+          value == other.value &&
+          scriptPubkey == other.scriptPubkey;
+}
+
 class UncheckedProposal {
   final PayjoinFfiReceiveV1UncheckedProposal field0;
 
   const UncheckedProposal({
     required this.field0,
   });
+
+  /// Call this method if the only way to initiate a Payjoin with this receiver requires manual intervention, as in most consumer wallets.
+  ///
+  /// So-called “non-interactive” receivers, like payment processors, that allow arbitrary requests are otherwise vulnerable to probing attacks. Those receivers call get_transaction_to_check_broadcast() and attest_tested_and_scheduled_broadcast() after making those checks downstream.
+  Future<MaybeInputsOwned> assumeInteractiveReceiver({dynamic hint}) =>
+      PayjoinCore.instance.api.uncheckedProposalAssumeInteractiveReceiver(
+        that: this,
+      );
 
   /// Call after checking that the Original PSBT can be broadcast.
   ///
@@ -131,6 +866,289 @@ class UncheckedProposal {
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is UncheckedProposal &&
+          runtimeType == other.runtimeType &&
+          field0 == other.field0;
+}
+
+class V2MaybeInputsOwned {
+  final ArcPayjoinFfiReceiveV2V2MaybeInputsOwned field0;
+
+  const V2MaybeInputsOwned({
+    required this.field0,
+  });
+
+  ///Check that the Original PSBT has no receiver-owned inputs. Return original-psbt-rejected error or otherwise refuse to sign undesirable inputs.
+  /// An attacker could try to spend receiver's own inputs. This check prevents that.
+  Future<V2MaybeMixedInputScripts> checkInputsNotOwned(
+          {required FutureOr<bool> Function(Uint8List) isOwned,
+          dynamic hint}) =>
+      PayjoinCore.instance.api.v2MaybeInputsOwnedCheckInputsNotOwned(
+        that: this,
+        isOwned: isOwned,
+      );
+
+  @override
+  int get hashCode => field0.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is V2MaybeInputsOwned &&
+          runtimeType == other.runtimeType &&
+          field0 == other.field0;
+}
+
+class V2MaybeInputsSeen {
+  final ArcPayjoinFfiReceiveV2V2MaybeInputsSeen field0;
+
+  const V2MaybeInputsSeen({
+    required this.field0,
+  });
+
+  /// Make sure that the original transaction inputs have never been seen before.
+  /// This prevents probing attacks. This prevents reentrant Payjoin, where a sender
+  /// proposes a Payjoin PSBT as a new Original PSBT for a new Payjoin.
+  Future<V2OutputsUnknown> checkNoInputsSeenBefore(
+          {required FutureOr<bool> Function(OutPoint) isKnown, dynamic hint}) =>
+      PayjoinCore.instance.api.v2MaybeInputsSeenCheckNoInputsSeenBefore(
+        that: this,
+        isKnown: isKnown,
+      );
+
+  @override
+  int get hashCode => field0.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is V2MaybeInputsSeen &&
+          runtimeType == other.runtimeType &&
+          field0 == other.field0;
+}
+
+class V2MaybeMixedInputScripts {
+  final ArcPayjoinFfiReceiveV2V2MaybeMixedInputScripts field0;
+
+  const V2MaybeMixedInputScripts({
+    required this.field0,
+  });
+
+  /// Verify the original transaction did not have mixed input types
+  /// Call this after checking downstream.
+  ///
+  /// Note: mixed spends do not necessarily indicate distinct wallet fingerprints.
+  /// This check is intended to prevent some types of wallet fingerprinting.
+  Future<ArcV2MaybeInputsSeen> checkNoMixedInputScripts({dynamic hint}) =>
+      PayjoinCore.instance.api.v2MaybeMixedInputScriptsCheckNoMixedInputScripts(
+        that: this,
+      );
+
+  @override
+  int get hashCode => field0.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is V2MaybeMixedInputScripts &&
+          runtimeType == other.runtimeType &&
+          field0 == other.field0;
+}
+
+class V2OutputsUnknown {
+  final ArcPayjoinFfiReceiveV2V2OutputsUnknown field0;
+
+  const V2OutputsUnknown({
+    required this.field0,
+  });
+
+  /// Find which outputs belong to the receiver
+  Future<V2ProvisionalProposal> identifyReceiverOutputs(
+          {required FutureOr<bool> Function(Uint8List) isReceiverOutput,
+          dynamic hint}) =>
+      PayjoinCore.instance.api.v2OutputsUnknownIdentifyReceiverOutputs(
+        that: this,
+        isReceiverOutput: isReceiverOutput,
+      );
+
+  @override
+  int get hashCode => field0.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is V2OutputsUnknown &&
+          runtimeType == other.runtimeType &&
+          field0 == other.field0;
+}
+
+class V2PayjoinProposal {
+  final ArcPayjoinFfiReceiveV2V2PayjoinProposal field0;
+
+  const V2PayjoinProposal({
+    required this.field0,
+  });
+
+  Future<Uint8List> deserializeRes(
+          {required List<int> res,
+          required ClientResponse ohttpContext,
+          dynamic hint}) =>
+      PayjoinCore.instance.api.v2PayjoinProposalDeserializeRes(
+        that: this,
+        res: res,
+        ohttpContext: ohttpContext,
+      );
+
+  Future<String> extractV1Req({dynamic hint}) =>
+      PayjoinCore.instance.api.v2PayjoinProposalExtractV1Req(
+        that: this,
+      );
+
+  Future<RequestResponse> extractV2Req({dynamic hint}) =>
+      PayjoinCore.instance.api.v2PayjoinProposalExtractV2Req(
+        that: this,
+      );
+
+  Future<bool> isOutputSubstitutionDisabled({dynamic hint}) =>
+      PayjoinCore.instance.api.v2PayjoinProposalIsOutputSubstitutionDisabled(
+        that: this,
+      );
+
+  Future<Uint64List> ownedVouts({dynamic hint}) =>
+      PayjoinCore.instance.api.v2PayjoinProposalOwnedVouts(
+        that: this,
+      );
+
+  Future<String> psbt({dynamic hint}) =>
+      PayjoinCore.instance.api.v2PayjoinProposalPsbt(
+        that: this,
+      );
+
+  Future<List<OutPoint>> utxosToBeLocked({dynamic hint}) =>
+      PayjoinCore.instance.api.v2PayjoinProposalUtxosToBeLocked(
+        that: this,
+      );
+
+  @override
+  int get hashCode => field0.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is V2PayjoinProposal &&
+          runtimeType == other.runtimeType &&
+          field0 == other.field0;
+}
+
+class V2ProvisionalProposal {
+  final ArcPayjoinFfiReceiveV2V2ProvisionalProposal field0;
+
+  const V2ProvisionalProposal({
+    required this.field0,
+  });
+
+  Future<void> contributeNonWitnessInput(
+          {required List<int> tx, required OutPoint outpoint, dynamic hint}) =>
+      PayjoinCore.instance.api.v2ProvisionalProposalContributeNonWitnessInput(
+        that: this,
+        tx: tx,
+        outpoint: outpoint,
+      );
+
+  Future<void> contributeWitnessInput(
+          {required TxOut txo, required OutPoint outpoint, dynamic hint}) =>
+      PayjoinCore.instance.api.v2ProvisionalProposalContributeWitnessInput(
+        that: this,
+        txo: txo,
+        outpoint: outpoint,
+      );
+
+  Future<V2PayjoinProposal> finalizeProposal(
+          {required FutureOr<String> Function(String) processPsbt,
+          int? minFeerateSatPerVb,
+          dynamic hint}) =>
+      PayjoinCore.instance.api.v2ProvisionalProposalFinalizeProposal(
+        that: this,
+        processPsbt: processPsbt,
+        minFeerateSatPerVb: minFeerateSatPerVb,
+      );
+
+  Future<void> substituteOutputAddress(
+          {required String address, dynamic hint}) =>
+      PayjoinCore.instance.api.v2ProvisionalProposalSubstituteOutputAddress(
+        that: this,
+        address: address,
+      );
+
+  /// Select receiver input such that the payjoin avoids surveillance. Return the input chosen that has been applied to the Proposal.
+  ///
+  /// Proper coin selection allows payjoin to resemble ordinary transactions. To ensure the resemblance, a number of heuristics must be avoided.
+  ///
+  /// UIH “Unnecessary input heuristic” is one class of them to avoid. We define UIH1 and UIH2 according to the BlockSci practice BlockSci UIH1 and UIH2:
+  Future<OutPoint> tryPreservingPrivacy(
+          {required Map<int, OutPoint> candidateInputs, dynamic hint}) =>
+      PayjoinCore.instance.api.v2ProvisionalProposalTryPreservingPrivacy(
+        that: this,
+        candidateInputs: candidateInputs,
+      );
+
+  @override
+  int get hashCode => field0.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is V2ProvisionalProposal &&
+          runtimeType == other.runtimeType &&
+          field0 == other.field0;
+}
+
+class V2UncheckedProposal {
+  final PayjoinFfiReceiveV2V2UncheckedProposal field0;
+
+  const V2UncheckedProposal({
+    required this.field0,
+  });
+
+  /// Call this method if the only way to initiate a Payjoin with this receiver
+  /// requires manual intervention, as in most consumer wallets.
+  ///
+  /// So-called "non-interactive" receivers, like payment processors, that allow arbitrary requests are otherwise vulnerable to probing attacks.
+  /// Those receivers call `extract_tx_to_check_broadcast()` and `attest_tested_and_scheduled_broadcast()` after making those checks downstream.
+  Future<ArcV2MaybeInputsOwned> assumeInteractiveReceiver({dynamic hint}) =>
+      PayjoinCore.instance.api.v2UncheckedProposalAssumeInteractiveReceiver(
+        that: this,
+      );
+
+  /// Call after checking that the Original PSBT can be broadcast.
+  ///
+  /// Receiver MUST check that the Original PSBT from the sender can be broadcast, i.e. testmempoolaccept bitcoind rpc returns { “allowed”: true,.. } for get_transaction_to_check_broadcast() before calling this method.
+  ///
+  /// Do this check if you generate bitcoin uri to receive Payjoin on sender request without manual human approval, like a payment processor. Such so called “non-interactive” receivers are otherwise vulnerable to probing attacks. If a sender can make requests at will, they can learn which bitcoin the receiver owns at no cost. Broadcasting the Original PSBT after some time in the failure case makes incurs sender cost and prevents probing.
+  ///
+  /// Call this after checking downstream.
+  Future<V2MaybeInputsOwned> checkBroadcastSuitability(
+          {int? minFeeRate,
+          required FutureOr<bool> Function(Uint8List) canBroadcast,
+          dynamic hint}) =>
+      PayjoinCore.instance.api.v2UncheckedProposalCheckBroadcastSuitability(
+        that: this,
+        minFeeRate: minFeeRate,
+        canBroadcast: canBroadcast,
+      );
+
+  ///The Sender’s Original PSBT
+  Future<Uint8List> extractTxToScheduleBroadcast({dynamic hint}) =>
+      PayjoinCore.instance.api.v2UncheckedProposalExtractTxToScheduleBroadcast(
+        that: this,
+      );
+
+  @override
+  int get hashCode => field0.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is V2UncheckedProposal &&
           runtimeType == other.runtimeType &&
           field0 == other.field0;
 }

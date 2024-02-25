@@ -6,6 +6,7 @@
 import '../frb_generated.dart';
 import '../utils/error.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
+import 'receive.dart';
 import 'uri.dart';
 
 // Rust type: RustOpaqueNom<Arc < payjoin_ffi :: send :: v1 :: ContextV1 >>
@@ -100,25 +101,6 @@ class ArcPayjoinFfiUriUri extends RustOpaque {
         .instance.api.rust_arc_decrement_strong_count_ArcPayjoinFfiUriUri,
     rustArcDecrementStrongCountPtr: PayjoinCore
         .instance.api.rust_arc_decrement_strong_count_ArcPayjoinFfiUriUriPtr,
-  );
-}
-
-// Rust type: RustOpaqueNom<Arc < payjoin_ffi :: uri :: Url >>
-@sealed
-class ArcPayjoinFfiUriUrl extends RustOpaque {
-  ArcPayjoinFfiUriUrl.dcoDecode(List<dynamic> wire)
-      : super.dcoDecode(wire, _kStaticData);
-
-  ArcPayjoinFfiUriUrl.sseDecode(int ptr, int externalSizeOnNative)
-      : super.sseDecode(ptr, externalSizeOnNative, _kStaticData);
-
-  static final _kStaticData = RustArcStaticData(
-    rustArcIncrementStrongCount: PayjoinCore
-        .instance.api.rust_arc_increment_strong_count_ArcPayjoinFfiUriUrl,
-    rustArcDecrementStrongCount: PayjoinCore
-        .instance.api.rust_arc_decrement_strong_count_ArcPayjoinFfiUriUrl,
-    rustArcDecrementStrongCountPtr: PayjoinCore
-        .instance.api.rust_arc_decrement_strong_count_ArcPayjoinFfiUriUrlPtr,
   );
 }
 

@@ -25,6 +25,54 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
           wire.rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffireceivev1MaybeInputsOwned;
 
   CrossPlatformFinalizerArg
+      get rust_arc_decrement_strong_count_ArcPayjoinFfiReceiveV1MaybeInputsSeenPtr =>
+          wire.rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffireceivev1MaybeInputsSeen;
+
+  CrossPlatformFinalizerArg
+      get rust_arc_decrement_strong_count_ArcPayjoinFfiReceiveV1MaybeMixedInputScriptsPtr =>
+          wire.rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffireceivev1MaybeMixedInputScripts;
+
+  CrossPlatformFinalizerArg
+      get rust_arc_decrement_strong_count_ArcPayjoinFfiReceiveV1OutputsUnknownPtr =>
+          wire.rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffireceivev1OutputsUnknown;
+
+  CrossPlatformFinalizerArg
+      get rust_arc_decrement_strong_count_ArcPayjoinFfiReceiveV1PayjoinProposalPtr =>
+          wire.rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffireceivev1PayjoinProposal;
+
+  CrossPlatformFinalizerArg
+      get rust_arc_decrement_strong_count_ArcPayjoinFfiReceiveV1ProvisionalProposalPtr =>
+          wire.rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffireceivev1ProvisionalProposal;
+
+  CrossPlatformFinalizerArg
+      get rust_arc_decrement_strong_count_ArcPayjoinFfiReceiveV2EnrolledPtr => wire
+          .rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffireceivev2Enrolled;
+
+  CrossPlatformFinalizerArg
+      get rust_arc_decrement_strong_count_ArcPayjoinFfiReceiveV2V2MaybeInputsOwnedPtr =>
+          wire.rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffireceivev2V2MaybeInputsOwned;
+
+  CrossPlatformFinalizerArg
+      get rust_arc_decrement_strong_count_ArcPayjoinFfiReceiveV2V2MaybeInputsSeenPtr =>
+          wire.rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffireceivev2V2MaybeInputsSeen;
+
+  CrossPlatformFinalizerArg
+      get rust_arc_decrement_strong_count_ArcPayjoinFfiReceiveV2V2MaybeMixedInputScriptsPtr =>
+          wire.rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffireceivev2V2MaybeMixedInputScripts;
+
+  CrossPlatformFinalizerArg
+      get rust_arc_decrement_strong_count_ArcPayjoinFfiReceiveV2V2OutputsUnknownPtr =>
+          wire.rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffireceivev2V2OutputsUnknown;
+
+  CrossPlatformFinalizerArg
+      get rust_arc_decrement_strong_count_ArcPayjoinFfiReceiveV2V2PayjoinProposalPtr =>
+          wire.rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffireceivev2V2PayjoinProposal;
+
+  CrossPlatformFinalizerArg
+      get rust_arc_decrement_strong_count_ArcPayjoinFfiReceiveV2V2ProvisionalProposalPtr =>
+          wire.rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffireceivev2V2ProvisionalProposal;
+
+  CrossPlatformFinalizerArg
       get rust_arc_decrement_strong_count_ArcPayjoinFfiSendV1ContextV1Ptr => wire
           .rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffisendv1ContextV1;
 
@@ -49,12 +97,50 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
           wire.rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffiuriUrl;
 
   CrossPlatformFinalizerArg
+      get rust_arc_decrement_strong_count_MutexOptionOhttpClientResponsePtr => wire
+          .rust_arc_decrement_strong_count_RustOpaque_MutexOptionohttpClientResponse;
+
+  CrossPlatformFinalizerArg
+      get rust_arc_decrement_strong_count_ArcV2MaybeInputsOwnedPtr => wire
+          .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockArcV2MaybeInputsOwned;
+
+  CrossPlatformFinalizerArg
+      get rust_arc_decrement_strong_count_ArcV2MaybeInputsSeenPtr => wire
+          .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockArcV2MaybeInputsSeen;
+
+  CrossPlatformFinalizerArg
       get rust_arc_decrement_strong_count_PayjoinFfiReceiveV1UncheckedProposalPtr =>
           wire.rust_arc_decrement_strong_count_RustOpaque_payjoin_ffireceivev1UncheckedProposal;
+
+  CrossPlatformFinalizerArg
+      get rust_arc_decrement_strong_count_PayjoinFfiReceiveV2EnrollerPtr => wire
+          .rust_arc_decrement_strong_count_RustOpaque_payjoin_ffireceivev2Enroller;
+
+  CrossPlatformFinalizerArg
+      get rust_arc_decrement_strong_count_PayjoinFfiReceiveV2V2UncheckedProposalPtr =>
+          wire.rust_arc_decrement_strong_count_RustOpaque_payjoin_ffireceivev2V2UncheckedProposal;
+
+  @protected
+  ArcV2MaybeInputsOwned
+      dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockArcV2MaybeInputsOwned(
+          dynamic raw);
+
+  @protected
+  ArcV2MaybeInputsSeen
+      dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockArcV2MaybeInputsSeen(
+          dynamic raw);
+
+  @protected
+  FutureOr<String> Function(String)
+      dco_decode_DartFn_Inputs_String_Output_String(dynamic raw);
 
   @protected
   FutureOr<bool> Function(Uint8List)
       dco_decode_DartFn_Inputs_list_prim_u_8_strict_Output_bool(dynamic raw);
+
+  @protected
+  FutureOr<bool> Function(OutPoint)
+      dco_decode_DartFn_Inputs_out_point_Output_bool(dynamic raw);
 
   @protected
   Object dco_decode_DartOpaque(dynamic raw);
@@ -63,8 +149,67 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
   Map<String, String> dco_decode_Map_String_String(dynamic raw);
 
   @protected
+  Map<int, OutPoint> dco_decode_Map_u_64_out_point(dynamic raw);
+
+  @protected
   ArcPayjoinFfiReceiveV1MaybeInputsOwned
       dco_decode_RustOpaque_Arcpayjoin_ffireceivev1MaybeInputsOwned(
+          dynamic raw);
+
+  @protected
+  ArcPayjoinFfiReceiveV1MaybeInputsSeen
+      dco_decode_RustOpaque_Arcpayjoin_ffireceivev1MaybeInputsSeen(dynamic raw);
+
+  @protected
+  ArcPayjoinFfiReceiveV1MaybeMixedInputScripts
+      dco_decode_RustOpaque_Arcpayjoin_ffireceivev1MaybeMixedInputScripts(
+          dynamic raw);
+
+  @protected
+  ArcPayjoinFfiReceiveV1OutputsUnknown
+      dco_decode_RustOpaque_Arcpayjoin_ffireceivev1OutputsUnknown(dynamic raw);
+
+  @protected
+  ArcPayjoinFfiReceiveV1PayjoinProposal
+      dco_decode_RustOpaque_Arcpayjoin_ffireceivev1PayjoinProposal(dynamic raw);
+
+  @protected
+  ArcPayjoinFfiReceiveV1ProvisionalProposal
+      dco_decode_RustOpaque_Arcpayjoin_ffireceivev1ProvisionalProposal(
+          dynamic raw);
+
+  @protected
+  ArcPayjoinFfiReceiveV2Enrolled
+      dco_decode_RustOpaque_Arcpayjoin_ffireceivev2Enrolled(dynamic raw);
+
+  @protected
+  ArcPayjoinFfiReceiveV2V2MaybeInputsOwned
+      dco_decode_RustOpaque_Arcpayjoin_ffireceivev2V2MaybeInputsOwned(
+          dynamic raw);
+
+  @protected
+  ArcPayjoinFfiReceiveV2V2MaybeInputsSeen
+      dco_decode_RustOpaque_Arcpayjoin_ffireceivev2V2MaybeInputsSeen(
+          dynamic raw);
+
+  @protected
+  ArcPayjoinFfiReceiveV2V2MaybeMixedInputScripts
+      dco_decode_RustOpaque_Arcpayjoin_ffireceivev2V2MaybeMixedInputScripts(
+          dynamic raw);
+
+  @protected
+  ArcPayjoinFfiReceiveV2V2OutputsUnknown
+      dco_decode_RustOpaque_Arcpayjoin_ffireceivev2V2OutputsUnknown(
+          dynamic raw);
+
+  @protected
+  ArcPayjoinFfiReceiveV2V2PayjoinProposal
+      dco_decode_RustOpaque_Arcpayjoin_ffireceivev2V2PayjoinProposal(
+          dynamic raw);
+
+  @protected
+  ArcPayjoinFfiReceiveV2V2ProvisionalProposal
+      dco_decode_RustOpaque_Arcpayjoin_ffireceivev2V2ProvisionalProposal(
           dynamic raw);
 
   @protected
@@ -90,8 +235,31 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
   ArcPayjoinFfiUriUrl dco_decode_RustOpaque_Arcpayjoin_ffiuriUrl(dynamic raw);
 
   @protected
+  MutexOptionOhttpClientResponse
+      dco_decode_RustOpaque_MutexOptionohttpClientResponse(dynamic raw);
+
+  @protected
+  ArcV2MaybeInputsOwned
+      dco_decode_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockArcV2MaybeInputsOwned(
+          dynamic raw);
+
+  @protected
+  ArcV2MaybeInputsSeen
+      dco_decode_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockArcV2MaybeInputsSeen(
+          dynamic raw);
+
+  @protected
   PayjoinFfiReceiveV1UncheckedProposal
       dco_decode_RustOpaque_payjoin_ffireceivev1UncheckedProposal(dynamic raw);
+
+  @protected
+  PayjoinFfiReceiveV2Enroller
+      dco_decode_RustOpaque_payjoin_ffireceivev2Enroller(dynamic raw);
+
+  @protected
+  PayjoinFfiReceiveV2V2UncheckedProposal
+      dco_decode_RustOpaque_payjoin_ffireceivev2V2UncheckedProposal(
+          dynamic raw);
 
   @protected
   String dco_decode_String(dynamic raw);
@@ -100,19 +268,53 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
   bool dco_decode_bool(dynamic raw);
 
   @protected
+  ClientResponse dco_decode_box_autoadd_client_response(dynamic raw);
+
+  @protected
   ContextV1 dco_decode_box_autoadd_context_v_1(dynamic raw);
 
   @protected
   ContextV2 dco_decode_box_autoadd_context_v_2(dynamic raw);
 
   @protected
+  Enrolled dco_decode_box_autoadd_enrolled(dynamic raw);
+
+  @protected
+  Enroller dco_decode_box_autoadd_enroller(dynamic raw);
+
+  @protected
   Headers dco_decode_box_autoadd_headers(dynamic raw);
+
+  @protected
+  MaybeInputsOwned dco_decode_box_autoadd_maybe_inputs_owned(dynamic raw);
+
+  @protected
+  MaybeInputsSeen dco_decode_box_autoadd_maybe_inputs_seen(dynamic raw);
+
+  @protected
+  MaybeMixedInputScripts dco_decode_box_autoadd_maybe_mixed_input_scripts(
+      dynamic raw);
+
+  @protected
+  OutPoint dco_decode_box_autoadd_out_point(dynamic raw);
+
+  @protected
+  OutputsUnknown dco_decode_box_autoadd_outputs_unknown(dynamic raw);
+
+  @protected
+  PayjoinProposal dco_decode_box_autoadd_payjoin_proposal(dynamic raw);
+
+  @protected
+  ProvisionalProposal dco_decode_box_autoadd_provisional_proposal(dynamic raw);
 
   @protected
   RequestBuilder dco_decode_box_autoadd_request_builder(dynamic raw);
 
   @protected
   RequestContext dco_decode_box_autoadd_request_context(dynamic raw);
+
+  @protected
+  TxOut dco_decode_box_autoadd_tx_out(dynamic raw);
 
   @protected
   int dco_decode_box_autoadd_u_64(dynamic raw);
@@ -130,13 +332,52 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
   Url dco_decode_box_autoadd_url(dynamic raw);
 
   @protected
+  V2MaybeInputsOwned dco_decode_box_autoadd_v_2_maybe_inputs_owned(dynamic raw);
+
+  @protected
+  V2MaybeInputsSeen dco_decode_box_autoadd_v_2_maybe_inputs_seen(dynamic raw);
+
+  @protected
+  V2MaybeMixedInputScripts dco_decode_box_autoadd_v_2_maybe_mixed_input_scripts(
+      dynamic raw);
+
+  @protected
+  V2OutputsUnknown dco_decode_box_autoadd_v_2_outputs_unknown(dynamic raw);
+
+  @protected
+  V2PayjoinProposal dco_decode_box_autoadd_v_2_payjoin_proposal(dynamic raw);
+
+  @protected
+  V2ProvisionalProposal dco_decode_box_autoadd_v_2_provisional_proposal(
+      dynamic raw);
+
+  @protected
+  V2UncheckedProposal dco_decode_box_autoadd_v_2_unchecked_proposal(
+      dynamic raw);
+
+  @protected
+  ClientResponse dco_decode_client_response(dynamic raw);
+
+  @protected
   ContextV1 dco_decode_context_v_1(dynamic raw);
 
   @protected
   ContextV2 dco_decode_context_v_2(dynamic raw);
 
   @protected
+  Enrolled dco_decode_enrolled(dynamic raw);
+
+  @protected
+  Enroller dco_decode_enroller(dynamic raw);
+
+  @protected
   Headers dco_decode_headers(dynamic raw);
+
+  @protected
+  List<OutPoint> dco_decode_list_out_point(dynamic raw);
+
+  @protected
+  Uint64List dco_decode_list_prim_u_64_strict(dynamic raw);
 
   @protected
   List<int> dco_decode_list_prim_u_8_loose(dynamic raw);
@@ -148,7 +389,16 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
   List<(String, String)> dco_decode_list_record_string_string(dynamic raw);
 
   @protected
+  List<(int, OutPoint)> dco_decode_list_record_u_64_out_point(dynamic raw);
+
+  @protected
   MaybeInputsOwned dco_decode_maybe_inputs_owned(dynamic raw);
+
+  @protected
+  MaybeInputsSeen dco_decode_maybe_inputs_seen(dynamic raw);
+
+  @protected
+  MaybeMixedInputScripts dco_decode_maybe_mixed_input_scripts(dynamic raw);
 
   @protected
   String? dco_decode_opt_String(dynamic raw);
@@ -160,10 +410,29 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
   int? dco_decode_opt_box_autoadd_u_8(dynamic raw);
 
   @protected
+  V2UncheckedProposal? dco_decode_opt_box_autoadd_v_2_unchecked_proposal(
+      dynamic raw);
+
+  @protected
+  OutPoint dco_decode_out_point(dynamic raw);
+
+  @protected
+  OutputsUnknown dco_decode_outputs_unknown(dynamic raw);
+
+  @protected
   PayjoinError dco_decode_payjoin_error(dynamic raw);
 
   @protected
+  PayjoinProposal dco_decode_payjoin_proposal(dynamic raw);
+
+  @protected
+  ProvisionalProposal dco_decode_provisional_proposal(dynamic raw);
+
+  @protected
   (String, String) dco_decode_record_string_string(dynamic raw);
+
+  @protected
+  (int, OutPoint) dco_decode_record_u_64_out_point(dynamic raw);
 
   @protected
   Request dco_decode_request(dynamic raw);
@@ -179,6 +448,15 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
 
   @protected
   RequestContextV2 dco_decode_request_context_v_2(dynamic raw);
+
+  @protected
+  RequestResponse dco_decode_request_response(dynamic raw);
+
+  @protected
+  TxOut dco_decode_tx_out(dynamic raw);
+
+  @protected
+  int dco_decode_u_32(dynamic raw);
 
   @protected
   int dco_decode_u_64(dynamic raw);
@@ -202,6 +480,38 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
   int dco_decode_usize(dynamic raw);
 
   @protected
+  V2MaybeInputsOwned dco_decode_v_2_maybe_inputs_owned(dynamic raw);
+
+  @protected
+  V2MaybeInputsSeen dco_decode_v_2_maybe_inputs_seen(dynamic raw);
+
+  @protected
+  V2MaybeMixedInputScripts dco_decode_v_2_maybe_mixed_input_scripts(
+      dynamic raw);
+
+  @protected
+  V2OutputsUnknown dco_decode_v_2_outputs_unknown(dynamic raw);
+
+  @protected
+  V2PayjoinProposal dco_decode_v_2_payjoin_proposal(dynamic raw);
+
+  @protected
+  V2ProvisionalProposal dco_decode_v_2_provisional_proposal(dynamic raw);
+
+  @protected
+  V2UncheckedProposal dco_decode_v_2_unchecked_proposal(dynamic raw);
+
+  @protected
+  ArcV2MaybeInputsOwned
+      sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockArcV2MaybeInputsOwned(
+          SseDeserializer deserializer);
+
+  @protected
+  ArcV2MaybeInputsSeen
+      sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockArcV2MaybeInputsSeen(
+          SseDeserializer deserializer);
+
+  @protected
   Object sse_decode_DartOpaque(SseDeserializer deserializer);
 
   @protected
@@ -209,8 +519,72 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
       SseDeserializer deserializer);
 
   @protected
+  Map<int, OutPoint> sse_decode_Map_u_64_out_point(
+      SseDeserializer deserializer);
+
+  @protected
   ArcPayjoinFfiReceiveV1MaybeInputsOwned
       sse_decode_RustOpaque_Arcpayjoin_ffireceivev1MaybeInputsOwned(
+          SseDeserializer deserializer);
+
+  @protected
+  ArcPayjoinFfiReceiveV1MaybeInputsSeen
+      sse_decode_RustOpaque_Arcpayjoin_ffireceivev1MaybeInputsSeen(
+          SseDeserializer deserializer);
+
+  @protected
+  ArcPayjoinFfiReceiveV1MaybeMixedInputScripts
+      sse_decode_RustOpaque_Arcpayjoin_ffireceivev1MaybeMixedInputScripts(
+          SseDeserializer deserializer);
+
+  @protected
+  ArcPayjoinFfiReceiveV1OutputsUnknown
+      sse_decode_RustOpaque_Arcpayjoin_ffireceivev1OutputsUnknown(
+          SseDeserializer deserializer);
+
+  @protected
+  ArcPayjoinFfiReceiveV1PayjoinProposal
+      sse_decode_RustOpaque_Arcpayjoin_ffireceivev1PayjoinProposal(
+          SseDeserializer deserializer);
+
+  @protected
+  ArcPayjoinFfiReceiveV1ProvisionalProposal
+      sse_decode_RustOpaque_Arcpayjoin_ffireceivev1ProvisionalProposal(
+          SseDeserializer deserializer);
+
+  @protected
+  ArcPayjoinFfiReceiveV2Enrolled
+      sse_decode_RustOpaque_Arcpayjoin_ffireceivev2Enrolled(
+          SseDeserializer deserializer);
+
+  @protected
+  ArcPayjoinFfiReceiveV2V2MaybeInputsOwned
+      sse_decode_RustOpaque_Arcpayjoin_ffireceivev2V2MaybeInputsOwned(
+          SseDeserializer deserializer);
+
+  @protected
+  ArcPayjoinFfiReceiveV2V2MaybeInputsSeen
+      sse_decode_RustOpaque_Arcpayjoin_ffireceivev2V2MaybeInputsSeen(
+          SseDeserializer deserializer);
+
+  @protected
+  ArcPayjoinFfiReceiveV2V2MaybeMixedInputScripts
+      sse_decode_RustOpaque_Arcpayjoin_ffireceivev2V2MaybeMixedInputScripts(
+          SseDeserializer deserializer);
+
+  @protected
+  ArcPayjoinFfiReceiveV2V2OutputsUnknown
+      sse_decode_RustOpaque_Arcpayjoin_ffireceivev2V2OutputsUnknown(
+          SseDeserializer deserializer);
+
+  @protected
+  ArcPayjoinFfiReceiveV2V2PayjoinProposal
+      sse_decode_RustOpaque_Arcpayjoin_ffireceivev2V2PayjoinProposal(
+          SseDeserializer deserializer);
+
+  @protected
+  ArcPayjoinFfiReceiveV2V2ProvisionalProposal
+      sse_decode_RustOpaque_Arcpayjoin_ffireceivev2V2ProvisionalProposal(
           SseDeserializer deserializer);
 
   @protected
@@ -242,8 +616,33 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
       SseDeserializer deserializer);
 
   @protected
+  MutexOptionOhttpClientResponse
+      sse_decode_RustOpaque_MutexOptionohttpClientResponse(
+          SseDeserializer deserializer);
+
+  @protected
+  ArcV2MaybeInputsOwned
+      sse_decode_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockArcV2MaybeInputsOwned(
+          SseDeserializer deserializer);
+
+  @protected
+  ArcV2MaybeInputsSeen
+      sse_decode_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockArcV2MaybeInputsSeen(
+          SseDeserializer deserializer);
+
+  @protected
   PayjoinFfiReceiveV1UncheckedProposal
       sse_decode_RustOpaque_payjoin_ffireceivev1UncheckedProposal(
+          SseDeserializer deserializer);
+
+  @protected
+  PayjoinFfiReceiveV2Enroller
+      sse_decode_RustOpaque_payjoin_ffireceivev2Enroller(
+          SseDeserializer deserializer);
+
+  @protected
+  PayjoinFfiReceiveV2V2UncheckedProposal
+      sse_decode_RustOpaque_payjoin_ffireceivev2V2UncheckedProposal(
           SseDeserializer deserializer);
 
   @protected
@@ -253,13 +652,50 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
   bool sse_decode_bool(SseDeserializer deserializer);
 
   @protected
+  ClientResponse sse_decode_box_autoadd_client_response(
+      SseDeserializer deserializer);
+
+  @protected
   ContextV1 sse_decode_box_autoadd_context_v_1(SseDeserializer deserializer);
 
   @protected
   ContextV2 sse_decode_box_autoadd_context_v_2(SseDeserializer deserializer);
 
   @protected
+  Enrolled sse_decode_box_autoadd_enrolled(SseDeserializer deserializer);
+
+  @protected
+  Enroller sse_decode_box_autoadd_enroller(SseDeserializer deserializer);
+
+  @protected
   Headers sse_decode_box_autoadd_headers(SseDeserializer deserializer);
+
+  @protected
+  MaybeInputsOwned sse_decode_box_autoadd_maybe_inputs_owned(
+      SseDeserializer deserializer);
+
+  @protected
+  MaybeInputsSeen sse_decode_box_autoadd_maybe_inputs_seen(
+      SseDeserializer deserializer);
+
+  @protected
+  MaybeMixedInputScripts sse_decode_box_autoadd_maybe_mixed_input_scripts(
+      SseDeserializer deserializer);
+
+  @protected
+  OutPoint sse_decode_box_autoadd_out_point(SseDeserializer deserializer);
+
+  @protected
+  OutputsUnknown sse_decode_box_autoadd_outputs_unknown(
+      SseDeserializer deserializer);
+
+  @protected
+  PayjoinProposal sse_decode_box_autoadd_payjoin_proposal(
+      SseDeserializer deserializer);
+
+  @protected
+  ProvisionalProposal sse_decode_box_autoadd_provisional_proposal(
+      SseDeserializer deserializer);
 
   @protected
   RequestBuilder sse_decode_box_autoadd_request_builder(
@@ -268,6 +704,9 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
   @protected
   RequestContext sse_decode_box_autoadd_request_context(
       SseDeserializer deserializer);
+
+  @protected
+  TxOut sse_decode_box_autoadd_tx_out(SseDeserializer deserializer);
 
   @protected
   int sse_decode_box_autoadd_u_64(SseDeserializer deserializer);
@@ -286,13 +725,56 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
   Url sse_decode_box_autoadd_url(SseDeserializer deserializer);
 
   @protected
+  V2MaybeInputsOwned sse_decode_box_autoadd_v_2_maybe_inputs_owned(
+      SseDeserializer deserializer);
+
+  @protected
+  V2MaybeInputsSeen sse_decode_box_autoadd_v_2_maybe_inputs_seen(
+      SseDeserializer deserializer);
+
+  @protected
+  V2MaybeMixedInputScripts sse_decode_box_autoadd_v_2_maybe_mixed_input_scripts(
+      SseDeserializer deserializer);
+
+  @protected
+  V2OutputsUnknown sse_decode_box_autoadd_v_2_outputs_unknown(
+      SseDeserializer deserializer);
+
+  @protected
+  V2PayjoinProposal sse_decode_box_autoadd_v_2_payjoin_proposal(
+      SseDeserializer deserializer);
+
+  @protected
+  V2ProvisionalProposal sse_decode_box_autoadd_v_2_provisional_proposal(
+      SseDeserializer deserializer);
+
+  @protected
+  V2UncheckedProposal sse_decode_box_autoadd_v_2_unchecked_proposal(
+      SseDeserializer deserializer);
+
+  @protected
+  ClientResponse sse_decode_client_response(SseDeserializer deserializer);
+
+  @protected
   ContextV1 sse_decode_context_v_1(SseDeserializer deserializer);
 
   @protected
   ContextV2 sse_decode_context_v_2(SseDeserializer deserializer);
 
   @protected
+  Enrolled sse_decode_enrolled(SseDeserializer deserializer);
+
+  @protected
+  Enroller sse_decode_enroller(SseDeserializer deserializer);
+
+  @protected
   Headers sse_decode_headers(SseDeserializer deserializer);
+
+  @protected
+  List<OutPoint> sse_decode_list_out_point(SseDeserializer deserializer);
+
+  @protected
+  Uint64List sse_decode_list_prim_u_64_strict(SseDeserializer deserializer);
 
   @protected
   List<int> sse_decode_list_prim_u_8_loose(SseDeserializer deserializer);
@@ -305,7 +787,18 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
       SseDeserializer deserializer);
 
   @protected
+  List<(int, OutPoint)> sse_decode_list_record_u_64_out_point(
+      SseDeserializer deserializer);
+
+  @protected
   MaybeInputsOwned sse_decode_maybe_inputs_owned(SseDeserializer deserializer);
+
+  @protected
+  MaybeInputsSeen sse_decode_maybe_inputs_seen(SseDeserializer deserializer);
+
+  @protected
+  MaybeMixedInputScripts sse_decode_maybe_mixed_input_scripts(
+      SseDeserializer deserializer);
 
   @protected
   String? sse_decode_opt_String(SseDeserializer deserializer);
@@ -317,10 +810,31 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
   int? sse_decode_opt_box_autoadd_u_8(SseDeserializer deserializer);
 
   @protected
+  V2UncheckedProposal? sse_decode_opt_box_autoadd_v_2_unchecked_proposal(
+      SseDeserializer deserializer);
+
+  @protected
+  OutPoint sse_decode_out_point(SseDeserializer deserializer);
+
+  @protected
+  OutputsUnknown sse_decode_outputs_unknown(SseDeserializer deserializer);
+
+  @protected
   PayjoinError sse_decode_payjoin_error(SseDeserializer deserializer);
 
   @protected
+  PayjoinProposal sse_decode_payjoin_proposal(SseDeserializer deserializer);
+
+  @protected
+  ProvisionalProposal sse_decode_provisional_proposal(
+      SseDeserializer deserializer);
+
+  @protected
   (String, String) sse_decode_record_string_string(
+      SseDeserializer deserializer);
+
+  @protected
+  (int, OutPoint) sse_decode_record_u_64_out_point(
       SseDeserializer deserializer);
 
   @protected
@@ -337,6 +851,15 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
 
   @protected
   RequestContextV2 sse_decode_request_context_v_2(SseDeserializer deserializer);
+
+  @protected
+  RequestResponse sse_decode_request_response(SseDeserializer deserializer);
+
+  @protected
+  TxOut sse_decode_tx_out(SseDeserializer deserializer);
+
+  @protected
+  int sse_decode_u_32(SseDeserializer deserializer);
 
   @protected
   int sse_decode_u_64(SseDeserializer deserializer);
@@ -360,6 +883,33 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
   int sse_decode_usize(SseDeserializer deserializer);
 
   @protected
+  V2MaybeInputsOwned sse_decode_v_2_maybe_inputs_owned(
+      SseDeserializer deserializer);
+
+  @protected
+  V2MaybeInputsSeen sse_decode_v_2_maybe_inputs_seen(
+      SseDeserializer deserializer);
+
+  @protected
+  V2MaybeMixedInputScripts sse_decode_v_2_maybe_mixed_input_scripts(
+      SseDeserializer deserializer);
+
+  @protected
+  V2OutputsUnknown sse_decode_v_2_outputs_unknown(SseDeserializer deserializer);
+
+  @protected
+  V2PayjoinProposal sse_decode_v_2_payjoin_proposal(
+      SseDeserializer deserializer);
+
+  @protected
+  V2ProvisionalProposal sse_decode_v_2_provisional_proposal(
+      SseDeserializer deserializer);
+
+  @protected
+  V2UncheckedProposal sse_decode_v_2_unchecked_proposal(
+      SseDeserializer deserializer);
+
+  @protected
   int sse_decode_i_32(SseDeserializer deserializer);
 
   @protected
@@ -370,9 +920,22 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
   }
 
   @protected
+  List<dynamic> cst_encode_Map_u_64_out_point(Map<int, OutPoint> raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return cst_encode_list_record_u_64_out_point(
+        raw.entries.map((e) => (e.key, e.value)).toList());
+  }
+
+  @protected
   String cst_encode_String(String raw) {
     // Codec=Cst (C-struct based), see doc to use other codecs
     return raw;
+  }
+
+  @protected
+  List<dynamic> cst_encode_box_autoadd_client_response(ClientResponse raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return cst_encode_client_response(raw);
   }
 
   @protected
@@ -388,9 +951,66 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
   }
 
   @protected
+  List<dynamic> cst_encode_box_autoadd_enrolled(Enrolled raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return cst_encode_enrolled(raw);
+  }
+
+  @protected
+  List<dynamic> cst_encode_box_autoadd_enroller(Enroller raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return cst_encode_enroller(raw);
+  }
+
+  @protected
   List<dynamic> cst_encode_box_autoadd_headers(Headers raw) {
     // Codec=Cst (C-struct based), see doc to use other codecs
     return cst_encode_headers(raw);
+  }
+
+  @protected
+  List<dynamic> cst_encode_box_autoadd_maybe_inputs_owned(
+      MaybeInputsOwned raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return cst_encode_maybe_inputs_owned(raw);
+  }
+
+  @protected
+  List<dynamic> cst_encode_box_autoadd_maybe_inputs_seen(MaybeInputsSeen raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return cst_encode_maybe_inputs_seen(raw);
+  }
+
+  @protected
+  List<dynamic> cst_encode_box_autoadd_maybe_mixed_input_scripts(
+      MaybeMixedInputScripts raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return cst_encode_maybe_mixed_input_scripts(raw);
+  }
+
+  @protected
+  List<dynamic> cst_encode_box_autoadd_out_point(OutPoint raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return cst_encode_out_point(raw);
+  }
+
+  @protected
+  List<dynamic> cst_encode_box_autoadd_outputs_unknown(OutputsUnknown raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return cst_encode_outputs_unknown(raw);
+  }
+
+  @protected
+  List<dynamic> cst_encode_box_autoadd_payjoin_proposal(PayjoinProposal raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return cst_encode_payjoin_proposal(raw);
+  }
+
+  @protected
+  List<dynamic> cst_encode_box_autoadd_provisional_proposal(
+      ProvisionalProposal raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return cst_encode_provisional_proposal(raw);
   }
 
   @protected
@@ -403,6 +1023,12 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
   List<dynamic> cst_encode_box_autoadd_request_context(RequestContext raw) {
     // Codec=Cst (C-struct based), see doc to use other codecs
     return cst_encode_request_context(raw);
+  }
+
+  @protected
+  List<dynamic> cst_encode_box_autoadd_tx_out(TxOut raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return cst_encode_tx_out(raw);
   }
 
   @protected
@@ -437,6 +1063,61 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
   }
 
   @protected
+  List<dynamic> cst_encode_box_autoadd_v_2_maybe_inputs_owned(
+      V2MaybeInputsOwned raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return cst_encode_v_2_maybe_inputs_owned(raw);
+  }
+
+  @protected
+  List<dynamic> cst_encode_box_autoadd_v_2_maybe_inputs_seen(
+      V2MaybeInputsSeen raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return cst_encode_v_2_maybe_inputs_seen(raw);
+  }
+
+  @protected
+  List<dynamic> cst_encode_box_autoadd_v_2_maybe_mixed_input_scripts(
+      V2MaybeMixedInputScripts raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return cst_encode_v_2_maybe_mixed_input_scripts(raw);
+  }
+
+  @protected
+  List<dynamic> cst_encode_box_autoadd_v_2_outputs_unknown(
+      V2OutputsUnknown raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return cst_encode_v_2_outputs_unknown(raw);
+  }
+
+  @protected
+  List<dynamic> cst_encode_box_autoadd_v_2_payjoin_proposal(
+      V2PayjoinProposal raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return cst_encode_v_2_payjoin_proposal(raw);
+  }
+
+  @protected
+  List<dynamic> cst_encode_box_autoadd_v_2_provisional_proposal(
+      V2ProvisionalProposal raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return cst_encode_v_2_provisional_proposal(raw);
+  }
+
+  @protected
+  List<dynamic> cst_encode_box_autoadd_v_2_unchecked_proposal(
+      V2UncheckedProposal raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return cst_encode_v_2_unchecked_proposal(raw);
+  }
+
+  @protected
+  List<dynamic> cst_encode_client_response(ClientResponse raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return [cst_encode_RustOpaque_MutexOptionohttpClientResponse(raw.field0)];
+  }
+
+  @protected
   List<dynamic> cst_encode_context_v_1(ContextV1 raw) {
     // Codec=Cst (C-struct based), see doc to use other codecs
     return [cst_encode_RustOpaque_Arcpayjoin_ffisendv1ContextV1(raw.field0)];
@@ -449,9 +1130,33 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
   }
 
   @protected
+  List<dynamic> cst_encode_enrolled(Enrolled raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return [cst_encode_RustOpaque_Arcpayjoin_ffireceivev2Enrolled(raw.field0)];
+  }
+
+  @protected
+  List<dynamic> cst_encode_enroller(Enroller raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return [cst_encode_RustOpaque_payjoin_ffireceivev2Enroller(raw.field0)];
+  }
+
+  @protected
   List<dynamic> cst_encode_headers(Headers raw) {
     // Codec=Cst (C-struct based), see doc to use other codecs
     return [cst_encode_Map_String_String(raw.field0)];
+  }
+
+  @protected
+  List<dynamic> cst_encode_list_out_point(List<OutPoint> raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return raw.map(cst_encode_out_point).toList();
+  }
+
+  @protected
+  Object /* BigInt64Array */ cst_encode_list_prim_u_64_strict(Uint64List raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return raw.inner;
   }
 
   @protected
@@ -474,10 +1179,35 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
   }
 
   @protected
+  List<dynamic> cst_encode_list_record_u_64_out_point(
+      List<(int, OutPoint)> raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return raw.map(cst_encode_record_u_64_out_point).toList();
+  }
+
+  @protected
   List<dynamic> cst_encode_maybe_inputs_owned(MaybeInputsOwned raw) {
     // Codec=Cst (C-struct based), see doc to use other codecs
     return [
       cst_encode_RustOpaque_Arcpayjoin_ffireceivev1MaybeInputsOwned(raw.field0)
+    ];
+  }
+
+  @protected
+  List<dynamic> cst_encode_maybe_inputs_seen(MaybeInputsSeen raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return [
+      cst_encode_RustOpaque_Arcpayjoin_ffireceivev1MaybeInputsSeen(raw.field0)
+    ];
+  }
+
+  @protected
+  List<dynamic> cst_encode_maybe_mixed_input_scripts(
+      MaybeMixedInputScripts raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return [
+      cst_encode_RustOpaque_Arcpayjoin_ffireceivev1MaybeMixedInputScripts(
+          raw.field0)
     ];
   }
 
@@ -497,6 +1227,29 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
   int? cst_encode_opt_box_autoadd_u_8(int? raw) {
     // Codec=Cst (C-struct based), see doc to use other codecs
     return raw == null ? null : cst_encode_box_autoadd_u_8(raw);
+  }
+
+  @protected
+  List<dynamic>? cst_encode_opt_box_autoadd_v_2_unchecked_proposal(
+      V2UncheckedProposal? raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return raw == null
+        ? null
+        : cst_encode_box_autoadd_v_2_unchecked_proposal(raw);
+  }
+
+  @protected
+  List<dynamic> cst_encode_out_point(OutPoint raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return [cst_encode_String(raw.txid), cst_encode_u_32(raw.vout)];
+  }
+
+  @protected
+  List<dynamic> cst_encode_outputs_unknown(OutputsUnknown raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return [
+      cst_encode_RustOpaque_Arcpayjoin_ffireceivev1OutputsUnknown(raw.field0)
+    ];
   }
 
   @protected
@@ -558,9 +1311,32 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
   }
 
   @protected
+  List<dynamic> cst_encode_payjoin_proposal(PayjoinProposal raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return [
+      cst_encode_RustOpaque_Arcpayjoin_ffireceivev1PayjoinProposal(raw.field0)
+    ];
+  }
+
+  @protected
+  List<dynamic> cst_encode_provisional_proposal(ProvisionalProposal raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return [
+      cst_encode_RustOpaque_Arcpayjoin_ffireceivev1ProvisionalProposal(
+          raw.field0)
+    ];
+  }
+
+  @protected
   List<dynamic> cst_encode_record_string_string((String, String) raw) {
     // Codec=Cst (C-struct based), see doc to use other codecs
     return [cst_encode_String(raw.$1), cst_encode_String(raw.$2)];
+  }
+
+  @protected
+  List<dynamic> cst_encode_record_u_64_out_point((int, OutPoint) raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return [cst_encode_u_64(raw.$1), cst_encode_out_point(raw.$2)];
   }
 
   @protected
@@ -604,6 +1380,24 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
   }
 
   @protected
+  List<dynamic> cst_encode_request_response(RequestResponse raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return [
+      cst_encode_request(raw.request),
+      cst_encode_client_response(raw.clientResponse)
+    ];
+  }
+
+  @protected
+  List<dynamic> cst_encode_tx_out(TxOut raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return [
+      cst_encode_u_64(raw.value),
+      cst_encode_list_prim_u_8_strict(raw.scriptPubkey)
+    ];
+  }
+
+  @protected
   Object cst_encode_u_64(int raw) {
     // Codec=Cst (C-struct based), see doc to use other codecs
     return castNativeBigInt(raw);
@@ -630,8 +1424,84 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
   }
 
   @protected
+  List<dynamic> cst_encode_v_2_maybe_inputs_owned(V2MaybeInputsOwned raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return [
+      cst_encode_RustOpaque_Arcpayjoin_ffireceivev2V2MaybeInputsOwned(
+          raw.field0)
+    ];
+  }
+
+  @protected
+  List<dynamic> cst_encode_v_2_maybe_inputs_seen(V2MaybeInputsSeen raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return [
+      cst_encode_RustOpaque_Arcpayjoin_ffireceivev2V2MaybeInputsSeen(raw.field0)
+    ];
+  }
+
+  @protected
+  List<dynamic> cst_encode_v_2_maybe_mixed_input_scripts(
+      V2MaybeMixedInputScripts raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return [
+      cst_encode_RustOpaque_Arcpayjoin_ffireceivev2V2MaybeMixedInputScripts(
+          raw.field0)
+    ];
+  }
+
+  @protected
+  List<dynamic> cst_encode_v_2_outputs_unknown(V2OutputsUnknown raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return [
+      cst_encode_RustOpaque_Arcpayjoin_ffireceivev2V2OutputsUnknown(raw.field0)
+    ];
+  }
+
+  @protected
+  List<dynamic> cst_encode_v_2_payjoin_proposal(V2PayjoinProposal raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return [
+      cst_encode_RustOpaque_Arcpayjoin_ffireceivev2V2PayjoinProposal(raw.field0)
+    ];
+  }
+
+  @protected
+  List<dynamic> cst_encode_v_2_provisional_proposal(V2ProvisionalProposal raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return [
+      cst_encode_RustOpaque_Arcpayjoin_ffireceivev2V2ProvisionalProposal(
+          raw.field0)
+    ];
+  }
+
+  @protected
+  List<dynamic> cst_encode_v_2_unchecked_proposal(V2UncheckedProposal raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return [
+      cst_encode_RustOpaque_payjoin_ffireceivev2V2UncheckedProposal(raw.field0)
+    ];
+  }
+
+  @protected
+  int cst_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockArcV2MaybeInputsOwned(
+      ArcV2MaybeInputsOwned raw);
+
+  @protected
+  int cst_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockArcV2MaybeInputsSeen(
+      ArcV2MaybeInputsSeen raw);
+
+  @protected
+  PlatformPointer cst_encode_DartFn_Inputs_String_Output_String(
+      FutureOr<String> Function(String) raw);
+
+  @protected
   PlatformPointer cst_encode_DartFn_Inputs_list_prim_u_8_strict_Output_bool(
       FutureOr<bool> Function(Uint8List) raw);
+
+  @protected
+  PlatformPointer cst_encode_DartFn_Inputs_out_point_Output_bool(
+      FutureOr<bool> Function(OutPoint) raw);
 
   @protected
   PlatformPointer cst_encode_DartOpaque(Object raw);
@@ -639,6 +1509,54 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
   @protected
   int cst_encode_RustOpaque_Arcpayjoin_ffireceivev1MaybeInputsOwned(
       ArcPayjoinFfiReceiveV1MaybeInputsOwned raw);
+
+  @protected
+  int cst_encode_RustOpaque_Arcpayjoin_ffireceivev1MaybeInputsSeen(
+      ArcPayjoinFfiReceiveV1MaybeInputsSeen raw);
+
+  @protected
+  int cst_encode_RustOpaque_Arcpayjoin_ffireceivev1MaybeMixedInputScripts(
+      ArcPayjoinFfiReceiveV1MaybeMixedInputScripts raw);
+
+  @protected
+  int cst_encode_RustOpaque_Arcpayjoin_ffireceivev1OutputsUnknown(
+      ArcPayjoinFfiReceiveV1OutputsUnknown raw);
+
+  @protected
+  int cst_encode_RustOpaque_Arcpayjoin_ffireceivev1PayjoinProposal(
+      ArcPayjoinFfiReceiveV1PayjoinProposal raw);
+
+  @protected
+  int cst_encode_RustOpaque_Arcpayjoin_ffireceivev1ProvisionalProposal(
+      ArcPayjoinFfiReceiveV1ProvisionalProposal raw);
+
+  @protected
+  int cst_encode_RustOpaque_Arcpayjoin_ffireceivev2Enrolled(
+      ArcPayjoinFfiReceiveV2Enrolled raw);
+
+  @protected
+  int cst_encode_RustOpaque_Arcpayjoin_ffireceivev2V2MaybeInputsOwned(
+      ArcPayjoinFfiReceiveV2V2MaybeInputsOwned raw);
+
+  @protected
+  int cst_encode_RustOpaque_Arcpayjoin_ffireceivev2V2MaybeInputsSeen(
+      ArcPayjoinFfiReceiveV2V2MaybeInputsSeen raw);
+
+  @protected
+  int cst_encode_RustOpaque_Arcpayjoin_ffireceivev2V2MaybeMixedInputScripts(
+      ArcPayjoinFfiReceiveV2V2MaybeMixedInputScripts raw);
+
+  @protected
+  int cst_encode_RustOpaque_Arcpayjoin_ffireceivev2V2OutputsUnknown(
+      ArcPayjoinFfiReceiveV2V2OutputsUnknown raw);
+
+  @protected
+  int cst_encode_RustOpaque_Arcpayjoin_ffireceivev2V2PayjoinProposal(
+      ArcPayjoinFfiReceiveV2V2PayjoinProposal raw);
+
+  @protected
+  int cst_encode_RustOpaque_Arcpayjoin_ffireceivev2V2ProvisionalProposal(
+      ArcPayjoinFfiReceiveV2V2ProvisionalProposal raw);
 
   @protected
   int cst_encode_RustOpaque_Arcpayjoin_ffisendv1ContextV1(
@@ -663,11 +1581,34 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
   int cst_encode_RustOpaque_Arcpayjoin_ffiuriUrl(ArcPayjoinFfiUriUrl raw);
 
   @protected
+  int cst_encode_RustOpaque_MutexOptionohttpClientResponse(
+      MutexOptionOhttpClientResponse raw);
+
+  @protected
+  int cst_encode_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockArcV2MaybeInputsOwned(
+      ArcV2MaybeInputsOwned raw);
+
+  @protected
+  int cst_encode_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockArcV2MaybeInputsSeen(
+      ArcV2MaybeInputsSeen raw);
+
+  @protected
   int cst_encode_RustOpaque_payjoin_ffireceivev1UncheckedProposal(
       PayjoinFfiReceiveV1UncheckedProposal raw);
 
   @protected
+  int cst_encode_RustOpaque_payjoin_ffireceivev2Enroller(
+      PayjoinFfiReceiveV2Enroller raw);
+
+  @protected
+  int cst_encode_RustOpaque_payjoin_ffireceivev2V2UncheckedProposal(
+      PayjoinFfiReceiveV2V2UncheckedProposal raw);
+
+  @protected
   bool cst_encode_bool(bool raw);
+
+  @protected
+  int cst_encode_u_32(int raw);
 
   @protected
   int cst_encode_u_8(int raw);
@@ -679,8 +1620,26 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
   int cst_encode_usize(int raw);
 
   @protected
+  void
+      sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockArcV2MaybeInputsOwned(
+          ArcV2MaybeInputsOwned self, SseSerializer serializer);
+
+  @protected
+  void
+      sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockArcV2MaybeInputsSeen(
+          ArcV2MaybeInputsSeen self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_DartFn_Inputs_String_Output_String(
+      FutureOr<String> Function(String) self, SseSerializer serializer);
+
+  @protected
   void sse_encode_DartFn_Inputs_list_prim_u_8_strict_Output_bool(
       FutureOr<bool> Function(Uint8List) self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_DartFn_Inputs_out_point_Output_bool(
+      FutureOr<bool> Function(OutPoint) self, SseSerializer serializer);
 
   @protected
   void sse_encode_DartOpaque(Object self, SseSerializer serializer);
@@ -690,8 +1649,63 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
       Map<String, String> self, SseSerializer serializer);
 
   @protected
+  void sse_encode_Map_u_64_out_point(
+      Map<int, OutPoint> self, SseSerializer serializer);
+
+  @protected
   void sse_encode_RustOpaque_Arcpayjoin_ffireceivev1MaybeInputsOwned(
       ArcPayjoinFfiReceiveV1MaybeInputsOwned self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_RustOpaque_Arcpayjoin_ffireceivev1MaybeInputsSeen(
+      ArcPayjoinFfiReceiveV1MaybeInputsSeen self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_RustOpaque_Arcpayjoin_ffireceivev1MaybeMixedInputScripts(
+      ArcPayjoinFfiReceiveV1MaybeMixedInputScripts self,
+      SseSerializer serializer);
+
+  @protected
+  void sse_encode_RustOpaque_Arcpayjoin_ffireceivev1OutputsUnknown(
+      ArcPayjoinFfiReceiveV1OutputsUnknown self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_RustOpaque_Arcpayjoin_ffireceivev1PayjoinProposal(
+      ArcPayjoinFfiReceiveV1PayjoinProposal self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_RustOpaque_Arcpayjoin_ffireceivev1ProvisionalProposal(
+      ArcPayjoinFfiReceiveV1ProvisionalProposal self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_RustOpaque_Arcpayjoin_ffireceivev2Enrolled(
+      ArcPayjoinFfiReceiveV2Enrolled self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_RustOpaque_Arcpayjoin_ffireceivev2V2MaybeInputsOwned(
+      ArcPayjoinFfiReceiveV2V2MaybeInputsOwned self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_RustOpaque_Arcpayjoin_ffireceivev2V2MaybeInputsSeen(
+      ArcPayjoinFfiReceiveV2V2MaybeInputsSeen self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_RustOpaque_Arcpayjoin_ffireceivev2V2MaybeMixedInputScripts(
+      ArcPayjoinFfiReceiveV2V2MaybeMixedInputScripts self,
+      SseSerializer serializer);
+
+  @protected
+  void sse_encode_RustOpaque_Arcpayjoin_ffireceivev2V2OutputsUnknown(
+      ArcPayjoinFfiReceiveV2V2OutputsUnknown self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_RustOpaque_Arcpayjoin_ffireceivev2V2PayjoinProposal(
+      ArcPayjoinFfiReceiveV2V2PayjoinProposal self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_RustOpaque_Arcpayjoin_ffireceivev2V2ProvisionalProposal(
+      ArcPayjoinFfiReceiveV2V2ProvisionalProposal self,
+      SseSerializer serializer);
 
   @protected
   void sse_encode_RustOpaque_Arcpayjoin_ffisendv1ContextV1(
@@ -718,14 +1732,40 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
       ArcPayjoinFfiUriUrl self, SseSerializer serializer);
 
   @protected
+  void sse_encode_RustOpaque_MutexOptionohttpClientResponse(
+      MutexOptionOhttpClientResponse self, SseSerializer serializer);
+
+  @protected
+  void
+      sse_encode_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockArcV2MaybeInputsOwned(
+          ArcV2MaybeInputsOwned self, SseSerializer serializer);
+
+  @protected
+  void
+      sse_encode_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockArcV2MaybeInputsSeen(
+          ArcV2MaybeInputsSeen self, SseSerializer serializer);
+
+  @protected
   void sse_encode_RustOpaque_payjoin_ffireceivev1UncheckedProposal(
       PayjoinFfiReceiveV1UncheckedProposal self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_RustOpaque_payjoin_ffireceivev2Enroller(
+      PayjoinFfiReceiveV2Enroller self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_RustOpaque_payjoin_ffireceivev2V2UncheckedProposal(
+      PayjoinFfiReceiveV2V2UncheckedProposal self, SseSerializer serializer);
 
   @protected
   void sse_encode_String(String self, SseSerializer serializer);
 
   @protected
   void sse_encode_bool(bool self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_box_autoadd_client_response(
+      ClientResponse self, SseSerializer serializer);
 
   @protected
   void sse_encode_box_autoadd_context_v_1(
@@ -736,7 +1776,41 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
       ContextV2 self, SseSerializer serializer);
 
   @protected
+  void sse_encode_box_autoadd_enrolled(Enrolled self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_box_autoadd_enroller(Enroller self, SseSerializer serializer);
+
+  @protected
   void sse_encode_box_autoadd_headers(Headers self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_box_autoadd_maybe_inputs_owned(
+      MaybeInputsOwned self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_box_autoadd_maybe_inputs_seen(
+      MaybeInputsSeen self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_box_autoadd_maybe_mixed_input_scripts(
+      MaybeMixedInputScripts self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_box_autoadd_out_point(
+      OutPoint self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_box_autoadd_outputs_unknown(
+      OutputsUnknown self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_box_autoadd_payjoin_proposal(
+      PayjoinProposal self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_box_autoadd_provisional_proposal(
+      ProvisionalProposal self, SseSerializer serializer);
 
   @protected
   void sse_encode_box_autoadd_request_builder(
@@ -745,6 +1819,9 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
   @protected
   void sse_encode_box_autoadd_request_context(
       RequestContext self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_box_autoadd_tx_out(TxOut self, SseSerializer serializer);
 
   @protected
   void sse_encode_box_autoadd_u_64(int self, SseSerializer serializer);
@@ -763,13 +1840,58 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
   void sse_encode_box_autoadd_url(Url self, SseSerializer serializer);
 
   @protected
+  void sse_encode_box_autoadd_v_2_maybe_inputs_owned(
+      V2MaybeInputsOwned self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_box_autoadd_v_2_maybe_inputs_seen(
+      V2MaybeInputsSeen self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_box_autoadd_v_2_maybe_mixed_input_scripts(
+      V2MaybeMixedInputScripts self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_box_autoadd_v_2_outputs_unknown(
+      V2OutputsUnknown self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_box_autoadd_v_2_payjoin_proposal(
+      V2PayjoinProposal self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_box_autoadd_v_2_provisional_proposal(
+      V2ProvisionalProposal self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_box_autoadd_v_2_unchecked_proposal(
+      V2UncheckedProposal self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_client_response(
+      ClientResponse self, SseSerializer serializer);
+
+  @protected
   void sse_encode_context_v_1(ContextV1 self, SseSerializer serializer);
 
   @protected
   void sse_encode_context_v_2(ContextV2 self, SseSerializer serializer);
 
   @protected
+  void sse_encode_enrolled(Enrolled self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_enroller(Enroller self, SseSerializer serializer);
+
+  @protected
   void sse_encode_headers(Headers self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_list_out_point(List<OutPoint> self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_list_prim_u_64_strict(
+      Uint64List self, SseSerializer serializer);
 
   @protected
   void sse_encode_list_prim_u_8_loose(List<int> self, SseSerializer serializer);
@@ -783,8 +1905,20 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
       List<(String, String)> self, SseSerializer serializer);
 
   @protected
+  void sse_encode_list_record_u_64_out_point(
+      List<(int, OutPoint)> self, SseSerializer serializer);
+
+  @protected
   void sse_encode_maybe_inputs_owned(
       MaybeInputsOwned self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_maybe_inputs_seen(
+      MaybeInputsSeen self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_maybe_mixed_input_scripts(
+      MaybeMixedInputScripts self, SseSerializer serializer);
 
   @protected
   void sse_encode_opt_String(String? self, SseSerializer serializer);
@@ -796,11 +1930,34 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
   void sse_encode_opt_box_autoadd_u_8(int? self, SseSerializer serializer);
 
   @protected
+  void sse_encode_opt_box_autoadd_v_2_unchecked_proposal(
+      V2UncheckedProposal? self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_out_point(OutPoint self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_outputs_unknown(
+      OutputsUnknown self, SseSerializer serializer);
+
+  @protected
   void sse_encode_payjoin_error(PayjoinError self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_payjoin_proposal(
+      PayjoinProposal self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_provisional_proposal(
+      ProvisionalProposal self, SseSerializer serializer);
 
   @protected
   void sse_encode_record_string_string(
       (String, String) self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_record_u_64_out_point(
+      (int, OutPoint) self, SseSerializer serializer);
 
   @protected
   void sse_encode_request(Request self, SseSerializer serializer);
@@ -820,6 +1977,16 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
   @protected
   void sse_encode_request_context_v_2(
       RequestContextV2 self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_request_response(
+      RequestResponse self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_tx_out(TxOut self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_u_32(int self, SseSerializer serializer);
 
   @protected
   void sse_encode_u_64(int self, SseSerializer serializer);
@@ -844,6 +2011,34 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
   void sse_encode_usize(int self, SseSerializer serializer);
 
   @protected
+  void sse_encode_v_2_maybe_inputs_owned(
+      V2MaybeInputsOwned self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_v_2_maybe_inputs_seen(
+      V2MaybeInputsSeen self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_v_2_maybe_mixed_input_scripts(
+      V2MaybeMixedInputScripts self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_v_2_outputs_unknown(
+      V2OutputsUnknown self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_v_2_payjoin_proposal(
+      V2PayjoinProposal self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_v_2_provisional_proposal(
+      V2ProvisionalProposal self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_v_2_unchecked_proposal(
+      V2UncheckedProposal self, SseSerializer serializer);
+
+  @protected
   void sse_encode_i_32(int self, SseSerializer serializer);
 }
 
@@ -852,8 +2047,112 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
 class PayjoinCoreWire implements BaseWire {
   PayjoinCoreWire.fromExternalLibrary(ExternalLibrary lib);
 
+  void wire_Enrolled_extract_req(NativePortType port_, List<dynamic> that) =>
+      wasmModule.wire_Enrolled_extract_req(port_, that);
+
+  void wire_Enrolled_fallback_target(
+          NativePortType port_, List<dynamic> that) =>
+      wasmModule.wire_Enrolled_fallback_target(port_, that);
+
+  void wire_Enrolled_process_res(NativePortType port_, List<dynamic> that,
+          List<int> body, List<dynamic> ctx) =>
+      wasmModule.wire_Enrolled_process_res(port_, that, body, ctx);
+
+  void wire_Enrolled_subdirectory(NativePortType port_, List<dynamic> that) =>
+      wasmModule.wire_Enrolled_subdirectory(port_, that);
+
+  void wire_Enroller_extract_req(NativePortType port_, List<dynamic> that) =>
+      wasmModule.wire_Enroller_extract_req(port_, that);
+
+  void wire_Enroller_from_relay_config(NativePortType port_, String relay_url,
+          String ohttp_config_base64, String ohttp_proxy_url) =>
+      wasmModule.wire_Enroller_from_relay_config(
+          port_, relay_url, ohttp_config_base64, ohttp_proxy_url);
+
+  void wire_Enroller_payjoin_subdir(NativePortType port_, List<dynamic> that) =>
+      wasmModule.wire_Enroller_payjoin_subdir(port_, that);
+
+  void wire_Enroller_process_res(NativePortType port_, List<dynamic> that,
+          List<int> body, List<dynamic> ctx) =>
+      wasmModule.wire_Enroller_process_res(port_, that, body, ctx);
+
+  void wire_Enroller_subdirectory(NativePortType port_, List<dynamic> that) =>
+      wasmModule.wire_Enroller_subdirectory(port_, that);
+
   void wire_Headers_from_vec(NativePortType port_, List<int> body) =>
       wasmModule.wire_Headers_from_vec(port_, body);
+
+  void wire_MaybeInputsOwned_check_inputs_not_owned(
+          NativePortType port_, List<dynamic> that, PlatformPointer is_owned) =>
+      wasmModule.wire_MaybeInputsOwned_check_inputs_not_owned(
+          port_, that, is_owned);
+
+  void wire_MaybeInputsSeen_check_no_inputs_seen_before(
+          NativePortType port_, List<dynamic> that, PlatformPointer is_known) =>
+      wasmModule.wire_MaybeInputsSeen_check_no_inputs_seen_before(
+          port_, that, is_known);
+
+  void wire_MaybeMixedInputScripts_check_no_mixed_input_scripts(
+          NativePortType port_, List<dynamic> that) =>
+      wasmModule.wire_MaybeMixedInputScripts_check_no_mixed_input_scripts(
+          port_, that);
+
+  void wire_OutputsUnknown_identify_receiver_outputs(NativePortType port_,
+          List<dynamic> that, PlatformPointer is_receiver_output) =>
+      wasmModule.wire_OutputsUnknown_identify_receiver_outputs(
+          port_, that, is_receiver_output);
+
+  void wire_PayjoinProposal_is_output_substitution_disabled(
+          NativePortType port_, List<dynamic> that) =>
+      wasmModule.wire_PayjoinProposal_is_output_substitution_disabled(
+          port_, that);
+
+  void wire_PayjoinProposal_owned_vouts(
+          NativePortType port_, List<dynamic> that) =>
+      wasmModule.wire_PayjoinProposal_owned_vouts(port_, that);
+
+  void wire_PayjoinProposal_psbt(NativePortType port_, List<dynamic> that) =>
+      wasmModule.wire_PayjoinProposal_psbt(port_, that);
+
+  void wire_PayjoinProposal_utxos_to_be_locked(
+          NativePortType port_, List<dynamic> that) =>
+      wasmModule.wire_PayjoinProposal_utxos_to_be_locked(port_, that);
+
+  void wire_ProvisionalProposal_contribute_non_witness_input(
+          NativePortType port_,
+          List<dynamic> that,
+          List<int> tx,
+          List<dynamic> outpoint) =>
+      wasmModule.wire_ProvisionalProposal_contribute_non_witness_input(
+          port_, that, tx, outpoint);
+
+  void wire_ProvisionalProposal_contribute_witness_input(NativePortType port_,
+          List<dynamic> that, List<dynamic> txo, List<dynamic> outpoint) =>
+      wasmModule.wire_ProvisionalProposal_contribute_witness_input(
+          port_, that, txo, outpoint);
+
+  void wire_ProvisionalProposal_finalize_proposal(
+          NativePortType port_,
+          List<dynamic> that,
+          PlatformPointer process_psbt,
+          Object? min_feerate_sat_per_vb) =>
+      wasmModule.wire_ProvisionalProposal_finalize_proposal(
+          port_, that, process_psbt, min_feerate_sat_per_vb);
+
+  void wire_ProvisionalProposal_substitute_output_address(
+          NativePortType port_, List<dynamic> that, String address) =>
+      wasmModule.wire_ProvisionalProposal_substitute_output_address(
+          port_, that, address);
+
+  void wire_ProvisionalProposal_try_preserving_privacy(NativePortType port_,
+          List<dynamic> that, List<dynamic> candidate_inputs) =>
+      wasmModule.wire_ProvisionalProposal_try_preserving_privacy(
+          port_, that, candidate_inputs);
+
+  void wire_UncheckedProposal_assume_interactive_receiver(
+          NativePortType port_, List<dynamic> that) =>
+      wasmModule.wire_UncheckedProposal_assume_interactive_receiver(
+          port_, that);
 
   void wire_UncheckedProposal_check_broadcast_suitability(
           NativePortType port_,
@@ -872,6 +2171,104 @@ class PayjoinCoreWire implements BaseWire {
           String query, List<dynamic> headers) =>
       wasmModule.wire_UncheckedProposal_from_request(
           port_, body, query, headers);
+
+  void wire_V2MaybeInputsOwned_check_inputs_not_owned(
+          NativePortType port_, List<dynamic> that, PlatformPointer is_owned) =>
+      wasmModule.wire_V2MaybeInputsOwned_check_inputs_not_owned(
+          port_, that, is_owned);
+
+  void wire_V2MaybeInputsSeen_check_no_inputs_seen_before(
+          NativePortType port_, List<dynamic> that, PlatformPointer is_known) =>
+      wasmModule.wire_V2MaybeInputsSeen_check_no_inputs_seen_before(
+          port_, that, is_known);
+
+  void wire_V2MaybeMixedInputScripts_check_no_mixed_input_scripts(
+          NativePortType port_, List<dynamic> that) =>
+      wasmModule.wire_V2MaybeMixedInputScripts_check_no_mixed_input_scripts(
+          port_, that);
+
+  void wire_V2OutputsUnknown_identify_receiver_outputs(NativePortType port_,
+          List<dynamic> that, PlatformPointer is_receiver_output) =>
+      wasmModule.wire_V2OutputsUnknown_identify_receiver_outputs(
+          port_, that, is_receiver_output);
+
+  void wire_V2PayjoinProposal_deserialize_res(NativePortType port_,
+          List<dynamic> that, List<int> res, List<dynamic> ohttp_context) =>
+      wasmModule.wire_V2PayjoinProposal_deserialize_res(
+          port_, that, res, ohttp_context);
+
+  void wire_V2PayjoinProposal_extract_v1_req(
+          NativePortType port_, List<dynamic> that) =>
+      wasmModule.wire_V2PayjoinProposal_extract_v1_req(port_, that);
+
+  void wire_V2PayjoinProposal_extract_v2_req(
+          NativePortType port_, List<dynamic> that) =>
+      wasmModule.wire_V2PayjoinProposal_extract_v2_req(port_, that);
+
+  void wire_V2PayjoinProposal_is_output_substitution_disabled(
+          NativePortType port_, List<dynamic> that) =>
+      wasmModule.wire_V2PayjoinProposal_is_output_substitution_disabled(
+          port_, that);
+
+  void wire_V2PayjoinProposal_owned_vouts(
+          NativePortType port_, List<dynamic> that) =>
+      wasmModule.wire_V2PayjoinProposal_owned_vouts(port_, that);
+
+  void wire_V2PayjoinProposal_psbt(NativePortType port_, List<dynamic> that) =>
+      wasmModule.wire_V2PayjoinProposal_psbt(port_, that);
+
+  void wire_V2PayjoinProposal_utxos_to_be_locked(
+          NativePortType port_, List<dynamic> that) =>
+      wasmModule.wire_V2PayjoinProposal_utxos_to_be_locked(port_, that);
+
+  void wire_V2ProvisionalProposal_contribute_non_witness_input(
+          NativePortType port_,
+          List<dynamic> that,
+          List<int> tx,
+          List<dynamic> outpoint) =>
+      wasmModule.wire_V2ProvisionalProposal_contribute_non_witness_input(
+          port_, that, tx, outpoint);
+
+  void wire_V2ProvisionalProposal_contribute_witness_input(NativePortType port_,
+          List<dynamic> that, List<dynamic> txo, List<dynamic> outpoint) =>
+      wasmModule.wire_V2ProvisionalProposal_contribute_witness_input(
+          port_, that, txo, outpoint);
+
+  void wire_V2ProvisionalProposal_finalize_proposal(
+          NativePortType port_,
+          List<dynamic> that,
+          PlatformPointer process_psbt,
+          Object? min_feerate_sat_per_vb) =>
+      wasmModule.wire_V2ProvisionalProposal_finalize_proposal(
+          port_, that, process_psbt, min_feerate_sat_per_vb);
+
+  void wire_V2ProvisionalProposal_substitute_output_address(
+          NativePortType port_, List<dynamic> that, String address) =>
+      wasmModule.wire_V2ProvisionalProposal_substitute_output_address(
+          port_, that, address);
+
+  void wire_V2ProvisionalProposal_try_preserving_privacy(NativePortType port_,
+          List<dynamic> that, List<dynamic> candidate_inputs) =>
+      wasmModule.wire_V2ProvisionalProposal_try_preserving_privacy(
+          port_, that, candidate_inputs);
+
+  void wire_V2UncheckedProposal_assume_interactive_receiver(
+          NativePortType port_, List<dynamic> that) =>
+      wasmModule.wire_V2UncheckedProposal_assume_interactive_receiver(
+          port_, that);
+
+  void wire_V2UncheckedProposal_check_broadcast_suitability(
+          NativePortType port_,
+          List<dynamic> that,
+          Object? min_fee_rate,
+          PlatformPointer can_broadcast) =>
+      wasmModule.wire_V2UncheckedProposal_check_broadcast_suitability(
+          port_, that, min_fee_rate, can_broadcast);
+
+  void wire_V2UncheckedProposal_extract_tx_to_schedule_broadcast(
+          NativePortType port_, List<dynamic> that) =>
+      wasmModule.wire_V2UncheckedProposal_extract_tx_to_schedule_broadcast(
+          port_, that);
 
   void wire_ContextV1_process_response(
           NativePortType port_, List<dynamic> that, List<int> response) =>
@@ -952,6 +2349,150 @@ class PayjoinCoreWire implements BaseWire {
           .rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffireceivev1MaybeInputsOwned(
               ptr);
 
+  void rust_arc_increment_strong_count_RustOpaque_Arcpayjoin_ffireceivev1MaybeInputsSeen(
+          dynamic ptr) =>
+      wasmModule
+          .rust_arc_increment_strong_count_RustOpaque_Arcpayjoin_ffireceivev1MaybeInputsSeen(
+              ptr);
+
+  void rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffireceivev1MaybeInputsSeen(
+          dynamic ptr) =>
+      wasmModule
+          .rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffireceivev1MaybeInputsSeen(
+              ptr);
+
+  void rust_arc_increment_strong_count_RustOpaque_Arcpayjoin_ffireceivev1MaybeMixedInputScripts(
+          dynamic ptr) =>
+      wasmModule
+          .rust_arc_increment_strong_count_RustOpaque_Arcpayjoin_ffireceivev1MaybeMixedInputScripts(
+              ptr);
+
+  void rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffireceivev1MaybeMixedInputScripts(
+          dynamic ptr) =>
+      wasmModule
+          .rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffireceivev1MaybeMixedInputScripts(
+              ptr);
+
+  void rust_arc_increment_strong_count_RustOpaque_Arcpayjoin_ffireceivev1OutputsUnknown(
+          dynamic ptr) =>
+      wasmModule
+          .rust_arc_increment_strong_count_RustOpaque_Arcpayjoin_ffireceivev1OutputsUnknown(
+              ptr);
+
+  void rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffireceivev1OutputsUnknown(
+          dynamic ptr) =>
+      wasmModule
+          .rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffireceivev1OutputsUnknown(
+              ptr);
+
+  void rust_arc_increment_strong_count_RustOpaque_Arcpayjoin_ffireceivev1PayjoinProposal(
+          dynamic ptr) =>
+      wasmModule
+          .rust_arc_increment_strong_count_RustOpaque_Arcpayjoin_ffireceivev1PayjoinProposal(
+              ptr);
+
+  void rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffireceivev1PayjoinProposal(
+          dynamic ptr) =>
+      wasmModule
+          .rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffireceivev1PayjoinProposal(
+              ptr);
+
+  void rust_arc_increment_strong_count_RustOpaque_Arcpayjoin_ffireceivev1ProvisionalProposal(
+          dynamic ptr) =>
+      wasmModule
+          .rust_arc_increment_strong_count_RustOpaque_Arcpayjoin_ffireceivev1ProvisionalProposal(
+              ptr);
+
+  void rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffireceivev1ProvisionalProposal(
+          dynamic ptr) =>
+      wasmModule
+          .rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffireceivev1ProvisionalProposal(
+              ptr);
+
+  void rust_arc_increment_strong_count_RustOpaque_Arcpayjoin_ffireceivev2Enrolled(
+          dynamic ptr) =>
+      wasmModule
+          .rust_arc_increment_strong_count_RustOpaque_Arcpayjoin_ffireceivev2Enrolled(
+              ptr);
+
+  void rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffireceivev2Enrolled(
+          dynamic ptr) =>
+      wasmModule
+          .rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffireceivev2Enrolled(
+              ptr);
+
+  void rust_arc_increment_strong_count_RustOpaque_Arcpayjoin_ffireceivev2V2MaybeInputsOwned(
+          dynamic ptr) =>
+      wasmModule
+          .rust_arc_increment_strong_count_RustOpaque_Arcpayjoin_ffireceivev2V2MaybeInputsOwned(
+              ptr);
+
+  void rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffireceivev2V2MaybeInputsOwned(
+          dynamic ptr) =>
+      wasmModule
+          .rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffireceivev2V2MaybeInputsOwned(
+              ptr);
+
+  void rust_arc_increment_strong_count_RustOpaque_Arcpayjoin_ffireceivev2V2MaybeInputsSeen(
+          dynamic ptr) =>
+      wasmModule
+          .rust_arc_increment_strong_count_RustOpaque_Arcpayjoin_ffireceivev2V2MaybeInputsSeen(
+              ptr);
+
+  void rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffireceivev2V2MaybeInputsSeen(
+          dynamic ptr) =>
+      wasmModule
+          .rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffireceivev2V2MaybeInputsSeen(
+              ptr);
+
+  void rust_arc_increment_strong_count_RustOpaque_Arcpayjoin_ffireceivev2V2MaybeMixedInputScripts(
+          dynamic ptr) =>
+      wasmModule
+          .rust_arc_increment_strong_count_RustOpaque_Arcpayjoin_ffireceivev2V2MaybeMixedInputScripts(
+              ptr);
+
+  void rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffireceivev2V2MaybeMixedInputScripts(
+          dynamic ptr) =>
+      wasmModule
+          .rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffireceivev2V2MaybeMixedInputScripts(
+              ptr);
+
+  void rust_arc_increment_strong_count_RustOpaque_Arcpayjoin_ffireceivev2V2OutputsUnknown(
+          dynamic ptr) =>
+      wasmModule
+          .rust_arc_increment_strong_count_RustOpaque_Arcpayjoin_ffireceivev2V2OutputsUnknown(
+              ptr);
+
+  void rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffireceivev2V2OutputsUnknown(
+          dynamic ptr) =>
+      wasmModule
+          .rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffireceivev2V2OutputsUnknown(
+              ptr);
+
+  void rust_arc_increment_strong_count_RustOpaque_Arcpayjoin_ffireceivev2V2PayjoinProposal(
+          dynamic ptr) =>
+      wasmModule
+          .rust_arc_increment_strong_count_RustOpaque_Arcpayjoin_ffireceivev2V2PayjoinProposal(
+              ptr);
+
+  void rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffireceivev2V2PayjoinProposal(
+          dynamic ptr) =>
+      wasmModule
+          .rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffireceivev2V2PayjoinProposal(
+              ptr);
+
+  void rust_arc_increment_strong_count_RustOpaque_Arcpayjoin_ffireceivev2V2ProvisionalProposal(
+          dynamic ptr) =>
+      wasmModule
+          .rust_arc_increment_strong_count_RustOpaque_Arcpayjoin_ffireceivev2V2ProvisionalProposal(
+              ptr);
+
+  void rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffireceivev2V2ProvisionalProposal(
+          dynamic ptr) =>
+      wasmModule
+          .rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffireceivev2V2ProvisionalProposal(
+              ptr);
+
   void rust_arc_increment_strong_count_RustOpaque_Arcpayjoin_ffisendv1ContextV1(
           dynamic ptr) =>
       wasmModule
@@ -1020,6 +2561,42 @@ class PayjoinCoreWire implements BaseWire {
       wasmModule
           .rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffiuriUrl(ptr);
 
+  void rust_arc_increment_strong_count_RustOpaque_MutexOptionohttpClientResponse(
+          dynamic ptr) =>
+      wasmModule
+          .rust_arc_increment_strong_count_RustOpaque_MutexOptionohttpClientResponse(
+              ptr);
+
+  void rust_arc_decrement_strong_count_RustOpaque_MutexOptionohttpClientResponse(
+          dynamic ptr) =>
+      wasmModule
+          .rust_arc_decrement_strong_count_RustOpaque_MutexOptionohttpClientResponse(
+              ptr);
+
+  void rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockArcV2MaybeInputsOwned(
+          dynamic ptr) =>
+      wasmModule
+          .rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockArcV2MaybeInputsOwned(
+              ptr);
+
+  void rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockArcV2MaybeInputsOwned(
+          dynamic ptr) =>
+      wasmModule
+          .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockArcV2MaybeInputsOwned(
+              ptr);
+
+  void rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockArcV2MaybeInputsSeen(
+          dynamic ptr) =>
+      wasmModule
+          .rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockArcV2MaybeInputsSeen(
+              ptr);
+
+  void rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockArcV2MaybeInputsSeen(
+          dynamic ptr) =>
+      wasmModule
+          .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockArcV2MaybeInputsSeen(
+              ptr);
+
   void rust_arc_increment_strong_count_RustOpaque_payjoin_ffireceivev1UncheckedProposal(
           dynamic ptr) =>
       wasmModule
@@ -1030,6 +2607,30 @@ class PayjoinCoreWire implements BaseWire {
           dynamic ptr) =>
       wasmModule
           .rust_arc_decrement_strong_count_RustOpaque_payjoin_ffireceivev1UncheckedProposal(
+              ptr);
+
+  void rust_arc_increment_strong_count_RustOpaque_payjoin_ffireceivev2Enroller(
+          dynamic ptr) =>
+      wasmModule
+          .rust_arc_increment_strong_count_RustOpaque_payjoin_ffireceivev2Enroller(
+              ptr);
+
+  void rust_arc_decrement_strong_count_RustOpaque_payjoin_ffireceivev2Enroller(
+          dynamic ptr) =>
+      wasmModule
+          .rust_arc_decrement_strong_count_RustOpaque_payjoin_ffireceivev2Enroller(
+              ptr);
+
+  void rust_arc_increment_strong_count_RustOpaque_payjoin_ffireceivev2V2UncheckedProposal(
+          dynamic ptr) =>
+      wasmModule
+          .rust_arc_increment_strong_count_RustOpaque_payjoin_ffireceivev2V2UncheckedProposal(
+              ptr);
+
+  void rust_arc_decrement_strong_count_RustOpaque_payjoin_ffireceivev2V2UncheckedProposal(
+          dynamic ptr) =>
+      wasmModule
+          .rust_arc_decrement_strong_count_RustOpaque_payjoin_ffireceivev2V2UncheckedProposal(
               ptr);
 }
 
@@ -1045,7 +2646,87 @@ class PayjoinCoreWasmModule implements WasmModule {
   @override
   external PayjoinCoreWasmModule bind(dynamic thisArg, String moduleName);
 
+  external void wire_Enrolled_extract_req(
+      NativePortType port_, List<dynamic> that);
+
+  external void wire_Enrolled_fallback_target(
+      NativePortType port_, List<dynamic> that);
+
+  external void wire_Enrolled_process_res(NativePortType port_,
+      List<dynamic> that, List<int> body, List<dynamic> ctx);
+
+  external void wire_Enrolled_subdirectory(
+      NativePortType port_, List<dynamic> that);
+
+  external void wire_Enroller_extract_req(
+      NativePortType port_, List<dynamic> that);
+
+  external void wire_Enroller_from_relay_config(NativePortType port_,
+      String relay_url, String ohttp_config_base64, String ohttp_proxy_url);
+
+  external void wire_Enroller_payjoin_subdir(
+      NativePortType port_, List<dynamic> that);
+
+  external void wire_Enroller_process_res(NativePortType port_,
+      List<dynamic> that, List<int> body, List<dynamic> ctx);
+
+  external void wire_Enroller_subdirectory(
+      NativePortType port_, List<dynamic> that);
+
   external void wire_Headers_from_vec(NativePortType port_, List<int> body);
+
+  external void wire_MaybeInputsOwned_check_inputs_not_owned(
+      NativePortType port_, List<dynamic> that, PlatformPointer is_owned);
+
+  external void wire_MaybeInputsSeen_check_no_inputs_seen_before(
+      NativePortType port_, List<dynamic> that, PlatformPointer is_known);
+
+  external void wire_MaybeMixedInputScripts_check_no_mixed_input_scripts(
+      NativePortType port_, List<dynamic> that);
+
+  external void wire_OutputsUnknown_identify_receiver_outputs(
+      NativePortType port_,
+      List<dynamic> that,
+      PlatformPointer is_receiver_output);
+
+  external void wire_PayjoinProposal_is_output_substitution_disabled(
+      NativePortType port_, List<dynamic> that);
+
+  external void wire_PayjoinProposal_owned_vouts(
+      NativePortType port_, List<dynamic> that);
+
+  external void wire_PayjoinProposal_psbt(
+      NativePortType port_, List<dynamic> that);
+
+  external void wire_PayjoinProposal_utxos_to_be_locked(
+      NativePortType port_, List<dynamic> that);
+
+  external void wire_ProvisionalProposal_contribute_non_witness_input(
+      NativePortType port_,
+      List<dynamic> that,
+      List<int> tx,
+      List<dynamic> outpoint);
+
+  external void wire_ProvisionalProposal_contribute_witness_input(
+      NativePortType port_,
+      List<dynamic> that,
+      List<dynamic> txo,
+      List<dynamic> outpoint);
+
+  external void wire_ProvisionalProposal_finalize_proposal(
+      NativePortType port_,
+      List<dynamic> that,
+      PlatformPointer process_psbt,
+      Object? min_feerate_sat_per_vb);
+
+  external void wire_ProvisionalProposal_substitute_output_address(
+      NativePortType port_, List<dynamic> that, String address);
+
+  external void wire_ProvisionalProposal_try_preserving_privacy(
+      NativePortType port_, List<dynamic> that, List<dynamic> candidate_inputs);
+
+  external void wire_UncheckedProposal_assume_interactive_receiver(
+      NativePortType port_, List<dynamic> that);
 
   external void wire_UncheckedProposal_check_broadcast_suitability(
       NativePortType port_,
@@ -1058,6 +2739,77 @@ class PayjoinCoreWasmModule implements WasmModule {
 
   external void wire_UncheckedProposal_from_request(NativePortType port_,
       List<int> body, String query, List<dynamic> headers);
+
+  external void wire_V2MaybeInputsOwned_check_inputs_not_owned(
+      NativePortType port_, List<dynamic> that, PlatformPointer is_owned);
+
+  external void wire_V2MaybeInputsSeen_check_no_inputs_seen_before(
+      NativePortType port_, List<dynamic> that, PlatformPointer is_known);
+
+  external void wire_V2MaybeMixedInputScripts_check_no_mixed_input_scripts(
+      NativePortType port_, List<dynamic> that);
+
+  external void wire_V2OutputsUnknown_identify_receiver_outputs(
+      NativePortType port_,
+      List<dynamic> that,
+      PlatformPointer is_receiver_output);
+
+  external void wire_V2PayjoinProposal_deserialize_res(NativePortType port_,
+      List<dynamic> that, List<int> res, List<dynamic> ohttp_context);
+
+  external void wire_V2PayjoinProposal_extract_v1_req(
+      NativePortType port_, List<dynamic> that);
+
+  external void wire_V2PayjoinProposal_extract_v2_req(
+      NativePortType port_, List<dynamic> that);
+
+  external void wire_V2PayjoinProposal_is_output_substitution_disabled(
+      NativePortType port_, List<dynamic> that);
+
+  external void wire_V2PayjoinProposal_owned_vouts(
+      NativePortType port_, List<dynamic> that);
+
+  external void wire_V2PayjoinProposal_psbt(
+      NativePortType port_, List<dynamic> that);
+
+  external void wire_V2PayjoinProposal_utxos_to_be_locked(
+      NativePortType port_, List<dynamic> that);
+
+  external void wire_V2ProvisionalProposal_contribute_non_witness_input(
+      NativePortType port_,
+      List<dynamic> that,
+      List<int> tx,
+      List<dynamic> outpoint);
+
+  external void wire_V2ProvisionalProposal_contribute_witness_input(
+      NativePortType port_,
+      List<dynamic> that,
+      List<dynamic> txo,
+      List<dynamic> outpoint);
+
+  external void wire_V2ProvisionalProposal_finalize_proposal(
+      NativePortType port_,
+      List<dynamic> that,
+      PlatformPointer process_psbt,
+      Object? min_feerate_sat_per_vb);
+
+  external void wire_V2ProvisionalProposal_substitute_output_address(
+      NativePortType port_, List<dynamic> that, String address);
+
+  external void wire_V2ProvisionalProposal_try_preserving_privacy(
+      NativePortType port_, List<dynamic> that, List<dynamic> candidate_inputs);
+
+  external void wire_V2UncheckedProposal_assume_interactive_receiver(
+      NativePortType port_, List<dynamic> that);
+
+  external void wire_V2UncheckedProposal_check_broadcast_suitability(
+      NativePortType port_,
+      List<dynamic> that,
+      Object? min_fee_rate,
+      PlatformPointer can_broadcast);
+
+  external void wire_V2UncheckedProposal_extract_tx_to_schedule_broadcast(
+      NativePortType port_, List<dynamic> that);
 
   external void wire_ContextV1_process_response(
       NativePortType port_, List<dynamic> that, List<int> response);
@@ -1112,6 +2864,102 @@ class PayjoinCoreWasmModule implements WasmModule {
           dynamic ptr);
 
   external void
+      rust_arc_increment_strong_count_RustOpaque_Arcpayjoin_ffireceivev1MaybeInputsSeen(
+          dynamic ptr);
+
+  external void
+      rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffireceivev1MaybeInputsSeen(
+          dynamic ptr);
+
+  external void
+      rust_arc_increment_strong_count_RustOpaque_Arcpayjoin_ffireceivev1MaybeMixedInputScripts(
+          dynamic ptr);
+
+  external void
+      rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffireceivev1MaybeMixedInputScripts(
+          dynamic ptr);
+
+  external void
+      rust_arc_increment_strong_count_RustOpaque_Arcpayjoin_ffireceivev1OutputsUnknown(
+          dynamic ptr);
+
+  external void
+      rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffireceivev1OutputsUnknown(
+          dynamic ptr);
+
+  external void
+      rust_arc_increment_strong_count_RustOpaque_Arcpayjoin_ffireceivev1PayjoinProposal(
+          dynamic ptr);
+
+  external void
+      rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffireceivev1PayjoinProposal(
+          dynamic ptr);
+
+  external void
+      rust_arc_increment_strong_count_RustOpaque_Arcpayjoin_ffireceivev1ProvisionalProposal(
+          dynamic ptr);
+
+  external void
+      rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffireceivev1ProvisionalProposal(
+          dynamic ptr);
+
+  external void
+      rust_arc_increment_strong_count_RustOpaque_Arcpayjoin_ffireceivev2Enrolled(
+          dynamic ptr);
+
+  external void
+      rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffireceivev2Enrolled(
+          dynamic ptr);
+
+  external void
+      rust_arc_increment_strong_count_RustOpaque_Arcpayjoin_ffireceivev2V2MaybeInputsOwned(
+          dynamic ptr);
+
+  external void
+      rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffireceivev2V2MaybeInputsOwned(
+          dynamic ptr);
+
+  external void
+      rust_arc_increment_strong_count_RustOpaque_Arcpayjoin_ffireceivev2V2MaybeInputsSeen(
+          dynamic ptr);
+
+  external void
+      rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffireceivev2V2MaybeInputsSeen(
+          dynamic ptr);
+
+  external void
+      rust_arc_increment_strong_count_RustOpaque_Arcpayjoin_ffireceivev2V2MaybeMixedInputScripts(
+          dynamic ptr);
+
+  external void
+      rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffireceivev2V2MaybeMixedInputScripts(
+          dynamic ptr);
+
+  external void
+      rust_arc_increment_strong_count_RustOpaque_Arcpayjoin_ffireceivev2V2OutputsUnknown(
+          dynamic ptr);
+
+  external void
+      rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffireceivev2V2OutputsUnknown(
+          dynamic ptr);
+
+  external void
+      rust_arc_increment_strong_count_RustOpaque_Arcpayjoin_ffireceivev2V2PayjoinProposal(
+          dynamic ptr);
+
+  external void
+      rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffireceivev2V2PayjoinProposal(
+          dynamic ptr);
+
+  external void
+      rust_arc_increment_strong_count_RustOpaque_Arcpayjoin_ffireceivev2V2ProvisionalProposal(
+          dynamic ptr);
+
+  external void
+      rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffireceivev2V2ProvisionalProposal(
+          dynamic ptr);
+
+  external void
       rust_arc_increment_strong_count_RustOpaque_Arcpayjoin_ffisendv1ContextV1(
           dynamic ptr);
 
@@ -1156,10 +3004,50 @@ class PayjoinCoreWasmModule implements WasmModule {
       dynamic ptr);
 
   external void
+      rust_arc_increment_strong_count_RustOpaque_MutexOptionohttpClientResponse(
+          dynamic ptr);
+
+  external void
+      rust_arc_decrement_strong_count_RustOpaque_MutexOptionohttpClientResponse(
+          dynamic ptr);
+
+  external void
+      rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockArcV2MaybeInputsOwned(
+          dynamic ptr);
+
+  external void
+      rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockArcV2MaybeInputsOwned(
+          dynamic ptr);
+
+  external void
+      rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockArcV2MaybeInputsSeen(
+          dynamic ptr);
+
+  external void
+      rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockArcV2MaybeInputsSeen(
+          dynamic ptr);
+
+  external void
       rust_arc_increment_strong_count_RustOpaque_payjoin_ffireceivev1UncheckedProposal(
           dynamic ptr);
 
   external void
       rust_arc_decrement_strong_count_RustOpaque_payjoin_ffireceivev1UncheckedProposal(
+          dynamic ptr);
+
+  external void
+      rust_arc_increment_strong_count_RustOpaque_payjoin_ffireceivev2Enroller(
+          dynamic ptr);
+
+  external void
+      rust_arc_decrement_strong_count_RustOpaque_payjoin_ffireceivev2Enroller(
+          dynamic ptr);
+
+  external void
+      rust_arc_increment_strong_count_RustOpaque_payjoin_ffireceivev2V2UncheckedProposal(
+          dynamic ptr);
+
+  external void
+      rust_arc_decrement_strong_count_RustOpaque_payjoin_ffireceivev2V2UncheckedProposal(
           dynamic ptr);
 }
