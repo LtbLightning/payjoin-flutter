@@ -46,8 +46,8 @@ class Url {
     required this.field0,
   });
 
-  static Future<Url> newUrl({required String input, dynamic hint}) =>
-      PayjoinCore.instance.api.urlNew(input: input, hint: hint);
+  static Future<Url> fromStr({required String url, dynamic hint}) =>
+      PayjoinCore.instance.api.urlFromStr(url: url, hint: hint);
 
   Future<String?> query({dynamic hint}) => PayjoinCore.instance.api.urlQuery(
         that: this,
