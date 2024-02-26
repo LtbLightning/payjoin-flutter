@@ -1762,11 +1762,11 @@ pub extern "C" fn frbgen_payjoin_flutter_wire_Uri_from_str(
 }
 
 #[no_mangle]
-pub extern "C" fn frbgen_payjoin_flutter_wire_Url_new(
+pub extern "C" fn frbgen_payjoin_flutter_wire_Url_from_str(
     port_: i64,
-    input: *mut wire_cst_list_prim_u_8_strict,
+    url: *mut wire_cst_list_prim_u_8_strict,
 ) {
-    wire_Url_new_impl(port_, input)
+    wire_Url_from_str_impl(port_, url)
 }
 
 #[no_mangle]

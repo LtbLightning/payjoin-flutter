@@ -1437,19 +1437,19 @@ fn wire_Uri_from_str_impl(
         },
     )
 }
-fn wire_Url_new_impl(
+fn wire_Url_from_str_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
-    input: impl CstDecode<String>,
+    url: impl CstDecode<String>,
 ) {
     FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::DcoCodec, _, _>(
         flutter_rust_bridge::for_generated::TaskInfo {
-            debug_name: "Url_new",
+            debug_name: "Url_from_str",
             port: Some(port_),
             mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
         },
         move || {
-            let api_input = input.cst_decode();
-            move |context| transform_result_dco((move || crate::api::uri::Url::new(api_input))())
+            let api_url = url.cst_decode();
+            move |context| transform_result_dco((move || crate::api::uri::Url::from_str(api_url))())
         },
     )
 }

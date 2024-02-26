@@ -3677,22 +3677,22 @@ class PayjoinCoreWire implements BaseWire {
   late final _wire_Uri_from_str = _wire_Uri_from_strPtr.asFunction<
       void Function(int, ffi.Pointer<wire_cst_list_prim_u_8_strict>)>();
 
-  void wire_Url_new(
+  void wire_Url_from_str(
     int port_,
-    ffi.Pointer<wire_cst_list_prim_u_8_strict> input,
+    ffi.Pointer<wire_cst_list_prim_u_8_strict> url,
   ) {
-    return _wire_Url_new(
+    return _wire_Url_from_str(
       port_,
-      input,
+      url,
     );
   }
 
-  late final _wire_Url_newPtr = _lookup<
+  late final _wire_Url_from_strPtr = _lookup<
           ffi.NativeFunction<
               ffi.Void Function(
                   ffi.Int64, ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
-      'frbgen_payjoin_flutter_wire_Url_new');
-  late final _wire_Url_new = _wire_Url_newPtr.asFunction<
+      'frbgen_payjoin_flutter_wire_Url_from_str');
+  late final _wire_Url_from_str = _wire_Url_from_strPtr.asFunction<
       void Function(int, ffi.Pointer<wire_cst_list_prim_u_8_strict>)>();
 
   void wire_Url_query(

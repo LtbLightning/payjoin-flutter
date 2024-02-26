@@ -2331,8 +2331,8 @@ class PayjoinCoreWire implements BaseWire {
   void wire_Uri_from_str(NativePortType port_, String uri) =>
       wasmModule.wire_Uri_from_str(port_, uri);
 
-  void wire_Url_new(NativePortType port_, String input) =>
-      wasmModule.wire_Url_new(port_, input);
+  void wire_Url_from_str(NativePortType port_, String url) =>
+      wasmModule.wire_Url_from_str(port_, url);
 
   void wire_Url_query(NativePortType port_, List<dynamic> that) =>
       wasmModule.wire_Url_query(port_, that);
@@ -2851,7 +2851,7 @@ class PayjoinCoreWasmModule implements WasmModule {
 
   external void wire_Uri_from_str(NativePortType port_, String uri);
 
-  external void wire_Url_new(NativePortType port_, String input);
+  external void wire_Url_from_str(NativePortType port_, String url);
 
   external void wire_Url_query(NativePortType port_, List<dynamic> that);
 

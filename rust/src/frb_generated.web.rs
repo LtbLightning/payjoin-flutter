@@ -1662,8 +1662,8 @@ pub fn wire_Uri_from_str(port_: flutter_rust_bridge::for_generated::MessagePort,
 }
 
 #[wasm_bindgen]
-pub fn wire_Url_new(port_: flutter_rust_bridge::for_generated::MessagePort, input: String) {
-    wire_Url_new_impl(port_, input)
+pub fn wire_Url_from_str(port_: flutter_rust_bridge::for_generated::MessagePort, url: String) {
+    wire_Url_from_str_impl(port_, url)
 }
 
 #[wasm_bindgen]

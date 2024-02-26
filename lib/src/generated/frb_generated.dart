@@ -301,7 +301,7 @@ abstract class PayjoinCoreApi extends BaseApi {
 
   Future<Uri> uriFromStr({required String uri, dynamic hint});
 
-  Future<Url> urlNew({required String input, dynamic hint});
+  Future<Url> urlFromStr({required String url, dynamic hint});
 
   Future<String?> urlQuery({required Url that, dynamic hint});
 
@@ -2150,26 +2150,26 @@ class PayjoinCoreApiImpl extends PayjoinCoreApiImplPlatform
       );
 
   @override
-  Future<Url> urlNew({required String input, dynamic hint}) {
+  Future<Url> urlFromStr({required String url, dynamic hint}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        var arg0 = cst_encode_String(input);
-        return wire.wire_Url_new(port_, arg0);
+        var arg0 = cst_encode_String(url);
+        return wire.wire_Url_from_str(port_, arg0);
       },
       codec: DcoCodec(
         decodeSuccessData: dco_decode_url,
         decodeErrorData: dco_decode_payjoin_error,
       ),
-      constMeta: kUrlNewConstMeta,
-      argValues: [input],
+      constMeta: kUrlFromStrConstMeta,
+      argValues: [url],
       apiImpl: this,
       hint: hint,
     ));
   }
 
-  TaskConstMeta get kUrlNewConstMeta => const TaskConstMeta(
-        debugName: "Url_new",
-        argNames: ["input"],
+  TaskConstMeta get kUrlFromStrConstMeta => const TaskConstMeta(
+        debugName: "Url_from_str",
+        argNames: ["url"],
       );
 
   @override
