@@ -1,5 +1,6 @@
-# See `pure_dart` example for comments on the configs
+
 rust_input: rust/src/api/*.rs
 dart_output: lib/src/generated/
 full_dep: true
+c_output: ios/Classes/frb_generated.h
 dart_entrypoint_class_name: PayjoinCore
