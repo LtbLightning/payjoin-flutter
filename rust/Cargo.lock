@@ -1962,11 +1962,8 @@ dependencies = [
  "anyhow",
  "flutter_rust_bridge",
  "flutter_rust_bridge_codegen",
- "lazy_static",
  "ohttp",
  "payjoin_ffi",
- "serde",
- "serde_json",
  "tokio",
 ]
 
