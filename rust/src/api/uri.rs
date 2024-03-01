@@ -15,8 +15,8 @@ impl From<Arc<payjoin_ffi::uri::Url>> for Url {
     }
 }
 impl Url {
-    pub fn new(input: String) -> anyhow::Result<Url, PayjoinError> {
-        match payjoin_ffi::uri::Url::new(input) {
+    pub fn from_str(url: String) -> anyhow::Result<Url, PayjoinError> {
+        match payjoin_ffi::uri::Url::new(url) {
             Ok(e) => Ok(e.into()),
             Err(e) => Err(e.into()),
         }

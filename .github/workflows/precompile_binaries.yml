@@ -38,7 +38,7 @@ jobs:
           PRIVATE_KEY: ${{ secrets.RELEASE_PRIVATE_KEY }}
       - name: Precompile (with Android)
         if: (matrix.os == 'ubuntu-20.04')
-        run: dart run build_tool precompile-binaries -v --manifest-dir=../../rust --repository=LtbLightning/payjoin-flutter --android-sdk-location=/usr/local/lib/android/sdk --android-ndk-version=26.1.10909125 --android-min-sdk-version=23
+        run: dart run build_tool precompile-binaries -v --manifest-dir=../../rust --repository=LtbLightning/payjoin-flutter --android-sdk-location=/usr/local/lib/android/sdk --android-ndk-version=24.0.8215888 --android-min-sdk-version=23
         working-directory: cargokit/build_tool
         env:
           GITHUB_TOKEN: ${{ secrets.RELEASE_GITHUB_TOKEN }}
