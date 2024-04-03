@@ -30,7 +30,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+  bdk_flutter:
+    git:
+      url: https://github.com/LtbLightning/bdk-flutter
+      ref: v0.31.0
   payjoin_flutter:
     # When depending on this package from a real application you should use:
     #   payjoin: ^x.y.z
