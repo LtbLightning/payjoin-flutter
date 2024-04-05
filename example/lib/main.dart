@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:payjoin_flutter/payjoin.dart';
 
@@ -14,15 +15,39 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  // BdkLibrary lib = BdkLibrary();
+  // late Wallet aliceWallet;
+  // Blockchain? blockchain;
   @override
   void initState() {
     super.initState();
   }
 
-  Future<Uri> buildPjUri(double amount, String address, String pj) async {
+  Future<Uri> buildPjUri(double amount, String pj) async {
     try {
-      final pjUri = "bitcoin:$address?amount=${amount / 100000000.0}&pj=$pj";
+      // final address = await aliceWallet.getAddress(
+      //     addressIndex: const AddressIndex.increase());
+      // final qUriAddress = await (await Address.fromString(
+      //         s: address.address, network: Network.testnet))
+      //     .toQrUri();
+      final pjUri =
+          "tb1q5tsjcyz7xmet07yxtumakt739y53hcttmntajq?amount=${amount / 100000000.0}&pj=$pj";
       return await Uri.fromStr(uri: pjUri);
+    } catch (e) {
+      debugPrint(e.toString());
+      rethrow;
+    }
+  }
+
+  Future<RequestContextV1> buildRequestBuilder(String psbt, Uri uri) async {
+    try {
+      final res = await (await RequestBuilder.fromPsbtAndUri(
+              psbtBase64: psbt, uri: uri))
+          .buildWithAdditionalFee(
+              maxFeeContribution: 10000,
+              minFeeRate: 1,
+              clampFeeContribution: false);
+      return (await res.extractV1());
     } catch (e) {
       debugPrint(e.toString());
       rethrow;
@@ -44,11 +69,11 @@ class _MyAppState extends State<MyApp> {
               children: [
                 TextButton(
                     onPressed: () async {
-                      final uri = await buildPjUri(
-                          10000000,
-                          "12c6DSiU4Rq3P4ZxziKxzrL5LmMBrzjrJX",
+                      final uri = await buildPjUri(10000000,
                           "https://testnet.demo.btcpayserver.org/BTC/pj");
-                      print(await uri.address());
+                      if (kDebugMode) {
+                        print(await uri.address());
+                      }
                     },
                     child: const Text("Build PjUri"))
               ],
