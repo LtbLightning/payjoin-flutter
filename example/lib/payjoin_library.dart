@@ -14,4 +14,19 @@ class PayjoinLibrary {
       rethrow;
     }
   }
+
+  handlePjRequest(Request req, Headers headers) async {
+    final proposal = await UncheckedProposal.fromRequest(
+        body: req.body.toList(),
+        query: (await req.url.query())!,
+        headers: headers);
+  }
+
+  handleProposal(UncheckedProposal proposal) async {
+    try {
+      final _ = await proposal.extractTxToScheduleBroadcast();
+    } on PayjoinError catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 }

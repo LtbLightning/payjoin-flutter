@@ -1,11 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:payjoin_flutter/payjoin.dart';
 
 import 'generated/frb_generated.dart';
-
-class UriW extends Uri {
-  UriW({required super.field0});
-}
 
 class Payjoin {
   static Future<void> initialize() async {
