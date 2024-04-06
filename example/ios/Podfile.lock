@@ -1,24 +1,18 @@
 PODS:
-  - bdk_flutter (0.31.0-dev):
-    - Flutter
   - Flutter (1.0.0)
   - payjoin_flutter (0.0.1)
 
 DEPENDENCIES:
-  - bdk_flutter (from `.symlinks/plugins/bdk_flutter/ios`)
   - Flutter (from `Flutter`)
   - payjoin_flutter (from `.symlinks/plugins/payjoin_flutter/ios`)
 
 EXTERNAL SOURCES:
-  bdk_flutter:
-    :path: ".symlinks/plugins/bdk_flutter/ios"
   Flutter:
     :path: Flutter
   payjoin_flutter:
     :path: ".symlinks/plugins/payjoin_flutter/ios"
 
 SPEC CHECKSUMS:
-  bdk_flutter: 953fe5e95562d14d9cb8610d99cab99eaed89570
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   payjoin_flutter: 9011d8ef87f28bd66bcf80a21fdef14951b8a2aa
 
