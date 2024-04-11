@@ -1,81 +1,10 @@
-use crate::api::send::Request;
+use std::collections::HashMap;
 use crate::frb_generated::RustOpaque;
 pub use crate::utils::error::PayjoinError;
-use flutter_rust_bridge::DartFnFuture;
-use std::collections::HashMap;
+use flutter_rust_bridge::{DartFnFuture};
 pub use std::sync::{Arc, Mutex};
-
-#[derive(Clone)]
-pub struct Headers(pub HashMap<String, String>);
-/// A reference to a transaction output.
-#[derive(Clone, Debug, PartialEq, Eq, Hash)]
-pub struct OutPoint {
-    /// The referenced transaction's txid.
-    pub txid: String,
-    /// The index of the referenced output in its transaction's vout.
-    pub vout: u32,
-}
-
-impl From<OutPoint> for payjoin_ffi::types::OutPoint {
-    fn from(value: OutPoint) -> Self {
-        payjoin_ffi::types::OutPoint {
-            txid: value.txid,
-            vout: value.vout,
-        }
-    }
-}
-impl From<&payjoin_ffi::types::OutPoint> for OutPoint {
-    fn from(value: &payjoin_ffi::types::OutPoint) -> Self {
-        OutPoint {
-            txid: value.txid.clone(),
-            vout: value.vout,
-        }
-    }
-}
-
-#[derive(Debug, Clone)]
-pub struct TxOut {
-    /// The value of the output, in satoshis.
-    pub value: u64,
-    /// The address of the output.
-    pub script_pubkey: Vec<u8>,
-}
-
-impl From<TxOut> for payjoin_ffi::types::TxOut {
-    fn from(tx_out: TxOut) -> Self {
-        payjoin_ffi::types::TxOut {
-            value: tx_out.value,
-            script_pubkey: tx_out.script_pubkey,
-        }
-    }
-}
-
-impl From<payjoin_ffi::types::TxOut> for TxOut {
-    fn from(tx_out: payjoin_ffi::types::TxOut) -> Self {
-        TxOut {
-            value: tx_out.value,
-            script_pubkey: tx_out.script_pubkey,
-        }
-    }
-}
-impl From<Headers> for payjoin_ffi::receive::v1::Headers {
-    fn from(value: Headers) -> Self {
-        payjoin_ffi::receive::v1::Headers(value.0)
-    }
-}
-
-impl From<payjoin_ffi::receive::v1::Headers> for Headers {
-    fn from(value: payjoin_ffi::receive::v1::Headers) -> Self {
-        Headers(value.0)
-    }
-}
-
-impl Headers {
-    pub fn from_vec(body: Vec<u8>) -> Headers {
-        payjoin_ffi::receive::v1::Headers::from_vec(body).into()
-    }
-}
-
+use crate::api::uri::Url;
+use crate::utils::types::{Headers, OutPoint, TxOut};
 pub struct UncheckedProposal(pub RustOpaque<payjoin_ffi::receive::v1::UncheckedProposal>);
 impl From<payjoin_ffi::receive::v1::UncheckedProposal> for UncheckedProposal {
     fn from(value: payjoin_ffi::receive::v1::UncheckedProposal) -> Self {
@@ -112,12 +41,12 @@ impl UncheckedProposal {
     ///
     /// Call this after checking downstream.
     pub fn check_broadcast_suitability(
-        &self,
+        ptr: Self,
         min_fee_rate: Option<u64>,
         can_broadcast: impl Fn(Vec<u8>) -> DartFnFuture<bool>,
     ) -> Result<MaybeInputsOwned, PayjoinError> {
         let runtime = tokio::runtime::Runtime::new().unwrap();
-        self.0
+        ptr.0
             .check_broadcast_suitability_with_callback(min_fee_rate, |x| {
                 Ok(runtime.block_on(can_broadcast(x.clone())))
             })
@@ -127,8 +56,8 @@ impl UncheckedProposal {
     /// Call this method if the only way to initiate a Payjoin with this receiver requires manual intervention, as in most consumer wallets.
     ///
     /// So-called “non-interactive” receivers, like payment processors, that allow arbitrary requests are otherwise vulnerable to probing attacks. Those receivers call get_transaction_to_check_broadcast() and attest_tested_and_scheduled_broadcast() after making those checks downstream.
-    pub fn assume_interactive_receiver(&self) -> MaybeInputsOwned {
-        self.0.clone().assume_interactive_receiver().into()
+    pub fn assume_interactive_receiver(ptr: Self) -> MaybeInputsOwned {
+        ptr.0.assume_interactive_receiver().into()
     }
 }
 
@@ -140,11 +69,11 @@ impl From<Arc<payjoin_ffi::receive::v1::MaybeInputsOwned>> for MaybeInputsOwned 
 }
 impl MaybeInputsOwned {
     pub fn check_inputs_not_owned(
-        &self,
+        ptr: Self,
         is_owned: impl Fn(Vec<u8>) -> DartFnFuture<bool>,
     ) -> Result<MaybeMixedInputScripts, PayjoinError> {
         let runtime = tokio::runtime::Runtime::new().unwrap();
-        self.0
+        ptr.0
             .check_inputs_not_owned_with_callback(|o| Ok(runtime.block_on(is_owned(o.clone()))))
             .map(|e| e.into())
             .map_err(|e| e.into())
@@ -159,11 +88,8 @@ impl From<Arc<payjoin_ffi::receive::v1::MaybeMixedInputScripts>> for MaybeMixedI
     }
 }
 impl MaybeMixedInputScripts {
-    /// Verify the original transaction did not have mixed input types Call this after checking downstream.
-    ///
-    /// Note: mixed spends do not necessarily indicate distinct wallet fingerprints. This check is intended to prevent some types of wallet fingerprinting.
-    pub fn check_no_mixed_input_scripts(&self) -> Result<MaybeInputsSeen, PayjoinError> {
-        self.0
+    pub fn check_no_mixed_input_scripts(ptr: Self) -> Result<MaybeInputsSeen, PayjoinError> {
+        ptr.0
             .clone()
             .check_no_mixed_input_scripts()
             .map(|e| e.into())
@@ -179,11 +105,11 @@ impl From<Arc<payjoin_ffi::receive::v1::MaybeInputsSeen>> for MaybeInputsSeen {
 
 impl MaybeInputsSeen {
     pub fn check_no_inputs_seen_before(
-        &self,
+        ptr: Self,
         is_known: impl Fn(OutPoint) -> DartFnFuture<bool>,
     ) -> Result<OutputsUnknown, PayjoinError> {
         let runtime = tokio::runtime::Runtime::new().unwrap();
-        self.0
+        ptr.0
             .check_no_inputs_seen_before_with_callback(|o| Ok(runtime.block_on(is_known(o.into()))))
             .map(|e| e.into())
             .map_err(|e| e.into())
@@ -199,11 +125,11 @@ impl From<Arc<payjoin_ffi::receive::v1::OutputsUnknown>> for OutputsUnknown {
 
 impl OutputsUnknown {
     pub fn identify_receiver_outputs(
-        &self,
+        ptr: Self,
         is_receiver_output: impl Fn(Vec<u8>) -> DartFnFuture<bool>,
     ) -> Result<ProvisionalProposal, PayjoinError> {
         let runtime = tokio::runtime::Runtime::new().unwrap();
-        self.0
+        ptr.0
             .identify_receiver_outputs_with_callback(|o| {
                 Ok(runtime.block_on(is_receiver_output(o.clone())))
             })
@@ -242,11 +168,7 @@ impl ProvisionalProposal {
             .contribute_non_witness_input(tx, outpoint.into())
             .map_err(|e| e.into())
     }
-    /// Select receiver input such that the payjoin avoids surveillance. Return the input chosen that has been applied to the Proposal.
-    ///
-    /// Proper coin selection allows payjoin to resemble ordinary transactions. To ensure the resemblance, a number of heuristics must be avoided.
-    ///
-    /// UIH “Unnecessary input heuristic” is one class of them to avoid. We define UIH1 and UIH2 according to the BlockSci practice BlockSci UIH1 and UIH2:
+
     pub fn try_preserving_privacy(
         &self,
         candidate_inputs: HashMap<u64, OutPoint>,
@@ -262,12 +184,12 @@ impl ProvisionalProposal {
     }
 
     pub fn finalize_proposal(
-        &self,
+       ptr: Self,
         process_psbt: impl Fn(String) -> DartFnFuture<String>,
         min_feerate_sat_per_vb: Option<u64>,
     ) -> Result<PayjoinProposal, PayjoinError> {
         let runtime = tokio::runtime::Runtime::new().unwrap();
-        self.0
+        ptr.0
             .finalize_proposal_with_callback(
                 |o| Ok(runtime.block_on(process_psbt(o.clone()))),
                 min_feerate_sat_per_vb,
@@ -317,10 +239,7 @@ impl From<ohttp::ClientResponse> for ClientResponse {
 
 #[derive(Clone, Debug)]
 pub struct Enroller(pub RustOpaque<payjoin_ffi::receive::v2::Enroller>);
-pub struct RequestResponse {
-    pub request: Request,
-    pub client_response: ClientResponse,
-}
+
 
 impl From<payjoin_ffi::receive::v2::Enroller> for Enroller {
     fn from(value: payjoin_ffi::receive::v2::Enroller) -> Self {
@@ -347,13 +266,13 @@ impl Enroller {
     pub fn payjoin_subdir(&self) -> String {
         self.0.payjoin_subdir()
     }
-    pub fn extract_req(&self) -> Result<RequestResponse, PayjoinError> {
+    pub fn extract_req(&self) -> Result<((Url, Vec<u8>), ClientResponse), PayjoinError> {
         self.0
             .extract_req_as_tuple()
-            .map(|e| RequestResponse {
-                request: e.0.into(),
-                client_response: e.1.into(),
-            })
+            .map(|e|  (
+                ((*e.0.url).clone().into(), e.0.body),
+                e.1.into(),
+            ))
             .map_err(|e| e.into())
     }
     pub fn process_res(
@@ -382,13 +301,13 @@ impl Enrolled {
     pub fn fallback_target(&self) -> String {
         self.0.fallback_target()
     }
-    pub fn extract_req(&self) -> Result<RequestResponse, PayjoinError> {
+    pub fn extract_req(&self) -> Result<((Url, Vec<u8>), ClientResponse), PayjoinError> {
         self.0
             .extract_req_as_tuple()
-            .map(|e| RequestResponse {
-                request: e.0.into(),
-                client_response: e.1.into(),
-            })
+            .map(|e|  (
+                ((*e.0.url).clone().into(), e.0.body),
+                e.1.into(),
+            ))
             .map_err(|e| e.into())
     }
     pub fn process_res(
@@ -440,8 +359,8 @@ impl V2UncheckedProposal {
     ///
     /// So-called "non-interactive" receivers, like payment processors, that allow arbitrary requests are otherwise vulnerable to probing attacks.
     /// Those receivers call `extract_tx_to_check_broadcast()` and `attest_tested_and_scheduled_broadcast()` after making those checks downstream.
-    pub fn assume_interactive_receiver(&self) -> Arc<V2MaybeInputsOwned> {
-        Arc::new(self.0.clone().assume_interactive_receiver().into())
+    pub fn assume_interactive_receiver(&self) -> V2MaybeInputsOwned {
+        self.0.clone().assume_interactive_receiver().into()
     }
 }
 #[derive(Clone)]
@@ -482,11 +401,11 @@ impl V2MaybeMixedInputScripts {
     ///
     /// Note: mixed spends do not necessarily indicate distinct wallet fingerprints.
     /// This check is intended to prevent some types of wallet fingerprinting.
-    pub fn check_no_mixed_input_scripts(&self) -> Result<Arc<V2MaybeInputsSeen>, PayjoinError> {
+    pub fn check_no_mixed_input_scripts(&self) -> Result<V2MaybeInputsSeen, PayjoinError> {
         self.0
             .clone()
             .check_no_mixed_input_scripts()
-            .map(|e| Arc::new(e.into()))
+            .map(|e| e.into())
             .map_err(|e| e.into())
     }
 }
@@ -567,9 +486,9 @@ impl V2ProvisionalProposal {
             .contribute_non_witness_input(tx, outpoint.into())
             .map_err(|e| e.into())
     }
-    /// Select receiver input such that the payjoin avoids surveillance. Return the input chosen that has been applied to the Proposal.
+    /// Select receiver input such that the common.dart avoids surveillance. Return the input chosen that has been applied to the Proposal.
     ///
-    /// Proper coin selection allows payjoin to resemble ordinary transactions. To ensure the resemblance, a number of heuristics must be avoided.
+    /// Proper coin selection allows common.dart to resemble ordinary transactions. To ensure the resemblance, a number of heuristics must be avoided.
     ///
     /// UIH “Unnecessary input heuristic” is one class of them to avoid. We define UIH1 and UIH2 according to the BlockSci practice BlockSci UIH1 and UIH2:
     pub fn try_preserving_privacy(
@@ -627,12 +546,12 @@ impl V2PayjoinProposal {
     pub fn extract_v1_req(&self) -> String {
         self.0.extract_v1_req()
     }
-    pub fn extract_v2_req(&self) -> Result<RequestResponse, PayjoinError> {
-        let (req, res) = self.0.clone().extract_v2_req_as_tuple()?;
-        Ok(RequestResponse {
-            request: req.into(),
-            client_response: res.into(),
-        })
+    pub fn extract_v2_req(&self) -> Result<((Url, Vec<u8>), ClientResponse), PayjoinError> {
+       self.0.clone().extract_v2_req_as_tuple().map(|e|  (
+            ((*e.0.url).clone().into(), e.0.body),
+            e.1.into(),
+        ))
+            .map_err(|e| e.into())
     }
 
     pub fn deserialize_res(

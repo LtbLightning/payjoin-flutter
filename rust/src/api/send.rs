@@ -1,8 +1,9 @@
 use crate::{
-    api::uri::{Uri, Url},
+    api::uri::Uri,
     frb_generated::RustOpaque,
 };
 use std::sync::Arc;
+use crate::api::uri::Url;
 
 use super::receive::PayjoinError;
 
@@ -18,7 +19,6 @@ impl From<payjoin_ffi::send::v1::RequestBuilder> for RequestBuilder {
     }
 }
 impl RequestBuilder {
-    pub fn new() {}
     pub fn from_psbt_and_uri(
         psbt_base64: String,
         uri: Uri,
@@ -102,46 +102,17 @@ impl RequestContext {
     }
 }
 
-///Represents data that needs to be transmitted to the receiver.
-///You need to send this request over HTTP(S) to the receiver.
-#[derive(Clone, Debug)]
-pub struct Request {
-    ///URL to send the request to.
-    ///
-    ///This is full URL with scheme etc - you can pass it right to reqwest or a similar library.
-    pub url: Url,
-    ///Bytes to be sent to the receiver.
-    ///
-    ///This is properly encoded PSBT, already in base64. You only need to make sure Content-Type is text/plain and Content-Length is body.len() (most libraries do the latter automatically).
-    pub body: Vec<u8>,
-}
 
-impl From<Arc<payjoin_ffi::types::Request>> for Request {
-    fn from(value: Arc<payjoin_ffi::types::Request>) -> Self {
-        Self {
-            url: value.url.clone().into(),
-            body: value.body.clone(),
-        }
-    }
-}
-impl From<payjoin_ffi::types::Request> for Request {
-    fn from(value: payjoin_ffi::types::Request) -> Self {
-        Self {
-            url: value.url.clone().into(),
-            body: value.body.clone(),
-        }
-    }
-}
 #[derive(Clone)]
 pub struct RequestContextV1 {
-    pub request: Request,
+    pub request: (Url, Vec<u8>),
     pub context_v1: ContextV1,
 }
 
 impl From<Arc<payjoin_ffi::send::v1::RequestContextV1>> for RequestContextV1 {
     fn from(value: Arc<payjoin_ffi::send::v1::RequestContextV1>) -> Self {
         Self {
-            request: value.request.clone().into(),
+            request: ((*value.request.url).clone().into(), value.request.body.clone()),
             context_v1: value.context_v1.clone().into(),
         }
     }
@@ -150,20 +121,20 @@ impl From<Arc<payjoin_ffi::send::v1::RequestContextV1>> for RequestContextV1 {
 impl From<payjoin_ffi::send::v1::RequestContextV1> for RequestContextV1 {
     fn from(value: payjoin_ffi::send::v1::RequestContextV1) -> Self {
         Self {
-            request: value.request.into(),
+            request: ((*value.request.url).clone().into(), value.request.body),
             context_v1: value.context_v1.into(),
         }
     }
 }
 pub struct RequestContextV2 {
-    pub request: Request,
+    pub request: (Url, Vec<u8>),
     pub context_v2: ContextV2,
 }
 
 impl From<payjoin_ffi::send::v1::RequestContextV2> for RequestContextV2 {
     fn from(value: payjoin_ffi::send::v1::RequestContextV2) -> Self {
         Self {
-            request: value.request.into(),
+            request: ((*value.request.url).clone().into(), value.request.body ),
             context_v2: value.context_v2.into(),
         }
     }
