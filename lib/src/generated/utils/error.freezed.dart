@@ -227,8 +227,8 @@ class __$$PayjoinError_InvalidAddressImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$PayjoinError_InvalidAddressImpl implements PayjoinError_InvalidAddress {
-  const _$PayjoinError_InvalidAddressImpl({required this.message});
+class _$PayjoinError_InvalidAddressImpl extends PayjoinError_InvalidAddress {
+  const _$PayjoinError_InvalidAddressImpl({required this.message}) : super._();
 
   @override
   final String message;
@@ -415,9 +415,10 @@ class _$PayjoinError_InvalidAddressImpl implements PayjoinError_InvalidAddress {
   }
 }
 
-abstract class PayjoinError_InvalidAddress implements PayjoinError {
+abstract class PayjoinError_InvalidAddress extends PayjoinError {
   const factory PayjoinError_InvalidAddress({required final String message}) =
       _$PayjoinError_InvalidAddressImpl;
+  const PayjoinError_InvalidAddress._() : super._();
 
   @override
   String get message;
@@ -464,8 +465,8 @@ class __$$PayjoinError_InvalidScriptImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$PayjoinError_InvalidScriptImpl implements PayjoinError_InvalidScript {
-  const _$PayjoinError_InvalidScriptImpl({required this.message});
+class _$PayjoinError_InvalidScriptImpl extends PayjoinError_InvalidScript {
+  const _$PayjoinError_InvalidScriptImpl({required this.message}) : super._();
 
   @override
   final String message;
@@ -652,9 +653,10 @@ class _$PayjoinError_InvalidScriptImpl implements PayjoinError_InvalidScript {
   }
 }
 
-abstract class PayjoinError_InvalidScript implements PayjoinError {
+abstract class PayjoinError_InvalidScript extends PayjoinError {
   const factory PayjoinError_InvalidScript({required final String message}) =
       _$PayjoinError_InvalidScriptImpl;
+  const PayjoinError_InvalidScript._() : super._();
 
   @override
   String get message;
@@ -703,8 +705,9 @@ class __$$PayjoinError_NetworkValidationImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$PayjoinError_NetworkValidationImpl
-    implements PayjoinError_NetworkValidation {
-  const _$PayjoinError_NetworkValidationImpl({required this.message});
+    extends PayjoinError_NetworkValidation {
+  const _$PayjoinError_NetworkValidationImpl({required this.message})
+      : super._();
 
   @override
   final String message;
@@ -892,9 +895,10 @@ class _$PayjoinError_NetworkValidationImpl
   }
 }
 
-abstract class PayjoinError_NetworkValidation implements PayjoinError {
+abstract class PayjoinError_NetworkValidation extends PayjoinError {
   const factory PayjoinError_NetworkValidation(
       {required final String message}) = _$PayjoinError_NetworkValidationImpl;
+  const PayjoinError_NetworkValidation._() : super._();
 
   @override
   String get message;
@@ -942,8 +946,8 @@ class __$$PayjoinError_PsbtParseErrorImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$PayjoinError_PsbtParseErrorImpl implements PayjoinError_PsbtParseError {
-  const _$PayjoinError_PsbtParseErrorImpl({required this.message});
+class _$PayjoinError_PsbtParseErrorImpl extends PayjoinError_PsbtParseError {
+  const _$PayjoinError_PsbtParseErrorImpl({required this.message}) : super._();
 
   @override
   final String message;
@@ -1130,9 +1134,10 @@ class _$PayjoinError_PsbtParseErrorImpl implements PayjoinError_PsbtParseError {
   }
 }
 
-abstract class PayjoinError_PsbtParseError implements PayjoinError {
+abstract class PayjoinError_PsbtParseError extends PayjoinError {
   const factory PayjoinError_PsbtParseError({required final String message}) =
       _$PayjoinError_PsbtParseErrorImpl;
+  const PayjoinError_PsbtParseError._() : super._();
 
   @override
   String get message;
@@ -1179,8 +1184,8 @@ class __$$PayjoinError_ResponseErrorImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$PayjoinError_ResponseErrorImpl implements PayjoinError_ResponseError {
-  const _$PayjoinError_ResponseErrorImpl({required this.message});
+class _$PayjoinError_ResponseErrorImpl extends PayjoinError_ResponseError {
+  const _$PayjoinError_ResponseErrorImpl({required this.message}) : super._();
 
   @override
   final String message;
@@ -1367,9 +1372,10 @@ class _$PayjoinError_ResponseErrorImpl implements PayjoinError_ResponseError {
   }
 }
 
-abstract class PayjoinError_ResponseError implements PayjoinError {
+abstract class PayjoinError_ResponseError extends PayjoinError {
   const factory PayjoinError_ResponseError({required final String message}) =
       _$PayjoinError_ResponseErrorImpl;
+  const PayjoinError_ResponseError._() : super._();
 
   @override
   String get message;
@@ -1416,8 +1422,8 @@ class __$$PayjoinError_RequestErrorImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$PayjoinError_RequestErrorImpl implements PayjoinError_RequestError {
-  const _$PayjoinError_RequestErrorImpl({required this.message});
+class _$PayjoinError_RequestErrorImpl extends PayjoinError_RequestError {
+  const _$PayjoinError_RequestErrorImpl({required this.message}) : super._();
 
   @override
   final String message;
@@ -1604,9 +1610,10 @@ class _$PayjoinError_RequestErrorImpl implements PayjoinError_RequestError {
   }
 }
 
-abstract class PayjoinError_RequestError implements PayjoinError {
+abstract class PayjoinError_RequestError extends PayjoinError {
   const factory PayjoinError_RequestError({required final String message}) =
       _$PayjoinError_RequestErrorImpl;
+  const PayjoinError_RequestError._() : super._();
 
   @override
   String get message;
@@ -1655,8 +1662,9 @@ class __$$PayjoinError_TransactionErrorImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$PayjoinError_TransactionErrorImpl
-    implements PayjoinError_TransactionError {
-  const _$PayjoinError_TransactionErrorImpl({required this.message});
+    extends PayjoinError_TransactionError {
+  const _$PayjoinError_TransactionErrorImpl({required this.message})
+      : super._();
 
   @override
   final String message;
@@ -1844,9 +1852,10 @@ class _$PayjoinError_TransactionErrorImpl
   }
 }
 
-abstract class PayjoinError_TransactionError implements PayjoinError {
+abstract class PayjoinError_TransactionError extends PayjoinError {
   const factory PayjoinError_TransactionError({required final String message}) =
       _$PayjoinError_TransactionErrorImpl;
+  const PayjoinError_TransactionError._() : super._();
 
   @override
   String get message;
@@ -1894,8 +1903,8 @@ class __$$PayjoinError_ServerErrorImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$PayjoinError_ServerErrorImpl implements PayjoinError_ServerError {
-  const _$PayjoinError_ServerErrorImpl({required this.message});
+class _$PayjoinError_ServerErrorImpl extends PayjoinError_ServerError {
+  const _$PayjoinError_ServerErrorImpl({required this.message}) : super._();
 
   @override
   final String message;
@@ -2082,9 +2091,10 @@ class _$PayjoinError_ServerErrorImpl implements PayjoinError_ServerError {
   }
 }
 
-abstract class PayjoinError_ServerError implements PayjoinError {
+abstract class PayjoinError_ServerError extends PayjoinError {
   const factory PayjoinError_ServerError({required final String message}) =
       _$PayjoinError_ServerErrorImpl;
+  const PayjoinError_ServerError._() : super._();
 
   @override
   String get message;
@@ -2131,8 +2141,8 @@ class __$$PayjoinError_SelectionErrorImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$PayjoinError_SelectionErrorImpl implements PayjoinError_SelectionError {
-  const _$PayjoinError_SelectionErrorImpl({required this.message});
+class _$PayjoinError_SelectionErrorImpl extends PayjoinError_SelectionError {
+  const _$PayjoinError_SelectionErrorImpl({required this.message}) : super._();
 
   @override
   final String message;
@@ -2319,9 +2329,10 @@ class _$PayjoinError_SelectionErrorImpl implements PayjoinError_SelectionError {
   }
 }
 
-abstract class PayjoinError_SelectionError implements PayjoinError {
+abstract class PayjoinError_SelectionError extends PayjoinError {
   const factory PayjoinError_SelectionError({required final String message}) =
       _$PayjoinError_SelectionErrorImpl;
+  const PayjoinError_SelectionError._() : super._();
 
   @override
   String get message;
@@ -2370,8 +2381,9 @@ class __$$PayjoinError_CreateRequestErrorImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$PayjoinError_CreateRequestErrorImpl
-    implements PayjoinError_CreateRequestError {
-  const _$PayjoinError_CreateRequestErrorImpl({required this.message});
+    extends PayjoinError_CreateRequestError {
+  const _$PayjoinError_CreateRequestErrorImpl({required this.message})
+      : super._();
 
   @override
   final String message;
@@ -2559,9 +2571,10 @@ class _$PayjoinError_CreateRequestErrorImpl
   }
 }
 
-abstract class PayjoinError_CreateRequestError implements PayjoinError {
+abstract class PayjoinError_CreateRequestError extends PayjoinError {
   const factory PayjoinError_CreateRequestError(
       {required final String message}) = _$PayjoinError_CreateRequestErrorImpl;
+  const PayjoinError_CreateRequestError._() : super._();
 
   @override
   String get message;
@@ -2609,8 +2622,8 @@ class __$$PayjoinError_PjParseErrorImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$PayjoinError_PjParseErrorImpl implements PayjoinError_PjParseError {
-  const _$PayjoinError_PjParseErrorImpl({required this.message});
+class _$PayjoinError_PjParseErrorImpl extends PayjoinError_PjParseError {
+  const _$PayjoinError_PjParseErrorImpl({required this.message}) : super._();
 
   @override
   final String message;
@@ -2797,9 +2810,10 @@ class _$PayjoinError_PjParseErrorImpl implements PayjoinError_PjParseError {
   }
 }
 
-abstract class PayjoinError_PjParseError implements PayjoinError {
+abstract class PayjoinError_PjParseError extends PayjoinError {
   const factory PayjoinError_PjParseError({required final String message}) =
       _$PayjoinError_PjParseErrorImpl;
+  const PayjoinError_PjParseError._() : super._();
 
   @override
   String get message;
@@ -2846,8 +2860,8 @@ class __$$PayjoinError_PjNotSupportedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$PayjoinError_PjNotSupportedImpl implements PayjoinError_PjNotSupported {
-  const _$PayjoinError_PjNotSupportedImpl({required this.message});
+class _$PayjoinError_PjNotSupportedImpl extends PayjoinError_PjNotSupported {
+  const _$PayjoinError_PjNotSupportedImpl({required this.message}) : super._();
 
   @override
   final String message;
@@ -3034,9 +3048,10 @@ class _$PayjoinError_PjNotSupportedImpl implements PayjoinError_PjNotSupported {
   }
 }
 
-abstract class PayjoinError_PjNotSupported implements PayjoinError {
+abstract class PayjoinError_PjNotSupported extends PayjoinError {
   const factory PayjoinError_PjNotSupported({required final String message}) =
       _$PayjoinError_PjNotSupportedImpl;
+  const PayjoinError_PjNotSupported._() : super._();
 
   @override
   String get message;
@@ -3083,9 +3098,8 @@ class __$$PayjoinError_ValidationErrorImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$PayjoinError_ValidationErrorImpl
-    implements PayjoinError_ValidationError {
-  const _$PayjoinError_ValidationErrorImpl({required this.message});
+class _$PayjoinError_ValidationErrorImpl extends PayjoinError_ValidationError {
+  const _$PayjoinError_ValidationErrorImpl({required this.message}) : super._();
 
   @override
   final String message;
@@ -3273,9 +3287,10 @@ class _$PayjoinError_ValidationErrorImpl
   }
 }
 
-abstract class PayjoinError_ValidationError implements PayjoinError {
+abstract class PayjoinError_ValidationError extends PayjoinError {
   const factory PayjoinError_ValidationError({required final String message}) =
       _$PayjoinError_ValidationErrorImpl;
+  const PayjoinError_ValidationError._() : super._();
 
   @override
   String get message;
@@ -3321,8 +3336,8 @@ class __$$PayjoinError_V2ErrorImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$PayjoinError_V2ErrorImpl implements PayjoinError_V2Error {
-  const _$PayjoinError_V2ErrorImpl({required this.message});
+class _$PayjoinError_V2ErrorImpl extends PayjoinError_V2Error {
+  const _$PayjoinError_V2ErrorImpl({required this.message}) : super._();
 
   @override
   final String message;
@@ -3510,9 +3525,10 @@ class _$PayjoinError_V2ErrorImpl implements PayjoinError_V2Error {
   }
 }
 
-abstract class PayjoinError_V2Error implements PayjoinError {
+abstract class PayjoinError_V2Error extends PayjoinError {
   const factory PayjoinError_V2Error({required final String message}) =
       _$PayjoinError_V2ErrorImpl;
+  const PayjoinError_V2Error._() : super._();
 
   @override
   String get message;
@@ -3559,9 +3575,8 @@ class __$$PayjoinError_UnexpectedErrorImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$PayjoinError_UnexpectedErrorImpl
-    implements PayjoinError_UnexpectedError {
-  const _$PayjoinError_UnexpectedErrorImpl({required this.message});
+class _$PayjoinError_UnexpectedErrorImpl extends PayjoinError_UnexpectedError {
+  const _$PayjoinError_UnexpectedErrorImpl({required this.message}) : super._();
 
   @override
   final String message;
@@ -3749,9 +3764,10 @@ class _$PayjoinError_UnexpectedErrorImpl
   }
 }
 
-abstract class PayjoinError_UnexpectedError implements PayjoinError {
+abstract class PayjoinError_UnexpectedError extends PayjoinError {
   const factory PayjoinError_UnexpectedError({required final String message}) =
       _$PayjoinError_UnexpectedErrorImpl;
+  const PayjoinError_UnexpectedError._() : super._();
 
   @override
   String get message;
@@ -3799,8 +3815,8 @@ class __$$PayjoinError_OhttpErrorImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$PayjoinError_OhttpErrorImpl implements PayjoinError_OhttpError {
-  const _$PayjoinError_OhttpErrorImpl({required this.message});
+class _$PayjoinError_OhttpErrorImpl extends PayjoinError_OhttpError {
+  const _$PayjoinError_OhttpErrorImpl({required this.message}) : super._();
 
   @override
   final String message;
@@ -3987,9 +4003,10 @@ class _$PayjoinError_OhttpErrorImpl implements PayjoinError_OhttpError {
   }
 }
 
-abstract class PayjoinError_OhttpError implements PayjoinError {
+abstract class PayjoinError_OhttpError extends PayjoinError {
   const factory PayjoinError_OhttpError({required final String message}) =
       _$PayjoinError_OhttpErrorImpl;
+  const PayjoinError_OhttpError._() : super._();
 
   @override
   String get message;
@@ -4035,8 +4052,8 @@ class __$$PayjoinError_UrlErrorImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$PayjoinError_UrlErrorImpl implements PayjoinError_UrlError {
-  const _$PayjoinError_UrlErrorImpl({required this.message});
+class _$PayjoinError_UrlErrorImpl extends PayjoinError_UrlError {
+  const _$PayjoinError_UrlErrorImpl({required this.message}) : super._();
 
   @override
   final String message;
@@ -4223,9 +4240,10 @@ class _$PayjoinError_UrlErrorImpl implements PayjoinError_UrlError {
   }
 }
 
-abstract class PayjoinError_UrlError implements PayjoinError {
+abstract class PayjoinError_UrlError extends PayjoinError {
   const factory PayjoinError_UrlError({required final String message}) =
       _$PayjoinError_UrlErrorImpl;
+  const PayjoinError_UrlError._() : super._();
 
   @override
   String get message;
