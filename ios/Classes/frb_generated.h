@@ -95,7 +95,7 @@ typedef struct wire_cst_list_record_string_string {
 } wire_cst_list_record_string_string;
 
 typedef struct wire_cst_headers {
-  struct wire_cst_list_record_string_string *field0;
+  struct wire_cst_list_record_string_string *map;
 } wire_cst_headers;
 
 typedef struct wire_cst_v_2_maybe_inputs_owned {
@@ -253,250 +253,245 @@ typedef struct wire_cst_payjoin_error {
   union PayjoinErrorKind kind;
 } wire_cst_payjoin_error;
 
-typedef struct wire_cst_request {
-  struct wire_cst_url url;
-  struct wire_cst_list_prim_u_8_strict *body;
-} wire_cst_request;
+typedef struct wire_cst_record_url_list_prim_u_8_strict {
+  struct wire_cst_url field0;
+  struct wire_cst_list_prim_u_8_strict *field1;
+} wire_cst_record_url_list_prim_u_8_strict;
+
+typedef struct wire_cst_record_record_url_list_prim_u_8_strict_client_response {
+  struct wire_cst_record_url_list_prim_u_8_strict field0;
+  struct wire_cst_client_response field1;
+} wire_cst_record_record_url_list_prim_u_8_strict_client_response;
 
 typedef struct wire_cst_request_context_v_1 {
-  struct wire_cst_request request;
+  struct wire_cst_record_url_list_prim_u_8_strict request;
   struct wire_cst_context_v_1 context_v1;
 } wire_cst_request_context_v_1;
 
 typedef struct wire_cst_request_context_v_2 {
-  struct wire_cst_request request;
+  struct wire_cst_record_url_list_prim_u_8_strict request;
   struct wire_cst_context_v_2 context_v2;
 } wire_cst_request_context_v_2;
 
-typedef struct wire_cst_request_response {
-  struct wire_cst_request request;
-  struct wire_cst_client_response client_response;
-} wire_cst_request_response;
-
-void frbgen_payjoin_flutter_wire_Enrolled_extract_req(int64_t port_,
+void frbgen_payjoin_flutter_wire_enrolled_extract_req(int64_t port_,
                                                       struct wire_cst_enrolled *that);
 
-void frbgen_payjoin_flutter_wire_Enrolled_fallback_target(int64_t port_,
+void frbgen_payjoin_flutter_wire_enrolled_fallback_target(int64_t port_,
                                                           struct wire_cst_enrolled *that);
 
-void frbgen_payjoin_flutter_wire_Enrolled_process_res(int64_t port_,
+void frbgen_payjoin_flutter_wire_enrolled_process_res(int64_t port_,
                                                       struct wire_cst_enrolled *that,
                                                       struct wire_cst_list_prim_u_8_loose *body,
                                                       struct wire_cst_client_response *ctx);
 
-void frbgen_payjoin_flutter_wire_Enrolled_subdirectory(int64_t port_,
+void frbgen_payjoin_flutter_wire_enrolled_subdirectory(int64_t port_,
                                                        struct wire_cst_enrolled *that);
 
-void frbgen_payjoin_flutter_wire_Enroller_extract_req(int64_t port_,
+void frbgen_payjoin_flutter_wire_enroller_extract_req(int64_t port_,
                                                       struct wire_cst_enroller *that);
 
-void frbgen_payjoin_flutter_wire_Enroller_from_relay_config(int64_t port_,
+void frbgen_payjoin_flutter_wire_enroller_from_relay_config(int64_t port_,
                                                             struct wire_cst_list_prim_u_8_strict *relay_url,
                                                             struct wire_cst_list_prim_u_8_strict *ohttp_config_base64,
                                                             struct wire_cst_list_prim_u_8_strict *ohttp_proxy_url);
 
-void frbgen_payjoin_flutter_wire_Enroller_payjoin_subdir(int64_t port_,
+void frbgen_payjoin_flutter_wire_enroller_payjoin_subdir(int64_t port_,
                                                          struct wire_cst_enroller *that);
 
-void frbgen_payjoin_flutter_wire_Enroller_process_res(int64_t port_,
+void frbgen_payjoin_flutter_wire_enroller_process_res(int64_t port_,
                                                       struct wire_cst_enroller *that,
                                                       struct wire_cst_list_prim_u_8_loose *body,
                                                       struct wire_cst_client_response *ctx);
 
-void frbgen_payjoin_flutter_wire_Enroller_subdirectory(int64_t port_,
+void frbgen_payjoin_flutter_wire_enroller_subdirectory(int64_t port_,
                                                        struct wire_cst_enroller *that);
 
-void frbgen_payjoin_flutter_wire_Headers_from_vec(int64_t port_,
-                                                  struct wire_cst_list_prim_u_8_loose *body);
-
-void frbgen_payjoin_flutter_wire_MaybeInputsOwned_check_inputs_not_owned(int64_t port_,
-                                                                         struct wire_cst_maybe_inputs_owned *that,
-                                                                         const void *is_owned);
-
-void frbgen_payjoin_flutter_wire_MaybeInputsSeen_check_no_inputs_seen_before(int64_t port_,
-                                                                             struct wire_cst_maybe_inputs_seen *that,
-                                                                             const void *is_known);
-
-void frbgen_payjoin_flutter_wire_MaybeMixedInputScripts_check_no_mixed_input_scripts(int64_t port_,
-                                                                                     struct wire_cst_maybe_mixed_input_scripts *that);
-
-void frbgen_payjoin_flutter_wire_OutputsUnknown_identify_receiver_outputs(int64_t port_,
-                                                                          struct wire_cst_outputs_unknown *that,
-                                                                          const void *is_receiver_output);
-
-void frbgen_payjoin_flutter_wire_PayjoinProposal_is_output_substitution_disabled(int64_t port_,
-                                                                                 struct wire_cst_payjoin_proposal *that);
-
-void frbgen_payjoin_flutter_wire_PayjoinProposal_owned_vouts(int64_t port_,
-                                                             struct wire_cst_payjoin_proposal *that);
-
-void frbgen_payjoin_flutter_wire_PayjoinProposal_psbt(int64_t port_,
-                                                      struct wire_cst_payjoin_proposal *that);
-
-void frbgen_payjoin_flutter_wire_PayjoinProposal_utxos_to_be_locked(int64_t port_,
-                                                                    struct wire_cst_payjoin_proposal *that);
-
-void frbgen_payjoin_flutter_wire_ProvisionalProposal_contribute_non_witness_input(int64_t port_,
-                                                                                  struct wire_cst_provisional_proposal *that,
-                                                                                  struct wire_cst_list_prim_u_8_loose *tx,
-                                                                                  struct wire_cst_out_point *outpoint);
-
-void frbgen_payjoin_flutter_wire_ProvisionalProposal_contribute_witness_input(int64_t port_,
-                                                                              struct wire_cst_provisional_proposal *that,
-                                                                              struct wire_cst_tx_out *txo,
-                                                                              struct wire_cst_out_point *outpoint);
-
-void frbgen_payjoin_flutter_wire_ProvisionalProposal_finalize_proposal(int64_t port_,
-                                                                       struct wire_cst_provisional_proposal *that,
-                                                                       const void *process_psbt,
-                                                                       uint64_t *min_feerate_sat_per_vb);
-
-void frbgen_payjoin_flutter_wire_ProvisionalProposal_substitute_output_address(int64_t port_,
-                                                                               struct wire_cst_provisional_proposal *that,
-                                                                               struct wire_cst_list_prim_u_8_strict *address);
-
-void frbgen_payjoin_flutter_wire_ProvisionalProposal_try_preserving_privacy(int64_t port_,
-                                                                            struct wire_cst_provisional_proposal *that,
-                                                                            struct wire_cst_list_record_u_64_out_point *candidate_inputs);
-
-void frbgen_payjoin_flutter_wire_UncheckedProposal_assume_interactive_receiver(int64_t port_,
-                                                                               struct wire_cst_unchecked_proposal *that);
-
-void frbgen_payjoin_flutter_wire_UncheckedProposal_check_broadcast_suitability(int64_t port_,
-                                                                               struct wire_cst_unchecked_proposal *that,
-                                                                               uint64_t *min_fee_rate,
-                                                                               const void *can_broadcast);
-
-void frbgen_payjoin_flutter_wire_UncheckedProposal_extract_tx_to_schedule_broadcast(int64_t port_,
-                                                                                    struct wire_cst_unchecked_proposal *that);
-
-void frbgen_payjoin_flutter_wire_UncheckedProposal_from_request(int64_t port_,
-                                                                struct wire_cst_list_prim_u_8_loose *body,
-                                                                struct wire_cst_list_prim_u_8_strict *query,
-                                                                struct wire_cst_headers *headers);
-
-void frbgen_payjoin_flutter_wire_V2MaybeInputsOwned_check_inputs_not_owned(int64_t port_,
-                                                                           struct wire_cst_v_2_maybe_inputs_owned *that,
+void frbgen_payjoin_flutter_wire_maybe_inputs_owned_check_inputs_not_owned(int64_t port_,
+                                                                           struct wire_cst_maybe_inputs_owned *ptr,
                                                                            const void *is_owned);
 
-void frbgen_payjoin_flutter_wire_V2MaybeInputsSeen_check_no_inputs_seen_before(int64_t port_,
-                                                                               struct wire_cst_v_2_maybe_inputs_seen *that,
+void frbgen_payjoin_flutter_wire_maybe_inputs_seen_check_no_inputs_seen_before(int64_t port_,
+                                                                               struct wire_cst_maybe_inputs_seen *ptr,
                                                                                const void *is_known);
 
-void frbgen_payjoin_flutter_wire_V2MaybeMixedInputScripts_check_no_mixed_input_scripts(int64_t port_,
-                                                                                       struct wire_cst_v_2_maybe_mixed_input_scripts *that);
+void frbgen_payjoin_flutter_wire_maybe_mixed_input_scripts_check_no_mixed_input_scripts(int64_t port_,
+                                                                                        struct wire_cst_maybe_mixed_input_scripts *ptr);
 
-void frbgen_payjoin_flutter_wire_V2OutputsUnknown_identify_receiver_outputs(int64_t port_,
-                                                                            struct wire_cst_v_2_outputs_unknown *that,
-                                                                            const void *is_receiver_output);
+void frbgen_payjoin_flutter_wire_outputs_unknown_identify_receiver_outputs(int64_t port_,
+                                                                           struct wire_cst_outputs_unknown *ptr,
+                                                                           const void *is_receiver_output);
 
-void frbgen_payjoin_flutter_wire_V2PayjoinProposal_deserialize_res(int64_t port_,
-                                                                   struct wire_cst_v_2_payjoin_proposal *that,
-                                                                   struct wire_cst_list_prim_u_8_loose *res,
-                                                                   struct wire_cst_client_response *ohttp_context);
+void frbgen_payjoin_flutter_wire_payjoin_proposal_is_output_substitution_disabled(int64_t port_,
+                                                                                  struct wire_cst_payjoin_proposal *that);
 
-void frbgen_payjoin_flutter_wire_V2PayjoinProposal_extract_v1_req(int64_t port_,
+void frbgen_payjoin_flutter_wire_payjoin_proposal_owned_vouts(int64_t port_,
+                                                              struct wire_cst_payjoin_proposal *that);
+
+void frbgen_payjoin_flutter_wire_payjoin_proposal_psbt(int64_t port_,
+                                                       struct wire_cst_payjoin_proposal *that);
+
+void frbgen_payjoin_flutter_wire_payjoin_proposal_utxos_to_be_locked(int64_t port_,
+                                                                     struct wire_cst_payjoin_proposal *that);
+
+void frbgen_payjoin_flutter_wire_provisional_proposal_contribute_non_witness_input(int64_t port_,
+                                                                                   struct wire_cst_provisional_proposal *that,
+                                                                                   struct wire_cst_list_prim_u_8_loose *tx,
+                                                                                   struct wire_cst_out_point *outpoint);
+
+void frbgen_payjoin_flutter_wire_provisional_proposal_contribute_witness_input(int64_t port_,
+                                                                               struct wire_cst_provisional_proposal *that,
+                                                                               struct wire_cst_tx_out *txo,
+                                                                               struct wire_cst_out_point *outpoint);
+
+void frbgen_payjoin_flutter_wire_provisional_proposal_finalize_proposal(int64_t port_,
+                                                                        struct wire_cst_provisional_proposal *ptr,
+                                                                        const void *process_psbt,
+                                                                        uint64_t *min_feerate_sat_per_vb);
+
+void frbgen_payjoin_flutter_wire_provisional_proposal_substitute_output_address(int64_t port_,
+                                                                                struct wire_cst_provisional_proposal *that,
+                                                                                struct wire_cst_list_prim_u_8_strict *address);
+
+void frbgen_payjoin_flutter_wire_provisional_proposal_try_preserving_privacy(int64_t port_,
+                                                                             struct wire_cst_provisional_proposal *that,
+                                                                             struct wire_cst_list_record_u_64_out_point *candidate_inputs);
+
+void frbgen_payjoin_flutter_wire_unchecked_proposal_assume_interactive_receiver(int64_t port_,
+                                                                                struct wire_cst_unchecked_proposal *ptr);
+
+void frbgen_payjoin_flutter_wire_unchecked_proposal_check_broadcast_suitability(int64_t port_,
+                                                                                struct wire_cst_unchecked_proposal *ptr,
+                                                                                uint64_t *min_fee_rate,
+                                                                                const void *can_broadcast);
+
+void frbgen_payjoin_flutter_wire_unchecked_proposal_extract_tx_to_schedule_broadcast(int64_t port_,
+                                                                                     struct wire_cst_unchecked_proposal *that);
+
+void frbgen_payjoin_flutter_wire_unchecked_proposal_from_request(int64_t port_,
+                                                                 struct wire_cst_list_prim_u_8_loose *body,
+                                                                 struct wire_cst_list_prim_u_8_strict *query,
+                                                                 struct wire_cst_headers *headers);
+
+void frbgen_payjoin_flutter_wire_v_2_maybe_inputs_owned_check_inputs_not_owned(int64_t port_,
+                                                                               struct wire_cst_v_2_maybe_inputs_owned *that,
+                                                                               const void *is_owned);
+
+void frbgen_payjoin_flutter_wire_v_2_maybe_inputs_seen_check_no_inputs_seen_before(int64_t port_,
+                                                                                   struct wire_cst_v_2_maybe_inputs_seen *that,
+                                                                                   const void *is_known);
+
+void frbgen_payjoin_flutter_wire_v_2_maybe_mixed_input_scripts_check_no_mixed_input_scripts(int64_t port_,
+                                                                                            struct wire_cst_v_2_maybe_mixed_input_scripts *that);
+
+void frbgen_payjoin_flutter_wire_v_2_outputs_unknown_identify_receiver_outputs(int64_t port_,
+                                                                               struct wire_cst_v_2_outputs_unknown *that,
+                                                                               const void *is_receiver_output);
+
+void frbgen_payjoin_flutter_wire_v_2_payjoin_proposal_deserialize_res(int64_t port_,
+                                                                      struct wire_cst_v_2_payjoin_proposal *that,
+                                                                      struct wire_cst_list_prim_u_8_loose *res,
+                                                                      struct wire_cst_client_response *ohttp_context);
+
+void frbgen_payjoin_flutter_wire_v_2_payjoin_proposal_extract_v1_req(int64_t port_,
+                                                                     struct wire_cst_v_2_payjoin_proposal *that);
+
+void frbgen_payjoin_flutter_wire_v_2_payjoin_proposal_extract_v2_req(int64_t port_,
+                                                                     struct wire_cst_v_2_payjoin_proposal *that);
+
+void frbgen_payjoin_flutter_wire_v_2_payjoin_proposal_is_output_substitution_disabled(int64_t port_,
+                                                                                      struct wire_cst_v_2_payjoin_proposal *that);
+
+void frbgen_payjoin_flutter_wire_v_2_payjoin_proposal_owned_vouts(int64_t port_,
                                                                   struct wire_cst_v_2_payjoin_proposal *that);
 
-void frbgen_payjoin_flutter_wire_V2PayjoinProposal_extract_v2_req(int64_t port_,
-                                                                  struct wire_cst_v_2_payjoin_proposal *that);
+void frbgen_payjoin_flutter_wire_v_2_payjoin_proposal_psbt(int64_t port_,
+                                                           struct wire_cst_v_2_payjoin_proposal *that);
 
-void frbgen_payjoin_flutter_wire_V2PayjoinProposal_is_output_substitution_disabled(int64_t port_,
-                                                                                   struct wire_cst_v_2_payjoin_proposal *that);
+void frbgen_payjoin_flutter_wire_v_2_payjoin_proposal_utxos_to_be_locked(int64_t port_,
+                                                                         struct wire_cst_v_2_payjoin_proposal *that);
 
-void frbgen_payjoin_flutter_wire_V2PayjoinProposal_owned_vouts(int64_t port_,
-                                                               struct wire_cst_v_2_payjoin_proposal *that);
+void frbgen_payjoin_flutter_wire_v_2_provisional_proposal_contribute_non_witness_input(int64_t port_,
+                                                                                       struct wire_cst_v_2_provisional_proposal *that,
+                                                                                       struct wire_cst_list_prim_u_8_loose *tx,
+                                                                                       struct wire_cst_out_point *outpoint);
 
-void frbgen_payjoin_flutter_wire_V2PayjoinProposal_psbt(int64_t port_,
-                                                        struct wire_cst_v_2_payjoin_proposal *that);
+void frbgen_payjoin_flutter_wire_v_2_provisional_proposal_contribute_witness_input(int64_t port_,
+                                                                                   struct wire_cst_v_2_provisional_proposal *that,
+                                                                                   struct wire_cst_tx_out *txo,
+                                                                                   struct wire_cst_out_point *outpoint);
 
-void frbgen_payjoin_flutter_wire_V2PayjoinProposal_utxos_to_be_locked(int64_t port_,
-                                                                      struct wire_cst_v_2_payjoin_proposal *that);
+void frbgen_payjoin_flutter_wire_v_2_provisional_proposal_finalize_proposal(int64_t port_,
+                                                                            struct wire_cst_v_2_provisional_proposal *that,
+                                                                            const void *process_psbt,
+                                                                            uint64_t *min_feerate_sat_per_vb);
 
-void frbgen_payjoin_flutter_wire_V2ProvisionalProposal_contribute_non_witness_input(int64_t port_,
+void frbgen_payjoin_flutter_wire_v_2_provisional_proposal_substitute_output_address(int64_t port_,
                                                                                     struct wire_cst_v_2_provisional_proposal *that,
-                                                                                    struct wire_cst_list_prim_u_8_loose *tx,
-                                                                                    struct wire_cst_out_point *outpoint);
+                                                                                    struct wire_cst_list_prim_u_8_strict *address);
 
-void frbgen_payjoin_flutter_wire_V2ProvisionalProposal_contribute_witness_input(int64_t port_,
-                                                                                struct wire_cst_v_2_provisional_proposal *that,
-                                                                                struct wire_cst_tx_out *txo,
-                                                                                struct wire_cst_out_point *outpoint);
-
-void frbgen_payjoin_flutter_wire_V2ProvisionalProposal_finalize_proposal(int64_t port_,
-                                                                         struct wire_cst_v_2_provisional_proposal *that,
-                                                                         const void *process_psbt,
-                                                                         uint64_t *min_feerate_sat_per_vb);
-
-void frbgen_payjoin_flutter_wire_V2ProvisionalProposal_substitute_output_address(int64_t port_,
+void frbgen_payjoin_flutter_wire_v_2_provisional_proposal_try_preserving_privacy(int64_t port_,
                                                                                  struct wire_cst_v_2_provisional_proposal *that,
-                                                                                 struct wire_cst_list_prim_u_8_strict *address);
+                                                                                 struct wire_cst_list_record_u_64_out_point *candidate_inputs);
 
-void frbgen_payjoin_flutter_wire_V2ProvisionalProposal_try_preserving_privacy(int64_t port_,
-                                                                              struct wire_cst_v_2_provisional_proposal *that,
-                                                                              struct wire_cst_list_record_u_64_out_point *candidate_inputs);
+void frbgen_payjoin_flutter_wire_v_2_unchecked_proposal_assume_interactive_receiver(int64_t port_,
+                                                                                    struct wire_cst_v_2_unchecked_proposal *that);
 
-void frbgen_payjoin_flutter_wire_V2UncheckedProposal_assume_interactive_receiver(int64_t port_,
-                                                                                 struct wire_cst_v_2_unchecked_proposal *that);
+void frbgen_payjoin_flutter_wire_v_2_unchecked_proposal_check_broadcast_suitability(int64_t port_,
+                                                                                    struct wire_cst_v_2_unchecked_proposal *that,
+                                                                                    uint64_t *min_fee_rate,
+                                                                                    const void *can_broadcast);
 
-void frbgen_payjoin_flutter_wire_V2UncheckedProposal_check_broadcast_suitability(int64_t port_,
-                                                                                 struct wire_cst_v_2_unchecked_proposal *that,
-                                                                                 uint64_t *min_fee_rate,
-                                                                                 const void *can_broadcast);
+void frbgen_payjoin_flutter_wire_v_2_unchecked_proposal_extract_tx_to_schedule_broadcast(int64_t port_,
+                                                                                         struct wire_cst_v_2_unchecked_proposal *that);
 
-void frbgen_payjoin_flutter_wire_V2UncheckedProposal_extract_tx_to_schedule_broadcast(int64_t port_,
-                                                                                      struct wire_cst_v_2_unchecked_proposal *that);
+void frbgen_payjoin_flutter_wire_context_v_1_process_response(int64_t port_,
+                                                              struct wire_cst_context_v_1 *that,
+                                                              struct wire_cst_list_prim_u_8_loose *response);
 
-void frbgen_payjoin_flutter_wire_ContextV1_process_response(int64_t port_,
-                                                            struct wire_cst_context_v_1 *that,
-                                                            struct wire_cst_list_prim_u_8_loose *response);
+void frbgen_payjoin_flutter_wire_context_v_2_process_response(int64_t port_,
+                                                              struct wire_cst_context_v_2 *that,
+                                                              struct wire_cst_list_prim_u_8_loose *response);
 
-void frbgen_payjoin_flutter_wire_ContextV2_process_response(int64_t port_,
-                                                            struct wire_cst_context_v_2 *that,
-                                                            struct wire_cst_list_prim_u_8_loose *response);
+void frbgen_payjoin_flutter_wire_request_builder_always_disable_output_substitution(int64_t port_,
+                                                                                    struct wire_cst_request_builder *that,
+                                                                                    bool disable);
 
-void frbgen_payjoin_flutter_wire_RequestBuilder_always_disable_output_substitution(int64_t port_,
-                                                                                   struct wire_cst_request_builder *that,
-                                                                                   bool disable);
+void frbgen_payjoin_flutter_wire_request_builder_build_non_incentivizing(int64_t port_,
+                                                                         struct wire_cst_request_builder *that);
 
-void frbgen_payjoin_flutter_wire_RequestBuilder_build_non_incentivizing(int64_t port_,
-                                                                        struct wire_cst_request_builder *that);
+void frbgen_payjoin_flutter_wire_request_builder_build_recommended(int64_t port_,
+                                                                   struct wire_cst_request_builder *that,
+                                                                   uint64_t min_fee_rate);
 
-void frbgen_payjoin_flutter_wire_RequestBuilder_build_recommended(int64_t port_,
-                                                                  struct wire_cst_request_builder *that,
-                                                                  uint64_t min_fee_rate);
+void frbgen_payjoin_flutter_wire_request_builder_build_with_additional_fee(int64_t port_,
+                                                                           struct wire_cst_request_builder *that,
+                                                                           uint64_t max_fee_contribution,
+                                                                           uint8_t *change_index,
+                                                                           uint64_t min_fee_rate,
+                                                                           bool clamp_fee_contribution);
 
-void frbgen_payjoin_flutter_wire_RequestBuilder_build_with_additional_fee(int64_t port_,
-                                                                          struct wire_cst_request_builder *that,
-                                                                          uint64_t max_fee_contribution,
-                                                                          uint8_t *change_index,
-                                                                          uint64_t min_fee_rate,
-                                                                          bool clamp_fee_contribution);
+void frbgen_payjoin_flutter_wire_request_builder_from_psbt_and_uri(int64_t port_,
+                                                                   struct wire_cst_list_prim_u_8_strict *psbt_base64,
+                                                                   struct wire_cst_uri *uri);
 
-void frbgen_payjoin_flutter_wire_RequestBuilder_from_psbt_and_uri(int64_t port_,
-                                                                  struct wire_cst_list_prim_u_8_strict *psbt_base64,
-                                                                  struct wire_cst_uri *uri);
+void frbgen_payjoin_flutter_wire_request_context_extract_v1(int64_t port_,
+                                                            struct wire_cst_request_context *that);
 
-void frbgen_payjoin_flutter_wire_RequestBuilder_new(int64_t port_);
+void frbgen_payjoin_flutter_wire_request_context_extract_v2(int64_t port_,
+                                                            struct wire_cst_request_context *that,
+                                                            struct wire_cst_list_prim_u_8_strict *ohttp_proxy_url);
 
-void frbgen_payjoin_flutter_wire_RequestContext_extract_v1(int64_t port_,
-                                                           struct wire_cst_request_context *that);
+void frbgen_payjoin_flutter_wire_uri_address(int64_t port_, struct wire_cst_uri *that);
 
-void frbgen_payjoin_flutter_wire_RequestContext_extract_v2(int64_t port_,
-                                                           struct wire_cst_request_context *that,
-                                                           struct wire_cst_list_prim_u_8_strict *ohttp_proxy_url);
+void frbgen_payjoin_flutter_wire_uri_amount(int64_t port_, struct wire_cst_uri *that);
 
-void frbgen_payjoin_flutter_wire_Uri_address(int64_t port_, struct wire_cst_uri *that);
-
-void frbgen_payjoin_flutter_wire_Uri_amount(int64_t port_, struct wire_cst_uri *that);
-
-void frbgen_payjoin_flutter_wire_Uri_from_str(int64_t port_,
+void frbgen_payjoin_flutter_wire_uri_from_str(int64_t port_,
                                               struct wire_cst_list_prim_u_8_strict *uri);
 
-void frbgen_payjoin_flutter_wire_Url_from_str(int64_t port_,
+void frbgen_payjoin_flutter_wire_url_from_str(int64_t port_,
                                               struct wire_cst_list_prim_u_8_strict *url);
 
-void frbgen_payjoin_flutter_wire_Url_query(int64_t port_, struct wire_cst_url *that);
+void frbgen_payjoin_flutter_wire_url_query(int64_t port_, struct wire_cst_url *that);
 
 void frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_Arcpayjoin_ffireceivev1MaybeInputsOwned(const void *ptr);
 
@@ -577,14 +572,6 @@ void frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_Arcpayjoi
 void frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_MutexOptionohttpClientResponse(const void *ptr);
 
 void frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_MutexOptionohttpClientResponse(const void *ptr);
-
-void frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockArcV2MaybeInputsOwned(const void *ptr);
-
-void frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockArcV2MaybeInputsOwned(const void *ptr);
-
-void frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockArcV2MaybeInputsSeen(const void *ptr);
-
-void frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockArcV2MaybeInputsSeen(const void *ptr);
 
 void frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_payjoin_ffireceivev1UncheckedProposal(const void *ptr);
 
@@ -721,8 +708,6 @@ static int64_t dummy_method_to_enforce_bundling(void) {
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffiuriUri);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffiuriUrl);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_MutexOptionohttpClientResponse);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockArcV2MaybeInputsOwned);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockArcV2MaybeInputsSeen);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_payjoin_ffireceivev1UncheckedProposal);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_payjoin_ffireceivev2Enroller);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_payjoin_ffireceivev2V2UncheckedProposal);
@@ -746,72 +731,68 @@ static int64_t dummy_method_to_enforce_bundling(void) {
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_Arcpayjoin_ffiuriUri);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_Arcpayjoin_ffiuriUrl);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_MutexOptionohttpClientResponse);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockArcV2MaybeInputsOwned);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockArcV2MaybeInputsSeen);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_payjoin_ffireceivev1UncheckedProposal);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_payjoin_ffireceivev2Enroller);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_payjoin_ffireceivev2V2UncheckedProposal);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_ContextV1_process_response);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_ContextV2_process_response);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_Enrolled_extract_req);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_Enrolled_fallback_target);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_Enrolled_process_res);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_Enrolled_subdirectory);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_Enroller_extract_req);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_Enroller_from_relay_config);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_Enroller_payjoin_subdir);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_Enroller_process_res);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_Enroller_subdirectory);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_Headers_from_vec);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_MaybeInputsOwned_check_inputs_not_owned);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_MaybeInputsSeen_check_no_inputs_seen_before);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_MaybeMixedInputScripts_check_no_mixed_input_scripts);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_OutputsUnknown_identify_receiver_outputs);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_PayjoinProposal_is_output_substitution_disabled);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_PayjoinProposal_owned_vouts);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_PayjoinProposal_psbt);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_PayjoinProposal_utxos_to_be_locked);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_ProvisionalProposal_contribute_non_witness_input);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_ProvisionalProposal_contribute_witness_input);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_ProvisionalProposal_finalize_proposal);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_ProvisionalProposal_substitute_output_address);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_ProvisionalProposal_try_preserving_privacy);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_RequestBuilder_always_disable_output_substitution);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_RequestBuilder_build_non_incentivizing);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_RequestBuilder_build_recommended);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_RequestBuilder_build_with_additional_fee);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_RequestBuilder_from_psbt_and_uri);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_RequestBuilder_new);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_RequestContext_extract_v1);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_RequestContext_extract_v2);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_UncheckedProposal_assume_interactive_receiver);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_UncheckedProposal_check_broadcast_suitability);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_UncheckedProposal_extract_tx_to_schedule_broadcast);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_UncheckedProposal_from_request);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_Uri_address);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_Uri_amount);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_Uri_from_str);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_Url_from_str);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_Url_query);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_V2MaybeInputsOwned_check_inputs_not_owned);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_V2MaybeInputsSeen_check_no_inputs_seen_before);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_V2MaybeMixedInputScripts_check_no_mixed_input_scripts);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_V2OutputsUnknown_identify_receiver_outputs);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_V2PayjoinProposal_deserialize_res);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_V2PayjoinProposal_extract_v1_req);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_V2PayjoinProposal_extract_v2_req);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_V2PayjoinProposal_is_output_substitution_disabled);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_V2PayjoinProposal_owned_vouts);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_V2PayjoinProposal_psbt);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_V2PayjoinProposal_utxos_to_be_locked);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_V2ProvisionalProposal_contribute_non_witness_input);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_V2ProvisionalProposal_contribute_witness_input);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_V2ProvisionalProposal_finalize_proposal);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_V2ProvisionalProposal_substitute_output_address);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_V2ProvisionalProposal_try_preserving_privacy);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_V2UncheckedProposal_assume_interactive_receiver);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_V2UncheckedProposal_check_broadcast_suitability);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_V2UncheckedProposal_extract_tx_to_schedule_broadcast);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_context_v_1_process_response);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_context_v_2_process_response);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_enrolled_extract_req);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_enrolled_fallback_target);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_enrolled_process_res);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_enrolled_subdirectory);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_enroller_extract_req);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_enroller_from_relay_config);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_enroller_payjoin_subdir);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_enroller_process_res);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_enroller_subdirectory);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_maybe_inputs_owned_check_inputs_not_owned);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_maybe_inputs_seen_check_no_inputs_seen_before);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_maybe_mixed_input_scripts_check_no_mixed_input_scripts);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_outputs_unknown_identify_receiver_outputs);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_payjoin_proposal_is_output_substitution_disabled);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_payjoin_proposal_owned_vouts);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_payjoin_proposal_psbt);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_payjoin_proposal_utxos_to_be_locked);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_provisional_proposal_contribute_non_witness_input);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_provisional_proposal_contribute_witness_input);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_provisional_proposal_finalize_proposal);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_provisional_proposal_substitute_output_address);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_provisional_proposal_try_preserving_privacy);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_request_builder_always_disable_output_substitution);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_request_builder_build_non_incentivizing);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_request_builder_build_recommended);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_request_builder_build_with_additional_fee);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_request_builder_from_psbt_and_uri);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_request_context_extract_v1);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_request_context_extract_v2);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_unchecked_proposal_assume_interactive_receiver);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_unchecked_proposal_check_broadcast_suitability);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_unchecked_proposal_extract_tx_to_schedule_broadcast);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_unchecked_proposal_from_request);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_uri_address);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_uri_amount);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_uri_from_str);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_url_from_str);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_url_query);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_v_2_maybe_inputs_owned_check_inputs_not_owned);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_v_2_maybe_inputs_seen_check_no_inputs_seen_before);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_v_2_maybe_mixed_input_scripts_check_no_mixed_input_scripts);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_v_2_outputs_unknown_identify_receiver_outputs);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_v_2_payjoin_proposal_deserialize_res);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_v_2_payjoin_proposal_extract_v1_req);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_v_2_payjoin_proposal_extract_v2_req);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_v_2_payjoin_proposal_is_output_substitution_disabled);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_v_2_payjoin_proposal_owned_vouts);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_v_2_payjoin_proposal_psbt);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_v_2_payjoin_proposal_utxos_to_be_locked);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_v_2_provisional_proposal_contribute_non_witness_input);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_v_2_provisional_proposal_contribute_witness_input);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_v_2_provisional_proposal_finalize_proposal);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_v_2_provisional_proposal_substitute_output_address);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_v_2_provisional_proposal_try_preserving_privacy);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_v_2_unchecked_proposal_assume_interactive_receiver);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_v_2_unchecked_proposal_check_broadcast_suitability);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_v_2_unchecked_proposal_extract_tx_to_schedule_broadcast);
     dummy_var ^= ((int64_t) (void*) store_dart_post_cobject);
     return dummy_var;
 }
