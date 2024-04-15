@@ -1,14 +1,16 @@
 import 'package:flutter/cupertino.dart';
-import 'package:payjoin_flutter/payjoin.dart';
+import 'package:payjoin_flutter/common.dart';
+import 'package:payjoin_flutter/receive/v1.dart' as v1;
+import 'package:payjoin_flutter/uri.dart' as uri;
 
 class PayjoinLibrary {
-  static const PJ_URL = "https://localhost:8088";
-  static const OH_RELAY = "https://localhost:8088";
-  static const LOCAL_CERT_FILE = "localhost.der";
-  Future<Uri> buildPjUri(double amount, String address, String pj) async {
+  static const pjUrl = "https://localhost:8088";
+  static const ohRelay = "https://localhost:8088";
+  static const localCertFile = "localhost.der";
+  Future<uri.Uri> buildPjUri(double amount, String address, String pj) async {
     try {
       final pjUri = "bitcoin:$address?amount=${amount / 100000000.0}&pj=$pj";
-      return await Uri.fromStr(uri: pjUri);
+      return await uri.Uri.fromString(pjUri);
     } catch (e) {
       debugPrint(e.toString());
       rethrow;
@@ -16,16 +18,16 @@ class PayjoinLibrary {
   }
 
   handlePjRequest(Request req, Headers headers) async {
-    final proposal = await UncheckedProposal.fromRequest(
+    final _ = await v1.UncheckedProposal.fromRequest(
         body: req.body.toList(),
         query: (await req.url.query())!,
         headers: headers);
   }
 
-  handleProposal(UncheckedProposal proposal) async {
+  handleProposal(v1.UncheckedProposal proposal) async {
     try {
       final _ = await proposal.extractTxToScheduleBroadcast();
-    } on PayjoinError catch (e) {
+    } on Exception catch (e) {
       debugPrint(e.toString());
     }
   }
