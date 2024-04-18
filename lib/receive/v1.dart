@@ -46,7 +46,7 @@ class UncheckedProposal extends receive.UncheckedProposal {
       hint}) async {
     try {
       final res = await receive.UncheckedProposal.checkBroadcastSuitability(
-          minFeeRate: minFeeRate, canBroadcast: canBroadcast, ptr: super);
+          minFeeRate: minFeeRate, canBroadcast: canBroadcast, ptr: this);
       return MaybeInputsOwned._(field0: res.field0);
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
@@ -59,7 +59,7 @@ class UncheckedProposal extends receive.UncheckedProposal {
   Future<receive.MaybeInputsOwned> assumeInteractiveReceiver() async {
     try {
       final res =
-          await receive.UncheckedProposal.assumeInteractiveReceiver(ptr: super);
+          await receive.UncheckedProposal.assumeInteractiveReceiver(ptr: this);
       return MaybeInputsOwned._(field0: res.field0);
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
@@ -73,7 +73,7 @@ class MaybeInputsOwned extends receive.MaybeInputsOwned {
       {required FutureOr<bool> Function(Uint8List) isOwned}) async {
     try {
       final res = await receive.MaybeInputsOwned.checkInputsNotOwned(
-          ptr: super, isOwned: isOwned);
+          ptr: this, isOwned: isOwned);
       return MaybeMixedInputScripts._(field0: res.field0);
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
@@ -90,7 +90,7 @@ class MaybeMixedInputScripts extends receive.MaybeMixedInputScripts {
   Future<MaybeInputsSeen> checkNoMixedInputScripts() async {
     try {
       final res = await receive.MaybeMixedInputScripts.checkNoMixedInputScripts(
-          ptr: super);
+          ptr: this);
       return MaybeInputsSeen._(field0: res.field0);
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
@@ -105,7 +105,7 @@ class MaybeInputsSeen extends receive.MaybeInputsSeen {
       required FutureOr<bool> Function(OutPoint) isKnown}) async {
     try {
       final res = await receive.MaybeInputsSeen.checkNoInputsSeenBefore(
-          ptr: super, isKnown: isKnown);
+          ptr: this, isKnown: isKnown);
       return OutputsUnknown._(field0: res.field0);
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
@@ -119,7 +119,7 @@ class OutputsUnknown extends receive.OutputsUnknown {
       {required Future<bool> Function(Uint8List) isReceiverOutput}) async {
     try {
       final res = await receive.OutputsUnknown.identifyReceiverOutputs(
-          ptr: super, isReceiverOutput: isReceiverOutput);
+          ptr: this, isReceiverOutput: isReceiverOutput);
       return ProvisionalProposal._(field0: res.field0);
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
@@ -180,7 +180,7 @@ class ProvisionalProposal extends receive.ProvisionalProposal {
       final res = await receive.ProvisionalProposal.finalizeProposal(
           processPsbt: processPsbt,
           minFeerateSatPerVb: minFeeRateSatPerVb,
-          ptr: super);
+          ptr: this);
       return PayjoinProposal._(field0: res.field0);
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
