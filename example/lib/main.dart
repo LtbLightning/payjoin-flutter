@@ -1,4 +1,6 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:payjoin_flutter_example/payjoin_library.dart';
 
 void main() async {
   runApp(const MyApp());
@@ -12,9 +14,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  // BdkLibrary lib = BdkLibrary();
-  // late Wallet aliceWallet;
-  // Blockchain? blockchain;
+  PayjoinLibrary payJoinLibrary = PayjoinLibrary();
   @override
   void initState() {
     super.initState();
@@ -35,11 +35,13 @@ class _MyAppState extends State<MyApp> {
               children: [
                 TextButton(
                     onPressed: () async {
-                      // final uri = await buildPjUri(10000000,
-                      //     "https://testnet.demo.btcpayserver.org/BTC/pj");
-                      // if (kDebugMode) {
-                      //   print(await uri.address());
-                      // }
+                      final uri = await payJoinLibrary.buildPjUri(
+                          10000000,
+                          "32iVBEu4dxkUQk9dJbZUiBiQdmypcEyJRf",
+                          "https://testnet.demo.btcpayserver.org/BTC/pj");
+                      if (kDebugMode) {
+                        print(await uri.address());
+                      }
                     },
                     child: const Text("Build PjUri"))
               ],
