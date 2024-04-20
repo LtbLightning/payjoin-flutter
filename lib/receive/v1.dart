@@ -101,8 +101,7 @@ class MaybeMixedInputScripts extends receive.MaybeMixedInputScripts {
 class MaybeInputsSeen extends receive.MaybeInputsSeen {
   MaybeInputsSeen._({required super.field0});
   Future<OutputsUnknown> checkNoInputsSeenBefore(
-      {required MaybeInputsSeen ptr,
-      required FutureOr<bool> Function(OutPoint) isKnown}) async {
+      {required FutureOr<bool> Function(OutPoint) isKnown}) async {
     try {
       final res = await receive.MaybeInputsSeen.checkNoInputsSeenBefore(
           ptr: this, isKnown: isKnown);
@@ -115,7 +114,7 @@ class MaybeInputsSeen extends receive.MaybeInputsSeen {
 
 class OutputsUnknown extends receive.OutputsUnknown {
   OutputsUnknown._({required super.field0});
-  Future<ProvisionalProposal> checkNoInputsSeenBefore(
+  Future<ProvisionalProposal> identifyReceiverOutputs(
       {required Future<bool> Function(Uint8List) isReceiverOutput}) async {
     try {
       final res = await receive.OutputsUnknown.identifyReceiverOutputs(
