@@ -157,7 +157,7 @@ class ProvisionalProposal extends receive.ProvisionalProposal {
     }
   }
 
-  /// Select receiver input such that the common.dart avoids surveillance. Return the input chosen that has been applied to the Proposal.
+  /// Select receiver input such that the payJoin avoids surveillance. Return the input chosen that has been applied to the Proposal.
   ///
   /// Proper coin selection allows common.dart to resemble ordinary transactions. To ensure the resemblance, a number of heuristics must be avoided.
   ///
