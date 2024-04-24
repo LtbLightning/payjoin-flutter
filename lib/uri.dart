@@ -57,4 +57,13 @@ class Url extends generated.Url {
       throw mapPayjoinError(e);
     }
   }
+
+  @override
+  Future<String> asString({hint}) {
+    try {
+      return super.asString();
+    } on error.PayjoinError catch (e) {
+      throw mapPayjoinError(e);
+    }
+  }
 }

@@ -24,6 +24,9 @@ impl Url {
     pub fn query(&self) -> Option<String> {
         self.0.query()
     }
+    pub fn as_string(&self) -> String {
+        self.0.as_string()
+    }
 }
 
 pub struct Uri(pub RustOpaque<Arc<payjoin_ffi::uri::Uri>>);
