@@ -1,5 +1,6 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:payjoin_flutter_example/btc_client.dart';
 import 'package:payjoin_flutter_example/payjoin_library.dart';
 
 void main() async {
@@ -14,7 +15,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  PayjoinLibrary payJoinLibrary = PayjoinLibrary();
   @override
   void initState() {
     super.initState();
@@ -22,31 +22,150 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Payjoin Example App'),
-        ),
-        body: SingleChildScrollView(
-          child: Container(
-            padding: const EdgeInsets.all(10),
-            child: Column(
-              children: [
-                TextButton(
-                    onPressed: () async {
-                      final uri = await payJoinLibrary.buildPjUri(
-                          10000000,
-                          "32iVBEu4dxkUQk9dJbZUiBiQdmypcEyJRf",
-                          "https://testnet.demo.btcpayserver.org/BTC/pj");
-                      if (kDebugMode) {
-                        print(await uri.address());
-                      }
-                    },
-                    child: const Text("Build PjUri"))
-              ],
+    return const MaterialApp(
+        debugShowCheckedModeBanner: false, home: PayJoin());
+  }
+}
+
+class PayJoin extends StatefulWidget {
+  const PayJoin({super.key});
+
+  @override
+  State<PayJoin> createState() => _PayJoinState();
+}
+
+class _PayJoinState extends State<PayJoin> {
+  static const primaryColor = 0xffC71585;
+  PayJoinLibrary payJoinLibrary = PayJoinLibrary();
+  BtcClient senderRpc = BtcClient("sender");
+  BtcClient receiverRpc = BtcClient("receiver");
+
+  String displayText = "";
+  String pjUri = "";
+  String senderPsbt = "";
+  String processedAndFinalizedPsbt = "";
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: const Color(primaryColor),
+        elevation: 0,
+        centerTitle: false,
+        title: Text('PayJoin App',
+            style: GoogleFonts.ibmPlexMono(
+                fontWeight: FontWeight.w900,
+                fontSize: 18,
+                color: Colors.white)), // Set this heigh
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              margin: const EdgeInsets.only(bottom: 50),
+              padding: const EdgeInsets.only(left: 15, right: 15, bottom: 20),
+              color: const Color(primaryColor),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text("Response: ",
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.manrope(
+                          color: Colors.white,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w700)),
+                  Expanded(
+                    child: SelectableText(
+                      displayText,
+                      maxLines: 3,
+                      textAlign: TextAlign.start,
+                      style: GoogleFonts.ibmPlexMono(
+                          color: Colors.white,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w700),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
+            TextButton(
+                onPressed: () async {
+                  await senderRpc.loadWallet();
+                  await receiverRpc.loadWallet();
+                },
+                child: Text(
+                  "Init Sender & Receiver",
+                  style: GoogleFonts.manrope(
+                      color: Colors.black,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w800),
+                )),
+            TextButton(
+                onPressed: () async {
+                  final address = await receiverRpc.getNewAddress();
+                  final res = await payJoinLibrary.buildPjUri(150.0, address);
+                  setState(() {
+                    pjUri = res;
+                    displayText = res;
+                  });
+                },
+                child: Text(
+                  "Build Receiver pj Uri",
+                  style: GoogleFonts.manrope(
+                      color: Colors.black,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w800),
+                )),
+            TextButton(
+                onPressed: () async {
+                  final balance = await senderRpc.getBalance();
+                  debugPrint("Sender Balance: ${balance.toString()}");
+                  final psbt = (await senderRpc.walletCreateFundedPsbt(
+                      pjUri, 2))["psbt"];
+                  debugPrint(
+                    "\nOriginal sender psbt: ${psbt}",
+                  );
+                  setState(() {
+                    senderPsbt = psbt;
+                  });
+                },
+                child: Text(
+                  "Create Sender psbt using receiver pjUri",
+                  style: GoogleFonts.manrope(
+                      color: Colors.black,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w800),
+                )),
+            TextButton(
+                onPressed: () async {
+                  final psbt = await payJoinLibrary.handlePjRequest(
+                      senderPsbt, pjUri, 1, receiverRpc);
+                  debugPrint("\n Original receiver psbt: $psbt");
+                  setState(() {
+                    processedAndFinalizedPsbt = psbt;
+                  });
+                },
+                child: Text(
+                  "Process and finalize receiver Pj request",
+                  style: GoogleFonts.manrope(
+                      color: Colors.black,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w800),
+                )),
+            TextButton(
+                onPressed: () async {
+                  final res = await senderRpc
+                      .sendRawTransaction(processedAndFinalizedPsbt);
+                  debugPrint("Broadcast success: $res");
+                },
+                child: Text(
+                  "Broadcast processed psbt",
+                  style: GoogleFonts.manrope(
+                      color: Colors.black,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w800),
+                ))
+          ],
         ),
       ),
     );
