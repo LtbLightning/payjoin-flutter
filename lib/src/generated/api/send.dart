@@ -207,13 +207,16 @@ class RequestContext {
     required this.field0,
   });
 
-  Future<RequestContextV1> extractV1({dynamic hint}) =>
-      PayjoinCore.instance.api.requestContextExtractV1(that: this, hint: hint);
+  static Future<RequestContextV1> extractV1(
+          {required RequestContext ptr, dynamic hint}) =>
+      PayjoinCore.instance.api.requestContextExtractV1(ptr: ptr, hint: hint);
 
-  Future<RequestContextV2> extractV2(
-          {required String ohttpProxyUrl, dynamic hint}) =>
+  static Future<RequestContextV2> extractV2(
+          {required RequestContext ptr,
+          required String ohttpProxyUrl,
+          dynamic hint}) =>
       PayjoinCore.instance.api.requestContextExtractV2(
-          that: this, ohttpProxyUrl: ohttpProxyUrl, hint: hint);
+          ptr: ptr, ohttpProxyUrl: ohttpProxyUrl, hint: hint);
 
   @override
   int get hashCode => field0.hashCode;

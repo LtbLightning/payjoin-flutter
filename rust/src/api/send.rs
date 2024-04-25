@@ -88,14 +88,14 @@ impl From<RequestContext> for payjoin_ffi::send::v1::RequestContext {
     }
 }
 impl RequestContext {
-    pub fn extract_v1(&self) -> Result<RequestContextV1, PayjoinError> {
-        match self.0.extract_v1() {
+    pub fn extract_v1(ptr: Self) -> Result<RequestContextV1, PayjoinError> {
+        match ptr.0.extract_v1() {
             Ok(e) => Ok(e.into()),
             Err(e) => Err(e.into()),
         }
     }
-    pub fn extract_v2(&self, ohttp_proxy_url: String) -> Result<RequestContextV2, PayjoinError> {
-        match self.0.extract_v2(ohttp_proxy_url) {
+    pub fn extract_v2(ptr: Self, ohttp_proxy_url: String) -> Result<RequestContextV2, PayjoinError> {
+        match ptr.0.extract_v2(ohttp_proxy_url) {
             Ok(e) => Ok(e.into()),
             Err(e) => Err(e.into()),
         }

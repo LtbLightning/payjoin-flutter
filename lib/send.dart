@@ -77,9 +77,9 @@ class RequestContext extends send.RequestContext {
 
   Future<(common.Request, ContextV1)> extractContextV1() async {
     try {
-      final res = await super.extractV1();
+      final res = await send.RequestContext.extractV1(ptr: this);
       final request = common.Request(
-          await Url.fromString((await res.request.$1.query())!),
+          await Url.fromString((await res.request.$1.asString())),
           res.request.$2);
       return (request, ContextV1._(field0: res.contextV1.field0));
     } on error.PayjoinError catch (e) {
@@ -90,9 +90,10 @@ class RequestContext extends send.RequestContext {
   Future<(common.Request, ContextV2)> extractContextV2(
       String ohttpProxyUrl) async {
     try {
-      final res = await super.extractV2(ohttpProxyUrl: ohttpProxyUrl);
+      final res = await send.RequestContext.extractV2(
+          ohttpProxyUrl: ohttpProxyUrl, ptr: this);
       final request = common.Request(
-          await Url.fromString((await res.request.$1.query())!),
+          await Url.fromString((await res.request.$1.asString())),
           res.request.$2);
       return (request, ContextV2._(field0: res.contextV2.field0));
     } on error.PayjoinError catch (e) {
