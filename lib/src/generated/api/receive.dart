@@ -390,8 +390,9 @@ class Enrolled {
     required this.field0,
   });
 
-  Future<((Url, Uint8List), ClientResponse)> extractReq({dynamic hint}) =>
-      PayjoinCore.instance.api.enrolledExtractReq(that: this, hint: hint);
+  static Future<((Url, Uint8List), ClientResponse)> extractReq(
+          {required Enrolled ptr, dynamic hint}) =>
+      PayjoinCore.instance.api.enrolledExtractReq(ptr: ptr, hint: hint);
 
   Future<String> fallbackTarget({dynamic hint}) =>
       PayjoinCore.instance.api.enrolledFallbackTarget(that: this, hint: hint);
@@ -424,8 +425,9 @@ class Enroller {
     required this.field0,
   });
 
-  Future<((Url, Uint8List), ClientResponse)> extractReq({dynamic hint}) =>
-      PayjoinCore.instance.api.enrollerExtractReq(that: this, hint: hint);
+  static Future<((Url, Uint8List), ClientResponse)> extractReq(
+          {required Enroller ptr, dynamic hint}) =>
+      PayjoinCore.instance.api.enrollerExtractReq(ptr: ptr, hint: hint);
 
   static Future<Enroller> fromRelayConfig(
           {required String relayUrl,
@@ -819,9 +821,10 @@ class V2PayjoinProposal {
   Future<String> extractV1Req({dynamic hint}) => PayjoinCore.instance.api
       .v2PayjoinProposalExtractV1Req(that: this, hint: hint);
 
-  Future<((Url, Uint8List), ClientResponse)> extractV2Req({dynamic hint}) =>
+  static Future<((Url, Uint8List), ClientResponse)> extractV2Req(
+          {required V2PayjoinProposal ptr, dynamic hint}) =>
       PayjoinCore.instance.api
-          .v2PayjoinProposalExtractV2Req(that: this, hint: hint);
+          .v2PayjoinProposalExtractV2Req(ptr: ptr, hint: hint);
 
   Future<bool> isOutputSubstitutionDisabled({dynamic hint}) => PayjoinCore
       .instance.api

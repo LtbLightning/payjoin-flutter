@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
+import '../common.dart' as common;
 import '../common.dart';
 import '../src/exceptions.dart';
 import '../src/generated/api/receive.dart' as receive;
@@ -55,9 +56,9 @@ class Enroller extends receive.Enroller {
     }
   }
 
-  Future<(Request, ClientResponse)> extractRequest({hint}) async {
+  Future<(common.Request, ClientResponse)> extractRequest({hint}) async {
     try {
-      final res = await super.extractReq();
+      final res = await receive.Enroller.extractReq(ptr: this);
       final request = Request(
           await uri.Url.fromString((await res.$1.$1.query())!), res.$1.$2);
       return (request, ClientResponse._(field0: res.$2.field0));
@@ -69,9 +70,9 @@ class Enroller extends receive.Enroller {
 
 class Enrolled extends receive.Enrolled {
   Enrolled._({required super.field0});
-  Future<(Request, ClientResponse)> extractV2Request({hint}) async {
+  Future<(common.Request, ClientResponse)> extractRequest({hint}) async {
     try {
-      final res = await super.extractReq();
+      final res = await receive.Enrolled.extractReq(ptr: this);
       final request = Request(
           await uri.Url.fromString((await res.$1.$1.query())!), res.$1.$2);
       return (request, ClientResponse._(field0: res.$2.field0));
@@ -306,7 +307,7 @@ class PayjoinProposal extends receive.V2PayjoinProposal {
 
   Future<(Request, ClientResponse)> extractV2Request({hint}) async {
     try {
-      final res = await super.extractV2Req();
+      final res = await receive.V2PayjoinProposal.extractV2Req(ptr: this);
       final request = Request(
           await uri.Url.fromString((await res.$1.$1.query())!), res.$1.$2);
       return (request, ClientResponse._(field0: res.$2.field0));

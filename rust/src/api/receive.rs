@@ -266,8 +266,8 @@ impl Enroller {
     pub fn payjoin_subdir(&self) -> String {
         self.0.payjoin_subdir()
     }
-    pub fn extract_req(&self) -> Result<((Url, Vec<u8>), ClientResponse), PayjoinError> {
-        self.0
+    pub fn extract_req(ptr:Self) -> Result<((Url, Vec<u8>), ClientResponse), PayjoinError> {
+        ptr.0
             .extract_req_as_tuple()
             .map(|e|  (
                 ((*e.0.url).clone().into(), e.0.body),
@@ -301,8 +301,8 @@ impl Enrolled {
     pub fn fallback_target(&self) -> String {
         self.0.fallback_target()
     }
-    pub fn extract_req(&self) -> Result<((Url, Vec<u8>), ClientResponse), PayjoinError> {
-        self.0
+    pub fn extract_req(ptr:Self) -> Result<((Url, Vec<u8>), ClientResponse), PayjoinError> {
+        ptr.0
             .extract_req_as_tuple()
             .map(|e|  (
                 ((*e.0.url).clone().into(), e.0.body),
@@ -546,8 +546,8 @@ impl V2PayjoinProposal {
     pub fn extract_v1_req(&self) -> String {
         self.0.extract_v1_req()
     }
-    pub fn extract_v2_req(&self) -> Result<((Url, Vec<u8>), ClientResponse), PayjoinError> {
-       self.0.clone().extract_v2_req_as_tuple().map(|e|  (
+    pub fn extract_v2_req(ptr: Self) -> Result<((Url, Vec<u8>), ClientResponse), PayjoinError> {
+       ptr.0.clone().extract_v2_req_as_tuple().map(|e|  (
             ((*e.0.url).clone().into(), e.0.body),
             e.1.into(),
         ))
