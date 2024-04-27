@@ -1973,8 +1973,8 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
 class PayjoinCoreWire implements BaseWire {
   PayjoinCoreWire.fromExternalLibrary(ExternalLibrary lib);
 
-  void wire_enrolled_extract_req(NativePortType port_, List<dynamic> that) =>
-      wasmModule.wire_enrolled_extract_req(port_, that);
+  void wire_enrolled_extract_req(NativePortType port_, List<dynamic> ptr) =>
+      wasmModule.wire_enrolled_extract_req(port_, ptr);
 
   void wire_enrolled_fallback_target(
           NativePortType port_, List<dynamic> that) =>
@@ -1987,8 +1987,8 @@ class PayjoinCoreWire implements BaseWire {
   void wire_enrolled_subdirectory(NativePortType port_, List<dynamic> that) =>
       wasmModule.wire_enrolled_subdirectory(port_, that);
 
-  void wire_enroller_extract_req(NativePortType port_, List<dynamic> that) =>
-      wasmModule.wire_enroller_extract_req(port_, that);
+  void wire_enroller_extract_req(NativePortType port_, List<dynamic> ptr) =>
+      wasmModule.wire_enroller_extract_req(port_, ptr);
 
   void wire_enroller_from_relay_config(NativePortType port_, String relay_url,
           String ohttp_config_base64, String ohttp_proxy_url) =>
@@ -2126,8 +2126,8 @@ class PayjoinCoreWire implements BaseWire {
       wasmModule.wire_v_2_payjoin_proposal_extract_v1_req(port_, that);
 
   void wire_v_2_payjoin_proposal_extract_v2_req(
-          NativePortType port_, List<dynamic> that) =>
-      wasmModule.wire_v_2_payjoin_proposal_extract_v2_req(port_, that);
+          NativePortType port_, List<dynamic> ptr) =>
+      wasmModule.wire_v_2_payjoin_proposal_extract_v2_req(port_, ptr);
 
   void wire_v_2_payjoin_proposal_is_output_substitution_disabled(
           NativePortType port_, List<dynamic> that) =>
@@ -2243,12 +2243,12 @@ class PayjoinCoreWire implements BaseWire {
           port_, psbt_base64, uri);
 
   void wire_request_context_extract_v1(
-          NativePortType port_, List<dynamic> that) =>
-      wasmModule.wire_request_context_extract_v1(port_, that);
+          NativePortType port_, List<dynamic> ptr) =>
+      wasmModule.wire_request_context_extract_v1(port_, ptr);
 
   void wire_request_context_extract_v2(
-          NativePortType port_, List<dynamic> that, String ohttp_proxy_url) =>
-      wasmModule.wire_request_context_extract_v2(port_, that, ohttp_proxy_url);
+          NativePortType port_, List<dynamic> ptr, String ohttp_proxy_url) =>
+      wasmModule.wire_request_context_extract_v2(port_, ptr, ohttp_proxy_url);
 
   void wire_uri_address(NativePortType port_, List<dynamic> that) =>
       wasmModule.wire_uri_address(port_, that);
@@ -2258,6 +2258,9 @@ class PayjoinCoreWire implements BaseWire {
 
   void wire_uri_from_str(NativePortType port_, String uri) =>
       wasmModule.wire_uri_from_str(port_, uri);
+
+  void wire_url_as_string(NativePortType port_, List<dynamic> that) =>
+      wasmModule.wire_url_as_string(port_, that);
 
   void wire_url_from_str(NativePortType port_, String url) =>
       wasmModule.wire_url_from_str(port_, url);
@@ -2551,7 +2554,7 @@ class PayjoinCoreWasmModule implements WasmModule {
   external PayjoinCoreWasmModule bind(dynamic thisArg, String moduleName);
 
   external void wire_enrolled_extract_req(
-      NativePortType port_, List<dynamic> that);
+      NativePortType port_, List<dynamic> ptr);
 
   external void wire_enrolled_fallback_target(
       NativePortType port_, List<dynamic> that);
@@ -2563,7 +2566,7 @@ class PayjoinCoreWasmModule implements WasmModule {
       NativePortType port_, List<dynamic> that);
 
   external void wire_enroller_extract_req(
-      NativePortType port_, List<dynamic> that);
+      NativePortType port_, List<dynamic> ptr);
 
   external void wire_enroller_from_relay_config(NativePortType port_,
       String relay_url, String ohttp_config_base64, String ohttp_proxy_url);
@@ -2663,7 +2666,7 @@ class PayjoinCoreWasmModule implements WasmModule {
       NativePortType port_, List<dynamic> that);
 
   external void wire_v_2_payjoin_proposal_extract_v2_req(
-      NativePortType port_, List<dynamic> that);
+      NativePortType port_, List<dynamic> ptr);
 
   external void wire_v_2_payjoin_proposal_is_output_substitution_disabled(
       NativePortType port_, List<dynamic> that);
@@ -2740,16 +2743,18 @@ class PayjoinCoreWasmModule implements WasmModule {
       NativePortType port_, String psbt_base64, List<dynamic> uri);
 
   external void wire_request_context_extract_v1(
-      NativePortType port_, List<dynamic> that);
+      NativePortType port_, List<dynamic> ptr);
 
   external void wire_request_context_extract_v2(
-      NativePortType port_, List<dynamic> that, String ohttp_proxy_url);
+      NativePortType port_, List<dynamic> ptr, String ohttp_proxy_url);
 
   external void wire_uri_address(NativePortType port_, List<dynamic> that);
 
   external void wire_uri_amount(NativePortType port_, List<dynamic> that);
 
   external void wire_uri_from_str(NativePortType port_, String uri);
+
+  external void wire_url_as_string(NativePortType port_, List<dynamic> that);
 
   external void wire_url_from_str(NativePortType port_, String url);
 

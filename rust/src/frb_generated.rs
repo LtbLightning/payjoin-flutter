@@ -42,7 +42,7 @@ flutter_rust_bridge::frb_generated_default_handler!();
 
 fn wire_enrolled_extract_req_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
-    that: impl CstDecode<crate::api::receive::Enrolled>,
+    ptr: impl CstDecode<crate::api::receive::Enrolled>,
 ) {
     FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::DcoCodec, _, _>(
         flutter_rust_bridge::for_generated::TaskInfo {
@@ -51,10 +51,10 @@ fn wire_enrolled_extract_req_impl(
             mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
         },
         move || {
-            let api_that = that.cst_decode();
+            let api_ptr = ptr.cst_decode();
             move |context| {
                 transform_result_dco((move || {
-                    crate::api::receive::Enrolled::extract_req(&api_that)
+                    crate::api::receive::Enrolled::extract_req(api_ptr)
                 })())
             }
         },
@@ -126,7 +126,7 @@ fn wire_enrolled_subdirectory_impl(
 }
 fn wire_enroller_extract_req_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
-    that: impl CstDecode<crate::api::receive::Enroller>,
+    ptr: impl CstDecode<crate::api::receive::Enroller>,
 ) {
     FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::DcoCodec, _, _>(
         flutter_rust_bridge::for_generated::TaskInfo {
@@ -135,10 +135,10 @@ fn wire_enroller_extract_req_impl(
             mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
         },
         move || {
-            let api_that = that.cst_decode();
+            let api_ptr = ptr.cst_decode();
             move |context| {
                 transform_result_dco((move || {
-                    crate::api::receive::Enroller::extract_req(&api_that)
+                    crate::api::receive::Enroller::extract_req(api_ptr)
                 })())
             }
         },
@@ -816,7 +816,7 @@ fn wire_v_2_payjoin_proposal_extract_v1_req_impl(
 }
 fn wire_v_2_payjoin_proposal_extract_v2_req_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
-    that: impl CstDecode<crate::api::receive::V2PayjoinProposal>,
+    ptr: impl CstDecode<crate::api::receive::V2PayjoinProposal>,
 ) {
     FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::DcoCodec, _, _>(
         flutter_rust_bridge::for_generated::TaskInfo {
@@ -825,10 +825,10 @@ fn wire_v_2_payjoin_proposal_extract_v2_req_impl(
             mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
         },
         move || {
-            let api_that = that.cst_decode();
+            let api_ptr = ptr.cst_decode();
             move |context| {
                 transform_result_dco((move || {
-                    crate::api::receive::V2PayjoinProposal::extract_v2_req(&api_that)
+                    crate::api::receive::V2PayjoinProposal::extract_v2_req(api_ptr)
                 })())
             }
         },
@@ -1305,7 +1305,7 @@ fn wire_request_builder_from_psbt_and_uri_impl(
 }
 fn wire_request_context_extract_v1_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
-    that: impl CstDecode<crate::api::send::RequestContext>,
+    ptr: impl CstDecode<crate::api::send::RequestContext>,
 ) {
     FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::DcoCodec, _, _>(
         flutter_rust_bridge::for_generated::TaskInfo {
@@ -1314,10 +1314,10 @@ fn wire_request_context_extract_v1_impl(
             mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
         },
         move || {
-            let api_that = that.cst_decode();
+            let api_ptr = ptr.cst_decode();
             move |context| {
                 transform_result_dco((move || {
-                    crate::api::send::RequestContext::extract_v1(&api_that)
+                    crate::api::send::RequestContext::extract_v1(api_ptr)
                 })())
             }
         },
@@ -1325,7 +1325,7 @@ fn wire_request_context_extract_v1_impl(
 }
 fn wire_request_context_extract_v2_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
-    that: impl CstDecode<crate::api::send::RequestContext>,
+    ptr: impl CstDecode<crate::api::send::RequestContext>,
     ohttp_proxy_url: impl CstDecode<String>,
 ) {
     FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::DcoCodec, _, _>(
@@ -1335,11 +1335,11 @@ fn wire_request_context_extract_v2_impl(
             mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
         },
         move || {
-            let api_that = that.cst_decode();
+            let api_ptr = ptr.cst_decode();
             let api_ohttp_proxy_url = ohttp_proxy_url.cst_decode();
             move |context| {
                 transform_result_dco((move || {
-                    crate::api::send::RequestContext::extract_v2(&api_that, api_ohttp_proxy_url)
+                    crate::api::send::RequestContext::extract_v2(api_ptr, api_ohttp_proxy_url)
                 })())
             }
         },
@@ -1398,6 +1398,26 @@ fn wire_uri_from_str_impl(
         move || {
             let api_uri = uri.cst_decode();
             move |context| transform_result_dco((move || crate::api::uri::Uri::from_str(api_uri))())
+        },
+    )
+}
+fn wire_url_as_string_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    that: impl CstDecode<crate::api::uri::Url>,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::DcoCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "url_as_string",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let api_that = that.cst_decode();
+            move |context| {
+                transform_result_dco((move || {
+                    Result::<_, ()>::Ok(crate::api::uri::Url::as_string(&api_that))
+                })())
+            }
         },
     )
 }

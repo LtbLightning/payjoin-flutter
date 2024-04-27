@@ -1064,9 +1064,9 @@ impl CstDecode<usize> for flutter_rust_bridge::for_generated::wasm_bindgen::JsVa
 #[wasm_bindgen]
 pub fn wire_enrolled_extract_req(
     port_: flutter_rust_bridge::for_generated::MessagePort,
-    that: flutter_rust_bridge::for_generated::wasm_bindgen::JsValue,
+    ptr: flutter_rust_bridge::for_generated::wasm_bindgen::JsValue,
 ) {
-    wire_enrolled_extract_req_impl(port_, that)
+    wire_enrolled_extract_req_impl(port_, ptr)
 }
 
 #[wasm_bindgen]
@@ -1098,9 +1098,9 @@ pub fn wire_enrolled_subdirectory(
 #[wasm_bindgen]
 pub fn wire_enroller_extract_req(
     port_: flutter_rust_bridge::for_generated::MessagePort,
-    that: flutter_rust_bridge::for_generated::wasm_bindgen::JsValue,
+    ptr: flutter_rust_bridge::for_generated::wasm_bindgen::JsValue,
 ) {
-    wire_enroller_extract_req_impl(port_, that)
+    wire_enroller_extract_req_impl(port_, ptr)
 }
 
 #[wasm_bindgen]
@@ -1356,9 +1356,9 @@ pub fn wire_v_2_payjoin_proposal_extract_v1_req(
 #[wasm_bindgen]
 pub fn wire_v_2_payjoin_proposal_extract_v2_req(
     port_: flutter_rust_bridge::for_generated::MessagePort,
-    that: flutter_rust_bridge::for_generated::wasm_bindgen::JsValue,
+    ptr: flutter_rust_bridge::for_generated::wasm_bindgen::JsValue,
 ) {
-    wire_v_2_payjoin_proposal_extract_v2_req_impl(port_, that)
+    wire_v_2_payjoin_proposal_extract_v2_req_impl(port_, ptr)
 }
 
 #[wasm_bindgen]
@@ -1552,18 +1552,18 @@ pub fn wire_request_builder_from_psbt_and_uri(
 #[wasm_bindgen]
 pub fn wire_request_context_extract_v1(
     port_: flutter_rust_bridge::for_generated::MessagePort,
-    that: flutter_rust_bridge::for_generated::wasm_bindgen::JsValue,
+    ptr: flutter_rust_bridge::for_generated::wasm_bindgen::JsValue,
 ) {
-    wire_request_context_extract_v1_impl(port_, that)
+    wire_request_context_extract_v1_impl(port_, ptr)
 }
 
 #[wasm_bindgen]
 pub fn wire_request_context_extract_v2(
     port_: flutter_rust_bridge::for_generated::MessagePort,
-    that: flutter_rust_bridge::for_generated::wasm_bindgen::JsValue,
+    ptr: flutter_rust_bridge::for_generated::wasm_bindgen::JsValue,
     ohttp_proxy_url: String,
 ) {
-    wire_request_context_extract_v2_impl(port_, that, ohttp_proxy_url)
+    wire_request_context_extract_v2_impl(port_, ptr, ohttp_proxy_url)
 }
 
 #[wasm_bindgen]
@@ -1585,6 +1585,14 @@ pub fn wire_uri_amount(
 #[wasm_bindgen]
 pub fn wire_uri_from_str(port_: flutter_rust_bridge::for_generated::MessagePort, uri: String) {
     wire_uri_from_str_impl(port_, uri)
+}
+
+#[wasm_bindgen]
+pub fn wire_url_as_string(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    that: flutter_rust_bridge::for_generated::wasm_bindgen::JsValue,
+) {
+    wire_url_as_string_impl(port_, that)
 }
 
 #[wasm_bindgen]

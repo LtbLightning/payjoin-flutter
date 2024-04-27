@@ -273,8 +273,7 @@ typedef struct wire_cst_request_context_v_2 {
   struct wire_cst_context_v_2 context_v2;
 } wire_cst_request_context_v_2;
 
-void frbgen_payjoin_flutter_wire_enrolled_extract_req(int64_t port_,
-                                                      struct wire_cst_enrolled *that);
+void frbgen_payjoin_flutter_wire_enrolled_extract_req(int64_t port_, struct wire_cst_enrolled *ptr);
 
 void frbgen_payjoin_flutter_wire_enrolled_fallback_target(int64_t port_,
                                                           struct wire_cst_enrolled *that);
@@ -287,8 +286,7 @@ void frbgen_payjoin_flutter_wire_enrolled_process_res(int64_t port_,
 void frbgen_payjoin_flutter_wire_enrolled_subdirectory(int64_t port_,
                                                        struct wire_cst_enrolled *that);
 
-void frbgen_payjoin_flutter_wire_enroller_extract_req(int64_t port_,
-                                                      struct wire_cst_enroller *that);
+void frbgen_payjoin_flutter_wire_enroller_extract_req(int64_t port_, struct wire_cst_enroller *ptr);
 
 void frbgen_payjoin_flutter_wire_enroller_from_relay_config(int64_t port_,
                                                             struct wire_cst_list_prim_u_8_strict *relay_url,
@@ -396,7 +394,7 @@ void frbgen_payjoin_flutter_wire_v_2_payjoin_proposal_extract_v1_req(int64_t por
                                                                      struct wire_cst_v_2_payjoin_proposal *that);
 
 void frbgen_payjoin_flutter_wire_v_2_payjoin_proposal_extract_v2_req(int64_t port_,
-                                                                     struct wire_cst_v_2_payjoin_proposal *that);
+                                                                     struct wire_cst_v_2_payjoin_proposal *ptr);
 
 void frbgen_payjoin_flutter_wire_v_2_payjoin_proposal_is_output_substitution_disabled(int64_t port_,
                                                                                       struct wire_cst_v_2_payjoin_proposal *that);
@@ -475,10 +473,10 @@ void frbgen_payjoin_flutter_wire_request_builder_from_psbt_and_uri(int64_t port_
                                                                    struct wire_cst_uri *uri);
 
 void frbgen_payjoin_flutter_wire_request_context_extract_v1(int64_t port_,
-                                                            struct wire_cst_request_context *that);
+                                                            struct wire_cst_request_context *ptr);
 
 void frbgen_payjoin_flutter_wire_request_context_extract_v2(int64_t port_,
-                                                            struct wire_cst_request_context *that,
+                                                            struct wire_cst_request_context *ptr,
                                                             struct wire_cst_list_prim_u_8_strict *ohttp_proxy_url);
 
 void frbgen_payjoin_flutter_wire_uri_address(int64_t port_, struct wire_cst_uri *that);
@@ -487,6 +485,8 @@ void frbgen_payjoin_flutter_wire_uri_amount(int64_t port_, struct wire_cst_uri *
 
 void frbgen_payjoin_flutter_wire_uri_from_str(int64_t port_,
                                               struct wire_cst_list_prim_u_8_strict *uri);
+
+void frbgen_payjoin_flutter_wire_url_as_string(int64_t port_, struct wire_cst_url *that);
 
 void frbgen_payjoin_flutter_wire_url_from_str(int64_t port_,
                                               struct wire_cst_list_prim_u_8_strict *url);
@@ -772,6 +772,7 @@ static int64_t dummy_method_to_enforce_bundling(void) {
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_uri_address);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_uri_amount);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_uri_from_str);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_url_as_string);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_url_from_str);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_url_query);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire_v_2_maybe_inputs_owned_check_inputs_not_owned);

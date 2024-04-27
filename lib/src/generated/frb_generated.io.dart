@@ -2313,11 +2313,11 @@ class PayjoinCoreWire implements BaseWire {
 
   void wire_enrolled_extract_req(
     int port_,
-    ffi.Pointer<wire_cst_enrolled> that,
+    ffi.Pointer<wire_cst_enrolled> ptr,
   ) {
     return _wire_enrolled_extract_req(
       port_,
-      that,
+      ptr,
     );
   }
 
@@ -2394,11 +2394,11 @@ class PayjoinCoreWire implements BaseWire {
 
   void wire_enroller_extract_req(
     int port_,
-    ffi.Pointer<wire_cst_enroller> that,
+    ffi.Pointer<wire_cst_enroller> ptr,
   ) {
     return _wire_enroller_extract_req(
       port_,
-      that,
+      ptr,
     );
   }
 
@@ -3044,11 +3044,11 @@ class PayjoinCoreWire implements BaseWire {
 
   void wire_v_2_payjoin_proposal_extract_v2_req(
     int port_,
-    ffi.Pointer<wire_cst_v_2_payjoin_proposal> that,
+    ffi.Pointer<wire_cst_v_2_payjoin_proposal> ptr,
   ) {
     return _wire_v_2_payjoin_proposal_extract_v2_req(
       port_,
-      that,
+      ptr,
     );
   }
 
@@ -3503,11 +3503,11 @@ class PayjoinCoreWire implements BaseWire {
 
   void wire_request_context_extract_v1(
     int port_,
-    ffi.Pointer<wire_cst_request_context> that,
+    ffi.Pointer<wire_cst_request_context> ptr,
   ) {
     return _wire_request_context_extract_v1(
       port_,
-      that,
+      ptr,
     );
   }
 
@@ -3522,12 +3522,12 @@ class PayjoinCoreWire implements BaseWire {
 
   void wire_request_context_extract_v2(
     int port_,
-    ffi.Pointer<wire_cst_request_context> that,
+    ffi.Pointer<wire_cst_request_context> ptr,
     ffi.Pointer<wire_cst_list_prim_u_8_strict> ohttp_proxy_url,
   ) {
     return _wire_request_context_extract_v2(
       port_,
-      that,
+      ptr,
       ohttp_proxy_url,
     );
   }
@@ -3595,6 +3595,23 @@ class PayjoinCoreWire implements BaseWire {
       'frbgen_payjoin_flutter_wire_uri_from_str');
   late final _wire_uri_from_str = _wire_uri_from_strPtr.asFunction<
       void Function(int, ffi.Pointer<wire_cst_list_prim_u_8_strict>)>();
+
+  void wire_url_as_string(
+    int port_,
+    ffi.Pointer<wire_cst_url> that,
+  ) {
+    return _wire_url_as_string(
+      port_,
+      that,
+    );
+  }
+
+  late final _wire_url_as_stringPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Void Function(ffi.Int64, ffi.Pointer<wire_cst_url>)>>(
+      'frbgen_payjoin_flutter_wire_url_as_string');
+  late final _wire_url_as_string = _wire_url_as_stringPtr
+      .asFunction<void Function(int, ffi.Pointer<wire_cst_url>)>();
 
   void wire_url_from_str(
     int port_,

@@ -68,7 +68,7 @@ class PayjoinCore extends BaseEntrypoint<PayjoinCoreApi, PayjoinCoreApiImpl,
 
 abstract class PayjoinCoreApi extends BaseApi {
   Future<((Url, Uint8List), ClientResponse)> enrolledExtractReq(
-      {required Enrolled that, dynamic hint});
+      {required Enrolled ptr, dynamic hint});
 
   Future<String> enrolledFallbackTarget({required Enrolled that, dynamic hint});
 
@@ -82,7 +82,7 @@ abstract class PayjoinCoreApi extends BaseApi {
       {required Enrolled that, dynamic hint});
 
   Future<((Url, Uint8List), ClientResponse)> enrollerExtractReq(
-      {required Enroller that, dynamic hint});
+      {required Enroller ptr, dynamic hint});
 
   Future<Enroller> enrollerFromRelayConfig(
       {required String relayUrl,
@@ -204,7 +204,7 @@ abstract class PayjoinCoreApi extends BaseApi {
       {required V2PayjoinProposal that, dynamic hint});
 
   Future<((Url, Uint8List), ClientResponse)> v2PayjoinProposalExtractV2Req(
-      {required V2PayjoinProposal that, dynamic hint});
+      {required V2PayjoinProposal ptr, dynamic hint});
 
   Future<bool> v2PayjoinProposalIsOutputSubstitutionDisabled(
       {required V2PayjoinProposal that, dynamic hint});
@@ -285,10 +285,10 @@ abstract class PayjoinCoreApi extends BaseApi {
       {required String psbtBase64, required Uri uri, dynamic hint});
 
   Future<RequestContextV1> requestContextExtractV1(
-      {required RequestContext that, dynamic hint});
+      {required RequestContext ptr, dynamic hint});
 
   Future<RequestContextV2> requestContextExtractV2(
-      {required RequestContext that,
+      {required RequestContext ptr,
       required String ohttpProxyUrl,
       dynamic hint});
 
@@ -297,6 +297,8 @@ abstract class PayjoinCoreApi extends BaseApi {
   Future<int?> uriAmount({required Uri that, dynamic hint});
 
   Future<Uri> uriFromStr({required String uri, dynamic hint});
+
+  Future<String> urlAsString({required Url that, dynamic hint});
 
   Future<Url> urlFromStr({required String url, dynamic hint});
 
@@ -521,10 +523,10 @@ class PayjoinCoreApiImpl extends PayjoinCoreApiImplPlatform
 
   @override
   Future<((Url, Uint8List), ClientResponse)> enrolledExtractReq(
-      {required Enrolled that, dynamic hint}) {
+      {required Enrolled ptr, dynamic hint}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        var arg0 = cst_encode_box_autoadd_enrolled(that);
+        var arg0 = cst_encode_box_autoadd_enrolled(ptr);
         return wire.wire_enrolled_extract_req(port_, arg0);
       },
       codec: DcoCodec(
@@ -533,7 +535,7 @@ class PayjoinCoreApiImpl extends PayjoinCoreApiImplPlatform
         decodeErrorData: dco_decode_payjoin_error,
       ),
       constMeta: kEnrolledExtractReqConstMeta,
-      argValues: [that],
+      argValues: [ptr],
       apiImpl: this,
       hint: hint,
     ));
@@ -541,7 +543,7 @@ class PayjoinCoreApiImpl extends PayjoinCoreApiImplPlatform
 
   TaskConstMeta get kEnrolledExtractReqConstMeta => const TaskConstMeta(
         debugName: "enrolled_extract_req",
-        argNames: ["that"],
+        argNames: ["ptr"],
       );
 
   @override
@@ -623,10 +625,10 @@ class PayjoinCoreApiImpl extends PayjoinCoreApiImplPlatform
 
   @override
   Future<((Url, Uint8List), ClientResponse)> enrollerExtractReq(
-      {required Enroller that, dynamic hint}) {
+      {required Enroller ptr, dynamic hint}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        var arg0 = cst_encode_box_autoadd_enroller(that);
+        var arg0 = cst_encode_box_autoadd_enroller(ptr);
         return wire.wire_enroller_extract_req(port_, arg0);
       },
       codec: DcoCodec(
@@ -635,7 +637,7 @@ class PayjoinCoreApiImpl extends PayjoinCoreApiImplPlatform
         decodeErrorData: dco_decode_payjoin_error,
       ),
       constMeta: kEnrollerExtractReqConstMeta,
-      argValues: [that],
+      argValues: [ptr],
       apiImpl: this,
       hint: hint,
     ));
@@ -643,7 +645,7 @@ class PayjoinCoreApiImpl extends PayjoinCoreApiImplPlatform
 
   TaskConstMeta get kEnrollerExtractReqConstMeta => const TaskConstMeta(
         debugName: "enroller_extract_req",
-        argNames: ["that"],
+        argNames: ["ptr"],
       );
 
   @override
@@ -1406,10 +1408,10 @@ class PayjoinCoreApiImpl extends PayjoinCoreApiImplPlatform
 
   @override
   Future<((Url, Uint8List), ClientResponse)> v2PayjoinProposalExtractV2Req(
-      {required V2PayjoinProposal that, dynamic hint}) {
+      {required V2PayjoinProposal ptr, dynamic hint}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        var arg0 = cst_encode_box_autoadd_v_2_payjoin_proposal(that);
+        var arg0 = cst_encode_box_autoadd_v_2_payjoin_proposal(ptr);
         return wire.wire_v_2_payjoin_proposal_extract_v2_req(port_, arg0);
       },
       codec: DcoCodec(
@@ -1418,7 +1420,7 @@ class PayjoinCoreApiImpl extends PayjoinCoreApiImplPlatform
         decodeErrorData: dco_decode_payjoin_error,
       ),
       constMeta: kV2PayjoinProposalExtractV2ReqConstMeta,
-      argValues: [that],
+      argValues: [ptr],
       apiImpl: this,
       hint: hint,
     ));
@@ -1427,7 +1429,7 @@ class PayjoinCoreApiImpl extends PayjoinCoreApiImplPlatform
   TaskConstMeta get kV2PayjoinProposalExtractV2ReqConstMeta =>
       const TaskConstMeta(
         debugName: "v_2_payjoin_proposal_extract_v2_req",
-        argNames: ["that"],
+        argNames: ["ptr"],
       );
 
   @override
@@ -1969,10 +1971,10 @@ class PayjoinCoreApiImpl extends PayjoinCoreApiImplPlatform
 
   @override
   Future<RequestContextV1> requestContextExtractV1(
-      {required RequestContext that, dynamic hint}) {
+      {required RequestContext ptr, dynamic hint}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        var arg0 = cst_encode_box_autoadd_request_context(that);
+        var arg0 = cst_encode_box_autoadd_request_context(ptr);
         return wire.wire_request_context_extract_v1(port_, arg0);
       },
       codec: DcoCodec(
@@ -1980,7 +1982,7 @@ class PayjoinCoreApiImpl extends PayjoinCoreApiImplPlatform
         decodeErrorData: dco_decode_payjoin_error,
       ),
       constMeta: kRequestContextExtractV1ConstMeta,
-      argValues: [that],
+      argValues: [ptr],
       apiImpl: this,
       hint: hint,
     ));
@@ -1988,17 +1990,17 @@ class PayjoinCoreApiImpl extends PayjoinCoreApiImplPlatform
 
   TaskConstMeta get kRequestContextExtractV1ConstMeta => const TaskConstMeta(
         debugName: "request_context_extract_v1",
-        argNames: ["that"],
+        argNames: ["ptr"],
       );
 
   @override
   Future<RequestContextV2> requestContextExtractV2(
-      {required RequestContext that,
+      {required RequestContext ptr,
       required String ohttpProxyUrl,
       dynamic hint}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        var arg0 = cst_encode_box_autoadd_request_context(that);
+        var arg0 = cst_encode_box_autoadd_request_context(ptr);
         var arg1 = cst_encode_String(ohttpProxyUrl);
         return wire.wire_request_context_extract_v2(port_, arg0, arg1);
       },
@@ -2007,7 +2009,7 @@ class PayjoinCoreApiImpl extends PayjoinCoreApiImplPlatform
         decodeErrorData: dco_decode_payjoin_error,
       ),
       constMeta: kRequestContextExtractV2ConstMeta,
-      argValues: [that, ohttpProxyUrl],
+      argValues: [ptr, ohttpProxyUrl],
       apiImpl: this,
       hint: hint,
     ));
@@ -2015,7 +2017,7 @@ class PayjoinCoreApiImpl extends PayjoinCoreApiImplPlatform
 
   TaskConstMeta get kRequestContextExtractV2ConstMeta => const TaskConstMeta(
         debugName: "request_context_extract_v2",
-        argNames: ["that", "ohttpProxyUrl"],
+        argNames: ["ptr", "ohttpProxyUrl"],
       );
 
   @override
@@ -2085,6 +2087,29 @@ class PayjoinCoreApiImpl extends PayjoinCoreApiImplPlatform
   TaskConstMeta get kUriFromStrConstMeta => const TaskConstMeta(
         debugName: "uri_from_str",
         argNames: ["uri"],
+      );
+
+  @override
+  Future<String> urlAsString({required Url that, dynamic hint}) {
+    return handler.executeNormal(NormalTask(
+      callFfi: (port_) {
+        var arg0 = cst_encode_box_autoadd_url(that);
+        return wire.wire_url_as_string(port_, arg0);
+      },
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_String,
+        decodeErrorData: null,
+      ),
+      constMeta: kUrlAsStringConstMeta,
+      argValues: [that],
+      apiImpl: this,
+      hint: hint,
+    ));
+  }
+
+  TaskConstMeta get kUrlAsStringConstMeta => const TaskConstMeta(
+        debugName: "url_as_string",
+        argNames: ["that"],
       );
 
   @override

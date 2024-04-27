@@ -1181,9 +1181,9 @@ impl Default for wire_cst_v_2_unchecked_proposal {
 #[no_mangle]
 pub extern "C" fn frbgen_payjoin_flutter_wire_enrolled_extract_req(
     port_: i64,
-    that: *mut wire_cst_enrolled,
+    ptr: *mut wire_cst_enrolled,
 ) {
-    wire_enrolled_extract_req_impl(port_, that)
+    wire_enrolled_extract_req_impl(port_, ptr)
 }
 
 #[no_mangle]
@@ -1215,9 +1215,9 @@ pub extern "C" fn frbgen_payjoin_flutter_wire_enrolled_subdirectory(
 #[no_mangle]
 pub extern "C" fn frbgen_payjoin_flutter_wire_enroller_extract_req(
     port_: i64,
-    that: *mut wire_cst_enroller,
+    ptr: *mut wire_cst_enroller,
 ) {
-    wire_enroller_extract_req_impl(port_, that)
+    wire_enroller_extract_req_impl(port_, ptr)
 }
 
 #[no_mangle]
@@ -1473,9 +1473,9 @@ pub extern "C" fn frbgen_payjoin_flutter_wire_v_2_payjoin_proposal_extract_v1_re
 #[no_mangle]
 pub extern "C" fn frbgen_payjoin_flutter_wire_v_2_payjoin_proposal_extract_v2_req(
     port_: i64,
-    that: *mut wire_cst_v_2_payjoin_proposal,
+    ptr: *mut wire_cst_v_2_payjoin_proposal,
 ) {
-    wire_v_2_payjoin_proposal_extract_v2_req_impl(port_, that)
+    wire_v_2_payjoin_proposal_extract_v2_req_impl(port_, ptr)
 }
 
 #[no_mangle]
@@ -1669,18 +1669,18 @@ pub extern "C" fn frbgen_payjoin_flutter_wire_request_builder_from_psbt_and_uri(
 #[no_mangle]
 pub extern "C" fn frbgen_payjoin_flutter_wire_request_context_extract_v1(
     port_: i64,
-    that: *mut wire_cst_request_context,
+    ptr: *mut wire_cst_request_context,
 ) {
-    wire_request_context_extract_v1_impl(port_, that)
+    wire_request_context_extract_v1_impl(port_, ptr)
 }
 
 #[no_mangle]
 pub extern "C" fn frbgen_payjoin_flutter_wire_request_context_extract_v2(
     port_: i64,
-    that: *mut wire_cst_request_context,
+    ptr: *mut wire_cst_request_context,
     ohttp_proxy_url: *mut wire_cst_list_prim_u_8_strict,
 ) {
-    wire_request_context_extract_v2_impl(port_, that, ohttp_proxy_url)
+    wire_request_context_extract_v2_impl(port_, ptr, ohttp_proxy_url)
 }
 
 #[no_mangle]
@@ -1699,6 +1699,11 @@ pub extern "C" fn frbgen_payjoin_flutter_wire_uri_from_str(
     uri: *mut wire_cst_list_prim_u_8_strict,
 ) {
     wire_uri_from_str_impl(port_, uri)
+}
+
+#[no_mangle]
+pub extern "C" fn frbgen_payjoin_flutter_wire_url_as_string(port_: i64, that: *mut wire_cst_url) {
+    wire_url_as_string_impl(port_, that)
 }
 
 #[no_mangle]
