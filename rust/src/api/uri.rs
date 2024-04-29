@@ -52,8 +52,8 @@ impl Uri {
     pub fn address(&self) -> String {
         self.0.address()
     }
-    ///Gets the amount in satoshis.
-    pub fn amount(&self) -> Option<u64> {
+    ///Gets the amount in btc.
+    pub fn amount(&self) -> Option<f64> {
         self.0.amount()
     }
 }

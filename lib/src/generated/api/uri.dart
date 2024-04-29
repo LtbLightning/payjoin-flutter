@@ -19,8 +19,8 @@ class Uri {
   Future<String> address({dynamic hint}) =>
       PayjoinCore.instance.api.uriAddress(that: this, hint: hint);
 
-  ///Gets the amount in satoshis.
-  Future<int?> amount({dynamic hint}) =>
+  ///Gets the amount in btc.
+  Future<double?> amount({dynamic hint}) =>
       PayjoinCore.instance.api.uriAmount(that: this, hint: hint);
 
   static Future<Uri> fromStr({required String uri, dynamic hint}) =>

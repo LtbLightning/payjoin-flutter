@@ -19,7 +19,7 @@ class Uri extends generated.Uri {
 
   ///Gets the amount in satoshis.
   @override
-  Future<int?> amount({hint}) {
+  Future<double?> amount({hint}) {
     try {
       return super.amount();
     } on error.PayjoinError catch (e) {
