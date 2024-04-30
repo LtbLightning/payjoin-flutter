@@ -595,6 +595,8 @@ struct wire_cst_enrolled *frbgen_payjoin_flutter_cst_new_box_autoadd_enrolled(vo
 
 struct wire_cst_enroller *frbgen_payjoin_flutter_cst_new_box_autoadd_enroller(void);
 
+double *frbgen_payjoin_flutter_cst_new_box_autoadd_f_64(double value);
+
 struct wire_cst_headers *frbgen_payjoin_flutter_cst_new_box_autoadd_headers(void);
 
 struct wire_cst_maybe_inputs_owned *frbgen_payjoin_flutter_cst_new_box_autoadd_maybe_inputs_owned(void);
@@ -659,6 +661,7 @@ static int64_t dummy_method_to_enforce_bundling(void) {
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_cst_new_box_autoadd_context_v_2);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_cst_new_box_autoadd_enrolled);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_cst_new_box_autoadd_enroller);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_cst_new_box_autoadd_f_64);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_cst_new_box_autoadd_headers);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_cst_new_box_autoadd_maybe_inputs_owned);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_cst_new_box_autoadd_maybe_inputs_seen);

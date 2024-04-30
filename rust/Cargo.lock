@@ -1179,7 +1179,7 @@ dependencies = [
 [[package]]
 name = "payjoin_ffi"
 version = "0.13.0"
-source = "git+https://github.com/LtbLightning/payjoin-ffi?branch=v0.13#6639d6680235a7bc6732fdbe724b1f788c24de81"
+source = "git+https://github.com/LtbLightning/payjoin-ffi?branch=v0.13#e0c57c32fb8036d5eefc5c3b0a96b812e8805e42"
 dependencies = [
  "ohttp",
  "payjoin",

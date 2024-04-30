@@ -294,7 +294,7 @@ abstract class PayjoinCoreApi extends BaseApi {
 
   Future<String> uriAddress({required Uri that, dynamic hint});
 
-  Future<int?> uriAmount({required Uri that, dynamic hint});
+  Future<double?> uriAmount({required Uri that, dynamic hint});
 
   Future<Uri> uriFromStr({required String uri, dynamic hint});
 
@@ -2044,14 +2044,14 @@ class PayjoinCoreApiImpl extends PayjoinCoreApiImplPlatform
       );
 
   @override
-  Future<int?> uriAmount({required Uri that, dynamic hint}) {
+  Future<double?> uriAmount({required Uri that, dynamic hint}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
         var arg0 = cst_encode_box_autoadd_uri(that);
         return wire.wire_uri_amount(port_, arg0);
       },
       codec: DcoCodec(
-        decodeSuccessData: dco_decode_opt_box_autoadd_u_64,
+        decodeSuccessData: dco_decode_opt_box_autoadd_f_64,
         decodeErrorData: null,
       ),
       constMeta: kUriAmountConstMeta,
@@ -2668,6 +2668,12 @@ class PayjoinCoreApiImpl extends PayjoinCoreApiImplPlatform
   }
 
   @protected
+  double dco_decode_box_autoadd_f_64(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw as double;
+  }
+
+  @protected
   Headers dco_decode_box_autoadd_headers(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_headers(raw);
@@ -2866,6 +2872,12 @@ class PayjoinCoreApiImpl extends PayjoinCoreApiImplPlatform
   }
 
   @protected
+  double dco_decode_f_64(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw as double;
+  }
+
+  @protected
   Headers dco_decode_headers(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
@@ -2955,6 +2967,12 @@ class PayjoinCoreApiImpl extends PayjoinCoreApiImplPlatform
   String? dco_decode_opt_String(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw == null ? null : dco_decode_String(raw);
+  }
+
+  @protected
+  double? dco_decode_opt_box_autoadd_f_64(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_f_64(raw);
   }
 
   @protected
@@ -3639,6 +3657,12 @@ class PayjoinCoreApiImpl extends PayjoinCoreApiImplPlatform
   }
 
   @protected
+  double sse_decode_box_autoadd_f_64(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_f_64(deserializer));
+  }
+
+  @protected
   Headers sse_decode_box_autoadd_headers(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return (sse_decode_headers(deserializer));
@@ -3833,6 +3857,12 @@ class PayjoinCoreApiImpl extends PayjoinCoreApiImplPlatform
   }
 
   @protected
+  double sse_decode_f_64(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return deserializer.buffer.getFloat64();
+  }
+
+  @protected
   Headers sse_decode_headers(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var var_map = sse_decode_Map_String_String(deserializer);
@@ -3932,6 +3962,17 @@ class PayjoinCoreApiImpl extends PayjoinCoreApiImplPlatform
 
     if (sse_decode_bool(deserializer)) {
       return (sse_decode_String(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  double? sse_decode_opt_box_autoadd_f_64(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_f_64(deserializer));
     } else {
       return null;
     }
@@ -4497,6 +4538,12 @@ class PayjoinCoreApiImpl extends PayjoinCoreApiImplPlatform
   }
 
   @protected
+  double cst_encode_f_64(double raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return raw;
+  }
+
+  @protected
   int cst_encode_u_32(int raw) {
     // Codec=Cst (C-struct based), see doc to use other codecs
     return raw;
@@ -4783,6 +4830,12 @@ class PayjoinCoreApiImpl extends PayjoinCoreApiImplPlatform
   }
 
   @protected
+  void sse_encode_box_autoadd_f_64(double self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_f_64(self, serializer);
+  }
+
+  @protected
   void sse_encode_box_autoadd_headers(Headers self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_headers(self, serializer);
@@ -4973,6 +5026,12 @@ class PayjoinCoreApiImpl extends PayjoinCoreApiImplPlatform
   }
 
   @protected
+  void sse_encode_f_64(double self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    serializer.buffer.putFloat64(self);
+  }
+
+  @protected
   void sse_encode_headers(Headers self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_Map_String_String(self.map, serializer);
@@ -5064,6 +5123,16 @@ class PayjoinCoreApiImpl extends PayjoinCoreApiImplPlatform
     sse_encode_bool(self != null, serializer);
     if (self != null) {
       sse_encode_String(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_f_64(double? self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_f_64(self, serializer);
     }
   }
 

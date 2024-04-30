@@ -257,6 +257,9 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
   Enroller dco_decode_box_autoadd_enroller(dynamic raw);
 
   @protected
+  double dco_decode_box_autoadd_f_64(dynamic raw);
+
+  @protected
   Headers dco_decode_box_autoadd_headers(dynamic raw);
 
   @protected
@@ -345,6 +348,9 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
   Enroller dco_decode_enroller(dynamic raw);
 
   @protected
+  double dco_decode_f_64(dynamic raw);
+
+  @protected
   Headers dco_decode_headers(dynamic raw);
 
   @protected
@@ -376,6 +382,9 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
 
   @protected
   String? dco_decode_opt_String(dynamic raw);
+
+  @protected
+  double? dco_decode_opt_box_autoadd_f_64(dynamic raw);
 
   @protected
   int? dco_decode_opt_box_autoadd_u_64(dynamic raw);
@@ -624,6 +633,9 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
   Enroller sse_decode_box_autoadd_enroller(SseDeserializer deserializer);
 
   @protected
+  double sse_decode_box_autoadd_f_64(SseDeserializer deserializer);
+
+  @protected
   Headers sse_decode_box_autoadd_headers(SseDeserializer deserializer);
 
   @protected
@@ -724,6 +736,9 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
   Enroller sse_decode_enroller(SseDeserializer deserializer);
 
   @protected
+  double sse_decode_f_64(SseDeserializer deserializer);
+
+  @protected
   Headers sse_decode_headers(SseDeserializer deserializer);
 
   @protected
@@ -758,6 +773,9 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
 
   @protected
   String? sse_decode_opt_String(SseDeserializer deserializer);
+
+  @protected
+  double? sse_decode_opt_box_autoadd_f_64(SseDeserializer deserializer);
 
   @protected
   int? sse_decode_opt_box_autoadd_u_64(SseDeserializer deserializer);
@@ -934,6 +952,12 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
     final ptr = wire.cst_new_box_autoadd_enroller();
     cst_api_fill_to_wire_enroller(raw, ptr.ref);
     return ptr;
+  }
+
+  @protected
+  ffi.Pointer<ffi.Double> cst_encode_box_autoadd_f_64(double raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return wire.cst_new_box_autoadd_f_64(cst_encode_f_64(raw));
   }
 
   @protected
@@ -1201,6 +1225,12 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
       String? raw) {
     // Codec=Cst (C-struct based), see doc to use other codecs
     return raw == null ? ffi.nullptr : cst_encode_String(raw);
+  }
+
+  @protected
+  ffi.Pointer<ffi.Double> cst_encode_opt_box_autoadd_f_64(double? raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return raw == null ? ffi.nullptr : cst_encode_box_autoadd_f_64(raw);
   }
 
   @protected
@@ -1855,6 +1885,9 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
   bool cst_encode_bool(bool raw);
 
   @protected
+  double cst_encode_f_64(double raw);
+
+  @protected
   int cst_encode_u_32(int raw);
 
   @protected
@@ -2009,6 +2042,9 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
   void sse_encode_box_autoadd_enroller(Enroller self, SseSerializer serializer);
 
   @protected
+  void sse_encode_box_autoadd_f_64(double self, SseSerializer serializer);
+
+  @protected
   void sse_encode_box_autoadd_headers(Headers self, SseSerializer serializer);
 
   @protected
@@ -2111,6 +2147,9 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
   void sse_encode_enroller(Enroller self, SseSerializer serializer);
 
   @protected
+  void sse_encode_f_64(double self, SseSerializer serializer);
+
+  @protected
   void sse_encode_headers(Headers self, SseSerializer serializer);
 
   @protected
@@ -2149,6 +2188,9 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
 
   @protected
   void sse_encode_opt_String(String? self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_opt_box_autoadd_f_64(double? self, SseSerializer serializer);
 
   @protected
   void sse_encode_opt_box_autoadd_u_64(int? self, SseSerializer serializer);
@@ -4426,6 +4468,20 @@ class PayjoinCoreWire implements BaseWire {
           'frbgen_payjoin_flutter_cst_new_box_autoadd_enroller');
   late final _cst_new_box_autoadd_enroller = _cst_new_box_autoadd_enrollerPtr
       .asFunction<ffi.Pointer<wire_cst_enroller> Function()>();
+
+  ffi.Pointer<ffi.Double> cst_new_box_autoadd_f_64(
+    double value,
+  ) {
+    return _cst_new_box_autoadd_f_64(
+      value,
+    );
+  }
+
+  late final _cst_new_box_autoadd_f_64Ptr =
+      _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Double> Function(ffi.Double)>>(
+          'frbgen_payjoin_flutter_cst_new_box_autoadd_f_64');
+  late final _cst_new_box_autoadd_f_64 = _cst_new_box_autoadd_f_64Ptr
+      .asFunction<ffi.Pointer<ffi.Double> Function(double)>();
 
   ffi.Pointer<wire_cst_headers> cst_new_box_autoadd_headers() {
     return _cst_new_box_autoadd_headers();

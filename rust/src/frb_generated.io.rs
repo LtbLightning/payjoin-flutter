@@ -220,6 +220,12 @@ impl CstDecode<crate::api::receive::Enroller> for *mut wire_cst_enroller {
         CstDecode::<crate::api::receive::Enroller>::cst_decode(*wrap).into()
     }
 }
+impl CstDecode<f64> for *mut f64 {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    fn cst_decode(self) -> f64 {
+        unsafe { *flutter_rust_bridge::for_generated::box_from_leak_ptr(self) }
+    }
+}
 impl CstDecode<crate::utils::types::Headers> for *mut wire_cst_headers {
     // Codec=Cst (C-struct based), see doc to use other codecs
     fn cst_decode(self) -> crate::utils::types::Headers {
@@ -2189,6 +2195,11 @@ pub extern "C" fn frbgen_payjoin_flutter_cst_new_box_autoadd_enrolled() -> *mut 
 #[no_mangle]
 pub extern "C" fn frbgen_payjoin_flutter_cst_new_box_autoadd_enroller() -> *mut wire_cst_enroller {
     flutter_rust_bridge::for_generated::new_leak_box_ptr(wire_cst_enroller::new_with_null_ptr())
+}
+
+#[no_mangle]
+pub extern "C" fn frbgen_payjoin_flutter_cst_new_box_autoadd_f_64(value: f64) -> *mut f64 {
+    flutter_rust_bridge::for_generated::new_leak_box_ptr(value)
 }
 
 #[no_mangle]
