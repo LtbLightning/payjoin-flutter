@@ -3,7 +3,6 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:payjoin_flutter/uri.dart' as pay_join_uri;
 
 class BtcClient {
   Dio? _dioClient;
@@ -82,21 +81,31 @@ class BtcClient {
     return res as Map<String, dynamic>;
   }
 
-  Future<List<Map<String, dynamic>>> listUnspent(List<String> addresses) async {
+  Future<Map<String, dynamic>> finalizePsbt(String psbt) async {
+    var params = [psbt];
+    final res = await call("finalizepsbt", params);
+    return res as Map<String, dynamic>;
+  }
+
+  Future<List<dynamic>> listUnspent(List<String> addresses) async {
     var params = [
       1,
       9999999,
       addresses,
     ];
     final res = await call("listunspent", params);
-    return res as List<Map<String, dynamic>>;
+    if (res == []) {
+      return res;
+    } else {
+      return res;
+    }
   }
 
   Future<Map<String, dynamic>> walletCreateFundedPsbt(
-      String pjUri, int feeRate) async {
-    final pay_join_uri.Uri uri = await pay_join_uri.Uri.fromString(pjUri);
-    final address = await uri.address();
-    final amount = await uri.amount();
+    amount,
+    address,
+    int feeRate,
+  ) async {
     var params = [
       [],
       [
