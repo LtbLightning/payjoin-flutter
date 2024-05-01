@@ -16,8 +16,7 @@ class PayJoinLibrary {
   static const localCertFile = "localhost.der";
   Future<String> buildPjUri(double amount, String address, {String? pj}) async {
     try {
-      final pjUri =
-          "bitcoin:$address?amount=${amount / 100000000.0}&pj=${pj ?? pjUrl}";
+      final pjUri = "bitcoin:$address?amount=$amount&pj=${pj ?? pjUrl}";
       await uri.Uri.fromString(pjUri);
       return pjUri;
     } catch (e) {
@@ -33,7 +32,7 @@ class PayJoinLibrary {
                 psbtBase64: psbtBase64, uri: uriObj))
             .buildWithAdditionalFee(
                 maxFeeContribution: 10000,
-                minFeeRate: 1,
+                minFeeRate: 0,
                 clampFeeContribution: false))
         .extractContextV1();
     final headers = common.Headers(map: {
@@ -47,7 +46,7 @@ class PayJoinLibrary {
     final payJoinProposal = await handleProposal(unchecked, client);
     final psbt = await payJoinProposal.psbt();
     // Sender checks, signs, finalizes, extracts, and broadcasts
-    final checkedPsbt = await cxt.processResponse(response: base64Decode(psbt));
+    final checkedPsbt = await cxt.processResponse(response: utf8.encode(psbt));
     return checkedPsbt;
   }
 
@@ -95,7 +94,8 @@ class PayJoinLibrary {
       // Select receiver payjoin inputs. TODO Lock them.
       Map<int, common.OutPoint> candidateInputs = {};
       for (var e in availableInputs) {
-        candidateInputs[e["amount"]] =
+        int amount = (e["amount"] * 100000000).toInt();
+        candidateInputs[amount] =
             common.OutPoint(txid: e["txid"], vout: e["vout"]);
       }
       final selectedOutpoint = await provisionalProposal.tryPreservingPrivacy(
@@ -103,14 +103,20 @@ class PayJoinLibrary {
       final selectedUtxo = availableInputs.firstWhere((e) =>
           (e["txid"] == selectedOutpoint.txid) &&
           (e["vout"] == selectedOutpoint.vout));
+      final selectedUtxoScriptPubKey =
+          await ScriptBuf.fromHex(selectedUtxo["scriptPubKey"]);
+      int selectedUtxoAmount = (selectedUtxo["amount"] * 100000000).toInt();
       final txoutToContribute = common.TxOut(
-        scriptPubkey: selectedUtxo["scriptPubKey"],
-        value: selectedUtxo["amount"],
+        scriptPubkey: selectedUtxoScriptPubKey.bytes,
+        value: selectedUtxoAmount,
       );
       final outputToContribute = common.OutPoint(
           txid: selectedUtxo["txid"], vout: selectedUtxo["vout"]);
       await provisionalProposal.contributeWitnessInput(
           txo: txoutToContribute, outpoint: outputToContribute);
+      final newReceiverAddress = await receiver.getNewAddress();
+      await provisionalProposal.substituteOutputAddress(
+          address: newReceiverAddress);
       final payJoinProposal = await provisionalProposal.finalizeProposal(
           processPsbt: (e) => processPsbt(e, receiver));
       return payJoinProposal;

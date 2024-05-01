@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:payjoin_flutter/uri.dart' as pay_join_uri;
 import 'package:payjoin_flutter_example/btc_client.dart';
 import 'package:payjoin_flutter_example/payjoin_library.dart';
 
@@ -103,7 +104,8 @@ class _PayJoinState extends State<PayJoin> {
             TextButton(
                 onPressed: () async {
                   final address = await receiverRpc.getNewAddress();
-                  final res = await payJoinLibrary.buildPjUri(150.0, address);
+                  final res =
+                      await payJoinLibrary.buildPjUri(0.0000035, address);
                   setState(() {
                     pjUri = res;
                     displayText = res;
@@ -120,8 +122,11 @@ class _PayJoinState extends State<PayJoin> {
                 onPressed: () async {
                   final balance = await senderRpc.getBalance();
                   debugPrint("Sender Balance: ${balance.toString()}");
+                  final uri = await pay_join_uri.Uri.fromString(pjUri);
+                  final address = await uri.address();
+                  final amount = await uri.amount();
                   final psbt = (await senderRpc.walletCreateFundedPsbt(
-                      pjUri, 2))["psbt"];
+                      amount, address, 1))["psbt"];
                   debugPrint(
                     "\nOriginal sender psbt: ${psbt}",
                   );
