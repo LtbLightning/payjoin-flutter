@@ -16,9 +16,9 @@ payjoin_flutter: 0.13.0
 - Android minSdkVersion. : API 23 or higher.
 - Deployment target : iOS 12.0 or greater.
 
-## Run the example app
+### Build and run code
 
-Before running the example app, we need to set up the Bitcoin core properly in the regtest network. If you donot
+Before building the code, we need to set up the Bitcoin core properly in the regtest network. If you "don't"
 have Bitcoin Core locally, please refer to this [page](https://learn.saylor.org/mod/page/view.php?id=36347). Or you can
 install `Nigiri Bitcoin`, which is a tool designed to simplify the process of running local instances of Bitcoin and
 Liquid networks for development and testing purposes. You can refer to
@@ -30,5 +30,17 @@ rpc_user = "admin1"
 rpc_password = "123"
 rpc_host = "localhost"
 rpc_port = "18443"
+```
+## Running the integration tests
+Once we have set up the Bitcoin core properly in the `Regtest` network, 
+
+```shell
+git clone https://github.com/LtbLightning/payjoin-flutter.git
+cd payjoin-flutter
+git checkout v0.13
+
+cd example
+#Run the integration test
+flutter test integration_test
 ```
 
