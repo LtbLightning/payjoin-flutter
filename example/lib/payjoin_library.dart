@@ -7,7 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:payjoin_flutter/common.dart' as common;
 import 'package:payjoin_flutter/receive/v1.dart' as v1;
 import 'package:payjoin_flutter/send.dart' as send;
-import 'package:payjoin_flutter/uri.dart' as uri;
+import 'package:payjoin_flutter/uri.dart' as pj_uri;
 import 'package:payjoin_flutter_example/btc_client.dart';
 
 class PayJoinLibrary {
@@ -17,7 +17,7 @@ class PayJoinLibrary {
   Future<String> buildPjUri(double amount, String address, {String? pj}) async {
     try {
       final pjUri = "bitcoin:$address?amount=$amount&pj=${pj ?? pjUrl}";
-      await uri.Uri.fromString(pjUri);
+      await pj_uri.Uri.fromString(pjUri);
       return pjUri;
     } catch (e) {
       debugPrint(e.toString());
@@ -27,9 +27,9 @@ class PayJoinLibrary {
 
   Future<String> handlePjRequest(String psbtBase64, String uriStr,
       int minFeeRate, BtcClient client) async {
-    final uriObj = await uri.Uri.fromString(uriStr);
+    final uri = await pj_uri.Uri.fromString(uriStr);
     final (req, cxt) = await (await (await send.RequestBuilder.fromPsbtAndUri(
-                psbtBase64: psbtBase64, uri: uriObj))
+                psbtBase64: psbtBase64, uri: uri))
             .buildWithAdditionalFee(
                 maxFeeContribution: 10000,
                 minFeeRate: 0,
