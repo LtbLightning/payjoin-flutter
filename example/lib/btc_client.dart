@@ -57,6 +57,15 @@ class BtcClient {
     return res;
   }
 
+  Future<List<dynamic>> generateToAddress(int nblocks, String address) async {
+    var params = [
+      nblocks,
+      address,
+    ];
+    final res = await call("generatetoaddress", params);
+    return res;
+  }
+
   Future<double> getBalance() async {
     var params = [];
     final res = await call("getbalance", params);
@@ -115,20 +124,6 @@ class BtcClient {
       {"lockUnspents": false, "fee_rate": feeRate}
     ];
     final res = await call("walletcreatefundedpsbt", params);
-    return res as Map<String, dynamic>;
-  }
-
-  Future<Map<String, dynamic>> generateToAddress(
-      String address, int blocks) async {
-    var params = [
-      // [],
-      // [
-      //   {address: amount}
-      // ],
-      // 0,
-      // {"lockUnspents": true, "fee_rate": feeRate}
-    ];
-    final res = await call("generatetoaddress", params);
     return res as Map<String, dynamic>;
   }
 
