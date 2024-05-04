@@ -16,6 +16,10 @@ void main() {
       final receiver = BtcClient("sender");
       // Receiver creates the payjoin URI
       final pjReceiverAddress = await receiver.getNewAddress();
+      final pjSenderAddress = await sender.getNewAddress();
+      //Generate blocks to receiver and sender
+      await sender.generateToAddress(101, pjSenderAddress);
+      await receiver.generateToAddress(101, pjReceiverAddress);
       final pjUri = await payJoinLib.buildPjUri(0.0000035, pjReceiverAddress);
       // Sender create a funded PSBT (not broadcast) to address with amount given in the pjUri
       debugPrint("Sender Balance: ${(await sender.getBalance()).toString()}");
