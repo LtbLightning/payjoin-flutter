@@ -144,7 +144,7 @@ class _PayJoinState extends State<PayJoin> {
             TextButton(
                 onPressed: () async {
                   final psbt = await payJoinLibrary.handlePjRequest(
-                      senderPsbt, pjUri, 1, receiverRpc);
+                      senderPsbt, pjUri, receiverRpc);
                   debugPrint("\n Original receiver psbt: $psbt");
                   setState(() {
                     processedAndFinalizedPsbt = psbt;

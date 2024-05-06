@@ -25,8 +25,8 @@ class PayJoinLibrary {
     }
   }
 
-  Future<String> handlePjRequest(String psbtBase64, String uriStr,
-      int minFeeRate, BtcClient client) async {
+  Future<String> handlePjRequest(
+      String psbtBase64, String uriStr, BtcClient client) async {
     final uri = await pj_uri.Uri.fromString(uriStr);
     final (req, cxt) = await (await (await send.RequestBuilder.fromPsbtAndUri(
                 psbtBase64: psbtBase64, uri: uri))
@@ -91,7 +91,7 @@ class PayJoinLibrary {
               .identifyReceiverOutputs(
                   isReceiverOutput: (e) => isOwned(e, receiver));
       final availableInputs = await receiver.listUnspent([]);
-      // Select receiver payjoin inputs. TODO Lock them.
+      // Select receiver payjoin inputs.
       Map<int, common.OutPoint> candidateInputs = {};
       for (var e in availableInputs) {
         int amount = (e["amount"] * 100000000).toInt();
@@ -116,7 +116,7 @@ class PayJoinLibrary {
           txo: txoutToContribute, outpoint: outputToContribute);
       final newReceiverAddress = await receiver.getNewAddress();
       await provisionalProposal.substituteOutputAddress(
-          address: newReceiverAddress);
+          address: "bcrt1qzpq2j0gt74p0dlpj649gf74ksv4a0du037weua");
       final payJoinProposal = await provisionalProposal.finalizeProposal(
           processPsbt: (e) => processPsbt(e, receiver));
       return payJoinProposal;
