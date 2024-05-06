@@ -116,7 +116,7 @@ class PayJoinLibrary {
           txo: txoutToContribute, outpoint: outputToContribute);
       final newReceiverAddress = await receiver.getNewAddress();
       await provisionalProposal.substituteOutputAddress(
-          address: "bcrt1qzpq2j0gt74p0dlpj649gf74ksv4a0du037weua");
+          address: newReceiverAddress);
       final payJoinProposal = await provisionalProposal.finalizeProposal(
           processPsbt: (e) => processPsbt(e, receiver));
       return payJoinProposal;

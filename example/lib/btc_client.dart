@@ -52,7 +52,7 @@ class BtcClient {
   }
 
   Future<String> getNewAddress() async {
-    var params = [];
+    var params = ["", "bech32"];
     final res = await call("getnewaddress", params);
     return res;
   }
@@ -85,13 +85,13 @@ class BtcClient {
   }
 
   Future<Map<String, dynamic>> walletProcessPsbt(String psbt) async {
-    var params = [psbt];
+    var params = [psbt, true, "ALL", false];
     final res = await call("walletprocesspsbt", params);
     return res as Map<String, dynamic>;
   }
 
   Future<Map<String, dynamic>> finalizePsbt(String psbt) async {
-    var params = [psbt];
+    var params = [psbt, true];
     final res = await call("finalizepsbt", params);
     return res as Map<String, dynamic>;
   }

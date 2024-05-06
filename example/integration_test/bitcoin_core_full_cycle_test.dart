@@ -18,27 +18,27 @@ void main() {
       final pjReceiverAddress = await receiver.getNewAddress();
       final pjSenderAddress = await sender.getNewAddress();
       //Generate blocks to receiver and sender
-      await sender.generateToAddress(101, pjSenderAddress);
-      await receiver.generateToAddress(101, pjReceiverAddress);
-      final pjUri = await payJoinLib.buildPjUri(0.0000035, pjReceiverAddress);
+      await sender.generateToAddress(11, pjSenderAddress);
+      await receiver.generateToAddress(1, pjReceiverAddress);
+      final pjUri = await payJoinLib.buildPjUri(0.0083285, pjReceiverAddress);
       // Sender create a funded PSBT (not broadcast) to address with amount given in the pjUri
       debugPrint("Sender Balance: ${(await sender.getBalance()).toString()}");
       final uri = await pay_join_uri.Uri.fromString(pjUri);
       final address = await uri.address();
       final amount = await uri.amount();
       final senderPsbt =
-          (await sender.walletCreateFundedPsbt(amount, address, 1))["psbt"];
+          (await sender.walletCreateFundedPsbt(amount, address, 2000))["psbt"];
       debugPrint(
-        "\nOriginal sender psbt: ${senderPsbt}",
+        "\nOriginal sender psbt: $senderPsbt",
       );
       final receiverPsbt =
-          await payJoinLib.handlePjRequest(senderPsbt, pjUri, 1, receiver);
+          await payJoinLib.handlePjRequest(senderPsbt, pjUri, receiver);
       debugPrint("\n Original receiver psbt: $receiverPsbt");
       final senderProcessedPsbt =
           (await sender.walletProcessPsbt(receiverPsbt))["psbt"];
       final senderFinalizedPsbt =
-          (await sender.finalizePsbt(senderProcessedPsbt))["psbt"];
-      final res = await sender.sendRawTransaction(senderFinalizedPsbt);
+          (await sender.finalizePsbt(senderProcessedPsbt));
+      final res = await sender.sendRawTransaction(senderFinalizedPsbt["hex"]);
       debugPrint("Broadcast success: $res");
     });
   });
