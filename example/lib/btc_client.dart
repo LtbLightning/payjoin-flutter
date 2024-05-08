@@ -11,11 +11,7 @@ class BtcClient {
   final String wallet;
 
   String getConnectionString(String host, int port, String wallet) {
-    if (wallet == "") {
-      return 'http://$host:$port';
-    } else {
-      return 'http://$host:$port/wallet/$wallet';
-    }
+    return 'http://$host:$port/wallet/$wallet';
   }
 
   BtcClient(this.wallet) {
@@ -57,7 +53,7 @@ class BtcClient {
     return res;
   }
 
-  Future<List<dynamic>> generateToAddress(int nblocks, String address) async {
+  Future<List<dynamic>> generate(int nblocks, String address) async {
     var params = [
       nblocks,
       address,
@@ -81,6 +77,12 @@ class BtcClient {
   Future<String> sendRawTransaction(String psbt) async {
     var params = [psbt];
     final res = await call("sendrawtransaction", params);
+    return res;
+  }
+
+  Future<String> sendToAddress(String address, int amount) async {
+    var params = [address, amount];
+    final res = await call("sendtoaddress", params);
     return res;
   }
 
