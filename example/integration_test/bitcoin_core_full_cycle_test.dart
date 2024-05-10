@@ -17,13 +17,16 @@ void main() {
     testWidgets('full_cycle', (WidgetTester tester) async {
       final payJoinLib = PayJoinLibrary();
       final sender = BtcClient("receiver");
+      final client = BtcClient("");
       final receiver = BtcClient("sender");
       // Receiver creates the payjoin URI
       final pjReceiverAddress = await receiver.getNewAddress();
       final pjSenderAddress = await sender.getNewAddress();
       //Generate blocks to receiver and sender
-      await sender.generateToAddress(11, pjSenderAddress);
-      await receiver.generateToAddress(1, pjReceiverAddress);
+      await client.sendToAddress(pjSenderAddress, 10);
+      await client.sendToAddress(pjReceiverAddress, 1);
+      await sender.generate(11, pjSenderAddress);
+      await receiver.generate(1, pjReceiverAddress);
       final pjUri = await payJoinLib.buildPjUri(0.0083285, pjReceiverAddress);
       // Sender create a funded PSBT (not broadcast) to address with amount given in the pjUri
       debugPrint("Sender Balance: ${(await sender.getBalance()).toString()}");
