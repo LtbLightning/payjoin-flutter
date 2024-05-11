@@ -60,30 +60,32 @@ class BdkClient {
   Future<AddressInfo> getNewAddress() async {
     final res =
         await wallet.getAddress(addressIndex: const AddressIndex.increase());
-    debugPrint(await res.address.asString());
     return res;
   }
 
-  Future<void> sendTx(String addressStr, int amount) async {
+  Future<PartiallySignedTransaction> signPsbt(
+      PartiallySignedTransaction psbt) async {
+    final isFinalized = await wallet.sign(psbt: psbt);
+    if (isFinalized) {
+      return psbt;
+    } else {
+      throw Exception("PartiallySignedTransaction not finalized!");
+    }
+  }
+
+  Future<PartiallySignedTransaction> createPsbt(
+      String addressStr, int amount, int fee) async {
     try {
       final txBuilder = TxBuilder();
       final address =
           await Address.fromString(s: addressStr, network: Network.regtest);
       final script = await address.scriptPubkey();
 
-      final psbt = await txBuilder
+      final (psbt, _) = await txBuilder
           .addRecipient(script, amount)
-          .feeRate(1.0)
+          .feeAbsolute(fee)
           .finish(wallet);
-
-      final isFinalized = await wallet.sign(psbt: psbt.$1);
-      if (isFinalized) {
-        final tx = await psbt.$1.extractTx();
-        final res = await blockchain.broadcast(transaction: tx);
-        debugPrint(res);
-      } else {
-        debugPrint("psbt not finalized!");
-      }
+      return signPsbt(psbt);
     } on Exception {
       rethrow;
     }
@@ -96,9 +98,18 @@ class BdkClient {
     return balance.total;
   }
 
-  Future<bool> getAddressInfo(String address) async {
-    final addr = await Address.fromString(s: address, network: Network.regtest);
-    final res = await wallet.isMine(script: await addr.scriptPubkey());
+  Future<String> broadcastPsbt(PartiallySignedTransaction psbt) async {
+    try {
+      final tx = await psbt.extractTx();
+      final txid = await blockchain.broadcast(transaction: tx);
+      return txid;
+    } on Exception {
+      rethrow;
+    }
+  }
+
+  Future<bool> getAddressInfo(ScriptBuf script) async {
+    final res = await wallet.isMine(script: script);
     return res;
   }
 
