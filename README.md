@@ -40,7 +40,7 @@ cd payjoin-flutter
 git checkout v0.13
 
 cd example
-#Run the integration test
+#Run integration tests with bitcoin_core and bdk_flutter
 flutter test integration_test
 ```
 
