@@ -6,13 +6,11 @@ edition = "2021"
 [lib]
 crate-type = ["cdylib", "staticlib"]
 
-[build-dependencies]
-flutter_rust_bridge_codegen = { version = "=2.0.0-dev.25"  }
 anyhow = "1.0.68"
 [dependencies]
 ohttp = { version = "0.5.1" }
 payjoin_ffi = {git = "https://github.com/LtbLightning/payjoin-ffi", branch = "v0.13"}
-flutter_rust_bridge = { version = "=2.0.0-dev.25"  }
+flutter_rust_bridge = "=2.0.0-dev.31"
 anyhow = "1.0.68"
 tokio = "1.36.0"
 

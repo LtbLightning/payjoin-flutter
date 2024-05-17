@@ -24,6 +24,9 @@ impl Url {
     pub fn query(&self) -> Option<String> {
         self.0.query()
     }
+    pub fn as_string(&self) -> String {
+        self.0.as_string()
+    }
 }
 
 pub struct Uri(pub RustOpaque<Arc<payjoin_ffi::uri::Uri>>);
@@ -49,8 +52,8 @@ impl Uri {
     pub fn address(&self) -> String {
         self.0.address()
     }
-    ///Gets the amount in satoshis.
-    pub fn amount(&self) -> Option<u64> {
+    ///Gets the amount in btc.
+    pub fn amount(&self) -> Option<f64> {
         self.0.amount()
     }
 }
