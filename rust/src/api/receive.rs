@@ -1,10 +1,10 @@
-use std::collections::HashMap;
+use crate::api::uri::Url;
 use crate::frb_generated::RustOpaque;
 pub use crate::utils::error::PayjoinError;
-use flutter_rust_bridge::{DartFnFuture};
-pub use std::sync::{Arc, Mutex};
-use crate::api::uri::Url;
 use crate::utils::types::{Headers, OutPoint, TxOut};
+use flutter_rust_bridge::DartFnFuture;
+use std::collections::HashMap;
+pub use std::sync::{Arc, Mutex};
 pub struct UncheckedProposal(pub RustOpaque<payjoin_ffi::receive::v1::UncheckedProposal>);
 impl From<payjoin_ffi::receive::v1::UncheckedProposal> for UncheckedProposal {
     fn from(value: payjoin_ffi::receive::v1::UncheckedProposal) -> Self {
@@ -184,7 +184,7 @@ impl ProvisionalProposal {
     }
 
     pub fn finalize_proposal(
-       ptr: Self,
+        ptr: Self,
         process_psbt: impl Fn(String) -> DartFnFuture<String>,
         min_feerate_sat_per_vb: Option<u64>,
     ) -> Result<PayjoinProposal, PayjoinError> {
@@ -240,7 +240,6 @@ impl From<ohttp::ClientResponse> for ClientResponse {
 #[derive(Clone, Debug)]
 pub struct Enroller(pub RustOpaque<payjoin_ffi::receive::v2::Enroller>);
 
-
 impl From<payjoin_ffi::receive::v2::Enroller> for Enroller {
     fn from(value: payjoin_ffi::receive::v2::Enroller) -> Self {
         Self(RustOpaque::new(value))
@@ -266,13 +265,10 @@ impl Enroller {
     pub fn payjoin_subdir(&self) -> String {
         self.0.payjoin_subdir()
     }
-    pub fn extract_req(ptr:Self) -> Result<((Url, Vec<u8>), ClientResponse), PayjoinError> {
+    pub fn extract_req(ptr: Self) -> Result<((Url, Vec<u8>), ClientResponse), PayjoinError> {
         ptr.0
             .extract_req_as_tuple()
-            .map(|e|  (
-                ((*e.0.url).clone().into(), e.0.body),
-                e.1.into(),
-            ))
+            .map(|e| (((*e.0.url).clone().into(), e.0.body), e.1.into()))
             .map_err(|e| e.into())
     }
     pub fn process_res(
@@ -301,13 +297,10 @@ impl Enrolled {
     pub fn fallback_target(&self) -> String {
         self.0.fallback_target()
     }
-    pub fn extract_req(ptr:Self) -> Result<((Url, Vec<u8>), ClientResponse), PayjoinError> {
+    pub fn extract_req(ptr: Self) -> Result<((Url, Vec<u8>), ClientResponse), PayjoinError> {
         ptr.0
             .extract_req_as_tuple()
-            .map(|e|  (
-                ((*e.0.url).clone().into(), e.0.body),
-                e.1.into(),
-            ))
+            .map(|e| (((*e.0.url).clone().into(), e.0.body), e.1.into()))
             .map_err(|e| e.into())
     }
     pub fn process_res(
@@ -547,10 +540,10 @@ impl V2PayjoinProposal {
         self.0.extract_v1_req()
     }
     pub fn extract_v2_req(ptr: Self) -> Result<((Url, Vec<u8>), ClientResponse), PayjoinError> {
-       ptr.0.clone().extract_v2_req_as_tuple().map(|e|  (
-            ((*e.0.url).clone().into(), e.0.body),
-            e.1.into(),
-        ))
+        ptr.0
+            .clone()
+            .extract_v2_req_as_tuple()
+            .map(|e| (((*e.0.url).clone().into(), e.0.body), e.1.into()))
             .map_err(|e| e.into())
     }
 

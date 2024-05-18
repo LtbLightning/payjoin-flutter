@@ -1,6 +1,5 @@
 use std::collections::HashMap;
 
-
 // ///Represents data that needs to be transmitted to the receiver.
 // ///You need to send this request over HTTP(S) to the receiver.
 // #[derive(Clone, Debug)]
@@ -33,7 +32,9 @@ use std::collections::HashMap;
 // }
 
 #[derive(Clone)]
-pub struct Headers{pub map: HashMap<String, String>}
+pub struct Headers {
+    pub map: HashMap<String, String>,
+}
 impl From<Headers> for payjoin_ffi::receive::v1::Headers {
     fn from(value: Headers) -> Self {
         payjoin_ffi::receive::v1::Headers(value.map)
@@ -42,7 +43,7 @@ impl From<Headers> for payjoin_ffi::receive::v1::Headers {
 
 impl From<payjoin_ffi::receive::v1::Headers> for Headers {
     fn from(value: payjoin_ffi::receive::v1::Headers) -> Self {
-        Headers{map:value.0}
+        Headers { map: value.0 }
     }
 }
 impl Headers {
@@ -102,4 +103,3 @@ impl From<payjoin_ffi::types::TxOut> for TxOut {
         }
     }
 }
-
