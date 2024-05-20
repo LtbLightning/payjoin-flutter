@@ -4,6 +4,9 @@ import 'package:bdk_flutter/bdk_flutter.dart';
 import 'package:flutter/cupertino.dart';
 
 class BdkClient {
+  // Bitcoin core credentials
+  String localEsploraUrl = 'http://0.0.0.0:30000';
+
   late Wallet wallet;
   late Blockchain blockchain;
   final String mnemonic;
@@ -47,7 +50,7 @@ class BdkClient {
 
   Future<void> initBlockchain() async {
     String esploraUrl =
-        Platform.isAndroid ? 'http://10.0.2.2:30000' : 'http://127.0.0.1:30000';
+        Platform.isAndroid ? 'http://10.0.2.2:30000' : localEsploraUrl;
     try {
       blockchain = await Blockchain.create(
           config: BlockchainConfig.esplora(

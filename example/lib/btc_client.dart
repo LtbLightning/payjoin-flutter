@@ -5,6 +5,11 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 
 class BtcClient {
+  // Bitcoin core credentials
+  String rpcUser = "admin1";
+  String rpcPassword = "123";
+  int rpcPort = 18443;
+
   Dio? _dioClient;
   late Map<String, String> _headers;
   late String _url;
@@ -17,10 +22,11 @@ class BtcClient {
   BtcClient(this.wallet) {
     _headers = {
       'Content-Type': 'application/json',
-      'authorization': 'Basic ${base64.encode(utf8.encode('admin1:123'))}'
+      'authorization':
+          'Basic ${base64.encode(utf8.encode("$rpcUser:$rpcPassword"))}'
     };
     _url = getConnectionString(
-        Platform.isAndroid ? "10.0.2.2" : "0.0.0.0", 18443, wallet);
+        Platform.isAndroid ? "10.0.2.2" : "0.0.0.0", rpcPort, wallet);
     _dioClient = Dio();
   }
 
@@ -48,7 +54,7 @@ class BtcClient {
   }
 
   Future<String> getNewAddress() async {
-    var params = ["", "bech32"];
+    var params = [];
     final res = await call("getnewaddress", params);
     return res;
   }
