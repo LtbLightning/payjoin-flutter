@@ -35,7 +35,7 @@ jobs:
           channel: 'stable'
       - name: Configure git with access token
         run: |
-          git config --global url."https://x-access-token:${GITHUB_TOKEN}@github.com/LtbLightning/payjoin-ffi".insteadOf "https://github.com/LtbLightning/payjoin-ffi"
+          git config --global url."https://x-access-token:${GITHUB_TOKEN}@github.com".insteadOf "https://github.com"
         shell: bash
         env:
           GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
