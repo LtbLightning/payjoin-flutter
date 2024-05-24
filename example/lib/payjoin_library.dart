@@ -50,8 +50,7 @@ class PayJoinLibrary {
       v1.UncheckedProposal uncheckedProposal,
       Future<bool> Function(Uint8List) isOwned) async {
     // in a payment processor where the sender could go offline, this is where you schedule to broadcast the original_tx
-    var broadcastInFailureCase =
-        await uncheckedProposal.extractTxToScheduleBroadcast();
+    var _ = await uncheckedProposal.extractTxToScheduleBroadcast();
     final inputsOwned = await uncheckedProposal.checkBroadcastSuitability(
         canBroadcast: (e) async {
       return true;
