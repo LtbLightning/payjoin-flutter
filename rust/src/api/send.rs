@@ -1,9 +1,6 @@
-use crate::{
-    api::uri::Uri,
-    frb_generated::RustOpaque,
-};
-use std::sync::Arc;
 use crate::api::uri::Url;
+use crate::{api::uri::Uri, frb_generated::RustOpaque};
+use std::sync::Arc;
 
 use super::receive::PayjoinError;
 
@@ -94,14 +91,16 @@ impl RequestContext {
             Err(e) => Err(e.into()),
         }
     }
-    pub fn extract_v2(ptr: Self, ohttp_proxy_url: String) -> Result<RequestContextV2, PayjoinError> {
+    pub fn extract_v2(
+        ptr: Self,
+        ohttp_proxy_url: String,
+    ) -> Result<RequestContextV2, PayjoinError> {
         match ptr.0.extract_v2(ohttp_proxy_url) {
             Ok(e) => Ok(e.into()),
             Err(e) => Err(e.into()),
         }
     }
 }
-
 
 #[derive(Clone)]
 pub struct RequestContextV1 {
@@ -112,7 +111,10 @@ pub struct RequestContextV1 {
 impl From<Arc<payjoin_ffi::send::v1::RequestContextV1>> for RequestContextV1 {
     fn from(value: Arc<payjoin_ffi::send::v1::RequestContextV1>) -> Self {
         Self {
-            request: ((*value.request.url).clone().into(), value.request.body.clone()),
+            request: (
+                (*value.request.url).clone().into(),
+                value.request.body.clone(),
+            ),
             context_v1: value.context_v1.clone().into(),
         }
     }
@@ -134,7 +136,7 @@ pub struct RequestContextV2 {
 impl From<payjoin_ffi::send::v1::RequestContextV2> for RequestContextV2 {
     fn from(value: payjoin_ffi::send::v1::RequestContextV2) -> Self {
         Self {
-            request: ((*value.request.url).clone().into(), value.request.body ),
+            request: ((*value.request.url).clone().into(), value.request.body),
             context_v2: value.context_v2.into(),
         }
     }

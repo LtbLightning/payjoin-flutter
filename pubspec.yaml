@@ -1,7 +1,7 @@
 name: payjoin_flutter
 description: "A new Flutter FFI plugin project."
 version: 0.13.0
-homepage:
+homepage: https://github.com/LtbLightning/payjoin-flutter
 
 environment:
   sdk: '>=3.2.3 <4.0.0'
@@ -16,8 +16,6 @@ dependencies:
   freezed_annotation: ^2.2.0
   meta: ^1.10.0
   uuid: ^4.2.1
-  
-
 
 dev_dependencies:
   ffigen: ^9.0.0
