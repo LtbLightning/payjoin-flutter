@@ -93,9 +93,9 @@ impl RequestContext {
     }
     pub fn extract_v2(
         ptr: Self,
-        ohttp_proxy_url: String,
+        ohttp_proxy_url: Url,
     ) -> Result<RequestContextV2, PayjoinError> {
-        match ptr.0.extract_v2(ohttp_proxy_url) {
+        match ptr.0.extract_v2((*ohttp_proxy_url.0).clone()) {
             Ok(e) => Ok(e.into()),
             Err(e) => Err(e.into()),
         }
