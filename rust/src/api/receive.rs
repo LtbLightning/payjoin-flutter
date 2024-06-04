@@ -1,4 +1,4 @@
-use crate::api::uri::Url;
+use crate::api::uri::{OhttpKeys, Url};
 use crate::frb_generated::RustOpaque;
 pub use crate::utils::error::PayjoinError;
 use crate::utils::types::{Headers, OutPoint, TxOut};
@@ -47,7 +47,7 @@ impl UncheckedProposal {
     ) -> Result<MaybeInputsOwned, PayjoinError> {
         let runtime = tokio::runtime::Runtime::new().unwrap();
         ptr.0
-            .check_broadcast_suitability_with_callback(min_fee_rate, |x| {
+            .check_broadcast_suitability(min_fee_rate, |x| {
                 Ok(runtime.block_on(can_broadcast(x.clone())))
             })
             .map(|e| e.into())
@@ -74,7 +74,7 @@ impl MaybeInputsOwned {
     ) -> Result<MaybeMixedInputScripts, PayjoinError> {
         let runtime = tokio::runtime::Runtime::new().unwrap();
         ptr.0
-            .check_inputs_not_owned_with_callback(|o| Ok(runtime.block_on(is_owned(o.clone()))))
+            .check_inputs_not_owned(|o| Ok(runtime.block_on(is_owned(o.clone()))))
             .map(|e| e.into())
             .map_err(|e| e.into())
     }
@@ -110,7 +110,7 @@ impl MaybeInputsSeen {
     ) -> Result<OutputsUnknown, PayjoinError> {
         let runtime = tokio::runtime::Runtime::new().unwrap();
         ptr.0
-            .check_no_inputs_seen_before_with_callback(|o| Ok(runtime.block_on(is_known(o.into()))))
+            .check_no_inputs_seen_before(|o| Ok(runtime.block_on(is_known(o.into()))))
             .map(|e| e.into())
             .map_err(|e| e.into())
     }
@@ -130,7 +130,7 @@ impl OutputsUnknown {
     ) -> Result<ProvisionalProposal, PayjoinError> {
         let runtime = tokio::runtime::Runtime::new().unwrap();
         ptr.0
-            .identify_receiver_outputs_with_callback(|o| {
+            .identify_receiver_outputs(|o| {
                 Ok(runtime.block_on(is_receiver_output(o.clone())))
             })
             .map(|e| e.into())
@@ -190,7 +190,7 @@ impl ProvisionalProposal {
     ) -> Result<PayjoinProposal, PayjoinError> {
         let runtime = tokio::runtime::Runtime::new().unwrap();
         ptr.0
-            .finalize_proposal_with_callback(
+            .finalize_proposal(
                 |o| Ok(runtime.block_on(process_psbt(o.clone()))),
                 min_feerate_sat_per_vb,
             )
@@ -246,28 +246,17 @@ impl From<payjoin_ffi::receive::v2::Enroller> for Enroller {
     }
 }
 impl Enroller {
-    pub fn from_relay_config(
-        relay_url: String,
-        ohttp_config_base64: String,
-        ohttp_proxy_url: String,
+    pub fn from_directory_config(
+        directory: Url, ohttp_keys: OhttpKeys, ohttp_relay:Url
     ) -> Enroller {
-        payjoin_ffi::receive::v2::Enroller::from_relay_config(
-            relay_url,
-            ohttp_config_base64,
-            ohttp_proxy_url,
-        )
-        .into()
+        payjoin_ffi::receive::v2::Enroller::from_directory_config(
+            (*directory.0).clone(), Arc::new(ohttp_keys.into()), (*ohttp_relay.0).clone()
+        ).into()
     }
 
-    pub fn subdirectory(&self) -> String {
-        self.0.subdirectory()
-    }
-    pub fn payjoin_subdir(&self) -> String {
-        self.0.payjoin_subdir()
-    }
     pub fn extract_req(ptr: Self) -> Result<((Url, Vec<u8>), ClientResponse), PayjoinError> {
         ptr.0
-            .extract_req_as_tuple()
+            .extract_req()
             .map(|e| (((*e.0.url).clone().into(), e.0.body), e.1.into()))
             .map_err(|e| e.into())
     }
@@ -277,7 +266,7 @@ impl Enroller {
         ctx: ClientResponse,
     ) -> Result<Enrolled, PayjoinError> {
         self.0
-            .process_res_with_ohttp_response(body, ctx.into())
+            .process_res(body, ctx.into())
             .map(|e| e.into())
             .map_err(|e| e.into())
     }
@@ -291,15 +280,12 @@ impl From<Arc<payjoin_ffi::receive::v2::Enrolled>> for Enrolled {
     }
 }
 impl Enrolled {
-    pub fn subdirectory(&self) -> Vec<u8> {
-        self.0.pubkey()
-    }
     pub fn fallback_target(&self) -> String {
         self.0.fallback_target()
     }
     pub fn extract_req(ptr: Self) -> Result<((Url, Vec<u8>), ClientResponse), PayjoinError> {
         ptr.0
-            .extract_req_as_tuple()
+            .extract_req()
             .map(|e| (((*e.0.url).clone().into(), e.0.body), e.1.into()))
             .map_err(|e| e.into())
     }
@@ -309,7 +295,7 @@ impl Enrolled {
         ctx: ClientResponse,
     ) -> Result<Option<V2UncheckedProposal>, PayjoinError> {
         self.0
-            .process_res_with_ohttp_response(body, ctx.into())
+            .process_res(body, ctx.into())
             .map(|e| e.map(|o| o.into()))
             .map_err(|e| e.into())
     }
@@ -341,7 +327,7 @@ impl V2UncheckedProposal {
     ) -> Result<V2MaybeInputsOwned, PayjoinError> {
         let runtime = tokio::runtime::Runtime::new().unwrap();
         self.0
-            .check_broadcast_suitability_with_callback(min_fee_rate, |x| {
+            .check_broadcast_suitability(min_fee_rate, |x| {
                 Ok(runtime.block_on(can_broadcast(x.clone())))
             })
             .map(|e| e.into())
@@ -373,7 +359,7 @@ impl V2MaybeInputsOwned {
     ) -> Result<V2MaybeMixedInputScripts, PayjoinError> {
         let runtime = tokio::runtime::Runtime::new().unwrap();
         self.0
-            .check_inputs_not_owned_with_callback(|o| Ok(runtime.block_on(is_owned(o.clone()))))
+            .check_inputs_not_owned(|o| Ok(runtime.block_on(is_owned(o.clone()))))
             .map(|e| e.into())
             .map_err(|e| e.into())
     }
@@ -419,7 +405,7 @@ impl V2MaybeInputsSeen {
     ) -> Result<V2OutputsUnknown, PayjoinError> {
         let runtime = tokio::runtime::Runtime::new().unwrap();
         self.0
-            .check_no_inputs_seen_before_with_callback(|o| Ok(runtime.block_on(is_known(o.into()))))
+            .check_no_inputs_seen_before(|o| Ok(runtime.block_on(is_known(o.into()))))
             .map(|e| e.into())
             .map_err(|e| e.into())
     }
@@ -440,7 +426,7 @@ impl V2OutputsUnknown {
     ) -> Result<V2ProvisionalProposal, PayjoinError> {
         let runtime = tokio::runtime::Runtime::new().unwrap();
         self.0
-            .identify_receiver_outputs_with_callback(|o| {
+            .identify_receiver_outputs(|o| {
                 Ok(runtime.block_on(is_receiver_output(o.clone())))
             })
             .map(|e| e.into())
@@ -505,7 +491,7 @@ impl V2ProvisionalProposal {
     ) -> Result<V2PayjoinProposal, PayjoinError> {
         let runtime = tokio::runtime::Runtime::new().unwrap();
         self.0
-            .finalize_proposal_with_callback(
+            .finalize_proposal(
                 |o| Ok(runtime.block_on(process_psbt(o.clone()))),
                 min_feerate_sat_per_vb,
             )
@@ -542,7 +528,7 @@ impl V2PayjoinProposal {
     pub fn extract_v2_req(ptr: Self) -> Result<((Url, Vec<u8>), ClientResponse), PayjoinError> {
         ptr.0
             .clone()
-            .extract_v2_req_as_tuple()
+            .extract_v2_req()
             .map(|e| (((*e.0.url).clone().into(), e.0.body), e.1.into()))
             .map_err(|e| e.into())
     }
@@ -553,7 +539,7 @@ impl V2PayjoinProposal {
         ohttp_context: ClientResponse,
     ) -> Result<Vec<u8>, PayjoinError> {
         self.0
-            .deserialize_res_with_ohttp_response(res, ohttp_context.into())
+            .deserialize_res(res, ohttp_context.into())
             .map(|e| e)
             .map_err(|e| e.into())
     }
