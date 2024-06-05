@@ -8,39 +8,19 @@ import '../src/exceptions.dart';
 import '../src/generated/api/receive.dart' as receive;
 import '../src/generated/utils/error.dart' as error;
 import '../uri.dart' as uri;
+import '../uri.dart';
 
 class Enroller extends receive.Enroller {
   Enroller._({required super.field0});
 
-  Future<Enroller> fromRelayConfig(
-      {required String relayUrl,
-      required String ohttpConfigBase64,
-      required String ohttpProxyUrl,
-      dynamic hint}) async {
+  Future<Enroller> fromDirectoryConfig(
+      {required Url directory,
+      required OhttpKeys ohttpKeys,
+      required Url ohttpRelay}) async {
     try {
-      final res = await receive.Enroller.fromRelayConfig(
-          relayUrl: relayUrl,
-          ohttpConfigBase64: ohttpConfigBase64,
-          ohttpProxyUrl: ohttpProxyUrl);
+      final res = await receive.Enroller.fromDirectoryConfig(
+          directory: directory, ohttpKeys: ohttpKeys, ohttpRelay: ohttpRelay);
       return Enroller._(field0: res.field0);
-    } on error.PayjoinError catch (e) {
-      throw mapPayjoinError(e);
-    }
-  }
-
-  @override
-  Future<String> payjoinSubdir({dynamic hint}) {
-    try {
-      return super.payjoinSubdir();
-    } on error.PayjoinError catch (e) {
-      throw mapPayjoinError(e);
-    }
-  }
-
-  @override
-  Future<String> subdirectory({dynamic hint}) {
-    try {
-      return super.subdirectory();
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
     }
