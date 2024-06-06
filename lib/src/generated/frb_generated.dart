@@ -78,27 +78,20 @@ abstract class PayjoinCoreApi extends BaseApi {
       required ClientResponse ctx,
       dynamic hint});
 
-  Future<Uint8List> enrolledSubdirectory(
-      {required Enrolled that, dynamic hint});
-
   Future<((Url, Uint8List), ClientResponse)> enrollerExtractReq(
       {required Enroller ptr, dynamic hint});
 
-  Future<Enroller> enrollerFromRelayConfig(
-      {required String relayUrl,
-      required String ohttpConfigBase64,
-      required String ohttpProxyUrl,
+  Future<Enroller> enrollerFromDirectoryConfig(
+      {required Url directory,
+      required OhttpKeys ohttpKeys,
+      required Url ohttpRelay,
       dynamic hint});
-
-  Future<String> enrollerPayjoinSubdir({required Enroller that, dynamic hint});
 
   Future<Enrolled> enrollerProcessRes(
       {required Enroller that,
       required List<int> body,
       required ClientResponse ctx,
       dynamic hint});
-
-  Future<String> enrollerSubdirectory({required Enroller that, dynamic hint});
 
   Future<MaybeMixedInputScripts> maybeInputsOwnedCheckInputsNotOwned(
       {required MaybeInputsOwned ptr,
@@ -288,9 +281,9 @@ abstract class PayjoinCoreApi extends BaseApi {
       {required RequestContext ptr, dynamic hint});
 
   Future<RequestContextV2> requestContextExtractV2(
-      {required RequestContext ptr,
-      required String ohttpProxyUrl,
-      dynamic hint});
+      {required RequestContext ptr, required Url ohttpProxyUrl, dynamic hint});
+
+  Future<OhttpKeys> ohttpKeysDecode({required List<int> bytes, dynamic hint});
 
   Future<String> uriAddress({required Uri that, dynamic hint});
 
@@ -510,6 +503,15 @@ abstract class PayjoinCoreApi extends BaseApi {
 
   CrossPlatformFinalizerArg
       get rust_arc_decrement_strong_count_PayjoinFfiReceiveV2V2UncheckedProposalPtr;
+
+  RustArcIncrementStrongCountFnType
+      get rust_arc_increment_strong_count_PayjoinFfiTypesOhttpKeys;
+
+  RustArcDecrementStrongCountFnType
+      get rust_arc_decrement_strong_count_PayjoinFfiTypesOhttpKeys;
+
+  CrossPlatformFinalizerArg
+      get rust_arc_decrement_strong_count_PayjoinFfiTypesOhttpKeysPtr;
 }
 
 class PayjoinCoreApiImpl extends PayjoinCoreApiImplPlatform
@@ -600,30 +602,6 @@ class PayjoinCoreApiImpl extends PayjoinCoreApiImplPlatform
       );
 
   @override
-  Future<Uint8List> enrolledSubdirectory(
-      {required Enrolled that, dynamic hint}) {
-    return handler.executeNormal(NormalTask(
-      callFfi: (port_) {
-        var arg0 = cst_encode_box_autoadd_enrolled(that);
-        return wire.wire_enrolled_subdirectory(port_, arg0);
-      },
-      codec: DcoCodec(
-        decodeSuccessData: dco_decode_list_prim_u_8_strict,
-        decodeErrorData: null,
-      ),
-      constMeta: kEnrolledSubdirectoryConstMeta,
-      argValues: [that],
-      apiImpl: this,
-      hint: hint,
-    ));
-  }
-
-  TaskConstMeta get kEnrolledSubdirectoryConstMeta => const TaskConstMeta(
-        debugName: "enrolled_subdirectory",
-        argNames: ["that"],
-      );
-
-  @override
   Future<((Url, Uint8List), ClientResponse)> enrollerExtractReq(
       {required Enroller ptr, dynamic hint}) {
     return handler.executeNormal(NormalTask(
@@ -649,55 +627,34 @@ class PayjoinCoreApiImpl extends PayjoinCoreApiImplPlatform
       );
 
   @override
-  Future<Enroller> enrollerFromRelayConfig(
-      {required String relayUrl,
-      required String ohttpConfigBase64,
-      required String ohttpProxyUrl,
+  Future<Enroller> enrollerFromDirectoryConfig(
+      {required Url directory,
+      required OhttpKeys ohttpKeys,
+      required Url ohttpRelay,
       dynamic hint}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        var arg0 = cst_encode_String(relayUrl);
-        var arg1 = cst_encode_String(ohttpConfigBase64);
-        var arg2 = cst_encode_String(ohttpProxyUrl);
-        return wire.wire_enroller_from_relay_config(port_, arg0, arg1, arg2);
+        var arg0 = cst_encode_box_autoadd_url(directory);
+        var arg1 = cst_encode_box_autoadd_ohttp_keys(ohttpKeys);
+        var arg2 = cst_encode_box_autoadd_url(ohttpRelay);
+        return wire.wire_enroller_from_directory_config(
+            port_, arg0, arg1, arg2);
       },
       codec: DcoCodec(
         decodeSuccessData: dco_decode_enroller,
         decodeErrorData: null,
       ),
-      constMeta: kEnrollerFromRelayConfigConstMeta,
-      argValues: [relayUrl, ohttpConfigBase64, ohttpProxyUrl],
+      constMeta: kEnrollerFromDirectoryConfigConstMeta,
+      argValues: [directory, ohttpKeys, ohttpRelay],
       apiImpl: this,
       hint: hint,
     ));
   }
 
-  TaskConstMeta get kEnrollerFromRelayConfigConstMeta => const TaskConstMeta(
-        debugName: "enroller_from_relay_config",
-        argNames: ["relayUrl", "ohttpConfigBase64", "ohttpProxyUrl"],
-      );
-
-  @override
-  Future<String> enrollerPayjoinSubdir({required Enroller that, dynamic hint}) {
-    return handler.executeNormal(NormalTask(
-      callFfi: (port_) {
-        var arg0 = cst_encode_box_autoadd_enroller(that);
-        return wire.wire_enroller_payjoin_subdir(port_, arg0);
-      },
-      codec: DcoCodec(
-        decodeSuccessData: dco_decode_String,
-        decodeErrorData: null,
-      ),
-      constMeta: kEnrollerPayjoinSubdirConstMeta,
-      argValues: [that],
-      apiImpl: this,
-      hint: hint,
-    ));
-  }
-
-  TaskConstMeta get kEnrollerPayjoinSubdirConstMeta => const TaskConstMeta(
-        debugName: "enroller_payjoin_subdir",
-        argNames: ["that"],
+  TaskConstMeta get kEnrollerFromDirectoryConfigConstMeta =>
+      const TaskConstMeta(
+        debugName: "enroller_from_directory_config",
+        argNames: ["directory", "ohttpKeys", "ohttpRelay"],
       );
 
   @override
@@ -727,29 +684,6 @@ class PayjoinCoreApiImpl extends PayjoinCoreApiImplPlatform
   TaskConstMeta get kEnrollerProcessResConstMeta => const TaskConstMeta(
         debugName: "enroller_process_res",
         argNames: ["that", "body", "ctx"],
-      );
-
-  @override
-  Future<String> enrollerSubdirectory({required Enroller that, dynamic hint}) {
-    return handler.executeNormal(NormalTask(
-      callFfi: (port_) {
-        var arg0 = cst_encode_box_autoadd_enroller(that);
-        return wire.wire_enroller_subdirectory(port_, arg0);
-      },
-      codec: DcoCodec(
-        decodeSuccessData: dco_decode_String,
-        decodeErrorData: null,
-      ),
-      constMeta: kEnrollerSubdirectoryConstMeta,
-      argValues: [that],
-      apiImpl: this,
-      hint: hint,
-    ));
-  }
-
-  TaskConstMeta get kEnrollerSubdirectoryConstMeta => const TaskConstMeta(
-        debugName: "enroller_subdirectory",
-        argNames: ["that"],
       );
 
   @override
@@ -1995,13 +1929,11 @@ class PayjoinCoreApiImpl extends PayjoinCoreApiImplPlatform
 
   @override
   Future<RequestContextV2> requestContextExtractV2(
-      {required RequestContext ptr,
-      required String ohttpProxyUrl,
-      dynamic hint}) {
+      {required RequestContext ptr, required Url ohttpProxyUrl, dynamic hint}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
         var arg0 = cst_encode_box_autoadd_request_context(ptr);
-        var arg1 = cst_encode_String(ohttpProxyUrl);
+        var arg1 = cst_encode_box_autoadd_url(ohttpProxyUrl);
         return wire.wire_request_context_extract_v2(port_, arg0, arg1);
       },
       codec: DcoCodec(
@@ -2018,6 +1950,29 @@ class PayjoinCoreApiImpl extends PayjoinCoreApiImplPlatform
   TaskConstMeta get kRequestContextExtractV2ConstMeta => const TaskConstMeta(
         debugName: "request_context_extract_v2",
         argNames: ["ptr", "ohttpProxyUrl"],
+      );
+
+  @override
+  Future<OhttpKeys> ohttpKeysDecode({required List<int> bytes, dynamic hint}) {
+    return handler.executeNormal(NormalTask(
+      callFfi: (port_) {
+        var arg0 = cst_encode_list_prim_u_8_loose(bytes);
+        return wire.wire_ohttp_keys_decode(port_, arg0);
+      },
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_ohttp_keys,
+        decodeErrorData: dco_decode_payjoin_error,
+      ),
+      constMeta: kOhttpKeysDecodeConstMeta,
+      argValues: [bytes],
+      apiImpl: this,
+      hint: hint,
+    ));
+  }
+
+  TaskConstMeta get kOhttpKeysDecodeConstMeta => const TaskConstMeta(
+        debugName: "ohttp_keys_decode",
+        argNames: ["bytes"],
       );
 
   @override
@@ -2401,6 +2356,14 @@ class PayjoinCoreApiImpl extends PayjoinCoreApiImplPlatform
       get rust_arc_decrement_strong_count_PayjoinFfiReceiveV2V2UncheckedProposal =>
           wire.rust_arc_decrement_strong_count_RustOpaque_payjoin_ffireceivev2V2UncheckedProposal;
 
+  RustArcIncrementStrongCountFnType
+      get rust_arc_increment_strong_count_PayjoinFfiTypesOhttpKeys => wire
+          .rust_arc_increment_strong_count_RustOpaque_payjoin_ffitypesOhttpKeys;
+
+  RustArcDecrementStrongCountFnType
+      get rust_arc_decrement_strong_count_PayjoinFfiTypesOhttpKeys => wire
+          .rust_arc_decrement_strong_count_RustOpaque_payjoin_ffitypesOhttpKeys;
+
   @protected
   FutureOr<String> Function(String)
       dco_decode_DartFn_Inputs_String_Output_String(dynamic raw) {
@@ -2626,6 +2589,13 @@ class PayjoinCoreApiImpl extends PayjoinCoreApiImplPlatform
   }
 
   @protected
+  PayjoinFfiTypesOhttpKeys dco_decode_RustOpaque_payjoin_ffitypesOhttpKeys(
+      dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return PayjoinFfiTypesOhttpKeys.dcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
   String dco_decode_String(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw as String;
@@ -2696,6 +2666,12 @@ class PayjoinCoreApiImpl extends PayjoinCoreApiImplPlatform
       dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_maybe_mixed_input_scripts(raw);
+  }
+
+  @protected
+  OhttpKeys dco_decode_box_autoadd_ohttp_keys(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_ohttp_keys(raw);
   }
 
   @protected
@@ -2960,6 +2936,17 @@ class PayjoinCoreApiImpl extends PayjoinCoreApiImplPlatform
       field0:
           dco_decode_RustOpaque_Arcpayjoin_ffireceivev1MaybeMixedInputScripts(
               arr[0]),
+    );
+  }
+
+  @protected
+  OhttpKeys dco_decode_ohttp_keys(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 1)
+      throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
+    return OhttpKeys(
+      field0: dco_decode_RustOpaque_payjoin_ffitypesOhttpKeys(arr[0]),
     );
   }
 
@@ -3613,6 +3600,14 @@ class PayjoinCoreApiImpl extends PayjoinCoreApiImplPlatform
   }
 
   @protected
+  PayjoinFfiTypesOhttpKeys sse_decode_RustOpaque_payjoin_ffitypesOhttpKeys(
+      SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return PayjoinFfiTypesOhttpKeys.sseDecode(
+        sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
+  }
+
+  @protected
   String sse_decode_String(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var inner = sse_decode_list_prim_u_8_strict(deserializer);
@@ -3687,6 +3682,12 @@ class PayjoinCoreApiImpl extends PayjoinCoreApiImplPlatform
       SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return (sse_decode_maybe_mixed_input_scripts(deserializer));
+  }
+
+  @protected
+  OhttpKeys sse_decode_box_autoadd_ohttp_keys(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_ohttp_keys(deserializer));
   }
 
   @protected
@@ -3954,6 +3955,14 @@ class PayjoinCoreApiImpl extends PayjoinCoreApiImplPlatform
         sse_decode_RustOpaque_Arcpayjoin_ffireceivev1MaybeMixedInputScripts(
             deserializer);
     return MaybeMixedInputScripts(field0: var_field0);
+  }
+
+  @protected
+  OhttpKeys sse_decode_ohttp_keys(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_field0 =
+        sse_decode_RustOpaque_payjoin_ffitypesOhttpKeys(deserializer);
+    return OhttpKeys(field0: var_field0);
   }
 
   @protected
@@ -4532,6 +4541,14 @@ class PayjoinCoreApiImpl extends PayjoinCoreApiImplPlatform
   }
 
   @protected
+  int cst_encode_RustOpaque_payjoin_ffitypesOhttpKeys(
+      PayjoinFfiTypesOhttpKeys raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+// ignore: invalid_use_of_internal_member
+    return raw.cstEncode();
+  }
+
+  @protected
   bool cst_encode_bool(bool raw) {
     // Codec=Cst (C-struct based), see doc to use other codecs
     return raw;
@@ -4783,6 +4800,13 @@ class PayjoinCoreApiImpl extends PayjoinCoreApiImplPlatform
   }
 
   @protected
+  void sse_encode_RustOpaque_payjoin_ffitypesOhttpKeys(
+      PayjoinFfiTypesOhttpKeys self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(self.sseEncode(move: null), serializer);
+  }
+
+  @protected
   void sse_encode_String(String self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_list_prim_u_8_strict(utf8.encoder.convert(self), serializer);
@@ -4860,6 +4884,13 @@ class PayjoinCoreApiImpl extends PayjoinCoreApiImplPlatform
       MaybeMixedInputScripts self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_maybe_mixed_input_scripts(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_ohttp_keys(
+      OhttpKeys self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_ohttp_keys(self, serializer);
   }
 
   @protected
@@ -5114,6 +5145,12 @@ class PayjoinCoreApiImpl extends PayjoinCoreApiImplPlatform
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_RustOpaque_Arcpayjoin_ffireceivev1MaybeMixedInputScripts(
         self.field0, serializer);
+  }
+
+  @protected
+  void sse_encode_ohttp_keys(OhttpKeys self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_RustOpaque_payjoin_ffitypesOhttpKeys(self.field0, serializer);
   }
 
   @protected

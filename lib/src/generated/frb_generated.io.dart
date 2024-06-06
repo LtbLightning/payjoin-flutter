@@ -114,6 +114,10 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
       get rust_arc_decrement_strong_count_PayjoinFfiReceiveV2V2UncheckedProposalPtr =>
           wire._rust_arc_decrement_strong_count_RustOpaque_payjoin_ffireceivev2V2UncheckedProposalPtr;
 
+  CrossPlatformFinalizerArg
+      get rust_arc_decrement_strong_count_PayjoinFfiTypesOhttpKeysPtr => wire
+          ._rust_arc_decrement_strong_count_RustOpaque_payjoin_ffitypesOhttpKeysPtr;
+
   @protected
   FutureOr<String> Function(String)
       dco_decode_DartFn_Inputs_String_Output_String(dynamic raw);
@@ -236,6 +240,10 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
           dynamic raw);
 
   @protected
+  PayjoinFfiTypesOhttpKeys dco_decode_RustOpaque_payjoin_ffitypesOhttpKeys(
+      dynamic raw);
+
+  @protected
   String dco_decode_String(dynamic raw);
 
   @protected
@@ -271,6 +279,9 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
   @protected
   MaybeMixedInputScripts dco_decode_box_autoadd_maybe_mixed_input_scripts(
       dynamic raw);
+
+  @protected
+  OhttpKeys dco_decode_box_autoadd_ohttp_keys(dynamic raw);
 
   @protected
   OutPoint dco_decode_box_autoadd_out_point(dynamic raw);
@@ -379,6 +390,9 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
 
   @protected
   MaybeMixedInputScripts dco_decode_maybe_mixed_input_scripts(dynamic raw);
+
+  @protected
+  OhttpKeys dco_decode_ohttp_keys(dynamic raw);
 
   @protected
   String? dco_decode_opt_String(dynamic raw);
@@ -611,6 +625,10 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
           SseDeserializer deserializer);
 
   @protected
+  PayjoinFfiTypesOhttpKeys sse_decode_RustOpaque_payjoin_ffitypesOhttpKeys(
+      SseDeserializer deserializer);
+
+  @protected
   String sse_decode_String(SseDeserializer deserializer);
 
   @protected
@@ -649,6 +667,9 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
   @protected
   MaybeMixedInputScripts sse_decode_box_autoadd_maybe_mixed_input_scripts(
       SseDeserializer deserializer);
+
+  @protected
+  OhttpKeys sse_decode_box_autoadd_ohttp_keys(SseDeserializer deserializer);
 
   @protected
   OutPoint sse_decode_box_autoadd_out_point(SseDeserializer deserializer);
@@ -770,6 +791,9 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
   @protected
   MaybeMixedInputScripts sse_decode_maybe_mixed_input_scripts(
       SseDeserializer deserializer);
+
+  @protected
+  OhttpKeys sse_decode_ohttp_keys(SseDeserializer deserializer);
 
   @protected
   String? sse_decode_opt_String(SseDeserializer deserializer);
@@ -993,6 +1017,15 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
     // Codec=Cst (C-struct based), see doc to use other codecs
     final ptr = wire.cst_new_box_autoadd_maybe_mixed_input_scripts();
     cst_api_fill_to_wire_maybe_mixed_input_scripts(raw, ptr.ref);
+    return ptr;
+  }
+
+  @protected
+  ffi.Pointer<wire_cst_ohttp_keys> cst_encode_box_autoadd_ohttp_keys(
+      OhttpKeys raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    final ptr = wire.cst_new_box_autoadd_ohttp_keys();
+    cst_api_fill_to_wire_ohttp_keys(raw, ptr.ref);
     return ptr;
   }
 
@@ -1318,6 +1351,12 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
   }
 
   @protected
+  void cst_api_fill_to_wire_box_autoadd_ohttp_keys(
+      OhttpKeys apiObj, ffi.Pointer<wire_cst_ohttp_keys> wireObj) {
+    cst_api_fill_to_wire_ohttp_keys(apiObj, wireObj.ref);
+  }
+
+  @protected
   void cst_api_fill_to_wire_box_autoadd_out_point(
       OutPoint apiObj, ffi.Pointer<wire_cst_out_point> wireObj) {
     cst_api_fill_to_wire_out_point(apiObj, wireObj.ref);
@@ -1491,6 +1530,13 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
     wireObj.field0 =
         cst_encode_RustOpaque_Arcpayjoin_ffireceivev1MaybeMixedInputScripts(
             apiObj.field0);
+  }
+
+  @protected
+  void cst_api_fill_to_wire_ohttp_keys(
+      OhttpKeys apiObj, wire_cst_ohttp_keys wireObj) {
+    wireObj.field0 =
+        cst_encode_RustOpaque_payjoin_ffitypesOhttpKeys(apiObj.field0);
   }
 
   @protected
@@ -1882,6 +1928,10 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
       PayjoinFfiReceiveV2V2UncheckedProposal raw);
 
   @protected
+  int cst_encode_RustOpaque_payjoin_ffitypesOhttpKeys(
+      PayjoinFfiTypesOhttpKeys raw);
+
+  @protected
   bool cst_encode_bool(bool raw);
 
   @protected
@@ -2018,6 +2068,10 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
       PayjoinFfiReceiveV2V2UncheckedProposal self, SseSerializer serializer);
 
   @protected
+  void sse_encode_RustOpaque_payjoin_ffitypesOhttpKeys(
+      PayjoinFfiTypesOhttpKeys self, SseSerializer serializer);
+
+  @protected
   void sse_encode_String(String self, SseSerializer serializer);
 
   @protected
@@ -2058,6 +2112,10 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
   @protected
   void sse_encode_box_autoadd_maybe_mixed_input_scripts(
       MaybeMixedInputScripts self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_box_autoadd_ohttp_keys(
+      OhttpKeys self, SseSerializer serializer);
 
   @protected
   void sse_encode_box_autoadd_out_point(
@@ -2185,6 +2243,9 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
   @protected
   void sse_encode_maybe_mixed_input_scripts(
       MaybeMixedInputScripts self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_ohttp_keys(OhttpKeys self, SseSerializer serializer);
 
   @protected
   void sse_encode_opt_String(String? self, SseSerializer serializer);
@@ -2417,23 +2478,6 @@ class PayjoinCoreWire implements BaseWire {
               ffi.Pointer<wire_cst_list_prim_u_8_loose>,
               ffi.Pointer<wire_cst_client_response>)>();
 
-  void wire_enrolled_subdirectory(
-    int port_,
-    ffi.Pointer<wire_cst_enrolled> that,
-  ) {
-    return _wire_enrolled_subdirectory(
-      port_,
-      that,
-    );
-  }
-
-  late final _wire_enrolled_subdirectoryPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(ffi.Int64, ffi.Pointer<wire_cst_enrolled>)>>(
-      'frbgen_payjoin_flutter_wire_enrolled_subdirectory');
-  late final _wire_enrolled_subdirectory = _wire_enrolled_subdirectoryPtr
-      .asFunction<void Function(int, ffi.Pointer<wire_cst_enrolled>)>();
-
   void wire_enroller_extract_req(
     int port_,
     ffi.Pointer<wire_cst_enroller> ptr,
@@ -2451,52 +2495,32 @@ class PayjoinCoreWire implements BaseWire {
   late final _wire_enroller_extract_req = _wire_enroller_extract_reqPtr
       .asFunction<void Function(int, ffi.Pointer<wire_cst_enroller>)>();
 
-  void wire_enroller_from_relay_config(
+  void wire_enroller_from_directory_config(
     int port_,
-    ffi.Pointer<wire_cst_list_prim_u_8_strict> relay_url,
-    ffi.Pointer<wire_cst_list_prim_u_8_strict> ohttp_config_base64,
-    ffi.Pointer<wire_cst_list_prim_u_8_strict> ohttp_proxy_url,
+    ffi.Pointer<wire_cst_url> directory,
+    ffi.Pointer<wire_cst_ohttp_keys> ohttp_keys,
+    ffi.Pointer<wire_cst_url> ohttp_relay,
   ) {
-    return _wire_enroller_from_relay_config(
+    return _wire_enroller_from_directory_config(
       port_,
-      relay_url,
-      ohttp_config_base64,
-      ohttp_proxy_url,
+      directory,
+      ohttp_keys,
+      ohttp_relay,
     );
   }
 
-  late final _wire_enroller_from_relay_configPtr = _lookup<
+  late final _wire_enroller_from_directory_configPtr = _lookup<
           ffi.NativeFunction<
               ffi.Void Function(
                   ffi.Int64,
-                  ffi.Pointer<wire_cst_list_prim_u_8_strict>,
-                  ffi.Pointer<wire_cst_list_prim_u_8_strict>,
-                  ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
-      'frbgen_payjoin_flutter_wire_enroller_from_relay_config');
-  late final _wire_enroller_from_relay_config =
-      _wire_enroller_from_relay_configPtr.asFunction<
-          void Function(
-              int,
-              ffi.Pointer<wire_cst_list_prim_u_8_strict>,
-              ffi.Pointer<wire_cst_list_prim_u_8_strict>,
-              ffi.Pointer<wire_cst_list_prim_u_8_strict>)>();
-
-  void wire_enroller_payjoin_subdir(
-    int port_,
-    ffi.Pointer<wire_cst_enroller> that,
-  ) {
-    return _wire_enroller_payjoin_subdir(
-      port_,
-      that,
-    );
-  }
-
-  late final _wire_enroller_payjoin_subdirPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(ffi.Int64, ffi.Pointer<wire_cst_enroller>)>>(
-      'frbgen_payjoin_flutter_wire_enroller_payjoin_subdir');
-  late final _wire_enroller_payjoin_subdir = _wire_enroller_payjoin_subdirPtr
-      .asFunction<void Function(int, ffi.Pointer<wire_cst_enroller>)>();
+                  ffi.Pointer<wire_cst_url>,
+                  ffi.Pointer<wire_cst_ohttp_keys>,
+                  ffi.Pointer<wire_cst_url>)>>(
+      'frbgen_payjoin_flutter_wire_enroller_from_directory_config');
+  late final _wire_enroller_from_directory_config =
+      _wire_enroller_from_directory_configPtr.asFunction<
+          void Function(int, ffi.Pointer<wire_cst_url>,
+              ffi.Pointer<wire_cst_ohttp_keys>, ffi.Pointer<wire_cst_url>)>();
 
   void wire_enroller_process_res(
     int port_,
@@ -2527,23 +2551,6 @@ class PayjoinCoreWire implements BaseWire {
               ffi.Pointer<wire_cst_enroller>,
               ffi.Pointer<wire_cst_list_prim_u_8_loose>,
               ffi.Pointer<wire_cst_client_response>)>();
-
-  void wire_enroller_subdirectory(
-    int port_,
-    ffi.Pointer<wire_cst_enroller> that,
-  ) {
-    return _wire_enroller_subdirectory(
-      port_,
-      that,
-    );
-  }
-
-  late final _wire_enroller_subdirectoryPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(ffi.Int64, ffi.Pointer<wire_cst_enroller>)>>(
-      'frbgen_payjoin_flutter_wire_enroller_subdirectory');
-  late final _wire_enroller_subdirectory = _wire_enroller_subdirectoryPtr
-      .asFunction<void Function(int, ffi.Pointer<wire_cst_enroller>)>();
 
   void wire_maybe_inputs_owned_check_inputs_not_owned(
     int port_,
@@ -3565,7 +3572,7 @@ class PayjoinCoreWire implements BaseWire {
   void wire_request_context_extract_v2(
     int port_,
     ffi.Pointer<wire_cst_request_context> ptr,
-    ffi.Pointer<wire_cst_list_prim_u_8_strict> ohttp_proxy_url,
+    ffi.Pointer<wire_cst_url> ohttp_proxy_url,
   ) {
     return _wire_request_context_extract_v2(
       port_,
@@ -3579,12 +3586,30 @@ class PayjoinCoreWire implements BaseWire {
               ffi.Void Function(
                   ffi.Int64,
                   ffi.Pointer<wire_cst_request_context>,
-                  ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
+                  ffi.Pointer<wire_cst_url>)>>(
       'frbgen_payjoin_flutter_wire_request_context_extract_v2');
   late final _wire_request_context_extract_v2 =
       _wire_request_context_extract_v2Ptr.asFunction<
           void Function(int, ffi.Pointer<wire_cst_request_context>,
-              ffi.Pointer<wire_cst_list_prim_u_8_strict>)>();
+              ffi.Pointer<wire_cst_url>)>();
+
+  void wire_ohttp_keys_decode(
+    int port_,
+    ffi.Pointer<wire_cst_list_prim_u_8_loose> bytes,
+  ) {
+    return _wire_ohttp_keys_decode(
+      port_,
+      bytes,
+    );
+  }
+
+  late final _wire_ohttp_keys_decodePtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Void Function(
+                  ffi.Int64, ffi.Pointer<wire_cst_list_prim_u_8_loose>)>>(
+      'frbgen_payjoin_flutter_wire_ohttp_keys_decode');
+  late final _wire_ohttp_keys_decode = _wire_ohttp_keys_decodePtr.asFunction<
+      void Function(int, ffi.Pointer<wire_cst_list_prim_u_8_loose>)>();
 
   void wire_uri_address(
     int port_,
@@ -4416,6 +4441,36 @@ class PayjoinCoreWire implements BaseWire {
       _rust_arc_decrement_strong_count_RustOpaque_payjoin_ffireceivev2V2UncheckedProposalPtr
           .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
 
+  void rust_arc_increment_strong_count_RustOpaque_payjoin_ffitypesOhttpKeys(
+    ffi.Pointer<ffi.Void> ptr,
+  ) {
+    return _rust_arc_increment_strong_count_RustOpaque_payjoin_ffitypesOhttpKeys(
+      ptr,
+    );
+  }
+
+  late final _rust_arc_increment_strong_count_RustOpaque_payjoin_ffitypesOhttpKeysPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
+          'frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_payjoin_ffitypesOhttpKeys');
+  late final _rust_arc_increment_strong_count_RustOpaque_payjoin_ffitypesOhttpKeys =
+      _rust_arc_increment_strong_count_RustOpaque_payjoin_ffitypesOhttpKeysPtr
+          .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
+
+  void rust_arc_decrement_strong_count_RustOpaque_payjoin_ffitypesOhttpKeys(
+    ffi.Pointer<ffi.Void> ptr,
+  ) {
+    return _rust_arc_decrement_strong_count_RustOpaque_payjoin_ffitypesOhttpKeys(
+      ptr,
+    );
+  }
+
+  late final _rust_arc_decrement_strong_count_RustOpaque_payjoin_ffitypesOhttpKeysPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
+          'frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_payjoin_ffitypesOhttpKeys');
+  late final _rust_arc_decrement_strong_count_RustOpaque_payjoin_ffitypesOhttpKeys =
+      _rust_arc_decrement_strong_count_RustOpaque_payjoin_ffitypesOhttpKeysPtr
+          .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
+
   ffi.Pointer<wire_cst_client_response> cst_new_box_autoadd_client_response() {
     return _cst_new_box_autoadd_client_response();
   }
@@ -4531,6 +4586,17 @@ class PayjoinCoreWire implements BaseWire {
   late final _cst_new_box_autoadd_maybe_mixed_input_scripts =
       _cst_new_box_autoadd_maybe_mixed_input_scriptsPtr.asFunction<
           ffi.Pointer<wire_cst_maybe_mixed_input_scripts> Function()>();
+
+  ffi.Pointer<wire_cst_ohttp_keys> cst_new_box_autoadd_ohttp_keys() {
+    return _cst_new_box_autoadd_ohttp_keys();
+  }
+
+  late final _cst_new_box_autoadd_ohttp_keysPtr =
+      _lookup<ffi.NativeFunction<ffi.Pointer<wire_cst_ohttp_keys> Function()>>(
+          'frbgen_payjoin_flutter_cst_new_box_autoadd_ohttp_keys');
+  late final _cst_new_box_autoadd_ohttp_keys =
+      _cst_new_box_autoadd_ohttp_keysPtr
+          .asFunction<ffi.Pointer<wire_cst_ohttp_keys> Function()>();
 
   ffi.Pointer<wire_cst_out_point> cst_new_box_autoadd_out_point() {
     return _cst_new_box_autoadd_out_point();
@@ -4897,11 +4963,14 @@ final class wire_cst_enroller extends ffi.Struct {
   external int field0;
 }
 
-final class wire_cst_list_prim_u_8_strict extends ffi.Struct {
-  external ffi.Pointer<ffi.Uint8> ptr;
+final class wire_cst_url extends ffi.Struct {
+  @ffi.UintPtr()
+  external int field0;
+}
 
-  @ffi.Int32()
-  external int len;
+final class wire_cst_ohttp_keys extends ffi.Struct {
+  @ffi.UintPtr()
+  external int field0;
 }
 
 final class wire_cst_maybe_inputs_owned extends ffi.Struct {
@@ -4932,6 +5001,13 @@ final class wire_cst_payjoin_proposal extends ffi.Struct {
 final class wire_cst_provisional_proposal extends ffi.Struct {
   @ffi.UintPtr()
   external int field0;
+}
+
+final class wire_cst_list_prim_u_8_strict extends ffi.Struct {
+  external ffi.Pointer<ffi.Uint8> ptr;
+
+  @ffi.Int32()
+  external int len;
 }
 
 final class wire_cst_out_point extends ffi.Struct {
@@ -5040,11 +5116,6 @@ final class wire_cst_uri extends ffi.Struct {
 }
 
 final class wire_cst_request_context extends ffi.Struct {
-  @ffi.UintPtr()
-  external int field0;
-}
-
-final class wire_cst_url extends ffi.Struct {
   @ffi.UintPtr()
   external int field0;
 }

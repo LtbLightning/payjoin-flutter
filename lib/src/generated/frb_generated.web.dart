@@ -113,6 +113,10 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
       get rust_arc_decrement_strong_count_PayjoinFfiReceiveV2V2UncheckedProposalPtr =>
           wire.rust_arc_decrement_strong_count_RustOpaque_payjoin_ffireceivev2V2UncheckedProposal;
 
+  CrossPlatformFinalizerArg
+      get rust_arc_decrement_strong_count_PayjoinFfiTypesOhttpKeysPtr => wire
+          .rust_arc_decrement_strong_count_RustOpaque_payjoin_ffitypesOhttpKeys;
+
   @protected
   FutureOr<String> Function(String)
       dco_decode_DartFn_Inputs_String_Output_String(dynamic raw);
@@ -235,6 +239,10 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
           dynamic raw);
 
   @protected
+  PayjoinFfiTypesOhttpKeys dco_decode_RustOpaque_payjoin_ffitypesOhttpKeys(
+      dynamic raw);
+
+  @protected
   String dco_decode_String(dynamic raw);
 
   @protected
@@ -270,6 +278,9 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
   @protected
   MaybeMixedInputScripts dco_decode_box_autoadd_maybe_mixed_input_scripts(
       dynamic raw);
+
+  @protected
+  OhttpKeys dco_decode_box_autoadd_ohttp_keys(dynamic raw);
 
   @protected
   OutPoint dco_decode_box_autoadd_out_point(dynamic raw);
@@ -378,6 +389,9 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
 
   @protected
   MaybeMixedInputScripts dco_decode_maybe_mixed_input_scripts(dynamic raw);
+
+  @protected
+  OhttpKeys dco_decode_ohttp_keys(dynamic raw);
 
   @protected
   String? dco_decode_opt_String(dynamic raw);
@@ -610,6 +624,10 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
           SseDeserializer deserializer);
 
   @protected
+  PayjoinFfiTypesOhttpKeys sse_decode_RustOpaque_payjoin_ffitypesOhttpKeys(
+      SseDeserializer deserializer);
+
+  @protected
   String sse_decode_String(SseDeserializer deserializer);
 
   @protected
@@ -648,6 +666,9 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
   @protected
   MaybeMixedInputScripts sse_decode_box_autoadd_maybe_mixed_input_scripts(
       SseDeserializer deserializer);
+
+  @protected
+  OhttpKeys sse_decode_box_autoadd_ohttp_keys(SseDeserializer deserializer);
 
   @protected
   OutPoint sse_decode_box_autoadd_out_point(SseDeserializer deserializer);
@@ -769,6 +790,9 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
   @protected
   MaybeMixedInputScripts sse_decode_maybe_mixed_input_scripts(
       SseDeserializer deserializer);
+
+  @protected
+  OhttpKeys sse_decode_ohttp_keys(SseDeserializer deserializer);
 
   @protected
   String? sse_decode_opt_String(SseDeserializer deserializer);
@@ -968,6 +992,12 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
       MaybeMixedInputScripts raw) {
     // Codec=Cst (C-struct based), see doc to use other codecs
     return cst_encode_maybe_mixed_input_scripts(raw);
+  }
+
+  @protected
+  List<dynamic> cst_encode_box_autoadd_ohttp_keys(OhttpKeys raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return cst_encode_ohttp_keys(raw);
   }
 
   @protected
@@ -1191,6 +1221,12 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
       cst_encode_RustOpaque_Arcpayjoin_ffireceivev1MaybeMixedInputScripts(
           raw.field0)
     ];
+  }
+
+  @protected
+  List<dynamic> cst_encode_ohttp_keys(OhttpKeys raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return [cst_encode_RustOpaque_payjoin_ffitypesOhttpKeys(raw.field0)];
   }
 
   @protected
@@ -1580,6 +1616,10 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
       PayjoinFfiReceiveV2V2UncheckedProposal raw);
 
   @protected
+  int cst_encode_RustOpaque_payjoin_ffitypesOhttpKeys(
+      PayjoinFfiTypesOhttpKeys raw);
+
+  @protected
   bool cst_encode_bool(bool raw);
 
   @protected
@@ -1716,6 +1756,10 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
       PayjoinFfiReceiveV2V2UncheckedProposal self, SseSerializer serializer);
 
   @protected
+  void sse_encode_RustOpaque_payjoin_ffitypesOhttpKeys(
+      PayjoinFfiTypesOhttpKeys self, SseSerializer serializer);
+
+  @protected
   void sse_encode_String(String self, SseSerializer serializer);
 
   @protected
@@ -1756,6 +1800,10 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
   @protected
   void sse_encode_box_autoadd_maybe_mixed_input_scripts(
       MaybeMixedInputScripts self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_box_autoadd_ohttp_keys(
+      OhttpKeys self, SseSerializer serializer);
 
   @protected
   void sse_encode_box_autoadd_out_point(
@@ -1883,6 +1931,9 @@ abstract class PayjoinCoreApiImplPlatform extends BaseApiImpl<PayjoinCoreWire> {
   @protected
   void sse_encode_maybe_mixed_input_scripts(
       MaybeMixedInputScripts self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_ohttp_keys(OhttpKeys self, SseSerializer serializer);
 
   @protected
   void sse_encode_opt_String(String? self, SseSerializer serializer);
@@ -2026,26 +2077,20 @@ class PayjoinCoreWire implements BaseWire {
           List<int> body, List<dynamic> ctx) =>
       wasmModule.wire_enrolled_process_res(port_, that, body, ctx);
 
-  void wire_enrolled_subdirectory(NativePortType port_, List<dynamic> that) =>
-      wasmModule.wire_enrolled_subdirectory(port_, that);
-
   void wire_enroller_extract_req(NativePortType port_, List<dynamic> ptr) =>
       wasmModule.wire_enroller_extract_req(port_, ptr);
 
-  void wire_enroller_from_relay_config(NativePortType port_, String relay_url,
-          String ohttp_config_base64, String ohttp_proxy_url) =>
-      wasmModule.wire_enroller_from_relay_config(
-          port_, relay_url, ohttp_config_base64, ohttp_proxy_url);
-
-  void wire_enroller_payjoin_subdir(NativePortType port_, List<dynamic> that) =>
-      wasmModule.wire_enroller_payjoin_subdir(port_, that);
+  void wire_enroller_from_directory_config(
+          NativePortType port_,
+          List<dynamic> directory,
+          List<dynamic> ohttp_keys,
+          List<dynamic> ohttp_relay) =>
+      wasmModule.wire_enroller_from_directory_config(
+          port_, directory, ohttp_keys, ohttp_relay);
 
   void wire_enroller_process_res(NativePortType port_, List<dynamic> that,
           List<int> body, List<dynamic> ctx) =>
       wasmModule.wire_enroller_process_res(port_, that, body, ctx);
-
-  void wire_enroller_subdirectory(NativePortType port_, List<dynamic> that) =>
-      wasmModule.wire_enroller_subdirectory(port_, that);
 
   void wire_maybe_inputs_owned_check_inputs_not_owned(
           NativePortType port_, List<dynamic> ptr, PlatformPointer is_owned) =>
@@ -2288,9 +2333,12 @@ class PayjoinCoreWire implements BaseWire {
           NativePortType port_, List<dynamic> ptr) =>
       wasmModule.wire_request_context_extract_v1(port_, ptr);
 
-  void wire_request_context_extract_v2(
-          NativePortType port_, List<dynamic> ptr, String ohttp_proxy_url) =>
+  void wire_request_context_extract_v2(NativePortType port_, List<dynamic> ptr,
+          List<dynamic> ohttp_proxy_url) =>
       wasmModule.wire_request_context_extract_v2(port_, ptr, ohttp_proxy_url);
+
+  void wire_ohttp_keys_decode(NativePortType port_, List<int> bytes) =>
+      wasmModule.wire_ohttp_keys_decode(port_, bytes);
 
   void wire_uri_address(NativePortType port_, List<dynamic> that) =>
       wasmModule.wire_uri_address(port_, that);
@@ -2581,6 +2629,18 @@ class PayjoinCoreWire implements BaseWire {
       wasmModule
           .rust_arc_decrement_strong_count_RustOpaque_payjoin_ffireceivev2V2UncheckedProposal(
               ptr);
+
+  void rust_arc_increment_strong_count_RustOpaque_payjoin_ffitypesOhttpKeys(
+          dynamic ptr) =>
+      wasmModule
+          .rust_arc_increment_strong_count_RustOpaque_payjoin_ffitypesOhttpKeys(
+              ptr);
+
+  void rust_arc_decrement_strong_count_RustOpaque_payjoin_ffitypesOhttpKeys(
+          dynamic ptr) =>
+      wasmModule
+          .rust_arc_decrement_strong_count_RustOpaque_payjoin_ffitypesOhttpKeys(
+              ptr);
 }
 
 @JS('wasm_bindgen')
@@ -2604,23 +2664,17 @@ class PayjoinCoreWasmModule implements WasmModule {
   external void wire_enrolled_process_res(NativePortType port_,
       List<dynamic> that, List<int> body, List<dynamic> ctx);
 
-  external void wire_enrolled_subdirectory(
-      NativePortType port_, List<dynamic> that);
-
   external void wire_enroller_extract_req(
       NativePortType port_, List<dynamic> ptr);
 
-  external void wire_enroller_from_relay_config(NativePortType port_,
-      String relay_url, String ohttp_config_base64, String ohttp_proxy_url);
-
-  external void wire_enroller_payjoin_subdir(
-      NativePortType port_, List<dynamic> that);
+  external void wire_enroller_from_directory_config(
+      NativePortType port_,
+      List<dynamic> directory,
+      List<dynamic> ohttp_keys,
+      List<dynamic> ohttp_relay);
 
   external void wire_enroller_process_res(NativePortType port_,
       List<dynamic> that, List<int> body, List<dynamic> ctx);
-
-  external void wire_enroller_subdirectory(
-      NativePortType port_, List<dynamic> that);
 
   external void wire_maybe_inputs_owned_check_inputs_not_owned(
       NativePortType port_, List<dynamic> ptr, PlatformPointer is_owned);
@@ -2788,7 +2842,9 @@ class PayjoinCoreWasmModule implements WasmModule {
       NativePortType port_, List<dynamic> ptr);
 
   external void wire_request_context_extract_v2(
-      NativePortType port_, List<dynamic> ptr, String ohttp_proxy_url);
+      NativePortType port_, List<dynamic> ptr, List<dynamic> ohttp_proxy_url);
+
+  external void wire_ohttp_keys_decode(NativePortType port_, List<int> bytes);
 
   external void wire_uri_address(NativePortType port_, List<dynamic> that);
 
@@ -2980,5 +3036,13 @@ class PayjoinCoreWasmModule implements WasmModule {
 
   external void
       rust_arc_decrement_strong_count_RustOpaque_payjoin_ffireceivev2V2UncheckedProposal(
+          dynamic ptr);
+
+  external void
+      rust_arc_increment_strong_count_RustOpaque_payjoin_ffitypesOhttpKeys(
+          dynamic ptr);
+
+  external void
+      rust_arc_decrement_strong_count_RustOpaque_payjoin_ffitypesOhttpKeys(
           dynamic ptr);
 }

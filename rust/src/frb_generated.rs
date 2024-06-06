@@ -104,26 +104,6 @@ fn wire_enrolled_process_res_impl(
         },
     )
 }
-fn wire_enrolled_subdirectory_impl(
-    port_: flutter_rust_bridge::for_generated::MessagePort,
-    that: impl CstDecode<crate::api::receive::Enrolled>,
-) {
-    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::DcoCodec, _, _>(
-        flutter_rust_bridge::for_generated::TaskInfo {
-            debug_name: "enrolled_subdirectory",
-            port: Some(port_),
-            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
-        },
-        move || {
-            let api_that = that.cst_decode();
-            move |context| {
-                transform_result_dco((move || {
-                    Result::<_, ()>::Ok(crate::api::receive::Enrolled::subdirectory(&api_that))
-                })())
-            }
-        },
-    )
-}
 fn wire_enroller_extract_req_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
     ptr: impl CstDecode<crate::api::receive::Enroller>,
@@ -144,49 +124,29 @@ fn wire_enroller_extract_req_impl(
         },
     )
 }
-fn wire_enroller_from_relay_config_impl(
+fn wire_enroller_from_directory_config_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
-    relay_url: impl CstDecode<String>,
-    ohttp_config_base64: impl CstDecode<String>,
-    ohttp_proxy_url: impl CstDecode<String>,
+    directory: impl CstDecode<crate::api::uri::Url>,
+    ohttp_keys: impl CstDecode<crate::api::uri::OhttpKeys>,
+    ohttp_relay: impl CstDecode<crate::api::uri::Url>,
 ) {
     FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::DcoCodec, _, _>(
         flutter_rust_bridge::for_generated::TaskInfo {
-            debug_name: "enroller_from_relay_config",
+            debug_name: "enroller_from_directory_config",
             port: Some(port_),
             mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
         },
         move || {
-            let api_relay_url = relay_url.cst_decode();
-            let api_ohttp_config_base64 = ohttp_config_base64.cst_decode();
-            let api_ohttp_proxy_url = ohttp_proxy_url.cst_decode();
+            let api_directory = directory.cst_decode();
+            let api_ohttp_keys = ohttp_keys.cst_decode();
+            let api_ohttp_relay = ohttp_relay.cst_decode();
             move |context| {
                 transform_result_dco((move || {
-                    Result::<_, ()>::Ok(crate::api::receive::Enroller::from_relay_config(
-                        api_relay_url,
-                        api_ohttp_config_base64,
-                        api_ohttp_proxy_url,
+                    Result::<_, ()>::Ok(crate::api::receive::Enroller::from_directory_config(
+                        api_directory,
+                        api_ohttp_keys,
+                        api_ohttp_relay,
                     ))
-                })())
-            }
-        },
-    )
-}
-fn wire_enroller_payjoin_subdir_impl(
-    port_: flutter_rust_bridge::for_generated::MessagePort,
-    that: impl CstDecode<crate::api::receive::Enroller>,
-) {
-    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::DcoCodec, _, _>(
-        flutter_rust_bridge::for_generated::TaskInfo {
-            debug_name: "enroller_payjoin_subdir",
-            port: Some(port_),
-            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
-        },
-        move || {
-            let api_that = that.cst_decode();
-            move |context| {
-                transform_result_dco((move || {
-                    Result::<_, ()>::Ok(crate::api::receive::Enroller::payjoin_subdir(&api_that))
                 })())
             }
         },
@@ -211,26 +171,6 @@ fn wire_enroller_process_res_impl(
             move |context| {
                 transform_result_dco((move || {
                     crate::api::receive::Enroller::process_res(&api_that, api_body, api_ctx)
-                })())
-            }
-        },
-    )
-}
-fn wire_enroller_subdirectory_impl(
-    port_: flutter_rust_bridge::for_generated::MessagePort,
-    that: impl CstDecode<crate::api::receive::Enroller>,
-) {
-    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::DcoCodec, _, _>(
-        flutter_rust_bridge::for_generated::TaskInfo {
-            debug_name: "enroller_subdirectory",
-            port: Some(port_),
-            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
-        },
-        move || {
-            let api_that = that.cst_decode();
-            move |context| {
-                transform_result_dco((move || {
-                    Result::<_, ()>::Ok(crate::api::receive::Enroller::subdirectory(&api_that))
                 })())
             }
         },
@@ -1326,7 +1266,7 @@ fn wire_request_context_extract_v1_impl(
 fn wire_request_context_extract_v2_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
     ptr: impl CstDecode<crate::api::send::RequestContext>,
-    ohttp_proxy_url: impl CstDecode<String>,
+    ohttp_proxy_url: impl CstDecode<crate::api::uri::Url>,
 ) {
     FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::DcoCodec, _, _>(
         flutter_rust_bridge::for_generated::TaskInfo {
@@ -1341,6 +1281,24 @@ fn wire_request_context_extract_v2_impl(
                 transform_result_dco((move || {
                     crate::api::send::RequestContext::extract_v2(api_ptr, api_ohttp_proxy_url)
                 })())
+            }
+        },
+    )
+}
+fn wire_ohttp_keys_decode_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    bytes: impl CstDecode<Vec<u8>>,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::DcoCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "ohttp_keys_decode",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let api_bytes = bytes.cst_decode();
+            move |context| {
+                transform_result_dco((move || crate::api::uri::OhttpKeys::decode(api_bytes))())
             }
         },
     )
@@ -1770,6 +1728,14 @@ impl SseDecode for RustOpaqueNom<payjoin_ffi::receive::v2::V2UncheckedProposal> 
     }
 }
 
+impl SseDecode for RustOpaqueNom<payjoin_ffi::types::OhttpKeys> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <usize>::sse_decode(deserializer);
+        return unsafe { decode_rust_opaque_nom(inner) };
+    }
+}
+
 impl SseDecode for String {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -1937,6 +1903,15 @@ impl SseDecode for crate::api::receive::MaybeMixedInputScripts {
                 deserializer,
             );
         return crate::api::receive::MaybeMixedInputScripts(var_field0);
+    }
+}
+
+impl SseDecode for crate::api::uri::OhttpKeys {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_field0 =
+            <RustOpaqueNom<payjoin_ffi::types::OhttpKeys>>::sse_decode(deserializer);
+        return crate::api::uri::OhttpKeys(var_field0);
     }
 }
 
@@ -2555,6 +2530,18 @@ impl flutter_rust_bridge::IntoIntoDart<crate::api::receive::MaybeMixedInputScrip
     for crate::api::receive::MaybeMixedInputScripts
 {
     fn into_into_dart(self) -> crate::api::receive::MaybeMixedInputScripts {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::api::uri::OhttpKeys {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [self.0.into_into_dart().into_dart()].into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive for crate::api::uri::OhttpKeys {}
+impl flutter_rust_bridge::IntoIntoDart<crate::api::uri::OhttpKeys> for crate::api::uri::OhttpKeys {
+    fn into_into_dart(self) -> crate::api::uri::OhttpKeys {
         self
     }
 }
@@ -3180,6 +3167,15 @@ impl SseEncode for RustOpaqueNom<payjoin_ffi::receive::v2::V2UncheckedProposal> 
     }
 }
 
+impl SseEncode for RustOpaqueNom<payjoin_ffi::types::OhttpKeys> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        let (ptr, size) = self.sse_encode_raw();
+        <usize>::sse_encode(ptr, serializer);
+        <i32>::sse_encode(size, serializer);
+    }
+}
+
 impl SseEncode for String {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -3317,6 +3313,13 @@ impl SseEncode for crate::api::receive::MaybeMixedInputScripts {
         <RustOpaqueNom<Arc<payjoin_ffi::receive::v1::MaybeMixedInputScripts>>>::sse_encode(
             self.0, serializer,
         );
+    }
+}
+
+impl SseEncode for crate::api::uri::OhttpKeys {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <RustOpaqueNom<payjoin_ffi::types::OhttpKeys>>::sse_encode(self.0, serializer);
     }
 }
 

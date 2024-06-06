@@ -235,6 +235,23 @@ impl CstDecode<crate::api::receive::MaybeMixedInputScripts>
         crate::api::receive::MaybeMixedInputScripts(self_.get(0).cst_decode())
     }
 }
+impl CstDecode<crate::api::uri::OhttpKeys>
+    for flutter_rust_bridge::for_generated::wasm_bindgen::JsValue
+{
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    fn cst_decode(self) -> crate::api::uri::OhttpKeys {
+        let self_ = self
+            .dyn_into::<flutter_rust_bridge::for_generated::js_sys::Array>()
+            .unwrap();
+        assert_eq!(
+            self_.length(),
+            1,
+            "Expected 1 elements, got {}",
+            self_.length()
+        );
+        crate::api::uri::OhttpKeys(self_.get(0).cst_decode())
+    }
+}
 impl CstDecode<Option<String>> for Option<String> {
     // Codec=Cst (C-struct based), see doc to use other codecs
     fn cst_decode(self) -> Option<String> {
@@ -1002,6 +1019,18 @@ impl CstDecode<RustOpaqueNom<payjoin_ffi::receive::v2::V2UncheckedProposal>>
         unsafe { decode_rust_opaque_nom((self.as_f64().unwrap() as usize) as _) }
     }
 }
+impl CstDecode<RustOpaqueNom<payjoin_ffi::types::OhttpKeys>>
+    for flutter_rust_bridge::for_generated::wasm_bindgen::JsValue
+{
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    fn cst_decode(self) -> RustOpaqueNom<payjoin_ffi::types::OhttpKeys> {
+        #[cfg(target_pointer_width = "64")]
+        {
+            compile_error!("64-bit pointers are not supported.");
+        }
+        unsafe { decode_rust_opaque_nom((self.as_f64().unwrap() as usize) as _) }
+    }
+}
 impl CstDecode<String> for flutter_rust_bridge::for_generated::wasm_bindgen::JsValue {
     // Codec=Cst (C-struct based), see doc to use other codecs
     fn cst_decode(self) -> String {
@@ -1094,14 +1123,6 @@ pub fn wire_enrolled_process_res(
 }
 
 #[wasm_bindgen]
-pub fn wire_enrolled_subdirectory(
-    port_: flutter_rust_bridge::for_generated::MessagePort,
-    that: flutter_rust_bridge::for_generated::wasm_bindgen::JsValue,
-) {
-    wire_enrolled_subdirectory_impl(port_, that)
-}
-
-#[wasm_bindgen]
 pub fn wire_enroller_extract_req(
     port_: flutter_rust_bridge::for_generated::MessagePort,
     ptr: flutter_rust_bridge::for_generated::wasm_bindgen::JsValue,
@@ -1110,21 +1131,13 @@ pub fn wire_enroller_extract_req(
 }
 
 #[wasm_bindgen]
-pub fn wire_enroller_from_relay_config(
+pub fn wire_enroller_from_directory_config(
     port_: flutter_rust_bridge::for_generated::MessagePort,
-    relay_url: String,
-    ohttp_config_base64: String,
-    ohttp_proxy_url: String,
+    directory: flutter_rust_bridge::for_generated::wasm_bindgen::JsValue,
+    ohttp_keys: flutter_rust_bridge::for_generated::wasm_bindgen::JsValue,
+    ohttp_relay: flutter_rust_bridge::for_generated::wasm_bindgen::JsValue,
 ) {
-    wire_enroller_from_relay_config_impl(port_, relay_url, ohttp_config_base64, ohttp_proxy_url)
-}
-
-#[wasm_bindgen]
-pub fn wire_enroller_payjoin_subdir(
-    port_: flutter_rust_bridge::for_generated::MessagePort,
-    that: flutter_rust_bridge::for_generated::wasm_bindgen::JsValue,
-) {
-    wire_enroller_payjoin_subdir_impl(port_, that)
+    wire_enroller_from_directory_config_impl(port_, directory, ohttp_keys, ohttp_relay)
 }
 
 #[wasm_bindgen]
@@ -1135,14 +1148,6 @@ pub fn wire_enroller_process_res(
     ctx: flutter_rust_bridge::for_generated::wasm_bindgen::JsValue,
 ) {
     wire_enroller_process_res_impl(port_, that, body, ctx)
-}
-
-#[wasm_bindgen]
-pub fn wire_enroller_subdirectory(
-    port_: flutter_rust_bridge::for_generated::MessagePort,
-    that: flutter_rust_bridge::for_generated::wasm_bindgen::JsValue,
-) {
-    wire_enroller_subdirectory_impl(port_, that)
 }
 
 #[wasm_bindgen]
@@ -1567,9 +1572,17 @@ pub fn wire_request_context_extract_v1(
 pub fn wire_request_context_extract_v2(
     port_: flutter_rust_bridge::for_generated::MessagePort,
     ptr: flutter_rust_bridge::for_generated::wasm_bindgen::JsValue,
-    ohttp_proxy_url: String,
+    ohttp_proxy_url: flutter_rust_bridge::for_generated::wasm_bindgen::JsValue,
 ) {
     wire_request_context_extract_v2_impl(port_, ptr, ohttp_proxy_url)
+}
+
+#[wasm_bindgen]
+pub fn wire_ohttp_keys_decode(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    bytes: Box<[u8]>,
+) {
+    wire_ohttp_keys_decode_impl(port_, bytes)
 }
 
 #[wasm_bindgen]
@@ -2053,5 +2066,23 @@ pub fn rust_arc_decrement_strong_count_RustOpaque_payjoin_ffireceivev2V2Unchecke
 ) {
     unsafe {
         StdArc::<payjoin_ffi::receive::v2::V2UncheckedProposal>::decrement_strong_count(ptr as _);
+    }
+}
+
+#[wasm_bindgen]
+pub fn rust_arc_increment_strong_count_RustOpaque_payjoin_ffitypesOhttpKeys(
+    ptr: *const std::ffi::c_void,
+) {
+    unsafe {
+        StdArc::<payjoin_ffi::types::OhttpKeys>::increment_strong_count(ptr as _);
+    }
+}
+
+#[wasm_bindgen]
+pub fn rust_arc_decrement_strong_count_RustOpaque_payjoin_ffitypesOhttpKeys(
+    ptr: *const std::ffi::c_void,
+) {
+    unsafe {
+        StdArc::<payjoin_ffi::types::OhttpKeys>::decrement_strong_count(ptr as _);
     }
 }
