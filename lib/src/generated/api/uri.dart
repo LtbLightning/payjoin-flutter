@@ -9,6 +9,27 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'receive.dart';
 import 'send.dart';
 
+class OhttpKeys {
+  final PayjoinFfiTypesOhttpKeys field0;
+
+  const OhttpKeys({
+    required this.field0,
+  });
+
+  static Future<OhttpKeys> decode({required List<int> bytes, dynamic hint}) =>
+      PayjoinCore.instance.api.ohttpKeysDecode(bytes: bytes, hint: hint);
+
+  @override
+  int get hashCode => field0.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is OhttpKeys &&
+          runtimeType == other.runtimeType &&
+          field0 == other.field0;
+}
+
 class Uri {
   final ArcPayjoinFfiUriUri field0;
 
