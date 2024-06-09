@@ -20,16 +20,16 @@ void main() {
       final btcClient = BtcClient("sender");
       await btcClient.loadWallet();
       final sender = BdkClient(
-          "puppy interest whip tonight dad never sudden response push zone pig patch");
+          "wpkh(tprv8ZgxMBicQKsPfNH1PykMg16TAvrZgoxDnxr3eorcbhvZxyZzStwFkvqCJegr8Gbwj3GQum8QpXQPh7DGkoobpTB7YbcnUeUSKRDyX2cNN9h/84'/1'/0'/0/*)#ey7hlgpn");
       final receiver = BdkClient(
-          "cart super leaf clinic pistol plug replace close super tooth wealth usage");
+          "wpkh(tprv8ZgxMBicQKsPczV7D2zfMr7oUzHDhNPEuBUgrwRoWM3ijLRvhG87xYiqh9JFLPqojuhmqwMdo1oJzbe5GUpxCbDHnqyGhQa5Jg1Wt6rc9di/84'/1'/0'/0/*)#kdnuw5lq");
       await sender.restoreWallet();
       await receiver.restoreWallet();
       // Receiver creates the payjoin URI
       final pjReceiverAddress = (await receiver.getNewAddress()).address;
       final pjSenderAddress = (await sender.getNewAddress()).address;
-      await btcClient.sendToAddress(await pjSenderAddress.asString(), 10);
-      await btcClient.sendToAddress(await pjReceiverAddress.asString(), 2);
+      await btcClient.sendToAddress(await pjSenderAddress.asString(), 1);
+      await btcClient.sendToAddress(await pjReceiverAddress.asString(), 1);
       await btcClient.generate(11, await pjSenderAddress.asString());
       await receiver.syncWallet();
       await sender.syncWallet();
@@ -51,16 +51,16 @@ void main() {
         final script = ScriptBuf(bytes: e);
         return (await receiver.getAddressInfo(script));
       });
-      final availableInputs = await receiver.listUnspent();
+      final unspent = await receiver.listUnspent();
       // Select receiver payjoin inputs.
       Map<int, common.OutPoint> candidateInputs = {
-        for (var input in availableInputs)
+        for (var input in unspent)
           input.txout.value: common.OutPoint(
               txid: input.outpoint.txid.toString(), vout: input.outpoint.vout)
       };
       final selectedOutpoint = await provisionalProposal.tryPreservingPrivacy(
           candidateInputs: candidateInputs);
-      var selectedUtxo = availableInputs.firstWhere(
+      var selectedUtxo = unspent.firstWhere(
           (i) =>
               i.outpoint.txid.toString() == selectedOutpoint.txid &&
               i.outpoint.vout == selectedOutpoint.vout,
@@ -81,6 +81,7 @@ void main() {
           address: await receiverAddress.asString());
       final payJoinProposal =
           await provisionalProposal.finalizeProposal(processPsbt: (e) async {
+        debugPrint("\n Original receiver unsigned psbt: $e");
         return await (await receiver
                 .signPsbt(await PartiallySignedTransaction.fromString(e)))
             .serialize();
