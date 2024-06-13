@@ -29,6 +29,8 @@ impl Url {
     }
 }
 
+
+#[derive(Clone)]
 pub struct Uri(pub RustOpaque<Arc<payjoin_ffi::uri::Uri>>);
 impl From<payjoin_ffi::uri::Uri> for Uri {
     fn from(value: payjoin_ffi::uri::Uri) -> Self {
