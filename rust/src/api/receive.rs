@@ -53,6 +53,18 @@ impl UncheckedProposal {
             .map(|e| e.into())
             .map_err(|e| e.into())
     }
+    pub(crate) fn _check_broadcast_suitability(
+        ptr: Self,
+        min_fee_rate: Option<u64>,
+        can_broadcast: impl Fn(Vec<u8>) -> Result<bool, PayjoinError>,
+    ) -> Result<MaybeInputsOwned, PayjoinError> {
+        ptr.0
+            .check_broadcast_suitability(min_fee_rate, |x| {
+                can_broadcast(x.clone()).map_err(|e| e.into())
+            })
+            .map(|e| e.into())
+            .map_err(|e| e.into())
+    }
     /// Call this method if the only way to initiate a Payjoin with this receiver requires manual intervention, as in most consumer wallets.
     ///
     /// So-called “non-interactive” receivers, like payment processors, that allow arbitrary requests are otherwise vulnerable to probing attacks. Those receivers call get_transaction_to_check_broadcast() and attest_tested_and_scheduled_broadcast() after making those checks downstream.
@@ -75,6 +87,15 @@ impl MaybeInputsOwned {
         let runtime = tokio::runtime::Runtime::new().unwrap();
         ptr.0
             .check_inputs_not_owned(|o| Ok(runtime.block_on(is_owned(o.clone()))))
+            .map(|e| e.into())
+            .map_err(|e| e.into())
+    }
+    pub(crate) fn _check_inputs_not_owned(
+        ptr: Self,
+        is_owned: impl Fn(Vec<u8>) ->Result<bool, PayjoinError>,
+    ) -> Result<MaybeMixedInputScripts, PayjoinError> {
+        ptr.0
+            .check_inputs_not_owned(|o| is_owned(o.clone()).map_err(|e| e.into()))
             .map(|e| e.into())
             .map_err(|e| e.into())
     }
@@ -114,6 +135,15 @@ impl MaybeInputsSeen {
             .map(|e| e.into())
             .map_err(|e| e.into())
     }
+   pub(crate) fn _check_no_inputs_seen_before(
+        ptr: Self,
+        is_known: impl Fn(OutPoint) -> Result<bool, PayjoinError>,
+    ) -> Result<OutputsUnknown, PayjoinError> {
+        ptr.0
+            .check_no_inputs_seen_before(|o| is_known(o.into()).map_err(|e| e.into()))
+            .map(|e| e.into())
+            .map_err(|e| e.into())
+    }
 }
 
 pub struct OutputsUnknown(pub RustOpaque<Arc<payjoin_ffi::receive::v1::OutputsUnknown>>);
@@ -132,6 +162,17 @@ impl OutputsUnknown {
         ptr.0
             .identify_receiver_outputs(|o| {
                 Ok(runtime.block_on(is_receiver_output(o.clone())))
+            })
+            .map(|e| e.into())
+            .map_err(|e| e.into())
+    }
+    pub(crate) fn _identify_receiver_outputs(
+        ptr: Self,
+        is_receiver_output: impl Fn(Vec<u8>) -> Result<bool, PayjoinError>,
+    ) -> Result<ProvisionalProposal, PayjoinError> {
+        ptr.0
+            .identify_receiver_outputs(|o| {
+               is_receiver_output(o.clone()).map_err(|e|e.into())
             })
             .map(|e| e.into())
             .map_err(|e| e.into())
@@ -192,6 +233,19 @@ impl ProvisionalProposal {
         ptr.0
             .finalize_proposal(
                 |o| Ok(runtime.block_on(process_psbt(o.clone()))),
+                min_feerate_sat_per_vb,
+            )
+            .map(|e| e.into())
+            .map_err(|e| e.into())
+    }
+    pub(crate) fn _finalize_proposal(
+        ptr: Self,
+        process_psbt: impl Fn(String) -> Result<String, PayjoinError>,
+        min_feerate_sat_per_vb: Option<u64>,
+    ) -> Result<PayjoinProposal, PayjoinError> {
+        ptr.0
+            .finalize_proposal(
+                |o| process_psbt(o.clone()).map_err(|e| e.into()),
                 min_feerate_sat_per_vb,
             )
             .map(|e| e.into())
