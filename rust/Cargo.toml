@@ -16,6 +16,7 @@ payjoin_ffi = {git = "https://github.com/LtbLightning/payjoin-ffi", rev="bd9d0b3
 flutter_rust_bridge = "=2.0.0-dev.31"
 anyhow = "1.0.68"
 tokio = "1.36.0"
+base64 = "0.13.1"
 
 [profile.release]
 strip = true
