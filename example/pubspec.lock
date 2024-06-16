@@ -36,11 +36,12 @@ packages:
   bdk_flutter:
     dependency: "direct main"
     description:
-      name: bdk_flutter
-      sha256: c912a10a473fc8d378a6fd56f9eeb46f0cacaabee6c51c61a5e4566dadc674a6
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.31.2-dev.1"
+      path: "."
+      ref: "v0.31.2-dev.2"
+      resolved-ref: "18649436038282f379e9a4679656bcd084434ddd"
+      url: "https://github.com/LtbLightning/bdk-flutter"
+    source: git
+    version: "0.31.2-dev.2"
   boolean_selector:
     dependency: transitive
     description:
@@ -382,10 +383,10 @@ packages:
     dependency: transitive
     description:
       name: path_provider_android
-      sha256: "9c96da072b421e98183f9ea7464898428e764bc0ce5567f27ec8693442e72514"
+      sha256: bca87b0165ffd7cdb9cad8edd22d18d2201e886d9a9f19b4fb3452ea7df3a72a
       url: "https://pub.dev"
     source: hosted
-    version: "2.2.5"
+    version: "2.2.6"
   path_provider_foundation:
     dependency: transitive
     description:
