@@ -51,21 +51,16 @@ class BdkClient {
 
   Future<PartiallySignedTransaction> signPsbt(
       PartiallySignedTransaction psbt) async {
-    final isFinalized = await wallet.sign(
+    await wallet.sign(
         psbt: psbt,
         signOptions: const SignOptions(
-            multiSig: false,
             trustWitnessUtxo: true,
             allowAllSighashes: false,
             removePartialSigs: true,
-            tryFinalize: false,
+            tryFinalize: true,
             signWithTapInternalKey: true,
             allowGrinding: false));
-    if (isFinalized) {
-      return psbt;
-    } else {
-      throw Exception("PartiallySignedTransaction not finalized!");
-    }
+    return psbt;
   }
 
   Future<PartiallySignedTransaction> createPsbt(
