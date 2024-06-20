@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:payjoin_flutter/common.dart' as common;
 import 'package:payjoin_flutter/uri.dart' as pay_join_uri;
-import 'package:payjoin_flutter_example/btc_client.dart';
+import 'package:payjoin_flutter_example/bdk_client.dart';
 import 'package:payjoin_flutter_example/payjoin_library.dart';
 
 void main() async {
@@ -42,13 +42,25 @@ class PayJoin extends StatefulWidget {
 class _PayJoinState extends State<PayJoin> {
   static const primaryColor = 0xffC71585;
   PayJoinLibrary payJoinLibrary = PayJoinLibrary();
-  BtcClient senderRpc = BtcClient("sender");
-  BtcClient receiverRpc = BtcClient("receiver");
+  final sender = BdkClient(
+      "wpkh(tprv8ZgxMBicQKsPdgsqhkRVYkBBULxG3HvyXtwhWKEgfH4bsU8bmaqhdbZvxq4Z7BLFtUrT58ynRDrBcfG3vNpNHsKTV5xCEgRoKaNNzcVW3HW/84'/1'/0'/0/*)#ln3hfgcf");
+  final receiver = BdkClient(
+      "wpkh(tprv8ZgxMBicQKsPfKJjrApLfm2BhWhV1JpL3StS8UPagm91Y215JGZktQKTtvErD92RKxEDYD9Sfc9eGZVkuH94NgEHPhz7rpgzhiNm2UPs1G1/84'/1'/0'/0/*)#h8uywf09");
 
   String displayText = "";
   String pjUri = "";
-  String senderPsbt = "";
-  String processedAndFinalizedPsbt = "";
+  late PartiallySignedTransaction senderPsbt;
+  late PartiallySignedTransaction processedAndFinalizedPsbt;
+  @override
+  void initState() {
+    sender.restoreWallet();
+    receiver.restoreWallet();
+    setState(() {
+      displayText = "sender & receiver restored";
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -95,11 +107,16 @@ class _PayJoinState extends State<PayJoin> {
             ),
             TextButton(
                 onPressed: () async {
-                  await senderRpc.loadWallet();
-                  await receiverRpc.loadWallet();
+                  await sender.syncWallet();
+                  await receiver.syncWallet();
+                  setState(() {
+                    displayText = "sync complete";
+                  });
+                  debugPrint(
+                      "sender balance: ${(await sender.getBalance()).toString()}");
                 },
                 child: Text(
-                  "Init Sender & Receiver",
+                  "Sync wallets",
                   style: GoogleFonts.manrope(
                       color: Colors.black,
                       fontSize: 14,
@@ -107,9 +124,9 @@ class _PayJoinState extends State<PayJoin> {
                 )),
             TextButton(
                 onPressed: () async {
-                  final address = await receiverRpc.getNewAddress();
-                  final res =
-                      await payJoinLibrary.buildPjUri(0.0083285, address);
+                  final address = (await receiver.getNewAddress()).address;
+                  final res = await payJoinLibrary.buildPjUri(
+                      0.0083285, await address.toQrUri());
                   setState(() {
                     pjUri = res;
                     displayText = res;
@@ -124,15 +141,15 @@ class _PayJoinState extends State<PayJoin> {
                 )),
             TextButton(
                 onPressed: () async {
-                  final balance = await senderRpc.getBalance();
+                  final balance = await sender.getBalance();
                   debugPrint("Sender Balance: ${balance.toString()}");
                   final uri = await pay_join_uri.Uri.fromString(pjUri);
                   final address = await uri.address();
-                  final amount = await uri.amount();
-                  final psbt = (await senderRpc.walletCreateFundedPsbt(
-                      amount, address, 2000))["psbt"];
+                  int amount =
+                      (((await uri.amount()) ?? 0) * 100000000).toInt();
+                  final psbt = (await sender.createPsbt(address, amount, 2000));
                   debugPrint(
-                    "\nOriginal sender psbt: $psbt",
+                    "\nOriginal sender psbt: ${await psbt.serialize()}",
                   );
                   setState(() {
                     senderPsbt = psbt;
@@ -148,57 +165,58 @@ class _PayJoinState extends State<PayJoin> {
             TextButton(
                 onPressed: () async {
                   final (provisionalProposal, contextV1) = await payJoinLibrary
-                      .handlePjRequest(senderPsbt, pjUri, (e) async {
+                      .handlePjRequest(await senderPsbt.serialize(), pjUri,
+                          (e) async {
                     final script = ScriptBuf(bytes: e);
-                    final address = await (await Address.fromScript(
-                            script: script, network: Network.regtest))
-                        .asString();
-                    return (await receiverRpc
-                        .getAddressInfo(address))["ismine"];
+
+                    return (await receiver.getAddressInfo(script));
                   });
-                  final availableInputs = await receiverRpc.listUnspent([]);
+                  final unspent = await receiver.listUnspent();
                   // Select receiver payjoin inputs.
-                  Map<int, common.OutPoint> candidateInputs = {};
-                  for (var e in availableInputs) {
-                    int amount = (e["amount"] * 100000000).toInt();
-                    candidateInputs[amount] =
-                        common.OutPoint(txid: e["txid"], vout: e["vout"]);
-                  }
+                  Map<int, common.OutPoint> candidateInputs = {
+                    for (var input in unspent)
+                      input.txout.value: common.OutPoint(
+                          txid: input.outpoint.txid.toString(),
+                          vout: input.outpoint.vout)
+                  };
                   final selectedOutpoint = await provisionalProposal
                       .tryPreservingPrivacy(candidateInputs: candidateInputs);
-
-                  final selectedUtxo = availableInputs.firstWhere((e) =>
-                      (e["txid"] == selectedOutpoint.txid) &&
-                      (e["vout"] == selectedOutpoint.vout));
-                  final selectedUtxoScriptPubKey =
-                      await ScriptBuf.fromHex(selectedUtxo["scriptPubKey"]);
-                  int selectedUtxoAmount =
-                      (selectedUtxo["amount"] * 100000000).toInt();
-                  final txoutToContribute = common.TxOut(
-                    scriptPubkey: selectedUtxoScriptPubKey.bytes,
-                    value: selectedUtxoAmount,
+                  var selectedUtxo = unspent.firstWhere(
+                      (i) =>
+                          i.outpoint.txid.toString() == selectedOutpoint.txid &&
+                          i.outpoint.vout == selectedOutpoint.vout,
+                      orElse: () => throw Exception('UTXO not found'));
+                  var txoToContribute = common.TxOut(
+                    value: selectedUtxo.txout.value,
+                    scriptPubkey: selectedUtxo.txout.scriptPubkey.bytes,
                   );
-                  final outputToContribute = common.OutPoint(
-                      txid: selectedUtxo["txid"], vout: selectedUtxo["vout"]);
+
+                  var outpointToContribute = common.OutPoint(
+                    txid: selectedUtxo.outpoint.txid.toString(),
+                    vout: selectedUtxo.outpoint.vout,
+                  );
+
                   await provisionalProposal.contributeWitnessInput(
-                      txo: txoutToContribute, outpoint: outputToContribute);
-                  final newReceiverAddress = await receiverRpc.getNewAddress();
+                      txo: txoToContribute, outpoint: outpointToContribute);
+                  final newReceiverAddress = await receiver.getNewAddress();
                   await provisionalProposal.substituteOutputAddress(
-                      address: newReceiverAddress);
+                      address: await newReceiverAddress.address.asString());
                   final payJoinProposal = await provisionalProposal
                       .finalizeProposal(processPsbt: (e) async {
-                    return (await receiverRpc.walletProcessPsbt(e))["psbt"];
+                    debugPrint("\n Original receiver unsigned psbt: $e");
+                    return await (await receiver.signPsbt(
+                            await PartiallySignedTransaction.fromString(e)))
+                        .serialize();
                   });
                   final receiverPsbt = await payJoinProposal.psbt();
                   debugPrint("\n Original receiver psbt: $receiverPsbt");
                   final receiverProcessedPsbt = await contextV1.processResponse(
                       response: utf8.encode(receiverPsbt));
-                  final senderProcessedPsbt = (await senderRpc
-                      .walletProcessPsbt(receiverProcessedPsbt))["psbt"];
-                  final senderFinalizedPsbt =
-                      (await senderRpc.finalizePsbt(senderProcessedPsbt));
+                  final senderProcessedPsbt = (await sender.signPsbt(
+                      await PartiallySignedTransaction.fromString(
+                          receiverProcessedPsbt)));
                   setState(() {
-                    processedAndFinalizedPsbt = senderFinalizedPsbt["hex"];
+                    processedAndFinalizedPsbt = senderProcessedPsbt;
                   });
                 },
                 child: Text(
@@ -210,8 +228,8 @@ class _PayJoinState extends State<PayJoin> {
                 )),
             TextButton(
                 onPressed: () async {
-                  final res = await senderRpc
-                      .sendRawTransaction(processedAndFinalizedPsbt);
+                  final res =
+                      await sender.broadcastPsbt(processedAndFinalizedPsbt);
                   debugPrint("Broadcast success: $res");
                 },
                 child: Text(
