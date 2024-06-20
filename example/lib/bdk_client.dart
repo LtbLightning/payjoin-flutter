@@ -1,60 +1,38 @@
-import 'dart:io';
-
 import 'package:bdk_flutter/bdk_flutter.dart';
 import 'package:flutter/cupertino.dart';
 
 class BdkClient {
   // Bitcoin core credentials
-  String localEsploraUrl = 'http://0.0.0.0:30000';
+  // String localEsploraUrl = 'http://0.0.0.0:30000';
 
   late Wallet wallet;
   late Blockchain blockchain;
-  final String mnemonic;
+  final String descriptor;
 
-  Future<List<Descriptor>> getDescriptors(String mnemonicStr) async {
-    final descriptors = <Descriptor>[];
-    try {
-      for (var e in [KeychainKind.externalChain, KeychainKind.internalChain]) {
-        final mnemonic = await Mnemonic.fromString(mnemonicStr);
-        final descriptorSecretKey = await DescriptorSecretKey.create(
-          network: Network.regtest,
-          mnemonic: mnemonic,
-        );
-        final descriptor = await Descriptor.newBip86(
-            secretKey: descriptorSecretKey,
-            network: Network.regtest,
-            keychain: e);
-        descriptors.add(descriptor);
-      }
-      return descriptors;
-    } on Exception {
-      rethrow;
-    }
-  }
-
-  BdkClient(this.mnemonic);
+  BdkClient(this.descriptor);
 
   Future<void> restoreWallet() async {
     try {
-      final descriptors = await getDescriptors(mnemonic);
       await initBlockchain();
       wallet = await Wallet.create(
-          descriptor: descriptors[0],
-          changeDescriptor: descriptors[1],
-          network: Network.regtest,
+          descriptor: await Descriptor.create(
+              descriptor: descriptor, network: Network.signet),
+          network: Network.signet,
           databaseConfig: const DatabaseConfig.memory());
+      debugPrint(await (await getNewAddress()).address.asString());
     } on Exception {
       rethrow;
     }
   }
 
   Future<void> initBlockchain() async {
-    String esploraUrl =
-        Platform.isAndroid ? 'http://10.0.2.2:30000' : localEsploraUrl;
+    // String esploraUrl =
+    //     Platform.isAndroid ? 'http://10.0.2.2:30000' : localEsploraUrl;
     try {
       blockchain = await Blockchain.create(
-          config: BlockchainConfig.esplora(
-              config: EsploraConfig(baseUrl: esploraUrl, stopGap: 10)));
+          config: const BlockchainConfig.esplora(
+              config: EsploraConfig(
+                  baseUrl: "https://mutinynet.com/api", stopGap: 10)));
     } on Exception {
       rethrow;
     }
@@ -66,14 +44,23 @@ class BdkClient {
     return res;
   }
 
+  Future<List<TransactionDetails>> listTransactions() async {
+    final res = await wallet.listTransactions(includeRaw: true);
+    return res;
+  }
+
   Future<PartiallySignedTransaction> signPsbt(
       PartiallySignedTransaction psbt) async {
-    final isFinalized = await wallet.sign(psbt: psbt);
-    if (isFinalized) {
-      return psbt;
-    } else {
-      throw Exception("PartiallySignedTransaction not finalized!");
-    }
+    await wallet.sign(
+        psbt: psbt,
+        signOptions: const SignOptions(
+            trustWitnessUtxo: true,
+            allowAllSighashes: false,
+            removePartialSigs: true,
+            tryFinalize: true,
+            signWithTapInternalKey: true,
+            allowGrinding: false));
+    return psbt;
   }
 
   Future<PartiallySignedTransaction> createPsbt(
@@ -81,9 +68,8 @@ class BdkClient {
     try {
       final txBuilder = TxBuilder();
       final address =
-          await Address.fromString(s: addressStr, network: Network.regtest);
+          await Address.fromString(s: addressStr, network: Network.signet);
       final script = await address.scriptPubkey();
-
       final (psbt, _) = await txBuilder
           .addRecipient(script, amount)
           .feeAbsolute(fee)

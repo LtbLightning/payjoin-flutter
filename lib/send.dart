@@ -88,7 +88,7 @@ class RequestContext extends send.RequestContext {
   }
 
   Future<(common.Request, ContextV2)> extractContextV2(
-      String ohttpProxyUrl) async {
+      Url ohttpProxyUrl) async {
     try {
       final res = await send.RequestContext.extractV2(
           ohttpProxyUrl: ohttpProxyUrl, ptr: this);

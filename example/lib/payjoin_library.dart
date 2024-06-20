@@ -13,7 +13,7 @@ class PayJoinLibrary {
   static const localCertFile = "localhost.der";
   Future<String> buildPjUri(double amount, String address, {String? pj}) async {
     try {
-      final pjUri = "bitcoin:$address?amount=$amount&pj=${pj ?? pjUrl}";
+      final pjUri = "$address?amount=$amount&pj=${pj ?? pjUrl}";
       await pj_uri.Uri.fromString(pjUri);
       return pjUri;
     } catch (e) {

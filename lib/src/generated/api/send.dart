@@ -213,7 +213,7 @@ class RequestContext {
 
   static Future<RequestContextV2> extractV2(
           {required RequestContext ptr,
-          required String ohttpProxyUrl,
+          required Url ohttpProxyUrl,
           dynamic hint}) =>
       PayjoinCore.instance.api.requestContextExtractV2(
           ptr: ptr, ohttpProxyUrl: ohttpProxyUrl, hint: hint);

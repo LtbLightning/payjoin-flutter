@@ -365,6 +365,25 @@ class PayjoinFfiReceiveV2V2UncheckedProposal extends RustOpaque {
   );
 }
 
+// Rust type: RustOpaqueNom<payjoin_ffi :: types :: OhttpKeys>
+@sealed
+class PayjoinFfiTypesOhttpKeys extends RustOpaque {
+  PayjoinFfiTypesOhttpKeys.dcoDecode(List<dynamic> wire)
+      : super.dcoDecode(wire, _kStaticData);
+
+  PayjoinFfiTypesOhttpKeys.sseDecode(int ptr, int externalSizeOnNative)
+      : super.sseDecode(ptr, externalSizeOnNative, _kStaticData);
+
+  static final _kStaticData = RustArcStaticData(
+    rustArcIncrementStrongCount: PayjoinCore
+        .instance.api.rust_arc_increment_strong_count_PayjoinFfiTypesOhttpKeys,
+    rustArcDecrementStrongCount: PayjoinCore
+        .instance.api.rust_arc_decrement_strong_count_PayjoinFfiTypesOhttpKeys,
+    rustArcDecrementStrongCountPtr: PayjoinCore.instance.api
+        .rust_arc_decrement_strong_count_PayjoinFfiTypesOhttpKeysPtr,
+  );
+}
+
 class ClientResponse {
   final MutexOptionOhttpClientResponse field0;
 
@@ -404,9 +423,6 @@ class Enrolled {
       PayjoinCore.instance.api
           .enrolledProcessRes(that: this, body: body, ctx: ctx, hint: hint);
 
-  Future<Uint8List> subdirectory({dynamic hint}) =>
-      PayjoinCore.instance.api.enrolledSubdirectory(that: this, hint: hint);
-
   @override
   int get hashCode => field0.hashCode;
 
@@ -429,19 +445,16 @@ class Enroller {
           {required Enroller ptr, dynamic hint}) =>
       PayjoinCore.instance.api.enrollerExtractReq(ptr: ptr, hint: hint);
 
-  static Future<Enroller> fromRelayConfig(
-          {required String relayUrl,
-          required String ohttpConfigBase64,
-          required String ohttpProxyUrl,
+  static Future<Enroller> fromDirectoryConfig(
+          {required Url directory,
+          required OhttpKeys ohttpKeys,
+          required Url ohttpRelay,
           dynamic hint}) =>
-      PayjoinCore.instance.api.enrollerFromRelayConfig(
-          relayUrl: relayUrl,
-          ohttpConfigBase64: ohttpConfigBase64,
-          ohttpProxyUrl: ohttpProxyUrl,
+      PayjoinCore.instance.api.enrollerFromDirectoryConfig(
+          directory: directory,
+          ohttpKeys: ohttpKeys,
+          ohttpRelay: ohttpRelay,
           hint: hint);
-
-  Future<String> payjoinSubdir({dynamic hint}) =>
-      PayjoinCore.instance.api.enrollerPayjoinSubdir(that: this, hint: hint);
 
   Future<Enrolled> processRes(
           {required List<int> body,
@@ -449,9 +462,6 @@ class Enroller {
           dynamic hint}) =>
       PayjoinCore.instance.api
           .enrollerProcessRes(that: this, body: body, ctx: ctx, hint: hint);
-
-  Future<String> subdirectory({dynamic hint}) =>
-      PayjoinCore.instance.api.enrollerSubdirectory(that: this, hint: hint);
 
   @override
   int get hashCode => field0.hashCode;

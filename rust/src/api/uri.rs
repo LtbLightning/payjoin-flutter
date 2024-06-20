@@ -16,7 +16,7 @@ impl From<Arc<payjoin_ffi::uri::Url>> for Url {
 }
 impl Url {
     pub fn from_str(url: String) -> anyhow::Result<Url, PayjoinError> {
-        match payjoin_ffi::uri::Url::new(url) {
+        match payjoin_ffi::uri::Url::from_str(url) {
             Ok(e) => Ok(e.into()),
             Err(e) => Err(e.into()),
         }
@@ -29,6 +29,8 @@ impl Url {
     }
 }
 
+
+#[derive(Clone)]
 pub struct Uri(pub RustOpaque<Arc<payjoin_ffi::uri::Uri>>);
 impl From<payjoin_ffi::uri::Uri> for Uri {
     fn from(value: payjoin_ffi::uri::Uri) -> Self {
@@ -56,4 +58,23 @@ impl Uri {
     pub fn amount(&self) -> Option<f64> {
         self.0.amount()
     }
+}
+pub struct OhttpKeys(pub RustOpaque<payjoin_ffi::types::OhttpKeys>);
+
+impl From<OhttpKeys>  for payjoin_ffi::types::OhttpKeys{
+    fn from(value: OhttpKeys) -> Self {
+        (*value.0).clone()
+    }
+}
+impl From<payjoin_ffi::types::OhttpKeys>  for OhttpKeys{
+    fn from(value:payjoin_ffi::types:: OhttpKeys) -> Self {
+       Self(RustOpaque::new(value))
+    }
+}
+
+impl OhttpKeys {
+    pub fn decode(bytes: Vec<u8>) -> Result<Self, PayjoinError> {
+         payjoin_ffi::types::OhttpKeys::decode(bytes).map(|e| e.into()).map_err(|e| e.into())
+    }
+    
 }

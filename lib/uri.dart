@@ -17,7 +17,7 @@ class Uri extends generated.Uri {
     }
   }
 
-  ///Gets the amount in satoshis.
+  ///Gets the amount in btc.
   @override
   Future<double?> amount({hint}) {
     try {
@@ -62,6 +62,22 @@ class Url extends generated.Url {
   Future<String> asString({hint}) {
     try {
       return super.asString();
+    } on error.PayjoinError catch (e) {
+      throw mapPayjoinError(e);
+    }
+  }
+}
+
+///The key configuration of a server. This can be used by both client and server.
+///An important invariant of this structure is that it does not include any combination of KEM, KDF, and AEAD that is not supported.
+class OhttpKeys extends generated.OhttpKeys {
+  OhttpKeys._({required super.field0});
+
+  ///Construct a configuration from the encoded server configuration.
+  static Future<OhttpKeys> decode({required List<int> bytes}) async {
+    try {
+      final res = await generated.OhttpKeys.decode(bytes: bytes);
+      return OhttpKeys._(field0: res.field0);
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
     }

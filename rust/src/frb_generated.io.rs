@@ -178,6 +178,12 @@ impl CstDecode<RustOpaqueNom<payjoin_ffi::receive::v2::V2UncheckedProposal>> for
         unsafe { decode_rust_opaque_nom(self as _) }
     }
 }
+impl CstDecode<RustOpaqueNom<payjoin_ffi::types::OhttpKeys>> for usize {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    fn cst_decode(self) -> RustOpaqueNom<payjoin_ffi::types::OhttpKeys> {
+        unsafe { decode_rust_opaque_nom(self as _) }
+    }
+}
 impl CstDecode<String> for *mut wire_cst_list_prim_u_8_strict {
     // Codec=Cst (C-struct based), see doc to use other codecs
     fn cst_decode(self) -> String {
@@ -254,6 +260,13 @@ impl CstDecode<crate::api::receive::MaybeMixedInputScripts>
     fn cst_decode(self) -> crate::api::receive::MaybeMixedInputScripts {
         let wrap = unsafe { flutter_rust_bridge::for_generated::box_from_leak_ptr(self) };
         CstDecode::<crate::api::receive::MaybeMixedInputScripts>::cst_decode(*wrap).into()
+    }
+}
+impl CstDecode<crate::api::uri::OhttpKeys> for *mut wire_cst_ohttp_keys {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    fn cst_decode(self) -> crate::api::uri::OhttpKeys {
+        let wrap = unsafe { flutter_rust_bridge::for_generated::box_from_leak_ptr(self) };
+        CstDecode::<crate::api::uri::OhttpKeys>::cst_decode(*wrap).into()
     }
 }
 impl CstDecode<crate::utils::types::OutPoint> for *mut wire_cst_out_point {
@@ -504,6 +517,12 @@ impl CstDecode<crate::api::receive::MaybeMixedInputScripts> for wire_cst_maybe_m
     // Codec=Cst (C-struct based), see doc to use other codecs
     fn cst_decode(self) -> crate::api::receive::MaybeMixedInputScripts {
         crate::api::receive::MaybeMixedInputScripts(self.field0.cst_decode())
+    }
+}
+impl CstDecode<crate::api::uri::OhttpKeys> for wire_cst_ohttp_keys {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    fn cst_decode(self) -> crate::api::uri::OhttpKeys {
+        crate::api::uri::OhttpKeys(self.field0.cst_decode())
     }
 }
 impl CstDecode<crate::utils::types::OutPoint> for wire_cst_out_point {
@@ -886,6 +905,18 @@ impl Default for wire_cst_maybe_mixed_input_scripts {
         Self::new_with_null_ptr()
     }
 }
+impl NewWithNullPtr for wire_cst_ohttp_keys {
+    fn new_with_null_ptr() -> Self {
+        Self {
+            field0: Default::default(),
+        }
+    }
+}
+impl Default for wire_cst_ohttp_keys {
+    fn default() -> Self {
+        Self::new_with_null_ptr()
+    }
+}
 impl NewWithNullPtr for wire_cst_out_point {
     fn new_with_null_ptr() -> Self {
         Self {
@@ -1211,14 +1242,6 @@ pub extern "C" fn frbgen_payjoin_flutter_wire_enrolled_process_res(
 }
 
 #[no_mangle]
-pub extern "C" fn frbgen_payjoin_flutter_wire_enrolled_subdirectory(
-    port_: i64,
-    that: *mut wire_cst_enrolled,
-) {
-    wire_enrolled_subdirectory_impl(port_, that)
-}
-
-#[no_mangle]
 pub extern "C" fn frbgen_payjoin_flutter_wire_enroller_extract_req(
     port_: i64,
     ptr: *mut wire_cst_enroller,
@@ -1227,21 +1250,13 @@ pub extern "C" fn frbgen_payjoin_flutter_wire_enroller_extract_req(
 }
 
 #[no_mangle]
-pub extern "C" fn frbgen_payjoin_flutter_wire_enroller_from_relay_config(
+pub extern "C" fn frbgen_payjoin_flutter_wire_enroller_from_directory_config(
     port_: i64,
-    relay_url: *mut wire_cst_list_prim_u_8_strict,
-    ohttp_config_base64: *mut wire_cst_list_prim_u_8_strict,
-    ohttp_proxy_url: *mut wire_cst_list_prim_u_8_strict,
+    directory: *mut wire_cst_url,
+    ohttp_keys: *mut wire_cst_ohttp_keys,
+    ohttp_relay: *mut wire_cst_url,
 ) {
-    wire_enroller_from_relay_config_impl(port_, relay_url, ohttp_config_base64, ohttp_proxy_url)
-}
-
-#[no_mangle]
-pub extern "C" fn frbgen_payjoin_flutter_wire_enroller_payjoin_subdir(
-    port_: i64,
-    that: *mut wire_cst_enroller,
-) {
-    wire_enroller_payjoin_subdir_impl(port_, that)
+    wire_enroller_from_directory_config_impl(port_, directory, ohttp_keys, ohttp_relay)
 }
 
 #[no_mangle]
@@ -1252,14 +1267,6 @@ pub extern "C" fn frbgen_payjoin_flutter_wire_enroller_process_res(
     ctx: *mut wire_cst_client_response,
 ) {
     wire_enroller_process_res_impl(port_, that, body, ctx)
-}
-
-#[no_mangle]
-pub extern "C" fn frbgen_payjoin_flutter_wire_enroller_subdirectory(
-    port_: i64,
-    that: *mut wire_cst_enroller,
-) {
-    wire_enroller_subdirectory_impl(port_, that)
 }
 
 #[no_mangle]
@@ -1684,9 +1691,17 @@ pub extern "C" fn frbgen_payjoin_flutter_wire_request_context_extract_v1(
 pub extern "C" fn frbgen_payjoin_flutter_wire_request_context_extract_v2(
     port_: i64,
     ptr: *mut wire_cst_request_context,
-    ohttp_proxy_url: *mut wire_cst_list_prim_u_8_strict,
+    ohttp_proxy_url: *mut wire_cst_url,
 ) {
     wire_request_context_extract_v2_impl(port_, ptr, ohttp_proxy_url)
+}
+
+#[no_mangle]
+pub extern "C" fn frbgen_payjoin_flutter_wire_ohttp_keys_decode(
+    port_: i64,
+    bytes: *mut wire_cst_list_prim_u_8_loose,
+) {
+    wire_ohttp_keys_decode_impl(port_, bytes)
 }
 
 #[no_mangle]
@@ -2168,6 +2183,24 @@ pub extern "C" fn frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpa
 }
 
 #[no_mangle]
+pub extern "C" fn frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_payjoin_ffitypesOhttpKeys(
+    ptr: *const std::ffi::c_void,
+) {
+    unsafe {
+        StdArc::<payjoin_ffi::types::OhttpKeys>::increment_strong_count(ptr as _);
+    }
+}
+
+#[no_mangle]
+pub extern "C" fn frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_payjoin_ffitypesOhttpKeys(
+    ptr: *const std::ffi::c_void,
+) {
+    unsafe {
+        StdArc::<payjoin_ffi::types::OhttpKeys>::decrement_strong_count(ptr as _);
+    }
+}
+
+#[no_mangle]
 pub extern "C" fn frbgen_payjoin_flutter_cst_new_box_autoadd_client_response(
 ) -> *mut wire_cst_client_response {
     flutter_rust_bridge::for_generated::new_leak_box_ptr(
@@ -2229,6 +2262,12 @@ pub extern "C" fn frbgen_payjoin_flutter_cst_new_box_autoadd_maybe_mixed_input_s
     flutter_rust_bridge::for_generated::new_leak_box_ptr(
         wire_cst_maybe_mixed_input_scripts::new_with_null_ptr(),
     )
+}
+
+#[no_mangle]
+pub extern "C" fn frbgen_payjoin_flutter_cst_new_box_autoadd_ohttp_keys() -> *mut wire_cst_ohttp_keys
+{
+    flutter_rust_bridge::for_generated::new_leak_box_ptr(wire_cst_ohttp_keys::new_with_null_ptr())
 }
 
 #[no_mangle]
@@ -2520,6 +2559,11 @@ pub struct wire_cst_maybe_inputs_seen {
 #[repr(C)]
 #[derive(Clone, Copy)]
 pub struct wire_cst_maybe_mixed_input_scripts {
+    field0: usize,
+}
+#[repr(C)]
+#[derive(Clone, Copy)]
+pub struct wire_cst_ohttp_keys {
     field0: usize,
 }
 #[repr(C)]
