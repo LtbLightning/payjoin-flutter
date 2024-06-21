@@ -169,6 +169,8 @@ class ProvisionalProposal extends receive.ProvisionalProposal {
       return super.tryPreservingPrivacy(candidateInputs: candidateInputs);
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
+    } catch (e) {
+      throw e;
     }
   }
 

@@ -82,8 +82,6 @@ class BdkClient {
 
   Future<int> getBalance() async {
     final balance = await wallet.getBalance();
-    final res = "Total Balance: ${balance.total.toString()}";
-    debugPrint(res);
     return balance.total;
   }
 

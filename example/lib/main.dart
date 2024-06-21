@@ -113,6 +113,8 @@ class _PayJoinState extends State<PayJoin> {
                     displayText = "sync complete";
                   });
                   debugPrint(
+                      "receiver balance: ${(await receiver.getBalance()).toString()}");
+                  debugPrint(
                       "sender balance: ${(await sender.getBalance()).toString()}");
                 },
                 child: Text(
@@ -126,7 +128,7 @@ class _PayJoinState extends State<PayJoin> {
                 onPressed: () async {
                   final address = (await receiver.getNewAddress()).address;
                   final res = await payJoinLibrary.buildPjUri(
-                      0.0083285, await address.toQrUri());
+                      0.00008328, await address.toQrUri());
                   setState(() {
                     pjUri = res;
                     displayText = res;
@@ -164,13 +166,16 @@ class _PayJoinState extends State<PayJoin> {
                 )),
             TextButton(
                 onPressed: () async {
-                  final (provisionalProposal, contextV1) = await payJoinLibrary
-                      .handlePjRequest(await senderPsbt.serialize(), pjUri,
-                          (e) async {
-                    final script = ScriptBuf(bytes: e);
+                  final (provisionalProposal, contextV1) =
+                      await payJoinLibrary.handlePjRequest(
+                    await senderPsbt.serialize(),
+                    pjUri,
+                    (e) async {
+                      final script = ScriptBuf(bytes: e);
 
-                    return (await receiver.getAddressInfo(script));
-                  });
+                      return (await receiver.getAddressInfo(script));
+                    },
+                  );
                   final unspent = await receiver.listUnspent();
                   // Select receiver payjoin inputs.
                   Map<int, common.OutPoint> candidateInputs = {
@@ -183,7 +188,7 @@ class _PayJoinState extends State<PayJoin> {
                       .tryPreservingPrivacy(candidateInputs: candidateInputs);
                   var selectedUtxo = unspent.firstWhere(
                       (i) =>
-                          i.outpoint.txid.toString() == selectedOutpoint.txid &&
+                          i.outpoint.txid == selectedOutpoint.txid &&
                           i.outpoint.vout == selectedOutpoint.vout,
                       orElse: () => throw Exception('UTXO not found'));
                   var txoToContribute = common.TxOut(
@@ -215,6 +220,8 @@ class _PayJoinState extends State<PayJoin> {
                   final senderProcessedPsbt = (await sender.signPsbt(
                       await PartiallySignedTransaction.fromString(
                           receiverProcessedPsbt)));
+                  debugPrint(
+                      "\nProcessed and finalized sender psbt: ${await senderProcessedPsbt.serialize()}");
                   setState(() {
                     processedAndFinalizedPsbt = senderProcessedPsbt;
                   });
@@ -228,6 +235,8 @@ class _PayJoinState extends State<PayJoin> {
                 )),
             TextButton(
                 onPressed: () async {
+                  debugPrint(
+                      'Processed and finalized sender psbt: ${await processedAndFinalizedPsbt.serialize()}');
                   final res =
                       await sender.broadcastPsbt(processedAndFinalizedPsbt);
                   debugPrint("Broadcast success: $res");
