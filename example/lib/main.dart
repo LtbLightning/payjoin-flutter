@@ -131,7 +131,7 @@ class _PayJoinState extends State<PayJoin> {
                 onPressed: () async {
                   final address = (await receiver.getNewAddress()).address;
                   final res = await payJoinLibrary.buildPjUri(
-                      0.00008328, await address.toQrUri());
+                      0.0083285, await address.toQrUri());
                   setState(() {
                     pjUri = res;
                     displayText = res;
