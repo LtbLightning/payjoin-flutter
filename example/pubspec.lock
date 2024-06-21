@@ -37,8 +37,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: bdk-payjoin-integration-fix
-      resolved-ref: ea7f666e1358bccb3fe6a99883d454bfcacf37f4
+      ref: main
+      resolved-ref: "821fe90d20c955e3cdfbfecea3b91fe24885552a"
       url: "https://github.com/LtbLightning/bdk-flutter"
     source: git
     version: "0.31.2-dev.2"
@@ -422,11 +422,9 @@ packages:
   payjoin_flutter:
     dependency: "direct main"
     description:
-      path: "."
-      ref: main
-      resolved-ref: c3d300fcf942cf0e5d42a093af416ac70777a69a
-      url: "https://github.com/LtbLightning/payjoin-flutter"
-    source: git
+      path: ".."
+      relative: true
+    source: path
     version: "0.13.0"
   platform:
     dependency: transitive

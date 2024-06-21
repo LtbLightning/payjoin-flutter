@@ -51,7 +51,7 @@ class _PayJoinState extends State<PayJoin> {
   String displayText = "";
   String pjUri = "";
   late PartiallySignedTransaction senderPsbt;
-  late String receiverPsbt;
+  late String receiverPsbtBase64;
   late ContextV1 contextV1;
 
   @override
@@ -226,10 +226,10 @@ class _PayJoinState extends State<PayJoin> {
                             await PartiallySignedTransaction.fromString(e)))
                         .serialize();
                   });
-                  receiverPsbt = await payJoinProposal.psbt();
+                  final receiverPsbt = await payJoinProposal.psbt();
                   debugPrint("\n Receiver response psbt: $receiverPsbt");
                   setState(() {
-                    receiverPsbt = receiverPsbt;
+                    receiverPsbtBase64 = receiverPsbt;
                   });
                 },
                 child: Text(
@@ -241,8 +241,9 @@ class _PayJoinState extends State<PayJoin> {
                 )),
             TextButton(
                 onPressed: () async {
-                  final processedReceiverResponsePsbt = await contextV1
-                      .processResponse(response: utf8.encode(receiverPsbt));
+                  final processedReceiverResponsePsbt =
+                      await contextV1.processResponse(
+                          response: utf8.encode(receiverPsbtBase64));
                   final finalizedPsbt = (await sender.signPsbt(
                       await PartiallySignedTransaction.fromString(
                           processedReceiverResponsePsbt)));

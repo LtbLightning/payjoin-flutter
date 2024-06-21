@@ -36,9 +36,7 @@ dependencies:
     # See https://dart.dev/tools/pub/dependencies#version-constraints
     # The example app is bundled with the plugin so we use a path dependency on
     # the parent directory to use the current plugin's version.
-    git:
-      url: https://github.com/LtbLightning/payjoin-flutter
-      ref: main
+    path: ../
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -47,7 +45,7 @@ dependencies:
   bdk_flutter:
     git:
       url: https://github.com/LtbLightning/bdk-flutter
-      ref: bdk-payjoin-integration-fix
+      ref: main
 
   google_fonts: ^6.2.1
 
