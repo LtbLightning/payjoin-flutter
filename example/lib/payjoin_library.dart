@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:flutter/cupertino.dart';
@@ -22,28 +23,18 @@ class PayJoinLibrary {
     }
   }
 
-  Future<(v1.ProvisionalProposal, send.ContextV1)> handlePjRequest(
-      String psbtBase64,
-      String uriStr,
-      Future<bool> Function(Uint8List) isOwned) async {
-    final uri = await pj_uri.Uri.fromString(uriStr);
-    final (req, cxt) = await (await (await send.RequestBuilder.fromPsbtAndUri(
-                psbtBase64: psbtBase64, uri: uri))
-            .buildWithAdditionalFee(
-                maxFeeContribution: 10000,
-                minFeeRate: 0,
-                clampFeeContribution: false))
-        .extractContextV1();
+  Future<v1.ProvisionalProposal> handlePjRequest(
+      String psbtBase64, Future<bool> Function(Uint8List) isOwned) async {
+    final body = utf8.encode(psbtBase64);
+
     final headers = common.Headers(map: {
       'content-type': 'text/plain',
-      'content-length': req.body.length.toString(),
+      'content-length': body.length.toString(),
     });
     final unchecked = await v1.UncheckedProposal.fromRequest(
-        body: req.body.toList(),
-        query: (await req.url.query())!,
-        headers: headers);
+        body: body.toList(), query: '', headers: headers);
     final provisionalProposal = await handleUnckedProposal(unchecked, isOwned);
-    return (provisionalProposal, cxt);
+    return provisionalProposal;
   }
 
   Future<v1.ProvisionalProposal> handleUnckedProposal(
