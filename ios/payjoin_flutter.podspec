@@ -1,13 +1,13 @@
 Pod::Spec.new do |s|
   s.name             = 'payjoin_flutter'
-  s.version          = '0.0.1'
-  s.summary          = 'A new Flutter FFI plugin project.'
+  s.version          = '0.13.0-dev.2'
+  s.summary          = 'A Flutter library for the Payjoin Dev Kit'
   s.description      = <<-DESC
 A new Flutter FFI plugin project.
                        DESC
-  s.homepage         = 'http://example.com'
+  s.homepage         = 'http://wwww.ltbl.io'
   s.license          = { :file => '../LICENSE' }
-  s.author           = { 'Your Company' => 'email@example.com' }
+  s.author           = { 'Let there be Lightning, Inc' => 'Hello@LtbL.io' }
 
   s.source           = { :path => '.' }
   s.source_files     = 'Classes/**/*'
