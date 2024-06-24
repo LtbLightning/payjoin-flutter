@@ -4,6 +4,7 @@ import 'package:bdk_flutter/bdk_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:payjoin_flutter/common.dart' as common;
+import 'package:payjoin_flutter/send.dart';
 import 'package:payjoin_flutter/uri.dart' as pay_join_uri;
 import 'package:payjoin_flutter_example/bdk_client.dart';
 import 'package:payjoin_flutter_example/payjoin_library.dart';
@@ -50,7 +51,9 @@ class _PayJoinState extends State<PayJoin> {
   String displayText = "";
   String pjUri = "";
   late PartiallySignedTransaction senderPsbt;
-  late PartiallySignedTransaction processedAndFinalizedPsbt;
+  late String receiverPsbtBase64;
+  late ContextV1 contextV1;
+
   @override
   void initState() {
     sender.restoreWallet();
@@ -113,6 +116,8 @@ class _PayJoinState extends State<PayJoin> {
                     displayText = "sync complete";
                   });
                   debugPrint(
+                      "receiver balance: ${(await receiver.getBalance()).toString()}");
+                  debugPrint(
                       "sender balance: ${(await sender.getBalance()).toString()}");
                 },
                 child: Text(
@@ -140,37 +145,50 @@ class _PayJoinState extends State<PayJoin> {
                       fontWeight: FontWeight.w800),
                 )),
             TextButton(
-                onPressed: () async {
-                  final balance = await sender.getBalance();
-                  debugPrint("Sender Balance: ${balance.toString()}");
-                  final uri = await pay_join_uri.Uri.fromString(pjUri);
-                  final address = await uri.address();
-                  int amount =
-                      (((await uri.amount()) ?? 0) * 100000000).toInt();
-                  final psbt = (await sender.createPsbt(address, amount, 2000));
-                  debugPrint(
-                    "\nOriginal sender psbt: ${await psbt.serialize()}",
-                  );
-                  setState(() {
-                    senderPsbt = psbt;
-                  });
-                },
-                child: Text(
-                  "Create Sender psbt using receiver pjUri",
-                  style: GoogleFonts.manrope(
-                      color: Colors.black,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w800),
-                )),
+              onPressed: () async {
+                final balance = await sender.getBalance();
+                debugPrint("Sender Balance: ${balance.toString()}");
+                final uri = await pay_join_uri.Uri.fromString(pjUri);
+                final address = await uri.address();
+                int amount = (((await uri.amount()) ?? 0) * 100000000).toInt();
+                final psbt = (await sender.createPsbt(address, amount, 2000));
+                debugPrint(
+                  "\nOriginal sender psbt: ${await psbt.serialize()}",
+                );
+
+                final requestContext =
+                    (await (await RequestBuilder.fromPsbtAndUri(
+                            psbtBase64: await psbt.serialize(), uri: uri))
+                        .buildRecommended(minFeeRate: 0));
+                // In a real scenario, the sender would send the request to
+                //  the payjoin endpoint of the receiver, here we just keep
+                //  the context for the last step.
+                final (_, ctx) = await requestContext.extractContextV1();
+
+                setState(() {
+                  senderPsbt = psbt;
+                  contextV1 = ctx;
+                });
+              },
+              child: Text(
+                "Create Sender request psbt using receiver pjUri",
+                style: GoogleFonts.manrope(
+                    color: Colors.black,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w800),
+              ),
+            ),
             TextButton(
                 onPressed: () async {
-                  final (provisionalProposal, contextV1) = await payJoinLibrary
-                      .handlePjRequest(await senderPsbt.serialize(), pjUri,
-                          (e) async {
-                    final script = ScriptBuf(bytes: e);
+                  final provisionalProposal =
+                      await payJoinLibrary.handlePjRequest(
+                    await senderPsbt.serialize(),
+                    (e) async {
+                      final script = ScriptBuf(bytes: e);
 
-                    return (await receiver.getAddressInfo(script));
-                  });
+                      return (await receiver.getAddressInfo(script));
+                    },
+                  );
                   final unspent = await receiver.listUnspent();
                   // Select receiver payjoin inputs.
                   Map<int, common.OutPoint> candidateInputs = {
@@ -183,7 +201,7 @@ class _PayJoinState extends State<PayJoin> {
                       .tryPreservingPrivacy(candidateInputs: candidateInputs);
                   var selectedUtxo = unspent.firstWhere(
                       (i) =>
-                          i.outpoint.txid.toString() == selectedOutpoint.txid &&
+                          i.outpoint.txid == selectedOutpoint.txid &&
                           i.outpoint.vout == selectedOutpoint.vout,
                       orElse: () => throw Exception('UTXO not found'));
                   var txoToContribute = common.TxOut(
@@ -203,24 +221,19 @@ class _PayJoinState extends State<PayJoin> {
                       address: await newReceiverAddress.address.asString());
                   final payJoinProposal = await provisionalProposal
                       .finalizeProposal(processPsbt: (e) async {
-                    debugPrint("\n Original receiver unsigned psbt: $e");
+                    debugPrint("\n Receiver response unsigned psbt: $e");
                     return await (await receiver.signPsbt(
                             await PartiallySignedTransaction.fromString(e)))
                         .serialize();
                   });
                   final receiverPsbt = await payJoinProposal.psbt();
-                  debugPrint("\n Original receiver psbt: $receiverPsbt");
-                  final receiverProcessedPsbt = await contextV1.processResponse(
-                      response: utf8.encode(receiverPsbt));
-                  final senderProcessedPsbt = (await sender.signPsbt(
-                      await PartiallySignedTransaction.fromString(
-                          receiverProcessedPsbt)));
+                  debugPrint("\n Receiver response psbt: $receiverPsbt");
                   setState(() {
-                    processedAndFinalizedPsbt = senderProcessedPsbt;
+                    receiverPsbtBase64 = receiverPsbt;
                   });
                 },
                 child: Text(
-                  "Process and finalize receiver Pj request",
+                  "Create Receiver response psbt",
                   style: GoogleFonts.manrope(
                       color: Colors.black,
                       fontSize: 14,
@@ -228,12 +241,19 @@ class _PayJoinState extends State<PayJoin> {
                 )),
             TextButton(
                 onPressed: () async {
-                  final res =
-                      await sender.broadcastPsbt(processedAndFinalizedPsbt);
+                  final processedReceiverResponsePsbt =
+                      await contextV1.processResponse(
+                          response: utf8.encode(receiverPsbtBase64));
+                  final finalizedPsbt = (await sender.signPsbt(
+                      await PartiallySignedTransaction.fromString(
+                          processedReceiverResponsePsbt)));
+                  debugPrint(
+                      'Processed and finalized sender psbt: ${await finalizedPsbt.serialize()}');
+                  final res = await sender.broadcastPsbt(finalizedPsbt);
                   debugPrint("Broadcast success: $res");
                 },
                 child: Text(
-                  "Broadcast processed psbt",
+                  "Process response and broadcast final Sender psbt",
                   style: GoogleFonts.manrope(
                       color: Colors.black,
                       fontSize: 14,
