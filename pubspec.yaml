@@ -1,6 +1,6 @@
 name: payjoin_flutter
-description: "A Flutter library for the Payjoin Dev Kit."
-version: 0.13.0-dev.2
+description: "A new Flutter FFI plugin project."
+version: 0.13.0
 homepage: https://github.com/LtbLightning/payjoin-flutter
 
 environment:

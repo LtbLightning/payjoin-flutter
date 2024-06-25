@@ -37,8 +37,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: main
-      resolved-ref: "821fe90d20c955e3cdfbfecea3b91fe24885552a"
+      ref: "v0.31.2-dev.2"
+      resolved-ref: "18649436038282f379e9a4679656bcd084434ddd"
       url: "https://github.com/LtbLightning/bdk-flutter"
     source: git
     version: "0.31.2-dev.2"

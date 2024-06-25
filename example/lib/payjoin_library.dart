@@ -1,11 +1,9 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:flutter/cupertino.dart';
 import 'package:payjoin_flutter/common.dart' as common;
 import 'package:payjoin_flutter/receive/v1.dart' as v1;
-import 'package:payjoin_flutter/receive/v2.dart';
 import 'package:payjoin_flutter/send.dart' as send;
 import 'package:payjoin_flutter/uri.dart' as pj_uri;
 
@@ -24,52 +22,39 @@ class PayJoinLibrary {
     }
   }
 
-  Future<v1.ProvisionalProposal> handlePjRequest(
-      String psbtBase64, Future<bool> Function(Uint8List) isOwned) async {
-    final body = utf8.encode(psbtBase64);
-
+  Future<(v1.ProvisionalProposal, send.ContextV1)> handlePjRequest(
+      String psbtBase64,
+      String uriStr,
+      Future<bool> Function(Uint8List) isOwned) async {
+    final uri = await pj_uri.Uri.fromString(uriStr);
+    final (req, cxt) = await (await (await send.RequestBuilder.fromPsbtAndUri(
+                psbtBase64: psbtBase64, uri: uri))
+            .buildWithAdditionalFee(
+                maxFeeContribution: 10000,
+                minFeeRate: 0,
+                clampFeeContribution: false))
+        .extractContextV1();
     final headers = common.Headers(map: {
       'content-type': 'text/plain',
-      'content-length': body.length.toString(),
+      'content-length': req.body.length.toString(),
     });
     final unchecked = await v1.UncheckedProposal.fromRequest(
-        body: body.toList(), query: '', headers: headers);
-    final provisionalProposal =
-        await handleUncheckedProposal(unchecked, isOwned);
-    return provisionalProposal;
+        body: req.body.toList(),
+        query: (await req.url.query())!,
+        headers: headers);
+    final provisionalProposal = await handleUnckedProposal(unchecked, isOwned);
+    return (provisionalProposal, cxt);
   }
 
-  Future<v1.ProvisionalProposal> handleUncheckedProposal(
+  Future<v1.ProvisionalProposal> handleUnckedProposal(
       v1.UncheckedProposal uncheckedProposal,
       Future<bool> Function(Uint8List) isOwned) async {
-    // A consumer wallet has some manual interaction to initiate a payjoin, it
-    //  is not a server that can receive a lot of requests without the user
-    //  being aware of it. Therefore we say a consumer wallet app is an
-    //  interactive receiver and an automatic payment processor is
-    //  non-interactive.
-    //
-    //  The way to check a proposal for these cases are different:
-    //   - For an interactive receiver, you can just call
-    //      `assumeInteractiveReceiver` as used here in the example code.
-    //   - For a non-interactive receiver, you would extract the original tx
-    //      with `extractTxToScheduleBroadcast` and check if it can be
-    //      broadcasted in `checkBroadcastSuitability`. This way, if the sender
-    //      doesn't complete the payjoin, you can still broadcast the original
-    //      tx and get your funds. This protects against sender maliciousness of
-    //      probing your utxo set amongst other things.
-
-    final inputsOwned = await uncheckedProposal.assumeInteractiveReceiver();
-    /*
-      // Non-interactive receiver example code:
-      final originalTx = await uncheckedProposal.extractTxToScheduleBroadcast();
-      final inputsOwned = await uncheckedProposal.checkBroadcastSuitability(
-          canBroadcast: (e) async {
-        // Here you would check if the original tx is a valid tx that pays you 
-        //  and that can be broadcasted.
-        return true;
-      });
-    */
-
+    // in a payment processor where the sender could go offline, this is where you schedule to broadcast the original_tx
+    var _ = await uncheckedProposal.extractTxToScheduleBroadcast();
+    final inputsOwned = await uncheckedProposal.checkBroadcastSuitability(
+        canBroadcast: (e) async {
+      return true;
+    });
     // Receive Check 2: receiver can't sign for proposal inputs
     final mixedInputScripts =
         await inputsOwned.checkInputsNotOwned(isOwned: isOwned);
