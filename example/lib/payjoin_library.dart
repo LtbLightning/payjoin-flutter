@@ -51,10 +51,7 @@ class PayJoinLibrary {
       Future<bool> Function(Uint8List) isOwned) async {
     // in a payment processor where the sender could go offline, this is where you schedule to broadcast the original_tx
     var _ = await uncheckedProposal.extractTxToScheduleBroadcast();
-    final inputsOwned = await uncheckedProposal.checkBroadcastSuitability(
-        canBroadcast: (e) async {
-      return true;
-    });
+    final inputsOwned = await uncheckedProposal.assumeInteractiveReceiver();
     // Receive Check 2: receiver can't sign for proposal inputs
     final mixedInputScripts =
         await inputsOwned.checkInputsNotOwned(isOwned: isOwned);
