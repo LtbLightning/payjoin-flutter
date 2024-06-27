@@ -37,11 +37,11 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: "v0.31.2-dev.2"
-      resolved-ref: "18649436038282f379e9a4679656bcd084434ddd"
+      ref: "0.31.2"
+      resolved-ref: "1944db1e3cf8c8e909fb8d22079a1caaec512ab2"
       url: "https://github.com/LtbLightning/bdk-flutter"
     source: git
-    version: "0.31.2-dev.2"
+    version: "0.31.2"
   boolean_selector:
     dependency: transitive
     description:
@@ -208,10 +208,10 @@ packages:
     dependency: transitive
     description:
       name: flutter_rust_bridge
-      sha256: e9a8716b1ad2fc81c434f3e4bf84b86c578578678c57e568b44aea7acf210102
+      sha256: f703c4b50e253e53efc604d50281bbaefe82d615856f8ae1e7625518ae252e98
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.0-dev.31"
+    version: "2.0.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -267,14 +267,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  js:
-    dependency: transitive
-    description:
-      name: js
-      sha256: c1b2e9b5ea78c45e1a0788d29606ba27dc5f71f019f32ca5140f61ef071838cf
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.7.1"
   json_annotation:
     dependency: transitive
     description:
@@ -425,7 +417,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "0.13.0"
+    version: "0.18.0"
   platform:
     dependency: transitive
     description:
