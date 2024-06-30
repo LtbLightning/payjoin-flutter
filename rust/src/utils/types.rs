@@ -1,5 +1,6 @@
 use std::collections::HashMap;
-
+use flutter_rust_bridge::frb;
+pub use payjoin_ffi::types::Network;
 // ///Represents data that needs to be transmitted to the receiver.
 // ///You need to send this request over HTTP(S) to the receiver.
 // #[derive(Clone, Debug)]
@@ -102,4 +103,20 @@ impl From<payjoin_ffi::types::TxOut> for TxOut {
             script_pubkey: tx_out.script_pubkey,
         }
     }
+}
+
+// It works with basic enums too
+// Enums with struct variants are not yet supported
+#[derive(Default)]
+#[frb(mirror(Network))]
+pub enum _Network {
+    ///Bitcoin’s testnet
+    #[default]
+    Testnet,
+    ///Bitcoin’s regtest
+    Regtest,
+    ///Classic Bitcoin
+    Bitcoin,
+    ///Bitcoin’s signet
+    Signet,
 }
