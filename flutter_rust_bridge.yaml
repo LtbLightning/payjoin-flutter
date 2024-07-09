@@ -1,6 +1,10 @@
-
-rust_input: rust/src/api/*.rs
+rust_input: crate::api
+rust_root: rust/
 dart_output: lib/src/generated/
+add_mod_to_lib: false
+web: false
+dart3: true
 full_dep: true
+enable_lifetime: true
 c_output: ios/Classes/frb_generated.h
-dart_entrypoint_class_name: PayjoinCore
+dart_entrypoint_class_name: core
