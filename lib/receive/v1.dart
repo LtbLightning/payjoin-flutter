@@ -6,10 +6,10 @@ import '../common.dart' as common;
 import '../common.dart';
 import '../src/config.dart';
 import '../src/exceptions.dart';
-import '../src/generated/api/receive.dart' as receive;
+import '../src/generated/api/receive.dart';
 import '../src/generated/utils/error.dart' as error;
 
-class UncheckedProposal extends receive.UncheckedProposal {
+class UncheckedProposal extends FfiUncheckedProposal {
   UncheckedProposal._({required super.field0});
   static Future<UncheckedProposal> fromRequest({
     required List<int> body,
@@ -18,7 +18,7 @@ class UncheckedProposal extends receive.UncheckedProposal {
   }) async {
     try {
       await PConfig.initializeApp();
-      final res = await receive.UncheckedProposal.fromRequest(
+      final res = await FfiUncheckedProposal.fromRequest(
           body: body, query: query, headers: headers);
       return UncheckedProposal._(field0: res.field0);
     } on error.PayjoinError catch (e) {
@@ -41,11 +41,11 @@ class UncheckedProposal extends receive.UncheckedProposal {
   /// Do this check if you generate bitcoin uri to receive Payjoin on sender request without manual human approval, like a payment processor. Such so called “non-interactive” receivers are otherwise vulnerable to probing attacks. If a sender can make requests at will, they can learn which bitcoin the receiver owns at no cost. Broadcasting the Original PSBT after some time in the failure case makes incurs sender cost and prevents probing.
   /// Call this after checking downstream.
   Future<MaybeInputsOwned> checkBroadcastSuitability(
-      {int? minFeeRate,
+      {BigInt? minFeeRate,
       required FutureOr<bool> Function(Uint8List) canBroadcast,
       hint}) async {
     try {
-      final res = await receive.UncheckedProposal.checkBroadcastSuitability(
+      final res = await FfiUncheckedProposal.checkBroadcastSuitability(
           minFeeRate: minFeeRate, canBroadcast: canBroadcast, ptr: this);
       return MaybeInputsOwned._(field0: res.field0);
     } on error.PayjoinError catch (e) {
@@ -59,7 +59,7 @@ class UncheckedProposal extends receive.UncheckedProposal {
   Future<MaybeInputsOwned> assumeInteractiveReceiver() async {
     try {
       final res =
-          await receive.UncheckedProposal.assumeInteractiveReceiver(ptr: this);
+          await FfiUncheckedProposal.assumeInteractiveReceiver(ptr: this);
       return MaybeInputsOwned._(field0: res.field0);
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
@@ -67,12 +67,12 @@ class UncheckedProposal extends receive.UncheckedProposal {
   }
 }
 
-class MaybeInputsOwned extends receive.MaybeInputsOwned {
+class MaybeInputsOwned extends FfiMaybeInputsOwned {
   MaybeInputsOwned._({required super.field0});
   Future<MaybeMixedInputScripts> checkInputsNotOwned(
       {required FutureOr<bool> Function(Uint8List) isOwned}) async {
     try {
-      final res = await receive.MaybeInputsOwned.checkInputsNotOwned(
+      final res = await FfiMaybeInputsOwned.checkInputsNotOwned(
           ptr: this, isOwned: isOwned);
       return MaybeMixedInputScripts._(field0: res.field0);
     } on error.PayjoinError catch (e) {
@@ -81,7 +81,7 @@ class MaybeInputsOwned extends receive.MaybeInputsOwned {
   }
 }
 
-class MaybeMixedInputScripts extends receive.MaybeMixedInputScripts {
+class MaybeMixedInputScripts extends FfiMaybeMixedInputScripts {
   MaybeMixedInputScripts._({required super.field0});
 
   /// Verify the original transaction did not have mixed input types Call this after checking downstream.
@@ -89,8 +89,8 @@ class MaybeMixedInputScripts extends receive.MaybeMixedInputScripts {
   /// Note: mixed spends do not necessarily indicate distinct wallet fingerprints. This check is intended to prevent some types of wallet fingerprinting.
   Future<MaybeInputsSeen> checkNoMixedInputScripts() async {
     try {
-      final res = await receive.MaybeMixedInputScripts.checkNoMixedInputScripts(
-          ptr: this);
+      final res =
+          await FfiMaybeMixedInputScripts.checkNoMixedInputScripts(ptr: this);
       return MaybeInputsSeen._(field0: res.field0);
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
@@ -98,12 +98,12 @@ class MaybeMixedInputScripts extends receive.MaybeMixedInputScripts {
   }
 }
 
-class MaybeInputsSeen extends receive.MaybeInputsSeen {
+class MaybeInputsSeen extends FfiMaybeInputsSeen {
   MaybeInputsSeen._({required super.field0});
   Future<OutputsUnknown> checkNoInputsSeenBefore(
       {required FutureOr<bool> Function(OutPoint) isKnown}) async {
     try {
-      final res = await receive.MaybeInputsSeen.checkNoInputsSeenBefore(
+      final res = await FfiMaybeInputsSeen.checkNoInputsSeenBefore(
           ptr: this, isKnown: isKnown);
       return OutputsUnknown._(field0: res.field0);
     } on error.PayjoinError catch (e) {
@@ -112,12 +112,12 @@ class MaybeInputsSeen extends receive.MaybeInputsSeen {
   }
 }
 
-class OutputsUnknown extends receive.OutputsUnknown {
+class OutputsUnknown extends FfiOutputsUnknown {
   OutputsUnknown._({required super.field0});
   Future<ProvisionalProposal> identifyReceiverOutputs(
       {required Future<bool> Function(Uint8List) isReceiverOutput}) async {
     try {
-      final res = await receive.OutputsUnknown.identifyReceiverOutputs(
+      final res = await FfiOutputsUnknown.identifyReceiverOutputs(
           ptr: this, isReceiverOutput: isReceiverOutput);
       return ProvisionalProposal._(field0: res.field0);
     } on error.PayjoinError catch (e) {
@@ -126,12 +126,14 @@ class OutputsUnknown extends receive.OutputsUnknown {
   }
 }
 
-class ProvisionalProposal extends receive.ProvisionalProposal {
+class ProvisionalProposal extends FfiProvisionalProposal {
   ProvisionalProposal._({required super.field0});
+
   @override
-  Future<void> substituteOutputAddress({required String address, hint}) {
+  Future<void> trySubstituteReceiverOutput(
+      {required FutureOr<Uint8List> Function() generateScript}) {
     try {
-      return super.substituteOutputAddress(address: address);
+      return super.trySubstituteReceiverOutput(generateScript: generateScript);
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
     }
@@ -164,7 +166,7 @@ class ProvisionalProposal extends receive.ProvisionalProposal {
   /// UIH “Unnecessary input heuristic” is one class of them to avoid. We define UIH1 and UIH2 according to the BlockSci practice BlockSci UIH1 and UIH2:
   @override
   Future<common.OutPoint> tryPreservingPrivacy(
-      {required Map<int, common.OutPoint> candidateInputs, hint}) {
+      {required Map<BigInt, common.OutPoint> candidateInputs, hint}) {
     try {
       return super.tryPreservingPrivacy(candidateInputs: candidateInputs);
     } on error.PayjoinError catch (e) {
@@ -174,9 +176,9 @@ class ProvisionalProposal extends receive.ProvisionalProposal {
 
   Future<PayjoinProposal> finalizeProposal(
       {required FutureOr<String> Function(String) processPsbt,
-      int? minFeeRateSatPerVb}) async {
+      BigInt? minFeeRateSatPerVb}) async {
     try {
-      final res = await receive.ProvisionalProposal.finalizeProposal(
+      final res = await FfiProvisionalProposal.finalizeProposal(
           processPsbt: processPsbt,
           minFeerateSatPerVb: minFeeRateSatPerVb,
           ptr: this);
@@ -187,7 +189,7 @@ class ProvisionalProposal extends receive.ProvisionalProposal {
   }
 }
 
-class PayjoinProposal extends receive.PayjoinProposal {
+class PayjoinProposal extends FfiPayjoinProposal {
   PayjoinProposal._({required super.field0});
 
   @override
