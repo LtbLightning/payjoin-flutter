@@ -30,9 +30,10 @@ class BdkClient {
     //     Platform.isAndroid ? 'http://10.0.2.2:30000' : localEsploraUrl;
     try {
       blockchain = await Blockchain.create(
-          config: const BlockchainConfig.esplora(
+          config: BlockchainConfig.esplora(
               config: EsploraConfig(
-                  baseUrl: "https://mutinynet.com/api", stopGap: 10)));
+                  baseUrl: "https://mutinynet.com/api",
+                  stopGap: BigInt.from(144))));
     } on Exception {
       rethrow;
     }
@@ -69,10 +70,10 @@ class BdkClient {
       final txBuilder = TxBuilder();
       final address =
           await Address.fromString(s: addressStr, network: Network.signet);
-      final script = await address.scriptPubkey();
+      final script = address.scriptPubkey();
       final (psbt, _) = await txBuilder
-          .addRecipient(script, amount)
-          .feeAbsolute(fee)
+          .addRecipient(script, BigInt.from(amount))
+          .feeAbsolute(BigInt.from(fee))
           .finish(wallet);
       return signPsbt(psbt);
     } on Exception {
@@ -81,10 +82,10 @@ class BdkClient {
   }
 
   Future<int> getBalance() async {
-    final balance = await wallet.getBalance();
+    final balance = wallet.getBalance();
     final res = "Total Balance: ${balance.total.toString()}";
     debugPrint(res);
-    return balance.total;
+    return balance.total.toInt();
   }
 
   Future<String> broadcastPsbt(PartiallySignedTransaction psbt) async {

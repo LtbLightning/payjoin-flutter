@@ -28,10 +28,10 @@ class PayJoinLibrary {
       Future<bool> Function(Uint8List) isOwned) async {
     final uri = await pj_uri.Uri.fromString(uriStr);
     final (req, cxt) = await (await (await send.RequestBuilder.fromPsbtAndUri(
-                psbtBase64: psbtBase64, uri: uri))
+                psbtBase64: psbtBase64, pjUri: uri.checkPjSupported()))
             .buildWithAdditionalFee(
-                maxFeeContribution: 10000,
-                minFeeRate: 0,
+                maxFeeContribution: BigInt.from(10000),
+                minFeeRate: BigInt.zero,
                 clampFeeContribution: false))
         .extractContextV1();
     final headers = common.Headers(map: {
