@@ -48,9 +48,9 @@ void main() {
       });
       final availableInputs = await receiver.listUnspent([]);
       // Select receiver payjoin inputs.
-      Map<int, common.OutPoint> candidateInputs = {};
+      Map<BigInt, common.OutPoint> candidateInputs = {};
       for (var e in availableInputs) {
-        int amount = (e["amount"] * 100000000).toInt();
+        var amount = BigInt.from(e["amount"] * 100000000);
         candidateInputs[amount] =
             common.OutPoint(txid: e["txid"], vout: e["vout"]);
       }
@@ -62,7 +62,8 @@ void main() {
           (e["vout"] == selectedOutpoint.vout));
       final selectedUtxoScriptPubKey =
           await ScriptBuf.fromHex(selectedUtxo["scriptPubKey"]);
-      int selectedUtxoAmount = (selectedUtxo["amount"] * 100000000).toInt();
+      final selectedUtxoAmount =
+          BigInt.from(selectedUtxo["amount"] * 100000000);
       final txoutToContribute = common.TxOut(
         scriptPubkey: selectedUtxoScriptPubKey.bytes,
         value: selectedUtxoAmount,
@@ -71,9 +72,6 @@ void main() {
           txid: selectedUtxo["txid"], vout: selectedUtxo["vout"]);
       await provisionalProposal.contributeWitnessInput(
           txo: txoutToContribute, outpoint: outputToContribute);
-      final newReceiverAddress = await receiver.getNewAddress();
-      await provisionalProposal.substituteOutputAddress(
-          address: newReceiverAddress);
       final payJoinProposal =
           await provisionalProposal.finalizeProposal(processPsbt: (e) async {
         return (await receiver.walletProcessPsbt(e))["psbt"];

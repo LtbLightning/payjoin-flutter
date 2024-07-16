@@ -36,22 +36,22 @@ void main() {
       // Sender create a funded PSBT (not broadcast) to address with amount given in the pjUri
       debugPrint("Sender Balance: ${(await sender.getBalance()).toString()}");
       final uri = await pay_join_uri.Uri.fromString(
-          "${await pjReceiverAddress.toQrUri()}?amount=${0.0083285}&pj=https://example.com");
-      final address = await uri.address();
-      int amount = (((await uri.amount()) ?? 0) * 100000000).toInt();
+          "${pjReceiverAddress.toQrUri()}?amount=${0.0083285}&pj=https://example.com");
+      final address = uri.address();
+      int amount = (((uri.amount()) ?? 0) * 100000000).toInt();
 
       final senderPsbt = (await sender.createPsbt(address, amount, 2000));
-      final senderPsbtBase64 = await senderPsbt.serialize();
+      final senderPsbtBase64 = senderPsbt.toString();
       debugPrint(
         "\nOriginal sender psbt: $senderPsbtBase64",
       );
 
       // Receiver part
       final (req, ctx) = await (await (await send.RequestBuilder.fromPsbtAndUri(
-                  psbtBase64: senderPsbtBase64, uri: uri))
+                  psbtBase64: senderPsbtBase64, pjUri: uri.checkPjSupported()))
               .buildWithAdditionalFee(
-                  maxFeeContribution: 10000,
-                  minFeeRate: 0,
+                  maxFeeContribution: BigInt.from(10000),
+                  minFeeRate: BigInt.zero,
                   clampFeeContribution: false))
           .extractContextV1();
       final headers = common.Headers(map: {
@@ -86,7 +86,7 @@ void main() {
       });
       final unspent = await receiver.listUnspent();
       // Select receiver payjoin inputs.
-      Map<int, common.OutPoint> candidateInputs = {
+      Map<BigInt, common.OutPoint> candidateInputs = {
         for (var input in unspent)
           input.txout.value: common.OutPoint(
               txid: input.outpoint.txid.toString(), vout: input.outpoint.vout)
@@ -109,15 +109,13 @@ void main() {
       );
       await provisionalProposal.contributeWitnessInput(
           txo: txoToContribute, outpoint: outpointToContribute);
-      final receiverAddress = (await receiver.getNewAddress()).address;
-      await provisionalProposal.substituteOutputAddress(
-          address: await receiverAddress.asString());
+
       final payJoinProposal =
           await provisionalProposal.finalizeProposal(processPsbt: (e) async {
         debugPrint("\n Original receiver unsigned psbt: $e");
-        return await (await receiver
+        return (await receiver
                 .signPsbt(await PartiallySignedTransaction.fromString(e)))
-            .serialize();
+            .toString();
       });
       final receiverPsbt = await payJoinProposal.psbt();
       debugPrint("\n Original receiver psbt: $receiverPsbt");

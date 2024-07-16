@@ -165,15 +165,14 @@ class _PayJoinState extends State<PayJoin> {
             TextButton(
                 onPressed: () async {
                   final (provisionalProposal, contextV1) = await payJoinLibrary
-                      .handlePjRequest(await senderPsbt.serialize(), pjUri,
-                          (e) async {
+                      .handlePjRequest(senderPsbt.toString(), pjUri, (e) async {
                     final script = ScriptBuf(bytes: e);
 
                     return (await receiver.getAddressInfo(script));
                   });
                   final unspent = await receiver.listUnspent();
                   // Select receiver payjoin inputs.
-                  Map<int, common.OutPoint> candidateInputs = {
+                  Map<BigInt, common.OutPoint> candidateInputs = {
                     for (var input in unspent)
                       input.txout.value: common.OutPoint(
                           txid: input.outpoint.txid.toString(),
@@ -198,15 +197,12 @@ class _PayJoinState extends State<PayJoin> {
 
                   await provisionalProposal.contributeWitnessInput(
                       txo: txoToContribute, outpoint: outpointToContribute);
-                  final newReceiverAddress = await receiver.getNewAddress();
-                  await provisionalProposal.substituteOutputAddress(
-                      address: await newReceiverAddress.address.asString());
                   final payJoinProposal = await provisionalProposal
                       .finalizeProposal(processPsbt: (e) async {
                     debugPrint("\n Original receiver unsigned psbt: $e");
-                    return await (await receiver.signPsbt(
+                    return (await receiver.signPsbt(
                             await PartiallySignedTransaction.fromString(e)))
-                        .serialize();
+                        .toString();
                   });
                   final receiverPsbt = await payJoinProposal.psbt();
                   debugPrint("\n Original receiver psbt: $receiverPsbt");
