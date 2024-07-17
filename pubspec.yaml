@@ -1,6 +1,6 @@
 name: payjoin_flutter
-description: "A Flutter library for the Payjoin Dev Kit."
-version: 0.13.0-dev.2
+description: "A new Flutter FFI plugin project."
+version: 0.18.0
 homepage: https://github.com/LtbLightning/payjoin-flutter
 
 environment:
@@ -12,7 +12,7 @@ dependencies:
     sdk: flutter
   collection: ^1.17.1
   ffi: ^2.0.1
-  flutter_rust_bridge: ">2.0.0-dev.30 <= 2.0.0-dev.31"
+  flutter_rust_bridge: "2.0.0"
   freezed_annotation: ^2.2.0
   meta: ^1.10.0
   uuid: ^4.2.1

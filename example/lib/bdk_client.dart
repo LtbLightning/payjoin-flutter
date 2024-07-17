@@ -8,18 +8,19 @@ class BdkClient {
   late Wallet wallet;
   late Blockchain blockchain;
   final String descriptor;
+  final Network network;
 
-  BdkClient(this.descriptor);
+  BdkClient(this.descriptor, this.network);
 
   Future<void> restoreWallet() async {
     try {
       await initBlockchain();
       wallet = await Wallet.create(
-          descriptor: await Descriptor.create(
-              descriptor: descriptor, network: Network.signet),
-          network: Network.signet,
+          descriptor:
+              await Descriptor.create(descriptor: descriptor, network: network),
+          network: network,
           databaseConfig: const DatabaseConfig.memory());
-      debugPrint(await (await getNewAddress()).address.asString());
+      debugPrint(getNewAddress().address.toString());
     } on Exception {
       rethrow;
     }
@@ -30,22 +31,22 @@ class BdkClient {
     //     Platform.isAndroid ? 'http://10.0.2.2:30000' : localEsploraUrl;
     try {
       blockchain = await Blockchain.create(
-          config: const BlockchainConfig.esplora(
+          config: BlockchainConfig.esplora(
               config: EsploraConfig(
-                  baseUrl: "https://mutinynet.com/api", stopGap: 10)));
+                  baseUrl: "https://mutinynet.com/api",
+                  stopGap: BigInt.from(144))));
     } on Exception {
       rethrow;
     }
   }
 
-  Future<AddressInfo> getNewAddress() async {
-    final res =
-        await wallet.getAddress(addressIndex: const AddressIndex.increase());
+  AddressInfo getNewAddress() {
+    final res = wallet.getAddress(addressIndex: const AddressIndex.increase());
     return res;
   }
 
-  Future<List<TransactionDetails>> listTransactions() async {
-    final res = await wallet.listTransactions(includeRaw: true);
+  List<TransactionDetails> listTransactions() {
+    final res = wallet.listTransactions(includeRaw: true);
     return res;
   }
 
@@ -67,12 +68,11 @@ class BdkClient {
       String addressStr, int amount, int fee) async {
     try {
       final txBuilder = TxBuilder();
-      final address =
-          await Address.fromString(s: addressStr, network: Network.signet);
-      final script = await address.scriptPubkey();
+      final address = await Address.fromString(s: addressStr, network: network);
+      final script = address.scriptPubkey();
       final (psbt, _) = await txBuilder
-          .addRecipient(script, amount)
-          .feeAbsolute(fee)
+          .addRecipient(script, BigInt.from(amount))
+          .feeAbsolute(BigInt.from(fee))
           .finish(wallet);
       return signPsbt(psbt);
     } on Exception {
@@ -80,14 +80,16 @@ class BdkClient {
     }
   }
 
-  Future<int> getBalance() async {
-    final balance = await wallet.getBalance();
-    return balance.total;
+  int getBalance() {
+    final balance = wallet.getBalance();
+    final res = "Total Balance: ${balance.total.toString()}";
+    debugPrint(res);
+    return balance.total.toInt();
   }
 
   Future<String> broadcastPsbt(PartiallySignedTransaction psbt) async {
     try {
-      final tx = await psbt.extractTx();
+      final tx = psbt.extractTx();
       final txid = await blockchain.broadcast(transaction: tx);
       return txid;
     } on Exception {
@@ -95,8 +97,8 @@ class BdkClient {
     }
   }
 
-  Future<bool> getAddressInfo(ScriptBuf script) async {
-    final res = await wallet.isMine(script: script);
+  bool getAddressInfo(ScriptBuf script) {
+    final res = wallet.isMine(script: script);
     return res;
   }
 
@@ -104,7 +106,7 @@ class BdkClient {
     wallet.sync(blockchain: blockchain);
   }
 
-  Future<List<LocalUtxo>> listUnspent() async {
-    return await wallet.listUnspent();
+  List<LocalUtxo> listUnspent() {
+    return wallet.listUnspent();
   }
 }

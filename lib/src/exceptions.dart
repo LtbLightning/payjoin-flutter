@@ -45,5 +45,6 @@ PayjoinException mapPayjoinError(error.PayjoinError e) {
     unexpectedError: (e) => PayjoinException(message: e.message),
     ohttpError: (e) => PayjoinException(message: e.message),
     urlError: (e) => PayjoinException(message: e.message),
+    ioError: (e) => PayjoinException(message: e.message),
   );
 }
