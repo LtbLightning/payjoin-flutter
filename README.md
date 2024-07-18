@@ -8,7 +8,7 @@ To use the `payjoin_flutter` package in your project, add it as a dependency in 
 
 ```dart
 dependencies:
-payjoin_flutter: 0.13.0
+payjoin_flutter: 0.18.0
 ```
 ### Requirements
 

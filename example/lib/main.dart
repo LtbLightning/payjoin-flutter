@@ -43,9 +43,11 @@ class _PayJoinState extends State<PayJoin> {
   static const primaryColor = 0xffC71585;
   PayJoinLibrary payJoinLibrary = PayJoinLibrary();
   final sender = BdkClient(
-      "wpkh(tprv8ZgxMBicQKsPdgsqhkRVYkBBULxG3HvyXtwhWKEgfH4bsU8bmaqhdbZvxq4Z7BLFtUrT58ynRDrBcfG3vNpNHsKTV5xCEgRoKaNNzcVW3HW/84'/1'/0'/0/*)#ln3hfgcf");
+      "wpkh(tprv8ZgxMBicQKsPdgsqhkRVYkBBULxG3HvyXtwhWKEgfH4bsU8bmaqhdbZvxq4Z7BLFtUrT58ynRDrBcfG3vNpNHsKTV5xCEgRoKaNNzcVW3HW/84'/1'/0'/0/*)#ln3hfgcf",
+      Network.signet);
   final receiver = BdkClient(
-      "wpkh(tprv8ZgxMBicQKsPfKJjrApLfm2BhWhV1JpL3StS8UPagm91Y215JGZktQKTtvErD92RKxEDYD9Sfc9eGZVkuH94NgEHPhz7rpgzhiNm2UPs1G1/84'/1'/0'/0/*)#h8uywf09");
+      "wpkh(tprv8ZgxMBicQKsPfKJjrApLfm2BhWhV1JpL3StS8UPagm91Y215JGZktQKTtvErD92RKxEDYD9Sfc9eGZVkuH94NgEHPhz7rpgzhiNm2UPs1G1/84'/1'/0'/0/*)#h8uywf09",
+      Network.signet);
 
   String displayText = "";
   String pjUri = "";
@@ -149,7 +151,7 @@ class _PayJoinState extends State<PayJoin> {
                       (((await uri.amount()) ?? 0) * 100000000).toInt();
                   final psbt = (await sender.createPsbt(address, amount, 2000));
                   debugPrint(
-                    "\nOriginal sender psbt: ${await psbt.serialize()}",
+                    "\nOriginal sender psbt: ${psbt.toString()}",
                   );
                   setState(() {
                     senderPsbt = psbt;
