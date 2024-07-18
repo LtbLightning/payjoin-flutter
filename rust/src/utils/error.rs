@@ -45,7 +45,7 @@ pub enum PayjoinError {
     PjParseError {
         message: String,
     },
-    PjNotSupported {
+    PjNotSupported{
         message: String,
     },
     ValidationError {
@@ -61,6 +61,9 @@ pub enum PayjoinError {
         message: String,
     },
     UrlError {
+        message: String,
+    },
+    IoError {
         message: String,
     },
 }
@@ -101,15 +104,16 @@ from_payjoin_ffi_error!(
     RequestError,
     TransactionError,
     ServerError,
+    PjNotSupported,
     SelectionError,
     CreateRequestError,
     PjParseError,
-    PjNotSupported,
     ValidationError,
     V2Error,
     UnexpectedError,
     OhttpError,
-    UrlError
+    UrlError,
+    IoError
 );
 from_payjoin_error!(
     InvalidAddress,
@@ -123,10 +127,11 @@ from_payjoin_error!(
     SelectionError,
     CreateRequestError,
     PjParseError,
-    PjNotSupported,
     ValidationError,
     V2Error,
+    PjNotSupported,
     UnexpectedError,
     OhttpError,
-    UrlError
+    UrlError,
+    IoError
 );

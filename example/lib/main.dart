@@ -4,7 +4,6 @@ import 'package:bdk_flutter/bdk_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:payjoin_flutter/common.dart' as common;
-import 'package:payjoin_flutter/send.dart';
 import 'package:payjoin_flutter/uri.dart' as pay_join_uri;
 import 'package:payjoin_flutter_example/bdk_client.dart';
 import 'package:payjoin_flutter_example/payjoin_library.dart';
@@ -44,16 +43,16 @@ class _PayJoinState extends State<PayJoin> {
   static const primaryColor = 0xffC71585;
   PayJoinLibrary payJoinLibrary = PayJoinLibrary();
   final sender = BdkClient(
-      "wpkh(tprv8ZgxMBicQKsPdgsqhkRVYkBBULxG3HvyXtwhWKEgfH4bsU8bmaqhdbZvxq4Z7BLFtUrT58ynRDrBcfG3vNpNHsKTV5xCEgRoKaNNzcVW3HW/84'/1'/0'/0/*)#ln3hfgcf");
+      "wpkh(tprv8ZgxMBicQKsPdgsqhkRVYkBBULxG3HvyXtwhWKEgfH4bsU8bmaqhdbZvxq4Z7BLFtUrT58ynRDrBcfG3vNpNHsKTV5xCEgRoKaNNzcVW3HW/84'/1'/0'/0/*)#ln3hfgcf",
+      Network.signet);
   final receiver = BdkClient(
-      "wpkh(tprv8ZgxMBicQKsPfKJjrApLfm2BhWhV1JpL3StS8UPagm91Y215JGZktQKTtvErD92RKxEDYD9Sfc9eGZVkuH94NgEHPhz7rpgzhiNm2UPs1G1/84'/1'/0'/0/*)#h8uywf09");
+      "wpkh(tprv8ZgxMBicQKsPfKJjrApLfm2BhWhV1JpL3StS8UPagm91Y215JGZktQKTtvErD92RKxEDYD9Sfc9eGZVkuH94NgEHPhz7rpgzhiNm2UPs1G1/84'/1'/0'/0/*)#h8uywf09",
+      Network.signet);
 
   String displayText = "";
   String pjUri = "";
   late PartiallySignedTransaction senderPsbt;
-  late String receiverPsbtBase64;
-  late ContextV1 contextV1;
-
+  late PartiallySignedTransaction processedAndFinalizedPsbt;
   @override
   void initState() {
     sender.restoreWallet();
@@ -116,8 +115,6 @@ class _PayJoinState extends State<PayJoin> {
                     displayText = "sync complete";
                   });
                   debugPrint(
-                      "receiver balance: ${(await receiver.getBalance()).toString()}");
-                  debugPrint(
                       "sender balance: ${(await sender.getBalance()).toString()}");
                 },
                 child: Text(
@@ -145,53 +142,39 @@ class _PayJoinState extends State<PayJoin> {
                       fontWeight: FontWeight.w800),
                 )),
             TextButton(
-              onPressed: () async {
-                final balance = await sender.getBalance();
-                debugPrint("Sender Balance: ${balance.toString()}");
-                final uri = await pay_join_uri.Uri.fromString(pjUri);
-                final address = await uri.address();
-                int amount = (((await uri.amount()) ?? 0) * 100000000).toInt();
-                final psbt = (await sender.createPsbt(address, amount, 2000));
-                debugPrint(
-                  "\nOriginal sender psbt: ${await psbt.serialize()}",
-                );
-
-                final requestContext =
-                    (await (await RequestBuilder.fromPsbtAndUri(
-                            psbtBase64: await psbt.serialize(), uri: uri))
-                        .buildRecommended(minFeeRate: 0));
-                // In a real scenario, the sender would send the request to
-                //  the payjoin endpoint of the receiver, here we just keep
-                //  the context for the last step.
-                final (_, ctx) = await requestContext.extractContextV1();
-
-                setState(() {
-                  senderPsbt = psbt;
-                  contextV1 = ctx;
-                });
-              },
-              child: Text(
-                "Create Sender request psbt using receiver pjUri",
-                style: GoogleFonts.manrope(
-                    color: Colors.black,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w800),
-              ),
-            ),
+                onPressed: () async {
+                  final balance = await sender.getBalance();
+                  debugPrint("Sender Balance: ${balance.toString()}");
+                  final uri = await pay_join_uri.Uri.fromString(pjUri);
+                  final address = await uri.address();
+                  int amount =
+                      (((await uri.amount()) ?? 0) * 100000000).toInt();
+                  final psbt = (await sender.createPsbt(address, amount, 2000));
+                  debugPrint(
+                    "\nOriginal sender psbt: ${psbt.toString()}",
+                  );
+                  setState(() {
+                    senderPsbt = psbt;
+                  });
+                },
+                child: Text(
+                  "Create Sender psbt using receiver pjUri",
+                  style: GoogleFonts.manrope(
+                      color: Colors.black,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w800),
+                )),
             TextButton(
                 onPressed: () async {
-                  final provisionalProposal =
-                      await payJoinLibrary.handlePjRequest(
-                    await senderPsbt.serialize(),
-                    (e) async {
-                      final script = ScriptBuf(bytes: e);
+                  final (provisionalProposal, contextV1) = await payJoinLibrary
+                      .handlePjRequest(senderPsbt.toString(), pjUri, (e) async {
+                    final script = ScriptBuf(bytes: e);
 
-                      return (await receiver.getAddressInfo(script));
-                    },
-                  );
+                    return (await receiver.getAddressInfo(script));
+                  });
                   final unspent = await receiver.listUnspent();
                   // Select receiver payjoin inputs.
-                  Map<int, common.OutPoint> candidateInputs = {
+                  Map<BigInt, common.OutPoint> candidateInputs = {
                     for (var input in unspent)
                       input.txout.value: common.OutPoint(
                           txid: input.outpoint.txid.toString(),
@@ -201,7 +184,7 @@ class _PayJoinState extends State<PayJoin> {
                       .tryPreservingPrivacy(candidateInputs: candidateInputs);
                   var selectedUtxo = unspent.firstWhere(
                       (i) =>
-                          i.outpoint.txid == selectedOutpoint.txid &&
+                          i.outpoint.txid.toString() == selectedOutpoint.txid &&
                           i.outpoint.vout == selectedOutpoint.vout,
                       orElse: () => throw Exception('UTXO not found'));
                   var txoToContribute = common.TxOut(
@@ -216,24 +199,26 @@ class _PayJoinState extends State<PayJoin> {
 
                   await provisionalProposal.contributeWitnessInput(
                       txo: txoToContribute, outpoint: outpointToContribute);
-                  final newReceiverAddress = await receiver.getNewAddress();
-                  await provisionalProposal.substituteOutputAddress(
-                      address: await newReceiverAddress.address.asString());
                   final payJoinProposal = await provisionalProposal
                       .finalizeProposal(processPsbt: (e) async {
-                    debugPrint("\n Receiver response unsigned psbt: $e");
-                    return await (await receiver.signPsbt(
+                    debugPrint("\n Original receiver unsigned psbt: $e");
+                    return (await receiver.signPsbt(
                             await PartiallySignedTransaction.fromString(e)))
-                        .serialize();
+                        .toString();
                   });
                   final receiverPsbt = await payJoinProposal.psbt();
-                  debugPrint("\n Receiver response psbt: $receiverPsbt");
+                  debugPrint("\n Original receiver psbt: $receiverPsbt");
+                  final receiverProcessedPsbt = await contextV1.processResponse(
+                      response: utf8.encode(receiverPsbt));
+                  final senderProcessedPsbt = (await sender.signPsbt(
+                      await PartiallySignedTransaction.fromString(
+                          receiverProcessedPsbt)));
                   setState(() {
-                    receiverPsbtBase64 = receiverPsbt;
+                    processedAndFinalizedPsbt = senderProcessedPsbt;
                   });
                 },
                 child: Text(
-                  "Create Receiver response psbt",
+                  "Process and finalize receiver Pj request",
                   style: GoogleFonts.manrope(
                       color: Colors.black,
                       fontSize: 14,
@@ -241,19 +226,12 @@ class _PayJoinState extends State<PayJoin> {
                 )),
             TextButton(
                 onPressed: () async {
-                  final processedReceiverResponsePsbt =
-                      await contextV1.processResponse(
-                          response: utf8.encode(receiverPsbtBase64));
-                  final finalizedPsbt = (await sender.signPsbt(
-                      await PartiallySignedTransaction.fromString(
-                          processedReceiverResponsePsbt)));
-                  debugPrint(
-                      'Processed and finalized sender psbt: ${await finalizedPsbt.serialize()}');
-                  final res = await sender.broadcastPsbt(finalizedPsbt);
+                  final res =
+                      await sender.broadcastPsbt(processedAndFinalizedPsbt);
                   debugPrint("Broadcast success: $res");
                 },
                 child: Text(
-                  "Process response and broadcast final Sender psbt",
+                  "Broadcast processed psbt",
                   style: GoogleFonts.manrope(
                       color: Colors.black,
                       fontSize: 14,

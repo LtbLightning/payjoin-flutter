@@ -5,7 +5,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:payjoin_flutter/common.dart' as common;
-import 'package:payjoin_flutter/send.dart';
 import 'package:payjoin_flutter/uri.dart' as pay_join_uri;
 import 'package:payjoin_flutter_example/btc_client.dart';
 import 'package:payjoin_flutter_example/payjoin_library.dart';
@@ -36,15 +35,11 @@ void main() {
       final amount = await uri.amount();
       final senderPsbt =
           (await sender.walletCreateFundedPsbt(amount, address, 2000))["psbt"];
-      final requestContext = await (await RequestBuilder.fromPsbtAndUri(
-              psbtBase64: senderPsbt, uri: uri))
-          .buildRecommended(minFeeRate: 0);
-      final (_, ctx) = await requestContext.extractContextV1();
       debugPrint(
         "\nOriginal sender psbt: $senderPsbt",
       );
-      final provisionalProposal =
-          await payJoinLib.handlePjRequest(senderPsbt, (e) async {
+      final (provisionalProposal, ctx) =
+          await payJoinLib.handlePjRequest(senderPsbt, pjUri, (e) async {
         final script = ScriptBuf(bytes: e);
         final address = await (await Address.fromScript(
                 script: script, network: Network.regtest))
@@ -53,9 +48,9 @@ void main() {
       });
       final availableInputs = await receiver.listUnspent([]);
       // Select receiver payjoin inputs.
-      Map<int, common.OutPoint> candidateInputs = {};
+      Map<BigInt, common.OutPoint> candidateInputs = {};
       for (var e in availableInputs) {
-        int amount = (e["amount"] * 100000000).toInt();
+        var amount = BigInt.from(e["amount"] * 100000000);
         candidateInputs[amount] =
             common.OutPoint(txid: e["txid"], vout: e["vout"]);
       }
@@ -67,7 +62,8 @@ void main() {
           (e["vout"] == selectedOutpoint.vout));
       final selectedUtxoScriptPubKey =
           await ScriptBuf.fromHex(selectedUtxo["scriptPubKey"]);
-      int selectedUtxoAmount = (selectedUtxo["amount"] * 100000000).toInt();
+      final selectedUtxoAmount =
+          BigInt.from(selectedUtxo["amount"] * 100000000);
       final txoutToContribute = common.TxOut(
         scriptPubkey: selectedUtxoScriptPubKey.bytes,
         value: selectedUtxoAmount,
@@ -76,9 +72,6 @@ void main() {
           txid: selectedUtxo["txid"], vout: selectedUtxo["vout"]);
       await provisionalProposal.contributeWitnessInput(
           txo: txoutToContribute, outpoint: outputToContribute);
-      final newReceiverAddress = await receiver.getNewAddress();
-      await provisionalProposal.substituteOutputAddress(
-          address: newReceiverAddress);
       final payJoinProposal =
           await provisionalProposal.finalizeProposal(processPsbt: (e) async {
         return (await receiver.walletProcessPsbt(e))["psbt"];

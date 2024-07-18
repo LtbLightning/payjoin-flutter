@@ -1,47 +1,49 @@
-## [0.13.0-dev.2]
+## [0.18.0]
+Updated `flutter_rust_bridge` to `2.0.0`.
+#### APIs added
+- Exposed `PjUriBuilder` and `PjUri`.
+- Exposed `pjUrlBuilder()` in `ActiveSession`.
+- Exposed `checkPjSupported()` in `PjUri`.
+- Exposed `fetchOhttpKeys()` to fetch the `ohttp` keys from the specified `payjoin` directory.
+#### APIs changed
+- Upgrade `receive/v2` type state machine to resume multiple `payjoins` simultaneously ([#283](https://github.com/payjoin/rust-payjoin/pull/283))
+- Refactor output substitution with new fallable `try_substitute_outputs` ([#277](https://github.com/payjoin/rust-payjoin/pull/277))
+- `Enroller` became `SessionInitializer`.
+- `Enrolled` became `ActiveSession`.
+- `fallbackTarget()` became `pjUrl()`.
 
-### Fixed
+#### Fixed
+- Handle OHTTP encapsulated response status ([#284](https://github.com/payjoin/rust-payjoin/pull/284))
 
-- Fix `assumeInteractiveReceiver` return type
-
-### Refactor
-
-- Separate receiver and sender logic in example app.
-
-## [0.13.0-dev.1]
-
+## [0.13.0]
 ### Features & Modules
-
 #### Send module
-
-- ##### V1
-  - `RequestBuilder` exposes `fromPsbtAndUri`, `buildWithAdditionalFee`, `buildRecommended`, `buildNonIncentivizing`, `alwaysDisableOutputSubstitution`.
-  - `RequestContext` exposes `extractContextV1` & `extractContextV2`.
-  - `ContextV1` exposes `processResponse`.
-- ##### V2
-  - `ContextV2` exposes `processResponse`.
-
+- #####  V1
+    - `RequestBuilder` exposes `fromPsbtAndUri`, `buildWithAdditionalFee`, `buildRecommended`, `buildNonIncentivizing`, `alwaysDisableOutputSubstitution`.
+    - `RequestContext` exposes `extractContextV1` & `extractContextV2`.
+    - `ContextV1` exposes `processResponse`.
+- ##### V2 
+    - `ContextV2` exposes `processResponse`.
 #### Receive module
-
-- ##### V1
-  - `UncheckedProposal` exposes `fromRequest`, `extractTxToScheduleBroadcast`, `checkBroadcastSuitability`, `buildNonIncentivizing`,
-    `assumeInteractiveReceiver` &`alwaysDisableOutputSubstitution`.
-  - `MaybeInputsOwned` exposes `checkInputsNotOwned`.
-  - `MaybeMixedInputScripts` exposes `checkNoMixedInputScripts`.
-  - `MaybeInputsSeen` exposes `checkNoInputsSeenBefore`.
-  - `OutputsUnknown` exposes `identifyReceiverOutputs`.
-  - `ProvisionalProposal` exposes `substituteOutputAddress`, `contributeNonWitnessInput`, `contributeWitnessInput`, `tryPreservingPrivacy` &
-    `finalizeProposal`.
-  - `PayjoinProposal` exposes `isOutputSubstitutionDisabled`, `ownedVouts`, `psbt` & `utxosToBeLocked`.
-- ##### V2
-  - `Enroller` exposes `fromDirectoryConfig`, `processResponse` & `extractRequest`.
-  - `Enrolled` exposes `extractRequest`, `processResponse` & `fallbackTarget`.
-  - `UncheckedProposal` exposes `extractTxToScheduleBroadcast`, `checkBroadcastSuitability` & `assumeInteractiveReceiver`.
-  - `MaybeInputsOwned` exposes `checkInputsNotOwned`.
-  - `MaybeMixedInputScripts` exposes `checkNoMixedInputScripts`.
-  - `MaybeInputsSeen` exposes `checkNoInputsSeenBefore`.
-  - `OutputsUnknown` exposes `identifyReceiverOutputs`.
-  - `ProvisionalProposal` exposes `substituteOutputAddress`, `contributeNonWitnessInput`, `contributeWitnessInput`, `tryPreservingPrivacy` &
-    `finalizeProposal`.
-  - `PayjoinProposal` exposes `deserializeRes`, `extractV1Req`, `extractV2Request`, `isOutputSubstitutionDisabled`, `ownedVouts`, `psbt` &
-    `utxosToBeLocked`.
+- #####  V1
+    - `UncheckedProposal` exposes `fromRequest`, `extractTxToScheduleBroadcast`, `checkBroadcastSuitability`, `buildNonIncentivizing`, 
+        `assumeInteractiveReceiver` &`alwaysDisableOutputSubstitution`.
+    - `MaybeInputsOwned` exposes `checkInputsNotOwned`.    
+    - `MaybeMixedInputScripts` exposes `checkNoMixedInputScripts`.    
+    - `MaybeInputsSeen` exposes `checkNoInputsSeenBefore`.   
+    - `OutputsUnknown` exposes `identifyReceiverOutputs`.   
+    - `ProvisionalProposal` exposes `substituteOutputAddress`, `contributeNonWitnessInput`, `contributeWitnessInput`, `tryPreservingPrivacy` & 
+        `finalizeProposal`.
+    - `PayjoinProposal` exposes `isOutputSubstitutionDisabled`, `ownedVouts`, `psbt` & `utxosToBeLocked`.   
+- ##### V2 
+    - `Enroller` exposes `fromDirectoryConfig`, `processResponse` & `extractRequest`.
+    - `Enrolled` exposes `extractRequest`, `processResponse` & `fallbackTarget`.
+    - `UncheckedProposal` exposes  `extractTxToScheduleBroadcast`, `checkBroadcastSuitability` & `assumeInteractiveReceiver`.
+    - `MaybeInputsOwned` exposes `checkInputsNotOwned`.    
+    - `MaybeMixedInputScripts` exposes `checkNoMixedInputScripts`.    
+    - `MaybeInputsSeen` exposes `checkNoInputsSeenBefore`.   
+    - `OutputsUnknown` exposes `identifyReceiverOutputs`.   
+    - `ProvisionalProposal` exposes `substituteOutputAddress`, `contributeNonWitnessInput`, `contributeWitnessInput`, `tryPreservingPrivacy` & 
+        `finalizeProposal`.
+    - `PayjoinProposal` exposes `deserializeRes`, `extractV1Req`, `extractV2Request`, `isOutputSubstitutionDisabled`, `ownedVouts`, `psbt` &
+        `utxosToBeLocked`.
