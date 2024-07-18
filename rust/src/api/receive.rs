@@ -2,7 +2,7 @@ use crate::api::uri::{FfiOhttpKeys, FfiPjUriBuilder, FfiUrl};
 use crate::frb_generated::RustOpaque;
 pub use crate::utils::error::PayjoinError;
 use crate::utils::types::{Headers, OutPoint, TxOut};
-use flutter_rust_bridge::DartFnFuture;
+use flutter_rust_bridge::{DartFnFuture, frb};
 use std::collections::HashMap;
 pub use std::sync::Arc;
 
@@ -265,7 +265,7 @@ impl From<payjoin_ffi::receive::v2::SessionInitializer> for FfiSessionInitialize
 impl FfiSessionInitializer {
     pub fn new(
         address: String,
-        expire_after: u64,
+        expire_after: Option<u64>,
         network: crate::utils::types::Network,
         directory: FfiUrl,
         ohttp_keys: FfiOhttpKeys,
@@ -310,12 +310,17 @@ impl From<payjoin_ffi::receive::v2::ActiveSession> for FfiActiveSession {
     }
 }
 impl FfiActiveSession {
+    ///The per-session public key to use as an identifier
+    #[frb(sync)]
     pub fn public_key(&self) -> String {
         self.0.public_key()
     }
+
+    #[frb(sync)]
     pub fn pj_url(ptr: Self) -> FfiUrl {
         ptr.0.pj_url().into()
     }
+    #[frb(sync)]
     pub fn pj_uri_builder(ptr: Self) -> FfiPjUriBuilder {
         ptr.0.pj_uri_builder().into()
     }

@@ -24,11 +24,10 @@ class FfiActiveSession {
           {required FfiActiveSession ptr}) =>
       core.instance.api.crateApiReceiveFfiActiveSessionExtractReq(ptr: ptr);
 
-  static Future<FfiPjUriBuilder> pjUriBuilder(
-          {required FfiActiveSession ptr}) =>
+  static FfiPjUriBuilder pjUriBuilder({required FfiActiveSession ptr}) =>
       core.instance.api.crateApiReceiveFfiActiveSessionPjUriBuilder(ptr: ptr);
 
-  static Future<FfiUrl> pjUrl({required FfiActiveSession ptr}) =>
+  static FfiUrl pjUrl({required FfiActiveSession ptr}) =>
       core.instance.api.crateApiReceiveFfiActiveSessionPjUrl(ptr: ptr);
 
   Future<FfiV2UncheckedProposal?> processRes(
@@ -36,7 +35,8 @@ class FfiActiveSession {
       core.instance.api.crateApiReceiveFfiActiveSessionProcessRes(
           that: this, body: body, ctx: ctx);
 
-  Future<String> publicKey() =>
+  ///The per-session public key to use as an identifier
+  String publicKey() =>
       core.instance.api.crateApiReceiveFfiActiveSessionPublicKey(
         that: this,
       );
@@ -271,7 +271,7 @@ class FfiSessionInitializer {
   // HINT: Make it `#[frb(sync)]` to let it become the default constructor of Dart class.
   static Future<FfiSessionInitializer> newInstance(
           {required String address,
-          required BigInt expireAfter,
+          BigInt? expireAfter,
           required Network network,
           required FfiUrl directory,
           required FfiOhttpKeys ohttpKeys,
