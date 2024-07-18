@@ -17,8 +17,12 @@ pub async fn fetch_ohttp_keys(
     payjoin_directory: FfiUrl,
     cert_der: Vec<u8>,
 ) -> Result<FfiOhttpKeys, PayjoinError> {
-    payjoin_ffi::io::fetch_ohttp_keys((*ohttp_relay.0).clone(), (*payjoin_directory.0).clone(), cert_der)
-        .await
-        .map(|e| e.into())
-        .map_err(|e| e.into())
+    payjoin_ffi::io::fetch_ohttp_keys(
+        (*ohttp_relay.0).clone(),
+        (*payjoin_directory.0).clone(),
+        cert_der,
+    )
+    .await
+    .map(|e| e.into())
+    .map_err(|e| e.into())
 }
