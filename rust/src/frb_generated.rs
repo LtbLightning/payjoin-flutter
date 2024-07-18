@@ -38,7 +38,7 @@ flutter_rust_bridge::frb_generated_boilerplate!(
     default_rust_auto_opaque = RustAutoOpaqueNom,
 );
 pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_VERSION: &str = "2.0.0";
-pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = 1145331695;
+pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = -1575278373;
 
 // Section: executor
 
@@ -102,48 +102,41 @@ fn wire__crate__api__receive__ffi_active_session_extract_req_impl(
     )
 }
 fn wire__crate__api__receive__ffi_active_session_pj_uri_builder_impl(
-    port_: flutter_rust_bridge::for_generated::MessagePort,
     ptr: impl CstDecode<crate::api::receive::FfiActiveSession>,
-) {
-    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::DcoCodec, _, _>(
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartDco {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::DcoCodec, _>(
         flutter_rust_bridge::for_generated::TaskInfo {
             debug_name: "ffi_active_session_pj_uri_builder",
-            port: Some(port_),
-            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
         },
         move || {
             let api_ptr = ptr.cst_decode();
-            move |context| {
-                transform_result_dco::<_, _, ()>((move || {
-                    let output_ok = Result::<_, ()>::Ok(
-                        crate::api::receive::FfiActiveSession::pj_uri_builder(api_ptr),
-                    )?;
-                    Ok(output_ok)
-                })())
-            }
+            transform_result_dco::<_, _, ()>((move || {
+                let output_ok = Result::<_, ()>::Ok(
+                    crate::api::receive::FfiActiveSession::pj_uri_builder(api_ptr),
+                )?;
+                Ok(output_ok)
+            })())
         },
     )
 }
 fn wire__crate__api__receive__ffi_active_session_pj_url_impl(
-    port_: flutter_rust_bridge::for_generated::MessagePort,
     ptr: impl CstDecode<crate::api::receive::FfiActiveSession>,
-) {
-    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::DcoCodec, _, _>(
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartDco {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::DcoCodec, _>(
         flutter_rust_bridge::for_generated::TaskInfo {
             debug_name: "ffi_active_session_pj_url",
-            port: Some(port_),
-            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
         },
         move || {
             let api_ptr = ptr.cst_decode();
-            move |context| {
-                transform_result_dco::<_, _, ()>((move || {
-                    let output_ok = Result::<_, ()>::Ok(
-                        crate::api::receive::FfiActiveSession::pj_url(api_ptr),
-                    )?;
-                    Ok(output_ok)
-                })())
-            }
+            transform_result_dco::<_, _, ()>((move || {
+                let output_ok =
+                    Result::<_, ()>::Ok(crate::api::receive::FfiActiveSession::pj_url(api_ptr))?;
+                Ok(output_ok)
+            })())
         },
     )
 }
@@ -176,25 +169,22 @@ fn wire__crate__api__receive__ffi_active_session_process_res_impl(
     )
 }
 fn wire__crate__api__receive__ffi_active_session_public_key_impl(
-    port_: flutter_rust_bridge::for_generated::MessagePort,
     that: impl CstDecode<crate::api::receive::FfiActiveSession>,
-) {
-    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::DcoCodec, _, _>(
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartDco {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::DcoCodec, _>(
         flutter_rust_bridge::for_generated::TaskInfo {
             debug_name: "ffi_active_session_public_key",
-            port: Some(port_),
-            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
         },
         move || {
             let api_that = that.cst_decode();
-            move |context| {
-                transform_result_dco::<_, _, ()>((move || {
-                    let output_ok = Result::<_, ()>::Ok(
-                        crate::api::receive::FfiActiveSession::public_key(&api_that),
-                    )?;
-                    Ok(output_ok)
-                })())
-            }
+            transform_result_dco::<_, _, ()>((move || {
+                let output_ok = Result::<_, ()>::Ok(
+                    crate::api::receive::FfiActiveSession::public_key(&api_that),
+                )?;
+                Ok(output_ok)
+            })())
         },
     )
 }
@@ -552,7 +542,7 @@ fn wire__crate__api__receive__ffi_session_initializer_extract_req_impl(
 fn wire__crate__api__receive__ffi_session_initializer_new_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
     address: impl CstDecode<String>,
-    expire_after: impl CstDecode<u64>,
+    expire_after: impl CstDecode<Option<u64>>,
     network: impl CstDecode<crate::utils::types::Network>,
     directory: impl CstDecode<crate::api::uri::FfiUrl>,
     ohttp_keys: impl CstDecode<crate::api::uri::FfiOhttpKeys>,
@@ -1557,6 +1547,39 @@ fn wire__crate__api__uri__ffi_pj_uri_builder_build_impl(
         },
     )
 }
+fn wire__crate__api__uri__ffi_pj_uri_builder_create_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    address: impl CstDecode<String>,
+    pj: impl CstDecode<crate::api::uri::FfiUrl>,
+    ohttp_keys: impl CstDecode<Option<crate::api::uri::FfiOhttpKeys>>,
+    expiry: impl CstDecode<Option<u64>>,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::DcoCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "ffi_pj_uri_builder_create",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let api_address = address.cst_decode();
+            let api_pj = pj.cst_decode();
+            let api_ohttp_keys = ohttp_keys.cst_decode();
+            let api_expiry = expiry.cst_decode();
+            move |context| {
+                transform_result_dco::<_, _, crate::utils::error::PayjoinError>((move || {
+                    let output_ok = crate::api::uri::FfiPjUriBuilder::create(
+                        api_address,
+                        api_pj,
+                        api_ohttp_keys,
+                        api_expiry,
+                    )?;
+                    Ok(output_ok)
+                })(
+                ))
+            }
+        },
+    )
+}
 fn wire__crate__api__uri__ffi_pj_uri_builder_label_impl(
     that: impl CstDecode<crate::api::uri::FfiPjUriBuilder>,
     label: impl CstDecode<String>,
@@ -1597,29 +1620,6 @@ fn wire__crate__api__uri__ffi_pj_uri_builder_message_impl(
                     &api_that,
                     api_message,
                 ))?;
-                Ok(output_ok)
-            })())
-        },
-    )
-}
-fn wire__crate__api__uri__ffi_pj_uri_builder_new_impl(
-    address: impl CstDecode<String>,
-    pj: impl CstDecode<crate::api::uri::FfiUrl>,
-    ohttp_keys: impl CstDecode<Option<crate::api::uri::FfiOhttpKeys>>,
-) -> flutter_rust_bridge::for_generated::WireSyncRust2DartDco {
-    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::DcoCodec, _>(
-        flutter_rust_bridge::for_generated::TaskInfo {
-            debug_name: "ffi_pj_uri_builder_new",
-            port: None,
-            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
-        },
-        move || {
-            let api_address = address.cst_decode();
-            let api_pj = pj.cst_decode();
-            let api_ohttp_keys = ohttp_keys.cst_decode();
-            transform_result_dco::<_, _, crate::utils::error::PayjoinError>((move || {
-                let output_ok =
-                    crate::api::uri::FfiPjUriBuilder::new(api_address, api_pj, api_ohttp_keys)?;
                 Ok(output_ok)
             })())
         },
@@ -2353,9 +2353,11 @@ impl SseDecode for crate::api::uri::FfiPjUri {
 impl SseDecode for crate::api::uri::FfiPjUriBuilder {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        let mut var_field0 =
+        let mut var_internal =
             <RustOpaqueNom<payjoin_ffi::uri::PjUriBuilder>>::sse_decode(deserializer);
-        return crate::api::uri::FfiPjUriBuilder(var_field0);
+        return crate::api::uri::FfiPjUriBuilder {
+            internal: var_internal,
+        };
     }
 }
 
@@ -3103,7 +3105,7 @@ impl flutter_rust_bridge::IntoIntoDart<crate::api::uri::FfiPjUri> for crate::api
 // Codec=Dco (DartCObject based), see doc to use other codecs
 impl flutter_rust_bridge::IntoDart for crate::api::uri::FfiPjUriBuilder {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
-        [self.0.into_into_dart().into_dart()].into_dart()
+        [self.internal.into_into_dart().into_dart()].into_dart()
     }
 }
 impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
@@ -3904,7 +3906,7 @@ impl SseEncode for crate::api::uri::FfiPjUri {
 impl SseEncode for crate::api::uri::FfiPjUriBuilder {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        <RustOpaqueNom<payjoin_ffi::uri::PjUriBuilder>>::sse_encode(self.0, serializer);
+        <RustOpaqueNom<payjoin_ffi::uri::PjUriBuilder>>::sse_encode(self.internal, serializer);
     }
 }
 

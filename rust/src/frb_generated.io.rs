@@ -524,7 +524,9 @@ impl CstDecode<crate::api::uri::FfiPjUri> for wire_cst_ffi_pj_uri {
 impl CstDecode<crate::api::uri::FfiPjUriBuilder> for wire_cst_ffi_pj_uri_builder {
     // Codec=Cst (C-struct based), see doc to use other codecs
     fn cst_decode(self) -> crate::api::uri::FfiPjUriBuilder {
-        crate::api::uri::FfiPjUriBuilder(self.field0.cst_decode())
+        crate::api::uri::FfiPjUriBuilder {
+            internal: self.internal.cst_decode(),
+        }
     }
 }
 impl CstDecode<crate::api::receive::FfiProvisionalProposal> for wire_cst_ffi_provisional_proposal {
@@ -1007,7 +1009,7 @@ impl Default for wire_cst_ffi_pj_uri {
 impl NewWithNullPtr for wire_cst_ffi_pj_uri_builder {
     fn new_with_null_ptr() -> Self {
         Self {
-            field0: Default::default(),
+            internal: Default::default(),
         }
     }
 }
@@ -1334,18 +1336,16 @@ pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_active_s
 
 #[no_mangle]
 pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_active_session_pj_uri_builder(
-    port_: i64,
     ptr: *mut wire_cst_ffi_active_session,
-) {
-    wire__crate__api__receive__ffi_active_session_pj_uri_builder_impl(port_, ptr)
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartDco {
+    wire__crate__api__receive__ffi_active_session_pj_uri_builder_impl(ptr)
 }
 
 #[no_mangle]
 pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_active_session_pj_url(
-    port_: i64,
     ptr: *mut wire_cst_ffi_active_session,
-) {
-    wire__crate__api__receive__ffi_active_session_pj_url_impl(port_, ptr)
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartDco {
+    wire__crate__api__receive__ffi_active_session_pj_url_impl(ptr)
 }
 
 #[no_mangle]
@@ -1360,10 +1360,9 @@ pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_active_s
 
 #[no_mangle]
 pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_active_session_public_key(
-    port_: i64,
     that: *mut wire_cst_ffi_active_session,
-) {
-    wire__crate__api__receive__ffi_active_session_public_key_impl(port_, that)
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartDco {
+    wire__crate__api__receive__ffi_active_session_public_key_impl(that)
 }
 
 #[no_mangle]
@@ -1522,7 +1521,7 @@ pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_session_
 pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_session_initializer_new(
     port_: i64,
     address: *mut wire_cst_list_prim_u_8_strict,
-    expire_after: u64,
+    expire_after: *mut u64,
     network: i32,
     directory: *mut wire_cst_ffi_url,
     ohttp_keys: *mut wire_cst_ffi_ohttp_keys,
@@ -1953,6 +1952,17 @@ pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__uri__ffi_pj_uri_build
 }
 
 #[no_mangle]
+pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__uri__ffi_pj_uri_builder_create(
+    port_: i64,
+    address: *mut wire_cst_list_prim_u_8_strict,
+    pj: *mut wire_cst_ffi_url,
+    ohttp_keys: *mut wire_cst_ffi_ohttp_keys,
+    expiry: *mut u64,
+) {
+    wire__crate__api__uri__ffi_pj_uri_builder_create_impl(port_, address, pj, ohttp_keys, expiry)
+}
+
+#[no_mangle]
 pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__uri__ffi_pj_uri_builder_label(
     that: *mut wire_cst_ffi_pj_uri_builder,
     label: *mut wire_cst_list_prim_u_8_strict,
@@ -1966,15 +1976,6 @@ pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__uri__ffi_pj_uri_build
     message: *mut wire_cst_list_prim_u_8_strict,
 ) -> flutter_rust_bridge::for_generated::WireSyncRust2DartDco {
     wire__crate__api__uri__ffi_pj_uri_builder_message_impl(that, message)
-}
-
-#[no_mangle]
-pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__uri__ffi_pj_uri_builder_new(
-    address: *mut wire_cst_list_prim_u_8_strict,
-    pj: *mut wire_cst_ffi_url,
-    ohttp_keys: *mut wire_cst_ffi_ohttp_keys,
-) -> flutter_rust_bridge::for_generated::WireSyncRust2DartDco {
-    wire__crate__api__uri__ffi_pj_uri_builder_new_impl(address, pj, ohttp_keys)
 }
 
 #[no_mangle]
@@ -2887,7 +2888,7 @@ pub struct wire_cst_ffi_pj_uri {
 #[repr(C)]
 #[derive(Clone, Copy)]
 pub struct wire_cst_ffi_pj_uri_builder {
-    field0: usize,
+    internal: usize,
 }
 #[repr(C)]
 #[derive(Clone, Copy)]

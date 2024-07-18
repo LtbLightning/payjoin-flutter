@@ -155,7 +155,7 @@ typedef struct wire_cst_ffi_request_context {
 } wire_cst_ffi_request_context;
 
 typedef struct wire_cst_ffi_pj_uri_builder {
-  uintptr_t field0;
+  uintptr_t internal;
 } wire_cst_ffi_pj_uri_builder;
 
 typedef struct wire_cst_ffi_uri {
@@ -298,19 +298,16 @@ void frbgen_payjoin_flutter_wire__crate__api__io__fetch_ohttp_keys(int64_t port_
 void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_active_session_extract_req(int64_t port_,
                                                                                       struct wire_cst_ffi_active_session *ptr);
 
-void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_active_session_pj_uri_builder(int64_t port_,
-                                                                                         struct wire_cst_ffi_active_session *ptr);
+WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__receive__ffi_active_session_pj_uri_builder(struct wire_cst_ffi_active_session *ptr);
 
-void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_active_session_pj_url(int64_t port_,
-                                                                                 struct wire_cst_ffi_active_session *ptr);
+WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__receive__ffi_active_session_pj_url(struct wire_cst_ffi_active_session *ptr);
 
 void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_active_session_process_res(int64_t port_,
                                                                                       struct wire_cst_ffi_active_session *that,
                                                                                       struct wire_cst_list_prim_u_8_loose *body,
                                                                                       struct wire_cst_ffi_client_response *ctx);
 
-void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_active_session_public_key(int64_t port_,
-                                                                                     struct wire_cst_ffi_active_session *that);
+WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__receive__ffi_active_session_public_key(struct wire_cst_ffi_active_session *that);
 
 void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_maybe_inputs_owned_check_inputs_not_owned(int64_t port_,
                                                                                                      struct wire_cst_ffi_maybe_inputs_owned *ptr,
@@ -367,7 +364,7 @@ void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_session_initializer_e
 
 void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_session_initializer_new(int64_t port_,
                                                                                    struct wire_cst_list_prim_u_8_strict *address,
-                                                                                   uint64_t expire_after,
+                                                                                   uint64_t *expire_after,
                                                                                    int32_t network,
                                                                                    struct wire_cst_ffi_url *directory,
                                                                                    struct wire_cst_ffi_ohttp_keys *ohttp_keys,
@@ -521,15 +518,17 @@ WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__uri__ffi_pj_uri_bu
 
 WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__uri__ffi_pj_uri_builder_build(struct wire_cst_ffi_pj_uri_builder *that);
 
+void frbgen_payjoin_flutter_wire__crate__api__uri__ffi_pj_uri_builder_create(int64_t port_,
+                                                                             struct wire_cst_list_prim_u_8_strict *address,
+                                                                             struct wire_cst_ffi_url *pj,
+                                                                             struct wire_cst_ffi_ohttp_keys *ohttp_keys,
+                                                                             uint64_t *expiry);
+
 WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__uri__ffi_pj_uri_builder_label(struct wire_cst_ffi_pj_uri_builder *that,
                                                                                             struct wire_cst_list_prim_u_8_strict *label);
 
 WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__uri__ffi_pj_uri_builder_message(struct wire_cst_ffi_pj_uri_builder *that,
                                                                                               struct wire_cst_list_prim_u_8_strict *message);
-
-WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__uri__ffi_pj_uri_builder_new(struct wire_cst_list_prim_u_8_strict *address,
-                                                                                          struct wire_cst_ffi_url *pj,
-                                                                                          struct wire_cst_ffi_ohttp_keys *ohttp_keys);
 
 WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__uri__ffi_pj_uri_builder_pjos(struct wire_cst_ffi_pj_uri_builder *that,
                                                                                            bool pjos);
@@ -884,9 +883,9 @@ static int64_t dummy_method_to_enforce_bundling(void) {
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__uri__ffi_pj_uri_as_string);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__uri__ffi_pj_uri_builder_amount);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__uri__ffi_pj_uri_builder_build);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__uri__ffi_pj_uri_builder_create);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__uri__ffi_pj_uri_builder_label);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__uri__ffi_pj_uri_builder_message);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__uri__ffi_pj_uri_builder_new);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__uri__ffi_pj_uri_builder_pjos);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__uri__ffi_uri_address);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__uri__ffi_uri_amount);

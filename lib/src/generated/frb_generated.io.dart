@@ -1698,8 +1698,8 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   @protected
   void cst_api_fill_to_wire_ffi_pj_uri_builder(
       FfiPjUriBuilder apiObj, wire_cst_ffi_pj_uri_builder wireObj) {
-    wireObj.field0 =
-        cst_encode_RustOpaque_payjoin_ffiuriPjUriBuilder(apiObj.field0);
+    wireObj.internal =
+        cst_encode_RustOpaque_payjoin_ffiuriPjUriBuilder(apiObj.internal);
   }
 
   @protected
@@ -2684,12 +2684,11 @@ class coreWire implements BaseWire {
       _wire__crate__api__receive__ffi_active_session_extract_reqPtr.asFunction<
           void Function(int, ffi.Pointer<wire_cst_ffi_active_session>)>();
 
-  void wire__crate__api__receive__ffi_active_session_pj_uri_builder(
-    int port_,
+  WireSyncRust2DartDco
+      wire__crate__api__receive__ffi_active_session_pj_uri_builder(
     ffi.Pointer<wire_cst_ffi_active_session> ptr,
   ) {
     return _wire__crate__api__receive__ffi_active_session_pj_uri_builder(
-      port_,
       ptr,
     );
   }
@@ -2697,32 +2696,32 @@ class coreWire implements BaseWire {
   late final _wire__crate__api__receive__ffi_active_session_pj_uri_builderPtr =
       _lookup<
               ffi.NativeFunction<
-                  ffi.Void Function(
-                      ffi.Int64, ffi.Pointer<wire_cst_ffi_active_session>)>>(
+                  WireSyncRust2DartDco Function(
+                      ffi.Pointer<wire_cst_ffi_active_session>)>>(
           'frbgen_payjoin_flutter_wire__crate__api__receive__ffi_active_session_pj_uri_builder');
   late final _wire__crate__api__receive__ffi_active_session_pj_uri_builder =
       _wire__crate__api__receive__ffi_active_session_pj_uri_builderPtr
           .asFunction<
-              void Function(int, ffi.Pointer<wire_cst_ffi_active_session>)>();
+              WireSyncRust2DartDco Function(
+                  ffi.Pointer<wire_cst_ffi_active_session>)>();
 
-  void wire__crate__api__receive__ffi_active_session_pj_url(
-    int port_,
+  WireSyncRust2DartDco wire__crate__api__receive__ffi_active_session_pj_url(
     ffi.Pointer<wire_cst_ffi_active_session> ptr,
   ) {
     return _wire__crate__api__receive__ffi_active_session_pj_url(
-      port_,
       ptr,
     );
   }
 
   late final _wire__crate__api__receive__ffi_active_session_pj_urlPtr = _lookup<
           ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Int64, ffi.Pointer<wire_cst_ffi_active_session>)>>(
+              WireSyncRust2DartDco Function(
+                  ffi.Pointer<wire_cst_ffi_active_session>)>>(
       'frbgen_payjoin_flutter_wire__crate__api__receive__ffi_active_session_pj_url');
   late final _wire__crate__api__receive__ffi_active_session_pj_url =
       _wire__crate__api__receive__ffi_active_session_pj_urlPtr.asFunction<
-          void Function(int, ffi.Pointer<wire_cst_ffi_active_session>)>();
+          WireSyncRust2DartDco Function(
+              ffi.Pointer<wire_cst_ffi_active_session>)>();
 
   void wire__crate__api__receive__ffi_active_session_process_res(
     int port_,
@@ -2755,24 +2754,23 @@ class coreWire implements BaseWire {
               ffi.Pointer<wire_cst_list_prim_u_8_loose>,
               ffi.Pointer<wire_cst_ffi_client_response>)>();
 
-  void wire__crate__api__receive__ffi_active_session_public_key(
-    int port_,
+  WireSyncRust2DartDco wire__crate__api__receive__ffi_active_session_public_key(
     ffi.Pointer<wire_cst_ffi_active_session> that,
   ) {
     return _wire__crate__api__receive__ffi_active_session_public_key(
-      port_,
       that,
     );
   }
 
   late final _wire__crate__api__receive__ffi_active_session_public_keyPtr = _lookup<
           ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Int64, ffi.Pointer<wire_cst_ffi_active_session>)>>(
+              WireSyncRust2DartDco Function(
+                  ffi.Pointer<wire_cst_ffi_active_session>)>>(
       'frbgen_payjoin_flutter_wire__crate__api__receive__ffi_active_session_public_key');
   late final _wire__crate__api__receive__ffi_active_session_public_key =
       _wire__crate__api__receive__ffi_active_session_public_keyPtr.asFunction<
-          void Function(int, ffi.Pointer<wire_cst_ffi_active_session>)>();
+          WireSyncRust2DartDco Function(
+              ffi.Pointer<wire_cst_ffi_active_session>)>();
 
   void wire__crate__api__receive__ffi_maybe_inputs_owned_check_inputs_not_owned(
     int port_,
@@ -3133,7 +3131,7 @@ class coreWire implements BaseWire {
   void wire__crate__api__receive__ffi_session_initializer_new(
     int port_,
     ffi.Pointer<wire_cst_list_prim_u_8_strict> address,
-    int expire_after,
+    ffi.Pointer<ffi.Uint64> expire_after,
     int network,
     ffi.Pointer<wire_cst_ffi_url> directory,
     ffi.Pointer<wire_cst_ffi_ohttp_keys> ohttp_keys,
@@ -3155,7 +3153,7 @@ class coreWire implements BaseWire {
               ffi.Void Function(
                   ffi.Int64,
                   ffi.Pointer<wire_cst_list_prim_u_8_strict>,
-                  ffi.Uint64,
+                  ffi.Pointer<ffi.Uint64>,
                   ffi.Int32,
                   ffi.Pointer<wire_cst_ffi_url>,
                   ffi.Pointer<wire_cst_ffi_ohttp_keys>,
@@ -3166,7 +3164,7 @@ class coreWire implements BaseWire {
           void Function(
               int,
               ffi.Pointer<wire_cst_list_prim_u_8_strict>,
-              int,
+              ffi.Pointer<ffi.Uint64>,
               int,
               ffi.Pointer<wire_cst_ffi_url>,
               ffi.Pointer<wire_cst_ffi_ohttp_keys>,
@@ -4173,6 +4171,40 @@ class coreWire implements BaseWire {
           WireSyncRust2DartDco Function(
               ffi.Pointer<wire_cst_ffi_pj_uri_builder>)>();
 
+  void wire__crate__api__uri__ffi_pj_uri_builder_create(
+    int port_,
+    ffi.Pointer<wire_cst_list_prim_u_8_strict> address,
+    ffi.Pointer<wire_cst_ffi_url> pj,
+    ffi.Pointer<wire_cst_ffi_ohttp_keys> ohttp_keys,
+    ffi.Pointer<ffi.Uint64> expiry,
+  ) {
+    return _wire__crate__api__uri__ffi_pj_uri_builder_create(
+      port_,
+      address,
+      pj,
+      ohttp_keys,
+      expiry,
+    );
+  }
+
+  late final _wire__crate__api__uri__ffi_pj_uri_builder_createPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Void Function(
+                  ffi.Int64,
+                  ffi.Pointer<wire_cst_list_prim_u_8_strict>,
+                  ffi.Pointer<wire_cst_ffi_url>,
+                  ffi.Pointer<wire_cst_ffi_ohttp_keys>,
+                  ffi.Pointer<ffi.Uint64>)>>(
+      'frbgen_payjoin_flutter_wire__crate__api__uri__ffi_pj_uri_builder_create');
+  late final _wire__crate__api__uri__ffi_pj_uri_builder_create =
+      _wire__crate__api__uri__ffi_pj_uri_builder_createPtr.asFunction<
+          void Function(
+              int,
+              ffi.Pointer<wire_cst_list_prim_u_8_strict>,
+              ffi.Pointer<wire_cst_ffi_url>,
+              ffi.Pointer<wire_cst_ffi_ohttp_keys>,
+              ffi.Pointer<ffi.Uint64>)>();
+
   WireSyncRust2DartDco wire__crate__api__uri__ffi_pj_uri_builder_label(
     ffi.Pointer<wire_cst_ffi_pj_uri_builder> that,
     ffi.Pointer<wire_cst_list_prim_u_8_strict> label,
@@ -4216,32 +4248,6 @@ class coreWire implements BaseWire {
           WireSyncRust2DartDco Function(
               ffi.Pointer<wire_cst_ffi_pj_uri_builder>,
               ffi.Pointer<wire_cst_list_prim_u_8_strict>)>();
-
-  WireSyncRust2DartDco wire__crate__api__uri__ffi_pj_uri_builder_new(
-    ffi.Pointer<wire_cst_list_prim_u_8_strict> address,
-    ffi.Pointer<wire_cst_ffi_url> pj,
-    ffi.Pointer<wire_cst_ffi_ohttp_keys> ohttp_keys,
-  ) {
-    return _wire__crate__api__uri__ffi_pj_uri_builder_new(
-      address,
-      pj,
-      ohttp_keys,
-    );
-  }
-
-  late final _wire__crate__api__uri__ffi_pj_uri_builder_newPtr = _lookup<
-          ffi.NativeFunction<
-              WireSyncRust2DartDco Function(
-                  ffi.Pointer<wire_cst_list_prim_u_8_strict>,
-                  ffi.Pointer<wire_cst_ffi_url>,
-                  ffi.Pointer<wire_cst_ffi_ohttp_keys>)>>(
-      'frbgen_payjoin_flutter_wire__crate__api__uri__ffi_pj_uri_builder_new');
-  late final _wire__crate__api__uri__ffi_pj_uri_builder_new =
-      _wire__crate__api__uri__ffi_pj_uri_builder_newPtr.asFunction<
-          WireSyncRust2DartDco Function(
-              ffi.Pointer<wire_cst_list_prim_u_8_strict>,
-              ffi.Pointer<wire_cst_ffi_url>,
-              ffi.Pointer<wire_cst_ffi_ohttp_keys>)>();
 
   WireSyncRust2DartDco wire__crate__api__uri__ffi_pj_uri_builder_pjos(
     ffi.Pointer<wire_cst_ffi_pj_uri_builder> that,
@@ -5905,7 +5911,7 @@ final class wire_cst_ffi_request_context extends ffi.Struct {
 
 final class wire_cst_ffi_pj_uri_builder extends ffi.Struct {
   @ffi.UintPtr()
-  external int field0;
+  external int internal;
 }
 
 final class wire_cst_ffi_uri extends ffi.Struct {
