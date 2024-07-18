@@ -55,53 +55,55 @@ impl FfiPjUri {
 }
 
 #[derive(Clone)]
-pub struct FfiPjUriBuilder(pub RustOpaque<payjoin_ffi::uri::PjUriBuilder>);
+pub struct FfiPjUriBuilder{pub internal: RustOpaque<payjoin_ffi::uri::PjUriBuilder>}
 
 impl From<payjoin_ffi::uri::PjUriBuilder> for FfiPjUriBuilder {
     fn from(value: payjoin_ffi::uri::PjUriBuilder) -> Self {
-        Self(RustOpaque::new(value))
+        Self{internal:RustOpaque::new(value)}
     }
 }
 
 impl FfiPjUriBuilder {
-    #[frb(sync)]
-    pub fn new(
+
+    pub fn create(
         address: String,
         pj: FfiUrl,
         ohttp_keys: Option<FfiOhttpKeys>,
+        expiry: Option<u64>
     ) -> Result<Self, PayjoinError> {
         payjoin_ffi::uri::PjUriBuilder::new(
             address,
             (*pj.0).clone(),
-            ohttp_keys.map(|e| (*e.0).clone().into()))
+            ohttp_keys.map(|e| (*e.0).clone().into()),
+            expiry)
             .map_err(|e| e.into())
             .map(|e| e.into())
     }
+    ///Accepts the amount you want to receive in sats and sets it in btc.
     #[frb(sync)]
     pub fn amount(&self, amount: u64)  -> Self {
-        self.0.amount(amount).into()
+        self.internal.amount(amount).into()
     }
     #[frb(sync)]
     /// Set the message.
     pub fn message(&self, message: String)  -> Self {
-        self.0.message(message).into()
+        self.internal.message(message).into()
     }
     #[frb(sync)]
     ///Set the label.
     pub fn label(&self, label: String)-> Self {
-        self.0.label(label).into()
+        self.internal.label(label).into()
     }
-
+  ///Set whether payjoin output substitution is allowed.
     #[frb(sync)]
     pub fn pjos(&self, pjos: bool) -> Self{
-        self.0.pjos(pjos).into()
+        self.internal.pjos(pjos).into()
     }
     #[frb(sync)]
     ///Constructs a Uri with PayjoinParams from the parameters set in the builder.
     pub fn build(&self) -> FfiPjUri {
-        self.0.build().into()
+        self.internal.build().into()
     }
-
 }
 
 #[derive(Clone)]
