@@ -45,7 +45,7 @@ pub enum PayjoinError {
     PjParseError {
         message: String,
     },
-    PjNotSupported{
+    PjNotSupported {
         message: String,
     },
     ValidationError {
