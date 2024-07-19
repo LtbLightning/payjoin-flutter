@@ -20,38 +20,40 @@ void main() {
       final btcClient = BtcClient("sender");
       await btcClient.loadWallet();
       final sender = BdkClient(
-          "wpkh(tprv8ZgxMBicQKsPfNH1PykMg16TAvrZgoxDnxr3eorcbhvZxyZzStwFkvqCJegr8Gbwj3GQum8QpXQPh7DGkoobpTB7YbcnUeUSKRDyX2cNN9h/84'/1'/0'/0/*)#ey7hlgpn");
+          "wpkh(tprv8ZgxMBicQKsPfNH1PykMg16TAvrZgoxDnxr3eorcbhvZxyZzStwFkvqCJegr8Gbwj3GQum8QpXQPh7DGkoobpTB7YbcnUeUSKRDyX2cNN9h/84'/1'/0'/0/*)#ey7hlgpn",
+          Network.regtest);
       final receiver = BdkClient(
-          "wpkh(tprv8ZgxMBicQKsPczV7D2zfMr7oUzHDhNPEuBUgrwRoWM3ijLRvhG87xYiqh9JFLPqojuhmqwMdo1oJzbe5GUpxCbDHnqyGhQa5Jg1Wt6rc9di/84'/1'/0'/0/*)#kdnuw5lq");
+          "wpkh(tprv8ZgxMBicQKsPczV7D2zfMr7oUzHDhNPEuBUgrwRoWM3ijLRvhG87xYiqh9JFLPqojuhmqwMdo1oJzbe5GUpxCbDHnqyGhQa5Jg1Wt6rc9di/84'/1'/0'/0/*)#kdnuw5lq",
+          Network.regtest);
       await sender.restoreWallet();
       await receiver.restoreWallet();
       // Receiver creates the payjoin URI
-      final pjReceiverAddress = (await receiver.getNewAddress()).address;
-      final pjSenderAddress = (await sender.getNewAddress()).address;
-      await btcClient.sendToAddress(await pjSenderAddress.asString(), 1);
-      await btcClient.sendToAddress(await pjReceiverAddress.asString(), 1);
-      await btcClient.generate(11, await pjSenderAddress.asString());
+      final pjReceiverAddress = receiver.getNewAddress().address;
+      final pjSenderAddress = sender.getNewAddress().address;
+      await btcClient.sendToAddress(pjSenderAddress.toString(), 1);
+      await btcClient.sendToAddress(pjReceiverAddress.toString(), 1);
+      await btcClient.generate(11, pjSenderAddress.toString());
       await receiver.syncWallet();
       await sender.syncWallet();
       // Sender create a funded PSBT (not broadcast) to address with amount given in the pjUri
-      debugPrint("Sender Balance: ${(await sender.getBalance()).toString()}");
+      debugPrint("Sender Balance: ${sender.getBalance().toString()}");
       final uri = await pay_join_uri.Uri.fromString(
-          "${await pjReceiverAddress.toQrUri()}?amount=${0.0083285}&pj=https://example.com");
-      final address = await uri.address();
-      int amount = (((await uri.amount()) ?? 0) * 100000000).toInt();
+          "${pjReceiverAddress.toQrUri()}?amount=${0.0083285}&pj=https://example.com");
+      final address = uri.address();
+      int amount = (((uri.amount()) ?? 0) * 100000000).toInt();
 
       final senderPsbt = (await sender.createPsbt(address, amount, 2000));
-      final senderPsbtBase64 = await senderPsbt.serialize();
+      final senderPsbtBase64 = senderPsbt.toString();
       debugPrint(
         "\nOriginal sender psbt: $senderPsbtBase64",
       );
 
       // Receiver part
       final (req, ctx) = await (await (await send.RequestBuilder.fromPsbtAndUri(
-                  psbtBase64: senderPsbtBase64, uri: uri))
+                  psbtBase64: senderPsbtBase64, pjUri: uri.checkPjSupported()))
               .buildWithAdditionalFee(
-                  maxFeeContribution: 10000,
-                  minFeeRate: 0,
+                  maxFeeContribution: BigInt.from(10000),
+                  minFeeRate: BigInt.zero,
                   clampFeeContribution: false))
           .extractContextV1();
       final headers = common.Headers(map: {
@@ -59,9 +61,7 @@ void main() {
         'content-length': req.body.length.toString(),
       });
       final uncheckedProposal = await v1.UncheckedProposal.fromRequest(
-          body: req.body.toList(),
-          query: (await req.url.query())!,
-          headers: headers);
+          body: req.body.toList(), query: (req.url.query())!, headers: headers);
       // in a payment processor where the sender could go offline, this is where you schedule to broadcast the original_tx
       var _ = await uncheckedProposal.extractTxToScheduleBroadcast();
       final inputsOwned = await uncheckedProposal.checkBroadcastSuitability(
@@ -71,7 +71,7 @@ void main() {
       // Receive Check 2: receiver can't sign for proposal inputs
       final mixedInputScripts =
           await inputsOwned.checkInputsNotOwned(isOwned: (e) async {
-        return await receiver.getAddressInfo(ScriptBuf(bytes: e));
+        return receiver.getAddressInfo(ScriptBuf(bytes: e));
       });
 
       // Receive Check 3: receiver can't sign for proposal inputs
@@ -82,11 +82,11 @@ void main() {
         return false;
       }))
               .identifyReceiverOutputs(isReceiverOutput: (e) async {
-        return await receiver.getAddressInfo(ScriptBuf(bytes: e));
+        return receiver.getAddressInfo(ScriptBuf(bytes: e));
       });
-      final unspent = await receiver.listUnspent();
+      final unspent = receiver.listUnspent();
       // Select receiver payjoin inputs.
-      Map<int, common.OutPoint> candidateInputs = {
+      Map<BigInt, common.OutPoint> candidateInputs = {
         for (var input in unspent)
           input.txout.value: common.OutPoint(
               txid: input.outpoint.txid.toString(), vout: input.outpoint.vout)
@@ -109,15 +109,13 @@ void main() {
       );
       await provisionalProposal.contributeWitnessInput(
           txo: txoToContribute, outpoint: outpointToContribute);
-      final receiverAddress = (await receiver.getNewAddress()).address;
-      await provisionalProposal.substituteOutputAddress(
-          address: await receiverAddress.asString());
+
       final payJoinProposal =
           await provisionalProposal.finalizeProposal(processPsbt: (e) async {
         debugPrint("\n Original receiver unsigned psbt: $e");
-        return await (await receiver
+        return (await receiver
                 .signPsbt(await PartiallySignedTransaction.fromString(e)))
-            .serialize();
+            .toString();
       });
       final receiverPsbt = await payJoinProposal.psbt();
       debugPrint("\n Original receiver psbt: $receiverPsbt");

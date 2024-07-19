@@ -2,45 +2,51 @@ import 'dart:async';
 
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
-import '../common.dart' as common;
 import '../common.dart';
 import '../src/exceptions.dart';
-import '../src/generated/api/receive.dart' as receive;
+import '../src/generated/api/receive.dart';
 import '../src/generated/utils/error.dart' as error;
-import '../uri.dart' as uri;
 import '../uri.dart';
 
-class Enroller extends receive.Enroller {
-  Enroller._({required super.field0});
+class SessionInitializer extends FfiSessionInitializer {
+  SessionInitializer._({required super.field0});
 
-  Future<Enroller> fromDirectoryConfig(
+  Future<SessionInitializer> create(
       {required Url directory,
       required OhttpKeys ohttpKeys,
+      required String address,
+      required BigInt expireAfter,
+      required Network network,
       required Url ohttpRelay}) async {
     try {
-      final res = await receive.Enroller.fromDirectoryConfig(
-          directory: directory, ohttpKeys: ohttpKeys, ohttpRelay: ohttpRelay);
-      return Enroller._(field0: res.field0);
+      final res = await FfiSessionInitializer.newInstance(
+          directory: directory,
+          ohttpKeys: ohttpKeys,
+          ohttpRelay: ohttpRelay,
+          address: address,
+          expireAfter: expireAfter,
+          network: network);
+      return SessionInitializer._(field0: res.field0);
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
     }
   }
 
-  Future<Enrolled> processResponse(
+  Future<ActiveSession> processResponse(
       {required List<int> body, required ClientResponse clientResponse}) async {
     try {
       final res = await super.processRes(body: body, ctx: clientResponse);
-      return Enrolled._(field0: res.field0);
+      return ActiveSession._(field0: res.field0);
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
     }
   }
 
-  Future<(common.Request, ClientResponse)> extractRequest({hint}) async {
+  Future<(Request, ClientResponse)> extractRequest({hint}) async {
     try {
-      final res = await receive.Enroller.extractReq(ptr: this);
-      final request = Request(
-          await uri.Url.fromString((await res.$1.$1.query())!), res.$1.$2);
+      final res = await FfiSessionInitializer.extractReq(ptr: this);
+      final request =
+          Request(await Url.fromString(res.$1.$1.query()!), res.$1.$2);
       return (request, ClientResponse._(field0: res.$2.field0));
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
@@ -48,13 +54,13 @@ class Enroller extends receive.Enroller {
   }
 }
 
-class Enrolled extends receive.Enrolled {
-  Enrolled._({required super.field0});
-  Future<(common.Request, ClientResponse)> extractRequest({hint}) async {
+class ActiveSession extends FfiActiveSession {
+  ActiveSession._({required super.field0});
+  Future<(Request, ClientResponse)> extractRequest({hint}) async {
     try {
-      final res = await receive.Enrolled.extractReq(ptr: this);
-      final request = Request(
-          await uri.Url.fromString((await res.$1.$1.query())!), res.$1.$2);
+      final res = await FfiActiveSession.extractReq(ptr: this);
+      final request =
+          Request(await Url.fromString(res.$1.$1.query()!), res.$1.$2);
       return (request, ClientResponse._(field0: res.$2.field0));
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
@@ -75,17 +81,20 @@ class Enrolled extends receive.Enrolled {
     }
   }
 
-  @override
-  Future<String> fallbackTarget({dynamic hint}) {
-    try {
-      return super.fallbackTarget();
-    } on error.PayjoinError catch (e) {
-      throw mapPayjoinError(e);
-    }
+  /// The contents of the `&pj=` query parameter including the base64url-encoded public key receiver subdirectory.
+  /// This identifies a session at the payjoin directory server.
+  Future<Url> pjUrl() {
+    final res = FfiActiveSession.pjUrl(ptr: super);
+    return Url.fromString(res.asString());
+  }
+
+  PjUriBuilder pjUriBuilder() {
+    final res = FfiActiveSession.pjUriBuilder(ptr: super);
+    return PjUriBuilder(internal: res.internal);
   }
 }
 
-class UncheckedProposal extends receive.V2UncheckedProposal {
+class UncheckedProposal extends FfiV2UncheckedProposal {
   UncheckedProposal._({required super.field0});
 
   ///The Sender’s Original PSBT
@@ -104,7 +113,7 @@ class UncheckedProposal extends receive.V2UncheckedProposal {
   /// Call this after checking downstream.
   @override
   Future<MaybeInputsOwned> checkBroadcastSuitability(
-      {int? minFeeRate,
+      {BigInt? minFeeRate,
       required FutureOr<bool> Function(Uint8List p1) canBroadcast,
       hint}) async {
     try {
@@ -130,7 +139,7 @@ class UncheckedProposal extends receive.V2UncheckedProposal {
   }
 }
 
-class MaybeInputsOwned extends receive.V2MaybeInputsOwned {
+class MaybeInputsOwned extends FfiV2MaybeInputsOwned {
   MaybeInputsOwned._({required super.field0});
 
   ///Check that the Original PSBT has no receiver-owned inputs. Return original-psbt-rejected error or otherwise refuse to sign undesirable inputs.
@@ -147,7 +156,7 @@ class MaybeInputsOwned extends receive.V2MaybeInputsOwned {
   }
 }
 
-class MaybeMixedInputScripts extends receive.V2MaybeMixedInputScripts {
+class MaybeMixedInputScripts extends FfiV2MaybeMixedInputScripts {
   MaybeMixedInputScripts._({required super.field0});
 
   /// Make sure that the original transaction inputs have never been seen before.
@@ -164,7 +173,7 @@ class MaybeMixedInputScripts extends receive.V2MaybeMixedInputScripts {
   }
 }
 
-class MaybeInputsSeen extends receive.V2MaybeInputsSeen {
+class MaybeInputsSeen extends FfiV2MaybeInputsSeen {
   MaybeInputsSeen._({required super.field0});
 
   /// Make sure that the original transaction inputs have never been seen before.
@@ -182,12 +191,12 @@ class MaybeInputsSeen extends receive.V2MaybeInputsSeen {
   }
 }
 
-class OutputsUnknown extends receive.V2OutputsUnknown {
+class OutputsUnknown extends FfiV2OutputsUnknown {
   OutputsUnknown._({required super.field0});
 
   /// Find which outputs belong to the receiver
   @override
-  Future<receive.V2ProvisionalProposal> identifyReceiverOutputs(
+  Future<FfiV2ProvisionalProposal> identifyReceiverOutputs(
       {required FutureOr<bool> Function(Uint8List p1) isReceiverOutput,
       hint}) async {
     try {
@@ -200,13 +209,14 @@ class OutputsUnknown extends receive.V2OutputsUnknown {
   }
 }
 
-class ProvisionalProposal extends receive.V2ProvisionalProposal {
+class ProvisionalProposal extends FfiV2ProvisionalProposal {
   ProvisionalProposal._({required super.field0});
 
   @override
-  Future<void> substituteOutputAddress({required String address, hint}) {
+  Future<void> trySubstituteReceiverOutput(
+      {required FutureOr<Uint8List> Function() generateScript}) {
     try {
-      return super.substituteOutputAddress(address: address);
+      return super.trySubstituteReceiverOutput(generateScript: generateScript);
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
     }
@@ -239,7 +249,7 @@ class ProvisionalProposal extends receive.V2ProvisionalProposal {
   /// UIH “Unnecessary input heuristic” is one class of them to avoid. We define UIH1 and UIH2 according to the BlockSci practice BlockSci UIH1 and UIH2:
   @override
   Future<OutPoint> tryPreservingPrivacy(
-      {required Map<int, OutPoint> candidateInputs, hint}) {
+      {required Map<BigInt, OutPoint> candidateInputs, hint}) {
     try {
       return super.tryPreservingPrivacy(candidateInputs: candidateInputs);
     } on error.PayjoinError catch (e) {
@@ -248,9 +258,9 @@ class ProvisionalProposal extends receive.V2ProvisionalProposal {
   }
 
   @override
-  Future<receive.V2PayjoinProposal> finalizeProposal(
+  Future<FfiV2PayjoinProposal> finalizeProposal(
       {required FutureOr<String> Function(String p1) processPsbt,
-      int? minFeerateSatPerVb,
+      BigInt? minFeerateSatPerVb,
       hint}) async {
     try {
       final res = await super.finalizeProposal(
@@ -262,15 +272,13 @@ class ProvisionalProposal extends receive.V2ProvisionalProposal {
   }
 }
 
-class PayjoinProposal extends receive.V2PayjoinProposal {
+class PayjoinProposal extends FfiV2PayjoinProposal {
   PayjoinProposal._({required super.field0});
-  @override
-  Future<Uint8List> deserializeRes(
-      {required List<int> res,
-      required receive.ClientResponse ohttpContext,
-      hint}) async {
+
+  Future<void> processResponse(
+      {required List<int> res, required ClientResponse ohttpContext}) {
     try {
-      return super.deserializeRes(ohttpContext: ohttpContext, res: res);
+      return super.processRes(ohttpContext: ohttpContext, res: res);
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
     }
@@ -287,9 +295,9 @@ class PayjoinProposal extends receive.V2PayjoinProposal {
 
   Future<(Request, ClientResponse)> extractV2Request({hint}) async {
     try {
-      final res = await receive.V2PayjoinProposal.extractV2Req(ptr: this);
-      final request = Request(
-          await uri.Url.fromString((await res.$1.$1.query())!), res.$1.$2);
+      final res = await FfiV2PayjoinProposal.extractV2Req(ptr: this);
+      final request =
+          Request(await Url.fromString(res.$1.$1.toString()), res.$1.$2);
       return (request, ClientResponse._(field0: res.$2.field0));
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
@@ -333,6 +341,6 @@ class PayjoinProposal extends receive.V2PayjoinProposal {
   }
 }
 
-class ClientResponse extends receive.ClientResponse {
+class ClientResponse extends FfiClientResponse {
   ClientResponse._({required super.field0});
 }
