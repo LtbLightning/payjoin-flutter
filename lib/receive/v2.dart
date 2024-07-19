@@ -11,7 +11,7 @@ import '../uri.dart';
 class SessionInitializer extends FfiSessionInitializer {
   SessionInitializer._({required super.field0});
 
-  Future<SessionInitializer> create(
+  static Future<SessionInitializer> create(
       {required Url directory,
       required OhttpKeys ohttpKeys,
       required String address,
