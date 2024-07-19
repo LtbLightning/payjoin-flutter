@@ -61,7 +61,7 @@ class core extends BaseEntrypoint<coreApi, coreApiImpl, coreWire> {
   String get codegenVersion => '2.0.0';
 
   @override
-  int get rustContentHash => 1145331695;
+  int get rustContentHash => -1575278373;
 
   static const kDefaultExternalLibraryLoaderConfig =
       ExternalLibraryLoaderConfig(
@@ -81,18 +81,17 @@ abstract class coreApi extends BaseApi {
       crateApiReceiveFfiActiveSessionExtractReq(
           {required FfiActiveSession ptr});
 
-  Future<FfiPjUriBuilder> crateApiReceiveFfiActiveSessionPjUriBuilder(
+  FfiPjUriBuilder crateApiReceiveFfiActiveSessionPjUriBuilder(
       {required FfiActiveSession ptr});
 
-  Future<FfiUrl> crateApiReceiveFfiActiveSessionPjUrl(
-      {required FfiActiveSession ptr});
+  FfiUrl crateApiReceiveFfiActiveSessionPjUrl({required FfiActiveSession ptr});
 
   Future<FfiV2UncheckedProposal?> crateApiReceiveFfiActiveSessionProcessRes(
       {required FfiActiveSession that,
       required List<int> body,
       required FfiClientResponse ctx});
 
-  Future<String> crateApiReceiveFfiActiveSessionPublicKey(
+  String crateApiReceiveFfiActiveSessionPublicKey(
       {required FfiActiveSession that});
 
   Future<FfiMaybeMixedInputScripts>
@@ -156,7 +155,7 @@ abstract class coreApi extends BaseApi {
 
   Future<FfiSessionInitializer> crateApiReceiveFfiSessionInitializerNew(
       {required String address,
-      required BigInt expireAfter,
+      BigInt? expireAfter,
       required Network network,
       required FfiUrl directory,
       required FfiOhttpKeys ohttpKeys,
@@ -318,14 +317,17 @@ abstract class coreApi extends BaseApi {
 
   FfiPjUri crateApiUriFfiPjUriBuilderBuild({required FfiPjUriBuilder that});
 
+  Future<FfiPjUriBuilder> crateApiUriFfiPjUriBuilderCreate(
+      {required String address,
+      required FfiUrl pj,
+      FfiOhttpKeys? ohttpKeys,
+      BigInt? expiry});
+
   FfiPjUriBuilder crateApiUriFfiPjUriBuilderLabel(
       {required FfiPjUriBuilder that, required String label});
 
   FfiPjUriBuilder crateApiUriFfiPjUriBuilderMessage(
       {required FfiPjUriBuilder that, required String message});
-
-  FfiPjUriBuilder crateApiUriFfiPjUriBuilderNew(
-      {required String address, required FfiUrl pj, FfiOhttpKeys? ohttpKeys});
 
   FfiPjUriBuilder crateApiUriFfiPjUriBuilderPjos(
       {required FfiPjUriBuilder that, required bool pjos});
@@ -632,14 +634,13 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       );
 
   @override
-  Future<FfiPjUriBuilder> crateApiReceiveFfiActiveSessionPjUriBuilder(
+  FfiPjUriBuilder crateApiReceiveFfiActiveSessionPjUriBuilder(
       {required FfiActiveSession ptr}) {
-    return handler.executeNormal(NormalTask(
-      callFfi: (port_) {
+    return handler.executeSync(SyncTask(
+      callFfi: () {
         var arg0 = cst_encode_box_autoadd_ffi_active_session(ptr);
         return wire
-            .wire__crate__api__receive__ffi_active_session_pj_uri_builder(
-                port_, arg0);
+            .wire__crate__api__receive__ffi_active_session_pj_uri_builder(arg0);
       },
       codec: DcoCodec(
         decodeSuccessData: dco_decode_ffi_pj_uri_builder,
@@ -658,13 +659,11 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       );
 
   @override
-  Future<FfiUrl> crateApiReceiveFfiActiveSessionPjUrl(
-      {required FfiActiveSession ptr}) {
-    return handler.executeNormal(NormalTask(
-      callFfi: (port_) {
+  FfiUrl crateApiReceiveFfiActiveSessionPjUrl({required FfiActiveSession ptr}) {
+    return handler.executeSync(SyncTask(
+      callFfi: () {
         var arg0 = cst_encode_box_autoadd_ffi_active_session(ptr);
-        return wire.wire__crate__api__receive__ffi_active_session_pj_url(
-            port_, arg0);
+        return wire.wire__crate__api__receive__ffi_active_session_pj_url(arg0);
       },
       codec: DcoCodec(
         decodeSuccessData: dco_decode_ffi_url,
@@ -713,13 +712,13 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       );
 
   @override
-  Future<String> crateApiReceiveFfiActiveSessionPublicKey(
+  String crateApiReceiveFfiActiveSessionPublicKey(
       {required FfiActiveSession that}) {
-    return handler.executeNormal(NormalTask(
-      callFfi: (port_) {
+    return handler.executeSync(SyncTask(
+      callFfi: () {
         var arg0 = cst_encode_box_autoadd_ffi_active_session(that);
-        return wire.wire__crate__api__receive__ffi_active_session_public_key(
-            port_, arg0);
+        return wire
+            .wire__crate__api__receive__ffi_active_session_public_key(arg0);
       },
       codec: DcoCodec(
         decodeSuccessData: dco_decode_String,
@@ -1164,7 +1163,7 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   @override
   Future<FfiSessionInitializer> crateApiReceiveFfiSessionInitializerNew(
       {required String address,
-      required BigInt expireAfter,
+      BigInt? expireAfter,
       required Network network,
       required FfiUrl directory,
       required FfiOhttpKeys ohttpKeys,
@@ -1172,7 +1171,7 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
         var arg0 = cst_encode_String(address);
-        var arg1 = cst_encode_u_64(expireAfter);
+        var arg1 = cst_encode_opt_box_autoadd_u_64(expireAfter);
         var arg2 = cst_encode_network(network);
         var arg3 = cst_encode_box_autoadd_ffi_url(directory);
         var arg4 = cst_encode_box_autoadd_ffi_ohttp_keys(ohttpKeys);
@@ -2376,6 +2375,37 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       );
 
   @override
+  Future<FfiPjUriBuilder> crateApiUriFfiPjUriBuilderCreate(
+      {required String address,
+      required FfiUrl pj,
+      FfiOhttpKeys? ohttpKeys,
+      BigInt? expiry}) {
+    return handler.executeNormal(NormalTask(
+      callFfi: (port_) {
+        var arg0 = cst_encode_String(address);
+        var arg1 = cst_encode_box_autoadd_ffi_url(pj);
+        var arg2 = cst_encode_opt_box_autoadd_ffi_ohttp_keys(ohttpKeys);
+        var arg3 = cst_encode_opt_box_autoadd_u_64(expiry);
+        return wire.wire__crate__api__uri__ffi_pj_uri_builder_create(
+            port_, arg0, arg1, arg2, arg3);
+      },
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_ffi_pj_uri_builder,
+        decodeErrorData: dco_decode_payjoin_error,
+      ),
+      constMeta: kCrateApiUriFfiPjUriBuilderCreateConstMeta,
+      argValues: [address, pj, ohttpKeys, expiry],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta get kCrateApiUriFfiPjUriBuilderCreateConstMeta =>
+      const TaskConstMeta(
+        debugName: "ffi_pj_uri_builder_create",
+        argNames: ["address", "pj", "ohttpKeys", "expiry"],
+      );
+
+  @override
   FfiPjUriBuilder crateApiUriFfiPjUriBuilderLabel(
       {required FfiPjUriBuilder that, required String label}) {
     return handler.executeSync(SyncTask(
@@ -2424,33 +2454,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       const TaskConstMeta(
         debugName: "ffi_pj_uri_builder_message",
         argNames: ["that", "message"],
-      );
-
-  @override
-  FfiPjUriBuilder crateApiUriFfiPjUriBuilderNew(
-      {required String address, required FfiUrl pj, FfiOhttpKeys? ohttpKeys}) {
-    return handler.executeSync(SyncTask(
-      callFfi: () {
-        var arg0 = cst_encode_String(address);
-        var arg1 = cst_encode_box_autoadd_ffi_url(pj);
-        var arg2 = cst_encode_opt_box_autoadd_ffi_ohttp_keys(ohttpKeys);
-        return wire.wire__crate__api__uri__ffi_pj_uri_builder_new(
-            arg0, arg1, arg2);
-      },
-      codec: DcoCodec(
-        decodeSuccessData: dco_decode_ffi_pj_uri_builder,
-        decodeErrorData: dco_decode_payjoin_error,
-      ),
-      constMeta: kCrateApiUriFfiPjUriBuilderNewConstMeta,
-      argValues: [address, pj, ohttpKeys],
-      apiImpl: this,
-    ));
-  }
-
-  TaskConstMeta get kCrateApiUriFfiPjUriBuilderNewConstMeta =>
-      const TaskConstMeta(
-        debugName: "ffi_pj_uri_builder_new",
-        argNames: ["address", "pj", "ohttpKeys"],
       );
 
   @override
@@ -3590,8 +3593,8 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
     final arr = raw as List<dynamic>;
     if (arr.length != 1)
       throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
-    return FfiPjUriBuilder.raw(
-      field0: dco_decode_RustOpaque_payjoin_ffiuriPjUriBuilder(arr[0]),
+    return FfiPjUriBuilder(
+      internal: dco_decode_RustOpaque_payjoin_ffiuriPjUriBuilder(arr[0]),
     );
   }
 
@@ -4655,9 +4658,9 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   @protected
   FfiPjUriBuilder sse_decode_ffi_pj_uri_builder(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_field0 =
+    var var_internal =
         sse_decode_RustOpaque_payjoin_ffiuriPjUriBuilder(deserializer);
-    return FfiPjUriBuilder.raw(field0: var_field0);
+    return FfiPjUriBuilder(internal: var_internal);
   }
 
   @protected
@@ -6013,7 +6016,7 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   void sse_encode_ffi_pj_uri_builder(
       FfiPjUriBuilder self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_RustOpaque_payjoin_ffiuriPjUriBuilder(self.field0, serializer);
+    sse_encode_RustOpaque_payjoin_ffiuriPjUriBuilder(self.internal, serializer);
   }
 
   @protected

@@ -5,6 +5,30 @@ import 'src/generated/api/io.dart' as io;
 import 'src/generated/api/uri.dart';
 import 'src/generated/utils/error.dart' as error;
 
+class PjUriBuilder extends FfiPjUriBuilder {
+  PjUriBuilder({required super.internal});
+
+  ///Create a new PjUriBuilder with required parameters.
+  /// Parameters
+  /// address: Represents a bitcoin address.
+  /// ohttpKeys: Optional OHTTP keys for v2.
+  /// expiry: Optional non-default duration_since epoch expiry for the `payjoin` session.
+  static Future<PjUriBuilder> create(
+      {required String address,
+      required FfiUrl pj,
+      FfiOhttpKeys? ohttpKeys,
+      BigInt? expiry}) async {
+    try {
+      await PConfig.initializeApp();
+      final res = await FfiPjUriBuilder.create(
+          address: address, pj: pj, ohttpKeys: ohttpKeys, expiry: expiry);
+      return PjUriBuilder(internal: res.internal);
+    } on error.PayjoinError catch (e) {
+      throw mapPayjoinError(e);
+    }
+  }
+}
+
 class Uri extends FfiUri {
   Uri._({required super.field0});
 
@@ -132,7 +156,7 @@ class OhttpKeys extends FfiOhttpKeys {
 /// * `payjoinDirectory`: The payjoin directory from which to fetch the ohttp keys.  This
 /// directory stores and forwards payjoin client payloads.
 ///
-/// * `cert_der` (optional): The DER-encoded certificate to use for local HTTPS connections.  This
+/// * `certDer` (optional): The DER-encoded certificate to use for local HTTPS connections.  This
 /// parameter is only available when the "danger-local-https" feature is enabled.
 Future<OhttpKeys> fetchOhttpKeys(
     {required Url ohttpRelay,

@@ -6,7 +6,6 @@ import '../common.dart';
 import '../src/exceptions.dart';
 import '../src/generated/api/receive.dart';
 import '../src/generated/utils/error.dart' as error;
-import '../uri.dart' as uri;
 import '../uri.dart';
 
 class SessionInitializer extends FfiSessionInitializer {
@@ -47,7 +46,7 @@ class SessionInitializer extends FfiSessionInitializer {
     try {
       final res = await FfiSessionInitializer.extractReq(ptr: this);
       final request =
-          Request(await uri.Url.fromString(res.$1.$1.query()!), res.$1.$2);
+          Request(await Url.fromString(res.$1.$1.query()!), res.$1.$2);
       return (request, ClientResponse._(field0: res.$2.field0));
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
@@ -61,7 +60,7 @@ class ActiveSession extends FfiActiveSession {
     try {
       final res = await FfiActiveSession.extractReq(ptr: this);
       final request =
-          Request(await uri.Url.fromString(res.$1.$1.query()!), res.$1.$2);
+          Request(await Url.fromString(res.$1.$1.query()!), res.$1.$2);
       return (request, ClientResponse._(field0: res.$2.field0));
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
@@ -81,15 +80,18 @@ class ActiveSession extends FfiActiveSession {
       throw mapPayjoinError(e);
     }
   }
-  //
-  // @override
-  // Future<String> fallbackTarget({dynamic hint}) {
-  //   try {
-  //     return super.fallbackTarget();
-  //   } on error.PayjoinError catch (e) {
-  //     throw mapPayjoinError(e);
-  //   }
-  // }
+
+  /// The contents of the `&pj=` query parameter including the base64url-encoded public key receiver subdirectory.
+  /// This identifies a session at the payjoin directory server.
+  Future<Url> pjUrl() {
+    final res = FfiActiveSession.pjUrl(ptr: super);
+    return Url.fromString(res.asString());
+  }
+
+  PjUriBuilder pjUriBuilder() {
+    final res = FfiActiveSession.pjUriBuilder(ptr: super);
+    return PjUriBuilder(internal: res.internal);
+  }
 }
 
 class UncheckedProposal extends FfiV2UncheckedProposal {
@@ -295,7 +297,7 @@ class PayjoinProposal extends FfiV2PayjoinProposal {
     try {
       final res = await FfiV2PayjoinProposal.extractV2Req(ptr: this);
       final request =
-          Request(await uri.Url.fromString(res.$1.$1.toString()), res.$1.$2);
+          Request(await Url.fromString(res.$1.$1.toString()), res.$1.$2);
       return (request, ClientResponse._(field0: res.$2.field0));
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);

@@ -1774,7 +1774,7 @@ checksum = "57c0d7b74b563b49d38dae00a0c37d4d6de9b432382b2892f0574ddcae73fd0a"
 [[package]]
 name = "payjoin"
 version = "0.18.0"
-source = "git+https://github.com/LtbLightning/rust-payjoin?branch=clone-pj-uri-builder#cd02a360127ecc080f46ee8ea961bc17000ccbca"
+source = "git+https://github.com/LtbLightning/rust-payjoin?branch=clone-pj-uri-builder#3b5bda95fc8ce63f506538f0ff9daed885810488"
 dependencies = [
  "bhttp",
  "bip21",
@@ -1783,7 +1783,6 @@ dependencies = [
  "http",
  "log",
  "ohttp",
- "percent-encoding-rfc3986",
  "reqwest",
  "rustls 0.22.4",
  "serde",
@@ -1794,7 +1793,7 @@ dependencies = [
 [[package]]
 name = "payjoin_ffi"
 version = "0.18.0"
-source = "git+https://github.com/LtbLightning/payjoin-ffi.git?branch=v0.18.0#e43ea781fda2a141eb3db8761503f1ea3bd5ecec"
+source = "git+https://github.com/LtbLightning/payjoin-ffi?branch=upgrade-v18.0#610aed9239c6e1e28cc56118e9b94b5000ae6052"
 dependencies = [
  "base64 0.22.1",
  "hex",

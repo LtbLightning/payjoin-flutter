@@ -1,5 +1,5 @@
 use crate::api::uri::{FfiPjUri, FfiUrl};
-use crate::{ frb_generated::RustOpaque};
+use crate::frb_generated::RustOpaque;
 use std::sync::Arc;
 
 use super::receive::PayjoinError;
@@ -25,9 +25,8 @@ impl FfiRequestBuilder {
         }
     }
     pub fn always_disable_output_substitution(&self, disable: bool) -> FfiRequestBuilder {
-        (*self.0
+        (*self.0.clone().always_disable_output_substitution(disable))
             .clone()
-            .always_disable_output_substitution(disable)).clone()
             .into()
     }
     pub fn build_recommended(
@@ -52,11 +51,14 @@ impl FfiRequestBuilder {
             min_fee_rate,
             clamp_fee_contribution,
         ) {
-            Ok(e) =>Ok((*e).clone().into()),
+            Ok(e) => Ok((*e).clone().into()),
             Err(e) => Err(e.into()),
         }
     }
-    pub fn build_non_incentivizing(&self, min_fee_rate: u64) -> anyhow::Result<FfiRequestContext, PayjoinError> {
+    pub fn build_non_incentivizing(
+        &self,
+        min_fee_rate: u64,
+    ) -> anyhow::Result<FfiRequestContext, PayjoinError> {
         match self.0.clone().build_non_incentivizing(min_fee_rate) {
             Ok(e) => Ok((*e).clone().into()),
             Err(e) => Err(e.into()),
@@ -115,7 +117,7 @@ impl From<payjoin_ffi::send::v1::RequestContextV1> for RequestContextV1 {
     fn from(value: payjoin_ffi::send::v1::RequestContextV1) -> Self {
         Self {
             request: ((*value.request.url).clone().into(), value.request.body),
-            context_v1:(*value.context_v1).clone().into(),
+            context_v1: (*value.context_v1).clone().into(),
         }
     }
 }
@@ -139,7 +141,6 @@ impl From<payjoin_ffi::send::v1::ContextV1> for FfiContextV1 {
         Self(RustOpaque::new(value))
     }
 }
-
 
 impl FfiContextV1 {
     pub fn process_response(&self, response: Vec<u8>) -> anyhow::Result<String, PayjoinError> {

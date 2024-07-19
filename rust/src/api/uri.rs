@@ -2,7 +2,7 @@ use crate::frb_generated::RustOpaque;
 use crate::utils::error::PayjoinError;
 use flutter_rust_bridge::frb;
 
-#[derive( Debug, Clone)]
+#[derive(Debug, Clone)]
 pub struct FfiUrl(pub RustOpaque<payjoin_ffi::uri::Url>);
 impl From<payjoin_ffi::uri::Url> for FfiUrl {
     fn from(value: payjoin_ffi::uri::Url) -> Self {
@@ -25,12 +25,10 @@ impl FfiUrl {
     pub fn as_string(&self) -> String {
         self.0.as_string()
     }
-
 }
 
 #[derive(Clone)]
 pub struct FfiPjUri(pub RustOpaque<payjoin_ffi::uri::PjUri>);
-
 
 impl From<payjoin_ffi::uri::PjUri> for FfiPjUri {
     fn from(value: payjoin_ffi::uri::PjUri) -> Self {
@@ -55,53 +53,59 @@ impl FfiPjUri {
 }
 
 #[derive(Clone)]
-pub struct FfiPjUriBuilder(pub RustOpaque<payjoin_ffi::uri::PjUriBuilder>);
+pub struct FfiPjUriBuilder {
+    pub internal: RustOpaque<payjoin_ffi::uri::PjUriBuilder>,
+}
 
 impl From<payjoin_ffi::uri::PjUriBuilder> for FfiPjUriBuilder {
     fn from(value: payjoin_ffi::uri::PjUriBuilder) -> Self {
-        Self(RustOpaque::new(value))
+        Self {
+            internal: RustOpaque::new(value),
+        }
     }
 }
 
 impl FfiPjUriBuilder {
-    #[frb(sync)]
-    pub fn new(
+    pub fn create(
         address: String,
         pj: FfiUrl,
         ohttp_keys: Option<FfiOhttpKeys>,
+        expiry: Option<u64>,
     ) -> Result<Self, PayjoinError> {
         payjoin_ffi::uri::PjUriBuilder::new(
             address,
             (*pj.0).clone(),
-            ohttp_keys.map(|e| (*e.0).clone().into()))
-            .map_err(|e| e.into())
-            .map(|e| e.into())
+            ohttp_keys.map(|e| (*e.0).clone().into()),
+            expiry,
+        )
+        .map_err(|e| e.into())
+        .map(|e| e.into())
     }
+    ///Accepts the amount you want to receive in sats and sets it in btc.
     #[frb(sync)]
-    pub fn amount(&self, amount: u64)  -> Self {
-        self.0.amount(amount).into()
+    pub fn amount(&self, amount: u64) -> Self {
+        self.internal.amount(amount).into()
     }
     #[frb(sync)]
     /// Set the message.
-    pub fn message(&self, message: String)  -> Self {
-        self.0.message(message).into()
+    pub fn message(&self, message: String) -> Self {
+        self.internal.message(message).into()
     }
     #[frb(sync)]
     ///Set the label.
-    pub fn label(&self, label: String)-> Self {
-        self.0.label(label).into()
+    pub fn label(&self, label: String) -> Self {
+        self.internal.label(label).into()
     }
-
+    ///Set whether payjoin output substitution is allowed.
     #[frb(sync)]
-    pub fn pjos(&self, pjos: bool) -> Self{
-        self.0.pjos(pjos).into()
+    pub fn pjos(&self, pjos: bool) -> Self {
+        self.internal.pjos(pjos).into()
     }
     #[frb(sync)]
     ///Constructs a Uri with PayjoinParams from the parameters set in the builder.
     pub fn build(&self) -> FfiPjUri {
-        self.0.build().into()
+        self.internal.build().into()
     }
-
 }
 
 #[derive(Clone)]
@@ -135,27 +139,30 @@ impl FfiUri {
     }
     #[frb(sync)]
     pub fn check_pj_supported(&self) -> Result<FfiPjUri, payjoin_ffi::error::PayjoinError> {
-        self.0.check_pj_supported()
+        self.0
+            .check_pj_supported()
             .map(|e| e.into())
             .map_err(|e| e.into())
     }
 }
 pub struct FfiOhttpKeys(pub RustOpaque<payjoin_ffi::types::OhttpKeys>);
 
-impl From<FfiOhttpKeys>  for payjoin_ffi::types::OhttpKeys{
+impl From<FfiOhttpKeys> for payjoin_ffi::types::OhttpKeys {
     fn from(value: FfiOhttpKeys) -> Self {
         (*value.0).clone()
     }
 }
-impl From<payjoin_ffi::types::OhttpKeys>  for FfiOhttpKeys {
-    fn from(value:payjoin_ffi::types:: OhttpKeys) -> Self {
-       Self(RustOpaque::new(value))
+impl From<payjoin_ffi::types::OhttpKeys> for FfiOhttpKeys {
+    fn from(value: payjoin_ffi::types::OhttpKeys) -> Self {
+        Self(RustOpaque::new(value))
     }
 }
 
 impl FfiOhttpKeys {
     pub fn decode(bytes: Vec<u8>) -> Result<Self, PayjoinError> {
-         payjoin_ffi::types::OhttpKeys::decode(bytes).map(|e| e.into()).map_err(|e| e.into())
+        payjoin_ffi::types::OhttpKeys::decode(bytes)
+            .map(|e| e.into())
+            .map_err(|e| e.into())
     }
 }
 #[cfg(test)]
@@ -177,7 +184,7 @@ mod tests {
                     FfiUrl::from_str(pj.to_string()).unwrap(),
                     None,
                 )
-                    .unwrap();
+                .unwrap();
                 let uri = builder
                     .amount(1)
                     .message("message".to_string())

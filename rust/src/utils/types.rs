@@ -1,6 +1,6 @@
-use std::collections::HashMap;
 use flutter_rust_bridge::frb;
 pub use payjoin_ffi::types::Network;
+use std::collections::HashMap;
 // ///Represents data that needs to be transmitted to the receiver.
 // ///You need to send this request over HTTP(S) to the receiver.
 // #[derive(Clone, Debug)]

@@ -2,7 +2,7 @@ use crate::api::uri::{FfiOhttpKeys, FfiPjUriBuilder, FfiUrl};
 use crate::frb_generated::RustOpaque;
 pub use crate::utils::error::PayjoinError;
 use crate::utils::types::{Headers, OutPoint, TxOut};
-use flutter_rust_bridge::DartFnFuture;
+use flutter_rust_bridge::{frb, DartFnFuture};
 use std::collections::HashMap;
 pub use std::sync::Arc;
 
@@ -131,9 +131,7 @@ impl FfiOutputsUnknown {
     ) -> Result<FfiProvisionalProposal, PayjoinError> {
         let runtime = tokio::runtime::Runtime::new().unwrap();
         ptr.0
-            .identify_receiver_outputs(|o| {
-                Ok(runtime.block_on(is_receiver_output(o.clone())))
-            })
+            .identify_receiver_outputs(|o| Ok(runtime.block_on(is_receiver_output(o.clone()))))
             .map(|e| e.into())
             .map_err(|e| e.into())
     }
@@ -146,12 +144,13 @@ impl From<payjoin_ffi::receive::v1::ProvisionalProposal> for FfiProvisionalPropo
     }
 }
 impl FfiProvisionalProposal {
-    pub fn try_substitute_receiver_output(&self,  generate_script: impl Fn() -> DartFnFuture<Vec<u8>> ) -> Result<(), PayjoinError> {
+    pub fn try_substitute_receiver_output(
+        &self,
+        generate_script: impl Fn() -> DartFnFuture<Vec<u8>>,
+    ) -> Result<(), PayjoinError> {
         let runtime = tokio::runtime::Runtime::new().unwrap();
         self.0
-            .try_substitute_receiver_output(|| {
-                Ok(runtime.block_on(generate_script()))
-            })
+            .try_substitute_receiver_output(|| Ok(runtime.block_on(generate_script())))
             .map_err(|e| e.into())
     }
     pub fn contribute_witness_input(
@@ -240,7 +239,9 @@ impl FfiPayjoinProposal {
         self.0.psbt()
     }
 }
-pub struct FfiClientResponse(pub RustOpaque<std::sync::Mutex<core::option::Option<ohttp::ClientResponse>>>);
+pub struct FfiClientResponse(
+    pub RustOpaque<std::sync::Mutex<core::option::Option<ohttp::ClientResponse>>>,
+);
 
 impl From<FfiClientResponse> for ohttp::ClientResponse {
     fn from(value: FfiClientResponse) -> Self {
@@ -265,7 +266,7 @@ impl From<payjoin_ffi::receive::v2::SessionInitializer> for FfiSessionInitialize
 impl FfiSessionInitializer {
     pub fn new(
         address: String,
-        expire_after: u64,
+        expire_after: Option<u64>,
         network: crate::utils::types::Network,
         directory: FfiUrl,
         ohttp_keys: FfiOhttpKeys,
@@ -278,11 +279,9 @@ impl FfiSessionInitializer {
             Arc::new((*directory.0).clone()),
             (*ohttp_keys.0).clone().into(),
             Arc::new((*ohttp_relay.0).clone()),
-
         )?
-            .into())
+        .into())
     }
-
 
     pub fn extract_req(ptr: Self) -> Result<((FfiUrl, Vec<u8>), FfiClientResponse), PayjoinError> {
         ptr.0
@@ -305,17 +304,22 @@ impl FfiSessionInitializer {
 pub struct FfiActiveSession(pub RustOpaque<payjoin_ffi::receive::v2::ActiveSession>);
 
 impl From<payjoin_ffi::receive::v2::ActiveSession> for FfiActiveSession {
-    fn from(value:payjoin_ffi::receive::v2::ActiveSession) -> Self {
+    fn from(value: payjoin_ffi::receive::v2::ActiveSession) -> Self {
         Self(RustOpaque::new(value))
     }
 }
 impl FfiActiveSession {
+    ///The per-session public key to use as an identifier
+    #[frb(sync)]
     pub fn public_key(&self) -> String {
         self.0.public_key()
     }
+
+    #[frb(sync)]
     pub fn pj_url(ptr: Self) -> FfiUrl {
         ptr.0.pj_url().into()
     }
+    #[frb(sync)]
     pub fn pj_uri_builder(ptr: Self) -> FfiPjUriBuilder {
         ptr.0.pj_uri_builder().into()
     }
@@ -375,7 +379,9 @@ impl FfiV2UncheckedProposal {
     /// So-called "non-interactive" receivers, like payment processors, that allow arbitrary requests are otherwise vulnerable to probing attacks.
     /// Those receivers call `extract_tx_to_check_broadcast()` and `attest_tested_and_scheduled_broadcast()` after making those checks downstream.
     pub fn assume_interactive_receiver(&self) -> FfiV2MaybeInputsOwned {
-        (*self.0.clone().assume_interactive_receiver()).clone().into()
+        (*self.0.clone().assume_interactive_receiver())
+            .clone()
+            .into()
     }
 }
 #[derive(Clone)]
@@ -462,9 +468,7 @@ impl FfiV2OutputsUnknown {
     ) -> Result<FfiV2ProvisionalProposal, PayjoinError> {
         let runtime = tokio::runtime::Runtime::new().unwrap();
         self.0
-            .identify_receiver_outputs(|o| {
-                Ok(runtime.block_on(is_receiver_output(o.clone())))
-            })
+            .identify_receiver_outputs(|o| Ok(runtime.block_on(is_receiver_output(o.clone()))))
             .map(|e| e.into())
             .map_err(|e| e.into())
     }
@@ -478,14 +482,16 @@ impl From<payjoin_ffi::receive::v2::V2ProvisionalProposal> for FfiV2ProvisionalP
     }
 }
 impl FfiV2ProvisionalProposal {
-
     pub fn is_output_substitution_disabled(&self) -> bool {
         self.0.is_output_substitution_disabled()
     }
-    pub fn try_substitute_receiver_output(&self, generate_script: impl Fn() -> DartFnFuture<Vec<u8>>) -> Result<(), PayjoinError> {
+    pub fn try_substitute_receiver_output(
+        &self,
+        generate_script: impl Fn() -> DartFnFuture<Vec<u8>>,
+    ) -> Result<(), PayjoinError> {
         let runtime = tokio::runtime::Runtime::new().unwrap();
         self.0
-            .try_substitute_receiver_output(|| Ok(runtime.block_on(generate_script())),)
+            .try_substitute_receiver_output(|| Ok(runtime.block_on(generate_script())))
             .map_err(|e| e.into())
     }
     pub fn contribute_witness_input(
@@ -566,7 +572,9 @@ impl FfiV2PayjoinProposal {
     pub fn extract_v1_req(&self) -> String {
         self.0.extract_v1_req()
     }
-    pub fn extract_v2_req(ptr: Self) -> Result<((FfiUrl, Vec<u8>), FfiClientResponse), PayjoinError> {
+    pub fn extract_v2_req(
+        ptr: Self,
+    ) -> Result<((FfiUrl, Vec<u8>), FfiClientResponse), PayjoinError> {
         ptr.0
             .clone()
             .extract_v2_req()
@@ -579,7 +587,8 @@ impl FfiV2PayjoinProposal {
         res: Vec<u8>,
         ohttp_context: FfiClientResponse,
     ) -> Result<(), PayjoinError> {
-        self.0.process_res(res, ohttp_context.into())
+        self.0
+            .process_res(res, ohttp_context.into())
             .map_err(|e| e.into())
     }
 }

@@ -63,12 +63,13 @@ class FfiPjUri {
 }
 
 class FfiPjUriBuilder {
-  final PjUriBuilder field0;
+  final PjUriBuilder internal;
 
-  const FfiPjUriBuilder.raw({
-    required this.field0,
+  const FfiPjUriBuilder({
+    required this.internal,
   });
 
+  ///Accepts the amount you want to receive in sats and sets it in btc.
   FfiPjUriBuilder amount({required BigInt amount}) => core.instance.api
       .crateApiUriFfiPjUriBuilderAmount(that: this, amount: amount);
 
@@ -76,6 +77,14 @@ class FfiPjUriBuilder {
   FfiPjUri build() => core.instance.api.crateApiUriFfiPjUriBuilderBuild(
         that: this,
       );
+
+  static Future<FfiPjUriBuilder> create(
+          {required String address,
+          required FfiUrl pj,
+          FfiOhttpKeys? ohttpKeys,
+          BigInt? expiry}) =>
+      core.instance.api.crateApiUriFfiPjUriBuilderCreate(
+          address: address, pj: pj, ohttpKeys: ohttpKeys, expiry: expiry);
 
   ///Set the label.
   FfiPjUriBuilder label({required String label}) => core.instance.api
@@ -85,25 +94,19 @@ class FfiPjUriBuilder {
   FfiPjUriBuilder message({required String message}) => core.instance.api
       .crateApiUriFfiPjUriBuilderMessage(that: this, message: message);
 
-  factory FfiPjUriBuilder(
-          {required String address,
-          required FfiUrl pj,
-          FfiOhttpKeys? ohttpKeys}) =>
-      core.instance.api.crateApiUriFfiPjUriBuilderNew(
-          address: address, pj: pj, ohttpKeys: ohttpKeys);
-
+  ///Set whether payjoin output substitution is allowed.
   FfiPjUriBuilder pjos({required bool pjos}) =>
       core.instance.api.crateApiUriFfiPjUriBuilderPjos(that: this, pjos: pjos);
 
   @override
-  int get hashCode => field0.hashCode;
+  int get hashCode => internal.hashCode;
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is FfiPjUriBuilder &&
           runtimeType == other.runtimeType &&
-          field0 == other.field0;
+          internal == other.internal;
 }
 
 class FfiUri {
