@@ -161,12 +161,12 @@ class OhttpKeys extends FfiOhttpKeys {
 Future<OhttpKeys> fetchOhttpKeys(
     {required Url ohttpRelay,
     required Url payjoinDirectory,
-    required List<int> certDer}) async {
+    List<int>? certDer}) async {
   try {
     final res = await io.fetchOhttpKeys(
-        ohttpRelay: ohttpRelay,
-        payjoinDirectory: payjoinDirectory,
-        certDer: certDer);
+      ohttpRelay: ohttpRelay,
+      payjoinDirectory: payjoinDirectory,
+    );
     return OhttpKeys._(field0: res.field0);
   } on error.PayjoinError catch (e) {
     throw mapPayjoinError(e);

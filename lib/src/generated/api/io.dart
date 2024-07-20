@@ -21,10 +21,6 @@ import 'uri.dart';
 /// * `cert_der` (optional): The DER-encoded certificate to use for local HTTPS connections.  This
 /// parameter is only available when the "danger-local-https" feature is enabled.
 Future<FfiOhttpKeys> fetchOhttpKeys(
-        {required FfiUrl ohttpRelay,
-        required FfiUrl payjoinDirectory,
-        required List<int> certDer}) =>
+        {required FfiUrl ohttpRelay, required FfiUrl payjoinDirectory}) =>
     core.instance.api.crateApiIoFetchOhttpKeys(
-        ohttpRelay: ohttpRelay,
-        payjoinDirectory: payjoinDirectory,
-        certDer: certDer);
+        ohttpRelay: ohttpRelay, payjoinDirectory: payjoinDirectory);

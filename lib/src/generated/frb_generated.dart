@@ -73,9 +73,7 @@ class core extends BaseEntrypoint<coreApi, coreApiImpl, coreWire> {
 
 abstract class coreApi extends BaseApi {
   Future<FfiOhttpKeys> crateApiIoFetchOhttpKeys(
-      {required FfiUrl ohttpRelay,
-      required FfiUrl payjoinDirectory,
-      required List<int> certDer});
+      {required FfiUrl ohttpRelay, required FfiUrl payjoinDirectory});
 
   Future<((FfiUrl, Uint8List), FfiClientResponse)>
       crateApiReceiveFfiActiveSessionExtractReq(
@@ -580,30 +578,26 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
 
   @override
   Future<FfiOhttpKeys> crateApiIoFetchOhttpKeys(
-      {required FfiUrl ohttpRelay,
-      required FfiUrl payjoinDirectory,
-      required List<int> certDer}) {
+      {required FfiUrl ohttpRelay, required FfiUrl payjoinDirectory}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
         var arg0 = cst_encode_box_autoadd_ffi_url(ohttpRelay);
         var arg1 = cst_encode_box_autoadd_ffi_url(payjoinDirectory);
-        var arg2 = cst_encode_list_prim_u_8_loose(certDer);
-        return wire.wire__crate__api__io__fetch_ohttp_keys(
-            port_, arg0, arg1, arg2);
+        return wire.wire__crate__api__io__fetch_ohttp_keys(port_, arg0, arg1);
       },
       codec: DcoCodec(
         decodeSuccessData: dco_decode_ffi_ohttp_keys,
         decodeErrorData: dco_decode_payjoin_error,
       ),
       constMeta: kCrateApiIoFetchOhttpKeysConstMeta,
-      argValues: [ohttpRelay, payjoinDirectory, certDer],
+      argValues: [ohttpRelay, payjoinDirectory],
       apiImpl: this,
     ));
   }
 
   TaskConstMeta get kCrateApiIoFetchOhttpKeysConstMeta => const TaskConstMeta(
         debugName: "fetch_ohttp_keys",
-        argNames: ["ohttpRelay", "payjoinDirectory", "certDer"],
+        argNames: ["ohttpRelay", "payjoinDirectory"],
       );
 
   @override

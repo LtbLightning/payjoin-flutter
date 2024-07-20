@@ -2638,31 +2638,23 @@ class coreWire implements BaseWire {
     int port_,
     ffi.Pointer<wire_cst_ffi_url> ohttp_relay,
     ffi.Pointer<wire_cst_ffi_url> payjoin_directory,
-    ffi.Pointer<wire_cst_list_prim_u_8_loose> cert_der,
   ) {
     return _wire__crate__api__io__fetch_ohttp_keys(
       port_,
       ohttp_relay,
       payjoin_directory,
-      cert_der,
     );
   }
 
   late final _wire__crate__api__io__fetch_ohttp_keysPtr = _lookup<
           ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Int64,
-                  ffi.Pointer<wire_cst_ffi_url>,
-                  ffi.Pointer<wire_cst_ffi_url>,
-                  ffi.Pointer<wire_cst_list_prim_u_8_loose>)>>(
+              ffi.Void Function(ffi.Int64, ffi.Pointer<wire_cst_ffi_url>,
+                  ffi.Pointer<wire_cst_ffi_url>)>>(
       'frbgen_payjoin_flutter_wire__crate__api__io__fetch_ohttp_keys');
   late final _wire__crate__api__io__fetch_ohttp_keys =
       _wire__crate__api__io__fetch_ohttp_keysPtr.asFunction<
-          void Function(
-              int,
-              ffi.Pointer<wire_cst_ffi_url>,
-              ffi.Pointer<wire_cst_ffi_url>,
-              ffi.Pointer<wire_cst_list_prim_u_8_loose>)>();
+          void Function(int, ffi.Pointer<wire_cst_ffi_url>,
+              ffi.Pointer<wire_cst_ffi_url>)>();
 
   void wire__crate__api__receive__ffi_active_session_extract_req(
     int port_,
@@ -5735,16 +5727,16 @@ final class wire_cst_ffi_url extends ffi.Struct {
   external int field0;
 }
 
+final class wire_cst_ffi_active_session extends ffi.Struct {
+  @ffi.UintPtr()
+  external int field0;
+}
+
 final class wire_cst_list_prim_u_8_loose extends ffi.Struct {
   external ffi.Pointer<ffi.Uint8> ptr;
 
   @ffi.Int32()
   external int len;
-}
-
-final class wire_cst_ffi_active_session extends ffi.Struct {
-  @ffi.UintPtr()
-  external int field0;
 }
 
 final class wire_cst_ffi_client_response extends ffi.Struct {

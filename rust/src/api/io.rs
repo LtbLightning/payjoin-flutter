@@ -15,14 +15,16 @@ use crate::utils::error::PayjoinError;
 pub async fn fetch_ohttp_keys(
     ohttp_relay: FfiUrl,
     payjoin_directory: FfiUrl,
-    cert_der: Vec<u8>,
+    #[cfg(feature = "danger-local-https")] cert_der: Vec<u8>,
 ) -> Result<FfiOhttpKeys, PayjoinError> {
-    payjoin_ffi::io::fetch_ohttp_keys(
+    #[cfg(not(feature = "danger-local-https"))]
+    let res =
+        payjoin_ffi::io::fetch_ohttp_keys((*ohttp_relay.0).clone(), (*payjoin_directory.0).clone());
+    #[cfg(feature = "danger-local-https")]
+    let res = payjoin_ffi::io::fetch_ohttp_keys(
         (*ohttp_relay.0).clone(),
         (*payjoin_directory.0).clone(),
         cert_der,
-    )
-    .await
-    .map(|e| e.into())
-    .map_err(|e| e.into())
+    );
+    res.await.map(|e| e.into()).map_err(|e| e.into())
 }

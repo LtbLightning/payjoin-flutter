@@ -18,14 +18,14 @@ typedef struct wire_cst_ffi_url {
   uintptr_t field0;
 } wire_cst_ffi_url;
 
+typedef struct wire_cst_ffi_active_session {
+  uintptr_t field0;
+} wire_cst_ffi_active_session;
+
 typedef struct wire_cst_list_prim_u_8_loose {
   uint8_t *ptr;
   int32_t len;
 } wire_cst_list_prim_u_8_loose;
-
-typedef struct wire_cst_ffi_active_session {
-  uintptr_t field0;
-} wire_cst_ffi_active_session;
 
 typedef struct wire_cst_ffi_client_response {
   uintptr_t field0;
@@ -292,8 +292,7 @@ typedef struct wire_cst_request_context_v_2 {
 
 void frbgen_payjoin_flutter_wire__crate__api__io__fetch_ohttp_keys(int64_t port_,
                                                                    struct wire_cst_ffi_url *ohttp_relay,
-                                                                   struct wire_cst_ffi_url *payjoin_directory,
-                                                                   struct wire_cst_list_prim_u_8_loose *cert_der);
+                                                                   struct wire_cst_ffi_url *payjoin_directory);
 
 void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_active_session_extract_req(int64_t port_,
                                                                                       struct wire_cst_ffi_active_session *ptr);
