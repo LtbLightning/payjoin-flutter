@@ -84,12 +84,12 @@ class ActiveSession extends FfiActiveSession {
   /// The contents of the `&pj=` query parameter including the base64url-encoded public key receiver subdirectory.
   /// This identifies a session at the payjoin directory server.
   Future<Url> pjUrl() {
-    final res = FfiActiveSession.pjUrl(ptr: super);
+    final res = FfiActiveSession.pjUrl(ptr: this);
     return Url.fromString(res.asString());
   }
 
   PjUriBuilder pjUriBuilder() {
-    final res = FfiActiveSession.pjUriBuilder(ptr: super);
+    final res = FfiActiveSession.pjUriBuilder(ptr: this);
     return PjUriBuilder(internal: res.internal);
   }
 }
