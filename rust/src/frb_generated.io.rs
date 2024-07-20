@@ -1321,9 +1321,8 @@ pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__io__fetch_ohttp_keys(
     port_: i64,
     ohttp_relay: *mut wire_cst_ffi_url,
     payjoin_directory: *mut wire_cst_ffi_url,
-    cert_der: *mut wire_cst_list_prim_u_8_loose,
 ) {
-    wire__crate__api__io__fetch_ohttp_keys_impl(port_, ohttp_relay, payjoin_directory, cert_der)
+    wire__crate__api__io__fetch_ohttp_keys_impl(port_, ohttp_relay, payjoin_directory)
 }
 
 #[no_mangle]

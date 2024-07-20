@@ -177,11 +177,12 @@ mod tests {
         let bech32_upper = "TB1Q6D3A2W975YNY0ASUVD9A67NER4NKS58FF0Q8G4";
         let bech32_lower = "tb1q6d3a2w975yny0asuvd9a67ner4nks58ff0q8g4";
 
-        for address in vec![base58, bech32_upper, bech32_lower] {
-            for pj in vec![https, onion] {
-                let builder = FfiPjUriBuilder::new(
+        for address in [base58, bech32_upper, bech32_lower] {
+            for pj in [https, onion] {
+                let builder = FfiPjUriBuilder::create(
                     address.to_string(),
                     FfiUrl::from_str(pj.to_string()).unwrap(),
+                    None,
                     None,
                 )
                 .unwrap();
@@ -193,6 +194,18 @@ mod tests {
                     .build();
                 // assert_eq!(uri.amount(), Some(bitcoin::Amount::ONE_BTC.to_btc()));
                 print!("\n {}", uri.as_string());
+                let expected_address = if address == base58 {
+                    base58
+                } else {
+                    bech32_lower
+                };
+                assert_eq!(
+                    uri.as_string(),
+                    format!(
+                        "bitcoin:{}?amount=0.00000001&label=label&message=message&pj={}&pjos=1",
+                        expected_address, pj
+                    ),
+                );
             }
         }
     }

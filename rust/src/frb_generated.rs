@@ -50,7 +50,6 @@ fn wire__crate__api__io__fetch_ohttp_keys_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
     ohttp_relay: impl CstDecode<crate::api::uri::FfiUrl>,
     payjoin_directory: impl CstDecode<crate::api::uri::FfiUrl>,
-    cert_der: impl CstDecode<Vec<u8>>,
 ) {
     FLUTTER_RUST_BRIDGE_HANDLER.wrap_async::<flutter_rust_bridge::for_generated::DcoCodec, _, _, _>(
         flutter_rust_bridge::for_generated::TaskInfo {
@@ -61,14 +60,12 @@ fn wire__crate__api__io__fetch_ohttp_keys_impl(
         move || {
             let api_ohttp_relay = ohttp_relay.cst_decode();
             let api_payjoin_directory = payjoin_directory.cst_decode();
-            let api_cert_der = cert_der.cst_decode();
             move |context| async move {
                 transform_result_dco::<_, _, crate::utils::error::PayjoinError>(
                     (move || async move {
                         let output_ok = crate::api::io::fetch_ohttp_keys(
                             api_ohttp_relay,
                             api_payjoin_directory,
-                            api_cert_der,
                         )
                         .await?;
                         Ok(output_ok)
