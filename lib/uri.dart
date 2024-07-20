@@ -158,10 +158,10 @@ class OhttpKeys extends FfiOhttpKeys {
 ///
 /// * `certDer` (optional): The DER-encoded certificate to use for local HTTPS connections.  This
 /// parameter is only available when the "danger-local-https" feature is enabled.
-Future<OhttpKeys> fetchOhttpKeys(
-    {required Url ohttpRelay,
-    required Url payjoinDirectory,
-    List<int>? certDer}) async {
+Future<OhttpKeys> fetchOhttpKeys({
+  required Url ohttpRelay,
+  required Url payjoinDirectory,
+}) async {
   try {
     final res = await io.fetchOhttpKeys(
       ohttpRelay: ohttpRelay,
