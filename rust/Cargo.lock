@@ -1793,7 +1793,7 @@ dependencies = [
 [[package]]
 name = "payjoin_ffi"
 version = "0.18.0"
-source = "git+https://github.com/kumulynja/payjoin-ffi?branch=danger-local-https#8c02096df2ab333bf967f74cd09c001dd4b7852c"
+source = "git+https://github.com/LtbLightning/payjoin-ffi?branch=main#f5d26ac3ff1a857ecdd36aecb8747b5d6124aede"
 dependencies = [
  "base64 0.22.1",
  "hex",
