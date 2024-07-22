@@ -297,7 +297,7 @@ class PayjoinProposal extends FfiV2PayjoinProposal {
     try {
       final res = await FfiV2PayjoinProposal.extractV2Req(ptr: this);
       final request =
-          Request(await Url.fromString(res.$1.$1.toString()), res.$1.$2);
+          Request(await Url.fromString(res.$1.$1.asString()), res.$1.$2);
       return (request, ClientResponse._(field0: res.$2.field0));
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
