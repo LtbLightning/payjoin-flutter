@@ -196,7 +196,7 @@ class OutputsUnknown extends FfiV2OutputsUnknown {
 
   /// Find which outputs belong to the receiver
   @override
-  Future<FfiV2ProvisionalProposal> identifyReceiverOutputs(
+  Future<ProvisionalProposal> identifyReceiverOutputs(
       {required FutureOr<bool> Function(Uint8List p1) isReceiverOutput,
       hint}) async {
     try {
@@ -258,7 +258,7 @@ class ProvisionalProposal extends FfiV2ProvisionalProposal {
   }
 
   @override
-  Future<FfiV2PayjoinProposal> finalizeProposal(
+  Future<PayjoinProposal> finalizeProposal(
       {required FutureOr<String> Function(String p1) processPsbt,
       BigInt? minFeerateSatPerVb,
       hint}) async {
