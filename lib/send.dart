@@ -61,10 +61,11 @@ class RequestBuilder extends FfiRequestBuilder {
   }
 
   @override
-  Future<FfiRequestBuilder> alwaysDisableOutputSubstitution(
+  Future<RequestBuilder> alwaysDisableOutputSubstitution(
       {required bool disable, hBigInt}) async {
     try {
-      return await super.alwaysDisableOutputSubstitution(disable: disable);
+      final res = await super.alwaysDisableOutputSubstitution(disable: disable);
+      return RequestBuilder._(field0: res.field0);
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
     }

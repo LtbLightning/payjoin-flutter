@@ -196,7 +196,7 @@ class OutputsUnknown extends FfiV2OutputsUnknown {
 
   /// Find which outputs belong to the receiver
   @override
-  Future<FfiV2ProvisionalProposal> identifyReceiverOutputs(
+  Future<ProvisionalProposal> identifyReceiverOutputs(
       {required FutureOr<bool> Function(Uint8List p1) isReceiverOutput,
       hint}) async {
     try {
@@ -258,7 +258,7 @@ class ProvisionalProposal extends FfiV2ProvisionalProposal {
   }
 
   @override
-  Future<FfiV2PayjoinProposal> finalizeProposal(
+  Future<PayjoinProposal> finalizeProposal(
       {required FutureOr<String> Function(String p1) processPsbt,
       BigInt? minFeerateSatPerVb,
       hint}) async {
@@ -297,7 +297,7 @@ class PayjoinProposal extends FfiV2PayjoinProposal {
     try {
       final res = await FfiV2PayjoinProposal.extractV2Req(ptr: this);
       final request =
-          Request(await Url.fromString(res.$1.$1.toString()), res.$1.$2);
+          Request(await Url.fromString(res.$1.$1.asString()), res.$1.$2);
       return (request, ClientResponse._(field0: res.$2.field0));
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
