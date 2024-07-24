@@ -78,7 +78,7 @@ class FfiPjUriBuilder {
         that: this,
       );
 
-  static Future<FfiPjUriBuilder> create(
+  static Future<FfiPjUriBuilder> _create(
           {required String address,
           required FfiUrl pj,
           FfiOhttpKeys? ohttpKeys,

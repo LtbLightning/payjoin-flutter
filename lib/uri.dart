@@ -27,12 +27,62 @@ class PjUriBuilder extends FfiPjUriBuilder {
       throw mapPayjoinError(e);
     }
   }
+
+  @override
+  PjUriBuilder amount({required BigInt amount}) {
+    try {
+      final res = super.amount(amount: amount);
+      return PjUriBuilder(internal: res.internal);
+    } on error.PayjoinError catch (e) {
+      throw mapPayjoinError(e);
+    }
+  }
+
+  @override
+  PjUriBuilder label({required String label}) {
+    try {
+      final res = super.label(label: label);
+      return PjUriBuilder(internal: res.internal);
+    } on error.PayjoinError catch (e) {
+      throw mapPayjoinError(e);
+    }
+  }
+
+  @override
+  PjUriBuilder message({required String message}) {
+    try {
+      final res = super.message(message: message);
+      return PjUriBuilder(internal: res.internal);
+    } on error.PayjoinError catch (e) {
+      throw mapPayjoinError(e);
+    }
+  }
+
+  @override
+  PjUriBuilder pjos({required bool pjos}) {
+    try {
+      final res = super.pjos(pjos: pjos);
+      return PjUriBuilder(internal: res.internal);
+    } on error.PayjoinError catch (e) {
+      throw mapPayjoinError(e);
+    }
+  }
+
+  @override
+  PjUri build() {
+    try {
+      final res = super.build();
+      return PjUri._(field0: res.field0);
+    } on error.PayjoinError catch (e) {
+      throw mapPayjoinError(e);
+    }
+  }
 }
 
 class Uri extends FfiUri {
   Uri._({required super.field0});
 
-  static Future<Uri> fromString(String uri) async {
+  static Future<Uri> fromStr(String uri) async {
     try {
       await PConfig.initializeApp();
       final res = await FfiUri.fromStr(uri: uri);
@@ -69,11 +119,6 @@ class Uri extends FfiUri {
       throw mapPayjoinError(e);
     }
   }
-
-  @override
-  String toString() {
-    return super.asString();
-  }
 }
 
 class PjUri extends FfiPjUri {
@@ -97,16 +142,11 @@ class PjUri extends FfiPjUri {
       throw mapPayjoinError(e);
     }
   }
-
-  @override
-  String toString() {
-    return super.asString();
-  }
 }
 
 class Url extends FfiUrl {
   Url._({required super.field0});
-  static Future<Url> fromString(String uri) async {
+  static Future<Url> fromStr(String uri) async {
     try {
       await PConfig.initializeApp();
       final res = await FfiUrl.fromStr(url: uri);
@@ -123,11 +163,6 @@ class Url extends FfiUrl {
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
     }
-  }
-
-  @override
-  String toString() {
-    return super.asString();
   }
 }
 
