@@ -29,6 +29,10 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
           ._rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffireceivev2V2PayjoinProposalPtr;
 
   CrossPlatformFinalizerArg
+      get rust_arc_decrement_strong_count_ArcContextV1Ptr => wire
+          ._rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffisendv1ContextV1Ptr;
+
+  CrossPlatformFinalizerArg
       get rust_arc_decrement_strong_count_ArcContextV2Ptr => wire
           ._rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffisendv2ContextV2Ptr;
 
@@ -91,9 +95,6 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   CrossPlatformFinalizerArg
       get rust_arc_decrement_strong_count_V2UncheckedProposalPtr => wire
           ._rust_arc_decrement_strong_count_RustOpaque_payjoin_ffireceivev2V2UncheckedProposalPtr;
-
-  CrossPlatformFinalizerArg get rust_arc_decrement_strong_count_ContextV1Ptr =>
-      wire._rust_arc_decrement_strong_count_RustOpaque_payjoin_ffisendv1ContextV1Ptr;
 
   CrossPlatformFinalizerArg
       get rust_arc_decrement_strong_count_RequestBuilderPtr => wire
@@ -159,6 +160,9 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   ArcV2PayjoinProposal
       dco_decode_RustOpaque_Arcpayjoin_ffireceivev2V2PayjoinProposal(
           dynamic raw);
+
+  @protected
+  ArcContextV1 dco_decode_RustOpaque_Arcpayjoin_ffisendv1ContextV1(dynamic raw);
 
   @protected
   ArcContextV2 dco_decode_RustOpaque_Arcpayjoin_ffisendv2ContextV2(dynamic raw);
@@ -227,9 +231,6 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   V2UncheckedProposal
       dco_decode_RustOpaque_payjoin_ffireceivev2V2UncheckedProposal(
           dynamic raw);
-
-  @protected
-  ContextV1 dco_decode_RustOpaque_payjoin_ffisendv1ContextV1(dynamic raw);
 
   @protected
   RequestBuilder dco_decode_RustOpaque_payjoin_ffisendv1RequestBuilder(
@@ -417,6 +418,9 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   FfiProvisionalProposal dco_decode_ffi_provisional_proposal(dynamic raw);
 
   @protected
+  FfiRequest dco_decode_ffi_request(dynamic raw);
+
+  @protected
   FfiRequestBuilder dco_decode_ffi_request_builder(dynamic raw);
 
   @protected
@@ -509,6 +513,14 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   PayjoinError dco_decode_payjoin_error(dynamic raw);
 
   @protected
+  (FfiRequest, FfiContextV1) dco_decode_record_ffi_request_ffi_context_v_1(
+      dynamic raw);
+
+  @protected
+  (FfiRequest, FfiContextV2) dco_decode_record_ffi_request_ffi_context_v_2(
+      dynamic raw);
+
+  @protected
   (FfiUrl, Uint8List) dco_decode_record_ffi_url_list_prim_u_8_strict(
       dynamic raw);
 
@@ -522,12 +534,6 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
 
   @protected
   (BigInt, OutPoint) dco_decode_record_u_64_out_point(dynamic raw);
-
-  @protected
-  RequestContextV1 dco_decode_request_context_v_1(dynamic raw);
-
-  @protected
-  RequestContextV2 dco_decode_request_context_v_2(dynamic raw);
 
   @protected
   TxOut dco_decode_tx_out(dynamic raw);
@@ -565,6 +571,10 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   ArcV2PayjoinProposal
       sse_decode_RustOpaque_Arcpayjoin_ffireceivev2V2PayjoinProposal(
           SseDeserializer deserializer);
+
+  @protected
+  ArcContextV1 sse_decode_RustOpaque_Arcpayjoin_ffisendv1ContextV1(
+      SseDeserializer deserializer);
 
   @protected
   ArcContextV2 sse_decode_RustOpaque_Arcpayjoin_ffisendv2ContextV2(
@@ -636,10 +646,6 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   V2UncheckedProposal
       sse_decode_RustOpaque_payjoin_ffireceivev2V2UncheckedProposal(
           SseDeserializer deserializer);
-
-  @protected
-  ContextV1 sse_decode_RustOpaque_payjoin_ffisendv1ContextV1(
-      SseDeserializer deserializer);
 
   @protected
   RequestBuilder sse_decode_RustOpaque_payjoin_ffisendv1RequestBuilder(
@@ -848,6 +854,9 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
       SseDeserializer deserializer);
 
   @protected
+  FfiRequest sse_decode_ffi_request(SseDeserializer deserializer);
+
+  @protected
   FfiRequestBuilder sse_decode_ffi_request_builder(
       SseDeserializer deserializer);
 
@@ -953,6 +962,14 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   PayjoinError sse_decode_payjoin_error(SseDeserializer deserializer);
 
   @protected
+  (FfiRequest, FfiContextV1) sse_decode_record_ffi_request_ffi_context_v_1(
+      SseDeserializer deserializer);
+
+  @protected
+  (FfiRequest, FfiContextV2) sse_decode_record_ffi_request_ffi_context_v_2(
+      SseDeserializer deserializer);
+
+  @protected
   (FfiUrl, Uint8List) sse_decode_record_ffi_url_list_prim_u_8_strict(
       SseDeserializer deserializer);
 
@@ -968,12 +985,6 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   @protected
   (BigInt, OutPoint) sse_decode_record_u_64_out_point(
       SseDeserializer deserializer);
-
-  @protected
-  RequestContextV1 sse_decode_request_context_v_1(SseDeserializer deserializer);
-
-  @protected
-  RequestContextV2 sse_decode_request_context_v_2(SseDeserializer deserializer);
 
   @protected
   TxOut sse_decode_tx_out(SseDeserializer deserializer);
@@ -1635,7 +1646,7 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   void cst_api_fill_to_wire_ffi_context_v_1(
       FfiContextV1 apiObj, wire_cst_ffi_context_v_1 wireObj) {
     wireObj.field0 =
-        cst_encode_RustOpaque_payjoin_ffisendv1ContextV1(apiObj.field0);
+        cst_encode_RustOpaque_Arcpayjoin_ffisendv1ContextV1(apiObj.field0);
   }
 
   @protected
@@ -1709,6 +1720,13 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
     wireObj.field0 =
         cst_encode_RustOpaque_payjoin_ffireceivev1ProvisionalProposal(
             apiObj.field0);
+  }
+
+  @protected
+  void cst_api_fill_to_wire_ffi_request(
+      FfiRequest apiObj, wire_cst_ffi_request wireObj) {
+    cst_api_fill_to_wire_ffi_url(apiObj.ffiUrl, wireObj.ffi_url);
+    wireObj.body = cst_encode_list_prim_u_8_strict(apiObj.body);
   }
 
   @protected
@@ -1936,6 +1954,22 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   }
 
   @protected
+  void cst_api_fill_to_wire_record_ffi_request_ffi_context_v_1(
+      (FfiRequest, FfiContextV1) apiObj,
+      wire_cst_record_ffi_request_ffi_context_v_1 wireObj) {
+    cst_api_fill_to_wire_ffi_request(apiObj.$1, wireObj.field0);
+    cst_api_fill_to_wire_ffi_context_v_1(apiObj.$2, wireObj.field1);
+  }
+
+  @protected
+  void cst_api_fill_to_wire_record_ffi_request_ffi_context_v_2(
+      (FfiRequest, FfiContextV2) apiObj,
+      wire_cst_record_ffi_request_ffi_context_v_2 wireObj) {
+    cst_api_fill_to_wire_ffi_request(apiObj.$1, wireObj.field0);
+    cst_api_fill_to_wire_ffi_context_v_2(apiObj.$2, wireObj.field1);
+  }
+
+  @protected
   void cst_api_fill_to_wire_record_ffi_url_list_prim_u_8_strict(
       (FfiUrl, Uint8List) apiObj,
       wire_cst_record_ffi_url_list_prim_u_8_strict wireObj) {
@@ -1965,22 +1999,6 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
       (BigInt, OutPoint) apiObj, wire_cst_record_u_64_out_point wireObj) {
     wireObj.field0 = cst_encode_u_64(apiObj.$1);
     cst_api_fill_to_wire_out_point(apiObj.$2, wireObj.field1);
-  }
-
-  @protected
-  void cst_api_fill_to_wire_request_context_v_1(
-      RequestContextV1 apiObj, wire_cst_request_context_v_1 wireObj) {
-    cst_api_fill_to_wire_record_ffi_url_list_prim_u_8_strict(
-        apiObj.request, wireObj.request);
-    cst_api_fill_to_wire_ffi_context_v_1(apiObj.contextV1, wireObj.context_v1);
-  }
-
-  @protected
-  void cst_api_fill_to_wire_request_context_v_2(
-      RequestContextV2 apiObj, wire_cst_request_context_v_2 wireObj) {
-    cst_api_fill_to_wire_record_ffi_url_list_prim_u_8_strict(
-        apiObj.request, wireObj.request);
-    cst_api_fill_to_wire_ffi_context_v_2(apiObj.contextV2, wireObj.context_v2);
   }
 
   @protected
@@ -2015,6 +2033,9 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   @protected
   int cst_encode_RustOpaque_Arcpayjoin_ffireceivev2V2PayjoinProposal(
       ArcV2PayjoinProposal raw);
+
+  @protected
+  int cst_encode_RustOpaque_Arcpayjoin_ffisendv1ContextV1(ArcContextV1 raw);
 
   @protected
   int cst_encode_RustOpaque_Arcpayjoin_ffisendv2ContextV2(ArcContextV2 raw);
@@ -2078,9 +2099,6 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   @protected
   int cst_encode_RustOpaque_payjoin_ffireceivev2V2UncheckedProposal(
       V2UncheckedProposal raw);
-
-  @protected
-  int cst_encode_RustOpaque_payjoin_ffisendv1ContextV1(ContextV1 raw);
 
   @protected
   int cst_encode_RustOpaque_payjoin_ffisendv1RequestBuilder(RequestBuilder raw);
@@ -2165,6 +2183,10 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
       ArcV2PayjoinProposal self, SseSerializer serializer);
 
   @protected
+  void sse_encode_RustOpaque_Arcpayjoin_ffisendv1ContextV1(
+      ArcContextV1 self, SseSerializer serializer);
+
+  @protected
   void sse_encode_RustOpaque_Arcpayjoin_ffisendv2ContextV2(
       ArcContextV2 self, SseSerializer serializer);
 
@@ -2227,10 +2249,6 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   @protected
   void sse_encode_RustOpaque_payjoin_ffireceivev2V2UncheckedProposal(
       V2UncheckedProposal self, SseSerializer serializer);
-
-  @protected
-  void sse_encode_RustOpaque_payjoin_ffisendv1ContextV1(
-      ContextV1 self, SseSerializer serializer);
 
   @protected
   void sse_encode_RustOpaque_payjoin_ffisendv1RequestBuilder(
@@ -2443,6 +2461,9 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
       FfiProvisionalProposal self, SseSerializer serializer);
 
   @protected
+  void sse_encode_ffi_request(FfiRequest self, SseSerializer serializer);
+
+  @protected
   void sse_encode_ffi_request_builder(
       FfiRequestBuilder self, SseSerializer serializer);
 
@@ -2550,6 +2571,14 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   void sse_encode_payjoin_error(PayjoinError self, SseSerializer serializer);
 
   @protected
+  void sse_encode_record_ffi_request_ffi_context_v_1(
+      (FfiRequest, FfiContextV1) self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_record_ffi_request_ffi_context_v_2(
+      (FfiRequest, FfiContextV2) self, SseSerializer serializer);
+
+  @protected
   void sse_encode_record_ffi_url_list_prim_u_8_strict(
       (FfiUrl, Uint8List) self, SseSerializer serializer);
 
@@ -2566,14 +2595,6 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   @protected
   void sse_encode_record_u_64_out_point(
       (BigInt, OutPoint) self, SseSerializer serializer);
-
-  @protected
-  void sse_encode_request_context_v_1(
-      RequestContextV1 self, SseSerializer serializer);
-
-  @protected
-  void sse_encode_request_context_v_2(
-      RequestContextV2 self, SseSerializer serializer);
 
   @protected
   void sse_encode_tx_out(TxOut self, SseSerializer serializer);
@@ -4017,11 +4038,11 @@ class coreWire implements BaseWire {
 
   void wire__crate__api__send__ffi_request_context_extract_v1(
     int port_,
-    ffi.Pointer<wire_cst_ffi_request_context> ptr,
+    ffi.Pointer<wire_cst_ffi_request_context> that,
   ) {
     return _wire__crate__api__send__ffi_request_context_extract_v1(
       port_,
-      ptr,
+      that,
     );
   }
 
@@ -4036,12 +4057,12 @@ class coreWire implements BaseWire {
 
   void wire__crate__api__send__ffi_request_context_extract_v2(
     int port_,
-    ffi.Pointer<wire_cst_ffi_request_context> ptr,
+    ffi.Pointer<wire_cst_ffi_request_context> that,
     ffi.Pointer<wire_cst_ffi_url> ohttp_proxy_url,
   ) {
     return _wire__crate__api__send__ffi_request_context_extract_v2(
       port_,
-      ptr,
+      that,
       ohttp_proxy_url,
     );
   }
@@ -4425,6 +4446,36 @@ class coreWire implements BaseWire {
           'frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffireceivev2V2PayjoinProposal');
   late final _rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffireceivev2V2PayjoinProposal =
       _rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffireceivev2V2PayjoinProposalPtr
+          .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
+
+  void rust_arc_increment_strong_count_RustOpaque_Arcpayjoin_ffisendv1ContextV1(
+    ffi.Pointer<ffi.Void> ptr,
+  ) {
+    return _rust_arc_increment_strong_count_RustOpaque_Arcpayjoin_ffisendv1ContextV1(
+      ptr,
+    );
+  }
+
+  late final _rust_arc_increment_strong_count_RustOpaque_Arcpayjoin_ffisendv1ContextV1Ptr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
+          'frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_Arcpayjoin_ffisendv1ContextV1');
+  late final _rust_arc_increment_strong_count_RustOpaque_Arcpayjoin_ffisendv1ContextV1 =
+      _rust_arc_increment_strong_count_RustOpaque_Arcpayjoin_ffisendv1ContextV1Ptr
+          .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
+
+  void rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffisendv1ContextV1(
+    ffi.Pointer<ffi.Void> ptr,
+  ) {
+    return _rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffisendv1ContextV1(
+      ptr,
+    );
+  }
+
+  late final _rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffisendv1ContextV1Ptr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
+          'frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffisendv1ContextV1');
+  late final _rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffisendv1ContextV1 =
+      _rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffisendv1ContextV1Ptr
           .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
 
   void rust_arc_increment_strong_count_RustOpaque_Arcpayjoin_ffisendv2ContextV2(
@@ -4935,36 +4986,6 @@ class coreWire implements BaseWire {
           'frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_payjoin_ffireceivev2V2UncheckedProposal');
   late final _rust_arc_decrement_strong_count_RustOpaque_payjoin_ffireceivev2V2UncheckedProposal =
       _rust_arc_decrement_strong_count_RustOpaque_payjoin_ffireceivev2V2UncheckedProposalPtr
-          .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
-
-  void rust_arc_increment_strong_count_RustOpaque_payjoin_ffisendv1ContextV1(
-    ffi.Pointer<ffi.Void> ptr,
-  ) {
-    return _rust_arc_increment_strong_count_RustOpaque_payjoin_ffisendv1ContextV1(
-      ptr,
-    );
-  }
-
-  late final _rust_arc_increment_strong_count_RustOpaque_payjoin_ffisendv1ContextV1Ptr =
-      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
-          'frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_payjoin_ffisendv1ContextV1');
-  late final _rust_arc_increment_strong_count_RustOpaque_payjoin_ffisendv1ContextV1 =
-      _rust_arc_increment_strong_count_RustOpaque_payjoin_ffisendv1ContextV1Ptr
-          .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
-
-  void rust_arc_decrement_strong_count_RustOpaque_payjoin_ffisendv1ContextV1(
-    ffi.Pointer<ffi.Void> ptr,
-  ) {
-    return _rust_arc_decrement_strong_count_RustOpaque_payjoin_ffisendv1ContextV1(
-      ptr,
-    );
-  }
-
-  late final _rust_arc_decrement_strong_count_RustOpaque_payjoin_ffisendv1ContextV1Ptr =
-      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
-          'frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_payjoin_ffisendv1ContextV1');
-  late final _rust_arc_decrement_strong_count_RustOpaque_payjoin_ffisendv1ContextV1 =
-      _rust_arc_decrement_strong_count_RustOpaque_payjoin_ffisendv1ContextV1Ptr
           .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
 
   void
@@ -5925,6 +5946,12 @@ final class wire_cst_list_prim_u_64_strict extends ffi.Struct {
   external int len;
 }
 
+final class wire_cst_ffi_request extends ffi.Struct {
+  external wire_cst_ffi_url ffi_url;
+
+  external ffi.Pointer<wire_cst_list_prim_u_8_strict> body;
+}
+
 final class wire_cst_PayjoinError_InvalidAddress extends ffi.Struct {
   external ffi.Pointer<wire_cst_list_prim_u_8_strict> message;
 }
@@ -6042,6 +6069,18 @@ final class wire_cst_payjoin_error extends ffi.Struct {
   external PayjoinErrorKind kind;
 }
 
+final class wire_cst_record_ffi_request_ffi_context_v_1 extends ffi.Struct {
+  external wire_cst_ffi_request field0;
+
+  external wire_cst_ffi_context_v_1 field1;
+}
+
+final class wire_cst_record_ffi_request_ffi_context_v_2 extends ffi.Struct {
+  external wire_cst_ffi_request field0;
+
+  external wire_cst_ffi_context_v_2 field1;
+}
+
 final class wire_cst_record_ffi_url_list_prim_u_8_strict extends ffi.Struct {
   external wire_cst_ffi_url field0;
 
@@ -6053,16 +6092,4 @@ final class wire_cst_record_record_ffi_url_list_prim_u_8_strict_ffi_client_respo
   external wire_cst_record_ffi_url_list_prim_u_8_strict field0;
 
   external wire_cst_ffi_client_response field1;
-}
-
-final class wire_cst_request_context_v_1 extends ffi.Struct {
-  external wire_cst_record_ffi_url_list_prim_u_8_strict request;
-
-  external wire_cst_ffi_context_v_1 context_v1;
-}
-
-final class wire_cst_request_context_v_2 extends ffi.Struct {
-  external wire_cst_record_ffi_url_list_prim_u_8_strict request;
-
-  external wire_cst_ffi_context_v_2 context_v2;
 }

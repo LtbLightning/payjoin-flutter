@@ -9,10 +9,11 @@ import '../utils/error.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'uri.dart';
 
-// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`
+// These types are ignored because they are not used by any `pub` functions: `FfiRequestContextV1`, `FfiRequestContextV2`
+// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `clone`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`
 
 class FfiContextV1 {
-  final ContextV1 field0;
+  final ArcContextV1 field0;
 
   const FfiContextV1({
     required this.field0,
@@ -53,6 +54,27 @@ class FfiContextV2 {
       other is FfiContextV2 &&
           runtimeType == other.runtimeType &&
           field0 == other.field0;
+}
+
+class FfiRequest {
+  final FfiUrl ffiUrl;
+  final Uint8List body;
+
+  const FfiRequest({
+    required this.ffiUrl,
+    required this.body,
+  });
+
+  @override
+  int get hashCode => ffiUrl.hashCode ^ body.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is FfiRequest &&
+          runtimeType == other.runtimeType &&
+          ffiUrl == other.ffiUrl &&
+          body == other.body;
 }
 
 class FfiRequestBuilder {
@@ -112,13 +134,15 @@ class FfiRequestContext {
     required this.field0,
   });
 
-  static Future<RequestContextV1> extractV1({required FfiRequestContext ptr}) =>
-      core.instance.api.crateApiSendFfiRequestContextExtractV1(ptr: ptr);
+  Future<(FfiRequest, FfiContextV1)> extractV1() =>
+      core.instance.api.crateApiSendFfiRequestContextExtractV1(
+        that: this,
+      );
 
-  static Future<RequestContextV2> extractV2(
-          {required FfiRequestContext ptr, required FfiUrl ohttpProxyUrl}) =>
+  Future<(FfiRequest, FfiContextV2)> extractV2(
+          {required FfiUrl ohttpProxyUrl}) =>
       core.instance.api.crateApiSendFfiRequestContextExtractV2(
-          ptr: ptr, ohttpProxyUrl: ohttpProxyUrl);
+          that: this, ohttpProxyUrl: ohttpProxyUrl);
 
   @override
   int get hashCode => field0.hashCode;
@@ -129,46 +153,4 @@ class FfiRequestContext {
       other is FfiRequestContext &&
           runtimeType == other.runtimeType &&
           field0 == other.field0;
-}
-
-class RequestContextV1 {
-  final (FfiUrl, Uint8List) request;
-  final FfiContextV1 contextV1;
-
-  const RequestContextV1({
-    required this.request,
-    required this.contextV1,
-  });
-
-  @override
-  int get hashCode => request.hashCode ^ contextV1.hashCode;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is RequestContextV1 &&
-          runtimeType == other.runtimeType &&
-          request == other.request &&
-          contextV1 == other.contextV1;
-}
-
-class RequestContextV2 {
-  final (FfiUrl, Uint8List) request;
-  final FfiContextV2 contextV2;
-
-  const RequestContextV2({
-    required this.request,
-    required this.contextV2,
-  });
-
-  @override
-  int get hashCode => request.hashCode ^ contextV2.hashCode;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is RequestContextV2 &&
-          runtimeType == other.runtimeType &&
-          request == other.request &&
-          contextV2 == other.contextV2;
 }

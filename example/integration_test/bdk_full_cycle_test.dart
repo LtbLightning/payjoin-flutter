@@ -37,7 +37,7 @@ void main() {
       await sender.syncWallet();
       // Sender create a funded PSBT (not broadcast) to address with amount given in the pjUri
       debugPrint("Sender Balance: ${sender.getBalance().toString()}");
-      final uri = await pay_join_uri.Uri.fromString(
+      final uri = await pay_join_uri.Uri.fromStr(
           "${pjReceiverAddress.toQrUri()}?amount=${0.0083285}&pj=https://example.com");
       final address = uri.address();
       int amount = (((uri.amount()) ?? 0) * 100000000).toInt();
@@ -55,7 +55,7 @@ void main() {
                   maxFeeContribution: BigInt.from(10000),
                   minFeeRate: BigInt.zero,
                   clampFeeContribution: false))
-          .extractContextV1();
+          .extractV1();
       final headers = common.Headers(map: {
         'content-type': 'text/plain',
         'content-length': req.body.length.toString(),

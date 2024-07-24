@@ -295,11 +295,11 @@ abstract class coreApi extends BaseApi {
   Future<FfiRequestBuilder> crateApiSendFfiRequestBuilderFromPsbtAndUri(
       {required String psbtBase64, required FfiPjUri pjUri});
 
-  Future<RequestContextV1> crateApiSendFfiRequestContextExtractV1(
-      {required FfiRequestContext ptr});
+  Future<(FfiRequest, FfiContextV1)> crateApiSendFfiRequestContextExtractV1(
+      {required FfiRequestContext that});
 
-  Future<RequestContextV2> crateApiSendFfiRequestContextExtractV2(
-      {required FfiRequestContext ptr, required FfiUrl ohttpProxyUrl});
+  Future<(FfiRequest, FfiContextV2)> crateApiSendFfiRequestContextExtractV2(
+      {required FfiRequestContext that, required FfiUrl ohttpProxyUrl});
 
   Future<FfiOhttpKeys> crateApiUriFfiOhttpKeysDecode(
       {required List<int> bytes});
@@ -354,6 +354,14 @@ abstract class coreApi extends BaseApi {
 
   CrossPlatformFinalizerArg
       get rust_arc_decrement_strong_count_ArcV2PayjoinProposalPtr;
+
+  RustArcIncrementStrongCountFnType
+      get rust_arc_increment_strong_count_ArcContextV1;
+
+  RustArcDecrementStrongCountFnType
+      get rust_arc_decrement_strong_count_ArcContextV1;
+
+  CrossPlatformFinalizerArg get rust_arc_decrement_strong_count_ArcContextV1Ptr;
 
   RustArcIncrementStrongCountFnType
       get rust_arc_increment_strong_count_ArcContextV2;
@@ -497,14 +505,6 @@ abstract class coreApi extends BaseApi {
 
   CrossPlatformFinalizerArg
       get rust_arc_decrement_strong_count_V2UncheckedProposalPtr;
-
-  RustArcIncrementStrongCountFnType
-      get rust_arc_increment_strong_count_ContextV1;
-
-  RustArcDecrementStrongCountFnType
-      get rust_arc_decrement_strong_count_ContextV1;
-
-  CrossPlatformFinalizerArg get rust_arc_decrement_strong_count_ContextV1Ptr;
 
   RustArcIncrementStrongCountFnType
       get rust_arc_increment_strong_count_RequestBuilder;
@@ -2178,20 +2178,20 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       );
 
   @override
-  Future<RequestContextV1> crateApiSendFfiRequestContextExtractV1(
-      {required FfiRequestContext ptr}) {
+  Future<(FfiRequest, FfiContextV1)> crateApiSendFfiRequestContextExtractV1(
+      {required FfiRequestContext that}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        var arg0 = cst_encode_box_autoadd_ffi_request_context(ptr);
+        var arg0 = cst_encode_box_autoadd_ffi_request_context(that);
         return wire.wire__crate__api__send__ffi_request_context_extract_v1(
             port_, arg0);
       },
       codec: DcoCodec(
-        decodeSuccessData: dco_decode_request_context_v_1,
+        decodeSuccessData: dco_decode_record_ffi_request_ffi_context_v_1,
         decodeErrorData: dco_decode_payjoin_error,
       ),
       constMeta: kCrateApiSendFfiRequestContextExtractV1ConstMeta,
-      argValues: [ptr],
+      argValues: [that],
       apiImpl: this,
     ));
   }
@@ -2199,25 +2199,25 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   TaskConstMeta get kCrateApiSendFfiRequestContextExtractV1ConstMeta =>
       const TaskConstMeta(
         debugName: "ffi_request_context_extract_v1",
-        argNames: ["ptr"],
+        argNames: ["that"],
       );
 
   @override
-  Future<RequestContextV2> crateApiSendFfiRequestContextExtractV2(
-      {required FfiRequestContext ptr, required FfiUrl ohttpProxyUrl}) {
+  Future<(FfiRequest, FfiContextV2)> crateApiSendFfiRequestContextExtractV2(
+      {required FfiRequestContext that, required FfiUrl ohttpProxyUrl}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        var arg0 = cst_encode_box_autoadd_ffi_request_context(ptr);
+        var arg0 = cst_encode_box_autoadd_ffi_request_context(that);
         var arg1 = cst_encode_box_autoadd_ffi_url(ohttpProxyUrl);
         return wire.wire__crate__api__send__ffi_request_context_extract_v2(
             port_, arg0, arg1);
       },
       codec: DcoCodec(
-        decodeSuccessData: dco_decode_request_context_v_2,
+        decodeSuccessData: dco_decode_record_ffi_request_ffi_context_v_2,
         decodeErrorData: dco_decode_payjoin_error,
       ),
       constMeta: kCrateApiSendFfiRequestContextExtractV2ConstMeta,
-      argValues: [ptr, ohttpProxyUrl],
+      argValues: [that, ohttpProxyUrl],
       apiImpl: this,
     ));
   }
@@ -2225,7 +2225,7 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   TaskConstMeta get kCrateApiSendFfiRequestContextExtractV2ConstMeta =>
       const TaskConstMeta(
         debugName: "ffi_request_context_extract_v2",
-        argNames: ["ptr", "ohttpProxyUrl"],
+        argNames: ["that", "ohttpProxyUrl"],
       );
 
   @override
@@ -2794,6 +2794,14 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
           .rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffireceivev2V2PayjoinProposal;
 
   RustArcIncrementStrongCountFnType
+      get rust_arc_increment_strong_count_ArcContextV1 => wire
+          .rust_arc_increment_strong_count_RustOpaque_Arcpayjoin_ffisendv1ContextV1;
+
+  RustArcDecrementStrongCountFnType
+      get rust_arc_decrement_strong_count_ArcContextV1 => wire
+          .rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffisendv1ContextV1;
+
+  RustArcIncrementStrongCountFnType
       get rust_arc_increment_strong_count_ArcContextV2 => wire
           .rust_arc_increment_strong_count_RustOpaque_Arcpayjoin_ffisendv2ContextV2;
 
@@ -2922,14 +2930,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
           .rust_arc_decrement_strong_count_RustOpaque_payjoin_ffireceivev2V2UncheckedProposal;
 
   RustArcIncrementStrongCountFnType
-      get rust_arc_increment_strong_count_ContextV1 => wire
-          .rust_arc_increment_strong_count_RustOpaque_payjoin_ffisendv1ContextV1;
-
-  RustArcDecrementStrongCountFnType
-      get rust_arc_decrement_strong_count_ContextV1 => wire
-          .rust_arc_decrement_strong_count_RustOpaque_payjoin_ffisendv1ContextV1;
-
-  RustArcIncrementStrongCountFnType
       get rust_arc_increment_strong_count_RequestBuilder => wire
           .rust_arc_increment_strong_count_RustOpaque_payjoin_ffisendv1RequestBuilder;
 
@@ -3054,6 +3054,13 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
+  ArcContextV1 dco_decode_RustOpaque_Arcpayjoin_ffisendv1ContextV1(
+      dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return ArcContextV1Impl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
   ArcContextV2 dco_decode_RustOpaque_Arcpayjoin_ffisendv2ContextV2(
       dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
@@ -3172,12 +3179,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
           dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return V2UncheckedProposalImpl.frbInternalDcoDecode(raw as List<dynamic>);
-  }
-
-  @protected
-  ContextV1 dco_decode_RustOpaque_payjoin_ffisendv1ContextV1(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return ContextV1Impl.frbInternalDcoDecode(raw as List<dynamic>);
   }
 
   @protected
@@ -3486,7 +3487,7 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
     if (arr.length != 1)
       throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
     return FfiContextV1(
-      field0: dco_decode_RustOpaque_payjoin_ffisendv1ContextV1(arr[0]),
+      field0: dco_decode_RustOpaque_Arcpayjoin_ffisendv1ContextV1(arr[0]),
     );
   }
 
@@ -3601,6 +3602,18 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
     return FfiProvisionalProposal(
       field0:
           dco_decode_RustOpaque_payjoin_ffireceivev1ProvisionalProposal(arr[0]),
+    );
+  }
+
+  @protected
+  FfiRequest dco_decode_ffi_request(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2)
+      throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
+    return FfiRequest(
+      ffiUrl: dco_decode_ffi_url(arr[0]),
+      body: dco_decode_list_prim_u_8_strict(arr[1]),
     );
   }
 
@@ -3953,6 +3966,34 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
+  (FfiRequest, FfiContextV1) dco_decode_record_ffi_request_ffi_context_v_1(
+      dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2) {
+      throw Exception('Expected 2 elements, got ${arr.length}');
+    }
+    return (
+      dco_decode_ffi_request(arr[0]),
+      dco_decode_ffi_context_v_1(arr[1]),
+    );
+  }
+
+  @protected
+  (FfiRequest, FfiContextV2) dco_decode_record_ffi_request_ffi_context_v_2(
+      dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2) {
+      throw Exception('Expected 2 elements, got ${arr.length}');
+    }
+    return (
+      dco_decode_ffi_request(arr[0]),
+      dco_decode_ffi_context_v_2(arr[1]),
+    );
+  }
+
+  @protected
   (FfiUrl, Uint8List) dco_decode_record_ffi_url_list_prim_u_8_strict(
       dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
@@ -4004,30 +4045,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
     return (
       dco_decode_u_64(arr[0]),
       dco_decode_out_point(arr[1]),
-    );
-  }
-
-  @protected
-  RequestContextV1 dco_decode_request_context_v_1(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    final arr = raw as List<dynamic>;
-    if (arr.length != 2)
-      throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
-    return RequestContextV1(
-      request: dco_decode_record_ffi_url_list_prim_u_8_strict(arr[0]),
-      contextV1: dco_decode_ffi_context_v_1(arr[1]),
-    );
-  }
-
-  @protected
-  RequestContextV2 dco_decode_request_context_v_2(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    final arr = raw as List<dynamic>;
-    if (arr.length != 2)
-      throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
-    return RequestContextV2(
-      request: dco_decode_record_ffi_url_list_prim_u_8_strict(arr[0]),
-      contextV2: dco_decode_ffi_context_v_2(arr[1]),
     );
   }
 
@@ -4109,6 +4126,14 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
           SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return ArcV2PayjoinProposalImpl.frbInternalSseDecode(
+        sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
+  }
+
+  @protected
+  ArcContextV1 sse_decode_RustOpaque_Arcpayjoin_ffisendv1ContextV1(
+      SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return ArcContextV1Impl.frbInternalSseDecode(
         sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
   }
 
@@ -4244,14 +4269,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
           SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return V2UncheckedProposalImpl.frbInternalSseDecode(
-        sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
-  }
-
-  @protected
-  ContextV1 sse_decode_RustOpaque_payjoin_ffisendv1ContextV1(
-      SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return ContextV1Impl.frbInternalSseDecode(
         sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
   }
 
@@ -4576,7 +4593,7 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   FfiContextV1 sse_decode_ffi_context_v_1(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var var_field0 =
-        sse_decode_RustOpaque_payjoin_ffisendv1ContextV1(deserializer);
+        sse_decode_RustOpaque_Arcpayjoin_ffisendv1ContextV1(deserializer);
     return FfiContextV1(field0: var_field0);
   }
 
@@ -4665,6 +4682,14 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
         sse_decode_RustOpaque_payjoin_ffireceivev1ProvisionalProposal(
             deserializer);
     return FfiProvisionalProposal(field0: var_field0);
+  }
+
+  @protected
+  FfiRequest sse_decode_ffi_request(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_ffiUrl = sse_decode_ffi_url(deserializer);
+    var var_body = sse_decode_list_prim_u_8_strict(deserializer);
+    return FfiRequest(ffiUrl: var_ffiUrl, body: var_body);
   }
 
   @protected
@@ -5009,6 +5034,24 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
+  (FfiRequest, FfiContextV1) sse_decode_record_ffi_request_ffi_context_v_1(
+      SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_field0 = sse_decode_ffi_request(deserializer);
+    var var_field1 = sse_decode_ffi_context_v_1(deserializer);
+    return (var_field0, var_field1);
+  }
+
+  @protected
+  (FfiRequest, FfiContextV2) sse_decode_record_ffi_request_ffi_context_v_2(
+      SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_field0 = sse_decode_ffi_request(deserializer);
+    var var_field1 = sse_decode_ffi_context_v_2(deserializer);
+    return (var_field0, var_field1);
+  }
+
+  @protected
   (FfiUrl, Uint8List) sse_decode_record_ffi_url_list_prim_u_8_strict(
       SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
@@ -5044,26 +5087,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
     var var_field0 = sse_decode_u_64(deserializer);
     var var_field1 = sse_decode_out_point(deserializer);
     return (var_field0, var_field1);
-  }
-
-  @protected
-  RequestContextV1 sse_decode_request_context_v_1(
-      SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_request =
-        sse_decode_record_ffi_url_list_prim_u_8_strict(deserializer);
-    var var_contextV1 = sse_decode_ffi_context_v_1(deserializer);
-    return RequestContextV1(request: var_request, contextV1: var_contextV1);
-  }
-
-  @protected
-  RequestContextV2 sse_decode_request_context_v_2(
-      SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_request =
-        sse_decode_record_ffi_url_list_prim_u_8_strict(deserializer);
-    var var_contextV2 = sse_decode_ffi_context_v_2(deserializer);
-    return RequestContextV2(request: var_request, contextV2: var_contextV2);
   }
 
   @protected
@@ -5152,6 +5175,13 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
     // Codec=Cst (C-struct based), see doc to use other codecs
 // ignore: invalid_use_of_internal_member
     return (raw as ArcV2PayjoinProposalImpl).frbInternalCstEncode();
+  }
+
+  @protected
+  int cst_encode_RustOpaque_Arcpayjoin_ffisendv1ContextV1(ArcContextV1 raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+// ignore: invalid_use_of_internal_member
+    return (raw as ArcContextV1Impl).frbInternalCstEncode();
   }
 
   @protected
@@ -5279,13 +5309,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
     // Codec=Cst (C-struct based), see doc to use other codecs
 // ignore: invalid_use_of_internal_member
     return (raw as V2UncheckedProposalImpl).frbInternalCstEncode();
-  }
-
-  @protected
-  int cst_encode_RustOpaque_payjoin_ffisendv1ContextV1(ContextV1 raw) {
-    // Codec=Cst (C-struct based), see doc to use other codecs
-// ignore: invalid_use_of_internal_member
-    return (raw as ContextV1Impl).frbInternalCstEncode();
   }
 
   @protected
@@ -5470,6 +5493,15 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
+  void sse_encode_RustOpaque_Arcpayjoin_ffisendv1ContextV1(
+      ArcContextV1 self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+        (self as ArcContextV1Impl).frbInternalSseEncode(move: null),
+        serializer);
+  }
+
+  @protected
   void sse_encode_RustOpaque_Arcpayjoin_ffisendv2ContextV2(
       ArcContextV2 self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
@@ -5611,14 +5643,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
     sse_encode_usize(
         (self as V2UncheckedProposalImpl).frbInternalSseEncode(move: null),
         serializer);
-  }
-
-  @protected
-  void sse_encode_RustOpaque_payjoin_ffisendv1ContextV1(
-      ContextV1 self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_usize(
-        (self as ContextV1Impl).frbInternalSseEncode(move: null), serializer);
   }
 
   @protected
@@ -5944,7 +5968,8 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   @protected
   void sse_encode_ffi_context_v_1(FfiContextV1 self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_RustOpaque_payjoin_ffisendv1ContextV1(self.field0, serializer);
+    sse_encode_RustOpaque_Arcpayjoin_ffisendv1ContextV1(
+        self.field0, serializer);
   }
 
   @protected
@@ -6019,6 +6044,13 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_RustOpaque_payjoin_ffireceivev1ProvisionalProposal(
         self.field0, serializer);
+  }
+
+  @protected
+  void sse_encode_ffi_request(FfiRequest self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_ffi_url(self.ffiUrl, serializer);
+    sse_encode_list_prim_u_8_strict(self.body, serializer);
   }
 
   @protected
@@ -6327,6 +6359,22 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
+  void sse_encode_record_ffi_request_ffi_context_v_1(
+      (FfiRequest, FfiContextV1) self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_ffi_request(self.$1, serializer);
+    sse_encode_ffi_context_v_1(self.$2, serializer);
+  }
+
+  @protected
+  void sse_encode_record_ffi_request_ffi_context_v_2(
+      (FfiRequest, FfiContextV2) self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_ffi_request(self.$1, serializer);
+    sse_encode_ffi_context_v_2(self.$2, serializer);
+  }
+
+  @protected
   void sse_encode_record_ffi_url_list_prim_u_8_strict(
       (FfiUrl, Uint8List) self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
@@ -6358,22 +6406,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_u_64(self.$1, serializer);
     sse_encode_out_point(self.$2, serializer);
-  }
-
-  @protected
-  void sse_encode_request_context_v_1(
-      RequestContextV1 self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_record_ffi_url_list_prim_u_8_strict(self.request, serializer);
-    sse_encode_ffi_context_v_1(self.contextV1, serializer);
-  }
-
-  @protected
-  void sse_encode_request_context_v_2(
-      RequestContextV2 self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_record_ffi_url_list_prim_u_8_strict(self.request, serializer);
-    sse_encode_ffi_context_v_2(self.contextV2, serializer);
   }
 
   @protected
@@ -6434,6 +6466,26 @@ class ActiveSessionImpl extends RustOpaque implements ActiveSession {
 }
 
 @sealed
+class ArcContextV1Impl extends RustOpaque implements ArcContextV1 {
+  // Not to be used by end users
+  ArcContextV1Impl.frbInternalDcoDecode(List<dynamic> wire)
+      : super.frbInternalDcoDecode(wire, _kStaticData);
+
+  // Not to be used by end users
+  ArcContextV1Impl.frbInternalSseDecode(BigInt ptr, int externalSizeOnNative)
+      : super.frbInternalSseDecode(ptr, externalSizeOnNative, _kStaticData);
+
+  static final _kStaticData = RustArcStaticData(
+    rustArcIncrementStrongCount:
+        core.instance.api.rust_arc_increment_strong_count_ArcContextV1,
+    rustArcDecrementStrongCount:
+        core.instance.api.rust_arc_decrement_strong_count_ArcContextV1,
+    rustArcDecrementStrongCountPtr:
+        core.instance.api.rust_arc_decrement_strong_count_ArcContextV1Ptr,
+  );
+}
+
+@sealed
 class ArcContextV2Impl extends RustOpaque implements ArcContextV2 {
   // Not to be used by end users
   ArcContextV2Impl.frbInternalDcoDecode(List<dynamic> wire)
@@ -6472,26 +6524,6 @@ class ArcV2PayjoinProposalImpl extends RustOpaque
         core.instance.api.rust_arc_decrement_strong_count_ArcV2PayjoinProposal,
     rustArcDecrementStrongCountPtr: core
         .instance.api.rust_arc_decrement_strong_count_ArcV2PayjoinProposalPtr,
-  );
-}
-
-@sealed
-class ContextV1Impl extends RustOpaque implements ContextV1 {
-  // Not to be used by end users
-  ContextV1Impl.frbInternalDcoDecode(List<dynamic> wire)
-      : super.frbInternalDcoDecode(wire, _kStaticData);
-
-  // Not to be used by end users
-  ContextV1Impl.frbInternalSseDecode(BigInt ptr, int externalSizeOnNative)
-      : super.frbInternalSseDecode(ptr, externalSizeOnNative, _kStaticData);
-
-  static final _kStaticData = RustArcStaticData(
-    rustArcIncrementStrongCount:
-        core.instance.api.rust_arc_increment_strong_count_ContextV1,
-    rustArcDecrementStrongCount:
-        core.instance.api.rust_arc_decrement_strong_count_ContextV1,
-    rustArcDecrementStrongCountPtr:
-        core.instance.api.rust_arc_decrement_strong_count_ContextV1Ptr,
   );
 }
 

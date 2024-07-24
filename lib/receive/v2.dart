@@ -46,7 +46,7 @@ class SessionInitializer extends FfiSessionInitializer {
     try {
       final res = await FfiSessionInitializer.extractReq(ptr: this);
       final request =
-          Request(await Url.fromString(res.$1.$1.asString()), res.$1.$2);
+          Request(await Url.fromStr(res.$1.$1.asString()), res.$1.$2);
       return (request, ClientResponse._(field0: res.$2.field0));
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
@@ -60,7 +60,7 @@ class ActiveSession extends FfiActiveSession {
     try {
       final res = await FfiActiveSession.extractReq(ptr: this);
       final request =
-          Request(await Url.fromString(res.$1.$1.asString()), res.$1.$2);
+          Request(await Url.fromStr(res.$1.$1.asString()), res.$1.$2);
       return (request, ClientResponse._(field0: res.$2.field0));
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
@@ -85,7 +85,7 @@ class ActiveSession extends FfiActiveSession {
   /// This identifies a session at the payjoin directory server.
   Future<Url> pjUrl() {
     final res = FfiActiveSession.pjUrl(ptr: this);
-    return Url.fromString(res.asString());
+    return Url.fromStr(res.asString());
   }
 
   PjUriBuilder pjUriBuilder() {
@@ -297,7 +297,7 @@ class PayjoinProposal extends FfiV2PayjoinProposal {
     try {
       final res = await FfiV2PayjoinProposal.extractV2Req(ptr: this);
       final request =
-          Request(await Url.fromString(res.$1.$1.asString()), res.$1.$2);
+          Request(await Url.fromStr(res.$1.$1.asString()), res.$1.$2);
       return (request, ClientResponse._(field0: res.$2.field0));
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);

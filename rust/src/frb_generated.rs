@@ -1379,7 +1379,7 @@ fn wire__crate__api__send__ffi_request_builder_from_psbt_and_uri_impl(
 }
 fn wire__crate__api__send__ffi_request_context_extract_v1_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
-    ptr: impl CstDecode<crate::api::send::FfiRequestContext>,
+    that: impl CstDecode<crate::api::send::FfiRequestContext>,
 ) {
     FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::DcoCodec, _, _>(
         flutter_rust_bridge::for_generated::TaskInfo {
@@ -1388,10 +1388,10 @@ fn wire__crate__api__send__ffi_request_context_extract_v1_impl(
             mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
         },
         move || {
-            let api_ptr = ptr.cst_decode();
+            let api_that = that.cst_decode();
             move |context| {
                 transform_result_dco::<_, _, crate::utils::error::PayjoinError>((move || {
-                    let output_ok = crate::api::send::FfiRequestContext::extract_v1(api_ptr)?;
+                    let output_ok = crate::api::send::FfiRequestContext::extract_v1(&api_that)?;
                     Ok(output_ok)
                 })(
                 ))
@@ -1401,7 +1401,7 @@ fn wire__crate__api__send__ffi_request_context_extract_v1_impl(
 }
 fn wire__crate__api__send__ffi_request_context_extract_v2_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
-    ptr: impl CstDecode<crate::api::send::FfiRequestContext>,
+    that: impl CstDecode<crate::api::send::FfiRequestContext>,
     ohttp_proxy_url: impl CstDecode<crate::api::uri::FfiUrl>,
 ) {
     FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::DcoCodec, _, _>(
@@ -1411,12 +1411,12 @@ fn wire__crate__api__send__ffi_request_context_extract_v2_impl(
             mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
         },
         move || {
-            let api_ptr = ptr.cst_decode();
+            let api_that = that.cst_decode();
             let api_ohttp_proxy_url = ohttp_proxy_url.cst_decode();
             move |context| {
                 transform_result_dco::<_, _, crate::utils::error::PayjoinError>((move || {
                     let output_ok = crate::api::send::FfiRequestContext::extract_v2(
-                        api_ptr,
+                        &api_that,
                         api_ohttp_proxy_url,
                     )?;
                     Ok(output_ok)
@@ -2024,6 +2024,14 @@ impl SseDecode for RustOpaqueNom<Arc<payjoin_ffi::receive::v2::V2PayjoinProposal
     }
 }
 
+impl SseDecode for RustOpaqueNom<Arc<payjoin_ffi::send::v1::ContextV1>> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <usize>::sse_decode(deserializer);
+        return unsafe { decode_rust_opaque_nom(inner) };
+    }
+}
+
 impl SseDecode for RustOpaqueNom<Arc<payjoin_ffi::send::v2::ContextV2>> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -2152,14 +2160,6 @@ impl SseDecode for RustOpaqueNom<payjoin_ffi::receive::v2::V2UncheckedProposal> 
     }
 }
 
-impl SseDecode for RustOpaqueNom<payjoin_ffi::send::v1::ContextV1> {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        let mut inner = <usize>::sse_decode(deserializer);
-        return unsafe { decode_rust_opaque_nom(inner) };
-    }
-}
-
 impl SseDecode for RustOpaqueNom<payjoin_ffi::send::v1::RequestBuilder> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -2269,7 +2269,7 @@ impl SseDecode for crate::api::send::FfiContextV1 {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut var_field0 =
-            <RustOpaqueNom<payjoin_ffi::send::v1::ContextV1>>::sse_decode(deserializer);
+            <RustOpaqueNom<Arc<payjoin_ffi::send::v1::ContextV1>>>::sse_decode(deserializer);
         return crate::api::send::FfiContextV1(var_field0);
     }
 }
@@ -2366,6 +2366,18 @@ impl SseDecode for crate::api::receive::FfiProvisionalProposal {
                 deserializer,
             );
         return crate::api::receive::FfiProvisionalProposal(var_field0);
+    }
+}
+
+impl SseDecode for crate::api::send::FfiRequest {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_ffiUrl = <crate::api::uri::FfiUrl>::sse_decode(deserializer);
+        let mut var_body = <Vec<u8>>::sse_decode(deserializer);
+        return crate::api::send::FfiRequest {
+            ffi_url: var_ffiUrl,
+            body: var_body,
+        };
     }
 }
 
@@ -2783,6 +2795,24 @@ impl SseDecode for crate::utils::error::PayjoinError {
     }
 }
 
+impl SseDecode for (crate::api::send::FfiRequest, crate::api::send::FfiContextV1) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_field0 = <crate::api::send::FfiRequest>::sse_decode(deserializer);
+        let mut var_field1 = <crate::api::send::FfiContextV1>::sse_decode(deserializer);
+        return (var_field0, var_field1);
+    }
+}
+
+impl SseDecode for (crate::api::send::FfiRequest, crate::api::send::FfiContextV2) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_field0 = <crate::api::send::FfiRequest>::sse_decode(deserializer);
+        let mut var_field1 = <crate::api::send::FfiContextV2>::sse_decode(deserializer);
+        return (var_field0, var_field1);
+    }
+}
+
 impl SseDecode for (crate::api::uri::FfiUrl, Vec<u8>) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -2821,30 +2851,6 @@ impl SseDecode for (u64, crate::utils::types::OutPoint) {
         let mut var_field0 = <u64>::sse_decode(deserializer);
         let mut var_field1 = <crate::utils::types::OutPoint>::sse_decode(deserializer);
         return (var_field0, var_field1);
-    }
-}
-
-impl SseDecode for crate::api::send::RequestContextV1 {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        let mut var_request = <(crate::api::uri::FfiUrl, Vec<u8>)>::sse_decode(deserializer);
-        let mut var_contextV1 = <crate::api::send::FfiContextV1>::sse_decode(deserializer);
-        return crate::api::send::RequestContextV1 {
-            request: var_request,
-            context_v1: var_contextV1,
-        };
-    }
-}
-
-impl SseDecode for crate::api::send::RequestContextV2 {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        let mut var_request = <(crate::api::uri::FfiUrl, Vec<u8>)>::sse_decode(deserializer);
-        let mut var_contextV2 = <crate::api::send::FfiContextV2>::sse_decode(deserializer);
-        return crate::api::send::RequestContextV2 {
-            request: var_request,
-            context_v2: var_contextV2,
-        };
     }
 }
 
@@ -3130,6 +3136,24 @@ impl flutter_rust_bridge::IntoIntoDart<crate::api::receive::FfiProvisionalPropos
     for crate::api::receive::FfiProvisionalProposal
 {
     fn into_into_dart(self) -> crate::api::receive::FfiProvisionalProposal {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::api::send::FfiRequest {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.ffi_url.into_into_dart().into_dart(),
+            self.body.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive for crate::api::send::FfiRequest {}
+impl flutter_rust_bridge::IntoIntoDart<crate::api::send::FfiRequest>
+    for crate::api::send::FfiRequest
+{
+    fn into_into_dart(self) -> crate::api::send::FfiRequest {
         self
     }
 }
@@ -3475,48 +3499,6 @@ impl flutter_rust_bridge::IntoIntoDart<crate::utils::error::PayjoinError>
     }
 }
 // Codec=Dco (DartCObject based), see doc to use other codecs
-impl flutter_rust_bridge::IntoDart for crate::api::send::RequestContextV1 {
-    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
-        [
-            self.request.into_into_dart().into_dart(),
-            self.context_v1.into_into_dart().into_dart(),
-        ]
-        .into_dart()
-    }
-}
-impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
-    for crate::api::send::RequestContextV1
-{
-}
-impl flutter_rust_bridge::IntoIntoDart<crate::api::send::RequestContextV1>
-    for crate::api::send::RequestContextV1
-{
-    fn into_into_dart(self) -> crate::api::send::RequestContextV1 {
-        self
-    }
-}
-// Codec=Dco (DartCObject based), see doc to use other codecs
-impl flutter_rust_bridge::IntoDart for crate::api::send::RequestContextV2 {
-    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
-        [
-            self.request.into_into_dart().into_dart(),
-            self.context_v2.into_into_dart().into_dart(),
-        ]
-        .into_dart()
-    }
-}
-impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
-    for crate::api::send::RequestContextV2
-{
-}
-impl flutter_rust_bridge::IntoIntoDart<crate::api::send::RequestContextV2>
-    for crate::api::send::RequestContextV2
-{
-    fn into_into_dart(self) -> crate::api::send::RequestContextV2 {
-        self
-    }
-}
-// Codec=Dco (DartCObject based), see doc to use other codecs
 impl flutter_rust_bridge::IntoDart for crate::utils::types::TxOut {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         [
@@ -3565,6 +3547,15 @@ impl SseEncode for std::collections::HashMap<u64, crate::utils::types::OutPoint>
 }
 
 impl SseEncode for RustOpaqueNom<Arc<payjoin_ffi::receive::v2::V2PayjoinProposal>> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        let (ptr, size) = self.sse_encode_raw();
+        <usize>::sse_encode(ptr, serializer);
+        <i32>::sse_encode(size, serializer);
+    }
+}
+
+impl SseEncode for RustOpaqueNom<Arc<payjoin_ffi::send::v1::ContextV1>> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         let (ptr, size) = self.sse_encode_raw();
@@ -3717,15 +3708,6 @@ impl SseEncode for RustOpaqueNom<payjoin_ffi::receive::v2::V2UncheckedProposal> 
     }
 }
 
-impl SseEncode for RustOpaqueNom<payjoin_ffi::send::v1::ContextV1> {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        let (ptr, size) = self.sse_encode_raw();
-        <usize>::sse_encode(ptr, serializer);
-        <i32>::sse_encode(size, serializer);
-    }
-}
-
 impl SseEncode for RustOpaqueNom<payjoin_ffi::send::v1::RequestBuilder> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -3838,7 +3820,7 @@ impl SseEncode for crate::api::receive::FfiClientResponse {
 impl SseEncode for crate::api::send::FfiContextV1 {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        <RustOpaqueNom<payjoin_ffi::send::v1::ContextV1>>::sse_encode(self.0, serializer);
+        <RustOpaqueNom<Arc<payjoin_ffi::send::v1::ContextV1>>>::sse_encode(self.0, serializer);
     }
 }
 
@@ -3913,6 +3895,14 @@ impl SseEncode for crate::api::receive::FfiProvisionalProposal {
         <RustOpaqueNom<payjoin_ffi::receive::v1::ProvisionalProposal>>::sse_encode(
             self.0, serializer,
         );
+    }
+}
+
+impl SseEncode for crate::api::send::FfiRequest {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <crate::api::uri::FfiUrl>::sse_encode(self.ffi_url, serializer);
+        <Vec<u8>>::sse_encode(self.body, serializer);
     }
 }
 
@@ -4256,6 +4246,22 @@ impl SseEncode for crate::utils::error::PayjoinError {
     }
 }
 
+impl SseEncode for (crate::api::send::FfiRequest, crate::api::send::FfiContextV1) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <crate::api::send::FfiRequest>::sse_encode(self.0, serializer);
+        <crate::api::send::FfiContextV1>::sse_encode(self.1, serializer);
+    }
+}
+
+impl SseEncode for (crate::api::send::FfiRequest, crate::api::send::FfiContextV2) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <crate::api::send::FfiRequest>::sse_encode(self.0, serializer);
+        <crate::api::send::FfiContextV2>::sse_encode(self.1, serializer);
+    }
+}
+
 impl SseEncode for (crate::api::uri::FfiUrl, Vec<u8>) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -4290,22 +4296,6 @@ impl SseEncode for (u64, crate::utils::types::OutPoint) {
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <u64>::sse_encode(self.0, serializer);
         <crate::utils::types::OutPoint>::sse_encode(self.1, serializer);
-    }
-}
-
-impl SseEncode for crate::api::send::RequestContextV1 {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        <(crate::api::uri::FfiUrl, Vec<u8>)>::sse_encode(self.request, serializer);
-        <crate::api::send::FfiContextV1>::sse_encode(self.context_v1, serializer);
-    }
-}
-
-impl SseEncode for crate::api::send::RequestContextV2 {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        <(crate::api::uri::FfiUrl, Vec<u8>)>::sse_encode(self.request, serializer);
-        <crate::api::send::FfiContextV2>::sse_encode(self.context_v2, serializer);
     }
 }
 
