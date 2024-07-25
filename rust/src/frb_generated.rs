@@ -78,7 +78,7 @@ fn wire__crate__api__io__fetch_ohttp_keys_impl(
 }
 fn wire__crate__api__receive__ffi_active_session_extract_req_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
-    ptr: impl CstDecode<crate::api::receive::FfiActiveSession>,
+    that: impl CstDecode<crate::api::receive::FfiActiveSession>,
 ) {
     FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::DcoCodec, _, _>(
         flutter_rust_bridge::for_generated::TaskInfo {
@@ -87,10 +87,10 @@ fn wire__crate__api__receive__ffi_active_session_extract_req_impl(
             mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
         },
         move || {
-            let api_ptr = ptr.cst_decode();
+            let api_that = that.cst_decode();
             move |context| {
                 transform_result_dco::<_, _, crate::utils::error::PayjoinError>((move || {
-                    let output_ok = crate::api::receive::FfiActiveSession::extract_req(api_ptr)?;
+                    let output_ok = crate::api::receive::FfiActiveSession::extract_req(&api_that)?;
                     Ok(output_ok)
                 })(
                 ))
@@ -99,7 +99,7 @@ fn wire__crate__api__receive__ffi_active_session_extract_req_impl(
     )
 }
 fn wire__crate__api__receive__ffi_active_session_pj_uri_builder_impl(
-    ptr: impl CstDecode<crate::api::receive::FfiActiveSession>,
+    that: impl CstDecode<crate::api::receive::FfiActiveSession>,
 ) -> flutter_rust_bridge::for_generated::WireSyncRust2DartDco {
     FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::DcoCodec, _>(
         flutter_rust_bridge::for_generated::TaskInfo {
@@ -108,10 +108,10 @@ fn wire__crate__api__receive__ffi_active_session_pj_uri_builder_impl(
             mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
         },
         move || {
-            let api_ptr = ptr.cst_decode();
+            let api_that = that.cst_decode();
             transform_result_dco::<_, _, ()>((move || {
                 let output_ok = Result::<_, ()>::Ok(
-                    crate::api::receive::FfiActiveSession::pj_uri_builder(api_ptr),
+                    crate::api::receive::FfiActiveSession::pj_uri_builder(&api_that),
                 )?;
                 Ok(output_ok)
             })())
@@ -119,7 +119,7 @@ fn wire__crate__api__receive__ffi_active_session_pj_uri_builder_impl(
     )
 }
 fn wire__crate__api__receive__ffi_active_session_pj_url_impl(
-    ptr: impl CstDecode<crate::api::receive::FfiActiveSession>,
+    that: impl CstDecode<crate::api::receive::FfiActiveSession>,
 ) -> flutter_rust_bridge::for_generated::WireSyncRust2DartDco {
     FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::DcoCodec, _>(
         flutter_rust_bridge::for_generated::TaskInfo {
@@ -128,10 +128,10 @@ fn wire__crate__api__receive__ffi_active_session_pj_url_impl(
             mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
         },
         move || {
-            let api_ptr = ptr.cst_decode();
+            let api_that = that.cst_decode();
             transform_result_dco::<_, _, ()>((move || {
                 let output_ok =
-                    Result::<_, ()>::Ok(crate::api::receive::FfiActiveSession::pj_url(api_ptr))?;
+                    Result::<_, ()>::Ok(crate::api::receive::FfiActiveSession::pj_url(&api_that))?;
                 Ok(output_ok)
             })())
         },
@@ -141,7 +141,7 @@ fn wire__crate__api__receive__ffi_active_session_process_res_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
     that: impl CstDecode<crate::api::receive::FfiActiveSession>,
     body: impl CstDecode<Vec<u8>>,
-    ctx: impl CstDecode<crate::api::receive::FfiClientResponse>,
+    ctx: impl CstDecode<crate::utils::types::ClientResponse>,
 ) {
     FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::DcoCodec, _, _>(
         flutter_rust_bridge::for_generated::TaskInfo {
@@ -515,7 +515,7 @@ fn wire__crate__api__receive__ffi_provisional_proposal_try_substitute_receiver_o
 }
 fn wire__crate__api__receive__ffi_session_initializer_extract_req_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
-    ptr: impl CstDecode<crate::api::receive::FfiSessionInitializer>,
+    that: impl CstDecode<crate::api::receive::FfiSessionInitializer>,
 ) {
     FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::DcoCodec, _, _>(
         flutter_rust_bridge::for_generated::TaskInfo {
@@ -524,11 +524,11 @@ fn wire__crate__api__receive__ffi_session_initializer_extract_req_impl(
             mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
         },
         move || {
-            let api_ptr = ptr.cst_decode();
+            let api_that = that.cst_decode();
             move |context| {
                 transform_result_dco::<_, _, crate::utils::error::PayjoinError>((move || {
                     let output_ok =
-                        crate::api::receive::FfiSessionInitializer::extract_req(api_ptr)?;
+                        crate::api::receive::FfiSessionInitializer::extract_req(&api_that)?;
                     Ok(output_ok)
                 })(
                 ))
@@ -579,7 +579,7 @@ fn wire__crate__api__receive__ffi_session_initializer_process_res_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
     that: impl CstDecode<crate::api::receive::FfiSessionInitializer>,
     body: impl CstDecode<Vec<u8>>,
-    ctx: impl CstDecode<crate::api::receive::FfiClientResponse>,
+    ctx: impl CstDecode<crate::utils::types::ClientResponse>,
 ) {
     FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::DcoCodec, _, _>(
         flutter_rust_bridge::for_generated::TaskInfo {
@@ -843,7 +843,7 @@ fn wire__crate__api__receive__ffi_v_2_payjoin_proposal_extract_v1_req_impl(
 }
 fn wire__crate__api__receive__ffi_v_2_payjoin_proposal_extract_v2_req_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
-    ptr: impl CstDecode<crate::api::receive::FfiV2PayjoinProposal>,
+    that: impl CstDecode<crate::api::receive::FfiV2PayjoinProposal>,
 ) {
     FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::DcoCodec, _, _>(
         flutter_rust_bridge::for_generated::TaskInfo {
@@ -852,11 +852,11 @@ fn wire__crate__api__receive__ffi_v_2_payjoin_proposal_extract_v2_req_impl(
             mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
         },
         move || {
-            let api_ptr = ptr.cst_decode();
+            let api_that = that.cst_decode();
             move |context| {
                 transform_result_dco::<_, _, crate::utils::error::PayjoinError>((move || {
                     let output_ok =
-                        crate::api::receive::FfiV2PayjoinProposal::extract_v2_req(api_ptr)?;
+                        crate::api::receive::FfiV2PayjoinProposal::extract_v2_req(&api_that)?;
                     Ok(output_ok)
                 })(
                 ))
@@ -916,7 +916,7 @@ fn wire__crate__api__receive__ffi_v_2_payjoin_proposal_process_res_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
     that: impl CstDecode<crate::api::receive::FfiV2PayjoinProposal>,
     res: impl CstDecode<Vec<u8>>,
-    ohttp_context: impl CstDecode<crate::api::receive::FfiClientResponse>,
+    ohttp_context: impl CstDecode<crate::utils::types::ClientResponse>,
 ) {
     FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::DcoCodec, _, _>(
         flutter_rust_bridge::for_generated::TaskInfo {
@@ -1035,7 +1035,7 @@ fn wire__crate__api__receive__ffi_v_2_provisional_proposal_finalize_proposal_imp
     port_: flutter_rust_bridge::for_generated::MessagePort,
     that: impl CstDecode<crate::api::receive::FfiV2ProvisionalProposal>,
     process_psbt: impl CstDecode<flutter_rust_bridge::DartOpaque>,
-    min_feerate_sat_per_vb: impl CstDecode<Option<u64>>,
+    min_fee_rate_sat_per_vb: impl CstDecode<Option<u64>>,
 ) {
     FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::DcoCodec, _, _>(
         flutter_rust_bridge::for_generated::TaskInfo {
@@ -1048,14 +1048,14 @@ fn wire__crate__api__receive__ffi_v_2_provisional_proposal_finalize_proposal_imp
             let api_process_psbt = decode_DartFn_Inputs_String_Output_String_AnyhowException(
                 process_psbt.cst_decode(),
             );
-            let api_min_feerate_sat_per_vb = min_feerate_sat_per_vb.cst_decode();
+            let api_min_fee_rate_sat_per_vb = min_fee_rate_sat_per_vb.cst_decode();
             move |context| {
                 transform_result_dco::<_, _, crate::utils::error::PayjoinError>((move || {
                     let output_ok =
                         crate::api::receive::FfiV2ProvisionalProposal::finalize_proposal(
                             &api_that,
                             api_process_psbt,
-                            api_min_feerate_sat_per_vb,
+                            api_min_fee_rate_sat_per_vb,
                         )?;
                     Ok(output_ok)
                 })(
@@ -1717,24 +1717,20 @@ fn wire__crate__api__uri__ffi_uri_check_pj_supported_impl(
     )
 }
 fn wire__crate__api__uri__ffi_uri_from_str_impl(
-    port_: flutter_rust_bridge::for_generated::MessagePort,
     uri: impl CstDecode<String>,
-) {
-    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::DcoCodec, _, _>(
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartDco {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::DcoCodec, _>(
         flutter_rust_bridge::for_generated::TaskInfo {
             debug_name: "ffi_uri_from_str",
-            port: Some(port_),
-            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
         },
         move || {
             let api_uri = uri.cst_decode();
-            move |context| {
-                transform_result_dco::<_, _, crate::utils::error::PayjoinError>((move || {
-                    let output_ok = crate::api::uri::FfiUri::from_str(api_uri)?;
-                    Ok(output_ok)
-                })(
-                ))
-            }
+            transform_result_dco::<_, _, crate::utils::error::PayjoinError>((move || {
+                let output_ok = crate::api::uri::FfiUri::from_str(api_uri)?;
+                Ok(output_ok)
+            })())
         },
     )
 }
@@ -1757,24 +1753,20 @@ fn wire__crate__api__uri__ffi_url_as_string_impl(
     )
 }
 fn wire__crate__api__uri__ffi_url_from_str_impl(
-    port_: flutter_rust_bridge::for_generated::MessagePort,
     url: impl CstDecode<String>,
-) {
-    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::DcoCodec, _, _>(
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartDco {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::DcoCodec, _>(
         flutter_rust_bridge::for_generated::TaskInfo {
             debug_name: "ffi_url_from_str",
-            port: Some(port_),
-            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
         },
         move || {
             let api_url = url.cst_decode();
-            move |context| {
-                transform_result_dco::<_, _, crate::utils::error::PayjoinError>((move || {
-                    let output_ok = crate::api::uri::FfiUrl::from_str(api_url)?;
-                    Ok(output_ok)
-                })(
-                ))
-            }
+            transform_result_dco::<_, _, crate::utils::error::PayjoinError>((move || {
+                let output_ok = crate::api::uri::FfiUrl::from_str(api_url)?;
+                Ok(output_ok)
+            })())
         },
     )
 }
@@ -2239,6 +2231,16 @@ impl SseDecode for bool {
     }
 }
 
+impl SseDecode for crate::utils::types::ClientResponse {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_field0 = <RustOpaqueNom<
+            std::sync::Mutex<core::option::Option<ohttp::ClientResponse>>,
+        >>::sse_decode(deserializer);
+        return crate::utils::types::ClientResponse(var_field0);
+    }
+}
+
 impl SseDecode for f64 {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -2252,16 +2254,6 @@ impl SseDecode for crate::api::receive::FfiActiveSession {
         let mut var_field0 =
             <RustOpaqueNom<payjoin_ffi::receive::v2::ActiveSession>>::sse_decode(deserializer);
         return crate::api::receive::FfiActiveSession(var_field0);
-    }
-}
-
-impl SseDecode for crate::api::receive::FfiClientResponse {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        let mut var_field0 = <RustOpaqueNom<
-            std::sync::Mutex<core::option::Option<ohttp::ClientResponse>>,
-        >>::sse_decode(deserializer);
-        return crate::api::receive::FfiClientResponse(var_field0);
     }
 }
 
@@ -2825,13 +2817,13 @@ impl SseDecode for (crate::api::uri::FfiUrl, Vec<u8>) {
 impl SseDecode
     for (
         (crate::api::uri::FfiUrl, Vec<u8>),
-        crate::api::receive::FfiClientResponse,
+        crate::utils::types::ClientResponse,
     )
 {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut var_field0 = <(crate::api::uri::FfiUrl, Vec<u8>)>::sse_decode(deserializer);
-        let mut var_field1 = <crate::api::receive::FfiClientResponse>::sse_decode(deserializer);
+        let mut var_field1 = <crate::utils::types::ClientResponse>::sse_decode(deserializer);
         return (var_field0, var_field1);
     }
 }
@@ -2927,6 +2919,23 @@ fn pde_ffi_dispatcher_sync_impl(
 // Section: rust2dart
 
 // Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::utils::types::ClientResponse {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [self.0.into_into_dart().into_dart()].into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::utils::types::ClientResponse
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::utils::types::ClientResponse>
+    for crate::utils::types::ClientResponse
+{
+    fn into_into_dart(self) -> crate::utils::types::ClientResponse {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
 impl flutter_rust_bridge::IntoDart for crate::api::receive::FfiActiveSession {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         [self.0.into_into_dart().into_dart()].into_dart()
@@ -2940,23 +2949,6 @@ impl flutter_rust_bridge::IntoIntoDart<crate::api::receive::FfiActiveSession>
     for crate::api::receive::FfiActiveSession
 {
     fn into_into_dart(self) -> crate::api::receive::FfiActiveSession {
-        self
-    }
-}
-// Codec=Dco (DartCObject based), see doc to use other codecs
-impl flutter_rust_bridge::IntoDart for crate::api::receive::FfiClientResponse {
-    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
-        [self.0.into_into_dart().into_dart()].into_dart()
-    }
-}
-impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
-    for crate::api::receive::FfiClientResponse
-{
-}
-impl flutter_rust_bridge::IntoIntoDart<crate::api::receive::FfiClientResponse>
-    for crate::api::receive::FfiClientResponse
-{
-    fn into_into_dart(self) -> crate::api::receive::FfiClientResponse {
         self
     }
 }
@@ -3794,6 +3786,15 @@ impl SseEncode for bool {
     }
 }
 
+impl SseEncode for crate::utils::types::ClientResponse {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <RustOpaqueNom<std::sync::Mutex<core::option::Option<ohttp::ClientResponse>>>>::sse_encode(
+            self.0, serializer,
+        );
+    }
+}
+
 impl SseEncode for f64 {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -3805,15 +3806,6 @@ impl SseEncode for crate::api::receive::FfiActiveSession {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <RustOpaqueNom<payjoin_ffi::receive::v2::ActiveSession>>::sse_encode(self.0, serializer);
-    }
-}
-
-impl SseEncode for crate::api::receive::FfiClientResponse {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        <RustOpaqueNom<std::sync::Mutex<core::option::Option<ohttp::ClientResponse>>>>::sse_encode(
-            self.0, serializer,
-        );
     }
 }
 
@@ -4273,13 +4265,13 @@ impl SseEncode for (crate::api::uri::FfiUrl, Vec<u8>) {
 impl SseEncode
     for (
         (crate::api::uri::FfiUrl, Vec<u8>),
-        crate::api::receive::FfiClientResponse,
+        crate::utils::types::ClientResponse,
     )
 {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <(crate::api::uri::FfiUrl, Vec<u8>)>::sse_encode(self.0, serializer);
-        <crate::api::receive::FfiClientResponse>::sse_encode(self.1, serializer);
+        <crate::utils::types::ClientResponse>::sse_encode(self.1, serializer);
     }
 }
 

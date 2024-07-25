@@ -11,7 +11,7 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'uri.dart';
 
 // These functions are ignored because they are not marked as `pub`: `_finalize_proposal`
-// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `clone`, `clone`, `fmt`, `fmt`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`
+// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `clone`, `clone`, `fmt`, `fmt`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`
 
 class FfiActiveSession {
   final ActiveSession field0;
@@ -20,18 +20,22 @@ class FfiActiveSession {
     required this.field0,
   });
 
-  static Future<((FfiUrl, Uint8List), FfiClientResponse)> extractReq(
-          {required FfiActiveSession ptr}) =>
-      core.instance.api.crateApiReceiveFfiActiveSessionExtractReq(ptr: ptr);
+  Future<((FfiUrl, Uint8List), ClientResponse)> extractReq() =>
+      core.instance.api.crateApiReceiveFfiActiveSessionExtractReq(
+        that: this,
+      );
 
-  static FfiPjUriBuilder pjUriBuilder({required FfiActiveSession ptr}) =>
-      core.instance.api.crateApiReceiveFfiActiveSessionPjUriBuilder(ptr: ptr);
+  FfiPjUriBuilder pjUriBuilder() =>
+      core.instance.api.crateApiReceiveFfiActiveSessionPjUriBuilder(
+        that: this,
+      );
 
-  static FfiUrl pjUrl({required FfiActiveSession ptr}) =>
-      core.instance.api.crateApiReceiveFfiActiveSessionPjUrl(ptr: ptr);
+  FfiUrl pjUrl() => core.instance.api.crateApiReceiveFfiActiveSessionPjUrl(
+        that: this,
+      );
 
   Future<FfiV2UncheckedProposal?> processRes(
-          {required List<int> body, required FfiClientResponse ctx}) =>
+          {required List<int> body, required ClientResponse ctx}) =>
       core.instance.api.crateApiReceiveFfiActiveSessionProcessRes(
           that: this, body: body, ctx: ctx);
 
@@ -48,24 +52,6 @@ class FfiActiveSession {
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is FfiActiveSession &&
-          runtimeType == other.runtimeType &&
-          field0 == other.field0;
-}
-
-class FfiClientResponse {
-  final MutexOptionClientResponse field0;
-
-  const FfiClientResponse({
-    required this.field0,
-  });
-
-  @override
-  int get hashCode => field0.hashCode;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FfiClientResponse &&
           runtimeType == other.runtimeType &&
           field0 == other.field0;
 }
@@ -258,10 +244,10 @@ class FfiSessionInitializer {
     required this.field0,
   });
 
-  static Future<((FfiUrl, Uint8List), FfiClientResponse)> extractReq(
-          {required FfiSessionInitializer ptr}) =>
-      core.instance.api
-          .crateApiReceiveFfiSessionInitializerExtractReq(ptr: ptr);
+  Future<((FfiUrl, Uint8List), ClientResponse)> extractReq() =>
+      core.instance.api.crateApiReceiveFfiSessionInitializerExtractReq(
+        that: this,
+      );
 
   // HINT: Make it `#[frb(sync)]` to let it become the default constructor of Dart class.
   static Future<FfiSessionInitializer> newInstance(
@@ -280,7 +266,7 @@ class FfiSessionInitializer {
           ohttpRelay: ohttpRelay);
 
   Future<FfiActiveSession> processRes(
-          {required List<int> body, required FfiClientResponse ctx}) =>
+          {required List<int> body, required ClientResponse ctx}) =>
       core.instance.api.crateApiReceiveFfiSessionInitializerProcessRes(
           that: this, body: body, ctx: ctx);
 
@@ -465,10 +451,10 @@ class FfiV2PayjoinProposal {
         that: this,
       );
 
-  static Future<((FfiUrl, Uint8List), FfiClientResponse)> extractV2Req(
-          {required FfiV2PayjoinProposal ptr}) =>
-      core.instance.api
-          .crateApiReceiveFfiV2PayjoinProposalExtractV2Req(ptr: ptr);
+  Future<((FfiUrl, Uint8List), ClientResponse)> extractV2Req() =>
+      core.instance.api.crateApiReceiveFfiV2PayjoinProposalExtractV2Req(
+        that: this,
+      );
 
   Future<bool> isOutputSubstitutionDisabled() => core.instance.api
           .crateApiReceiveFfiV2PayjoinProposalIsOutputSubstitutionDisabled(
@@ -481,7 +467,7 @@ class FfiV2PayjoinProposal {
       );
 
   Future<void> processRes(
-          {required List<int> res, required FfiClientResponse ohttpContext}) =>
+          {required List<int> res, required ClientResponse ohttpContext}) =>
       core.instance.api.crateApiReceiveFfiV2PayjoinProposalProcessRes(
           that: this, res: res, ohttpContext: ohttpContext);
 
@@ -527,11 +513,11 @@ class FfiV2ProvisionalProposal {
 
   Future<FfiV2PayjoinProposal> finalizeProposal(
           {required FutureOr<String> Function(String) processPsbt,
-          BigInt? minFeerateSatPerVb}) =>
+          BigInt? minFeeRateSatPerVb}) =>
       core.instance.api.crateApiReceiveFfiV2ProvisionalProposalFinalizeProposal(
           that: this,
           processPsbt: processPsbt,
-          minFeerateSatPerVb: minFeerateSatPerVb);
+          minFeeRateSatPerVb: minFeeRateSatPerVb);
 
   Future<bool> isOutputSubstitutionDisabled() => core.instance.api
           .crateApiReceiveFfiV2ProvisionalProposalIsOutputSubstitutionDisabled(

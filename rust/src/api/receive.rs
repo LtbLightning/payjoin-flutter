@@ -1,7 +1,7 @@
 use crate::api::uri::{FfiOhttpKeys, FfiPjUriBuilder, FfiUrl};
 use crate::frb_generated::RustOpaque;
 pub use crate::utils::error::PayjoinError;
-use crate::utils::types::{Headers, OutPoint, TxOut};
+use crate::utils::types::{ClientResponse, Headers, OutPoint, TxOut};
 use flutter_rust_bridge::{frb, DartFnFuture};
 use std::collections::HashMap;
 pub use std::sync::Arc;
@@ -239,21 +239,6 @@ impl FfiPayjoinProposal {
         self.0.psbt()
     }
 }
-pub struct FfiClientResponse(
-    pub RustOpaque<std::sync::Mutex<core::option::Option<ohttp::ClientResponse>>>,
-);
-
-impl From<FfiClientResponse> for ohttp::ClientResponse {
-    fn from(value: FfiClientResponse) -> Self {
-        let mut data_guard = value.0.lock().unwrap();
-        Option::take(&mut *data_guard).expect("ClientResponse moved out of memory")
-    }
-}
-impl From<ohttp::ClientResponse> for FfiClientResponse {
-    fn from(value: ohttp::ClientResponse) -> Self {
-        Self(RustOpaque::new(std::sync::Mutex::new(Some(value))))
-    }
-}
 
 #[derive(Clone, Debug)]
 pub struct FfiSessionInitializer(pub RustOpaque<payjoin_ffi::receive::v2::SessionInitializer>);
@@ -283,8 +268,8 @@ impl FfiSessionInitializer {
         .into())
     }
 
-    pub fn extract_req(ptr: Self) -> Result<((FfiUrl, Vec<u8>), FfiClientResponse), PayjoinError> {
-        ptr.0
+    pub fn extract_req(&self) -> Result<((FfiUrl, Vec<u8>), ClientResponse), PayjoinError> {
+        self.0
             .extract_req()
             .map(|e| (((*e.0.url).clone().into(), e.0.body), e.1.into()))
             .map_err(|e| e.into())
@@ -292,7 +277,7 @@ impl FfiSessionInitializer {
     pub fn process_res(
         &self,
         body: Vec<u8>,
-        ctx: FfiClientResponse,
+        ctx: ClientResponse,
     ) -> Result<FfiActiveSession, PayjoinError> {
         self.0
             .process_res(body, ctx.into())
@@ -316,15 +301,15 @@ impl FfiActiveSession {
     }
 
     #[frb(sync)]
-    pub fn pj_url(ptr: Self) -> FfiUrl {
-        ptr.0.pj_url().into()
+    pub fn pj_url(&self) -> FfiUrl {
+        self.0.pj_url().into()
     }
     #[frb(sync)]
-    pub fn pj_uri_builder(ptr: Self) -> FfiPjUriBuilder {
-        ptr.0.pj_uri_builder().into()
+    pub fn pj_uri_builder(&self) -> FfiPjUriBuilder {
+        self.0.pj_uri_builder().into()
     }
-    pub fn extract_req(ptr: Self) -> Result<((FfiUrl, Vec<u8>), FfiClientResponse), PayjoinError> {
-        ptr.0
+    pub fn extract_req(&self) -> Result<((FfiUrl, Vec<u8>), ClientResponse), PayjoinError> {
+        self.0
             .extract_req()
             .map(|e| (((*e.0.url).clone().into(), e.0.body), e.1.into()))
             .map_err(|e| e.into())
@@ -332,7 +317,7 @@ impl FfiActiveSession {
     pub fn process_res(
         &self,
         body: Vec<u8>,
-        ctx: FfiClientResponse,
+        ctx: ClientResponse,
     ) -> Result<Option<FfiV2UncheckedProposal>, PayjoinError> {
         self.0
             .process_res(body, ctx.into())
@@ -534,13 +519,13 @@ impl FfiV2ProvisionalProposal {
     pub fn finalize_proposal(
         &self,
         process_psbt: impl Fn(String) -> DartFnFuture<String>,
-        min_feerate_sat_per_vb: Option<u64>,
+        min_fee_rate_sat_per_vb: Option<u64>,
     ) -> Result<FfiV2PayjoinProposal, PayjoinError> {
         let runtime = tokio::runtime::Runtime::new().unwrap();
         self.0
             .finalize_proposal(
                 |o| Ok(runtime.block_on(process_psbt(o.clone()))),
-                min_feerate_sat_per_vb,
+                min_fee_rate_sat_per_vb,
             )
             .map(|e| e.into())
             .map_err(|e| e.into())
@@ -572,10 +557,8 @@ impl FfiV2PayjoinProposal {
     pub fn extract_v1_req(&self) -> String {
         self.0.extract_v1_req()
     }
-    pub fn extract_v2_req(
-        ptr: Self,
-    ) -> Result<((FfiUrl, Vec<u8>), FfiClientResponse), PayjoinError> {
-        ptr.0
+    pub fn extract_v2_req(&self) -> Result<((FfiUrl, Vec<u8>), ClientResponse), PayjoinError> {
+        self.0
             .clone()
             .extract_v2_req()
             .map(|e| (((*e.0.url).clone().into(), e.0.body), e.1.into()))
@@ -585,7 +568,7 @@ impl FfiV2PayjoinProposal {
     pub fn process_res(
         &self,
         res: Vec<u8>,
-        ohttp_context: FfiClientResponse,
+        ohttp_context: ClientResponse,
     ) -> Result<(), PayjoinError> {
         self.0
             .process_res(res, ohttp_context.into())

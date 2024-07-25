@@ -75,19 +75,19 @@ abstract class coreApi extends BaseApi {
   Future<FfiOhttpKeys> crateApiIoFetchOhttpKeys(
       {required FfiUrl ohttpRelay, required FfiUrl payjoinDirectory});
 
-  Future<((FfiUrl, Uint8List), FfiClientResponse)>
+  Future<((FfiUrl, Uint8List), ClientResponse)>
       crateApiReceiveFfiActiveSessionExtractReq(
-          {required FfiActiveSession ptr});
+          {required FfiActiveSession that});
 
   FfiPjUriBuilder crateApiReceiveFfiActiveSessionPjUriBuilder(
-      {required FfiActiveSession ptr});
+      {required FfiActiveSession that});
 
-  FfiUrl crateApiReceiveFfiActiveSessionPjUrl({required FfiActiveSession ptr});
+  FfiUrl crateApiReceiveFfiActiveSessionPjUrl({required FfiActiveSession that});
 
   Future<FfiV2UncheckedProposal?> crateApiReceiveFfiActiveSessionProcessRes(
       {required FfiActiveSession that,
       required List<int> body,
-      required FfiClientResponse ctx});
+      required ClientResponse ctx});
 
   String crateApiReceiveFfiActiveSessionPublicKey(
       {required FfiActiveSession that});
@@ -147,9 +147,9 @@ abstract class coreApi extends BaseApi {
       {required FfiProvisionalProposal that,
       required FutureOr<Uint8List> Function() generateScript});
 
-  Future<((FfiUrl, Uint8List), FfiClientResponse)>
+  Future<((FfiUrl, Uint8List), ClientResponse)>
       crateApiReceiveFfiSessionInitializerExtractReq(
-          {required FfiSessionInitializer ptr});
+          {required FfiSessionInitializer that});
 
   Future<FfiSessionInitializer> crateApiReceiveFfiSessionInitializerNew(
       {required String address,
@@ -162,7 +162,7 @@ abstract class coreApi extends BaseApi {
   Future<FfiActiveSession> crateApiReceiveFfiSessionInitializerProcessRes(
       {required FfiSessionInitializer that,
       required List<int> body,
-      required FfiClientResponse ctx});
+      required ClientResponse ctx});
 
   Future<FfiMaybeInputsOwned>
       crateApiReceiveFfiUncheckedProposalAssumeInteractiveReceiver(
@@ -205,9 +205,9 @@ abstract class coreApi extends BaseApi {
   Future<String> crateApiReceiveFfiV2PayjoinProposalExtractV1Req(
       {required FfiV2PayjoinProposal that});
 
-  Future<((FfiUrl, Uint8List), FfiClientResponse)>
+  Future<((FfiUrl, Uint8List), ClientResponse)>
       crateApiReceiveFfiV2PayjoinProposalExtractV2Req(
-          {required FfiV2PayjoinProposal ptr});
+          {required FfiV2PayjoinProposal that});
 
   Future<bool> crateApiReceiveFfiV2PayjoinProposalIsOutputSubstitutionDisabled(
       {required FfiV2PayjoinProposal that});
@@ -218,7 +218,7 @@ abstract class coreApi extends BaseApi {
   Future<void> crateApiReceiveFfiV2PayjoinProposalProcessRes(
       {required FfiV2PayjoinProposal that,
       required List<int> res,
-      required FfiClientResponse ohttpContext});
+      required ClientResponse ohttpContext});
 
   Future<String> crateApiReceiveFfiV2PayjoinProposalPsbt(
       {required FfiV2PayjoinProposal that});
@@ -240,7 +240,7 @@ abstract class coreApi extends BaseApi {
       crateApiReceiveFfiV2ProvisionalProposalFinalizeProposal(
           {required FfiV2ProvisionalProposal that,
           required FutureOr<String> Function(String) processPsbt,
-          BigInt? minFeerateSatPerVb});
+          BigInt? minFeeRateSatPerVb});
 
   Future<bool>
       crateApiReceiveFfiV2ProvisionalProposalIsOutputSubstitutionDisabled(
@@ -338,11 +338,11 @@ abstract class coreApi extends BaseApi {
 
   FfiPjUri crateApiUriFfiUriCheckPjSupported({required FfiUri that});
 
-  Future<FfiUri> crateApiUriFfiUriFromStr({required String uri});
+  FfiUri crateApiUriFfiUriFromStr({required String uri});
 
   String crateApiUriFfiUrlAsString({required FfiUrl that});
 
-  Future<FfiUrl> crateApiUriFfiUrlFromStr({required String url});
+  FfiUrl crateApiUriFfiUrlFromStr({required String url});
 
   String? crateApiUriFfiUrlQuery({required FfiUrl that});
 
@@ -601,22 +601,22 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       );
 
   @override
-  Future<((FfiUrl, Uint8List), FfiClientResponse)>
+  Future<((FfiUrl, Uint8List), ClientResponse)>
       crateApiReceiveFfiActiveSessionExtractReq(
-          {required FfiActiveSession ptr}) {
+          {required FfiActiveSession that}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        var arg0 = cst_encode_box_autoadd_ffi_active_session(ptr);
+        var arg0 = cst_encode_box_autoadd_ffi_active_session(that);
         return wire.wire__crate__api__receive__ffi_active_session_extract_req(
             port_, arg0);
       },
       codec: DcoCodec(
         decodeSuccessData:
-            dco_decode_record_record_ffi_url_list_prim_u_8_strict_ffi_client_response,
+            dco_decode_record_record_ffi_url_list_prim_u_8_strict_client_response,
         decodeErrorData: dco_decode_payjoin_error,
       ),
       constMeta: kCrateApiReceiveFfiActiveSessionExtractReqConstMeta,
-      argValues: [ptr],
+      argValues: [that],
       apiImpl: this,
     ));
   }
@@ -624,15 +624,15 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   TaskConstMeta get kCrateApiReceiveFfiActiveSessionExtractReqConstMeta =>
       const TaskConstMeta(
         debugName: "ffi_active_session_extract_req",
-        argNames: ["ptr"],
+        argNames: ["that"],
       );
 
   @override
   FfiPjUriBuilder crateApiReceiveFfiActiveSessionPjUriBuilder(
-      {required FfiActiveSession ptr}) {
+      {required FfiActiveSession that}) {
     return handler.executeSync(SyncTask(
       callFfi: () {
-        var arg0 = cst_encode_box_autoadd_ffi_active_session(ptr);
+        var arg0 = cst_encode_box_autoadd_ffi_active_session(that);
         return wire
             .wire__crate__api__receive__ffi_active_session_pj_uri_builder(arg0);
       },
@@ -641,7 +641,7 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
         decodeErrorData: null,
       ),
       constMeta: kCrateApiReceiveFfiActiveSessionPjUriBuilderConstMeta,
-      argValues: [ptr],
+      argValues: [that],
       apiImpl: this,
     ));
   }
@@ -649,14 +649,15 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   TaskConstMeta get kCrateApiReceiveFfiActiveSessionPjUriBuilderConstMeta =>
       const TaskConstMeta(
         debugName: "ffi_active_session_pj_uri_builder",
-        argNames: ["ptr"],
+        argNames: ["that"],
       );
 
   @override
-  FfiUrl crateApiReceiveFfiActiveSessionPjUrl({required FfiActiveSession ptr}) {
+  FfiUrl crateApiReceiveFfiActiveSessionPjUrl(
+      {required FfiActiveSession that}) {
     return handler.executeSync(SyncTask(
       callFfi: () {
-        var arg0 = cst_encode_box_autoadd_ffi_active_session(ptr);
+        var arg0 = cst_encode_box_autoadd_ffi_active_session(that);
         return wire.wire__crate__api__receive__ffi_active_session_pj_url(arg0);
       },
       codec: DcoCodec(
@@ -664,7 +665,7 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
         decodeErrorData: null,
       ),
       constMeta: kCrateApiReceiveFfiActiveSessionPjUrlConstMeta,
-      argValues: [ptr],
+      argValues: [that],
       apiImpl: this,
     ));
   }
@@ -672,19 +673,19 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   TaskConstMeta get kCrateApiReceiveFfiActiveSessionPjUrlConstMeta =>
       const TaskConstMeta(
         debugName: "ffi_active_session_pj_url",
-        argNames: ["ptr"],
+        argNames: ["that"],
       );
 
   @override
   Future<FfiV2UncheckedProposal?> crateApiReceiveFfiActiveSessionProcessRes(
       {required FfiActiveSession that,
       required List<int> body,
-      required FfiClientResponse ctx}) {
+      required ClientResponse ctx}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
         var arg0 = cst_encode_box_autoadd_ffi_active_session(that);
         var arg1 = cst_encode_list_prim_u_8_loose(body);
-        var arg2 = cst_encode_box_autoadd_ffi_client_response(ctx);
+        var arg2 = cst_encode_box_autoadd_client_response(ctx);
         return wire.wire__crate__api__receive__ffi_active_session_process_res(
             port_, arg0, arg1, arg2);
       },
@@ -1127,23 +1128,23 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
           );
 
   @override
-  Future<((FfiUrl, Uint8List), FfiClientResponse)>
+  Future<((FfiUrl, Uint8List), ClientResponse)>
       crateApiReceiveFfiSessionInitializerExtractReq(
-          {required FfiSessionInitializer ptr}) {
+          {required FfiSessionInitializer that}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        var arg0 = cst_encode_box_autoadd_ffi_session_initializer(ptr);
+        var arg0 = cst_encode_box_autoadd_ffi_session_initializer(that);
         return wire
             .wire__crate__api__receive__ffi_session_initializer_extract_req(
                 port_, arg0);
       },
       codec: DcoCodec(
         decodeSuccessData:
-            dco_decode_record_record_ffi_url_list_prim_u_8_strict_ffi_client_response,
+            dco_decode_record_record_ffi_url_list_prim_u_8_strict_client_response,
         decodeErrorData: dco_decode_payjoin_error,
       ),
       constMeta: kCrateApiReceiveFfiSessionInitializerExtractReqConstMeta,
-      argValues: [ptr],
+      argValues: [that],
       apiImpl: this,
     ));
   }
@@ -1151,7 +1152,7 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   TaskConstMeta get kCrateApiReceiveFfiSessionInitializerExtractReqConstMeta =>
       const TaskConstMeta(
         debugName: "ffi_session_initializer_extract_req",
-        argNames: ["ptr"],
+        argNames: ["that"],
       );
 
   @override
@@ -1207,12 +1208,12 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   Future<FfiActiveSession> crateApiReceiveFfiSessionInitializerProcessRes(
       {required FfiSessionInitializer that,
       required List<int> body,
-      required FfiClientResponse ctx}) {
+      required ClientResponse ctx}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
         var arg0 = cst_encode_box_autoadd_ffi_session_initializer(that);
         var arg1 = cst_encode_list_prim_u_8_loose(body);
-        var arg2 = cst_encode_box_autoadd_ffi_client_response(ctx);
+        var arg2 = cst_encode_box_autoadd_client_response(ctx);
         return wire
             .wire__crate__api__receive__ffi_session_initializer_process_res(
                 port_, arg0, arg1, arg2);
@@ -1514,23 +1515,23 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       );
 
   @override
-  Future<((FfiUrl, Uint8List), FfiClientResponse)>
+  Future<((FfiUrl, Uint8List), ClientResponse)>
       crateApiReceiveFfiV2PayjoinProposalExtractV2Req(
-          {required FfiV2PayjoinProposal ptr}) {
+          {required FfiV2PayjoinProposal that}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        var arg0 = cst_encode_box_autoadd_ffi_v_2_payjoin_proposal(ptr);
+        var arg0 = cst_encode_box_autoadd_ffi_v_2_payjoin_proposal(that);
         return wire
             .wire__crate__api__receive__ffi_v_2_payjoin_proposal_extract_v2_req(
                 port_, arg0);
       },
       codec: DcoCodec(
         decodeSuccessData:
-            dco_decode_record_record_ffi_url_list_prim_u_8_strict_ffi_client_response,
+            dco_decode_record_record_ffi_url_list_prim_u_8_strict_client_response,
         decodeErrorData: dco_decode_payjoin_error,
       ),
       constMeta: kCrateApiReceiveFfiV2PayjoinProposalExtractV2ReqConstMeta,
-      argValues: [ptr],
+      argValues: [that],
       apiImpl: this,
     ));
   }
@@ -1538,7 +1539,7 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   TaskConstMeta get kCrateApiReceiveFfiV2PayjoinProposalExtractV2ReqConstMeta =>
       const TaskConstMeta(
         debugName: "ffi_v_2_payjoin_proposal_extract_v2_req",
-        argNames: ["ptr"],
+        argNames: ["that"],
       );
 
   @override
@@ -1600,12 +1601,12 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   Future<void> crateApiReceiveFfiV2PayjoinProposalProcessRes(
       {required FfiV2PayjoinProposal that,
       required List<int> res,
-      required FfiClientResponse ohttpContext}) {
+      required ClientResponse ohttpContext}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
         var arg0 = cst_encode_box_autoadd_ffi_v_2_payjoin_proposal(that);
         var arg1 = cst_encode_list_prim_u_8_loose(res);
-        var arg2 = cst_encode_box_autoadd_ffi_client_response(ohttpContext);
+        var arg2 = cst_encode_box_autoadd_client_response(ohttpContext);
         return wire
             .wire__crate__api__receive__ffi_v_2_payjoin_proposal_process_res(
                 port_, arg0, arg1, arg2);
@@ -1748,14 +1749,14 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       crateApiReceiveFfiV2ProvisionalProposalFinalizeProposal(
           {required FfiV2ProvisionalProposal that,
           required FutureOr<String> Function(String) processPsbt,
-          BigInt? minFeerateSatPerVb}) {
+          BigInt? minFeeRateSatPerVb}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
         var arg0 = cst_encode_box_autoadd_ffi_v_2_provisional_proposal(that);
         var arg1 =
             cst_encode_DartFn_Inputs_String_Output_String_AnyhowException(
                 processPsbt);
-        var arg2 = cst_encode_opt_box_autoadd_u_64(minFeerateSatPerVb);
+        var arg2 = cst_encode_opt_box_autoadd_u_64(minFeeRateSatPerVb);
         return wire
             .wire__crate__api__receive__ffi_v_2_provisional_proposal_finalize_proposal(
                 port_, arg0, arg1, arg2);
@@ -1766,7 +1767,7 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       ),
       constMeta:
           kCrateApiReceiveFfiV2ProvisionalProposalFinalizeProposalConstMeta,
-      argValues: [that, processPsbt, minFeerateSatPerVb],
+      argValues: [that, processPsbt, minFeeRateSatPerVb],
       apiImpl: this,
     ));
   }
@@ -1775,7 +1776,7 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       get kCrateApiReceiveFfiV2ProvisionalProposalFinalizeProposalConstMeta =>
           const TaskConstMeta(
             debugName: "ffi_v_2_provisional_proposal_finalize_proposal",
-            argNames: ["that", "processPsbt", "minFeerateSatPerVb"],
+            argNames: ["that", "processPsbt", "minFeeRateSatPerVb"],
           );
 
   @override
@@ -2565,11 +2566,11 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       );
 
   @override
-  Future<FfiUri> crateApiUriFfiUriFromStr({required String uri}) {
-    return handler.executeNormal(NormalTask(
-      callFfi: (port_) {
+  FfiUri crateApiUriFfiUriFromStr({required String uri}) {
+    return handler.executeSync(SyncTask(
+      callFfi: () {
         var arg0 = cst_encode_String(uri);
-        return wire.wire__crate__api__uri__ffi_uri_from_str(port_, arg0);
+        return wire.wire__crate__api__uri__ffi_uri_from_str(arg0);
       },
       codec: DcoCodec(
         decodeSuccessData: dco_decode_ffi_uri,
@@ -2609,11 +2610,11 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       );
 
   @override
-  Future<FfiUrl> crateApiUriFfiUrlFromStr({required String url}) {
-    return handler.executeNormal(NormalTask(
-      callFfi: (port_) {
+  FfiUrl crateApiUriFfiUrlFromStr({required String url}) {
+    return handler.executeSync(SyncTask(
+      callFfi: () {
         var arg0 = cst_encode_String(url);
-        return wire.wire__crate__api__uri__ffi_url_from_str(port_, arg0);
+        return wire.wire__crate__api__uri__ffi_url_from_str(arg0);
       },
       codec: DcoCodec(
         decodeSuccessData: dco_decode_ffi_url,
@@ -3247,6 +3248,12 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
+  ClientResponse dco_decode_box_autoadd_client_response(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_client_response(raw);
+  }
+
+  @protected
   double dco_decode_box_autoadd_f_64(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw as double;
@@ -3256,12 +3263,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   FfiActiveSession dco_decode_box_autoadd_ffi_active_session(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_ffi_active_session(raw);
-  }
-
-  @protected
-  FfiClientResponse dco_decode_box_autoadd_ffi_client_response(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return dco_decode_ffi_client_response(raw);
   }
 
   @protected
@@ -3451,6 +3452,19 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
+  ClientResponse dco_decode_client_response(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 1)
+      throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
+    return ClientResponse(
+      field0:
+          dco_decode_RustOpaque_stdsyncMutexcoreoptionOptionohttpClientResponse(
+              arr[0]),
+    );
+  }
+
+  @protected
   double dco_decode_f_64(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw as double;
@@ -3464,19 +3478,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
     return FfiActiveSession(
       field0: dco_decode_RustOpaque_payjoin_ffireceivev2ActiveSession(arr[0]),
-    );
-  }
-
-  @protected
-  FfiClientResponse dco_decode_ffi_client_response(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    final arr = raw as List<dynamic>;
-    if (arr.length != 1)
-      throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
-    return FfiClientResponse(
-      field0:
-          dco_decode_RustOpaque_stdsyncMutexcoreoptionOptionohttpClientResponse(
-              arr[0]),
     );
   }
 
@@ -4008,8 +4009,8 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
-  ((FfiUrl, Uint8List), FfiClientResponse)
-      dco_decode_record_record_ffi_url_list_prim_u_8_strict_ffi_client_response(
+  ((FfiUrl, Uint8List), ClientResponse)
+      dco_decode_record_record_ffi_url_list_prim_u_8_strict_client_response(
           dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
@@ -4018,7 +4019,7 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
     }
     return (
       dco_decode_record_ffi_url_list_prim_u_8_strict(arr[0]),
-      dco_decode_ffi_client_response(arr[1]),
+      dco_decode_client_response(arr[1]),
     );
   }
 
@@ -4349,6 +4350,13 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
+  ClientResponse sse_decode_box_autoadd_client_response(
+      SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_client_response(deserializer));
+  }
+
+  @protected
   double sse_decode_box_autoadd_f_64(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return (sse_decode_f_64(deserializer));
@@ -4359,13 +4367,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return (sse_decode_ffi_active_session(deserializer));
-  }
-
-  @protected
-  FfiClientResponse sse_decode_box_autoadd_ffi_client_response(
-      SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return (sse_decode_ffi_client_response(deserializer));
   }
 
   @protected
@@ -4566,6 +4567,15 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
+  ClientResponse sse_decode_client_response(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_field0 =
+        sse_decode_RustOpaque_stdsyncMutexcoreoptionOptionohttpClientResponse(
+            deserializer);
+    return ClientResponse(field0: var_field0);
+  }
+
+  @protected
   double sse_decode_f_64(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return deserializer.buffer.getFloat64();
@@ -4577,16 +4587,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
     var var_field0 =
         sse_decode_RustOpaque_payjoin_ffireceivev2ActiveSession(deserializer);
     return FfiActiveSession(field0: var_field0);
-  }
-
-  @protected
-  FfiClientResponse sse_decode_ffi_client_response(
-      SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_field0 =
-        sse_decode_RustOpaque_stdsyncMutexcoreoptionOptionohttpClientResponse(
-            deserializer);
-    return FfiClientResponse(field0: var_field0);
   }
 
   @protected
@@ -5061,13 +5061,13 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
-  ((FfiUrl, Uint8List), FfiClientResponse)
-      sse_decode_record_record_ffi_url_list_prim_u_8_strict_ffi_client_response(
+  ((FfiUrl, Uint8List), ClientResponse)
+      sse_decode_record_record_ffi_url_list_prim_u_8_strict_client_response(
           SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var var_field0 =
         sse_decode_record_ffi_url_list_prim_u_8_strict(deserializer);
-    var var_field1 = sse_decode_ffi_client_response(deserializer);
+    var var_field1 = sse_decode_client_response(deserializer);
     return (var_field0, var_field1);
   }
 
@@ -5727,6 +5727,13 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
+  void sse_encode_box_autoadd_client_response(
+      ClientResponse self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_client_response(self, serializer);
+  }
+
+  @protected
   void sse_encode_box_autoadd_f_64(double self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_f_64(self, serializer);
@@ -5737,13 +5744,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       FfiActiveSession self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_ffi_active_session(self, serializer);
-  }
-
-  @protected
-  void sse_encode_box_autoadd_ffi_client_response(
-      FfiClientResponse self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_ffi_client_response(self, serializer);
   }
 
   @protected
@@ -5944,6 +5944,14 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
+  void sse_encode_client_response(
+      ClientResponse self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_RustOpaque_stdsyncMutexcoreoptionOptionohttpClientResponse(
+        self.field0, serializer);
+  }
+
+  @protected
   void sse_encode_f_64(double self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     serializer.buffer.putFloat64(self);
@@ -5954,14 +5962,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       FfiActiveSession self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_RustOpaque_payjoin_ffireceivev2ActiveSession(
-        self.field0, serializer);
-  }
-
-  @protected
-  void sse_encode_ffi_client_response(
-      FfiClientResponse self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_RustOpaque_stdsyncMutexcoreoptionOptionohttpClientResponse(
         self.field0, serializer);
   }
 
@@ -6383,13 +6383,11 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
-  void
-      sse_encode_record_record_ffi_url_list_prim_u_8_strict_ffi_client_response(
-          ((FfiUrl, Uint8List), FfiClientResponse) self,
-          SseSerializer serializer) {
+  void sse_encode_record_record_ffi_url_list_prim_u_8_strict_client_response(
+      ((FfiUrl, Uint8List), ClientResponse) self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_record_ffi_url_list_prim_u_8_strict(self.$1, serializer);
-    sse_encode_ffi_client_response(self.$2, serializer);
+    sse_encode_client_response(self.$2, serializer);
   }
 
   @protected

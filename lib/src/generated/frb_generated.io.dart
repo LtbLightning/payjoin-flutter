@@ -267,13 +267,13 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   bool dco_decode_bool(dynamic raw);
 
   @protected
+  ClientResponse dco_decode_box_autoadd_client_response(dynamic raw);
+
+  @protected
   double dco_decode_box_autoadd_f_64(dynamic raw);
 
   @protected
   FfiActiveSession dco_decode_box_autoadd_ffi_active_session(dynamic raw);
-
-  @protected
-  FfiClientResponse dco_decode_box_autoadd_ffi_client_response(dynamic raw);
 
   @protected
   FfiContextV1 dco_decode_box_autoadd_ffi_context_v_1(dynamic raw);
@@ -375,13 +375,13 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   int dco_decode_box_autoadd_u_8(dynamic raw);
 
   @protected
+  ClientResponse dco_decode_client_response(dynamic raw);
+
+  @protected
   double dco_decode_f_64(dynamic raw);
 
   @protected
   FfiActiveSession dco_decode_ffi_active_session(dynamic raw);
-
-  @protected
-  FfiClientResponse dco_decode_ffi_client_response(dynamic raw);
 
   @protected
   FfiContextV1 dco_decode_ffi_context_v_1(dynamic raw);
@@ -525,8 +525,8 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
       dynamic raw);
 
   @protected
-  ((FfiUrl, Uint8List), FfiClientResponse)
-      dco_decode_record_record_ffi_url_list_prim_u_8_strict_ffi_client_response(
+  ((FfiUrl, Uint8List), ClientResponse)
+      dco_decode_record_record_ffi_url_list_prim_u_8_strict_client_response(
           dynamic raw);
 
   @protected
@@ -684,14 +684,14 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   bool sse_decode_bool(SseDeserializer deserializer);
 
   @protected
+  ClientResponse sse_decode_box_autoadd_client_response(
+      SseDeserializer deserializer);
+
+  @protected
   double sse_decode_box_autoadd_f_64(SseDeserializer deserializer);
 
   @protected
   FfiActiveSession sse_decode_box_autoadd_ffi_active_session(
-      SseDeserializer deserializer);
-
-  @protected
-  FfiClientResponse sse_decode_box_autoadd_ffi_client_response(
       SseDeserializer deserializer);
 
   @protected
@@ -805,14 +805,13 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   int sse_decode_box_autoadd_u_8(SseDeserializer deserializer);
 
   @protected
+  ClientResponse sse_decode_client_response(SseDeserializer deserializer);
+
+  @protected
   double sse_decode_f_64(SseDeserializer deserializer);
 
   @protected
   FfiActiveSession sse_decode_ffi_active_session(SseDeserializer deserializer);
-
-  @protected
-  FfiClientResponse sse_decode_ffi_client_response(
-      SseDeserializer deserializer);
 
   @protected
   FfiContextV1 sse_decode_ffi_context_v_1(SseDeserializer deserializer);
@@ -974,8 +973,8 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
       SseDeserializer deserializer);
 
   @protected
-  ((FfiUrl, Uint8List), FfiClientResponse)
-      sse_decode_record_record_ffi_url_list_prim_u_8_strict_ffi_client_response(
+  ((FfiUrl, Uint8List), ClientResponse)
+      sse_decode_record_record_ffi_url_list_prim_u_8_strict_client_response(
           SseDeserializer deserializer);
 
   @protected
@@ -1034,6 +1033,15 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   }
 
   @protected
+  ffi.Pointer<wire_cst_client_response> cst_encode_box_autoadd_client_response(
+      ClientResponse raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    final ptr = wire.cst_new_box_autoadd_client_response();
+    cst_api_fill_to_wire_client_response(raw, ptr.ref);
+    return ptr;
+  }
+
+  @protected
   ffi.Pointer<ffi.Double> cst_encode_box_autoadd_f_64(double raw) {
     // Codec=Cst (C-struct based), see doc to use other codecs
     return wire.cst_new_box_autoadd_f_64(cst_encode_f_64(raw));
@@ -1045,15 +1053,6 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
     // Codec=Cst (C-struct based), see doc to use other codecs
     final ptr = wire.cst_new_box_autoadd_ffi_active_session();
     cst_api_fill_to_wire_ffi_active_session(raw, ptr.ref);
-    return ptr;
-  }
-
-  @protected
-  ffi.Pointer<wire_cst_ffi_client_response>
-      cst_encode_box_autoadd_ffi_client_response(FfiClientResponse raw) {
-    // Codec=Cst (C-struct based), see doc to use other codecs
-    final ptr = wire.cst_new_box_autoadd_ffi_client_response();
-    cst_api_fill_to_wire_ffi_client_response(raw, ptr.ref);
     return ptr;
   }
 
@@ -1434,17 +1433,16 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   }
 
   @protected
+  void cst_api_fill_to_wire_box_autoadd_client_response(
+      ClientResponse apiObj, ffi.Pointer<wire_cst_client_response> wireObj) {
+    cst_api_fill_to_wire_client_response(apiObj, wireObj.ref);
+  }
+
+  @protected
   void cst_api_fill_to_wire_box_autoadd_ffi_active_session(
       FfiActiveSession apiObj,
       ffi.Pointer<wire_cst_ffi_active_session> wireObj) {
     cst_api_fill_to_wire_ffi_active_session(apiObj, wireObj.ref);
-  }
-
-  @protected
-  void cst_api_fill_to_wire_box_autoadd_ffi_client_response(
-      FfiClientResponse apiObj,
-      ffi.Pointer<wire_cst_ffi_client_response> wireObj) {
-    cst_api_fill_to_wire_ffi_client_response(apiObj, wireObj.ref);
   }
 
   @protected
@@ -1628,18 +1626,18 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   }
 
   @protected
+  void cst_api_fill_to_wire_client_response(
+      ClientResponse apiObj, wire_cst_client_response wireObj) {
+    wireObj.field0 =
+        cst_encode_RustOpaque_stdsyncMutexcoreoptionOptionohttpClientResponse(
+            apiObj.field0);
+  }
+
+  @protected
   void cst_api_fill_to_wire_ffi_active_session(
       FfiActiveSession apiObj, wire_cst_ffi_active_session wireObj) {
     wireObj.field0 =
         cst_encode_RustOpaque_payjoin_ffireceivev2ActiveSession(apiObj.field0);
-  }
-
-  @protected
-  void cst_api_fill_to_wire_ffi_client_response(
-      FfiClientResponse apiObj, wire_cst_ffi_client_response wireObj) {
-    wireObj.field0 =
-        cst_encode_RustOpaque_stdsyncMutexcoreoptionOptionohttpClientResponse(
-            apiObj.field0);
   }
 
   @protected
@@ -1978,13 +1976,14 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   }
 
   @protected
-  void cst_api_fill_to_wire_record_record_ffi_url_list_prim_u_8_strict_ffi_client_response(
-      ((FfiUrl, Uint8List), FfiClientResponse) apiObj,
-      wire_cst_record_record_ffi_url_list_prim_u_8_strict_ffi_client_response
-          wireObj) {
+  void
+      cst_api_fill_to_wire_record_record_ffi_url_list_prim_u_8_strict_client_response(
+          ((FfiUrl, Uint8List), ClientResponse) apiObj,
+          wire_cst_record_record_ffi_url_list_prim_u_8_strict_client_response
+              wireObj) {
     cst_api_fill_to_wire_record_ffi_url_list_prim_u_8_strict(
         apiObj.$1, wireObj.field0);
-    cst_api_fill_to_wire_ffi_client_response(apiObj.$2, wireObj.field1);
+    cst_api_fill_to_wire_client_response(apiObj.$2, wireObj.field1);
   }
 
   @protected
@@ -2289,15 +2288,15 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   void sse_encode_bool(bool self, SseSerializer serializer);
 
   @protected
+  void sse_encode_box_autoadd_client_response(
+      ClientResponse self, SseSerializer serializer);
+
+  @protected
   void sse_encode_box_autoadd_f_64(double self, SseSerializer serializer);
 
   @protected
   void sse_encode_box_autoadd_ffi_active_session(
       FfiActiveSession self, SseSerializer serializer);
-
-  @protected
-  void sse_encode_box_autoadd_ffi_client_response(
-      FfiClientResponse self, SseSerializer serializer);
 
   @protected
   void sse_encode_box_autoadd_ffi_context_v_1(
@@ -2410,15 +2409,15 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   void sse_encode_box_autoadd_u_8(int self, SseSerializer serializer);
 
   @protected
+  void sse_encode_client_response(
+      ClientResponse self, SseSerializer serializer);
+
+  @protected
   void sse_encode_f_64(double self, SseSerializer serializer);
 
   @protected
   void sse_encode_ffi_active_session(
       FfiActiveSession self, SseSerializer serializer);
-
-  @protected
-  void sse_encode_ffi_client_response(
-      FfiClientResponse self, SseSerializer serializer);
 
   @protected
   void sse_encode_ffi_context_v_1(FfiContextV1 self, SseSerializer serializer);
@@ -2583,10 +2582,8 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
       (FfiUrl, Uint8List) self, SseSerializer serializer);
 
   @protected
-  void
-      sse_encode_record_record_ffi_url_list_prim_u_8_strict_ffi_client_response(
-          ((FfiUrl, Uint8List), FfiClientResponse) self,
-          SseSerializer serializer);
+  void sse_encode_record_record_ffi_url_list_prim_u_8_strict_client_response(
+      ((FfiUrl, Uint8List), ClientResponse) self, SseSerializer serializer);
 
   @protected
   void sse_encode_record_string_string(
@@ -2679,11 +2676,11 @@ class coreWire implements BaseWire {
 
   void wire__crate__api__receive__ffi_active_session_extract_req(
     int port_,
-    ffi.Pointer<wire_cst_ffi_active_session> ptr,
+    ffi.Pointer<wire_cst_ffi_active_session> that,
   ) {
     return _wire__crate__api__receive__ffi_active_session_extract_req(
       port_,
-      ptr,
+      that,
     );
   }
 
@@ -2699,10 +2696,10 @@ class coreWire implements BaseWire {
 
   WireSyncRust2DartDco
       wire__crate__api__receive__ffi_active_session_pj_uri_builder(
-    ffi.Pointer<wire_cst_ffi_active_session> ptr,
+    ffi.Pointer<wire_cst_ffi_active_session> that,
   ) {
     return _wire__crate__api__receive__ffi_active_session_pj_uri_builder(
-      ptr,
+      that,
     );
   }
 
@@ -2719,10 +2716,10 @@ class coreWire implements BaseWire {
                   ffi.Pointer<wire_cst_ffi_active_session>)>();
 
   WireSyncRust2DartDco wire__crate__api__receive__ffi_active_session_pj_url(
-    ffi.Pointer<wire_cst_ffi_active_session> ptr,
+    ffi.Pointer<wire_cst_ffi_active_session> that,
   ) {
     return _wire__crate__api__receive__ffi_active_session_pj_url(
-      ptr,
+      that,
     );
   }
 
@@ -2740,7 +2737,7 @@ class coreWire implements BaseWire {
     int port_,
     ffi.Pointer<wire_cst_ffi_active_session> that,
     ffi.Pointer<wire_cst_list_prim_u_8_loose> body,
-    ffi.Pointer<wire_cst_ffi_client_response> ctx,
+    ffi.Pointer<wire_cst_client_response> ctx,
   ) {
     return _wire__crate__api__receive__ffi_active_session_process_res(
       port_,
@@ -2757,7 +2754,7 @@ class coreWire implements BaseWire {
                       ffi.Int64,
                       ffi.Pointer<wire_cst_ffi_active_session>,
                       ffi.Pointer<wire_cst_list_prim_u_8_loose>,
-                      ffi.Pointer<wire_cst_ffi_client_response>)>>(
+                      ffi.Pointer<wire_cst_client_response>)>>(
           'frbgen_payjoin_flutter_wire__crate__api__receive__ffi_active_session_process_res');
   late final _wire__crate__api__receive__ffi_active_session_process_res =
       _wire__crate__api__receive__ffi_active_session_process_resPtr.asFunction<
@@ -2765,7 +2762,7 @@ class coreWire implements BaseWire {
               int,
               ffi.Pointer<wire_cst_ffi_active_session>,
               ffi.Pointer<wire_cst_list_prim_u_8_loose>,
-              ffi.Pointer<wire_cst_ffi_client_response>)>();
+              ffi.Pointer<wire_cst_client_response>)>();
 
   WireSyncRust2DartDco wire__crate__api__receive__ffi_active_session_public_key(
     ffi.Pointer<wire_cst_ffi_active_session> that,
@@ -3121,11 +3118,11 @@ class coreWire implements BaseWire {
 
   void wire__crate__api__receive__ffi_session_initializer_extract_req(
     int port_,
-    ffi.Pointer<wire_cst_ffi_session_initializer> ptr,
+    ffi.Pointer<wire_cst_ffi_session_initializer> that,
   ) {
     return _wire__crate__api__receive__ffi_session_initializer_extract_req(
       port_,
-      ptr,
+      that,
     );
   }
 
@@ -3187,7 +3184,7 @@ class coreWire implements BaseWire {
     int port_,
     ffi.Pointer<wire_cst_ffi_session_initializer> that,
     ffi.Pointer<wire_cst_list_prim_u_8_loose> body,
-    ffi.Pointer<wire_cst_ffi_client_response> ctx,
+    ffi.Pointer<wire_cst_client_response> ctx,
   ) {
     return _wire__crate__api__receive__ffi_session_initializer_process_res(
       port_,
@@ -3204,7 +3201,7 @@ class coreWire implements BaseWire {
                       ffi.Int64,
                       ffi.Pointer<wire_cst_ffi_session_initializer>,
                       ffi.Pointer<wire_cst_list_prim_u_8_loose>,
-                      ffi.Pointer<wire_cst_ffi_client_response>)>>(
+                      ffi.Pointer<wire_cst_client_response>)>>(
           'frbgen_payjoin_flutter_wire__crate__api__receive__ffi_session_initializer_process_res');
   late final _wire__crate__api__receive__ffi_session_initializer_process_res =
       _wire__crate__api__receive__ffi_session_initializer_process_resPtr
@@ -3213,7 +3210,7 @@ class coreWire implements BaseWire {
                   int,
                   ffi.Pointer<wire_cst_ffi_session_initializer>,
                   ffi.Pointer<wire_cst_list_prim_u_8_loose>,
-                  ffi.Pointer<wire_cst_ffi_client_response>)>();
+                  ffi.Pointer<wire_cst_client_response>)>();
 
   void
       wire__crate__api__receive__ffi_unchecked_proposal_assume_interactive_receiver(
@@ -3457,11 +3454,11 @@ class coreWire implements BaseWire {
 
   void wire__crate__api__receive__ffi_v_2_payjoin_proposal_extract_v2_req(
     int port_,
-    ffi.Pointer<wire_cst_ffi_v_2_payjoin_proposal> ptr,
+    ffi.Pointer<wire_cst_ffi_v_2_payjoin_proposal> that,
   ) {
     return _wire__crate__api__receive__ffi_v_2_payjoin_proposal_extract_v2_req(
       port_,
-      ptr,
+      that,
     );
   }
 
@@ -3526,7 +3523,7 @@ class coreWire implements BaseWire {
     int port_,
     ffi.Pointer<wire_cst_ffi_v_2_payjoin_proposal> that,
     ffi.Pointer<wire_cst_list_prim_u_8_loose> res,
-    ffi.Pointer<wire_cst_ffi_client_response> ohttp_context,
+    ffi.Pointer<wire_cst_client_response> ohttp_context,
   ) {
     return _wire__crate__api__receive__ffi_v_2_payjoin_proposal_process_res(
       port_,
@@ -3543,7 +3540,7 @@ class coreWire implements BaseWire {
                       ffi.Int64,
                       ffi.Pointer<wire_cst_ffi_v_2_payjoin_proposal>,
                       ffi.Pointer<wire_cst_list_prim_u_8_loose>,
-                      ffi.Pointer<wire_cst_ffi_client_response>)>>(
+                      ffi.Pointer<wire_cst_client_response>)>>(
           'frbgen_payjoin_flutter_wire__crate__api__receive__ffi_v_2_payjoin_proposal_process_res');
   late final _wire__crate__api__receive__ffi_v_2_payjoin_proposal_process_res =
       _wire__crate__api__receive__ffi_v_2_payjoin_proposal_process_resPtr
@@ -3552,7 +3549,7 @@ class coreWire implements BaseWire {
                   int,
                   ffi.Pointer<wire_cst_ffi_v_2_payjoin_proposal>,
                   ffi.Pointer<wire_cst_list_prim_u_8_loose>,
-                  ffi.Pointer<wire_cst_ffi_client_response>)>();
+                  ffi.Pointer<wire_cst_client_response>)>();
 
   void wire__crate__api__receive__ffi_v_2_payjoin_proposal_psbt(
     int port_,
@@ -3666,13 +3663,13 @@ class coreWire implements BaseWire {
     int port_,
     ffi.Pointer<wire_cst_ffi_v_2_provisional_proposal> that,
     ffi.Pointer<ffi.Void> process_psbt,
-    ffi.Pointer<ffi.Uint64> min_feerate_sat_per_vb,
+    ffi.Pointer<ffi.Uint64> min_fee_rate_sat_per_vb,
   ) {
     return _wire__crate__api__receive__ffi_v_2_provisional_proposal_finalize_proposal(
       port_,
       that,
       process_psbt,
-      min_feerate_sat_per_vb,
+      min_fee_rate_sat_per_vb,
     );
   }
 
@@ -4346,24 +4343,23 @@ class coreWire implements BaseWire {
       _wire__crate__api__uri__ffi_uri_check_pj_supportedPtr.asFunction<
           WireSyncRust2DartDco Function(ffi.Pointer<wire_cst_ffi_uri>)>();
 
-  void wire__crate__api__uri__ffi_uri_from_str(
-    int port_,
+  WireSyncRust2DartDco wire__crate__api__uri__ffi_uri_from_str(
     ffi.Pointer<wire_cst_list_prim_u_8_strict> uri,
   ) {
     return _wire__crate__api__uri__ffi_uri_from_str(
-      port_,
       uri,
     );
   }
 
   late final _wire__crate__api__uri__ffi_uri_from_strPtr = _lookup<
           ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Int64, ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
+              WireSyncRust2DartDco Function(
+                  ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
       'frbgen_payjoin_flutter_wire__crate__api__uri__ffi_uri_from_str');
   late final _wire__crate__api__uri__ffi_uri_from_str =
       _wire__crate__api__uri__ffi_uri_from_strPtr.asFunction<
-          void Function(int, ffi.Pointer<wire_cst_list_prim_u_8_strict>)>();
+          WireSyncRust2DartDco Function(
+              ffi.Pointer<wire_cst_list_prim_u_8_strict>)>();
 
   WireSyncRust2DartDco wire__crate__api__uri__ffi_url_as_string(
     ffi.Pointer<wire_cst_ffi_url> that,
@@ -4381,24 +4377,23 @@ class coreWire implements BaseWire {
       _wire__crate__api__uri__ffi_url_as_stringPtr.asFunction<
           WireSyncRust2DartDco Function(ffi.Pointer<wire_cst_ffi_url>)>();
 
-  void wire__crate__api__uri__ffi_url_from_str(
-    int port_,
+  WireSyncRust2DartDco wire__crate__api__uri__ffi_url_from_str(
     ffi.Pointer<wire_cst_list_prim_u_8_strict> url,
   ) {
     return _wire__crate__api__uri__ffi_url_from_str(
-      port_,
       url,
     );
   }
 
   late final _wire__crate__api__uri__ffi_url_from_strPtr = _lookup<
           ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Int64, ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
+              WireSyncRust2DartDco Function(
+                  ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
       'frbgen_payjoin_flutter_wire__crate__api__uri__ffi_url_from_str');
   late final _wire__crate__api__uri__ffi_url_from_str =
       _wire__crate__api__uri__ffi_url_from_strPtr.asFunction<
-          void Function(int, ffi.Pointer<wire_cst_list_prim_u_8_strict>)>();
+          WireSyncRust2DartDco Function(
+              ffi.Pointer<wire_cst_list_prim_u_8_strict>)>();
 
   WireSyncRust2DartDco wire__crate__api__uri__ffi_url_query(
     ffi.Pointer<wire_cst_ffi_url> that,
@@ -5234,6 +5229,17 @@ class coreWire implements BaseWire {
       _rust_arc_decrement_strong_count_RustOpaque_stdsyncMutexcoreoptionOptionohttpClientResponsePtr
           .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
 
+  ffi.Pointer<wire_cst_client_response> cst_new_box_autoadd_client_response() {
+    return _cst_new_box_autoadd_client_response();
+  }
+
+  late final _cst_new_box_autoadd_client_responsePtr = _lookup<
+          ffi.NativeFunction<ffi.Pointer<wire_cst_client_response> Function()>>(
+      'frbgen_payjoin_flutter_cst_new_box_autoadd_client_response');
+  late final _cst_new_box_autoadd_client_response =
+      _cst_new_box_autoadd_client_responsePtr
+          .asFunction<ffi.Pointer<wire_cst_client_response> Function()>();
+
   ffi.Pointer<ffi.Double> cst_new_box_autoadd_f_64(
     double value,
   ) {
@@ -5260,19 +5266,6 @@ class coreWire implements BaseWire {
   late final _cst_new_box_autoadd_ffi_active_session =
       _cst_new_box_autoadd_ffi_active_sessionPtr
           .asFunction<ffi.Pointer<wire_cst_ffi_active_session> Function()>();
-
-  ffi.Pointer<wire_cst_ffi_client_response>
-      cst_new_box_autoadd_ffi_client_response() {
-    return _cst_new_box_autoadd_ffi_client_response();
-  }
-
-  late final _cst_new_box_autoadd_ffi_client_responsePtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<wire_cst_ffi_client_response> Function()>>(
-      'frbgen_payjoin_flutter_cst_new_box_autoadd_ffi_client_response');
-  late final _cst_new_box_autoadd_ffi_client_response =
-      _cst_new_box_autoadd_ffi_client_responsePtr
-          .asFunction<ffi.Pointer<wire_cst_ffi_client_response> Function()>();
 
   ffi.Pointer<wire_cst_ffi_context_v_1> cst_new_box_autoadd_ffi_context_v_1() {
     return _cst_new_box_autoadd_ffi_context_v_1();
@@ -5760,7 +5753,7 @@ final class wire_cst_list_prim_u_8_loose extends ffi.Struct {
   external int len;
 }
 
-final class wire_cst_ffi_client_response extends ffi.Struct {
+final class wire_cst_client_response extends ffi.Struct {
   @ffi.UintPtr()
   external int field0;
 }
@@ -6087,9 +6080,9 @@ final class wire_cst_record_ffi_url_list_prim_u_8_strict extends ffi.Struct {
   external ffi.Pointer<wire_cst_list_prim_u_8_strict> field1;
 }
 
-final class wire_cst_record_record_ffi_url_list_prim_u_8_strict_ffi_client_response
+final class wire_cst_record_record_ffi_url_list_prim_u_8_strict_client_response
     extends ffi.Struct {
   external wire_cst_record_ffi_url_list_prim_u_8_strict field0;
 
-  external wire_cst_ffi_client_response field1;
+  external wire_cst_client_response field1;
 }

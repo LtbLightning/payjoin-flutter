@@ -134,7 +134,7 @@ class FfiUri {
         that: this,
       );
 
-  static Future<FfiUri> fromStr({required String uri}) =>
+  static FfiUri fromStr({required String uri}) =>
       core.instance.api.crateApiUriFfiUriFromStr(uri: uri);
 
   @override
@@ -159,7 +159,7 @@ class FfiUrl {
         that: this,
       );
 
-  static Future<FfiUrl> fromStr({required String url}) =>
+  static FfiUrl fromStr({required String url}) =>
       core.instance.api.crateApiUriFfiUrlFromStr(url: url);
 
   String? query() => core.instance.api.crateApiUriFfiUrlQuery(

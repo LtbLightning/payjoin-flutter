@@ -32,22 +32,23 @@ class SessionInitializer extends FfiSessionInitializer {
     }
   }
 
-  Future<ActiveSession> processResponse(
-      {required List<int> body, required ClientResponse clientResponse}) async {
+  @override
+  Future<ActiveSession> processRes(
+      {required List<int> body, required ClientResponse ctx}) async {
     try {
-      final res = await super.processRes(body: body, ctx: clientResponse);
+      final res = await super.processRes(body: body, ctx: ctx);
       return ActiveSession._(field0: res.field0);
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
     }
   }
 
-  Future<(Request, ClientResponse)> extractRequest({hint}) async {
+  @override
+  Future<(Request, ClientResponse)> extractReq() async {
     try {
-      final res = await FfiSessionInitializer.extractReq(ptr: this);
-      final request =
-          Request(await Url.fromStr(res.$1.$1.asString()), res.$1.$2);
-      return (request, ClientResponse._(field0: res.$2.field0));
+      final res = await super.extractReq();
+      final request = Request(Url.fromStr(res.$1.$1.asString()), res.$1.$2);
+      return (request, res.$2);
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
     }
@@ -56,21 +57,23 @@ class SessionInitializer extends FfiSessionInitializer {
 
 class ActiveSession extends FfiActiveSession {
   ActiveSession._({required super.field0});
-  Future<(Request, ClientResponse)> extractRequest({hint}) async {
+
+  @override
+  Future<(Request, ClientResponse)> extractReq() async {
     try {
-      final res = await FfiActiveSession.extractReq(ptr: this);
-      final request =
-          Request(await Url.fromStr(res.$1.$1.asString()), res.$1.$2);
-      return (request, ClientResponse._(field0: res.$2.field0));
+      final res = await super.extractReq();
+      final request = Request(Url.fromStr(res.$1.$1.asString()), res.$1.$2);
+      return (request, res.$2);
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
     }
   }
 
-  Future<UncheckedProposal?> processResponse(
-      {required List<int> body, required ClientResponse clientResponse}) async {
+  @override
+  Future<UncheckedProposal?> processRes(
+      {required List<int> body, required ClientResponse ctx}) async {
     try {
-      final res = await super.processRes(body: body, ctx: clientResponse);
+      final res = await super.processRes(body: body, ctx: ctx);
       if (res != null) {
         return UncheckedProposal._(field0: res.field0);
       } else {
@@ -83,13 +86,15 @@ class ActiveSession extends FfiActiveSession {
 
   /// The contents of the `&pj=` query parameter including the base64url-encoded public key receiver subdirectory.
   /// This identifies a session at the payjoin directory server.
-  Future<Url> pjUrl() {
-    final res = FfiActiveSession.pjUrl(ptr: this);
+  @override
+  Url pjUrl() {
+    final res = super.pjUrl();
     return Url.fromStr(res.asString());
   }
 
+  @override
   PjUriBuilder pjUriBuilder() {
-    final res = FfiActiveSession.pjUriBuilder(ptr: this);
+    final res = super.pjUriBuilder();
     return PjUriBuilder(internal: res.internal);
   }
 }
@@ -260,11 +265,11 @@ class ProvisionalProposal extends FfiV2ProvisionalProposal {
   @override
   Future<PayjoinProposal> finalizeProposal(
       {required FutureOr<String> Function(String p1) processPsbt,
-      BigInt? minFeerateSatPerVb,
+      BigInt? minFeeRateSatPerVb,
       hint}) async {
     try {
       final res = await super.finalizeProposal(
-          processPsbt: processPsbt, minFeerateSatPerVb: minFeerateSatPerVb);
+          processPsbt: processPsbt, minFeeRateSatPerVb: minFeeRateSatPerVb);
       return PayjoinProposal._(field0: res.field0);
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
@@ -275,7 +280,8 @@ class ProvisionalProposal extends FfiV2ProvisionalProposal {
 class PayjoinProposal extends FfiV2PayjoinProposal {
   PayjoinProposal._({required super.field0});
 
-  Future<void> processResponse(
+  @override
+  Future<void> processRes(
       {required List<int> res, required ClientResponse ohttpContext}) {
     try {
       return super.processRes(ohttpContext: ohttpContext, res: res);
@@ -293,12 +299,12 @@ class PayjoinProposal extends FfiV2PayjoinProposal {
     }
   }
 
-  Future<(Request, ClientResponse)> extractV2Request({hint}) async {
+  @override
+  Future<(Request, ClientResponse)> extractV2Req() async {
     try {
-      final res = await FfiV2PayjoinProposal.extractV2Req(ptr: this);
-      final request =
-          Request(await Url.fromStr(res.$1.$1.asString()), res.$1.$2);
-      return (request, ClientResponse._(field0: res.$2.field0));
+      final res = await super.extractV2Req();
+      final request = Request(Url.fromStr(res.$1.$1.asString()), res.$1.$2);
+      return (request, res.$2);
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
     }
@@ -339,8 +345,4 @@ class PayjoinProposal extends FfiV2PayjoinProposal {
       throw mapPayjoinError(e);
     }
   }
-}
-
-class ClientResponse extends FfiClientResponse {
-  ClientResponse._({required super.field0});
 }

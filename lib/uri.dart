@@ -85,7 +85,7 @@ class Uri extends FfiUri {
   static Future<Uri> fromStr(String uri) async {
     try {
       await PConfig.initializeApp();
-      final res = await FfiUri.fromStr(uri: uri);
+      final res = FfiUri.fromStr(uri: uri);
       return Uri._(field0: res.field0);
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
@@ -146,10 +146,9 @@ class PjUri extends FfiPjUri {
 
 class Url extends FfiUrl {
   Url._({required super.field0});
-  static Future<Url> fromStr(String uri) async {
+  static Url fromStr(String uri) {
     try {
-      await PConfig.initializeApp();
-      final res = await FfiUrl.fromStr(url: uri);
+      final res = FfiUrl.fromStr(url: uri);
       return Url._(field0: res.field0);
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);

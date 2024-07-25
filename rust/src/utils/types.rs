@@ -1,6 +1,8 @@
 use flutter_rust_bridge::frb;
 pub use payjoin_ffi::types::Network;
 use std::collections::HashMap;
+
+use crate::frb_generated::RustOpaque;
 // ///Represents data that needs to be transmitted to the receiver.
 // ///You need to send this request over HTTP(S) to the receiver.
 // #[derive(Clone, Debug)]
@@ -119,4 +121,20 @@ pub enum _Network {
     Bitcoin,
     ///Bitcoin’s signet
     Signet,
+}
+
+pub struct ClientResponse(
+    pub RustOpaque<std::sync::Mutex<core::option::Option<ohttp::ClientResponse>>>,
+);
+
+impl From<ClientResponse> for ohttp::ClientResponse {
+    fn from(value: ClientResponse) -> Self {
+        let mut data_guard = value.0.lock().unwrap();
+        Option::take(&mut *data_guard).expect("ClientResponse moved out of memory")
+    }
+}
+impl From<ohttp::ClientResponse> for ClientResponse {
+    fn from(value: ohttp::ClientResponse) -> Self {
+        Self(RustOpaque::new(std::sync::Mutex::new(Some(value))))
+    }
 }
