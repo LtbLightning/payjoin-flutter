@@ -40,13 +40,14 @@ class UncheckedProposal extends FfiUncheckedProposal {
   /// Receiver MUST check that the Original PSBT from the sender can be broadcast, i.e. testmempoolaccept bitcoind rpc returns { “allowed”: true,.. } for gettransactiontocheckbroadcast() before calling this method.
   /// Do this check if you generate bitcoin uri to receive Payjoin on sender request without manual human approval, like a payment processor. Such so called “non-interactive” receivers are otherwise vulnerable to probing attacks. If a sender can make requests at will, they can learn which bitcoin the receiver owns at no cost. Broadcasting the Original PSBT after some time in the failure case makes incurs sender cost and prevents probing.
   /// Call this after checking downstream.
+  @override
   Future<MaybeInputsOwned> checkBroadcastSuitability(
       {BigInt? minFeeRate,
       required FutureOr<bool> Function(Uint8List) canBroadcast,
       hint}) async {
     try {
-      final res = await FfiUncheckedProposal.checkBroadcastSuitability(
-          minFeeRate: minFeeRate, canBroadcast: canBroadcast, ptr: this);
+      final res = await super.checkBroadcastSuitability(
+          minFeeRate: minFeeRate, canBroadcast: canBroadcast);
       return MaybeInputsOwned._(field0: res.field0);
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
@@ -56,10 +57,10 @@ class UncheckedProposal extends FfiUncheckedProposal {
   ///Call this method if the only way to initiate a `Payjoin` with this receiver requires manual intervention, as in most consumer wallets.
   /// So-called “non-interactive” receivers, like payment processors,
   /// that allow arbitrary requests are otherwise vulnerable to probing attacks.
+  @override
   Future<MaybeInputsOwned> assumeInteractiveReceiver() async {
     try {
-      final res =
-          await FfiUncheckedProposal.assumeInteractiveReceiver(ptr: this);
+      final res = await super.assumeInteractiveReceiver();
       return MaybeInputsOwned._(field0: res.field0);
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
@@ -69,11 +70,11 @@ class UncheckedProposal extends FfiUncheckedProposal {
 
 class MaybeInputsOwned extends FfiMaybeInputsOwned {
   MaybeInputsOwned._({required super.field0});
+  @override
   Future<MaybeMixedInputScripts> checkInputsNotOwned(
       {required FutureOr<bool> Function(Uint8List) isOwned}) async {
     try {
-      final res = await FfiMaybeInputsOwned.checkInputsNotOwned(
-          ptr: this, isOwned: isOwned);
+      final res = await super.checkInputsNotOwned(isOwned: isOwned);
       return MaybeMixedInputScripts._(field0: res.field0);
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
@@ -87,10 +88,10 @@ class MaybeMixedInputScripts extends FfiMaybeMixedInputScripts {
   /// Verify the original transaction did not have mixed input types Call this after checking downstream.
   ///
   /// Note: mixed spends do not necessarily indicate distinct wallet fingerprints. This check is intended to prevent some types of wallet fingerprinting.
+  @override
   Future<MaybeInputsSeen> checkNoMixedInputScripts() async {
     try {
-      final res =
-          await FfiMaybeMixedInputScripts.checkNoMixedInputScripts(ptr: this);
+      final res = await super.checkNoMixedInputScripts();
       return MaybeInputsSeen._(field0: res.field0);
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
@@ -100,11 +101,11 @@ class MaybeMixedInputScripts extends FfiMaybeMixedInputScripts {
 
 class MaybeInputsSeen extends FfiMaybeInputsSeen {
   MaybeInputsSeen._({required super.field0});
+  @override
   Future<OutputsUnknown> checkNoInputsSeenBefore(
       {required FutureOr<bool> Function(OutPoint) isKnown}) async {
     try {
-      final res = await FfiMaybeInputsSeen.checkNoInputsSeenBefore(
-          ptr: this, isKnown: isKnown);
+      final res = await super.checkNoInputsSeenBefore(isKnown: isKnown);
       return OutputsUnknown._(field0: res.field0);
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
@@ -114,11 +115,12 @@ class MaybeInputsSeen extends FfiMaybeInputsSeen {
 
 class OutputsUnknown extends FfiOutputsUnknown {
   OutputsUnknown._({required super.field0});
+  @override
   Future<ProvisionalProposal> identifyReceiverOutputs(
-      {required Future<bool> Function(Uint8List) isReceiverOutput}) async {
+      {required FutureOr<bool> Function(Uint8List) isReceiverOutput}) async {
     try {
-      final res = await FfiOutputsUnknown.identifyReceiverOutputs(
-          ptr: this, isReceiverOutput: isReceiverOutput);
+      final res = await super
+          .identifyReceiverOutputs(isReceiverOutput: isReceiverOutput);
       return ProvisionalProposal._(field0: res.field0);
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
@@ -174,14 +176,16 @@ class ProvisionalProposal extends FfiProvisionalProposal {
     }
   }
 
-  Future<PayjoinProposal> finalizeProposal(
-      {required FutureOr<String> Function(String) processPsbt,
-      BigInt? minFeeRateSatPerVb}) async {
+  @override
+  Future<PayjoinProposal> finalizeProposal({
+    required FutureOr<String> Function(String) processPsbt,
+    BigInt? minFeeRateSatPerVb,
+  }) async {
     try {
-      final res = await FfiProvisionalProposal.finalizeProposal(
-          processPsbt: processPsbt,
-          minFeerateSatPerVb: minFeeRateSatPerVb,
-          ptr: this);
+      final res = await super.finalizeProposal(
+        processPsbt: processPsbt,
+        minFeeRateSatPerVb: minFeeRateSatPerVb,
+      );
       return PayjoinProposal._(field0: res.field0);
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);

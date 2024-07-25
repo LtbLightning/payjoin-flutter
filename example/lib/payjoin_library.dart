@@ -14,7 +14,7 @@ class PayJoinLibrary {
   Future<String> buildPjUri(double amount, String address, {String? pj}) async {
     try {
       final pjUri = "$address?amount=$amount&pj=${pj ?? pjUrl}";
-      await pj_uri.Uri.fromString(pjUri);
+      await pj_uri.Uri.fromStr(pjUri);
       return pjUri;
     } catch (e) {
       debugPrint(e.toString());
@@ -26,14 +26,14 @@ class PayJoinLibrary {
       String psbtBase64,
       String uriStr,
       Future<bool> Function(Uint8List) isOwned) async {
-    final uri = await pj_uri.Uri.fromString(uriStr);
+    final uri = await pj_uri.Uri.fromStr(uriStr);
     final (req, cxt) = await (await (await send.RequestBuilder.fromPsbtAndUri(
                 psbtBase64: psbtBase64, pjUri: uri.checkPjSupported()))
             .buildWithAdditionalFee(
                 maxFeeContribution: BigInt.from(10000),
                 minFeeRate: BigInt.zero,
                 clampFeeContribution: false))
-        .extractContextV1();
+        .extractV1();
     final headers = common.Headers(map: {
       'content-type': 'text/plain',
       'content-length': req.body.length.toString(),

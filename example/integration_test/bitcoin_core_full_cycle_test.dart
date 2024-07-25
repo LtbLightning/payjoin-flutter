@@ -30,7 +30,7 @@ void main() {
       final pjUri = await payJoinLib.buildPjUri(0.0083285, pjReceiverAddress);
       // Sender create a funded PSBT (not broadcast) to address with amount given in the pjUri
       debugPrint("Sender Balance: ${(await sender.getBalance()).toString()}");
-      final uri = await pay_join_uri.Uri.fromString(pjUri);
+      final uri = await pay_join_uri.Uri.fromStr(pjUri);
       final address = await uri.address();
       final amount = await uri.amount();
       final senderPsbt =

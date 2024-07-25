@@ -9,6 +9,9 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 // Rust type: RustOpaqueNom<Arc < payjoin_ffi :: receive :: v2 :: V2PayjoinProposal >>
 abstract class ArcV2PayjoinProposal implements RustOpaqueInterface {}
 
+// Rust type: RustOpaqueNom<Arc < payjoin_ffi :: send :: v1 :: ContextV1 >>
+abstract class ArcContextV1 implements RustOpaqueInterface {}
+
 // Rust type: RustOpaqueNom<Arc < payjoin_ffi :: send :: v2 :: ContextV2 >>
 abstract class ArcContextV2 implements RustOpaqueInterface {}
 
@@ -56,9 +59,6 @@ abstract class V2ProvisionalProposal implements RustOpaqueInterface {}
 
 // Rust type: RustOpaqueNom<payjoin_ffi :: receive :: v2 :: V2UncheckedProposal>
 abstract class V2UncheckedProposal implements RustOpaqueInterface {}
-
-// Rust type: RustOpaqueNom<payjoin_ffi :: send :: v1 :: ContextV1>
-abstract class ContextV1 implements RustOpaqueInterface {}
 
 // Rust type: RustOpaqueNom<payjoin_ffi :: send :: v1 :: RequestBuilder>
 abstract class RequestBuilder implements RustOpaqueInterface {}

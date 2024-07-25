@@ -145,7 +145,7 @@ class _PayJoinState extends State<PayJoin> {
                 onPressed: () async {
                   final balance = await sender.getBalance();
                   debugPrint("Sender Balance: ${balance.toString()}");
-                  final uri = await pay_join_uri.Uri.fromString(pjUri);
+                  final uri = await pay_join_uri.Uri.fromStr(pjUri);
                   final address = await uri.address();
                   int amount =
                       (((await uri.amount()) ?? 0) * 100000000).toInt();

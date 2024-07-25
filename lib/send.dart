@@ -4,6 +4,7 @@ import 'package:payjoin_flutter/uri.dart';
 
 import 'common.dart' as common;
 import 'src/generated/api/send.dart';
+import 'src/generated/api/uri.dart';
 import 'src/generated/utils/error.dart' as error;
 
 class RequestBuilder extends FfiRequestBuilder {
@@ -75,25 +76,33 @@ class RequestBuilder extends FfiRequestBuilder {
 class RequestContext extends FfiRequestContext {
   RequestContext._({required super.field0});
 
-  Future<(common.Request, ContextV1)> extractContextV1() async {
+  @override
+  Future<(common.Request, ContextV1)> extractV1() async {
     try {
-      final res = await FfiRequestContext.extractV1(ptr: this);
+      final res = await super.extractV1();
       final request = common.Request(
-          await Url.fromString((res.request.$1.asString())), res.request.$2);
-      return (request, ContextV1._(field0: res.contextV1.field0));
+        url: await Url.fromStr((res.$1.url.asString())),
+        body: res.$1.body,
+      );
+      return (request, ContextV1._(field0: res.$2.field0));
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
     }
   }
 
-  Future<(common.Request, ContextV2)> extractContextV2(
-      Url ohttpProxyUrl) async {
+  @override
+  Future<(common.Request, ContextV2)> extractV2({
+    required FfiUrl ohttpProxyUrl,
+  }) async {
     try {
-      final res = await FfiRequestContext.extractV2(
-          ohttpProxyUrl: ohttpProxyUrl, ptr: this);
+      final res = await super.extractV2(
+        ohttpProxyUrl: ohttpProxyUrl,
+      );
       final request = common.Request(
-          await Url.fromString((res.request.$1.asString())), res.request.$2);
-      return (request, ContextV2._(field0: res.contextV2.field0));
+        url: await Url.fromStr((res.$1.url.asString())),
+        body: res.$1.body,
+      );
+      return (request, ContextV2._(field0: res.$2.field0));
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
     }
