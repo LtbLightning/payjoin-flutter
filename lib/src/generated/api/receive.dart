@@ -77,11 +77,10 @@ class FfiMaybeInputsOwned {
     required this.field0,
   });
 
-  static Future<FfiMaybeMixedInputScripts> checkInputsNotOwned(
-          {required FfiMaybeInputsOwned ptr,
-          required FutureOr<bool> Function(Uint8List) isOwned}) =>
+  Future<FfiMaybeMixedInputScripts> checkInputsNotOwned(
+          {required FutureOr<bool> Function(Uint8List) isOwned}) =>
       core.instance.api.crateApiReceiveFfiMaybeInputsOwnedCheckInputsNotOwned(
-          ptr: ptr, isOwned: isOwned);
+          that: this, isOwned: isOwned);
 
   @override
   int get hashCode => field0.hashCode;
@@ -101,12 +100,11 @@ class FfiMaybeInputsSeen {
     required this.field0,
   });
 
-  static Future<FfiOutputsUnknown> checkNoInputsSeenBefore(
-          {required FfiMaybeInputsSeen ptr,
-          required FutureOr<bool> Function(OutPoint) isKnown}) =>
+  Future<FfiOutputsUnknown> checkNoInputsSeenBefore(
+          {required FutureOr<bool> Function(OutPoint) isKnown}) =>
       core.instance.api
           .crateApiReceiveFfiMaybeInputsSeenCheckNoInputsSeenBefore(
-              ptr: ptr, isKnown: isKnown);
+              that: this, isKnown: isKnown);
 
   @override
   int get hashCode => field0.hashCode;
@@ -126,11 +124,10 @@ class FfiMaybeMixedInputScripts {
     required this.field0,
   });
 
-  static Future<FfiMaybeInputsSeen> checkNoMixedInputScripts(
-          {required FfiMaybeMixedInputScripts ptr}) =>
-      core.instance.api
+  Future<FfiMaybeInputsSeen> checkNoMixedInputScripts() => core.instance.api
           .crateApiReceiveFfiMaybeMixedInputScriptsCheckNoMixedInputScripts(
-              ptr: ptr);
+        that: this,
+      );
 
   @override
   int get hashCode => field0.hashCode;
@@ -150,11 +147,10 @@ class FfiOutputsUnknown {
     required this.field0,
   });
 
-  static Future<FfiProvisionalProposal> identifyReceiverOutputs(
-          {required FfiOutputsUnknown ptr,
-          required FutureOr<bool> Function(Uint8List) isReceiverOutput}) =>
+  Future<FfiProvisionalProposal> identifyReceiverOutputs(
+          {required FutureOr<bool> Function(Uint8List) isReceiverOutput}) =>
       core.instance.api.crateApiReceiveFfiOutputsUnknownIdentifyReceiverOutputs(
-          ptr: ptr, isReceiverOutput: isReceiverOutput);
+          that: this, isReceiverOutput: isReceiverOutput);
 
   @override
   int get hashCode => field0.hashCode;
@@ -224,14 +220,13 @@ class FfiProvisionalProposal {
           .crateApiReceiveFfiProvisionalProposalContributeWitnessInput(
               that: this, txo: txo, outpoint: outpoint);
 
-  static Future<FfiPayjoinProposal> finalizeProposal(
-          {required FfiProvisionalProposal ptr,
-          required FutureOr<String> Function(String) processPsbt,
-          BigInt? minFeerateSatPerVb}) =>
+  Future<FfiPayjoinProposal> finalizeProposal(
+          {required FutureOr<String> Function(String) processPsbt,
+          BigInt? minFeeRateSatPerVb}) =>
       core.instance.api.crateApiReceiveFfiProvisionalProposalFinalizeProposal(
-          ptr: ptr,
+          that: this,
           processPsbt: processPsbt,
-          minFeerateSatPerVb: minFeerateSatPerVb);
+          minFeeRateSatPerVb: minFeeRateSatPerVb);
 
   Future<OutPoint> tryPreservingPrivacy(
           {required Map<BigInt, OutPoint> candidateInputs}) =>
@@ -310,11 +305,10 @@ class FfiUncheckedProposal {
   /// Call this method if the only way to initiate a Payjoin with this receiver requires manual intervention, as in most consumer wallets.
   ///
   /// So-called “non-interactive” receivers, like payment processors, that allow arbitrary requests are otherwise vulnerable to probing attacks. Those receivers call get_transaction_to_check_broadcast() and attest_tested_and_scheduled_broadcast() after making those checks downstream.
-  static Future<FfiMaybeInputsOwned> assumeInteractiveReceiver(
-          {required FfiUncheckedProposal ptr}) =>
-      core.instance.api
+  Future<FfiMaybeInputsOwned> assumeInteractiveReceiver() => core.instance.api
           .crateApiReceiveFfiUncheckedProposalAssumeInteractiveReceiver(
-              ptr: ptr);
+        that: this,
+      );
 
   /// Call after checking that the Original PSBT can be broadcast.
   ///
@@ -323,13 +317,12 @@ class FfiUncheckedProposal {
   /// Do this check if you generate bitcoin uri to receive Payjoin on sender request without manual human approval, like a payment processor. Such so called “non-interactive” receivers are otherwise vulnerable to probing attacks. If a sender can make requests at will, they can learn which bitcoin the receiver owns at no cost. Broadcasting the Original PSBT after some time in the failure case makes incurs sender cost and prevents probing.
   ///
   /// Call this after checking downstream.
-  static Future<FfiMaybeInputsOwned> checkBroadcastSuitability(
-          {required FfiUncheckedProposal ptr,
-          BigInt? minFeeRate,
+  Future<FfiMaybeInputsOwned> checkBroadcastSuitability(
+          {BigInt? minFeeRate,
           required FutureOr<bool> Function(Uint8List) canBroadcast}) =>
       core.instance.api
           .crateApiReceiveFfiUncheckedProposalCheckBroadcastSuitability(
-              ptr: ptr, minFeeRate: minFeeRate, canBroadcast: canBroadcast);
+              that: this, minFeeRate: minFeeRate, canBroadcast: canBroadcast);
 
   /// The Sender’s Original PSBT
   Future<Uint8List> extractTxToScheduleBroadcast() => core.instance.api

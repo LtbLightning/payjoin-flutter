@@ -187,7 +187,7 @@ fn wire__crate__api__receive__ffi_active_session_public_key_impl(
 }
 fn wire__crate__api__receive__ffi_maybe_inputs_owned_check_inputs_not_owned_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
-    ptr: impl CstDecode<crate::api::receive::FfiMaybeInputsOwned>,
+    that: impl CstDecode<crate::api::receive::FfiMaybeInputsOwned>,
     is_owned: impl CstDecode<flutter_rust_bridge::DartOpaque>,
 ) {
     FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::DcoCodec, _, _>(
@@ -197,7 +197,7 @@ fn wire__crate__api__receive__ffi_maybe_inputs_owned_check_inputs_not_owned_impl
             mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
         },
         move || {
-            let api_ptr = ptr.cst_decode();
+            let api_that = that.cst_decode();
             let api_is_owned =
                 decode_DartFn_Inputs_list_prim_u_8_strict_Output_bool_AnyhowException(
                     is_owned.cst_decode(),
@@ -206,7 +206,7 @@ fn wire__crate__api__receive__ffi_maybe_inputs_owned_check_inputs_not_owned_impl
                 transform_result_dco::<_, _, crate::utils::error::PayjoinError>((move || {
                     let output_ok =
                         crate::api::receive::FfiMaybeInputsOwned::check_inputs_not_owned(
-                            api_ptr,
+                            &api_that,
                             api_is_owned,
                         )?;
                     Ok(output_ok)
@@ -218,7 +218,7 @@ fn wire__crate__api__receive__ffi_maybe_inputs_owned_check_inputs_not_owned_impl
 }
 fn wire__crate__api__receive__ffi_maybe_inputs_seen_check_no_inputs_seen_before_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
-    ptr: impl CstDecode<crate::api::receive::FfiMaybeInputsSeen>,
+    that: impl CstDecode<crate::api::receive::FfiMaybeInputsSeen>,
     is_known: impl CstDecode<flutter_rust_bridge::DartOpaque>,
 ) {
     FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::DcoCodec, _, _>(
@@ -228,14 +228,14 @@ fn wire__crate__api__receive__ffi_maybe_inputs_seen_check_no_inputs_seen_before_
             mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
         },
         move || {
-            let api_ptr = ptr.cst_decode();
+            let api_that = that.cst_decode();
             let api_is_known =
                 decode_DartFn_Inputs_out_point_Output_bool_AnyhowException(is_known.cst_decode());
             move |context| {
                 transform_result_dco::<_, _, crate::utils::error::PayjoinError>((move || {
                     let output_ok =
                         crate::api::receive::FfiMaybeInputsSeen::check_no_inputs_seen_before(
-                            api_ptr,
+                            &api_that,
                             api_is_known,
                         )?;
                     Ok(output_ok)
@@ -247,17 +247,17 @@ fn wire__crate__api__receive__ffi_maybe_inputs_seen_check_no_inputs_seen_before_
 }
 fn wire__crate__api__receive__ffi_maybe_mixed_input_scripts_check_no_mixed_input_scripts_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
-    ptr: impl CstDecode<crate::api::receive::FfiMaybeMixedInputScripts>,
+    that: impl CstDecode<crate::api::receive::FfiMaybeMixedInputScripts>,
 ) {
-    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::DcoCodec,_,_>(flutter_rust_bridge::for_generated::TaskInfo{ debug_name: "ffi_maybe_mixed_input_scripts_check_no_mixed_input_scripts", port: Some(port_), mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal }, move || { let api_ptr = ptr.cst_decode(); move |context|  {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::DcoCodec,_,_>(flutter_rust_bridge::for_generated::TaskInfo{ debug_name: "ffi_maybe_mixed_input_scripts_check_no_mixed_input_scripts", port: Some(port_), mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal }, move || { let api_that = that.cst_decode(); move |context|  {
                     transform_result_dco::<_, _, crate::utils::error::PayjoinError>((move ||  {
-                         let output_ok = crate::api::receive::FfiMaybeMixedInputScripts::check_no_mixed_input_scripts(api_ptr)?;  Ok(output_ok)
+                         let output_ok = crate::api::receive::FfiMaybeMixedInputScripts::check_no_mixed_input_scripts(&api_that)?;  Ok(output_ok)
                     })())
                 } })
 }
 fn wire__crate__api__receive__ffi_outputs_unknown_identify_receiver_outputs_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
-    ptr: impl CstDecode<crate::api::receive::FfiOutputsUnknown>,
+    that: impl CstDecode<crate::api::receive::FfiOutputsUnknown>,
     is_receiver_output: impl CstDecode<flutter_rust_bridge::DartOpaque>,
 ) {
     FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::DcoCodec, _, _>(
@@ -267,7 +267,7 @@ fn wire__crate__api__receive__ffi_outputs_unknown_identify_receiver_outputs_impl
             mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
         },
         move || {
-            let api_ptr = ptr.cst_decode();
+            let api_that = that.cst_decode();
             let api_is_receiver_output =
                 decode_DartFn_Inputs_list_prim_u_8_strict_Output_bool_AnyhowException(
                     is_receiver_output.cst_decode(),
@@ -276,7 +276,7 @@ fn wire__crate__api__receive__ffi_outputs_unknown_identify_receiver_outputs_impl
                 transform_result_dco::<_, _, crate::utils::error::PayjoinError>((move || {
                     let output_ok =
                         crate::api::receive::FfiOutputsUnknown::identify_receiver_outputs(
-                            api_ptr,
+                            &api_that,
                             api_is_receiver_output,
                         )?;
                     Ok(output_ok)
@@ -444,9 +444,9 @@ fn wire__crate__api__receive__ffi_provisional_proposal_contribute_witness_input_
 }
 fn wire__crate__api__receive__ffi_provisional_proposal_finalize_proposal_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
-    ptr: impl CstDecode<crate::api::receive::FfiProvisionalProposal>,
+    that: impl CstDecode<crate::api::receive::FfiProvisionalProposal>,
     process_psbt: impl CstDecode<flutter_rust_bridge::DartOpaque>,
-    min_feerate_sat_per_vb: impl CstDecode<Option<u64>>,
+    min_fee_rate_sat_per_vb: impl CstDecode<Option<u64>>,
 ) {
     FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::DcoCodec, _, _>(
         flutter_rust_bridge::for_generated::TaskInfo {
@@ -455,17 +455,17 @@ fn wire__crate__api__receive__ffi_provisional_proposal_finalize_proposal_impl(
             mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
         },
         move || {
-            let api_ptr = ptr.cst_decode();
+            let api_that = that.cst_decode();
             let api_process_psbt = decode_DartFn_Inputs_String_Output_String_AnyhowException(
                 process_psbt.cst_decode(),
             );
-            let api_min_feerate_sat_per_vb = min_feerate_sat_per_vb.cst_decode();
+            let api_min_fee_rate_sat_per_vb = min_fee_rate_sat_per_vb.cst_decode();
             move |context| {
                 transform_result_dco::<_, _, crate::utils::error::PayjoinError>((move || {
                     let output_ok = crate::api::receive::FfiProvisionalProposal::finalize_proposal(
-                        api_ptr,
+                        &api_that,
                         api_process_psbt,
-                        api_min_feerate_sat_per_vb,
+                        api_min_fee_rate_sat_per_vb,
                     )?;
                     Ok(output_ok)
                 })(
@@ -605,7 +605,7 @@ fn wire__crate__api__receive__ffi_session_initializer_process_res_impl(
 }
 fn wire__crate__api__receive__ffi_unchecked_proposal_assume_interactive_receiver_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
-    ptr: impl CstDecode<crate::api::receive::FfiUncheckedProposal>,
+    that: impl CstDecode<crate::api::receive::FfiUncheckedProposal>,
 ) {
     FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::DcoCodec, _, _>(
         flutter_rust_bridge::for_generated::TaskInfo {
@@ -614,12 +614,12 @@ fn wire__crate__api__receive__ffi_unchecked_proposal_assume_interactive_receiver
             mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
         },
         move || {
-            let api_ptr = ptr.cst_decode();
+            let api_that = that.cst_decode();
             move |context| {
                 transform_result_dco::<_, _, ()>((move || {
                     let output_ok = Result::<_, ()>::Ok(
                         crate::api::receive::FfiUncheckedProposal::assume_interactive_receiver(
-                            api_ptr,
+                            &api_that,
                         ),
                     )?;
                     Ok(output_ok)
@@ -630,7 +630,7 @@ fn wire__crate__api__receive__ffi_unchecked_proposal_assume_interactive_receiver
 }
 fn wire__crate__api__receive__ffi_unchecked_proposal_check_broadcast_suitability_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
-    ptr: impl CstDecode<crate::api::receive::FfiUncheckedProposal>,
+    that: impl CstDecode<crate::api::receive::FfiUncheckedProposal>,
     min_fee_rate: impl CstDecode<Option<u64>>,
     can_broadcast: impl CstDecode<flutter_rust_bridge::DartOpaque>,
 ) {
@@ -641,7 +641,7 @@ fn wire__crate__api__receive__ffi_unchecked_proposal_check_broadcast_suitability
             mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
         },
         move || {
-            let api_ptr = ptr.cst_decode();
+            let api_that = that.cst_decode();
             let api_min_fee_rate = min_fee_rate.cst_decode();
             let api_can_broadcast =
                 decode_DartFn_Inputs_list_prim_u_8_strict_Output_bool_AnyhowException(
@@ -651,7 +651,7 @@ fn wire__crate__api__receive__ffi_unchecked_proposal_check_broadcast_suitability
                 transform_result_dco::<_, _, crate::utils::error::PayjoinError>((move || {
                     let output_ok =
                         crate::api::receive::FfiUncheckedProposal::check_broadcast_suitability(
-                            api_ptr,
+                            &api_that,
                             api_min_fee_rate,
                             api_can_broadcast,
                         )?;

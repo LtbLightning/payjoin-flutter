@@ -42,12 +42,12 @@ impl FfiUncheckedProposal {
     ///
     /// Call this after checking downstream.
     pub fn check_broadcast_suitability(
-        ptr: Self,
+        &self,
         min_fee_rate: Option<u64>,
         can_broadcast: impl Fn(Vec<u8>) -> DartFnFuture<bool>,
     ) -> Result<FfiMaybeInputsOwned, PayjoinError> {
         let runtime = tokio::runtime::Runtime::new().unwrap();
-        ptr.0
+        self.0
             .check_broadcast_suitability(min_fee_rate, |x| {
                 Ok(runtime.block_on(can_broadcast(x.clone())))
             })
@@ -57,8 +57,8 @@ impl FfiUncheckedProposal {
     /// Call this method if the only way to initiate a Payjoin with this receiver requires manual intervention, as in most consumer wallets.
     ///
     /// So-called “non-interactive” receivers, like payment processors, that allow arbitrary requests are otherwise vulnerable to probing attacks. Those receivers call get_transaction_to_check_broadcast() and attest_tested_and_scheduled_broadcast() after making those checks downstream.
-    pub fn assume_interactive_receiver(ptr: Self) -> FfiMaybeInputsOwned {
-        (*ptr.0.assume_interactive_receiver()).clone().into()
+    pub fn assume_interactive_receiver(&self) -> FfiMaybeInputsOwned {
+        (*self.0.assume_interactive_receiver()).clone().into()
     }
 }
 
@@ -70,11 +70,11 @@ impl From<payjoin_ffi::receive::v1::MaybeInputsOwned> for FfiMaybeInputsOwned {
 }
 impl FfiMaybeInputsOwned {
     pub fn check_inputs_not_owned(
-        ptr: Self,
+        &self,
         is_owned: impl Fn(Vec<u8>) -> DartFnFuture<bool>,
     ) -> Result<FfiMaybeMixedInputScripts, PayjoinError> {
         let runtime = tokio::runtime::Runtime::new().unwrap();
-        ptr.0
+        self.0
             .check_inputs_not_owned(|o| Ok(runtime.block_on(is_owned(o.clone()))))
             .map(|e| (*e).clone().into())
             .map_err(|e| e.into())
@@ -89,8 +89,8 @@ impl From<payjoin_ffi::receive::v1::MaybeMixedInputScripts> for FfiMaybeMixedInp
     }
 }
 impl FfiMaybeMixedInputScripts {
-    pub fn check_no_mixed_input_scripts(ptr: Self) -> Result<FfiMaybeInputsSeen, PayjoinError> {
-        ptr.0
+    pub fn check_no_mixed_input_scripts(&self) -> Result<FfiMaybeInputsSeen, PayjoinError> {
+        self.0
             .clone()
             .check_no_mixed_input_scripts()
             .map(|e| (*e).clone().into())
@@ -106,11 +106,11 @@ impl From<payjoin_ffi::receive::v1::MaybeInputsSeen> for FfiMaybeInputsSeen {
 
 impl FfiMaybeInputsSeen {
     pub fn check_no_inputs_seen_before(
-        ptr: Self,
+        &self,
         is_known: impl Fn(OutPoint) -> DartFnFuture<bool>,
     ) -> Result<FfiOutputsUnknown, PayjoinError> {
         let runtime = tokio::runtime::Runtime::new().unwrap();
-        ptr.0
+        self.0
             .check_no_inputs_seen_before(|o| Ok(runtime.block_on(is_known(o.into()))))
             .map(|e| (*e).clone().into())
             .map_err(|e| e.into())
@@ -126,11 +126,11 @@ impl From<payjoin_ffi::receive::v1::OutputsUnknown> for FfiOutputsUnknown {
 
 impl FfiOutputsUnknown {
     pub fn identify_receiver_outputs(
-        ptr: Self,
+        &self,
         is_receiver_output: impl Fn(Vec<u8>) -> DartFnFuture<bool>,
     ) -> Result<FfiProvisionalProposal, PayjoinError> {
         let runtime = tokio::runtime::Runtime::new().unwrap();
-        ptr.0
+        self.0
             .identify_receiver_outputs(|o| Ok(runtime.block_on(is_receiver_output(o.clone()))))
             .map(|e| e.into())
             .map_err(|e| e.into())
@@ -187,15 +187,15 @@ impl FfiProvisionalProposal {
     }
 
     pub fn finalize_proposal(
-        ptr: Self,
+        &self,
         process_psbt: impl Fn(String) -> DartFnFuture<String>,
-        min_feerate_sat_per_vb: Option<u64>,
+        min_fee_rate_sat_per_vb: Option<u64>,
     ) -> Result<FfiPayjoinProposal, PayjoinError> {
         let runtime = tokio::runtime::Runtime::new().unwrap();
-        ptr.0
+        self.0
             .finalize_proposal(
                 |o| Ok(runtime.block_on(process_psbt(o.clone()))),
-                min_feerate_sat_per_vb,
+                min_fee_rate_sat_per_vb,
             )
             .map(|e| (*e).clone().into())
             .map_err(|e| e.into())
@@ -203,12 +203,12 @@ impl FfiProvisionalProposal {
     pub(crate) fn _finalize_proposal(
         ptr: Self,
         process_psbt: impl Fn(String) -> Result<String, PayjoinError>,
-        min_feerate_sat_per_vb: Option<u64>,
+        min_fee_rate_sat_per_vb: Option<u64>,
     ) -> Result<FfiPayjoinProposal, PayjoinError> {
         ptr.0
             .finalize_proposal(
                 |o| process_psbt(o.clone()).map_err(|e| e.into()),
-                min_feerate_sat_per_vb,
+                min_fee_rate_sat_per_vb,
             )
             .map(|e| (*e).clone().into())
             .map_err(|e| e.into())

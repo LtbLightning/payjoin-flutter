@@ -1387,44 +1387,44 @@ pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_active_s
 #[no_mangle]
 pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_maybe_inputs_owned_check_inputs_not_owned(
     port_: i64,
-    ptr: *mut wire_cst_ffi_maybe_inputs_owned,
+    that: *mut wire_cst_ffi_maybe_inputs_owned,
     is_owned: *const std::ffi::c_void,
 ) {
     wire__crate__api__receive__ffi_maybe_inputs_owned_check_inputs_not_owned_impl(
-        port_, ptr, is_owned,
+        port_, that, is_owned,
     )
 }
 
 #[no_mangle]
 pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_maybe_inputs_seen_check_no_inputs_seen_before(
     port_: i64,
-    ptr: *mut wire_cst_ffi_maybe_inputs_seen,
+    that: *mut wire_cst_ffi_maybe_inputs_seen,
     is_known: *const std::ffi::c_void,
 ) {
     wire__crate__api__receive__ffi_maybe_inputs_seen_check_no_inputs_seen_before_impl(
-        port_, ptr, is_known,
+        port_, that, is_known,
     )
 }
 
 #[no_mangle]
 pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_maybe_mixed_input_scripts_check_no_mixed_input_scripts(
     port_: i64,
-    ptr: *mut wire_cst_ffi_maybe_mixed_input_scripts,
+    that: *mut wire_cst_ffi_maybe_mixed_input_scripts,
 ) {
     wire__crate__api__receive__ffi_maybe_mixed_input_scripts_check_no_mixed_input_scripts_impl(
-        port_, ptr,
+        port_, that,
     )
 }
 
 #[no_mangle]
 pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_outputs_unknown_identify_receiver_outputs(
     port_: i64,
-    ptr: *mut wire_cst_ffi_outputs_unknown,
+    that: *mut wire_cst_ffi_outputs_unknown,
     is_receiver_output: *const std::ffi::c_void,
 ) {
     wire__crate__api__receive__ffi_outputs_unknown_identify_receiver_outputs_impl(
         port_,
-        ptr,
+        that,
         is_receiver_output,
     )
 }
@@ -1490,15 +1490,15 @@ pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_provisio
 #[no_mangle]
 pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_provisional_proposal_finalize_proposal(
     port_: i64,
-    ptr: *mut wire_cst_ffi_provisional_proposal,
+    that: *mut wire_cst_ffi_provisional_proposal,
     process_psbt: *const std::ffi::c_void,
-    min_feerate_sat_per_vb: *mut u64,
+    min_fee_rate_sat_per_vb: *mut u64,
 ) {
     wire__crate__api__receive__ffi_provisional_proposal_finalize_proposal_impl(
         port_,
-        ptr,
+        that,
         process_psbt,
-        min_feerate_sat_per_vb,
+        min_fee_rate_sat_per_vb,
     )
 }
 
@@ -1570,21 +1570,21 @@ pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_session_
 #[no_mangle]
 pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_unchecked_proposal_assume_interactive_receiver(
     port_: i64,
-    ptr: *mut wire_cst_ffi_unchecked_proposal,
+    that: *mut wire_cst_ffi_unchecked_proposal,
 ) {
-    wire__crate__api__receive__ffi_unchecked_proposal_assume_interactive_receiver_impl(port_, ptr)
+    wire__crate__api__receive__ffi_unchecked_proposal_assume_interactive_receiver_impl(port_, that)
 }
 
 #[no_mangle]
 pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_unchecked_proposal_check_broadcast_suitability(
     port_: i64,
-    ptr: *mut wire_cst_ffi_unchecked_proposal,
+    that: *mut wire_cst_ffi_unchecked_proposal,
     min_fee_rate: *mut u64,
     can_broadcast: *const std::ffi::c_void,
 ) {
     wire__crate__api__receive__ffi_unchecked_proposal_check_broadcast_suitability_impl(
         port_,
-        ptr,
+        that,
         min_fee_rate,
         can_broadcast,
     )

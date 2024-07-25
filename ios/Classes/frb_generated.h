@@ -314,18 +314,18 @@ void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_active_session_proces
 WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__receive__ffi_active_session_public_key(struct wire_cst_ffi_active_session *that);
 
 void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_maybe_inputs_owned_check_inputs_not_owned(int64_t port_,
-                                                                                                     struct wire_cst_ffi_maybe_inputs_owned *ptr,
+                                                                                                     struct wire_cst_ffi_maybe_inputs_owned *that,
                                                                                                      const void *is_owned);
 
 void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_maybe_inputs_seen_check_no_inputs_seen_before(int64_t port_,
-                                                                                                         struct wire_cst_ffi_maybe_inputs_seen *ptr,
+                                                                                                         struct wire_cst_ffi_maybe_inputs_seen *that,
                                                                                                          const void *is_known);
 
 void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_maybe_mixed_input_scripts_check_no_mixed_input_scripts(int64_t port_,
-                                                                                                                  struct wire_cst_ffi_maybe_mixed_input_scripts *ptr);
+                                                                                                                  struct wire_cst_ffi_maybe_mixed_input_scripts *that);
 
 void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_outputs_unknown_identify_receiver_outputs(int64_t port_,
-                                                                                                     struct wire_cst_ffi_outputs_unknown *ptr,
+                                                                                                     struct wire_cst_ffi_outputs_unknown *that,
                                                                                                      const void *is_receiver_output);
 
 void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_payjoin_proposal_is_output_substitution_disabled(int64_t port_,
@@ -351,9 +351,9 @@ void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_provisional_proposal_
                                                                                                          struct wire_cst_out_point *outpoint);
 
 void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_provisional_proposal_finalize_proposal(int64_t port_,
-                                                                                                  struct wire_cst_ffi_provisional_proposal *ptr,
+                                                                                                  struct wire_cst_ffi_provisional_proposal *that,
                                                                                                   const void *process_psbt,
-                                                                                                  uint64_t *min_feerate_sat_per_vb);
+                                                                                                  uint64_t *min_fee_rate_sat_per_vb);
 
 void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_provisional_proposal_try_preserving_privacy(int64_t port_,
                                                                                                        struct wire_cst_ffi_provisional_proposal *that,
@@ -380,10 +380,10 @@ void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_session_initializer_p
                                                                                            struct wire_cst_ffi_client_response *ctx);
 
 void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_unchecked_proposal_assume_interactive_receiver(int64_t port_,
-                                                                                                          struct wire_cst_ffi_unchecked_proposal *ptr);
+                                                                                                          struct wire_cst_ffi_unchecked_proposal *that);
 
 void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_unchecked_proposal_check_broadcast_suitability(int64_t port_,
-                                                                                                          struct wire_cst_ffi_unchecked_proposal *ptr,
+                                                                                                          struct wire_cst_ffi_unchecked_proposal *that,
                                                                                                           uint64_t *min_fee_rate,
                                                                                                           const void *can_broadcast);
 

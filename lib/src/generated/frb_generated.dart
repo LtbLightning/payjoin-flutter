@@ -94,21 +94,21 @@ abstract class coreApi extends BaseApi {
 
   Future<FfiMaybeMixedInputScripts>
       crateApiReceiveFfiMaybeInputsOwnedCheckInputsNotOwned(
-          {required FfiMaybeInputsOwned ptr,
+          {required FfiMaybeInputsOwned that,
           required FutureOr<bool> Function(Uint8List) isOwned});
 
   Future<FfiOutputsUnknown>
       crateApiReceiveFfiMaybeInputsSeenCheckNoInputsSeenBefore(
-          {required FfiMaybeInputsSeen ptr,
+          {required FfiMaybeInputsSeen that,
           required FutureOr<bool> Function(OutPoint) isKnown});
 
   Future<FfiMaybeInputsSeen>
       crateApiReceiveFfiMaybeMixedInputScriptsCheckNoMixedInputScripts(
-          {required FfiMaybeMixedInputScripts ptr});
+          {required FfiMaybeMixedInputScripts that});
 
   Future<FfiProvisionalProposal>
       crateApiReceiveFfiOutputsUnknownIdentifyReceiverOutputs(
-          {required FfiOutputsUnknown ptr,
+          {required FfiOutputsUnknown that,
           required FutureOr<bool> Function(Uint8List) isReceiverOutput});
 
   Future<bool> crateApiReceiveFfiPayjoinProposalIsOutputSubstitutionDisabled(
@@ -135,9 +135,9 @@ abstract class coreApi extends BaseApi {
 
   Future<FfiPayjoinProposal>
       crateApiReceiveFfiProvisionalProposalFinalizeProposal(
-          {required FfiProvisionalProposal ptr,
+          {required FfiProvisionalProposal that,
           required FutureOr<String> Function(String) processPsbt,
-          BigInt? minFeerateSatPerVb});
+          BigInt? minFeeRateSatPerVb});
 
   Future<OutPoint> crateApiReceiveFfiProvisionalProposalTryPreservingPrivacy(
       {required FfiProvisionalProposal that,
@@ -166,11 +166,11 @@ abstract class coreApi extends BaseApi {
 
   Future<FfiMaybeInputsOwned>
       crateApiReceiveFfiUncheckedProposalAssumeInteractiveReceiver(
-          {required FfiUncheckedProposal ptr});
+          {required FfiUncheckedProposal that});
 
   Future<FfiMaybeInputsOwned>
       crateApiReceiveFfiUncheckedProposalCheckBroadcastSuitability(
-          {required FfiUncheckedProposal ptr,
+          {required FfiUncheckedProposal that,
           BigInt? minFeeRate,
           required FutureOr<bool> Function(Uint8List) canBroadcast});
 
@@ -733,11 +733,11 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   @override
   Future<FfiMaybeMixedInputScripts>
       crateApiReceiveFfiMaybeInputsOwnedCheckInputsNotOwned(
-          {required FfiMaybeInputsOwned ptr,
+          {required FfiMaybeInputsOwned that,
           required FutureOr<bool> Function(Uint8List) isOwned}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        var arg0 = cst_encode_box_autoadd_ffi_maybe_inputs_owned(ptr);
+        var arg0 = cst_encode_box_autoadd_ffi_maybe_inputs_owned(that);
         var arg1 =
             cst_encode_DartFn_Inputs_list_prim_u_8_strict_Output_bool_AnyhowException(
                 isOwned);
@@ -751,7 +751,7 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       ),
       constMeta:
           kCrateApiReceiveFfiMaybeInputsOwnedCheckInputsNotOwnedConstMeta,
-      argValues: [ptr, isOwned],
+      argValues: [that, isOwned],
       apiImpl: this,
     ));
   }
@@ -760,17 +760,17 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       get kCrateApiReceiveFfiMaybeInputsOwnedCheckInputsNotOwnedConstMeta =>
           const TaskConstMeta(
             debugName: "ffi_maybe_inputs_owned_check_inputs_not_owned",
-            argNames: ["ptr", "isOwned"],
+            argNames: ["that", "isOwned"],
           );
 
   @override
   Future<FfiOutputsUnknown>
       crateApiReceiveFfiMaybeInputsSeenCheckNoInputsSeenBefore(
-          {required FfiMaybeInputsSeen ptr,
+          {required FfiMaybeInputsSeen that,
           required FutureOr<bool> Function(OutPoint) isKnown}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        var arg0 = cst_encode_box_autoadd_ffi_maybe_inputs_seen(ptr);
+        var arg0 = cst_encode_box_autoadd_ffi_maybe_inputs_seen(that);
         var arg1 =
             cst_encode_DartFn_Inputs_out_point_Output_bool_AnyhowException(
                 isKnown);
@@ -784,7 +784,7 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       ),
       constMeta:
           kCrateApiReceiveFfiMaybeInputsSeenCheckNoInputsSeenBeforeConstMeta,
-      argValues: [ptr, isKnown],
+      argValues: [that, isKnown],
       apiImpl: this,
     ));
   }
@@ -793,16 +793,16 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       get kCrateApiReceiveFfiMaybeInputsSeenCheckNoInputsSeenBeforeConstMeta =>
           const TaskConstMeta(
             debugName: "ffi_maybe_inputs_seen_check_no_inputs_seen_before",
-            argNames: ["ptr", "isKnown"],
+            argNames: ["that", "isKnown"],
           );
 
   @override
   Future<FfiMaybeInputsSeen>
       crateApiReceiveFfiMaybeMixedInputScriptsCheckNoMixedInputScripts(
-          {required FfiMaybeMixedInputScripts ptr}) {
+          {required FfiMaybeMixedInputScripts that}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        var arg0 = cst_encode_box_autoadd_ffi_maybe_mixed_input_scripts(ptr);
+        var arg0 = cst_encode_box_autoadd_ffi_maybe_mixed_input_scripts(that);
         return wire
             .wire__crate__api__receive__ffi_maybe_mixed_input_scripts_check_no_mixed_input_scripts(
                 port_, arg0);
@@ -813,7 +813,7 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       ),
       constMeta:
           kCrateApiReceiveFfiMaybeMixedInputScriptsCheckNoMixedInputScriptsConstMeta,
-      argValues: [ptr],
+      argValues: [that],
       apiImpl: this,
     ));
   }
@@ -823,17 +823,17 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
           const TaskConstMeta(
             debugName:
                 "ffi_maybe_mixed_input_scripts_check_no_mixed_input_scripts",
-            argNames: ["ptr"],
+            argNames: ["that"],
           );
 
   @override
   Future<FfiProvisionalProposal>
       crateApiReceiveFfiOutputsUnknownIdentifyReceiverOutputs(
-          {required FfiOutputsUnknown ptr,
+          {required FfiOutputsUnknown that,
           required FutureOr<bool> Function(Uint8List) isReceiverOutput}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        var arg0 = cst_encode_box_autoadd_ffi_outputs_unknown(ptr);
+        var arg0 = cst_encode_box_autoadd_ffi_outputs_unknown(that);
         var arg1 =
             cst_encode_DartFn_Inputs_list_prim_u_8_strict_Output_bool_AnyhowException(
                 isReceiverOutput);
@@ -847,7 +847,7 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       ),
       constMeta:
           kCrateApiReceiveFfiOutputsUnknownIdentifyReceiverOutputsConstMeta,
-      argValues: [ptr, isReceiverOutput],
+      argValues: [that, isReceiverOutput],
       apiImpl: this,
     ));
   }
@@ -856,7 +856,7 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       get kCrateApiReceiveFfiOutputsUnknownIdentifyReceiverOutputsConstMeta =>
           const TaskConstMeta(
             debugName: "ffi_outputs_unknown_identify_receiver_outputs",
-            argNames: ["ptr", "isReceiverOutput"],
+            argNames: ["that", "isReceiverOutput"],
           );
 
   @override
@@ -1031,16 +1031,16 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   @override
   Future<FfiPayjoinProposal>
       crateApiReceiveFfiProvisionalProposalFinalizeProposal(
-          {required FfiProvisionalProposal ptr,
+          {required FfiProvisionalProposal that,
           required FutureOr<String> Function(String) processPsbt,
-          BigInt? minFeerateSatPerVb}) {
+          BigInt? minFeeRateSatPerVb}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        var arg0 = cst_encode_box_autoadd_ffi_provisional_proposal(ptr);
+        var arg0 = cst_encode_box_autoadd_ffi_provisional_proposal(that);
         var arg1 =
             cst_encode_DartFn_Inputs_String_Output_String_AnyhowException(
                 processPsbt);
-        var arg2 = cst_encode_opt_box_autoadd_u_64(minFeerateSatPerVb);
+        var arg2 = cst_encode_opt_box_autoadd_u_64(minFeeRateSatPerVb);
         return wire
             .wire__crate__api__receive__ffi_provisional_proposal_finalize_proposal(
                 port_, arg0, arg1, arg2);
@@ -1051,7 +1051,7 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       ),
       constMeta:
           kCrateApiReceiveFfiProvisionalProposalFinalizeProposalConstMeta,
-      argValues: [ptr, processPsbt, minFeerateSatPerVb],
+      argValues: [that, processPsbt, minFeeRateSatPerVb],
       apiImpl: this,
     ));
   }
@@ -1060,7 +1060,7 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       get kCrateApiReceiveFfiProvisionalProposalFinalizeProposalConstMeta =>
           const TaskConstMeta(
             debugName: "ffi_provisional_proposal_finalize_proposal",
-            argNames: ["ptr", "processPsbt", "minFeerateSatPerVb"],
+            argNames: ["that", "processPsbt", "minFeeRateSatPerVb"],
           );
 
   @override
@@ -1236,10 +1236,10 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   @override
   Future<FfiMaybeInputsOwned>
       crateApiReceiveFfiUncheckedProposalAssumeInteractiveReceiver(
-          {required FfiUncheckedProposal ptr}) {
+          {required FfiUncheckedProposal that}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        var arg0 = cst_encode_box_autoadd_ffi_unchecked_proposal(ptr);
+        var arg0 = cst_encode_box_autoadd_ffi_unchecked_proposal(that);
         return wire
             .wire__crate__api__receive__ffi_unchecked_proposal_assume_interactive_receiver(
                 port_, arg0);
@@ -1250,7 +1250,7 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       ),
       constMeta:
           kCrateApiReceiveFfiUncheckedProposalAssumeInteractiveReceiverConstMeta,
-      argValues: [ptr],
+      argValues: [that],
       apiImpl: this,
     ));
   }
@@ -1259,18 +1259,18 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       get kCrateApiReceiveFfiUncheckedProposalAssumeInteractiveReceiverConstMeta =>
           const TaskConstMeta(
             debugName: "ffi_unchecked_proposal_assume_interactive_receiver",
-            argNames: ["ptr"],
+            argNames: ["that"],
           );
 
   @override
   Future<FfiMaybeInputsOwned>
       crateApiReceiveFfiUncheckedProposalCheckBroadcastSuitability(
-          {required FfiUncheckedProposal ptr,
+          {required FfiUncheckedProposal that,
           BigInt? minFeeRate,
           required FutureOr<bool> Function(Uint8List) canBroadcast}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        var arg0 = cst_encode_box_autoadd_ffi_unchecked_proposal(ptr);
+        var arg0 = cst_encode_box_autoadd_ffi_unchecked_proposal(that);
         var arg1 = cst_encode_opt_box_autoadd_u_64(minFeeRate);
         var arg2 =
             cst_encode_DartFn_Inputs_list_prim_u_8_strict_Output_bool_AnyhowException(
@@ -1285,7 +1285,7 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       ),
       constMeta:
           kCrateApiReceiveFfiUncheckedProposalCheckBroadcastSuitabilityConstMeta,
-      argValues: [ptr, minFeeRate, canBroadcast],
+      argValues: [that, minFeeRate, canBroadcast],
       apiImpl: this,
     ));
   }
@@ -1294,7 +1294,7 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       get kCrateApiReceiveFfiUncheckedProposalCheckBroadcastSuitabilityConstMeta =>
           const TaskConstMeta(
             debugName: "ffi_unchecked_proposal_check_broadcast_suitability",
-            argNames: ["ptr", "minFeeRate", "canBroadcast"],
+            argNames: ["that", "minFeeRate", "canBroadcast"],
           );
 
   @override

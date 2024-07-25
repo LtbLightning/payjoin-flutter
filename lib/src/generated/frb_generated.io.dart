@@ -2787,12 +2787,12 @@ class coreWire implements BaseWire {
 
   void wire__crate__api__receive__ffi_maybe_inputs_owned_check_inputs_not_owned(
     int port_,
-    ffi.Pointer<wire_cst_ffi_maybe_inputs_owned> ptr,
+    ffi.Pointer<wire_cst_ffi_maybe_inputs_owned> that,
     ffi.Pointer<ffi.Void> is_owned,
   ) {
     return _wire__crate__api__receive__ffi_maybe_inputs_owned_check_inputs_not_owned(
       port_,
-      ptr,
+      that,
       is_owned,
     );
   }
@@ -2814,12 +2814,12 @@ class coreWire implements BaseWire {
   void
       wire__crate__api__receive__ffi_maybe_inputs_seen_check_no_inputs_seen_before(
     int port_,
-    ffi.Pointer<wire_cst_ffi_maybe_inputs_seen> ptr,
+    ffi.Pointer<wire_cst_ffi_maybe_inputs_seen> that,
     ffi.Pointer<ffi.Void> is_known,
   ) {
     return _wire__crate__api__receive__ffi_maybe_inputs_seen_check_no_inputs_seen_before(
       port_,
-      ptr,
+      that,
       is_known,
     );
   }
@@ -2841,11 +2841,11 @@ class coreWire implements BaseWire {
   void
       wire__crate__api__receive__ffi_maybe_mixed_input_scripts_check_no_mixed_input_scripts(
     int port_,
-    ffi.Pointer<wire_cst_ffi_maybe_mixed_input_scripts> ptr,
+    ffi.Pointer<wire_cst_ffi_maybe_mixed_input_scripts> that,
   ) {
     return _wire__crate__api__receive__ffi_maybe_mixed_input_scripts_check_no_mixed_input_scripts(
       port_,
-      ptr,
+      that,
     );
   }
 
@@ -2863,12 +2863,12 @@ class coreWire implements BaseWire {
 
   void wire__crate__api__receive__ffi_outputs_unknown_identify_receiver_outputs(
     int port_,
-    ffi.Pointer<wire_cst_ffi_outputs_unknown> ptr,
+    ffi.Pointer<wire_cst_ffi_outputs_unknown> that,
     ffi.Pointer<ffi.Void> is_receiver_output,
   ) {
     return _wire__crate__api__receive__ffi_outputs_unknown_identify_receiver_outputs(
       port_,
-      ptr,
+      that,
       is_receiver_output,
     );
   }
@@ -3038,15 +3038,15 @@ class coreWire implements BaseWire {
 
   void wire__crate__api__receive__ffi_provisional_proposal_finalize_proposal(
     int port_,
-    ffi.Pointer<wire_cst_ffi_provisional_proposal> ptr,
+    ffi.Pointer<wire_cst_ffi_provisional_proposal> that,
     ffi.Pointer<ffi.Void> process_psbt,
-    ffi.Pointer<ffi.Uint64> min_feerate_sat_per_vb,
+    ffi.Pointer<ffi.Uint64> min_fee_rate_sat_per_vb,
   ) {
     return _wire__crate__api__receive__ffi_provisional_proposal_finalize_proposal(
       port_,
-      ptr,
+      that,
       process_psbt,
-      min_feerate_sat_per_vb,
+      min_fee_rate_sat_per_vb,
     );
   }
 
@@ -3218,11 +3218,11 @@ class coreWire implements BaseWire {
   void
       wire__crate__api__receive__ffi_unchecked_proposal_assume_interactive_receiver(
     int port_,
-    ffi.Pointer<wire_cst_ffi_unchecked_proposal> ptr,
+    ffi.Pointer<wire_cst_ffi_unchecked_proposal> that,
   ) {
     return _wire__crate__api__receive__ffi_unchecked_proposal_assume_interactive_receiver(
       port_,
-      ptr,
+      that,
     );
   }
 
@@ -3241,13 +3241,13 @@ class coreWire implements BaseWire {
   void
       wire__crate__api__receive__ffi_unchecked_proposal_check_broadcast_suitability(
     int port_,
-    ffi.Pointer<wire_cst_ffi_unchecked_proposal> ptr,
+    ffi.Pointer<wire_cst_ffi_unchecked_proposal> that,
     ffi.Pointer<ffi.Uint64> min_fee_rate,
     ffi.Pointer<ffi.Void> can_broadcast,
   ) {
     return _wire__crate__api__receive__ffi_unchecked_proposal_check_broadcast_suitability(
       port_,
-      ptr,
+      that,
       min_fee_rate,
       can_broadcast,
     );
