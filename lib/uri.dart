@@ -146,8 +146,9 @@ class PjUri extends FfiPjUri {
 
 class Url extends FfiUrl {
   Url._({required super.field0});
-  static Url fromStr(String uri) {
+  static Future<Url> fromStr(String uri) async {
     try {
+      await PConfig.initializeApp();
       final res = FfiUrl.fromStr(url: uri);
       return Url._(field0: res.field0);
     } on error.PayjoinError catch (e) {

@@ -119,21 +119,25 @@ fn wire__crate__api__receive__ffi_active_session_pj_uri_builder_impl(
     )
 }
 fn wire__crate__api__receive__ffi_active_session_pj_url_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
     that: impl CstDecode<crate::api::receive::FfiActiveSession>,
-) -> flutter_rust_bridge::for_generated::WireSyncRust2DartDco {
-    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::DcoCodec, _>(
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::DcoCodec, _, _>(
         flutter_rust_bridge::for_generated::TaskInfo {
             debug_name: "ffi_active_session_pj_url",
-            port: None,
-            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
         },
         move || {
             let api_that = that.cst_decode();
-            transform_result_dco::<_, _, ()>((move || {
-                let output_ok =
-                    Result::<_, ()>::Ok(crate::api::receive::FfiActiveSession::pj_url(&api_that))?;
-                Ok(output_ok)
-            })())
+            move |context| {
+                transform_result_dco::<_, _, ()>((move || {
+                    let output_ok = Result::<_, ()>::Ok(
+                        crate::api::receive::FfiActiveSession::pj_url(&api_that),
+                    )?;
+                    Ok(output_ok)
+                })())
+            }
         },
     )
 }

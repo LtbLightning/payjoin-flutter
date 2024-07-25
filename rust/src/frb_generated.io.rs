@@ -1341,9 +1341,10 @@ pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_active_s
 
 #[no_mangle]
 pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_active_session_pj_url(
+    port_: i64,
     that: *mut wire_cst_ffi_active_session,
-) -> flutter_rust_bridge::for_generated::WireSyncRust2DartDco {
-    wire__crate__api__receive__ffi_active_session_pj_url_impl(that)
+) {
+    wire__crate__api__receive__ffi_active_session_pj_url_impl(port_, that)
 }
 
 #[no_mangle]

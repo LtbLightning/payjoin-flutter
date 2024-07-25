@@ -299,7 +299,8 @@ void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_active_session_extrac
 
 WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__receive__ffi_active_session_pj_uri_builder(struct wire_cst_ffi_active_session *that);
 
-WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__receive__ffi_active_session_pj_url(struct wire_cst_ffi_active_session *that);
+void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_active_session_pj_url(int64_t port_,
+                                                                                 struct wire_cst_ffi_active_session *that);
 
 void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_active_session_process_res(int64_t port_,
                                                                                       struct wire_cst_ffi_active_session *that,

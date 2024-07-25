@@ -81,7 +81,7 @@ class RequestContext extends FfiRequestContext {
     try {
       final res = await super.extractV1();
       final request = common.Request(
-        url: Url.fromStr((res.$1.url.asString())),
+        url: await Url.fromStr((res.$1.url.asString())),
         body: res.$1.body,
       );
       return (request, ContextV1._(field0: res.$2.field0));
@@ -99,7 +99,7 @@ class RequestContext extends FfiRequestContext {
         ohttpProxyUrl: ohttpProxyUrl,
       );
       final request = common.Request(
-        url: Url.fromStr((res.$1.url.asString())),
+        url: await Url.fromStr((res.$1.url.asString())),
         body: res.$1.body,
       );
       return (request, ContextV2._(field0: res.$2.field0));

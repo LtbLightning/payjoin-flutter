@@ -81,7 +81,8 @@ abstract class coreApi extends BaseApi {
   FfiPjUriBuilder crateApiReceiveFfiActiveSessionPjUriBuilder(
       {required FfiActiveSession that});
 
-  FfiUrl crateApiReceiveFfiActiveSessionPjUrl({required FfiActiveSession that});
+  Future<FfiUrl> crateApiReceiveFfiActiveSessionPjUrl(
+      {required FfiActiveSession that});
 
   Future<FfiV2UncheckedProposal?> crateApiReceiveFfiActiveSessionProcessRes(
       {required FfiActiveSession that,
@@ -650,12 +651,13 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       );
 
   @override
-  FfiUrl crateApiReceiveFfiActiveSessionPjUrl(
+  Future<FfiUrl> crateApiReceiveFfiActiveSessionPjUrl(
       {required FfiActiveSession that}) {
-    return handler.executeSync(SyncTask(
-      callFfi: () {
+    return handler.executeNormal(NormalTask(
+      callFfi: (port_) {
         var arg0 = cst_encode_box_autoadd_ffi_active_session(that);
-        return wire.wire__crate__api__receive__ffi_active_session_pj_url(arg0);
+        return wire.wire__crate__api__receive__ffi_active_session_pj_url(
+            port_, arg0);
       },
       codec: DcoCodec(
         decodeSuccessData: dco_decode_ffi_url,

@@ -2689,23 +2689,24 @@ class coreWire implements BaseWire {
               WireSyncRust2DartDco Function(
                   ffi.Pointer<wire_cst_ffi_active_session>)>();
 
-  WireSyncRust2DartDco wire__crate__api__receive__ffi_active_session_pj_url(
+  void wire__crate__api__receive__ffi_active_session_pj_url(
+    int port_,
     ffi.Pointer<wire_cst_ffi_active_session> that,
   ) {
     return _wire__crate__api__receive__ffi_active_session_pj_url(
+      port_,
       that,
     );
   }
 
   late final _wire__crate__api__receive__ffi_active_session_pj_urlPtr = _lookup<
           ffi.NativeFunction<
-              WireSyncRust2DartDco Function(
-                  ffi.Pointer<wire_cst_ffi_active_session>)>>(
+              ffi.Void Function(
+                  ffi.Int64, ffi.Pointer<wire_cst_ffi_active_session>)>>(
       'frbgen_payjoin_flutter_wire__crate__api__receive__ffi_active_session_pj_url');
   late final _wire__crate__api__receive__ffi_active_session_pj_url =
       _wire__crate__api__receive__ffi_active_session_pj_urlPtr.asFunction<
-          WireSyncRust2DartDco Function(
-              ffi.Pointer<wire_cst_ffi_active_session>)>();
+          void Function(int, ffi.Pointer<wire_cst_ffi_active_session>)>();
 
   void wire__crate__api__receive__ffi_active_session_process_res(
     int port_,

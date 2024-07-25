@@ -30,7 +30,8 @@ class FfiActiveSession {
         that: this,
       );
 
-  FfiUrl pjUrl() => core.instance.api.crateApiReceiveFfiActiveSessionPjUrl(
+  Future<FfiUrl> pjUrl() =>
+      core.instance.api.crateApiReceiveFfiActiveSessionPjUrl(
         that: this,
       );
 

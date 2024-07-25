@@ -300,7 +300,6 @@ impl FfiActiveSession {
         self.0.public_key()
     }
 
-    #[frb(sync)]
     pub fn pj_url(&self) -> FfiUrl {
         self.0.pj_url().into()
     }

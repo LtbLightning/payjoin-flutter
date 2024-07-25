@@ -48,7 +48,7 @@ class SessionInitializer extends FfiSessionInitializer {
     try {
       final res = await super.extractReq();
       final request = Request(
-        url: Url.fromStr(res.$1.url.asString()),
+        url: await Url.fromStr(res.$1.url.asString()),
         body: res.$1.body,
       );
       return (request, res.$2);
@@ -66,7 +66,7 @@ class ActiveSession extends FfiActiveSession {
     try {
       final res = await super.extractReq();
       final request = Request(
-        url: Url.fromStr(res.$1.url.asString()),
+        url: await Url.fromStr(res.$1.url.asString()),
         body: res.$1.body,
       );
       return (request, res.$2);
@@ -93,8 +93,8 @@ class ActiveSession extends FfiActiveSession {
   /// The contents of the `&pj=` query parameter including the base64url-encoded public key receiver subdirectory.
   /// This identifies a session at the payjoin directory server.
   @override
-  Url pjUrl() {
-    final res = super.pjUrl();
+  Future<Url> pjUrl() async {
+    final res = await super.pjUrl();
     return Url.fromStr(res.asString());
   }
 
@@ -310,7 +310,7 @@ class PayjoinProposal extends FfiV2PayjoinProposal {
     try {
       final res = await super.extractV2Req();
       final request = Request(
-        url: Url.fromStr(res.$1.url.asString()),
+        url: await Url.fromStr(res.$1.url.asString()),
         body: res.$1.body,
       );
       return (request, res.$2);
