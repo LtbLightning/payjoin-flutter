@@ -20,7 +20,7 @@ class FfiActiveSession {
     required this.field0,
   });
 
-  Future<((FfiUrl, Uint8List), ClientResponse)> extractReq() =>
+  Future<(Request, ClientResponse)> extractReq() =>
       core.instance.api.crateApiReceiveFfiActiveSessionExtractReq(
         that: this,
       );
@@ -244,7 +244,7 @@ class FfiSessionInitializer {
     required this.field0,
   });
 
-  Future<((FfiUrl, Uint8List), ClientResponse)> extractReq() =>
+  Future<(Request, ClientResponse)> extractReq() =>
       core.instance.api.crateApiReceiveFfiSessionInitializerExtractReq(
         that: this,
       );
@@ -451,7 +451,7 @@ class FfiV2PayjoinProposal {
         that: this,
       );
 
-  Future<((FfiUrl, Uint8List), ClientResponse)> extractV2Req() =>
+  Future<(Request, ClientResponse)> extractV2Req() =>
       core.instance.api.crateApiReceiveFfiV2PayjoinProposalExtractV2Req(
         that: this,
       );

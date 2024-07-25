@@ -3,6 +3,7 @@
 
 // ignore_for_file: invalid_use_of_internal_member, unused_import, unnecessary_import
 
+import '../api/uri.dart';
 import '../frb_generated.dart';
 import '../lib.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
@@ -79,6 +80,27 @@ class OutPoint {
           runtimeType == other.runtimeType &&
           txid == other.txid &&
           vout == other.vout;
+}
+
+class Request {
+  final FfiUrl url;
+  final Uint8List body;
+
+  const Request({
+    required this.url,
+    required this.body,
+  });
+
+  @override
+  int get hashCode => url.hashCode ^ body.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Request &&
+          runtimeType == other.runtimeType &&
+          url == other.url &&
+          body == other.body;
 }
 
 class TxOut {

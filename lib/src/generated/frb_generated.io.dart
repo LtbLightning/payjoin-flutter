@@ -418,9 +418,6 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   FfiProvisionalProposal dco_decode_ffi_provisional_proposal(dynamic raw);
 
   @protected
-  FfiRequest dco_decode_ffi_request(dynamic raw);
-
-  @protected
   FfiRequestBuilder dco_decode_ffi_request_builder(dynamic raw);
 
   @protected
@@ -513,27 +510,25 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   PayjoinError dco_decode_payjoin_error(dynamic raw);
 
   @protected
-  (FfiRequest, FfiContextV1) dco_decode_record_ffi_request_ffi_context_v_1(
+  (Request, ClientResponse) dco_decode_record_request_client_response(
       dynamic raw);
 
   @protected
-  (FfiRequest, FfiContextV2) dco_decode_record_ffi_request_ffi_context_v_2(
+  (Request, FfiContextV1) dco_decode_record_request_ffi_context_v_1(
       dynamic raw);
 
   @protected
-  (FfiUrl, Uint8List) dco_decode_record_ffi_url_list_prim_u_8_strict(
+  (Request, FfiContextV2) dco_decode_record_request_ffi_context_v_2(
       dynamic raw);
-
-  @protected
-  ((FfiUrl, Uint8List), ClientResponse)
-      dco_decode_record_record_ffi_url_list_prim_u_8_strict_client_response(
-          dynamic raw);
 
   @protected
   (String, String) dco_decode_record_string_string(dynamic raw);
 
   @protected
   (BigInt, OutPoint) dco_decode_record_u_64_out_point(dynamic raw);
+
+  @protected
+  Request dco_decode_request(dynamic raw);
 
   @protected
   TxOut dco_decode_tx_out(dynamic raw);
@@ -853,9 +848,6 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
       SseDeserializer deserializer);
 
   @protected
-  FfiRequest sse_decode_ffi_request(SseDeserializer deserializer);
-
-  @protected
   FfiRequestBuilder sse_decode_ffi_request_builder(
       SseDeserializer deserializer);
 
@@ -961,21 +953,16 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   PayjoinError sse_decode_payjoin_error(SseDeserializer deserializer);
 
   @protected
-  (FfiRequest, FfiContextV1) sse_decode_record_ffi_request_ffi_context_v_1(
+  (Request, ClientResponse) sse_decode_record_request_client_response(
       SseDeserializer deserializer);
 
   @protected
-  (FfiRequest, FfiContextV2) sse_decode_record_ffi_request_ffi_context_v_2(
+  (Request, FfiContextV1) sse_decode_record_request_ffi_context_v_1(
       SseDeserializer deserializer);
 
   @protected
-  (FfiUrl, Uint8List) sse_decode_record_ffi_url_list_prim_u_8_strict(
+  (Request, FfiContextV2) sse_decode_record_request_ffi_context_v_2(
       SseDeserializer deserializer);
-
-  @protected
-  ((FfiUrl, Uint8List), ClientResponse)
-      sse_decode_record_record_ffi_url_list_prim_u_8_strict_client_response(
-          SseDeserializer deserializer);
 
   @protected
   (String, String) sse_decode_record_string_string(
@@ -984,6 +971,9 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   @protected
   (BigInt, OutPoint) sse_decode_record_u_64_out_point(
       SseDeserializer deserializer);
+
+  @protected
+  Request sse_decode_request(SseDeserializer deserializer);
 
   @protected
   TxOut sse_decode_tx_out(SseDeserializer deserializer);
@@ -1721,13 +1711,6 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   }
 
   @protected
-  void cst_api_fill_to_wire_ffi_request(
-      FfiRequest apiObj, wire_cst_ffi_request wireObj) {
-    cst_api_fill_to_wire_ffi_url(apiObj.ffiUrl, wireObj.ffi_url);
-    wireObj.body = cst_encode_list_prim_u_8_strict(apiObj.body);
-  }
-
-  @protected
   void cst_api_fill_to_wire_ffi_request_builder(
       FfiRequestBuilder apiObj, wire_cst_ffi_request_builder wireObj) {
     wireObj.field0 =
@@ -1952,38 +1935,27 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   }
 
   @protected
-  void cst_api_fill_to_wire_record_ffi_request_ffi_context_v_1(
-      (FfiRequest, FfiContextV1) apiObj,
-      wire_cst_record_ffi_request_ffi_context_v_1 wireObj) {
-    cst_api_fill_to_wire_ffi_request(apiObj.$1, wireObj.field0);
+  void cst_api_fill_to_wire_record_request_client_response(
+      (Request, ClientResponse) apiObj,
+      wire_cst_record_request_client_response wireObj) {
+    cst_api_fill_to_wire_request(apiObj.$1, wireObj.field0);
+    cst_api_fill_to_wire_client_response(apiObj.$2, wireObj.field1);
+  }
+
+  @protected
+  void cst_api_fill_to_wire_record_request_ffi_context_v_1(
+      (Request, FfiContextV1) apiObj,
+      wire_cst_record_request_ffi_context_v_1 wireObj) {
+    cst_api_fill_to_wire_request(apiObj.$1, wireObj.field0);
     cst_api_fill_to_wire_ffi_context_v_1(apiObj.$2, wireObj.field1);
   }
 
   @protected
-  void cst_api_fill_to_wire_record_ffi_request_ffi_context_v_2(
-      (FfiRequest, FfiContextV2) apiObj,
-      wire_cst_record_ffi_request_ffi_context_v_2 wireObj) {
-    cst_api_fill_to_wire_ffi_request(apiObj.$1, wireObj.field0);
+  void cst_api_fill_to_wire_record_request_ffi_context_v_2(
+      (Request, FfiContextV2) apiObj,
+      wire_cst_record_request_ffi_context_v_2 wireObj) {
+    cst_api_fill_to_wire_request(apiObj.$1, wireObj.field0);
     cst_api_fill_to_wire_ffi_context_v_2(apiObj.$2, wireObj.field1);
-  }
-
-  @protected
-  void cst_api_fill_to_wire_record_ffi_url_list_prim_u_8_strict(
-      (FfiUrl, Uint8List) apiObj,
-      wire_cst_record_ffi_url_list_prim_u_8_strict wireObj) {
-    cst_api_fill_to_wire_ffi_url(apiObj.$1, wireObj.field0);
-    wireObj.field1 = cst_encode_list_prim_u_8_strict(apiObj.$2);
-  }
-
-  @protected
-  void
-      cst_api_fill_to_wire_record_record_ffi_url_list_prim_u_8_strict_client_response(
-          ((FfiUrl, Uint8List), ClientResponse) apiObj,
-          wire_cst_record_record_ffi_url_list_prim_u_8_strict_client_response
-              wireObj) {
-    cst_api_fill_to_wire_record_ffi_url_list_prim_u_8_strict(
-        apiObj.$1, wireObj.field0);
-    cst_api_fill_to_wire_client_response(apiObj.$2, wireObj.field1);
   }
 
   @protected
@@ -1998,6 +1970,12 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
       (BigInt, OutPoint) apiObj, wire_cst_record_u_64_out_point wireObj) {
     wireObj.field0 = cst_encode_u_64(apiObj.$1);
     cst_api_fill_to_wire_out_point(apiObj.$2, wireObj.field1);
+  }
+
+  @protected
+  void cst_api_fill_to_wire_request(Request apiObj, wire_cst_request wireObj) {
+    cst_api_fill_to_wire_ffi_url(apiObj.url, wireObj.url);
+    wireObj.body = cst_encode_list_prim_u_8_strict(apiObj.body);
   }
 
   @protected
@@ -2460,9 +2438,6 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
       FfiProvisionalProposal self, SseSerializer serializer);
 
   @protected
-  void sse_encode_ffi_request(FfiRequest self, SseSerializer serializer);
-
-  @protected
   void sse_encode_ffi_request_builder(
       FfiRequestBuilder self, SseSerializer serializer);
 
@@ -2570,20 +2545,16 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   void sse_encode_payjoin_error(PayjoinError self, SseSerializer serializer);
 
   @protected
-  void sse_encode_record_ffi_request_ffi_context_v_1(
-      (FfiRequest, FfiContextV1) self, SseSerializer serializer);
+  void sse_encode_record_request_client_response(
+      (Request, ClientResponse) self, SseSerializer serializer);
 
   @protected
-  void sse_encode_record_ffi_request_ffi_context_v_2(
-      (FfiRequest, FfiContextV2) self, SseSerializer serializer);
+  void sse_encode_record_request_ffi_context_v_1(
+      (Request, FfiContextV1) self, SseSerializer serializer);
 
   @protected
-  void sse_encode_record_ffi_url_list_prim_u_8_strict(
-      (FfiUrl, Uint8List) self, SseSerializer serializer);
-
-  @protected
-  void sse_encode_record_record_ffi_url_list_prim_u_8_strict_client_response(
-      ((FfiUrl, Uint8List), ClientResponse) self, SseSerializer serializer);
+  void sse_encode_record_request_ffi_context_v_2(
+      (Request, FfiContextV2) self, SseSerializer serializer);
 
   @protected
   void sse_encode_record_string_string(
@@ -2592,6 +2563,9 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   @protected
   void sse_encode_record_u_64_out_point(
       (BigInt, OutPoint) self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_request(Request self, SseSerializer serializer);
 
   @protected
   void sse_encode_tx_out(TxOut self, SseSerializer serializer);
@@ -5939,12 +5913,6 @@ final class wire_cst_list_prim_u_64_strict extends ffi.Struct {
   external int len;
 }
 
-final class wire_cst_ffi_request extends ffi.Struct {
-  external wire_cst_ffi_url ffi_url;
-
-  external ffi.Pointer<wire_cst_list_prim_u_8_strict> body;
-}
-
 final class wire_cst_PayjoinError_InvalidAddress extends ffi.Struct {
   external ffi.Pointer<wire_cst_list_prim_u_8_strict> message;
 }
@@ -6062,27 +6030,26 @@ final class wire_cst_payjoin_error extends ffi.Struct {
   external PayjoinErrorKind kind;
 }
 
-final class wire_cst_record_ffi_request_ffi_context_v_1 extends ffi.Struct {
-  external wire_cst_ffi_request field0;
+final class wire_cst_request extends ffi.Struct {
+  external wire_cst_ffi_url url;
+
+  external ffi.Pointer<wire_cst_list_prim_u_8_strict> body;
+}
+
+final class wire_cst_record_request_client_response extends ffi.Struct {
+  external wire_cst_request field0;
+
+  external wire_cst_client_response field1;
+}
+
+final class wire_cst_record_request_ffi_context_v_1 extends ffi.Struct {
+  external wire_cst_request field0;
 
   external wire_cst_ffi_context_v_1 field1;
 }
 
-final class wire_cst_record_ffi_request_ffi_context_v_2 extends ffi.Struct {
-  external wire_cst_ffi_request field0;
+final class wire_cst_record_request_ffi_context_v_2 extends ffi.Struct {
+  external wire_cst_request field0;
 
   external wire_cst_ffi_context_v_2 field1;
-}
-
-final class wire_cst_record_ffi_url_list_prim_u_8_strict extends ffi.Struct {
-  external wire_cst_ffi_url field0;
-
-  external ffi.Pointer<wire_cst_list_prim_u_8_strict> field1;
-}
-
-final class wire_cst_record_record_ffi_url_list_prim_u_8_strict_client_response
-    extends ffi.Struct {
-  external wire_cst_record_ffi_url_list_prim_u_8_strict field0;
-
-  external wire_cst_client_response field1;
 }

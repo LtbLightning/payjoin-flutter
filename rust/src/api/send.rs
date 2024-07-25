@@ -1,5 +1,6 @@
 use crate::api::uri::{FfiPjUri, FfiUrl};
 use crate::frb_generated::RustOpaque;
+use crate::utils::types::Request;
 use std::sync::Arc;
 
 use super::receive::PayjoinError;
@@ -78,7 +79,7 @@ impl From<FfiRequestContext> for payjoin_ffi::send::v1::RequestContext {
     }
 }
 impl FfiRequestContext {
-    pub fn extract_v1(&self) -> Result<(FfiRequest, FfiContextV1), PayjoinError> {
+    pub fn extract_v1(&self) -> Result<(Request, FfiContextV1), PayjoinError> {
         match self.0.extract_v1() {
             Ok(e) => Ok((e.request.into(), e.context_v1.into())),
             Err(e) => Err(e.into()),
@@ -87,7 +88,7 @@ impl FfiRequestContext {
     pub fn extract_v2(
         &self,
         ohttp_proxy_url: FfiUrl,
-    ) -> Result<(FfiRequest, FfiContextV2), PayjoinError> {
+    ) -> Result<(Request, FfiContextV2), PayjoinError> {
         match self.0.extract_v2(Arc::new((*ohttp_proxy_url.0).clone())) {
             Ok(e) => Ok((e.request.into(), e.context_v2.into())),
             Err(e) => Err(e.into()),
@@ -96,31 +97,16 @@ impl FfiRequestContext {
 }
 
 #[derive(Clone)]
-pub struct FfiRequest {
-    pub ffi_url: FfiUrl,
-    pub body: Vec<u8>,
-}
-
-impl From<payjoin_ffi::types::Request> for FfiRequest {
-    fn from(value: payjoin_ffi::types::Request) -> Self {
-        Self {
-            ffi_url: (*value.url).clone().into(),
-            body: value.body,
-        }
-    }
-}
-
-#[derive(Clone)]
 pub struct FfiRequestContextV1 {
-    pub request: FfiRequest,
+    pub request: Request,
     pub context_v1: FfiContextV1,
 }
 
 impl From<payjoin_ffi::send::v1::RequestContextV1> for FfiRequestContextV1 {
     fn from(value: payjoin_ffi::send::v1::RequestContextV1) -> Self {
         Self {
-            request: FfiRequest {
-                ffi_url: (*value.request.url).clone().into(),
+            request: Request {
+                url: (*value.request.url).clone().into(),
                 body: value.request.body.clone(),
             },
             context_v1: value.context_v1.into(),
@@ -129,15 +115,15 @@ impl From<payjoin_ffi::send::v1::RequestContextV1> for FfiRequestContextV1 {
 }
 
 pub struct FfiRequestContextV2 {
-    pub request: FfiRequest,
+    pub request: Request,
     pub context_v2: FfiContextV2,
 }
 
 impl From<payjoin_ffi::send::v1::RequestContextV2> for FfiRequestContextV2 {
     fn from(value: payjoin_ffi::send::v1::RequestContextV2) -> Self {
         Self {
-            request: FfiRequest {
-                ffi_url: (*value.request.url).clone().into(),
+            request: Request {
+                url: (*value.request.url).clone().into(),
                 body: value.request.body,
             },
             context_v2: value.context_v2.into(),

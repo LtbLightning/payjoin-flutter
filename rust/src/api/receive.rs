@@ -1,7 +1,7 @@
 use crate::api::uri::{FfiOhttpKeys, FfiPjUriBuilder, FfiUrl};
 use crate::frb_generated::RustOpaque;
 pub use crate::utils::error::PayjoinError;
-use crate::utils::types::{ClientResponse, Headers, OutPoint, TxOut};
+use crate::utils::types::{ClientResponse, Headers, OutPoint, Request, TxOut};
 use flutter_rust_bridge::{frb, DartFnFuture};
 use std::collections::HashMap;
 pub use std::sync::Arc;
@@ -233,7 +233,7 @@ impl FfiPayjoinProposal {
         self.0.is_output_substitution_disabled()
     }
     pub fn owned_vouts(&self) -> Vec<u64> {
-        self.0.owned_vouts().iter().map(|x| (*x).into()).collect()
+        self.0.owned_vouts().to_vec()
     }
     pub fn psbt(&self) -> String {
         self.0.psbt()
@@ -268,10 +268,10 @@ impl FfiSessionInitializer {
         .into())
     }
 
-    pub fn extract_req(&self) -> Result<((FfiUrl, Vec<u8>), ClientResponse), PayjoinError> {
+    pub fn extract_req(&self) -> Result<(Request, ClientResponse), PayjoinError> {
         self.0
             .extract_req()
-            .map(|e| (((*e.0.url).clone().into(), e.0.body), e.1.into()))
+            .map(|e| (e.0.into(), e.1.into()))
             .map_err(|e| e.into())
     }
     pub fn process_res(
@@ -308,10 +308,10 @@ impl FfiActiveSession {
     pub fn pj_uri_builder(&self) -> FfiPjUriBuilder {
         self.0.pj_uri_builder().into()
     }
-    pub fn extract_req(&self) -> Result<((FfiUrl, Vec<u8>), ClientResponse), PayjoinError> {
+    pub fn extract_req(&self) -> Result<(Request, ClientResponse), PayjoinError> {
         self.0
             .extract_req()
-            .map(|e| (((*e.0.url).clone().into(), e.0.body), e.1.into()))
+            .map(|e| (e.0.into(), e.1.into()))
             .map_err(|e| e.into())
     }
     pub fn process_res(
@@ -549,7 +549,7 @@ impl FfiV2PayjoinProposal {
         self.0.is_output_substitution_disabled()
     }
     pub fn owned_vouts(&self) -> Vec<u64> {
-        self.0.owned_vouts().iter().map(|x| (*x).into()).collect()
+        self.0.owned_vouts().to_vec()
     }
     pub fn psbt(&self) -> String {
         self.0.psbt()
@@ -557,11 +557,11 @@ impl FfiV2PayjoinProposal {
     pub fn extract_v1_req(&self) -> String {
         self.0.extract_v1_req()
     }
-    pub fn extract_v2_req(&self) -> Result<((FfiUrl, Vec<u8>), ClientResponse), PayjoinError> {
+    pub fn extract_v2_req(&self) -> Result<(Request, ClientResponse), PayjoinError> {
         self.0
             .clone()
             .extract_v2_req()
-            .map(|e| (((*e.0.url).clone().into(), e.0.body), e.1.into()))
+            .map(|e| (e.0.into(), e.1.into()))
             .map_err(|e| e.into())
     }
 

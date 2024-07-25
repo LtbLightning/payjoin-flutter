@@ -75,9 +75,8 @@ abstract class coreApi extends BaseApi {
   Future<FfiOhttpKeys> crateApiIoFetchOhttpKeys(
       {required FfiUrl ohttpRelay, required FfiUrl payjoinDirectory});
 
-  Future<((FfiUrl, Uint8List), ClientResponse)>
-      crateApiReceiveFfiActiveSessionExtractReq(
-          {required FfiActiveSession that});
+  Future<(Request, ClientResponse)> crateApiReceiveFfiActiveSessionExtractReq(
+      {required FfiActiveSession that});
 
   FfiPjUriBuilder crateApiReceiveFfiActiveSessionPjUriBuilder(
       {required FfiActiveSession that});
@@ -147,7 +146,7 @@ abstract class coreApi extends BaseApi {
       {required FfiProvisionalProposal that,
       required FutureOr<Uint8List> Function() generateScript});
 
-  Future<((FfiUrl, Uint8List), ClientResponse)>
+  Future<(Request, ClientResponse)>
       crateApiReceiveFfiSessionInitializerExtractReq(
           {required FfiSessionInitializer that});
 
@@ -205,7 +204,7 @@ abstract class coreApi extends BaseApi {
   Future<String> crateApiReceiveFfiV2PayjoinProposalExtractV1Req(
       {required FfiV2PayjoinProposal that});
 
-  Future<((FfiUrl, Uint8List), ClientResponse)>
+  Future<(Request, ClientResponse)>
       crateApiReceiveFfiV2PayjoinProposalExtractV2Req(
           {required FfiV2PayjoinProposal that});
 
@@ -295,10 +294,10 @@ abstract class coreApi extends BaseApi {
   Future<FfiRequestBuilder> crateApiSendFfiRequestBuilderFromPsbtAndUri(
       {required String psbtBase64, required FfiPjUri pjUri});
 
-  Future<(FfiRequest, FfiContextV1)> crateApiSendFfiRequestContextExtractV1(
+  Future<(Request, FfiContextV1)> crateApiSendFfiRequestContextExtractV1(
       {required FfiRequestContext that});
 
-  Future<(FfiRequest, FfiContextV2)> crateApiSendFfiRequestContextExtractV2(
+  Future<(Request, FfiContextV2)> crateApiSendFfiRequestContextExtractV2(
       {required FfiRequestContext that, required FfiUrl ohttpProxyUrl});
 
   Future<FfiOhttpKeys> crateApiUriFfiOhttpKeysDecode(
@@ -601,9 +600,8 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       );
 
   @override
-  Future<((FfiUrl, Uint8List), ClientResponse)>
-      crateApiReceiveFfiActiveSessionExtractReq(
-          {required FfiActiveSession that}) {
+  Future<(Request, ClientResponse)> crateApiReceiveFfiActiveSessionExtractReq(
+      {required FfiActiveSession that}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
         var arg0 = cst_encode_box_autoadd_ffi_active_session(that);
@@ -611,8 +609,7 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
             port_, arg0);
       },
       codec: DcoCodec(
-        decodeSuccessData:
-            dco_decode_record_record_ffi_url_list_prim_u_8_strict_client_response,
+        decodeSuccessData: dco_decode_record_request_client_response,
         decodeErrorData: dco_decode_payjoin_error,
       ),
       constMeta: kCrateApiReceiveFfiActiveSessionExtractReqConstMeta,
@@ -1128,7 +1125,7 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
           );
 
   @override
-  Future<((FfiUrl, Uint8List), ClientResponse)>
+  Future<(Request, ClientResponse)>
       crateApiReceiveFfiSessionInitializerExtractReq(
           {required FfiSessionInitializer that}) {
     return handler.executeNormal(NormalTask(
@@ -1139,8 +1136,7 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
                 port_, arg0);
       },
       codec: DcoCodec(
-        decodeSuccessData:
-            dco_decode_record_record_ffi_url_list_prim_u_8_strict_client_response,
+        decodeSuccessData: dco_decode_record_request_client_response,
         decodeErrorData: dco_decode_payjoin_error,
       ),
       constMeta: kCrateApiReceiveFfiSessionInitializerExtractReqConstMeta,
@@ -1515,7 +1511,7 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       );
 
   @override
-  Future<((FfiUrl, Uint8List), ClientResponse)>
+  Future<(Request, ClientResponse)>
       crateApiReceiveFfiV2PayjoinProposalExtractV2Req(
           {required FfiV2PayjoinProposal that}) {
     return handler.executeNormal(NormalTask(
@@ -1526,8 +1522,7 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
                 port_, arg0);
       },
       codec: DcoCodec(
-        decodeSuccessData:
-            dco_decode_record_record_ffi_url_list_prim_u_8_strict_client_response,
+        decodeSuccessData: dco_decode_record_request_client_response,
         decodeErrorData: dco_decode_payjoin_error,
       ),
       constMeta: kCrateApiReceiveFfiV2PayjoinProposalExtractV2ReqConstMeta,
@@ -2179,7 +2174,7 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       );
 
   @override
-  Future<(FfiRequest, FfiContextV1)> crateApiSendFfiRequestContextExtractV1(
+  Future<(Request, FfiContextV1)> crateApiSendFfiRequestContextExtractV1(
       {required FfiRequestContext that}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
@@ -2188,7 +2183,7 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
             port_, arg0);
       },
       codec: DcoCodec(
-        decodeSuccessData: dco_decode_record_ffi_request_ffi_context_v_1,
+        decodeSuccessData: dco_decode_record_request_ffi_context_v_1,
         decodeErrorData: dco_decode_payjoin_error,
       ),
       constMeta: kCrateApiSendFfiRequestContextExtractV1ConstMeta,
@@ -2204,7 +2199,7 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       );
 
   @override
-  Future<(FfiRequest, FfiContextV2)> crateApiSendFfiRequestContextExtractV2(
+  Future<(Request, FfiContextV2)> crateApiSendFfiRequestContextExtractV2(
       {required FfiRequestContext that, required FfiUrl ohttpProxyUrl}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
@@ -2214,7 +2209,7 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
             port_, arg0, arg1);
       },
       codec: DcoCodec(
-        decodeSuccessData: dco_decode_record_ffi_request_ffi_context_v_2,
+        decodeSuccessData: dco_decode_record_request_ffi_context_v_2,
         decodeErrorData: dco_decode_payjoin_error,
       ),
       constMeta: kCrateApiSendFfiRequestContextExtractV2ConstMeta,
@@ -3607,18 +3602,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
-  FfiRequest dco_decode_ffi_request(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    final arr = raw as List<dynamic>;
-    if (arr.length != 2)
-      throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
-    return FfiRequest(
-      ffiUrl: dco_decode_ffi_url(arr[0]),
-      body: dco_decode_list_prim_u_8_strict(arr[1]),
-    );
-  }
-
-  @protected
   FfiRequestBuilder dco_decode_ffi_request_builder(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
@@ -3967,7 +3950,7 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
-  (FfiRequest, FfiContextV1) dco_decode_record_ffi_request_ffi_context_v_1(
+  (Request, ClientResponse) dco_decode_record_request_client_response(
       dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
@@ -3975,13 +3958,27 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       throw Exception('Expected 2 elements, got ${arr.length}');
     }
     return (
-      dco_decode_ffi_request(arr[0]),
+      dco_decode_request(arr[0]),
+      dco_decode_client_response(arr[1]),
+    );
+  }
+
+  @protected
+  (Request, FfiContextV1) dco_decode_record_request_ffi_context_v_1(
+      dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2) {
+      throw Exception('Expected 2 elements, got ${arr.length}');
+    }
+    return (
+      dco_decode_request(arr[0]),
       dco_decode_ffi_context_v_1(arr[1]),
     );
   }
 
   @protected
-  (FfiRequest, FfiContextV2) dco_decode_record_ffi_request_ffi_context_v_2(
+  (Request, FfiContextV2) dco_decode_record_request_ffi_context_v_2(
       dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
@@ -3989,37 +3986,8 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       throw Exception('Expected 2 elements, got ${arr.length}');
     }
     return (
-      dco_decode_ffi_request(arr[0]),
+      dco_decode_request(arr[0]),
       dco_decode_ffi_context_v_2(arr[1]),
-    );
-  }
-
-  @protected
-  (FfiUrl, Uint8List) dco_decode_record_ffi_url_list_prim_u_8_strict(
-      dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    final arr = raw as List<dynamic>;
-    if (arr.length != 2) {
-      throw Exception('Expected 2 elements, got ${arr.length}');
-    }
-    return (
-      dco_decode_ffi_url(arr[0]),
-      dco_decode_list_prim_u_8_strict(arr[1]),
-    );
-  }
-
-  @protected
-  ((FfiUrl, Uint8List), ClientResponse)
-      dco_decode_record_record_ffi_url_list_prim_u_8_strict_client_response(
-          dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    final arr = raw as List<dynamic>;
-    if (arr.length != 2) {
-      throw Exception('Expected 2 elements, got ${arr.length}');
-    }
-    return (
-      dco_decode_record_ffi_url_list_prim_u_8_strict(arr[0]),
-      dco_decode_client_response(arr[1]),
     );
   }
 
@@ -4046,6 +4014,18 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
     return (
       dco_decode_u_64(arr[0]),
       dco_decode_out_point(arr[1]),
+    );
+  }
+
+  @protected
+  Request dco_decode_request(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2)
+      throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
+    return Request(
+      url: dco_decode_ffi_url(arr[0]),
+      body: dco_decode_list_prim_u_8_strict(arr[1]),
     );
   }
 
@@ -4685,14 +4665,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
-  FfiRequest sse_decode_ffi_request(SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_ffiUrl = sse_decode_ffi_url(deserializer);
-    var var_body = sse_decode_list_prim_u_8_strict(deserializer);
-    return FfiRequest(ffiUrl: var_ffiUrl, body: var_body);
-  }
-
-  @protected
   FfiRequestBuilder sse_decode_ffi_request_builder(
       SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
@@ -5034,40 +5006,29 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
-  (FfiRequest, FfiContextV1) sse_decode_record_ffi_request_ffi_context_v_1(
+  (Request, ClientResponse) sse_decode_record_request_client_response(
       SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_field0 = sse_decode_ffi_request(deserializer);
+    var var_field0 = sse_decode_request(deserializer);
+    var var_field1 = sse_decode_client_response(deserializer);
+    return (var_field0, var_field1);
+  }
+
+  @protected
+  (Request, FfiContextV1) sse_decode_record_request_ffi_context_v_1(
+      SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_field0 = sse_decode_request(deserializer);
     var var_field1 = sse_decode_ffi_context_v_1(deserializer);
     return (var_field0, var_field1);
   }
 
   @protected
-  (FfiRequest, FfiContextV2) sse_decode_record_ffi_request_ffi_context_v_2(
+  (Request, FfiContextV2) sse_decode_record_request_ffi_context_v_2(
       SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_field0 = sse_decode_ffi_request(deserializer);
+    var var_field0 = sse_decode_request(deserializer);
     var var_field1 = sse_decode_ffi_context_v_2(deserializer);
-    return (var_field0, var_field1);
-  }
-
-  @protected
-  (FfiUrl, Uint8List) sse_decode_record_ffi_url_list_prim_u_8_strict(
-      SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_field0 = sse_decode_ffi_url(deserializer);
-    var var_field1 = sse_decode_list_prim_u_8_strict(deserializer);
-    return (var_field0, var_field1);
-  }
-
-  @protected
-  ((FfiUrl, Uint8List), ClientResponse)
-      sse_decode_record_record_ffi_url_list_prim_u_8_strict_client_response(
-          SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_field0 =
-        sse_decode_record_ffi_url_list_prim_u_8_strict(deserializer);
-    var var_field1 = sse_decode_client_response(deserializer);
     return (var_field0, var_field1);
   }
 
@@ -5087,6 +5048,14 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
     var var_field0 = sse_decode_u_64(deserializer);
     var var_field1 = sse_decode_out_point(deserializer);
     return (var_field0, var_field1);
+  }
+
+  @protected
+  Request sse_decode_request(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_url = sse_decode_ffi_url(deserializer);
+    var var_body = sse_decode_list_prim_u_8_strict(deserializer);
+    return Request(url: var_url, body: var_body);
   }
 
   @protected
@@ -6047,13 +6016,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
-  void sse_encode_ffi_request(FfiRequest self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_ffi_url(self.ffiUrl, serializer);
-    sse_encode_list_prim_u_8_strict(self.body, serializer);
-  }
-
-  @protected
   void sse_encode_ffi_request_builder(
       FfiRequestBuilder self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
@@ -6359,35 +6321,27 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
-  void sse_encode_record_ffi_request_ffi_context_v_1(
-      (FfiRequest, FfiContextV1) self, SseSerializer serializer) {
+  void sse_encode_record_request_client_response(
+      (Request, ClientResponse) self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_ffi_request(self.$1, serializer);
+    sse_encode_request(self.$1, serializer);
+    sse_encode_client_response(self.$2, serializer);
+  }
+
+  @protected
+  void sse_encode_record_request_ffi_context_v_1(
+      (Request, FfiContextV1) self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_request(self.$1, serializer);
     sse_encode_ffi_context_v_1(self.$2, serializer);
   }
 
   @protected
-  void sse_encode_record_ffi_request_ffi_context_v_2(
-      (FfiRequest, FfiContextV2) self, SseSerializer serializer) {
+  void sse_encode_record_request_ffi_context_v_2(
+      (Request, FfiContextV2) self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_ffi_request(self.$1, serializer);
+    sse_encode_request(self.$1, serializer);
     sse_encode_ffi_context_v_2(self.$2, serializer);
-  }
-
-  @protected
-  void sse_encode_record_ffi_url_list_prim_u_8_strict(
-      (FfiUrl, Uint8List) self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_ffi_url(self.$1, serializer);
-    sse_encode_list_prim_u_8_strict(self.$2, serializer);
-  }
-
-  @protected
-  void sse_encode_record_record_ffi_url_list_prim_u_8_strict_client_response(
-      ((FfiUrl, Uint8List), ClientResponse) self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_record_ffi_url_list_prim_u_8_strict(self.$1, serializer);
-    sse_encode_client_response(self.$2, serializer);
   }
 
   @protected
@@ -6404,6 +6358,13 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_u_64(self.$1, serializer);
     sse_encode_out_point(self.$2, serializer);
+  }
+
+  @protected
+  void sse_encode_request(Request self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_ffi_url(self.url, serializer);
+    sse_encode_list_prim_u_8_strict(self.body, serializer);
   }
 
   @protected

@@ -81,8 +81,8 @@ class RequestContext extends FfiRequestContext {
     try {
       final res = await super.extractV1();
       final request = common.Request(
-        Url.fromStr((res.$1.ffiUrl.asString())),
-        res.$1.body,
+        url: Url.fromStr((res.$1.url.asString())),
+        body: res.$1.body,
       );
       return (request, ContextV1._(field0: res.$2.field0));
     } on error.PayjoinError catch (e) {
@@ -99,8 +99,8 @@ class RequestContext extends FfiRequestContext {
         ohttpProxyUrl: ohttpProxyUrl,
       );
       final request = common.Request(
-        Url.fromStr((res.$1.ffiUrl.asString())),
-        res.$1.body,
+        url: Url.fromStr((res.$1.url.asString())),
+        body: res.$1.body,
       );
       return (request, ContextV2._(field0: res.$2.field0));
     } on error.PayjoinError catch (e) {

@@ -2,7 +2,7 @@ use flutter_rust_bridge::frb;
 pub use payjoin_ffi::types::Network;
 use std::collections::HashMap;
 
-use crate::frb_generated::RustOpaque;
+use crate::{api::uri::FfiUrl, frb_generated::RustOpaque};
 // ///Represents data that needs to be transmitted to the receiver.
 // ///You need to send this request over HTTP(S) to the receiver.
 // #[derive(Clone, Debug)]
@@ -136,5 +136,20 @@ impl From<ClientResponse> for ohttp::ClientResponse {
 impl From<ohttp::ClientResponse> for ClientResponse {
     fn from(value: ohttp::ClientResponse) -> Self {
         Self(RustOpaque::new(std::sync::Mutex::new(Some(value))))
+    }
+}
+
+#[derive(Clone)]
+pub struct Request {
+    pub url: FfiUrl,
+    pub body: Vec<u8>,
+}
+
+impl From<payjoin_ffi::types::Request> for Request {
+    fn from(value: payjoin_ffi::types::Request) -> Self {
+        Self {
+            url: (*value.url).clone().into(),
+            body: value.body,
+        }
     }
 }

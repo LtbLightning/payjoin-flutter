@@ -172,11 +172,6 @@ typedef struct wire_cst_list_prim_u_64_strict {
   int32_t len;
 } wire_cst_list_prim_u_64_strict;
 
-typedef struct wire_cst_ffi_request {
-  struct wire_cst_ffi_url ffi_url;
-  struct wire_cst_list_prim_u_8_strict *body;
-} wire_cst_ffi_request;
-
 typedef struct wire_cst_PayjoinError_InvalidAddress {
   struct wire_cst_list_prim_u_8_strict *message;
 } wire_cst_PayjoinError_InvalidAddress;
@@ -275,25 +270,25 @@ typedef struct wire_cst_payjoin_error {
   union PayjoinErrorKind kind;
 } wire_cst_payjoin_error;
 
-typedef struct wire_cst_record_ffi_request_ffi_context_v_1 {
-  struct wire_cst_ffi_request field0;
-  struct wire_cst_ffi_context_v_1 field1;
-} wire_cst_record_ffi_request_ffi_context_v_1;
+typedef struct wire_cst_request {
+  struct wire_cst_ffi_url url;
+  struct wire_cst_list_prim_u_8_strict *body;
+} wire_cst_request;
 
-typedef struct wire_cst_record_ffi_request_ffi_context_v_2 {
-  struct wire_cst_ffi_request field0;
-  struct wire_cst_ffi_context_v_2 field1;
-} wire_cst_record_ffi_request_ffi_context_v_2;
-
-typedef struct wire_cst_record_ffi_url_list_prim_u_8_strict {
-  struct wire_cst_ffi_url field0;
-  struct wire_cst_list_prim_u_8_strict *field1;
-} wire_cst_record_ffi_url_list_prim_u_8_strict;
-
-typedef struct wire_cst_record_record_ffi_url_list_prim_u_8_strict_client_response {
-  struct wire_cst_record_ffi_url_list_prim_u_8_strict field0;
+typedef struct wire_cst_record_request_client_response {
+  struct wire_cst_request field0;
   struct wire_cst_client_response field1;
-} wire_cst_record_record_ffi_url_list_prim_u_8_strict_client_response;
+} wire_cst_record_request_client_response;
+
+typedef struct wire_cst_record_request_ffi_context_v_1 {
+  struct wire_cst_request field0;
+  struct wire_cst_ffi_context_v_1 field1;
+} wire_cst_record_request_ffi_context_v_1;
+
+typedef struct wire_cst_record_request_ffi_context_v_2 {
+  struct wire_cst_request field0;
+  struct wire_cst_ffi_context_v_2 field1;
+} wire_cst_record_request_ffi_context_v_2;
 
 void frbgen_payjoin_flutter_wire__crate__api__io__fetch_ohttp_keys(int64_t port_,
                                                                    struct wire_cst_ffi_url *ohttp_relay,

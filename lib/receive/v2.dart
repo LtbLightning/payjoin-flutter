@@ -47,7 +47,10 @@ class SessionInitializer extends FfiSessionInitializer {
   Future<(Request, ClientResponse)> extractReq() async {
     try {
       final res = await super.extractReq();
-      final request = Request(Url.fromStr(res.$1.$1.asString()), res.$1.$2);
+      final request = Request(
+        url: Url.fromStr(res.$1.url.asString()),
+        body: res.$1.body,
+      );
       return (request, res.$2);
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
@@ -62,7 +65,10 @@ class ActiveSession extends FfiActiveSession {
   Future<(Request, ClientResponse)> extractReq() async {
     try {
       final res = await super.extractReq();
-      final request = Request(Url.fromStr(res.$1.$1.asString()), res.$1.$2);
+      final request = Request(
+        url: Url.fromStr(res.$1.url.asString()),
+        body: res.$1.body,
+      );
       return (request, res.$2);
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
@@ -303,7 +309,10 @@ class PayjoinProposal extends FfiV2PayjoinProposal {
   Future<(Request, ClientResponse)> extractV2Req() async {
     try {
       final res = await super.extractV2Req();
-      final request = Request(Url.fromStr(res.$1.$1.asString()), res.$1.$2);
+      final request = Request(
+        url: Url.fromStr(res.$1.url.asString()),
+        body: res.$1.body,
+      );
       return (request, res.$2);
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);

@@ -535,15 +535,6 @@ impl CstDecode<crate::api::receive::FfiProvisionalProposal> for wire_cst_ffi_pro
         crate::api::receive::FfiProvisionalProposal(self.field0.cst_decode())
     }
 }
-impl CstDecode<crate::api::send::FfiRequest> for wire_cst_ffi_request {
-    // Codec=Cst (C-struct based), see doc to use other codecs
-    fn cst_decode(self) -> crate::api::send::FfiRequest {
-        crate::api::send::FfiRequest {
-            ffi_url: self.ffi_url.cst_decode(),
-            body: self.body.cst_decode(),
-        }
-    }
-}
 impl CstDecode<crate::api::send::FfiRequestBuilder> for wire_cst_ffi_request_builder {
     // Codec=Cst (C-struct based), see doc to use other codecs
     fn cst_decode(self) -> crate::api::send::FfiRequestBuilder {
@@ -820,43 +811,35 @@ impl CstDecode<crate::utils::error::PayjoinError> for wire_cst_payjoin_error {
         }
     }
 }
-impl CstDecode<(crate::api::send::FfiRequest, crate::api::send::FfiContextV1)>
-    for wire_cst_record_ffi_request_ffi_context_v_1
-{
-    // Codec=Cst (C-struct based), see doc to use other codecs
-    fn cst_decode(self) -> (crate::api::send::FfiRequest, crate::api::send::FfiContextV1) {
-        (self.field0.cst_decode(), self.field1.cst_decode())
-    }
-}
-impl CstDecode<(crate::api::send::FfiRequest, crate::api::send::FfiContextV2)>
-    for wire_cst_record_ffi_request_ffi_context_v_2
-{
-    // Codec=Cst (C-struct based), see doc to use other codecs
-    fn cst_decode(self) -> (crate::api::send::FfiRequest, crate::api::send::FfiContextV2) {
-        (self.field0.cst_decode(), self.field1.cst_decode())
-    }
-}
-impl CstDecode<(crate::api::uri::FfiUrl, Vec<u8>)>
-    for wire_cst_record_ffi_url_list_prim_u_8_strict
-{
-    // Codec=Cst (C-struct based), see doc to use other codecs
-    fn cst_decode(self) -> (crate::api::uri::FfiUrl, Vec<u8>) {
-        (self.field0.cst_decode(), self.field1.cst_decode())
-    }
-}
 impl
     CstDecode<(
-        (crate::api::uri::FfiUrl, Vec<u8>),
+        crate::utils::types::Request,
         crate::utils::types::ClientResponse,
-    )> for wire_cst_record_record_ffi_url_list_prim_u_8_strict_client_response
+    )> for wire_cst_record_request_client_response
 {
     // Codec=Cst (C-struct based), see doc to use other codecs
     fn cst_decode(
         self,
     ) -> (
-        (crate::api::uri::FfiUrl, Vec<u8>),
+        crate::utils::types::Request,
         crate::utils::types::ClientResponse,
     ) {
+        (self.field0.cst_decode(), self.field1.cst_decode())
+    }
+}
+impl CstDecode<(crate::utils::types::Request, crate::api::send::FfiContextV1)>
+    for wire_cst_record_request_ffi_context_v_1
+{
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    fn cst_decode(self) -> (crate::utils::types::Request, crate::api::send::FfiContextV1) {
+        (self.field0.cst_decode(), self.field1.cst_decode())
+    }
+}
+impl CstDecode<(crate::utils::types::Request, crate::api::send::FfiContextV2)>
+    for wire_cst_record_request_ffi_context_v_2
+{
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    fn cst_decode(self) -> (crate::utils::types::Request, crate::api::send::FfiContextV2) {
         (self.field0.cst_decode(), self.field1.cst_decode())
     }
 }
@@ -870,6 +853,15 @@ impl CstDecode<(u64, crate::utils::types::OutPoint)> for wire_cst_record_u_64_ou
     // Codec=Cst (C-struct based), see doc to use other codecs
     fn cst_decode(self) -> (u64, crate::utils::types::OutPoint) {
         (self.field0.cst_decode(), self.field1.cst_decode())
+    }
+}
+impl CstDecode<crate::utils::types::Request> for wire_cst_request {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    fn cst_decode(self) -> crate::utils::types::Request {
+        crate::utils::types::Request {
+            url: self.url.cst_decode(),
+            body: self.body.cst_decode(),
+        }
     }
 }
 impl CstDecode<crate::utils::types::TxOut> for wire_cst_tx_out {
@@ -1033,19 +1025,6 @@ impl NewWithNullPtr for wire_cst_ffi_provisional_proposal {
     }
 }
 impl Default for wire_cst_ffi_provisional_proposal {
-    fn default() -> Self {
-        Self::new_with_null_ptr()
-    }
-}
-impl NewWithNullPtr for wire_cst_ffi_request {
-    fn new_with_null_ptr() -> Self {
-        Self {
-            ffi_url: Default::default(),
-            body: core::ptr::null_mut(),
-        }
-    }
-}
-impl Default for wire_cst_ffi_request {
     fn default() -> Self {
         Self::new_with_null_ptr()
     }
@@ -1244,7 +1223,7 @@ impl Default for wire_cst_payjoin_error {
         Self::new_with_null_ptr()
     }
 }
-impl NewWithNullPtr for wire_cst_record_ffi_request_ffi_context_v_1 {
+impl NewWithNullPtr for wire_cst_record_request_client_response {
     fn new_with_null_ptr() -> Self {
         Self {
             field0: Default::default(),
@@ -1252,12 +1231,12 @@ impl NewWithNullPtr for wire_cst_record_ffi_request_ffi_context_v_1 {
         }
     }
 }
-impl Default for wire_cst_record_ffi_request_ffi_context_v_1 {
+impl Default for wire_cst_record_request_client_response {
     fn default() -> Self {
         Self::new_with_null_ptr()
     }
 }
-impl NewWithNullPtr for wire_cst_record_ffi_request_ffi_context_v_2 {
+impl NewWithNullPtr for wire_cst_record_request_ffi_context_v_1 {
     fn new_with_null_ptr() -> Self {
         Self {
             field0: Default::default(),
@@ -1265,25 +1244,12 @@ impl NewWithNullPtr for wire_cst_record_ffi_request_ffi_context_v_2 {
         }
     }
 }
-impl Default for wire_cst_record_ffi_request_ffi_context_v_2 {
+impl Default for wire_cst_record_request_ffi_context_v_1 {
     fn default() -> Self {
         Self::new_with_null_ptr()
     }
 }
-impl NewWithNullPtr for wire_cst_record_ffi_url_list_prim_u_8_strict {
-    fn new_with_null_ptr() -> Self {
-        Self {
-            field0: Default::default(),
-            field1: core::ptr::null_mut(),
-        }
-    }
-}
-impl Default for wire_cst_record_ffi_url_list_prim_u_8_strict {
-    fn default() -> Self {
-        Self::new_with_null_ptr()
-    }
-}
-impl NewWithNullPtr for wire_cst_record_record_ffi_url_list_prim_u_8_strict_client_response {
+impl NewWithNullPtr for wire_cst_record_request_ffi_context_v_2 {
     fn new_with_null_ptr() -> Self {
         Self {
             field0: Default::default(),
@@ -1291,7 +1257,7 @@ impl NewWithNullPtr for wire_cst_record_record_ffi_url_list_prim_u_8_strict_clie
         }
     }
 }
-impl Default for wire_cst_record_record_ffi_url_list_prim_u_8_strict_client_response {
+impl Default for wire_cst_record_request_ffi_context_v_2 {
     fn default() -> Self {
         Self::new_with_null_ptr()
     }
@@ -1318,6 +1284,19 @@ impl NewWithNullPtr for wire_cst_record_u_64_out_point {
     }
 }
 impl Default for wire_cst_record_u_64_out_point {
+    fn default() -> Self {
+        Self::new_with_null_ptr()
+    }
+}
+impl NewWithNullPtr for wire_cst_request {
+    fn new_with_null_ptr() -> Self {
+        Self {
+            url: Default::default(),
+            body: core::ptr::null_mut(),
+        }
+    }
+}
+impl Default for wire_cst_request {
     fn default() -> Self {
         Self::new_with_null_ptr()
     }
@@ -2914,12 +2893,6 @@ pub struct wire_cst_ffi_provisional_proposal {
 }
 #[repr(C)]
 #[derive(Clone, Copy)]
-pub struct wire_cst_ffi_request {
-    ffi_url: wire_cst_ffi_url,
-    body: *mut wire_cst_list_prim_u_8_strict,
-}
-#[repr(C)]
-#[derive(Clone, Copy)]
 pub struct wire_cst_ffi_request_builder {
     field0: usize,
 }
@@ -3151,27 +3124,21 @@ pub struct wire_cst_PayjoinError_IoError {
 }
 #[repr(C)]
 #[derive(Clone, Copy)]
-pub struct wire_cst_record_ffi_request_ffi_context_v_1 {
-    field0: wire_cst_ffi_request,
+pub struct wire_cst_record_request_client_response {
+    field0: wire_cst_request,
+    field1: wire_cst_client_response,
+}
+#[repr(C)]
+#[derive(Clone, Copy)]
+pub struct wire_cst_record_request_ffi_context_v_1 {
+    field0: wire_cst_request,
     field1: wire_cst_ffi_context_v_1,
 }
 #[repr(C)]
 #[derive(Clone, Copy)]
-pub struct wire_cst_record_ffi_request_ffi_context_v_2 {
-    field0: wire_cst_ffi_request,
+pub struct wire_cst_record_request_ffi_context_v_2 {
+    field0: wire_cst_request,
     field1: wire_cst_ffi_context_v_2,
-}
-#[repr(C)]
-#[derive(Clone, Copy)]
-pub struct wire_cst_record_ffi_url_list_prim_u_8_strict {
-    field0: wire_cst_ffi_url,
-    field1: *mut wire_cst_list_prim_u_8_strict,
-}
-#[repr(C)]
-#[derive(Clone, Copy)]
-pub struct wire_cst_record_record_ffi_url_list_prim_u_8_strict_client_response {
-    field0: wire_cst_record_ffi_url_list_prim_u_8_strict,
-    field1: wire_cst_client_response,
 }
 #[repr(C)]
 #[derive(Clone, Copy)]
@@ -3184,6 +3151,12 @@ pub struct wire_cst_record_string_string {
 pub struct wire_cst_record_u_64_out_point {
     field0: u64,
     field1: wire_cst_out_point,
+}
+#[repr(C)]
+#[derive(Clone, Copy)]
+pub struct wire_cst_request {
+    url: wire_cst_ffi_url,
+    body: *mut wire_cst_list_prim_u_8_strict,
 }
 #[repr(C)]
 #[derive(Clone, Copy)]

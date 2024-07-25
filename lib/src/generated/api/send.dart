@@ -6,11 +6,12 @@
 import '../frb_generated.dart';
 import '../lib.dart';
 import '../utils/error.dart';
+import '../utils/types.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'uri.dart';
 
 // These types are ignored because they are not used by any `pub` functions: `FfiRequestContextV1`, `FfiRequestContextV2`
-// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `clone`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`
+// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `from`, `from`, `from`, `from`, `from`, `from`, `from`
 
 class FfiContextV1 {
   final ArcContextV1 field0;
@@ -54,27 +55,6 @@ class FfiContextV2 {
       other is FfiContextV2 &&
           runtimeType == other.runtimeType &&
           field0 == other.field0;
-}
-
-class FfiRequest {
-  final FfiUrl ffiUrl;
-  final Uint8List body;
-
-  const FfiRequest({
-    required this.ffiUrl,
-    required this.body,
-  });
-
-  @override
-  int get hashCode => ffiUrl.hashCode ^ body.hashCode;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FfiRequest &&
-          runtimeType == other.runtimeType &&
-          ffiUrl == other.ffiUrl &&
-          body == other.body;
 }
 
 class FfiRequestBuilder {
@@ -134,13 +114,12 @@ class FfiRequestContext {
     required this.field0,
   });
 
-  Future<(FfiRequest, FfiContextV1)> extractV1() =>
+  Future<(Request, FfiContextV1)> extractV1() =>
       core.instance.api.crateApiSendFfiRequestContextExtractV1(
         that: this,
       );
 
-  Future<(FfiRequest, FfiContextV2)> extractV2(
-          {required FfiUrl ohttpProxyUrl}) =>
+  Future<(Request, FfiContextV2)> extractV2({required FfiUrl ohttpProxyUrl}) =>
       core.instance.api.crateApiSendFfiRequestContextExtractV2(
           that: this, ohttpProxyUrl: ohttpProxyUrl);
 
