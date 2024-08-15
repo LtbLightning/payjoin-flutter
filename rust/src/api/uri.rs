@@ -11,7 +11,8 @@ impl From<payjoin_ffi::uri::Url> for FfiUrl {
 }
 
 impl FfiUrl {
-    pub fn from_str(url: String) -> anyhow::Result<FfiUrl, PayjoinError> {
+    #[frb(sync)]
+    pub fn from_str(url: String) -> Result<Self, PayjoinError> {
         match payjoin_ffi::uri::Url::from_str(url) {
             Ok(e) => Ok(e.into()),
             Err(e) => Err(e.into()),
@@ -75,7 +76,7 @@ impl FfiPjUriBuilder {
         payjoin_ffi::uri::PjUriBuilder::new(
             address,
             (*pj.0).clone(),
-            ohttp_keys.map(|e| (*e.0).clone().into()),
+            ohttp_keys.map(|e| (*e.0).clone()),
             expiry,
         )
         .map_err(|e| e.into())
@@ -116,6 +117,7 @@ impl From<payjoin_ffi::uri::Uri> for FfiUri {
     }
 }
 impl FfiUri {
+    #[frb(sync)]
     pub fn from_str(uri: String) -> anyhow::Result<FfiUri, PayjoinError> {
         match payjoin_ffi::uri::Uri::from_str(uri) {
             Ok(e) => Ok(e.into()),
