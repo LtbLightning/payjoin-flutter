@@ -47,4 +47,8 @@ cd example
 #Run integration tests with bitcoin_core and bdk_flutter
 flutter test integration_test
 ```
+## Release status and readiness
 
+Caution, this package is an Alpha at this stage Please consider reviewing, experimenting and contributing
+
+Please review and carry out testing to ensure security and safety of funds before using in production.
