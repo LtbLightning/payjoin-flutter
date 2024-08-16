@@ -2943,39 +2943,6 @@ class coreWire implements BaseWire {
               void Function(int, ffi.Pointer<wire_cst_ffi_payjoin_proposal>)>();
 
   void
-      wire__crate__api__receive__ffi_provisional_proposal_contribute_non_witness_input(
-    int port_,
-    ffi.Pointer<wire_cst_ffi_provisional_proposal> that,
-    ffi.Pointer<wire_cst_list_prim_u_8_loose> tx,
-    ffi.Pointer<wire_cst_out_point> outpoint,
-  ) {
-    return _wire__crate__api__receive__ffi_provisional_proposal_contribute_non_witness_input(
-      port_,
-      that,
-      tx,
-      outpoint,
-    );
-  }
-
-  late final _wire__crate__api__receive__ffi_provisional_proposal_contribute_non_witness_inputPtr =
-      _lookup<
-              ffi.NativeFunction<
-                  ffi.Void Function(
-                      ffi.Int64,
-                      ffi.Pointer<wire_cst_ffi_provisional_proposal>,
-                      ffi.Pointer<wire_cst_list_prim_u_8_loose>,
-                      ffi.Pointer<wire_cst_out_point>)>>(
-          'frbgen_payjoin_flutter_wire__crate__api__receive__ffi_provisional_proposal_contribute_non_witness_input');
-  late final _wire__crate__api__receive__ffi_provisional_proposal_contribute_non_witness_input =
-      _wire__crate__api__receive__ffi_provisional_proposal_contribute_non_witness_inputPtr
-          .asFunction<
-              void Function(
-                  int,
-                  ffi.Pointer<wire_cst_ffi_provisional_proposal>,
-                  ffi.Pointer<wire_cst_list_prim_u_8_loose>,
-                  ffi.Pointer<wire_cst_out_point>)>();
-
-  void
       wire__crate__api__receive__ffi_provisional_proposal_contribute_witness_input(
     int port_,
     ffi.Pointer<wire_cst_ffi_provisional_proposal> that,
@@ -3566,39 +3533,6 @@ class coreWire implements BaseWire {
           .asFunction<
               void Function(
                   int, ffi.Pointer<wire_cst_ffi_v_2_payjoin_proposal>)>();
-
-  void
-      wire__crate__api__receive__ffi_v_2_provisional_proposal_contribute_non_witness_input(
-    int port_,
-    ffi.Pointer<wire_cst_ffi_v_2_provisional_proposal> that,
-    ffi.Pointer<wire_cst_list_prim_u_8_loose> tx,
-    ffi.Pointer<wire_cst_out_point> outpoint,
-  ) {
-    return _wire__crate__api__receive__ffi_v_2_provisional_proposal_contribute_non_witness_input(
-      port_,
-      that,
-      tx,
-      outpoint,
-    );
-  }
-
-  late final _wire__crate__api__receive__ffi_v_2_provisional_proposal_contribute_non_witness_inputPtr =
-      _lookup<
-              ffi.NativeFunction<
-                  ffi.Void Function(
-                      ffi.Int64,
-                      ffi.Pointer<wire_cst_ffi_v_2_provisional_proposal>,
-                      ffi.Pointer<wire_cst_list_prim_u_8_loose>,
-                      ffi.Pointer<wire_cst_out_point>)>>(
-          'frbgen_payjoin_flutter_wire__crate__api__receive__ffi_v_2_provisional_proposal_contribute_non_witness_input');
-  late final _wire__crate__api__receive__ffi_v_2_provisional_proposal_contribute_non_witness_input =
-      _wire__crate__api__receive__ffi_v_2_provisional_proposal_contribute_non_witness_inputPtr
-          .asFunction<
-              void Function(
-                  int,
-                  ffi.Pointer<wire_cst_ffi_v_2_provisional_proposal>,
-                  ffi.Pointer<wire_cst_list_prim_u_8_loose>,
-                  ffi.Pointer<wire_cst_out_point>)>();
 
   void
       wire__crate__api__receive__ffi_v_2_provisional_proposal_contribute_witness_input(
@@ -5770,18 +5704,18 @@ final class wire_cst_list_prim_u_8_strict extends ffi.Struct {
   external int len;
 }
 
-final class wire_cst_out_point extends ffi.Struct {
-  external ffi.Pointer<wire_cst_list_prim_u_8_strict> txid;
-
-  @ffi.Uint32()
-  external int vout;
-}
-
 final class wire_cst_tx_out extends ffi.Struct {
   @ffi.Uint64()
   external int value;
 
   external ffi.Pointer<wire_cst_list_prim_u_8_strict> script_pubkey;
+}
+
+final class wire_cst_out_point extends ffi.Struct {
+  external ffi.Pointer<wire_cst_list_prim_u_8_strict> txid;
+
+  @ffi.Uint32()
+  external int vout;
 }
 
 final class wire_cst_record_u_64_out_point extends ffi.Struct {

@@ -3,11 +3,12 @@
 
 // Section: imports
 
-use super::*;
-use crate::*;
 use flutter_rust_bridge::for_generated::byteorder::{NativeEndian, ReadBytesExt, WriteBytesExt};
 use flutter_rust_bridge::for_generated::{transform_result_dco, Lifetimeable, Lockable};
 use flutter_rust_bridge::{Handler, IntoIntoDart};
+
+use super::*;
+use crate::*;
 
 // Section: boilerplate
 
@@ -524,9 +525,7 @@ impl CstDecode<crate::api::uri::FfiPjUri> for wire_cst_ffi_pj_uri {
 impl CstDecode<crate::api::uri::FfiPjUriBuilder> for wire_cst_ffi_pj_uri_builder {
     // Codec=Cst (C-struct based), see doc to use other codecs
     fn cst_decode(self) -> crate::api::uri::FfiPjUriBuilder {
-        crate::api::uri::FfiPjUriBuilder {
-            internal: self.internal.cst_decode(),
-        }
+        crate::api::uri::FfiPjUriBuilder { internal: self.internal.cst_decode() }
     }
 }
 impl CstDecode<crate::api::receive::FfiProvisionalProposal> for wire_cst_ffi_provisional_proposal {
@@ -622,9 +621,7 @@ impl CstDecode<crate::api::receive::FfiV2UncheckedProposal>
 impl CstDecode<crate::utils::types::Headers> for wire_cst_headers {
     // Codec=Cst (C-struct based), see doc to use other codecs
     fn cst_decode(self) -> crate::utils::types::Headers {
-        crate::utils::types::Headers {
-            map: self.map.cst_decode(),
-        }
+        crate::utils::types::Headers { map: self.map.cst_decode() }
     }
 }
 impl CstDecode<Vec<crate::utils::types::OutPoint>> for *mut wire_cst_list_out_point {
@@ -689,10 +686,7 @@ impl CstDecode<Vec<(u64, crate::utils::types::OutPoint)>>
 impl CstDecode<crate::utils::types::OutPoint> for wire_cst_out_point {
     // Codec=Cst (C-struct based), see doc to use other codecs
     fn cst_decode(self) -> crate::utils::types::OutPoint {
-        crate::utils::types::OutPoint {
-            txid: self.txid.cst_decode(),
-            vout: self.vout.cst_decode(),
-        }
+        crate::utils::types::OutPoint { txid: self.txid.cst_decode(), vout: self.vout.cst_decode() }
     }
 }
 impl CstDecode<crate::utils::error::PayjoinError> for wire_cst_payjoin_error {
@@ -743,9 +737,7 @@ impl CstDecode<crate::utils::error::PayjoinError> for wire_cst_payjoin_error {
             }
             7 => {
                 let ans = unsafe { self.kind.ServerError };
-                crate::utils::error::PayjoinError::ServerError {
-                    message: ans.message.cst_decode(),
-                }
+                crate::utils::error::PayjoinError::ServerError { message: ans.message.cst_decode() }
             }
             8 => {
                 let ans = unsafe { self.kind.SelectionError };
@@ -779,9 +771,7 @@ impl CstDecode<crate::utils::error::PayjoinError> for wire_cst_payjoin_error {
             }
             13 => {
                 let ans = unsafe { self.kind.V2Error };
-                crate::utils::error::PayjoinError::V2Error {
-                    message: ans.message.cst_decode(),
-                }
+                crate::utils::error::PayjoinError::V2Error { message: ans.message.cst_decode() }
             }
             14 => {
                 let ans = unsafe { self.kind.UnexpectedError };
@@ -791,39 +781,25 @@ impl CstDecode<crate::utils::error::PayjoinError> for wire_cst_payjoin_error {
             }
             15 => {
                 let ans = unsafe { self.kind.OhttpError };
-                crate::utils::error::PayjoinError::OhttpError {
-                    message: ans.message.cst_decode(),
-                }
+                crate::utils::error::PayjoinError::OhttpError { message: ans.message.cst_decode() }
             }
             16 => {
                 let ans = unsafe { self.kind.UrlError };
-                crate::utils::error::PayjoinError::UrlError {
-                    message: ans.message.cst_decode(),
-                }
+                crate::utils::error::PayjoinError::UrlError { message: ans.message.cst_decode() }
             }
             17 => {
                 let ans = unsafe { self.kind.IoError };
-                crate::utils::error::PayjoinError::IoError {
-                    message: ans.message.cst_decode(),
-                }
+                crate::utils::error::PayjoinError::IoError { message: ans.message.cst_decode() }
             }
             _ => unreachable!(),
         }
     }
 }
-impl
-    CstDecode<(
-        crate::utils::types::Request,
-        crate::utils::types::ClientResponse,
-    )> for wire_cst_record_request_client_response
+impl CstDecode<(crate::utils::types::Request, crate::utils::types::ClientResponse)>
+    for wire_cst_record_request_client_response
 {
     // Codec=Cst (C-struct based), see doc to use other codecs
-    fn cst_decode(
-        self,
-    ) -> (
-        crate::utils::types::Request,
-        crate::utils::types::ClientResponse,
-    ) {
+    fn cst_decode(self) -> (crate::utils::types::Request, crate::utils::types::ClientResponse) {
         (self.field0.cst_decode(), self.field1.cst_decode())
     }
 }
@@ -858,10 +834,7 @@ impl CstDecode<(u64, crate::utils::types::OutPoint)> for wire_cst_record_u_64_ou
 impl CstDecode<crate::utils::types::Request> for wire_cst_request {
     // Codec=Cst (C-struct based), see doc to use other codecs
     fn cst_decode(self) -> crate::utils::types::Request {
-        crate::utils::types::Request {
-            url: self.url.cst_decode(),
-            body: self.body.cst_decode(),
-        }
+        crate::utils::types::Request { url: self.url.cst_decode(), body: self.body.cst_decode() }
     }
 }
 impl CstDecode<crate::utils::types::TxOut> for wire_cst_tx_out {
@@ -875,9 +848,7 @@ impl CstDecode<crate::utils::types::TxOut> for wire_cst_tx_out {
 }
 impl NewWithNullPtr for wire_cst_client_response {
     fn new_with_null_ptr() -> Self {
-        Self {
-            field0: Default::default(),
-        }
+        Self { field0: Default::default() }
     }
 }
 impl Default for wire_cst_client_response {
@@ -887,9 +858,7 @@ impl Default for wire_cst_client_response {
 }
 impl NewWithNullPtr for wire_cst_ffi_active_session {
     fn new_with_null_ptr() -> Self {
-        Self {
-            field0: Default::default(),
-        }
+        Self { field0: Default::default() }
     }
 }
 impl Default for wire_cst_ffi_active_session {
@@ -899,9 +868,7 @@ impl Default for wire_cst_ffi_active_session {
 }
 impl NewWithNullPtr for wire_cst_ffi_context_v_1 {
     fn new_with_null_ptr() -> Self {
-        Self {
-            field0: Default::default(),
-        }
+        Self { field0: Default::default() }
     }
 }
 impl Default for wire_cst_ffi_context_v_1 {
@@ -911,9 +878,7 @@ impl Default for wire_cst_ffi_context_v_1 {
 }
 impl NewWithNullPtr for wire_cst_ffi_context_v_2 {
     fn new_with_null_ptr() -> Self {
-        Self {
-            field0: Default::default(),
-        }
+        Self { field0: Default::default() }
     }
 }
 impl Default for wire_cst_ffi_context_v_2 {
@@ -923,9 +888,7 @@ impl Default for wire_cst_ffi_context_v_2 {
 }
 impl NewWithNullPtr for wire_cst_ffi_maybe_inputs_owned {
     fn new_with_null_ptr() -> Self {
-        Self {
-            field0: Default::default(),
-        }
+        Self { field0: Default::default() }
     }
 }
 impl Default for wire_cst_ffi_maybe_inputs_owned {
@@ -935,9 +898,7 @@ impl Default for wire_cst_ffi_maybe_inputs_owned {
 }
 impl NewWithNullPtr for wire_cst_ffi_maybe_inputs_seen {
     fn new_with_null_ptr() -> Self {
-        Self {
-            field0: Default::default(),
-        }
+        Self { field0: Default::default() }
     }
 }
 impl Default for wire_cst_ffi_maybe_inputs_seen {
@@ -947,9 +908,7 @@ impl Default for wire_cst_ffi_maybe_inputs_seen {
 }
 impl NewWithNullPtr for wire_cst_ffi_maybe_mixed_input_scripts {
     fn new_with_null_ptr() -> Self {
-        Self {
-            field0: Default::default(),
-        }
+        Self { field0: Default::default() }
     }
 }
 impl Default for wire_cst_ffi_maybe_mixed_input_scripts {
@@ -959,9 +918,7 @@ impl Default for wire_cst_ffi_maybe_mixed_input_scripts {
 }
 impl NewWithNullPtr for wire_cst_ffi_ohttp_keys {
     fn new_with_null_ptr() -> Self {
-        Self {
-            field0: Default::default(),
-        }
+        Self { field0: Default::default() }
     }
 }
 impl Default for wire_cst_ffi_ohttp_keys {
@@ -971,9 +928,7 @@ impl Default for wire_cst_ffi_ohttp_keys {
 }
 impl NewWithNullPtr for wire_cst_ffi_outputs_unknown {
     fn new_with_null_ptr() -> Self {
-        Self {
-            field0: Default::default(),
-        }
+        Self { field0: Default::default() }
     }
 }
 impl Default for wire_cst_ffi_outputs_unknown {
@@ -983,9 +938,7 @@ impl Default for wire_cst_ffi_outputs_unknown {
 }
 impl NewWithNullPtr for wire_cst_ffi_payjoin_proposal {
     fn new_with_null_ptr() -> Self {
-        Self {
-            field0: Default::default(),
-        }
+        Self { field0: Default::default() }
     }
 }
 impl Default for wire_cst_ffi_payjoin_proposal {
@@ -995,9 +948,7 @@ impl Default for wire_cst_ffi_payjoin_proposal {
 }
 impl NewWithNullPtr for wire_cst_ffi_pj_uri {
     fn new_with_null_ptr() -> Self {
-        Self {
-            field0: Default::default(),
-        }
+        Self { field0: Default::default() }
     }
 }
 impl Default for wire_cst_ffi_pj_uri {
@@ -1007,9 +958,7 @@ impl Default for wire_cst_ffi_pj_uri {
 }
 impl NewWithNullPtr for wire_cst_ffi_pj_uri_builder {
     fn new_with_null_ptr() -> Self {
-        Self {
-            internal: Default::default(),
-        }
+        Self { internal: Default::default() }
     }
 }
 impl Default for wire_cst_ffi_pj_uri_builder {
@@ -1019,9 +968,7 @@ impl Default for wire_cst_ffi_pj_uri_builder {
 }
 impl NewWithNullPtr for wire_cst_ffi_provisional_proposal {
     fn new_with_null_ptr() -> Self {
-        Self {
-            field0: Default::default(),
-        }
+        Self { field0: Default::default() }
     }
 }
 impl Default for wire_cst_ffi_provisional_proposal {
@@ -1031,9 +978,7 @@ impl Default for wire_cst_ffi_provisional_proposal {
 }
 impl NewWithNullPtr for wire_cst_ffi_request_builder {
     fn new_with_null_ptr() -> Self {
-        Self {
-            field0: Default::default(),
-        }
+        Self { field0: Default::default() }
     }
 }
 impl Default for wire_cst_ffi_request_builder {
@@ -1043,9 +988,7 @@ impl Default for wire_cst_ffi_request_builder {
 }
 impl NewWithNullPtr for wire_cst_ffi_request_context {
     fn new_with_null_ptr() -> Self {
-        Self {
-            field0: Default::default(),
-        }
+        Self { field0: Default::default() }
     }
 }
 impl Default for wire_cst_ffi_request_context {
@@ -1055,9 +998,7 @@ impl Default for wire_cst_ffi_request_context {
 }
 impl NewWithNullPtr for wire_cst_ffi_session_initializer {
     fn new_with_null_ptr() -> Self {
-        Self {
-            field0: Default::default(),
-        }
+        Self { field0: Default::default() }
     }
 }
 impl Default for wire_cst_ffi_session_initializer {
@@ -1067,9 +1008,7 @@ impl Default for wire_cst_ffi_session_initializer {
 }
 impl NewWithNullPtr for wire_cst_ffi_unchecked_proposal {
     fn new_with_null_ptr() -> Self {
-        Self {
-            field0: Default::default(),
-        }
+        Self { field0: Default::default() }
     }
 }
 impl Default for wire_cst_ffi_unchecked_proposal {
@@ -1079,9 +1018,7 @@ impl Default for wire_cst_ffi_unchecked_proposal {
 }
 impl NewWithNullPtr for wire_cst_ffi_uri {
     fn new_with_null_ptr() -> Self {
-        Self {
-            field0: Default::default(),
-        }
+        Self { field0: Default::default() }
     }
 }
 impl Default for wire_cst_ffi_uri {
@@ -1091,9 +1028,7 @@ impl Default for wire_cst_ffi_uri {
 }
 impl NewWithNullPtr for wire_cst_ffi_url {
     fn new_with_null_ptr() -> Self {
-        Self {
-            field0: Default::default(),
-        }
+        Self { field0: Default::default() }
     }
 }
 impl Default for wire_cst_ffi_url {
@@ -1103,9 +1038,7 @@ impl Default for wire_cst_ffi_url {
 }
 impl NewWithNullPtr for wire_cst_ffi_v_2_maybe_inputs_owned {
     fn new_with_null_ptr() -> Self {
-        Self {
-            field0: Default::default(),
-        }
+        Self { field0: Default::default() }
     }
 }
 impl Default for wire_cst_ffi_v_2_maybe_inputs_owned {
@@ -1115,9 +1048,7 @@ impl Default for wire_cst_ffi_v_2_maybe_inputs_owned {
 }
 impl NewWithNullPtr for wire_cst_ffi_v_2_maybe_inputs_seen {
     fn new_with_null_ptr() -> Self {
-        Self {
-            field0: Default::default(),
-        }
+        Self { field0: Default::default() }
     }
 }
 impl Default for wire_cst_ffi_v_2_maybe_inputs_seen {
@@ -1127,9 +1058,7 @@ impl Default for wire_cst_ffi_v_2_maybe_inputs_seen {
 }
 impl NewWithNullPtr for wire_cst_ffi_v_2_maybe_mixed_input_scripts {
     fn new_with_null_ptr() -> Self {
-        Self {
-            field0: Default::default(),
-        }
+        Self { field0: Default::default() }
     }
 }
 impl Default for wire_cst_ffi_v_2_maybe_mixed_input_scripts {
@@ -1139,9 +1068,7 @@ impl Default for wire_cst_ffi_v_2_maybe_mixed_input_scripts {
 }
 impl NewWithNullPtr for wire_cst_ffi_v_2_outputs_unknown {
     fn new_with_null_ptr() -> Self {
-        Self {
-            field0: Default::default(),
-        }
+        Self { field0: Default::default() }
     }
 }
 impl Default for wire_cst_ffi_v_2_outputs_unknown {
@@ -1151,9 +1078,7 @@ impl Default for wire_cst_ffi_v_2_outputs_unknown {
 }
 impl NewWithNullPtr for wire_cst_ffi_v_2_payjoin_proposal {
     fn new_with_null_ptr() -> Self {
-        Self {
-            field0: Default::default(),
-        }
+        Self { field0: Default::default() }
     }
 }
 impl Default for wire_cst_ffi_v_2_payjoin_proposal {
@@ -1163,9 +1088,7 @@ impl Default for wire_cst_ffi_v_2_payjoin_proposal {
 }
 impl NewWithNullPtr for wire_cst_ffi_v_2_provisional_proposal {
     fn new_with_null_ptr() -> Self {
-        Self {
-            field0: Default::default(),
-        }
+        Self { field0: Default::default() }
     }
 }
 impl Default for wire_cst_ffi_v_2_provisional_proposal {
@@ -1175,9 +1098,7 @@ impl Default for wire_cst_ffi_v_2_provisional_proposal {
 }
 impl NewWithNullPtr for wire_cst_ffi_v_2_unchecked_proposal {
     fn new_with_null_ptr() -> Self {
-        Self {
-            field0: Default::default(),
-        }
+        Self { field0: Default::default() }
     }
 }
 impl Default for wire_cst_ffi_v_2_unchecked_proposal {
@@ -1187,9 +1108,7 @@ impl Default for wire_cst_ffi_v_2_unchecked_proposal {
 }
 impl NewWithNullPtr for wire_cst_headers {
     fn new_with_null_ptr() -> Self {
-        Self {
-            map: core::ptr::null_mut(),
-        }
+        Self { map: core::ptr::null_mut() }
     }
 }
 impl Default for wire_cst_headers {
@@ -1199,10 +1118,7 @@ impl Default for wire_cst_headers {
 }
 impl NewWithNullPtr for wire_cst_out_point {
     fn new_with_null_ptr() -> Self {
-        Self {
-            txid: core::ptr::null_mut(),
-            vout: Default::default(),
-        }
+        Self { txid: core::ptr::null_mut(), vout: Default::default() }
     }
 }
 impl Default for wire_cst_out_point {
@@ -1212,10 +1128,7 @@ impl Default for wire_cst_out_point {
 }
 impl NewWithNullPtr for wire_cst_payjoin_error {
     fn new_with_null_ptr() -> Self {
-        Self {
-            tag: -1,
-            kind: PayjoinErrorKind { nil__: () },
-        }
+        Self { tag: -1, kind: PayjoinErrorKind { nil__: () } }
     }
 }
 impl Default for wire_cst_payjoin_error {
@@ -1225,10 +1138,7 @@ impl Default for wire_cst_payjoin_error {
 }
 impl NewWithNullPtr for wire_cst_record_request_client_response {
     fn new_with_null_ptr() -> Self {
-        Self {
-            field0: Default::default(),
-            field1: Default::default(),
-        }
+        Self { field0: Default::default(), field1: Default::default() }
     }
 }
 impl Default for wire_cst_record_request_client_response {
@@ -1238,10 +1148,7 @@ impl Default for wire_cst_record_request_client_response {
 }
 impl NewWithNullPtr for wire_cst_record_request_ffi_context_v_1 {
     fn new_with_null_ptr() -> Self {
-        Self {
-            field0: Default::default(),
-            field1: Default::default(),
-        }
+        Self { field0: Default::default(), field1: Default::default() }
     }
 }
 impl Default for wire_cst_record_request_ffi_context_v_1 {
@@ -1251,10 +1158,7 @@ impl Default for wire_cst_record_request_ffi_context_v_1 {
 }
 impl NewWithNullPtr for wire_cst_record_request_ffi_context_v_2 {
     fn new_with_null_ptr() -> Self {
-        Self {
-            field0: Default::default(),
-            field1: Default::default(),
-        }
+        Self { field0: Default::default(), field1: Default::default() }
     }
 }
 impl Default for wire_cst_record_request_ffi_context_v_2 {
@@ -1264,10 +1168,7 @@ impl Default for wire_cst_record_request_ffi_context_v_2 {
 }
 impl NewWithNullPtr for wire_cst_record_string_string {
     fn new_with_null_ptr() -> Self {
-        Self {
-            field0: core::ptr::null_mut(),
-            field1: core::ptr::null_mut(),
-        }
+        Self { field0: core::ptr::null_mut(), field1: core::ptr::null_mut() }
     }
 }
 impl Default for wire_cst_record_string_string {
@@ -1277,10 +1178,7 @@ impl Default for wire_cst_record_string_string {
 }
 impl NewWithNullPtr for wire_cst_record_u_64_out_point {
     fn new_with_null_ptr() -> Self {
-        Self {
-            field0: Default::default(),
-            field1: Default::default(),
-        }
+        Self { field0: Default::default(), field1: Default::default() }
     }
 }
 impl Default for wire_cst_record_u_64_out_point {
@@ -1290,10 +1188,7 @@ impl Default for wire_cst_record_u_64_out_point {
 }
 impl NewWithNullPtr for wire_cst_request {
     fn new_with_null_ptr() -> Self {
-        Self {
-            url: Default::default(),
-            body: core::ptr::null_mut(),
-        }
+        Self { url: Default::default(), body: core::ptr::null_mut() }
     }
 }
 impl Default for wire_cst_request {
@@ -1303,10 +1198,7 @@ impl Default for wire_cst_request {
 }
 impl NewWithNullPtr for wire_cst_tx_out {
     fn new_with_null_ptr() -> Self {
-        Self {
-            value: Default::default(),
-            script_pubkey: core::ptr::null_mut(),
-        }
+        Self { value: Default::default(), script_pubkey: core::ptr::null_mut() }
     }
 }
 impl Default for wire_cst_tx_out {
@@ -1441,18 +1333,6 @@ pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_payjoin_
     that: *mut wire_cst_ffi_payjoin_proposal,
 ) {
     wire__crate__api__receive__ffi_payjoin_proposal_utxos_to_be_locked_impl(port_, that)
-}
-
-#[no_mangle]
-pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_provisional_proposal_contribute_non_witness_input(
-    port_: i64,
-    that: *mut wire_cst_ffi_provisional_proposal,
-    tx: *mut wire_cst_list_prim_u_8_loose,
-    outpoint: *mut wire_cst_out_point,
-) {
-    wire__crate__api__receive__ffi_provisional_proposal_contribute_non_witness_input_impl(
-        port_, that, tx, outpoint,
-    )
 }
 
 #[no_mangle]
@@ -1698,18 +1578,6 @@ pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_v_2_payj
     that: *mut wire_cst_ffi_v_2_payjoin_proposal,
 ) {
     wire__crate__api__receive__ffi_v_2_payjoin_proposal_utxos_to_be_locked_impl(port_, that)
-}
-
-#[no_mangle]
-pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_v_2_provisional_proposal_contribute_non_witness_input(
-    port_: i64,
-    that: *mut wire_cst_ffi_v_2_provisional_proposal,
-    tx: *mut wire_cst_list_prim_u_8_loose,
-    outpoint: *mut wire_cst_out_point,
-) {
-    wire__crate__api__receive__ffi_v_2_provisional_proposal_contribute_non_witness_input_impl(
-        port_, that, tx, outpoint,
-    )
 }
 
 #[no_mangle]

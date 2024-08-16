@@ -61,7 +61,7 @@ class core extends BaseEntrypoint<coreApi, coreApiImpl, coreWire> {
   String get codegenVersion => '2.0.0';
 
   @override
-  int get rustContentHash => -1575278373;
+  int get rustContentHash => -486461789;
 
   static const kDefaultExternalLibraryLoaderConfig =
       ExternalLibraryLoaderConfig(
@@ -122,11 +122,6 @@ abstract class coreApi extends BaseApi {
 
   Future<List<OutPoint>> crateApiReceiveFfiPayjoinProposalUtxosToBeLocked(
       {required FfiPayjoinProposal that});
-
-  Future<void> crateApiReceiveFfiProvisionalProposalContributeNonWitnessInput(
-      {required FfiProvisionalProposal that,
-      required List<int> tx,
-      required OutPoint outpoint});
 
   Future<void> crateApiReceiveFfiProvisionalProposalContributeWitnessInput(
       {required FfiProvisionalProposal that,
@@ -225,11 +220,6 @@ abstract class coreApi extends BaseApi {
 
   Future<List<OutPoint>> crateApiReceiveFfiV2PayjoinProposalUtxosToBeLocked(
       {required FfiV2PayjoinProposal that});
-
-  Future<void> crateApiReceiveFfiV2ProvisionalProposalContributeNonWitnessInput(
-      {required FfiV2ProvisionalProposal that,
-      required List<int> tx,
-      required OutPoint outpoint});
 
   Future<void> crateApiReceiveFfiV2ProvisionalProposalContributeWitnessInput(
       {required FfiV2ProvisionalProposal that,
@@ -965,38 +955,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
           );
 
   @override
-  Future<void> crateApiReceiveFfiProvisionalProposalContributeNonWitnessInput(
-      {required FfiProvisionalProposal that,
-      required List<int> tx,
-      required OutPoint outpoint}) {
-    return handler.executeNormal(NormalTask(
-      callFfi: (port_) {
-        var arg0 = cst_encode_box_autoadd_ffi_provisional_proposal(that);
-        var arg1 = cst_encode_list_prim_u_8_loose(tx);
-        var arg2 = cst_encode_box_autoadd_out_point(outpoint);
-        return wire
-            .wire__crate__api__receive__ffi_provisional_proposal_contribute_non_witness_input(
-                port_, arg0, arg1, arg2);
-      },
-      codec: DcoCodec(
-        decodeSuccessData: dco_decode_unit,
-        decodeErrorData: dco_decode_payjoin_error,
-      ),
-      constMeta:
-          kCrateApiReceiveFfiProvisionalProposalContributeNonWitnessInputConstMeta,
-      argValues: [that, tx, outpoint],
-      apiImpl: this,
-    ));
-  }
-
-  TaskConstMeta
-      get kCrateApiReceiveFfiProvisionalProposalContributeNonWitnessInputConstMeta =>
-          const TaskConstMeta(
-            debugName: "ffi_provisional_proposal_contribute_non_witness_input",
-            argNames: ["that", "tx", "outpoint"],
-          );
-
-  @override
   Future<void> crateApiReceiveFfiProvisionalProposalContributeWitnessInput(
       {required FfiProvisionalProposal that,
       required TxOut txo,
@@ -1674,39 +1632,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
           const TaskConstMeta(
             debugName: "ffi_v_2_payjoin_proposal_utxos_to_be_locked",
             argNames: ["that"],
-          );
-
-  @override
-  Future<void> crateApiReceiveFfiV2ProvisionalProposalContributeNonWitnessInput(
-      {required FfiV2ProvisionalProposal that,
-      required List<int> tx,
-      required OutPoint outpoint}) {
-    return handler.executeNormal(NormalTask(
-      callFfi: (port_) {
-        var arg0 = cst_encode_box_autoadd_ffi_v_2_provisional_proposal(that);
-        var arg1 = cst_encode_list_prim_u_8_loose(tx);
-        var arg2 = cst_encode_box_autoadd_out_point(outpoint);
-        return wire
-            .wire__crate__api__receive__ffi_v_2_provisional_proposal_contribute_non_witness_input(
-                port_, arg0, arg1, arg2);
-      },
-      codec: DcoCodec(
-        decodeSuccessData: dco_decode_unit,
-        decodeErrorData: dco_decode_payjoin_error,
-      ),
-      constMeta:
-          kCrateApiReceiveFfiV2ProvisionalProposalContributeNonWitnessInputConstMeta,
-      argValues: [that, tx, outpoint],
-      apiImpl: this,
-    ));
-  }
-
-  TaskConstMeta
-      get kCrateApiReceiveFfiV2ProvisionalProposalContributeNonWitnessInputConstMeta =>
-          const TaskConstMeta(
-            debugName:
-                "ffi_v_2_provisional_proposal_contribute_non_witness_input",
-            argNames: ["that", "tx", "outpoint"],
           );
 
   @override
