@@ -1,6 +1,7 @@
+use flutter_rust_bridge::frb;
+
 use crate::frb_generated::RustOpaque;
 use crate::utils::error::PayjoinError;
-use flutter_rust_bridge::frb;
 
 #[derive(Debug, Clone)]
 pub struct FfiUrl(pub RustOpaque<payjoin_ffi::uri::Url>);
@@ -70,9 +71,7 @@ pub struct FfiPjUriBuilder {
 
 impl From<payjoin_ffi::uri::PjUriBuilder> for FfiPjUriBuilder {
     fn from(value: payjoin_ffi::uri::PjUriBuilder) -> Self {
-        Self {
-            internal: RustOpaque::new(value),
-        }
+        Self { internal: RustOpaque::new(value) }
     }
 }
 
@@ -81,17 +80,16 @@ impl FfiPjUriBuilder {
         address: String,
         pj: FfiUrl,
         ohttp_keys: Option<FfiOhttpKeys>,
-        expiry: Option<u64>
+        expiry: Option<u64>,
     ) -> Result<Self, PayjoinError> {
-        payjoin_ffi::uri::PjUriBuilder
-            ::new(
-                address,
-                (*pj.0).clone(),
-                ohttp_keys.map(|e| (*e.0).clone()),
-                expiry
-            )
-            .map_err(|e| e.into())
-            .map(|e| e.into())
+        payjoin_ffi::uri::PjUriBuilder::new(
+            address,
+            (*pj.0).clone(),
+            ohttp_keys.map(|e| (*e.0).clone()),
+            expiry,
+        )
+        .map_err(|e| e.into())
+        .map(|e| e.into())
     }
     ///Accepts the amount you want to receive in sats and sets it in btc.
     #[frb(sync)]
@@ -132,10 +130,7 @@ impl FfiUri {
     pub fn from_str(uri: String) -> anyhow::Result<FfiUri, PayjoinError> {
         match payjoin_ffi::uri::Uri::from_str(uri) {
             Ok(e) => Ok(e.into()),
-            Err(e) =>
-                Err(PayjoinError::PjParseError {
-                    message: e.to_string(),
-                }),
+            Err(e) => Err(PayjoinError::PjParseError { message: e.to_string() }),
         }
     }
     #[frb(sync)]
@@ -153,10 +148,7 @@ impl FfiUri {
     }
     #[frb(sync)]
     pub fn check_pj_supported(&self) -> Result<FfiPjUri, payjoin_ffi::error::PayjoinError> {
-        self.0
-            .check_pj_supported()
-            .map(|e| e.into())
-            .map_err(|e| e.into())
+        self.0.check_pj_supported().map(|e| e.into()).map_err(|e| e.into())
     }
 }
 pub struct FfiOhttpKeys(pub RustOpaque<payjoin_ffi::types::OhttpKeys>);
@@ -174,15 +166,12 @@ impl From<payjoin_ffi::types::OhttpKeys> for FfiOhttpKeys {
 
 impl FfiOhttpKeys {
     pub fn decode(bytes: Vec<u8>) -> Result<Self, PayjoinError> {
-        payjoin_ffi::types::OhttpKeys
-            ::decode(bytes)
-            .map(|e| e.into())
-            .map_err(|e| e.into())
+        payjoin_ffi::types::OhttpKeys::decode(bytes).map(|e| e.into()).map_err(|e| e.into())
     }
 }
 #[cfg(test)]
 mod tests {
-    use crate::api::uri::{ FfiPjUriBuilder, FfiUrl };
+    use crate::api::uri::{FfiPjUriBuilder, FfiUrl};
 
     #[test]
     fn test_ffi_builder() {
@@ -198,8 +187,9 @@ mod tests {
                     address.to_string(),
                     FfiUrl::from_str(pj.to_string()).unwrap(),
                     None,
-                    None
-                ).unwrap();
+                    None,
+                )
+                .unwrap();
                 let uri = builder
                     .amount(1)
                     .message("message".to_string())
@@ -213,8 +203,7 @@ mod tests {
                     uri.as_string(),
                     format!(
                         "bitcoin:{}?amount=0.00000001&label=label&message=message&pj={}&pjos=1",
-                        expected_address,
-                        pj
+                        expected_address, pj
                     )
                 );
             }

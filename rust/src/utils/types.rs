@@ -1,8 +1,10 @@
-use flutter_rust_bridge::frb;
-pub use payjoin_ffi::types::Network;
 use std::collections::HashMap;
 
-use crate::{api::uri::FfiUrl, frb_generated::RustOpaque};
+use flutter_rust_bridge::frb;
+pub use payjoin_ffi::types::Network;
+
+use crate::api::uri::FfiUrl;
+use crate::frb_generated::RustOpaque;
 // ///Represents data that needs to be transmitted to the receiver.
 // ///You need to send this request over HTTP(S) to the receiver.
 // #[derive(Clone, Debug)]
@@ -66,18 +68,12 @@ pub struct OutPoint {
 
 impl From<OutPoint> for payjoin_ffi::types::OutPoint {
     fn from(value: OutPoint) -> Self {
-        payjoin_ffi::types::OutPoint {
-            txid: value.txid,
-            vout: value.vout,
-        }
+        payjoin_ffi::types::OutPoint { txid: value.txid, vout: value.vout }
     }
 }
 impl From<&payjoin_ffi::types::OutPoint> for OutPoint {
     fn from(value: &payjoin_ffi::types::OutPoint) -> Self {
-        OutPoint {
-            txid: value.txid.clone(),
-            vout: value.vout,
-        }
+        OutPoint { txid: value.txid.clone(), vout: value.vout }
     }
 }
 
@@ -91,19 +87,13 @@ pub struct TxOut {
 
 impl From<TxOut> for payjoin_ffi::types::TxOut {
     fn from(tx_out: TxOut) -> Self {
-        payjoin_ffi::types::TxOut {
-            value: tx_out.value,
-            script_pubkey: tx_out.script_pubkey,
-        }
+        payjoin_ffi::types::TxOut { value: tx_out.value, script_pubkey: tx_out.script_pubkey }
     }
 }
 
 impl From<payjoin_ffi::types::TxOut> for TxOut {
     fn from(tx_out: payjoin_ffi::types::TxOut) -> Self {
-        TxOut {
-            value: tx_out.value,
-            script_pubkey: tx_out.script_pubkey,
-        }
+        TxOut { value: tx_out.value, script_pubkey: tx_out.script_pubkey }
     }
 }
 
@@ -147,9 +137,6 @@ pub struct Request {
 
 impl From<payjoin_ffi::types::Request> for Request {
     fn from(value: payjoin_ffi::types::Request) -> Self {
-        Self {
-            url: (*value.url).clone().into(),
-            body: value.body,
-        }
+        Self { url: (*value.url).clone().into(), body: value.body }
     }
 }
