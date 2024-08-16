@@ -20,10 +20,10 @@ void main() {
       final btcClient = BtcClient("sender");
       await btcClient.loadWallet();
       final sender = BdkClient(
-          "wpkh(tprv8ZgxMBicQKsPfNH1PykMg16TAvrZgoxDnxr3eorcbhvZxyZzStwFkvqCJegr8Gbwj3GQum8QpXQPh7DGkoobpTB7YbcnUeUSKRDyX2cNN9h/84'/1'/0'/0/*)#ey7hlgpn",
+          "wpkh(tprv8ZgxMBicQKsPemPN83fE95XY5PRnDJZ6YcTHbFACvme5Rwi2RRoivdksZzrP3M61Vz13pva5LjaY1TA9JezqgzLoaNG5SXpCAcyY5w2ursV)",
           Network.regtest);
       final receiver = BdkClient(
-          "wpkh(tprv8ZgxMBicQKsPczV7D2zfMr7oUzHDhNPEuBUgrwRoWM3ijLRvhG87xYiqh9JFLPqojuhmqwMdo1oJzbe5GUpxCbDHnqyGhQa5Jg1Wt6rc9di/84'/1'/0'/0/*)#kdnuw5lq",
+          "wpkh(tprv8ZgxMBicQKsPdD2rdKcJCtGop4vqW3cmvikhzVy42iCev4E9JpeJgnHXdMKLnmAyXatvhXPi8KomgWMa316mwyirBiLXi3MMPhRV1ikfNTJ)",
           Network.regtest);
       await sender.restoreWallet();
       await receiver.restoreWallet();
