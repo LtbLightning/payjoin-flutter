@@ -51,4 +51,4 @@ flutter test integration_test
 
 Caution, this package is an Alpha at this stage Please consider reviewing, experimenting and contributing
 
-Please review and carry out security testing before using in production.
+Please review and carry out testing to ensure security and safety of funds before using in production.
