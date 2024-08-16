@@ -38,8 +38,13 @@ cd example
 #Run integration tests with bitcoin_core and bdk_flutter
 flutter test integration_test
 ```
-## Release status and readiness
+## References
 
-Caution, this package is an Alpha at this stage Please consider reviewing, experimenting and contributing
+[Payjoin Dev Kit](https://payjoindevkit.org/)
 
-Please review and carry out testing to ensure security and safety of funds before using in production.
+[mozilla/uniffi-rs](https://github.com/mozilla/uniffi-rs)
+
+## Release Status and Disclaimer
+
+This project is in active development and currently in its Alpha stage. **Please proceed with caution**, particularly when using real funds.
+We encourage thorough review, testing, and contributions to help improve its stability and security before considering production use.
