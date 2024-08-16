@@ -8,7 +8,7 @@ import '../lib.dart';
 import '../utils/error.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
-// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `clone`, `clone`, `fmt`, `from`, `from`, `from`, `from`, `from`, `from`
+// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `clone`, `clone`, `fmt`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`
 
 class FfiOhttpKeys {
   final OhttpKeys field0;
