@@ -8,7 +8,7 @@ To use the `payjoin_flutter` package in your project, add it as a dependency in 
 
 ```dart
 dependencies:
-payjoin_flutter: 0.18.0
+payjoin_flutter: 0.20.0
 ```
 ### Requirements
 
@@ -26,15 +26,6 @@ this [link](https://github.com/vulpemventures/nigiri), to install it on your loc
 Once the nigiri bitcoin starts running, you need to mine a few blocks. Please refer to the following [link](https://developer.bitcoin.org/reference/rpc/generatetoaddress.html?highlight=generate)
 on how to mine blocks.
 
-Before running the integration tests, please replace following snippet in `example/integration_test/bitcoin_core_full_cycle_test.dart` with your
-nigiri bitcoin core credentials.
-
-```dart
-    // Bitcoin core credentials
-    String rpcUser = "admin1";
-    String rpcPassword = "123";
-    int rpcPort = 18443;
-```
 
 ## Running the integration tests
 Once we have set up the Bitcoin core properly in the `Regtest` network, 
@@ -47,8 +38,13 @@ cd example
 #Run integration tests with bitcoin_core and bdk_flutter
 flutter test integration_test
 ```
-## Release status and readiness
+## References
 
-Caution, this package is an Alpha at this stage Please consider reviewing, experimenting and contributing
+[Payjoin Dev Kit](https://payjoindevkit.org/)
 
-Please review and carry out testing to ensure security and safety of funds before using in production.
+[mozilla/uniffi-rs](https://github.com/mozilla/uniffi-rs)
+
+## Release Status and Disclaimer
+
+This project is in active development and currently in its Alpha stage. **Please proceed with caution**, particularly when using real funds.
+We encourage thorough review, testing, and contributions to help improve its stability and security before considering production use.

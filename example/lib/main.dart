@@ -115,7 +115,7 @@ class _PayJoinState extends State<PayJoin> {
                     displayText = "sync complete";
                   });
                   debugPrint(
-                      "sender balance: ${(await sender.getBalance()).toString()}");
+                      "sender balance: ${(sender.getBalance()).toString()}");
                 },
                 child: Text(
                   "Sync wallets",
@@ -126,9 +126,9 @@ class _PayJoinState extends State<PayJoin> {
                 )),
             TextButton(
                 onPressed: () async {
-                  final address = (await receiver.getNewAddress()).address;
+                  final address = (receiver.getNewAddress()).address;
                   final res = await payJoinLibrary.buildPjUri(
-                      0.0083285, await address.toQrUri());
+                      0.0083285, address.toQrUri());
                   setState(() {
                     pjUri = res;
                     displayText = res;
@@ -143,12 +143,11 @@ class _PayJoinState extends State<PayJoin> {
                 )),
             TextButton(
                 onPressed: () async {
-                  final balance = await sender.getBalance();
+                  final balance = sender.getBalance();
                   debugPrint("Sender Balance: ${balance.toString()}");
                   final uri = await pay_join_uri.Uri.fromStr(pjUri);
-                  final address = await uri.address();
-                  int amount =
-                      (((await uri.amount()) ?? 0) * 100000000).toInt();
+                  final address = uri.address();
+                  int amount = (((uri.amount()) ?? 0) * 100000000).toInt();
                   final psbt = (await sender.createPsbt(address, amount, 2000));
                   debugPrint(
                     "\nOriginal sender psbt: ${psbt.toString()}",
@@ -170,9 +169,9 @@ class _PayJoinState extends State<PayJoin> {
                       .handlePjRequest(senderPsbt.toString(), pjUri, (e) async {
                     final script = ScriptBuf(bytes: e);
 
-                    return (await receiver.getAddressInfo(script));
+                    return (receiver.getAddressInfo(script));
                   });
-                  final unspent = await receiver.listUnspent();
+                  final unspent = receiver.listUnspent();
                   // Select receiver payjoin inputs.
                   Map<BigInt, common.OutPoint> candidateInputs = {
                     for (var input in unspent)

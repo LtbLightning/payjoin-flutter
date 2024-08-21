@@ -39,9 +39,7 @@ class PayJoinLibrary {
       'content-length': req.body.length.toString(),
     });
     final unchecked = await v1.UncheckedProposal.fromRequest(
-        body: req.body.toList(),
-        query: (await req.url.query())!,
-        headers: headers);
+        body: req.body.toList(), query: (req.url.query())!, headers: headers);
     final provisionalProposal = await handleUnckedProposal(unchecked, isOwned);
     return (provisionalProposal, cxt);
   }

@@ -1,10 +1,12 @@
+use std::collections::HashMap;
+pub use std::sync::Arc;
+
+use flutter_rust_bridge::{frb, DartFnFuture};
+
 use crate::api::uri::{FfiOhttpKeys, FfiPjUriBuilder, FfiUrl};
 use crate::frb_generated::RustOpaque;
 pub use crate::utils::error::PayjoinError;
 use crate::utils::types::{ClientResponse, Headers, OutPoint, Request, TxOut};
-use flutter_rust_bridge::{frb, DartFnFuture};
-use std::collections::HashMap;
-pub use std::sync::Arc;
 
 pub struct FfiUncheckedProposal(pub RustOpaque<payjoin_ffi::receive::v1::UncheckedProposal>);
 impl From<payjoin_ffi::receive::v1::UncheckedProposal> for FfiUncheckedProposal {
@@ -158,32 +160,16 @@ impl FfiProvisionalProposal {
         txo: TxOut,
         outpoint: OutPoint,
     ) -> Result<(), PayjoinError> {
-        self.0
-            .contribute_witness_input(txo.into(), outpoint.into())
-            .map_err(|e| e.into())
-    }
-    pub fn contribute_non_witness_input(
-        &self,
-        tx: Vec<u8>,
-        outpoint: OutPoint,
-    ) -> Result<(), PayjoinError> {
-        self.0
-            .contribute_non_witness_input(tx, outpoint.into())
-            .map_err(|e| e.into())
+        self.0.contribute_witness_input(txo.into(), outpoint.into()).map_err(|e| e.into())
     }
 
     pub fn try_preserving_privacy(
         &self,
         candidate_inputs: HashMap<u64, OutPoint>,
     ) -> Result<OutPoint, PayjoinError> {
-        let candidate_inputs: HashMap<u64, payjoin_ffi::types::OutPoint> = candidate_inputs
-            .into_iter()
-            .map(|(key, value)| (key, value.into()))
-            .collect();
-        self.0
-            .try_preserving_privacy(candidate_inputs)
-            .map_err(|e| e.into())
-            .map(|o| (&o).into())
+        let candidate_inputs: HashMap<u64, payjoin_ffi::types::OutPoint> =
+            candidate_inputs.into_iter().map(|(key, value)| (key, value.into())).collect();
+        self.0.try_preserving_privacy(candidate_inputs).map_err(|e| e.into()).map(|o| (&o).into())
     }
 
     pub fn finalize_proposal(
@@ -223,11 +209,7 @@ impl From<payjoin_ffi::receive::v1::PayjoinProposal> for FfiPayjoinProposal {
 }
 impl FfiPayjoinProposal {
     pub fn utxos_to_be_locked(&self) -> Vec<OutPoint> {
-        self.0
-            .utxos_to_be_locked()
-            .iter()
-            .map(|x| x.into())
-            .collect()
+        self.0.utxos_to_be_locked().iter().map(|x| x.into()).collect()
     }
     pub fn is_output_substitution_disabled(&self) -> bool {
         self.0.is_output_substitution_disabled()
@@ -261,28 +243,22 @@ impl FfiSessionInitializer {
             address,
             expire_after,
             network,
-            Arc::new((*directory.0).clone()),
+            directory.into(),
             (*ohttp_keys.0).clone().into(),
-            Arc::new((*ohttp_relay.0).clone()),
+            ohttp_relay.into(),
         )?
         .into())
     }
 
     pub fn extract_req(&self) -> Result<(Request, ClientResponse), PayjoinError> {
-        self.0
-            .extract_req()
-            .map(|e| (e.0.into(), e.1.into()))
-            .map_err(|e| e.into())
+        self.0.extract_req().map(|e| (e.0.into(), e.1.into())).map_err(|e| e.into())
     }
     pub fn process_res(
         &self,
         body: Vec<u8>,
         ctx: ClientResponse,
     ) -> Result<FfiActiveSession, PayjoinError> {
-        self.0
-            .process_res(body, ctx.into())
-            .map(|e| e.into())
-            .map_err(|e| e.into())
+        self.0.process_res(body, ctx.into()).map(|e| e.into()).map_err(|e| e.into())
     }
 }
 #[derive(Clone, Debug)]
@@ -308,20 +284,14 @@ impl FfiActiveSession {
         self.0.pj_uri_builder().into()
     }
     pub fn extract_req(&self) -> Result<(Request, ClientResponse), PayjoinError> {
-        self.0
-            .extract_req()
-            .map(|e| (e.0.into(), e.1.into()))
-            .map_err(|e| e.into())
+        self.0.extract_req().map(|e| (e.0.into(), e.1.into())).map_err(|e| e.into())
     }
     pub fn process_res(
         &self,
         body: Vec<u8>,
         ctx: ClientResponse,
     ) -> Result<Option<FfiV2UncheckedProposal>, PayjoinError> {
-        self.0
-            .process_res(body, ctx.into())
-            .map(|e| e.map(|o| o.into()))
-            .map_err(|e| e.into())
+        self.0.process_res(body, ctx.into()).map(|e| e.map(|o| o.into())).map_err(|e| e.into())
     }
 }
 
@@ -363,9 +333,7 @@ impl FfiV2UncheckedProposal {
     /// So-called "non-interactive" receivers, like payment processors, that allow arbitrary requests are otherwise vulnerable to probing attacks.
     /// Those receivers call `extract_tx_to_check_broadcast()` and `attest_tested_and_scheduled_broadcast()` after making those checks downstream.
     pub fn assume_interactive_receiver(&self) -> FfiV2MaybeInputsOwned {
-        (*self.0.clone().assume_interactive_receiver())
-            .clone()
-            .into()
+        (*self.0.clone().assume_interactive_receiver()).clone().into()
     }
 }
 #[derive(Clone)]
@@ -483,19 +451,9 @@ impl FfiV2ProvisionalProposal {
         txo: TxOut,
         outpoint: OutPoint,
     ) -> Result<(), PayjoinError> {
-        self.0
-            .contribute_witness_input(txo.into(), outpoint.into())
-            .map_err(|e| e.into())
+        self.0.contribute_witness_input(txo.into(), outpoint.into()).map_err(|e| e.into())
     }
-    pub fn contribute_non_witness_input(
-        &self,
-        tx: Vec<u8>,
-        outpoint: OutPoint,
-    ) -> Result<(), PayjoinError> {
-        self.0
-            .contribute_non_witness_input(tx, outpoint.into())
-            .map_err(|e| e.into())
-    }
+
     /// Select receiver input such that the common.dart avoids surveillance. Return the input chosen that has been applied to the Proposal.
     ///
     /// Proper coin selection allows common.dart to resemble ordinary transactions. To ensure the resemblance, a number of heuristics must be avoided.
@@ -505,14 +463,9 @@ impl FfiV2ProvisionalProposal {
         &self,
         candidate_inputs: HashMap<u64, OutPoint>,
     ) -> Result<OutPoint, PayjoinError> {
-        let candidate_inputs: HashMap<u64, payjoin_ffi::types::OutPoint> = candidate_inputs
-            .into_iter()
-            .map(|(key, value)| (key, value.into()))
-            .collect();
-        self.0
-            .try_preserving_privacy(candidate_inputs)
-            .map_err(|e| e.into())
-            .map(|o| (&o).into())
+        let candidate_inputs: HashMap<u64, payjoin_ffi::types::OutPoint> =
+            candidate_inputs.into_iter().map(|(key, value)| (key, value.into())).collect();
+        self.0.try_preserving_privacy(candidate_inputs).map_err(|e| e.into()).map(|o| (&o).into())
     }
 
     pub fn finalize_proposal(
@@ -538,11 +491,7 @@ impl From<Arc<payjoin_ffi::receive::v2::V2PayjoinProposal>> for FfiV2PayjoinProp
 }
 impl FfiV2PayjoinProposal {
     pub fn utxos_to_be_locked(&self) -> Vec<OutPoint> {
-        self.0
-            .utxos_to_be_locked()
-            .iter()
-            .map(|x| x.into())
-            .collect()
+        self.0.utxos_to_be_locked().iter().map(|x| x.into()).collect()
     }
     pub fn is_output_substitution_disabled(&self) -> bool {
         self.0.is_output_substitution_disabled()
@@ -557,11 +506,7 @@ impl FfiV2PayjoinProposal {
         self.0.extract_v1_req()
     }
     pub fn extract_v2_req(&self) -> Result<(Request, ClientResponse), PayjoinError> {
-        self.0
-            .clone()
-            .extract_v2_req()
-            .map(|e| (e.0.into(), e.1.into()))
-            .map_err(|e| e.into())
+        self.0.clone().extract_v2_req().map(|e| (e.0.into(), e.1.into())).map_err(|e| e.into())
     }
 
     pub fn process_res(
@@ -569,8 +514,6 @@ impl FfiV2PayjoinProposal {
         res: Vec<u8>,
         ohttp_context: ClientResponse,
     ) -> Result<(), PayjoinError> {
-        self.0
-            .process_res(res, ohttp_context.into())
-            .map_err(|e| e.into())
+        self.0.process_res(res, ohttp_context.into()).map_err(|e| e.into())
     }
 }

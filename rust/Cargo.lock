@@ -369,11 +369,11 @@ dependencies = [
 
 [[package]]
 name = "bip21"
-version = "0.3.1"
+version = "0.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8b9532c632b068e45a478f5e309126b6e2ec1dbf0bbd327b73836f33d9a43ede"
+checksum = "ebe7a7f5928d264879d5b65eb18a72ea1890c57f22d62ee2eba93f207a6a020b"
 dependencies = [
- "bitcoin 0.30.2",
+ "bitcoin 0.32.2",
  "percent-encoding-rfc3986",
 ]
 
@@ -410,6 +410,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ea507acc1cd80fc084ace38544bbcf7ced7c2aa65b653b102de0ce718df668f6"
 dependencies = [
  "base58ck",
+ "base64 0.21.7",
  "bech32 0.11.0",
  "bitcoin-internals 0.3.0",
  "bitcoin-io",
@@ -1773,12 +1774,13 @@ checksum = "57c0d7b74b563b49d38dae00a0c37d4d6de9b432382b2892f0574ddcae73fd0a"
 
 [[package]]
 name = "payjoin"
-version = "0.19.0"
-source = "git+https://github.com/payjoin/rust-payjoin?rev=941a6798f52f60d72061fc0a02b5b42146321453#941a6798f52f60d72061fc0a02b5b42146321453"
+version = "0.20.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "bf485245549b366884e295426755ce649d924762f676c1cc00e12e21501884a3"
 dependencies = [
  "bhttp",
  "bip21",
- "bitcoin 0.30.2",
+ "bitcoin 0.32.2",
  "chacha20poly1305 0.10.1",
  "http",
  "log",
@@ -1792,8 +1794,8 @@ dependencies = [
 
 [[package]]
 name = "payjoin_ffi"
-version = "0.18.0"
-source = "git+https://github.com/LtbLightning/payjoin-ffi?branch=main#f5d26ac3ff1a857ecdd36aecb8747b5d6124aede"
+version = "0.20.0"
+source = "git+https://github.com/nucode-Tech/payjoin-ffi?branch=v0.20.0#e1538f8aac8981ba160f8f8705c3eb2a96d9f8eb"
 dependencies = [
  "base64 0.22.1",
  "hex",
@@ -1806,7 +1808,7 @@ dependencies = [
 
 [[package]]
 name = "payjoin_flutter"
-version = "0.18.0"
+version = "0.20.0"
 dependencies = [
  "anyhow",
  "base64 0.22.1",

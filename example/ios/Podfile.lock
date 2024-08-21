@@ -7,7 +7,7 @@ PODS:
   - path_provider_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
-  - payjoin_flutter (0.18.0)
+  - payjoin_flutter (0.20.0)
 
 DEPENDENCIES:
   - bdk_flutter (from `.symlinks/plugins/bdk_flutter/ios`)
@@ -33,8 +33,8 @@ SPEC CHECKSUMS:
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   integration_test: ce0a3ffa1de96d1a89ca0ac26fca7ea18a749ef4
   path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
-  payjoin_flutter: 845f79d3e51d45e67842ee5df33ab492a1fd03cb
+  payjoin_flutter: 6397d7b698cdad6453be4949ab6aca1863f6c5e5
 
 PODFILE CHECKSUM: a57f30d18f102dd3ce366b1d62a55ecbef2158e5
 
-COCOAPODS: 1.14.3
+COCOAPODS: 1.15.2

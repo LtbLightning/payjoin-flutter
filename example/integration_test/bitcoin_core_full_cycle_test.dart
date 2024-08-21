@@ -31,8 +31,8 @@ void main() {
       // Sender create a funded PSBT (not broadcast) to address with amount given in the pjUri
       debugPrint("Sender Balance: ${(await sender.getBalance()).toString()}");
       final uri = await pay_join_uri.Uri.fromStr(pjUri);
-      final address = await uri.address();
-      final amount = await uri.amount();
+      final address = uri.address();
+      final amount = uri.amount();
       final senderPsbt =
           (await sender.walletCreateFundedPsbt(amount, address, 2000))["psbt"];
       debugPrint(
@@ -41,9 +41,9 @@ void main() {
       final (provisionalProposal, ctx) =
           await payJoinLib.handlePjRequest(senderPsbt, pjUri, (e) async {
         final script = ScriptBuf(bytes: e);
-        final address = await (await Address.fromScript(
-                script: script, network: Network.regtest))
-            .asString();
+        final address =
+            (await Address.fromScript(script: script, network: Network.regtest))
+                .asString();
         return (await receiver.getAddressInfo(address))["ismine"];
       });
       final availableInputs = await receiver.listUnspent([]);

@@ -234,16 +234,6 @@ class ProvisionalProposal extends FfiV2ProvisionalProposal {
   }
 
   @override
-  Future<void> contributeNonWitnessInput(
-      {required List<int> tx, required OutPoint outpoint, hint}) {
-    try {
-      return super.contributeNonWitnessInput(tx: tx, outpoint: outpoint);
-    } on error.PayjoinError catch (e) {
-      throw mapPayjoinError(e);
-    }
-  }
-
-  @override
   Future<void> contributeWitnessInput(
       {required TxOut txo, required OutPoint outpoint, hint}) {
     try {

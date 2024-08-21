@@ -60,15 +60,15 @@ typedef struct wire_cst_list_prim_u_8_strict {
   int32_t len;
 } wire_cst_list_prim_u_8_strict;
 
-typedef struct wire_cst_out_point {
-  struct wire_cst_list_prim_u_8_strict *txid;
-  uint32_t vout;
-} wire_cst_out_point;
-
 typedef struct wire_cst_tx_out {
   uint64_t value;
   struct wire_cst_list_prim_u_8_strict *script_pubkey;
 } wire_cst_tx_out;
+
+typedef struct wire_cst_out_point {
+  struct wire_cst_list_prim_u_8_strict *txid;
+  uint32_t vout;
+} wire_cst_out_point;
 
 typedef struct wire_cst_record_u_64_out_point {
   uint64_t field0;
@@ -336,11 +336,6 @@ void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_payjoin_proposal_psbt
 void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_payjoin_proposal_utxos_to_be_locked(int64_t port_,
                                                                                                struct wire_cst_ffi_payjoin_proposal *that);
 
-void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_provisional_proposal_contribute_non_witness_input(int64_t port_,
-                                                                                                             struct wire_cst_ffi_provisional_proposal *that,
-                                                                                                             struct wire_cst_list_prim_u_8_loose *tx,
-                                                                                                             struct wire_cst_out_point *outpoint);
-
 void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_provisional_proposal_contribute_witness_input(int64_t port_,
                                                                                                          struct wire_cst_ffi_provisional_proposal *that,
                                                                                                          struct wire_cst_tx_out *txo,
@@ -428,11 +423,6 @@ void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_v_2_payjoin_proposal_
 
 void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_v_2_payjoin_proposal_utxos_to_be_locked(int64_t port_,
                                                                                                    struct wire_cst_ffi_v_2_payjoin_proposal *that);
-
-void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_v_2_provisional_proposal_contribute_non_witness_input(int64_t port_,
-                                                                                                                 struct wire_cst_ffi_v_2_provisional_proposal *that,
-                                                                                                                 struct wire_cst_list_prim_u_8_loose *tx,
-                                                                                                                 struct wire_cst_out_point *outpoint);
 
 void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_v_2_provisional_proposal_contribute_witness_input(int64_t port_,
                                                                                                              struct wire_cst_ffi_v_2_provisional_proposal *that,
@@ -834,7 +824,6 @@ static int64_t dummy_method_to_enforce_bundling(void) {
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__receive__ffi_payjoin_proposal_owned_vouts);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__receive__ffi_payjoin_proposal_psbt);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__receive__ffi_payjoin_proposal_utxos_to_be_locked);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__receive__ffi_provisional_proposal_contribute_non_witness_input);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__receive__ffi_provisional_proposal_contribute_witness_input);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__receive__ffi_provisional_proposal_finalize_proposal);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__receive__ffi_provisional_proposal_try_preserving_privacy);
@@ -857,7 +846,6 @@ static int64_t dummy_method_to_enforce_bundling(void) {
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__receive__ffi_v_2_payjoin_proposal_process_res);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__receive__ffi_v_2_payjoin_proposal_psbt);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__receive__ffi_v_2_payjoin_proposal_utxos_to_be_locked);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__receive__ffi_v_2_provisional_proposal_contribute_non_witness_input);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__receive__ffi_v_2_provisional_proposal_contribute_witness_input);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__receive__ffi_v_2_provisional_proposal_finalize_proposal);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__receive__ffi_v_2_provisional_proposal_is_output_substitution_disabled);

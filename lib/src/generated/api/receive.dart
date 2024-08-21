@@ -195,12 +195,6 @@ class FfiProvisionalProposal {
     required this.field0,
   });
 
-  Future<void> contributeNonWitnessInput(
-          {required List<int> tx, required OutPoint outpoint}) =>
-      core.instance.api
-          .crateApiReceiveFfiProvisionalProposalContributeNonWitnessInput(
-              that: this, tx: tx, outpoint: outpoint);
-
   Future<void> contributeWitnessInput(
           {required TxOut txo, required OutPoint outpoint}) =>
       core.instance.api
@@ -499,12 +493,6 @@ class FfiV2ProvisionalProposal {
   const FfiV2ProvisionalProposal({
     required this.field0,
   });
-
-  Future<void> contributeNonWitnessInput(
-          {required List<int> tx, required OutPoint outpoint}) =>
-      core.instance.api
-          .crateApiReceiveFfiV2ProvisionalProposalContributeNonWitnessInput(
-              that: this, tx: tx, outpoint: outpoint);
 
   Future<void> contributeWitnessInput(
           {required TxOut txo, required OutPoint outpoint}) =>

@@ -25,10 +25,11 @@
 
 // Section: imports
 
-use crate::*;
 use flutter_rust_bridge::for_generated::byteorder::{NativeEndian, ReadBytesExt, WriteBytesExt};
 use flutter_rust_bridge::for_generated::{transform_result_dco, Lifetimeable, Lockable};
 use flutter_rust_bridge::{Handler, IntoIntoDart};
+
+use crate::*;
 
 // Section: boilerplate
 
@@ -38,7 +39,7 @@ flutter_rust_bridge::frb_generated_boilerplate!(
     default_rust_auto_opaque = RustAutoOpaqueNom,
 );
 pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_VERSION: &str = "2.0.0";
-pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = -1575278373;
+pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = -486461789;
 
 // Section: executor
 
@@ -60,18 +61,22 @@ fn wire__crate__api__io__fetch_ohttp_keys_impl(
         move || {
             let api_ohttp_relay = ohttp_relay.cst_decode();
             let api_payjoin_directory = payjoin_directory.cst_decode();
-            move |context| async move {
-                transform_result_dco::<_, _, crate::utils::error::PayjoinError>(
-                    (move || async move {
-                        let output_ok = crate::api::io::fetch_ohttp_keys(
-                            api_ohttp_relay,
-                            api_payjoin_directory,
-                        )
-                        .await?;
-                        Ok(output_ok)
-                    })()
-                    .await,
-                )
+            move |context| {
+                async move {
+                    transform_result_dco::<_, _, crate::utils::error::PayjoinError>(
+                        (move || {
+                            async move {
+                                let output_ok = crate::api::io::fetch_ohttp_keys(
+                                    api_ohttp_relay,
+                                    api_payjoin_directory,
+                                )
+                                .await?;
+                                Ok(output_ok)
+                            }
+                        })()
+                        .await,
+                    )
+                }
             }
         },
     )
@@ -380,37 +385,6 @@ fn wire__crate__api__receive__ffi_payjoin_proposal_utxos_to_be_locked_impl(
                     )?;
                     Ok(output_ok)
                 })())
-            }
-        },
-    )
-}
-fn wire__crate__api__receive__ffi_provisional_proposal_contribute_non_witness_input_impl(
-    port_: flutter_rust_bridge::for_generated::MessagePort,
-    that: impl CstDecode<crate::api::receive::FfiProvisionalProposal>,
-    tx: impl CstDecode<Vec<u8>>,
-    outpoint: impl CstDecode<crate::utils::types::OutPoint>,
-) {
-    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::DcoCodec, _, _>(
-        flutter_rust_bridge::for_generated::TaskInfo {
-            debug_name: "ffi_provisional_proposal_contribute_non_witness_input",
-            port: Some(port_),
-            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
-        },
-        move || {
-            let api_that = that.cst_decode();
-            let api_tx = tx.cst_decode();
-            let api_outpoint = outpoint.cst_decode();
-            move |context| {
-                transform_result_dco::<_, _, crate::utils::error::PayjoinError>((move || {
-                    let output_ok =
-                        crate::api::receive::FfiProvisionalProposal::contribute_non_witness_input(
-                            &api_that,
-                            api_tx,
-                            api_outpoint,
-                        )?;
-                    Ok(output_ok)
-                })(
-                ))
             }
         },
     )
@@ -991,18 +965,6 @@ fn wire__crate__api__receive__ffi_v_2_payjoin_proposal_utxos_to_be_locked_impl(
             }
         },
     )
-}
-fn wire__crate__api__receive__ffi_v_2_provisional_proposal_contribute_non_witness_input_impl(
-    port_: flutter_rust_bridge::for_generated::MessagePort,
-    that: impl CstDecode<crate::api::receive::FfiV2ProvisionalProposal>,
-    tx: impl CstDecode<Vec<u8>>,
-    outpoint: impl CstDecode<crate::utils::types::OutPoint>,
-) {
-    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::DcoCodec,_,_>(flutter_rust_bridge::for_generated::TaskInfo{ debug_name: "ffi_v_2_provisional_proposal_contribute_non_witness_input", port: Some(port_), mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal }, move || { let api_that = that.cst_decode();let api_tx = tx.cst_decode();let api_outpoint = outpoint.cst_decode(); move |context|  {
-                    transform_result_dco::<_, _, crate::utils::error::PayjoinError>((move ||  {
-                         let output_ok = crate::api::receive::FfiV2ProvisionalProposal::contribute_non_witness_input(&api_that, api_tx, api_outpoint)?;  Ok(output_ok)
-                    })())
-                } })
 }
 fn wire__crate__api__receive__ffi_v_2_provisional_proposal_contribute_witness_input_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
@@ -1802,17 +1764,19 @@ fn decode_DartFn_Inputs_String_Output_String_AnyhowException(
 
     async fn body(dart_opaque: flutter_rust_bridge::DartOpaque, arg0: String) -> String {
         let args = vec![arg0.into_into_dart().into_dart()];
-        let message = FLUTTER_RUST_BRIDGE_HANDLER
-            .dart_fn_invoke(dart_opaque, args)
-            .await;
+        let message = FLUTTER_RUST_BRIDGE_HANDLER.dart_fn_invoke(dart_opaque, args).await;
 
         let mut deserializer = flutter_rust_bridge::for_generated::SseDeserializer::new(message);
         let action = deserializer.cursor.read_u8().unwrap();
         let ans = match action {
             0 => std::result::Result::Ok(<String>::sse_decode(&mut deserializer)),
-            1 => std::result::Result::Err(
-                <flutter_rust_bridge::for_generated::anyhow::Error>::sse_decode(&mut deserializer),
-            ),
+            1 => {
+                std::result::Result::Err(
+                    <flutter_rust_bridge::for_generated::anyhow::Error>::sse_decode(
+                        &mut deserializer,
+                    ),
+                )
+            }
             _ => unreachable!(),
         };
         deserializer.end();
@@ -1834,17 +1798,19 @@ fn decode_DartFn_Inputs__Output_list_prim_u_8_strict_AnyhowException(
 
     async fn body(dart_opaque: flutter_rust_bridge::DartOpaque) -> Vec<u8> {
         let args = vec![];
-        let message = FLUTTER_RUST_BRIDGE_HANDLER
-            .dart_fn_invoke(dart_opaque, args)
-            .await;
+        let message = FLUTTER_RUST_BRIDGE_HANDLER.dart_fn_invoke(dart_opaque, args).await;
 
         let mut deserializer = flutter_rust_bridge::for_generated::SseDeserializer::new(message);
         let action = deserializer.cursor.read_u8().unwrap();
         let ans = match action {
             0 => std::result::Result::Ok(<Vec<u8>>::sse_decode(&mut deserializer)),
-            1 => std::result::Result::Err(
-                <flutter_rust_bridge::for_generated::anyhow::Error>::sse_decode(&mut deserializer),
-            ),
+            1 => {
+                std::result::Result::Err(
+                    <flutter_rust_bridge::for_generated::anyhow::Error>::sse_decode(
+                        &mut deserializer,
+                    ),
+                )
+            }
             _ => unreachable!(),
         };
         deserializer.end();
@@ -1863,17 +1829,19 @@ fn decode_DartFn_Inputs_list_prim_u_8_strict_Output_bool_AnyhowException(
 
     async fn body(dart_opaque: flutter_rust_bridge::DartOpaque, arg0: Vec<u8>) -> bool {
         let args = vec![arg0.into_into_dart().into_dart()];
-        let message = FLUTTER_RUST_BRIDGE_HANDLER
-            .dart_fn_invoke(dart_opaque, args)
-            .await;
+        let message = FLUTTER_RUST_BRIDGE_HANDLER.dart_fn_invoke(dart_opaque, args).await;
 
         let mut deserializer = flutter_rust_bridge::for_generated::SseDeserializer::new(message);
         let action = deserializer.cursor.read_u8().unwrap();
         let ans = match action {
             0 => std::result::Result::Ok(<bool>::sse_decode(&mut deserializer)),
-            1 => std::result::Result::Err(
-                <flutter_rust_bridge::for_generated::anyhow::Error>::sse_decode(&mut deserializer),
-            ),
+            1 => {
+                std::result::Result::Err(
+                    <flutter_rust_bridge::for_generated::anyhow::Error>::sse_decode(
+                        &mut deserializer,
+                    ),
+                )
+            }
             _ => unreachable!(),
         };
         deserializer.end();
@@ -1898,17 +1866,19 @@ fn decode_DartFn_Inputs_out_point_Output_bool_AnyhowException(
         arg0: crate::utils::types::OutPoint,
     ) -> bool {
         let args = vec![arg0.into_into_dart().into_dart()];
-        let message = FLUTTER_RUST_BRIDGE_HANDLER
-            .dart_fn_invoke(dart_opaque, args)
-            .await;
+        let message = FLUTTER_RUST_BRIDGE_HANDLER.dart_fn_invoke(dart_opaque, args).await;
 
         let mut deserializer = flutter_rust_bridge::for_generated::SseDeserializer::new(message);
         let action = deserializer.cursor.read_u8().unwrap();
         let ans = match action {
             0 => std::result::Result::Ok(<bool>::sse_decode(&mut deserializer)),
-            1 => std::result::Result::Err(
-                <flutter_rust_bridge::for_generated::anyhow::Error>::sse_decode(&mut deserializer),
-            ),
+            1 => {
+                std::result::Result::Err(
+                    <flutter_rust_bridge::for_generated::anyhow::Error>::sse_decode(
+                        &mut deserializer,
+                    ),
+                )
+            }
             _ => unreachable!(),
         };
         deserializer.end();
@@ -2348,9 +2318,7 @@ impl SseDecode for crate::api::uri::FfiPjUriBuilder {
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut var_internal =
             <RustOpaqueNom<payjoin_ffi::uri::PjUriBuilder>>::sse_decode(deserializer);
-        return crate::api::uri::FfiPjUriBuilder {
-            internal: var_internal,
-        };
+        return crate::api::uri::FfiPjUriBuilder { internal: var_internal };
     }
 }
 
@@ -2557,9 +2525,7 @@ impl SseDecode for Vec<(u64, crate::utils::types::OutPoint)> {
         let mut len_ = <i32>::sse_decode(deserializer);
         let mut ans_ = vec![];
         for idx_ in 0..len_ {
-            ans_.push(<(u64, crate::utils::types::OutPoint)>::sse_decode(
-                deserializer,
-            ));
+            ans_.push(<(u64, crate::utils::types::OutPoint)>::sse_decode(deserializer));
         }
         return ans_;
     }
@@ -2616,9 +2582,7 @@ impl SseDecode for Option<crate::api::receive::FfiV2UncheckedProposal> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         if (<bool>::sse_decode(deserializer)) {
-            return Some(<crate::api::receive::FfiV2UncheckedProposal>::sse_decode(
-                deserializer,
-            ));
+            return Some(<crate::api::receive::FfiV2UncheckedProposal>::sse_decode(deserializer));
         } else {
             return None;
         }
@@ -2652,10 +2616,7 @@ impl SseDecode for crate::utils::types::OutPoint {
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut var_txid = <String>::sse_decode(deserializer);
         let mut var_vout = <u32>::sse_decode(deserializer);
-        return crate::utils::types::OutPoint {
-            txid: var_txid,
-            vout: var_vout,
-        };
+        return crate::utils::types::OutPoint { txid: var_txid, vout: var_vout };
     }
 }
 
@@ -2666,15 +2627,11 @@ impl SseDecode for crate::utils::error::PayjoinError {
         match tag_ {
             0 => {
                 let mut var_message = <String>::sse_decode(deserializer);
-                return crate::utils::error::PayjoinError::InvalidAddress {
-                    message: var_message,
-                };
+                return crate::utils::error::PayjoinError::InvalidAddress { message: var_message };
             }
             1 => {
                 let mut var_message = <String>::sse_decode(deserializer);
-                return crate::utils::error::PayjoinError::InvalidScript {
-                    message: var_message,
-                };
+                return crate::utils::error::PayjoinError::InvalidScript { message: var_message };
             }
             2 => {
                 let mut var_message = <String>::sse_decode(deserializer);
@@ -2684,21 +2641,15 @@ impl SseDecode for crate::utils::error::PayjoinError {
             }
             3 => {
                 let mut var_message = <String>::sse_decode(deserializer);
-                return crate::utils::error::PayjoinError::PsbtParseError {
-                    message: var_message,
-                };
+                return crate::utils::error::PayjoinError::PsbtParseError { message: var_message };
             }
             4 => {
                 let mut var_message = <String>::sse_decode(deserializer);
-                return crate::utils::error::PayjoinError::ResponseError {
-                    message: var_message,
-                };
+                return crate::utils::error::PayjoinError::ResponseError { message: var_message };
             }
             5 => {
                 let mut var_message = <String>::sse_decode(deserializer);
-                return crate::utils::error::PayjoinError::RequestError {
-                    message: var_message,
-                };
+                return crate::utils::error::PayjoinError::RequestError { message: var_message };
             }
             6 => {
                 let mut var_message = <String>::sse_decode(deserializer);
@@ -2708,15 +2659,11 @@ impl SseDecode for crate::utils::error::PayjoinError {
             }
             7 => {
                 let mut var_message = <String>::sse_decode(deserializer);
-                return crate::utils::error::PayjoinError::ServerError {
-                    message: var_message,
-                };
+                return crate::utils::error::PayjoinError::ServerError { message: var_message };
             }
             8 => {
                 let mut var_message = <String>::sse_decode(deserializer);
-                return crate::utils::error::PayjoinError::SelectionError {
-                    message: var_message,
-                };
+                return crate::utils::error::PayjoinError::SelectionError { message: var_message };
             }
             9 => {
                 let mut var_message = <String>::sse_decode(deserializer);
@@ -2726,51 +2673,35 @@ impl SseDecode for crate::utils::error::PayjoinError {
             }
             10 => {
                 let mut var_message = <String>::sse_decode(deserializer);
-                return crate::utils::error::PayjoinError::PjParseError {
-                    message: var_message,
-                };
+                return crate::utils::error::PayjoinError::PjParseError { message: var_message };
             }
             11 => {
                 let mut var_message = <String>::sse_decode(deserializer);
-                return crate::utils::error::PayjoinError::PjNotSupported {
-                    message: var_message,
-                };
+                return crate::utils::error::PayjoinError::PjNotSupported { message: var_message };
             }
             12 => {
                 let mut var_message = <String>::sse_decode(deserializer);
-                return crate::utils::error::PayjoinError::ValidationError {
-                    message: var_message,
-                };
+                return crate::utils::error::PayjoinError::ValidationError { message: var_message };
             }
             13 => {
                 let mut var_message = <String>::sse_decode(deserializer);
-                return crate::utils::error::PayjoinError::V2Error {
-                    message: var_message,
-                };
+                return crate::utils::error::PayjoinError::V2Error { message: var_message };
             }
             14 => {
                 let mut var_message = <String>::sse_decode(deserializer);
-                return crate::utils::error::PayjoinError::UnexpectedError {
-                    message: var_message,
-                };
+                return crate::utils::error::PayjoinError::UnexpectedError { message: var_message };
             }
             15 => {
                 let mut var_message = <String>::sse_decode(deserializer);
-                return crate::utils::error::PayjoinError::OhttpError {
-                    message: var_message,
-                };
+                return crate::utils::error::PayjoinError::OhttpError { message: var_message };
             }
             16 => {
                 let mut var_message = <String>::sse_decode(deserializer);
-                return crate::utils::error::PayjoinError::UrlError {
-                    message: var_message,
-                };
+                return crate::utils::error::PayjoinError::UrlError { message: var_message };
             }
             17 => {
                 let mut var_message = <String>::sse_decode(deserializer);
-                return crate::utils::error::PayjoinError::IoError {
-                    message: var_message,
-                };
+                return crate::utils::error::PayjoinError::IoError { message: var_message };
             }
             _ => {
                 unimplemented!("");
@@ -2779,12 +2710,7 @@ impl SseDecode for crate::utils::error::PayjoinError {
     }
 }
 
-impl SseDecode
-    for (
-        crate::utils::types::Request,
-        crate::utils::types::ClientResponse,
-    )
-{
+impl SseDecode for (crate::utils::types::Request, crate::utils::types::ClientResponse) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut var_field0 = <crate::utils::types::Request>::sse_decode(deserializer);
@@ -2834,10 +2760,7 @@ impl SseDecode for crate::utils::types::Request {
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut var_url = <crate::api::uri::FfiUrl>::sse_decode(deserializer);
         let mut var_body = <Vec<u8>>::sse_decode(deserializer);
-        return crate::utils::types::Request {
-            url: var_url,
-            body: var_body,
-        };
+        return crate::utils::types::Request { url: var_url, body: var_body };
     }
 }
 
@@ -2846,10 +2769,7 @@ impl SseDecode for crate::utils::types::TxOut {
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut var_value = <u64>::sse_decode(deserializer);
         let mut var_scriptPubkey = <Vec<u8>>::sse_decode(deserializer);
-        return crate::utils::types::TxOut {
-            value: var_value,
-            script_pubkey: var_scriptPubkey,
-        };
+        return crate::utils::types::TxOut { value: var_value, script_pubkey: var_scriptPubkey };
     }
 }
 
@@ -3377,11 +3297,7 @@ impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<crate::utils::types::Network>>
 // Codec=Dco (DartCObject based), see doc to use other codecs
 impl flutter_rust_bridge::IntoDart for crate::utils::types::OutPoint {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
-        [
-            self.txid.into_into_dart().into_dart(),
-            self.vout.into_into_dart().into_dart(),
-        ]
-        .into_dart()
+        [self.txid.into_into_dart().into_dart(), self.vout.into_into_dart().into_dart()].into_dart()
     }
 }
 impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive for crate::utils::types::OutPoint {}
@@ -3470,11 +3386,7 @@ impl flutter_rust_bridge::IntoIntoDart<crate::utils::error::PayjoinError>
 // Codec=Dco (DartCObject based), see doc to use other codecs
 impl flutter_rust_bridge::IntoDart for crate::utils::types::Request {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
-        [
-            self.url.into_into_dart().into_dart(),
-            self.body.into_into_dart().into_dart(),
-        ]
-        .into_dart()
+        [self.url.into_into_dart().into_dart(), self.body.into_into_dart().into_dart()].into_dart()
     }
 }
 impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive for crate::utils::types::Request {}
@@ -3488,11 +3400,8 @@ impl flutter_rust_bridge::IntoIntoDart<crate::utils::types::Request>
 // Codec=Dco (DartCObject based), see doc to use other codecs
 impl flutter_rust_bridge::IntoDart for crate::utils::types::TxOut {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
-        [
-            self.value.into_into_dart().into_dart(),
-            self.script_pubkey.into_into_dart().into_dart(),
-        ]
-        .into_dart()
+        [self.value.into_into_dart().into_dart(), self.script_pubkey.into_into_dart().into_dart()]
+            .into_dart()
     }
 }
 impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive for crate::utils::types::TxOut {}
@@ -4225,12 +4134,7 @@ impl SseEncode for crate::utils::error::PayjoinError {
     }
 }
 
-impl SseEncode
-    for (
-        crate::utils::types::Request,
-        crate::utils::types::ClientResponse,
-    )
-{
+impl SseEncode for (crate::utils::types::Request, crate::utils::types::ClientResponse) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <crate::utils::types::Request>::sse_encode(self.0, serializer);
@@ -4315,10 +4219,7 @@ impl SseEncode for () {
 impl SseEncode for usize {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        serializer
-            .cursor
-            .write_u64::<NativeEndian>(self as _)
-            .unwrap();
+        serializer.cursor.write_u64::<NativeEndian>(self as _).unwrap();
     }
 }
 

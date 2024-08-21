@@ -1,9 +1,9 @@
-use crate::api::uri::{FfiPjUri, FfiUrl};
-use crate::frb_generated::RustOpaque;
-use crate::utils::types::Request;
 use std::sync::Arc;
 
 use super::receive::PayjoinError;
+use crate::api::uri::{FfiPjUri, FfiUrl};
+use crate::frb_generated::RustOpaque;
+use crate::utils::types::Request;
 
 pub struct FfiRequestBuilder(pub RustOpaque<payjoin_ffi::send::v1::RequestBuilder>);
 impl From<payjoin_ffi::send::v1::RequestBuilder> for FfiRequestBuilder {
@@ -17,18 +17,13 @@ impl FfiRequestBuilder {
         psbt_base64: String,
         pj_uri: FfiPjUri,
     ) -> anyhow::Result<FfiRequestBuilder, PayjoinError> {
-        match payjoin_ffi::send::v1::RequestBuilder::from_psbt_and_uri(
-            psbt_base64,
-            Arc::new((*pj_uri.0).clone()),
-        ) {
+        match payjoin_ffi::send::v1::RequestBuilder::from_psbt_and_uri(psbt_base64, pj_uri.into()) {
             Ok(e) => Ok(e.into()),
             Err(e) => Err(e.into()),
         }
     }
     pub fn always_disable_output_substitution(&self, disable: bool) -> FfiRequestBuilder {
-        (*self.0.clone().always_disable_output_substitution(disable))
-            .clone()
-            .into()
+        (*self.0.clone().always_disable_output_substitution(disable)).clone().into()
     }
     pub fn build_recommended(
         &self,
@@ -122,10 +117,7 @@ pub struct FfiRequestContextV2 {
 impl From<payjoin_ffi::send::v1::RequestContextV2> for FfiRequestContextV2 {
     fn from(value: payjoin_ffi::send::v1::RequestContextV2) -> Self {
         Self {
-            request: Request {
-                url: (*value.request.url).clone().into(),
-                body: value.request.body,
-            },
+            request: Request { url: (*value.request.url).clone().into(), body: value.request.body },
             context_v2: value.context_v2.into(),
         }
     }
