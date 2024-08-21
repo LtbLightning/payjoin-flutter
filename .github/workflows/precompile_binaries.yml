@@ -1,6 +1,6 @@
 on:
   push:
-    branches: [main]
+    branches: [main, v0.20.0]
 
 name: Precompile Binaries
 
