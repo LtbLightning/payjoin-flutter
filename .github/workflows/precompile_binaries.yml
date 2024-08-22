@@ -16,10 +16,25 @@ jobs:
           - windows-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          override: true
       - uses: dart-lang/setup-dart@v1
       - uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
+      - name: Update NDK
+        run: sdkmanager --update   
+      - name: Set NDK Toolchain Path
+        run: |
+          export PATH=$PATH:/usr/local/lib/android/sdk/ndk/24.0.8215888/toolchains/llvm/prebuilt/linux-x86_64/bin
+          echo "Toolchain Path Set"
+      - name: Debug NDK Path
+        run: |
+          echo "NDK Path: /usr/local/lib/android/sdk/ndk/24.0.8215888"
+          ls -la /usr/local/lib/android/sdk/ndk/24.0.8215888/toolchains/llvm/prebuilt/linux-x86_64/bin/    
       - name: Install GTK
         if: (matrix.os == 'ubuntu-20.04')
         run: sudo apt-get update && sudo apt-get install libgtk-3-dev
