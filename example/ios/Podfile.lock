@@ -1,0 +1,33 @@
+PODS:
+  - bdk_flutter (0.31.2):
+    - Flutter
+  - Flutter (1.0.0)
+  - payjoin_flutter (0.20.0)
+  - url_launcher_ios (0.0.1):
+    - Flutter
+
+DEPENDENCIES:
+  - bdk_flutter (from `.symlinks/plugins/bdk_flutter/ios`)
+  - Flutter (from `Flutter`)
+  - payjoin_flutter (from `.symlinks/plugins/payjoin_flutter/ios`)
+  - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
+
+EXTERNAL SOURCES:
+  bdk_flutter:
+    :path: ".symlinks/plugins/bdk_flutter/ios"
+  Flutter:
+    :path: Flutter
+  payjoin_flutter:
+    :path: ".symlinks/plugins/payjoin_flutter/ios"
+  url_launcher_ios:
+    :path: ".symlinks/plugins/url_launcher_ios/ios"
+
+SPEC CHECKSUMS:
+  bdk_flutter: fb57a7400a7f3f181c5977bcdc2a5ef347ae4e7f
+  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
+  payjoin_flutter: 6397d7b698cdad6453be4949ab6aca1863f6c5e5
+  url_launcher_ios: 5334b05cef931de560670eeae103fd3e431ac3fe
+
+PODFILE CHECKSUM: 4e8f8b2be68aeea4c0d5beb6ff1e79fface1d048
+
+COCOAPODS: 1.15.2
