@@ -5,39 +5,29 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'common.dart';
 import 'src/exceptions.dart';
 import 'src/generated/api/receive.dart';
+import 'src/generated/api/bitcoin_ffi.dart';
 import 'src/generated/utils/error.dart' as error;
 import 'uri.dart';
 
-class SessionInitializer extends FfiSessionInitializer {
-  SessionInitializer._({required super.field0});
+class Receiver extends FfiReceiver {
+  Receiver._({required super.field0});
 
-  static Future<SessionInitializer> create(
-      {required Url directory,
-      required OhttpKeys ohttpKeys,
-      required String address,
-      required BigInt expireAfter,
+  static Future<Receiver> create(
+      {required String address,
       required Network network,
-      required Url ohttpRelay}) async {
+      required Url directory,
+      required OhttpKeys ohttpKeys,
+      required Url ohttpRelay,
+      BigInt? expireAfter}) async {
     try {
-      final res = await FfiSessionInitializer.newInstance(
+      final res = await FfiReceiver.create(
           directory: directory,
           ohttpKeys: ohttpKeys,
           ohttpRelay: ohttpRelay,
           address: address,
           expireAfter: expireAfter,
           network: network);
-      return SessionInitializer._(field0: res.field0);
-    } on error.PayjoinError catch (e) {
-      throw mapPayjoinError(e);
-    }
-  }
-
-  @override
-  Future<ActiveSession> processRes(
-      {required List<int> body, required ClientResponse ctx}) async {
-    try {
-      final res = await super.processRes(body: body, ctx: ctx);
-      return ActiveSession._(field0: res.field0);
+      return Receiver._(field0: res.field0);
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
     }
@@ -49,24 +39,7 @@ class SessionInitializer extends FfiSessionInitializer {
       final res = await super.extractReq();
       final request = Request(
         url: await Url.fromStr(res.$1.url.asString()),
-        body: res.$1.body,
-      );
-      return (request, res.$2);
-    } on error.PayjoinError catch (e) {
-      throw mapPayjoinError(e);
-    }
-  }
-}
-
-class ActiveSession extends FfiActiveSession {
-  ActiveSession._({required super.field0});
-
-  @override
-  Future<(Request, ClientResponse)> extractReq() async {
-    try {
-      final res = await super.extractReq();
-      final request = Request(
-        url: await Url.fromStr(res.$1.url.asString()),
+        contentType: res.$1.contentType,
         body: res.$1.body,
       );
       return (request, res.$2);
@@ -156,27 +129,10 @@ class MaybeInputsOwned extends FfiMaybeInputsOwned {
   ///Check that the Original PSBT has no receiver-owned inputs. Return original-psbt-rejected error or otherwise refuse to sign undesirable inputs.
   /// An attacker could try to spend receiver's own inputs. This check prevents that.
   @override
-  Future<MaybeMixedInputScripts> checkInputsNotOwned(
+  Future<MaybeInputsSeen> checkInputsNotOwned(
       {required FutureOr<bool> Function(Uint8List p1) isOwned, hint}) async {
     try {
       final res = await super.checkInputsNotOwned(isOwned: isOwned);
-      return MaybeMixedInputScripts._(field0: res.field0);
-    } on error.PayjoinError catch (e) {
-      throw mapPayjoinError(e);
-    }
-  }
-}
-
-class MaybeMixedInputScripts extends FfiMaybeMixedInputScripts {
-  MaybeMixedInputScripts._({required super.field0});
-
-  /// Make sure that the original transaction inputs have never been seen before.
-  /// This prevents probing attacks. This prevents reentrant Payjoin, where a sender
-  /// proposes a Payjoin PSBT as a new Original PSBT for a new Payjoin.
-  @override
-  Future<MaybeInputsSeen> checkNoMixedInputScripts({hint}) async {
-    try {
-      final res = await super.checkNoMixedInputScripts();
       return MaybeInputsSeen._(field0: res.field0);
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
@@ -207,13 +163,123 @@ class OutputsUnknown extends FfiOutputsUnknown {
 
   /// Find which outputs belong to the receiver
   @override
-  Future<ProvisionalProposal> identifyReceiverOutputs(
+  Future<WantsOutputs> identifyReceiverOutputs(
       {required FutureOr<bool> Function(Uint8List p1) isReceiverOutput,
       hint}) async {
     try {
       final res = await super
           .identifyReceiverOutputs(isReceiverOutput: isReceiverOutput);
+      return WantsOutputs._(field0: res.field0);
+    } on error.PayjoinError catch (e) {
+      throw mapPayjoinError(e);
+    }
+  }
+}
+
+class WantsOutputs extends FfiWantsOutputs {
+  WantsOutputs._({required super.field0});
+
+  @override
+  Future<bool> isOutputSubstitutionDisabled({hint}) {
+    try {
+      return super.isOutputSubstitutionDisabled();
+    } on error.PayjoinError catch (e) {
+      throw mapPayjoinError(e);
+    }
+  }
+
+  @override
+  Future<WantsOutputs> replaceReceiverOutputs(
+      {required List<TxOut> replacementOutputs,
+      required FfiScript drainScript}) async {
+    try {
+      final res = await super.replaceReceiverOutputs(
+          replacementOutputs: replacementOutputs, drainScript: drainScript);
+      return WantsOutputs._(field0: res.field0);
+    } on error.PayjoinError catch (e) {
+      throw mapPayjoinError(e);
+    }
+  }
+
+  @override
+  Future<WantsOutputs> substituteReceiverScript(
+      {required FfiScript outputScript}) async {
+    try {
+      final res =
+          await super.substituteReceiverScript(outputScript: outputScript);
+      return WantsOutputs._(field0: res.field0);
+    } on error.PayjoinError catch (e) {
+      throw mapPayjoinError(e);
+    }
+  }
+
+  @override
+  Future<WantsInputs> commitOutputs() async {
+    try {
+      final res = await super.commitOutputs();
+      return WantsInputs._(field0: res.field0);
+    } on error.PayjoinError catch (e) {
+      throw mapPayjoinError(e);
+    }
+  }
+}
+
+class WantsInputs extends FfiWantsInputs {
+  WantsInputs._({required super.field0});
+
+  /// Select receiver input such that the payjoin avoids surveillance.
+  /// Return the input chosen that has been applied to the Proposal.
+  ///
+  /// Proper coin selection allows payjoin to resemble ordinary transactions.
+  /// To ensure the resemblance, a number of heuristics must be avoided.
+  ///
+  /// UIH "Unnecessary input heuristic" is one class of them to avoid. We define
+  /// UIH1 and UIH2 according to the BlockSci practice
+  /// BlockSci UIH1 and UIH2:
+  /// if min(out) < min(in) then UIH1 else UIH2
+  /// https://eprint.iacr.org/2022/589.pdf
+  @override
+  Future<InputPair> tryPreservingPrivacy(
+      {required List<FfiInputPair> candidateInputs}) async {
+    try {
+      final res =
+          await super.tryPreservingPrivacy(candidateInputs: candidateInputs);
+      return InputPair._(field0: res.field0);
+    } on error.PayjoinError catch (e) {
+      throw mapPayjoinError(e);
+    }
+  }
+
+  @override
+  Future<WantsInputs> contributeInputs(
+      {required List<FfiInputPair> replacementInputs}) async {
+    try {
+      final res =
+          await super.contributeInputs(replacementInputs: replacementInputs);
+      return WantsInputs._(field0: res.field0);
+    } on error.PayjoinError catch (e) {
+      throw mapPayjoinError(e);
+    }
+  }
+
+  @override
+  Future<ProvisionalProposal> commitInputs() async {
+    try {
+      final res = await super.commitInputs();
       return ProvisionalProposal._(field0: res.field0);
+    } on error.PayjoinError catch (e) {
+      throw mapPayjoinError(e);
+    }
+  }
+}
+
+class InputPair extends FfiInputPair {
+  InputPair._({required super.field0});
+
+  static Future<InputPair> newInstance(TxIn txin, PsbtInput psbtin) async {
+    try {
+      final res = await FfiInputPair.newInstance(txin: txin, psbtin: psbtin);
+      return InputPair._(field0: res.field0);
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
     }
@@ -224,48 +290,17 @@ class ProvisionalProposal extends FfiProvisionalProposal {
   ProvisionalProposal._({required super.field0});
 
   @override
-  Future<void> trySubstituteReceiverOutput(
-      {required FutureOr<Uint8List> Function() generateScript}) {
-    try {
-      return super.trySubstituteReceiverOutput(generateScript: generateScript);
-    } on error.PayjoinError catch (e) {
-      throw mapPayjoinError(e);
-    }
-  }
-
-  @override
-  Future<void> contributeWitnessInput(
-      {required TxOut txo, required OutPoint outpoint, hint}) {
-    try {
-      return super.contributeWitnessInput(txo: txo, outpoint: outpoint);
-    } on error.PayjoinError catch (e) {
-      throw mapPayjoinError(e);
-    }
-  }
-
-  /// Select receiver input such that the common.dart avoids surveillance. Return the input chosen that has been applied to the Proposal.
-  ///
-  /// Proper coin selection allows common.dart to resemble ordinary transactions. To ensure the resemblance, a number of heuristics must be avoided.
-  ///
-  /// UIH “Unnecessary input heuristic” is one class of them to avoid. We define UIH1 and UIH2 according to the BlockSci practice BlockSci UIH1 and UIH2:
-  @override
-  Future<OutPoint> tryPreservingPrivacy(
-      {required Map<BigInt, OutPoint> candidateInputs, hint}) {
-    try {
-      return super.tryPreservingPrivacy(candidateInputs: candidateInputs);
-    } on error.PayjoinError catch (e) {
-      throw mapPayjoinError(e);
-    }
-  }
-
-  @override
-  Future<PayjoinProposal> finalizeProposal(
-      {required FutureOr<String> Function(String p1) processPsbt,
-      BigInt? minFeeRateSatPerVb,
-      hint}) async {
+  Future<PayjoinProposal> finalizeProposal({
+    required FutureOr<String> Function(String) processPsbt,
+    BigInt? minFeeRateSatPerVb,
+    required BigInt maxFeeRateSatPerVb,
+  }) async {
     try {
       final res = await super.finalizeProposal(
-          processPsbt: processPsbt, minFeeRateSatPerVb: minFeeRateSatPerVb);
+        processPsbt: processPsbt,
+        minFeeRateSatPerVb: minFeeRateSatPerVb,
+        maxFeeRateSatPerVb: maxFeeRateSatPerVb,
+      );
       return PayjoinProposal._(field0: res.field0);
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
@@ -301,6 +336,7 @@ class PayjoinProposal extends FfiPayjoinProposal {
       final res = await super.extractV2Req();
       final request = Request(
         url: await Url.fromStr(res.$1.url.asString()),
+        contentType: res.$1.contentType,
         body: res.$1.body,
       );
       return (request, res.$2);
@@ -319,27 +355,9 @@ class PayjoinProposal extends FfiPayjoinProposal {
   }
 
   @override
-  Future<Uint64List> ownedVouts({hint}) {
-    try {
-      return super.ownedVouts();
-    } on error.PayjoinError catch (e) {
-      throw mapPayjoinError(e);
-    }
-  }
-
-  @override
   Future<String> psbt({hint}) {
     try {
       return super.psbt();
-    } on error.PayjoinError catch (e) {
-      throw mapPayjoinError(e);
-    }
-  }
-
-  @override
-  Future<List<OutPoint>> utxosToBeLocked({hint}) {
-    try {
-      return super.utxosToBeLocked();
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
     }

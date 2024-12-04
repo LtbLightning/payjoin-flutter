@@ -3,6 +3,7 @@
 
 // ignore_for_file: invalid_use_of_internal_member, unused_import, unnecessary_import
 
+import '../api/bitcoin_ffi.dart';
 import '../api/uri.dart';
 import '../frb_generated.dart';
 import '../lib.dart';
@@ -66,17 +67,44 @@ class OutPoint {
           vout == other.vout;
 }
 
+class PsbtInput {
+  final TxOut? witnessUtxo;
+  final FfiScript? redeemScript;
+  final FfiScript? witnessScript;
+
+  const PsbtInput({
+    this.witnessUtxo,
+    this.redeemScript,
+    this.witnessScript,
+  });
+
+  @override
+  int get hashCode =>
+      witnessUtxo.hashCode ^ redeemScript.hashCode ^ witnessScript.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is PsbtInput &&
+          runtimeType == other.runtimeType &&
+          witnessUtxo == other.witnessUtxo &&
+          redeemScript == other.redeemScript &&
+          witnessScript == other.witnessScript;
+}
+
 class Request {
   final FfiUrl url;
+  final String contentType;
   final Uint8List body;
 
   const Request({
     required this.url,
+    required this.contentType,
     required this.body,
   });
 
   @override
-  int get hashCode => url.hashCode ^ body.hashCode;
+  int get hashCode => url.hashCode ^ contentType.hashCode ^ body.hashCode;
 
   @override
   bool operator ==(Object other) =>
@@ -84,7 +112,39 @@ class Request {
       other is Request &&
           runtimeType == other.runtimeType &&
           url == other.url &&
+          contentType == other.contentType &&
           body == other.body;
+}
+
+class TxIn {
+  final OutPoint previousOutput;
+  final FfiScript scriptSig;
+  final int sequence;
+  final List<Uint8List> witness;
+
+  const TxIn({
+    required this.previousOutput,
+    required this.scriptSig,
+    required this.sequence,
+    required this.witness,
+  });
+
+  @override
+  int get hashCode =>
+      previousOutput.hashCode ^
+      scriptSig.hashCode ^
+      sequence.hashCode ^
+      witness.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is TxIn &&
+          runtimeType == other.runtimeType &&
+          previousOutput == other.previousOutput &&
+          scriptSig == other.scriptSig &&
+          sequence == other.sequence &&
+          witness == other.witness;
 }
 
 class TxOut {
