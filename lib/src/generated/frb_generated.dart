@@ -61,7 +61,7 @@ class core extends BaseEntrypoint<coreApi, coreApiImpl, coreWire> {
   String get codegenVersion => '2.0.0';
 
   @override
-  int get rustContentHash => -486461789;
+  int get rustContentHash => 801594113;
 
   static const kDefaultExternalLibraryLoaderConfig =
       ExternalLibraryLoaderConfig(
@@ -92,56 +92,6 @@ abstract class coreApi extends BaseApi {
   String crateApiReceiveFfiActiveSessionPublicKey(
       {required FfiActiveSession that});
 
-  Future<FfiMaybeMixedInputScripts>
-      crateApiReceiveFfiMaybeInputsOwnedCheckInputsNotOwned(
-          {required FfiMaybeInputsOwned that,
-          required FutureOr<bool> Function(Uint8List) isOwned});
-
-  Future<FfiOutputsUnknown>
-      crateApiReceiveFfiMaybeInputsSeenCheckNoInputsSeenBefore(
-          {required FfiMaybeInputsSeen that,
-          required FutureOr<bool> Function(OutPoint) isKnown});
-
-  Future<FfiMaybeInputsSeen>
-      crateApiReceiveFfiMaybeMixedInputScriptsCheckNoMixedInputScripts(
-          {required FfiMaybeMixedInputScripts that});
-
-  Future<FfiProvisionalProposal>
-      crateApiReceiveFfiOutputsUnknownIdentifyReceiverOutputs(
-          {required FfiOutputsUnknown that,
-          required FutureOr<bool> Function(Uint8List) isReceiverOutput});
-
-  Future<bool> crateApiReceiveFfiPayjoinProposalIsOutputSubstitutionDisabled(
-      {required FfiPayjoinProposal that});
-
-  Future<Uint64List> crateApiReceiveFfiPayjoinProposalOwnedVouts(
-      {required FfiPayjoinProposal that});
-
-  Future<String> crateApiReceiveFfiPayjoinProposalPsbt(
-      {required FfiPayjoinProposal that});
-
-  Future<List<OutPoint>> crateApiReceiveFfiPayjoinProposalUtxosToBeLocked(
-      {required FfiPayjoinProposal that});
-
-  Future<void> crateApiReceiveFfiProvisionalProposalContributeWitnessInput(
-      {required FfiProvisionalProposal that,
-      required TxOut txo,
-      required OutPoint outpoint});
-
-  Future<FfiPayjoinProposal>
-      crateApiReceiveFfiProvisionalProposalFinalizeProposal(
-          {required FfiProvisionalProposal that,
-          required FutureOr<String> Function(String) processPsbt,
-          BigInt? minFeeRateSatPerVb});
-
-  Future<OutPoint> crateApiReceiveFfiProvisionalProposalTryPreservingPrivacy(
-      {required FfiProvisionalProposal that,
-      required Map<BigInt, OutPoint> candidateInputs});
-
-  Future<void> crateApiReceiveFfiProvisionalProposalTrySubstituteReceiverOutput(
-      {required FfiProvisionalProposal that,
-      required FutureOr<Uint8List> Function() generateScript});
-
   Future<(Request, ClientResponse)>
       crateApiReceiveFfiSessionInitializerExtractReq(
           {required FfiSessionInitializer that});
@@ -158,25 +108,6 @@ abstract class coreApi extends BaseApi {
       {required FfiSessionInitializer that,
       required List<int> body,
       required ClientResponse ctx});
-
-  Future<FfiMaybeInputsOwned>
-      crateApiReceiveFfiUncheckedProposalAssumeInteractiveReceiver(
-          {required FfiUncheckedProposal that});
-
-  Future<FfiMaybeInputsOwned>
-      crateApiReceiveFfiUncheckedProposalCheckBroadcastSuitability(
-          {required FfiUncheckedProposal that,
-          BigInt? minFeeRate,
-          required FutureOr<bool> Function(Uint8List) canBroadcast});
-
-  Future<Uint8List>
-      crateApiReceiveFfiUncheckedProposalExtractTxToScheduleBroadcast(
-          {required FfiUncheckedProposal that});
-
-  Future<FfiUncheckedProposal> crateApiReceiveFfiUncheckedProposalFromRequest(
-      {required List<int> body,
-      required String query,
-      required Headers headers});
 
   Future<FfiV2MaybeMixedInputScripts>
       crateApiReceiveFfiV2MaybeInputsOwnedCheckInputsNotOwned(
@@ -360,69 +291,6 @@ abstract class coreApi extends BaseApi {
       get rust_arc_decrement_strong_count_ArcContextV2;
 
   CrossPlatformFinalizerArg get rust_arc_decrement_strong_count_ArcContextV2Ptr;
-
-  RustArcIncrementStrongCountFnType
-      get rust_arc_increment_strong_count_MaybeInputsOwned;
-
-  RustArcDecrementStrongCountFnType
-      get rust_arc_decrement_strong_count_MaybeInputsOwned;
-
-  CrossPlatformFinalizerArg
-      get rust_arc_decrement_strong_count_MaybeInputsOwnedPtr;
-
-  RustArcIncrementStrongCountFnType
-      get rust_arc_increment_strong_count_MaybeInputsSeen;
-
-  RustArcDecrementStrongCountFnType
-      get rust_arc_decrement_strong_count_MaybeInputsSeen;
-
-  CrossPlatformFinalizerArg
-      get rust_arc_decrement_strong_count_MaybeInputsSeenPtr;
-
-  RustArcIncrementStrongCountFnType
-      get rust_arc_increment_strong_count_MaybeMixedInputScripts;
-
-  RustArcDecrementStrongCountFnType
-      get rust_arc_decrement_strong_count_MaybeMixedInputScripts;
-
-  CrossPlatformFinalizerArg
-      get rust_arc_decrement_strong_count_MaybeMixedInputScriptsPtr;
-
-  RustArcIncrementStrongCountFnType
-      get rust_arc_increment_strong_count_OutputsUnknown;
-
-  RustArcDecrementStrongCountFnType
-      get rust_arc_decrement_strong_count_OutputsUnknown;
-
-  CrossPlatformFinalizerArg
-      get rust_arc_decrement_strong_count_OutputsUnknownPtr;
-
-  RustArcIncrementStrongCountFnType
-      get rust_arc_increment_strong_count_PayjoinProposal;
-
-  RustArcDecrementStrongCountFnType
-      get rust_arc_decrement_strong_count_PayjoinProposal;
-
-  CrossPlatformFinalizerArg
-      get rust_arc_decrement_strong_count_PayjoinProposalPtr;
-
-  RustArcIncrementStrongCountFnType
-      get rust_arc_increment_strong_count_ProvisionalProposal;
-
-  RustArcDecrementStrongCountFnType
-      get rust_arc_decrement_strong_count_ProvisionalProposal;
-
-  CrossPlatformFinalizerArg
-      get rust_arc_decrement_strong_count_ProvisionalProposalPtr;
-
-  RustArcIncrementStrongCountFnType
-      get rust_arc_increment_strong_count_UncheckedProposal;
-
-  RustArcDecrementStrongCountFnType
-      get rust_arc_decrement_strong_count_UncheckedProposal;
-
-  CrossPlatformFinalizerArg
-      get rust_arc_decrement_strong_count_UncheckedProposalPtr;
 
   RustArcIncrementStrongCountFnType
       get rust_arc_increment_strong_count_ActiveSession;
@@ -721,370 +589,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       );
 
   @override
-  Future<FfiMaybeMixedInputScripts>
-      crateApiReceiveFfiMaybeInputsOwnedCheckInputsNotOwned(
-          {required FfiMaybeInputsOwned that,
-          required FutureOr<bool> Function(Uint8List) isOwned}) {
-    return handler.executeNormal(NormalTask(
-      callFfi: (port_) {
-        var arg0 = cst_encode_box_autoadd_ffi_maybe_inputs_owned(that);
-        var arg1 =
-            cst_encode_DartFn_Inputs_list_prim_u_8_strict_Output_bool_AnyhowException(
-                isOwned);
-        return wire
-            .wire__crate__api__receive__ffi_maybe_inputs_owned_check_inputs_not_owned(
-                port_, arg0, arg1);
-      },
-      codec: DcoCodec(
-        decodeSuccessData: dco_decode_ffi_maybe_mixed_input_scripts,
-        decodeErrorData: dco_decode_payjoin_error,
-      ),
-      constMeta:
-          kCrateApiReceiveFfiMaybeInputsOwnedCheckInputsNotOwnedConstMeta,
-      argValues: [that, isOwned],
-      apiImpl: this,
-    ));
-  }
-
-  TaskConstMeta
-      get kCrateApiReceiveFfiMaybeInputsOwnedCheckInputsNotOwnedConstMeta =>
-          const TaskConstMeta(
-            debugName: "ffi_maybe_inputs_owned_check_inputs_not_owned",
-            argNames: ["that", "isOwned"],
-          );
-
-  @override
-  Future<FfiOutputsUnknown>
-      crateApiReceiveFfiMaybeInputsSeenCheckNoInputsSeenBefore(
-          {required FfiMaybeInputsSeen that,
-          required FutureOr<bool> Function(OutPoint) isKnown}) {
-    return handler.executeNormal(NormalTask(
-      callFfi: (port_) {
-        var arg0 = cst_encode_box_autoadd_ffi_maybe_inputs_seen(that);
-        var arg1 =
-            cst_encode_DartFn_Inputs_out_point_Output_bool_AnyhowException(
-                isKnown);
-        return wire
-            .wire__crate__api__receive__ffi_maybe_inputs_seen_check_no_inputs_seen_before(
-                port_, arg0, arg1);
-      },
-      codec: DcoCodec(
-        decodeSuccessData: dco_decode_ffi_outputs_unknown,
-        decodeErrorData: dco_decode_payjoin_error,
-      ),
-      constMeta:
-          kCrateApiReceiveFfiMaybeInputsSeenCheckNoInputsSeenBeforeConstMeta,
-      argValues: [that, isKnown],
-      apiImpl: this,
-    ));
-  }
-
-  TaskConstMeta
-      get kCrateApiReceiveFfiMaybeInputsSeenCheckNoInputsSeenBeforeConstMeta =>
-          const TaskConstMeta(
-            debugName: "ffi_maybe_inputs_seen_check_no_inputs_seen_before",
-            argNames: ["that", "isKnown"],
-          );
-
-  @override
-  Future<FfiMaybeInputsSeen>
-      crateApiReceiveFfiMaybeMixedInputScriptsCheckNoMixedInputScripts(
-          {required FfiMaybeMixedInputScripts that}) {
-    return handler.executeNormal(NormalTask(
-      callFfi: (port_) {
-        var arg0 = cst_encode_box_autoadd_ffi_maybe_mixed_input_scripts(that);
-        return wire
-            .wire__crate__api__receive__ffi_maybe_mixed_input_scripts_check_no_mixed_input_scripts(
-                port_, arg0);
-      },
-      codec: DcoCodec(
-        decodeSuccessData: dco_decode_ffi_maybe_inputs_seen,
-        decodeErrorData: dco_decode_payjoin_error,
-      ),
-      constMeta:
-          kCrateApiReceiveFfiMaybeMixedInputScriptsCheckNoMixedInputScriptsConstMeta,
-      argValues: [that],
-      apiImpl: this,
-    ));
-  }
-
-  TaskConstMeta
-      get kCrateApiReceiveFfiMaybeMixedInputScriptsCheckNoMixedInputScriptsConstMeta =>
-          const TaskConstMeta(
-            debugName:
-                "ffi_maybe_mixed_input_scripts_check_no_mixed_input_scripts",
-            argNames: ["that"],
-          );
-
-  @override
-  Future<FfiProvisionalProposal>
-      crateApiReceiveFfiOutputsUnknownIdentifyReceiverOutputs(
-          {required FfiOutputsUnknown that,
-          required FutureOr<bool> Function(Uint8List) isReceiverOutput}) {
-    return handler.executeNormal(NormalTask(
-      callFfi: (port_) {
-        var arg0 = cst_encode_box_autoadd_ffi_outputs_unknown(that);
-        var arg1 =
-            cst_encode_DartFn_Inputs_list_prim_u_8_strict_Output_bool_AnyhowException(
-                isReceiverOutput);
-        return wire
-            .wire__crate__api__receive__ffi_outputs_unknown_identify_receiver_outputs(
-                port_, arg0, arg1);
-      },
-      codec: DcoCodec(
-        decodeSuccessData: dco_decode_ffi_provisional_proposal,
-        decodeErrorData: dco_decode_payjoin_error,
-      ),
-      constMeta:
-          kCrateApiReceiveFfiOutputsUnknownIdentifyReceiverOutputsConstMeta,
-      argValues: [that, isReceiverOutput],
-      apiImpl: this,
-    ));
-  }
-
-  TaskConstMeta
-      get kCrateApiReceiveFfiOutputsUnknownIdentifyReceiverOutputsConstMeta =>
-          const TaskConstMeta(
-            debugName: "ffi_outputs_unknown_identify_receiver_outputs",
-            argNames: ["that", "isReceiverOutput"],
-          );
-
-  @override
-  Future<bool> crateApiReceiveFfiPayjoinProposalIsOutputSubstitutionDisabled(
-      {required FfiPayjoinProposal that}) {
-    return handler.executeNormal(NormalTask(
-      callFfi: (port_) {
-        var arg0 = cst_encode_box_autoadd_ffi_payjoin_proposal(that);
-        return wire
-            .wire__crate__api__receive__ffi_payjoin_proposal_is_output_substitution_disabled(
-                port_, arg0);
-      },
-      codec: DcoCodec(
-        decodeSuccessData: dco_decode_bool,
-        decodeErrorData: null,
-      ),
-      constMeta:
-          kCrateApiReceiveFfiPayjoinProposalIsOutputSubstitutionDisabledConstMeta,
-      argValues: [that],
-      apiImpl: this,
-    ));
-  }
-
-  TaskConstMeta
-      get kCrateApiReceiveFfiPayjoinProposalIsOutputSubstitutionDisabledConstMeta =>
-          const TaskConstMeta(
-            debugName: "ffi_payjoin_proposal_is_output_substitution_disabled",
-            argNames: ["that"],
-          );
-
-  @override
-  Future<Uint64List> crateApiReceiveFfiPayjoinProposalOwnedVouts(
-      {required FfiPayjoinProposal that}) {
-    return handler.executeNormal(NormalTask(
-      callFfi: (port_) {
-        var arg0 = cst_encode_box_autoadd_ffi_payjoin_proposal(that);
-        return wire.wire__crate__api__receive__ffi_payjoin_proposal_owned_vouts(
-            port_, arg0);
-      },
-      codec: DcoCodec(
-        decodeSuccessData: dco_decode_list_prim_u_64_strict,
-        decodeErrorData: null,
-      ),
-      constMeta: kCrateApiReceiveFfiPayjoinProposalOwnedVoutsConstMeta,
-      argValues: [that],
-      apiImpl: this,
-    ));
-  }
-
-  TaskConstMeta get kCrateApiReceiveFfiPayjoinProposalOwnedVoutsConstMeta =>
-      const TaskConstMeta(
-        debugName: "ffi_payjoin_proposal_owned_vouts",
-        argNames: ["that"],
-      );
-
-  @override
-  Future<String> crateApiReceiveFfiPayjoinProposalPsbt(
-      {required FfiPayjoinProposal that}) {
-    return handler.executeNormal(NormalTask(
-      callFfi: (port_) {
-        var arg0 = cst_encode_box_autoadd_ffi_payjoin_proposal(that);
-        return wire.wire__crate__api__receive__ffi_payjoin_proposal_psbt(
-            port_, arg0);
-      },
-      codec: DcoCodec(
-        decodeSuccessData: dco_decode_String,
-        decodeErrorData: null,
-      ),
-      constMeta: kCrateApiReceiveFfiPayjoinProposalPsbtConstMeta,
-      argValues: [that],
-      apiImpl: this,
-    ));
-  }
-
-  TaskConstMeta get kCrateApiReceiveFfiPayjoinProposalPsbtConstMeta =>
-      const TaskConstMeta(
-        debugName: "ffi_payjoin_proposal_psbt",
-        argNames: ["that"],
-      );
-
-  @override
-  Future<List<OutPoint>> crateApiReceiveFfiPayjoinProposalUtxosToBeLocked(
-      {required FfiPayjoinProposal that}) {
-    return handler.executeNormal(NormalTask(
-      callFfi: (port_) {
-        var arg0 = cst_encode_box_autoadd_ffi_payjoin_proposal(that);
-        return wire
-            .wire__crate__api__receive__ffi_payjoin_proposal_utxos_to_be_locked(
-                port_, arg0);
-      },
-      codec: DcoCodec(
-        decodeSuccessData: dco_decode_list_out_point,
-        decodeErrorData: null,
-      ),
-      constMeta: kCrateApiReceiveFfiPayjoinProposalUtxosToBeLockedConstMeta,
-      argValues: [that],
-      apiImpl: this,
-    ));
-  }
-
-  TaskConstMeta
-      get kCrateApiReceiveFfiPayjoinProposalUtxosToBeLockedConstMeta =>
-          const TaskConstMeta(
-            debugName: "ffi_payjoin_proposal_utxos_to_be_locked",
-            argNames: ["that"],
-          );
-
-  @override
-  Future<void> crateApiReceiveFfiProvisionalProposalContributeWitnessInput(
-      {required FfiProvisionalProposal that,
-      required TxOut txo,
-      required OutPoint outpoint}) {
-    return handler.executeNormal(NormalTask(
-      callFfi: (port_) {
-        var arg0 = cst_encode_box_autoadd_ffi_provisional_proposal(that);
-        var arg1 = cst_encode_box_autoadd_tx_out(txo);
-        var arg2 = cst_encode_box_autoadd_out_point(outpoint);
-        return wire
-            .wire__crate__api__receive__ffi_provisional_proposal_contribute_witness_input(
-                port_, arg0, arg1, arg2);
-      },
-      codec: DcoCodec(
-        decodeSuccessData: dco_decode_unit,
-        decodeErrorData: dco_decode_payjoin_error,
-      ),
-      constMeta:
-          kCrateApiReceiveFfiProvisionalProposalContributeWitnessInputConstMeta,
-      argValues: [that, txo, outpoint],
-      apiImpl: this,
-    ));
-  }
-
-  TaskConstMeta
-      get kCrateApiReceiveFfiProvisionalProposalContributeWitnessInputConstMeta =>
-          const TaskConstMeta(
-            debugName: "ffi_provisional_proposal_contribute_witness_input",
-            argNames: ["that", "txo", "outpoint"],
-          );
-
-  @override
-  Future<FfiPayjoinProposal>
-      crateApiReceiveFfiProvisionalProposalFinalizeProposal(
-          {required FfiProvisionalProposal that,
-          required FutureOr<String> Function(String) processPsbt,
-          BigInt? minFeeRateSatPerVb}) {
-    return handler.executeNormal(NormalTask(
-      callFfi: (port_) {
-        var arg0 = cst_encode_box_autoadd_ffi_provisional_proposal(that);
-        var arg1 =
-            cst_encode_DartFn_Inputs_String_Output_String_AnyhowException(
-                processPsbt);
-        var arg2 = cst_encode_opt_box_autoadd_u_64(minFeeRateSatPerVb);
-        return wire
-            .wire__crate__api__receive__ffi_provisional_proposal_finalize_proposal(
-                port_, arg0, arg1, arg2);
-      },
-      codec: DcoCodec(
-        decodeSuccessData: dco_decode_ffi_payjoin_proposal,
-        decodeErrorData: dco_decode_payjoin_error,
-      ),
-      constMeta:
-          kCrateApiReceiveFfiProvisionalProposalFinalizeProposalConstMeta,
-      argValues: [that, processPsbt, minFeeRateSatPerVb],
-      apiImpl: this,
-    ));
-  }
-
-  TaskConstMeta
-      get kCrateApiReceiveFfiProvisionalProposalFinalizeProposalConstMeta =>
-          const TaskConstMeta(
-            debugName: "ffi_provisional_proposal_finalize_proposal",
-            argNames: ["that", "processPsbt", "minFeeRateSatPerVb"],
-          );
-
-  @override
-  Future<OutPoint> crateApiReceiveFfiProvisionalProposalTryPreservingPrivacy(
-      {required FfiProvisionalProposal that,
-      required Map<BigInt, OutPoint> candidateInputs}) {
-    return handler.executeNormal(NormalTask(
-      callFfi: (port_) {
-        var arg0 = cst_encode_box_autoadd_ffi_provisional_proposal(that);
-        var arg1 = cst_encode_Map_u_64_out_point(candidateInputs);
-        return wire
-            .wire__crate__api__receive__ffi_provisional_proposal_try_preserving_privacy(
-                port_, arg0, arg1);
-      },
-      codec: DcoCodec(
-        decodeSuccessData: dco_decode_out_point,
-        decodeErrorData: dco_decode_payjoin_error,
-      ),
-      constMeta:
-          kCrateApiReceiveFfiProvisionalProposalTryPreservingPrivacyConstMeta,
-      argValues: [that, candidateInputs],
-      apiImpl: this,
-    ));
-  }
-
-  TaskConstMeta
-      get kCrateApiReceiveFfiProvisionalProposalTryPreservingPrivacyConstMeta =>
-          const TaskConstMeta(
-            debugName: "ffi_provisional_proposal_try_preserving_privacy",
-            argNames: ["that", "candidateInputs"],
-          );
-
-  @override
-  Future<void> crateApiReceiveFfiProvisionalProposalTrySubstituteReceiverOutput(
-      {required FfiProvisionalProposal that,
-      required FutureOr<Uint8List> Function() generateScript}) {
-    return handler.executeNormal(NormalTask(
-      callFfi: (port_) {
-        var arg0 = cst_encode_box_autoadd_ffi_provisional_proposal(that);
-        var arg1 =
-            cst_encode_DartFn_Inputs__Output_list_prim_u_8_strict_AnyhowException(
-                generateScript);
-        return wire
-            .wire__crate__api__receive__ffi_provisional_proposal_try_substitute_receiver_output(
-                port_, arg0, arg1);
-      },
-      codec: DcoCodec(
-        decodeSuccessData: dco_decode_unit,
-        decodeErrorData: dco_decode_payjoin_error,
-      ),
-      constMeta:
-          kCrateApiReceiveFfiProvisionalProposalTrySubstituteReceiverOutputConstMeta,
-      argValues: [that, generateScript],
-      apiImpl: this,
-    ));
-  }
-
-  TaskConstMeta
-      get kCrateApiReceiveFfiProvisionalProposalTrySubstituteReceiverOutputConstMeta =>
-          const TaskConstMeta(
-            debugName:
-                "ffi_provisional_proposal_try_substitute_receiver_output",
-            argNames: ["that", "generateScript"],
-          );
-
-  @override
   Future<(Request, ClientResponse)>
       crateApiReceiveFfiSessionInitializerExtractReq(
           {required FfiSessionInitializer that}) {
@@ -1188,130 +692,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       const TaskConstMeta(
         debugName: "ffi_session_initializer_process_res",
         argNames: ["that", "body", "ctx"],
-      );
-
-  @override
-  Future<FfiMaybeInputsOwned>
-      crateApiReceiveFfiUncheckedProposalAssumeInteractiveReceiver(
-          {required FfiUncheckedProposal that}) {
-    return handler.executeNormal(NormalTask(
-      callFfi: (port_) {
-        var arg0 = cst_encode_box_autoadd_ffi_unchecked_proposal(that);
-        return wire
-            .wire__crate__api__receive__ffi_unchecked_proposal_assume_interactive_receiver(
-                port_, arg0);
-      },
-      codec: DcoCodec(
-        decodeSuccessData: dco_decode_ffi_maybe_inputs_owned,
-        decodeErrorData: null,
-      ),
-      constMeta:
-          kCrateApiReceiveFfiUncheckedProposalAssumeInteractiveReceiverConstMeta,
-      argValues: [that],
-      apiImpl: this,
-    ));
-  }
-
-  TaskConstMeta
-      get kCrateApiReceiveFfiUncheckedProposalAssumeInteractiveReceiverConstMeta =>
-          const TaskConstMeta(
-            debugName: "ffi_unchecked_proposal_assume_interactive_receiver",
-            argNames: ["that"],
-          );
-
-  @override
-  Future<FfiMaybeInputsOwned>
-      crateApiReceiveFfiUncheckedProposalCheckBroadcastSuitability(
-          {required FfiUncheckedProposal that,
-          BigInt? minFeeRate,
-          required FutureOr<bool> Function(Uint8List) canBroadcast}) {
-    return handler.executeNormal(NormalTask(
-      callFfi: (port_) {
-        var arg0 = cst_encode_box_autoadd_ffi_unchecked_proposal(that);
-        var arg1 = cst_encode_opt_box_autoadd_u_64(minFeeRate);
-        var arg2 =
-            cst_encode_DartFn_Inputs_list_prim_u_8_strict_Output_bool_AnyhowException(
-                canBroadcast);
-        return wire
-            .wire__crate__api__receive__ffi_unchecked_proposal_check_broadcast_suitability(
-                port_, arg0, arg1, arg2);
-      },
-      codec: DcoCodec(
-        decodeSuccessData: dco_decode_ffi_maybe_inputs_owned,
-        decodeErrorData: dco_decode_payjoin_error,
-      ),
-      constMeta:
-          kCrateApiReceiveFfiUncheckedProposalCheckBroadcastSuitabilityConstMeta,
-      argValues: [that, minFeeRate, canBroadcast],
-      apiImpl: this,
-    ));
-  }
-
-  TaskConstMeta
-      get kCrateApiReceiveFfiUncheckedProposalCheckBroadcastSuitabilityConstMeta =>
-          const TaskConstMeta(
-            debugName: "ffi_unchecked_proposal_check_broadcast_suitability",
-            argNames: ["that", "minFeeRate", "canBroadcast"],
-          );
-
-  @override
-  Future<Uint8List>
-      crateApiReceiveFfiUncheckedProposalExtractTxToScheduleBroadcast(
-          {required FfiUncheckedProposal that}) {
-    return handler.executeNormal(NormalTask(
-      callFfi: (port_) {
-        var arg0 = cst_encode_box_autoadd_ffi_unchecked_proposal(that);
-        return wire
-            .wire__crate__api__receive__ffi_unchecked_proposal_extract_tx_to_schedule_broadcast(
-                port_, arg0);
-      },
-      codec: DcoCodec(
-        decodeSuccessData: dco_decode_list_prim_u_8_strict,
-        decodeErrorData: null,
-      ),
-      constMeta:
-          kCrateApiReceiveFfiUncheckedProposalExtractTxToScheduleBroadcastConstMeta,
-      argValues: [that],
-      apiImpl: this,
-    ));
-  }
-
-  TaskConstMeta
-      get kCrateApiReceiveFfiUncheckedProposalExtractTxToScheduleBroadcastConstMeta =>
-          const TaskConstMeta(
-            debugName:
-                "ffi_unchecked_proposal_extract_tx_to_schedule_broadcast",
-            argNames: ["that"],
-          );
-
-  @override
-  Future<FfiUncheckedProposal> crateApiReceiveFfiUncheckedProposalFromRequest(
-      {required List<int> body,
-      required String query,
-      required Headers headers}) {
-    return handler.executeNormal(NormalTask(
-      callFfi: (port_) {
-        var arg0 = cst_encode_list_prim_u_8_loose(body);
-        var arg1 = cst_encode_String(query);
-        var arg2 = cst_encode_box_autoadd_headers(headers);
-        return wire
-            .wire__crate__api__receive__ffi_unchecked_proposal_from_request(
-                port_, arg0, arg1, arg2);
-      },
-      codec: DcoCodec(
-        decodeSuccessData: dco_decode_ffi_unchecked_proposal,
-        decodeErrorData: dco_decode_payjoin_error,
-      ),
-      constMeta: kCrateApiReceiveFfiUncheckedProposalFromRequestConstMeta,
-      argValues: [body, query, headers],
-      apiImpl: this,
-    ));
-  }
-
-  TaskConstMeta get kCrateApiReceiveFfiUncheckedProposalFromRequestConstMeta =>
-      const TaskConstMeta(
-        debugName: "ffi_unchecked_proposal_from_request",
-        argNames: ["body", "query", "headers"],
       );
 
   @override
@@ -2733,62 +2113,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
           .rust_arc_decrement_strong_count_RustOpaque_Arcpayjoin_ffisendv2ContextV2;
 
   RustArcIncrementStrongCountFnType
-      get rust_arc_increment_strong_count_MaybeInputsOwned => wire
-          .rust_arc_increment_strong_count_RustOpaque_payjoin_ffireceivev1MaybeInputsOwned;
-
-  RustArcDecrementStrongCountFnType
-      get rust_arc_decrement_strong_count_MaybeInputsOwned => wire
-          .rust_arc_decrement_strong_count_RustOpaque_payjoin_ffireceivev1MaybeInputsOwned;
-
-  RustArcIncrementStrongCountFnType
-      get rust_arc_increment_strong_count_MaybeInputsSeen => wire
-          .rust_arc_increment_strong_count_RustOpaque_payjoin_ffireceivev1MaybeInputsSeen;
-
-  RustArcDecrementStrongCountFnType
-      get rust_arc_decrement_strong_count_MaybeInputsSeen => wire
-          .rust_arc_decrement_strong_count_RustOpaque_payjoin_ffireceivev1MaybeInputsSeen;
-
-  RustArcIncrementStrongCountFnType
-      get rust_arc_increment_strong_count_MaybeMixedInputScripts => wire
-          .rust_arc_increment_strong_count_RustOpaque_payjoin_ffireceivev1MaybeMixedInputScripts;
-
-  RustArcDecrementStrongCountFnType
-      get rust_arc_decrement_strong_count_MaybeMixedInputScripts => wire
-          .rust_arc_decrement_strong_count_RustOpaque_payjoin_ffireceivev1MaybeMixedInputScripts;
-
-  RustArcIncrementStrongCountFnType
-      get rust_arc_increment_strong_count_OutputsUnknown => wire
-          .rust_arc_increment_strong_count_RustOpaque_payjoin_ffireceivev1OutputsUnknown;
-
-  RustArcDecrementStrongCountFnType
-      get rust_arc_decrement_strong_count_OutputsUnknown => wire
-          .rust_arc_decrement_strong_count_RustOpaque_payjoin_ffireceivev1OutputsUnknown;
-
-  RustArcIncrementStrongCountFnType
-      get rust_arc_increment_strong_count_PayjoinProposal => wire
-          .rust_arc_increment_strong_count_RustOpaque_payjoin_ffireceivev1PayjoinProposal;
-
-  RustArcDecrementStrongCountFnType
-      get rust_arc_decrement_strong_count_PayjoinProposal => wire
-          .rust_arc_decrement_strong_count_RustOpaque_payjoin_ffireceivev1PayjoinProposal;
-
-  RustArcIncrementStrongCountFnType
-      get rust_arc_increment_strong_count_ProvisionalProposal => wire
-          .rust_arc_increment_strong_count_RustOpaque_payjoin_ffireceivev1ProvisionalProposal;
-
-  RustArcDecrementStrongCountFnType
-      get rust_arc_decrement_strong_count_ProvisionalProposal => wire
-          .rust_arc_decrement_strong_count_RustOpaque_payjoin_ffireceivev1ProvisionalProposal;
-
-  RustArcIncrementStrongCountFnType
-      get rust_arc_increment_strong_count_UncheckedProposal => wire
-          .rust_arc_increment_strong_count_RustOpaque_payjoin_ffireceivev1UncheckedProposal;
-
-  RustArcDecrementStrongCountFnType
-      get rust_arc_decrement_strong_count_UncheckedProposal => wire
-          .rust_arc_decrement_strong_count_RustOpaque_payjoin_ffireceivev1UncheckedProposal;
-
-  RustArcIncrementStrongCountFnType
       get rust_arc_increment_strong_count_ActiveSession => wire
           .rust_arc_increment_strong_count_RustOpaque_payjoin_ffireceivev2ActiveSession;
 
@@ -2955,13 +2279,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
-  Map<String, String> dco_decode_Map_String_String(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return Map.fromEntries(dco_decode_list_record_string_string(raw)
-        .map((e) => MapEntry(e.$1, e.$2)));
-  }
-
-  @protected
   Map<BigInt, OutPoint> dco_decode_Map_u_64_out_point(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return Map.fromEntries(dco_decode_list_record_u_64_out_point(raw)
@@ -2988,58 +2305,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return ArcContextV2Impl.frbInternalDcoDecode(raw as List<dynamic>);
-  }
-
-  @protected
-  MaybeInputsOwned dco_decode_RustOpaque_payjoin_ffireceivev1MaybeInputsOwned(
-      dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return MaybeInputsOwnedImpl.frbInternalDcoDecode(raw as List<dynamic>);
-  }
-
-  @protected
-  MaybeInputsSeen dco_decode_RustOpaque_payjoin_ffireceivev1MaybeInputsSeen(
-      dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return MaybeInputsSeenImpl.frbInternalDcoDecode(raw as List<dynamic>);
-  }
-
-  @protected
-  MaybeMixedInputScripts
-      dco_decode_RustOpaque_payjoin_ffireceivev1MaybeMixedInputScripts(
-          dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return MaybeMixedInputScriptsImpl.frbInternalDcoDecode(
-        raw as List<dynamic>);
-  }
-
-  @protected
-  OutputsUnknown dco_decode_RustOpaque_payjoin_ffireceivev1OutputsUnknown(
-      dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return OutputsUnknownImpl.frbInternalDcoDecode(raw as List<dynamic>);
-  }
-
-  @protected
-  PayjoinProposal dco_decode_RustOpaque_payjoin_ffireceivev1PayjoinProposal(
-      dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return PayjoinProposalImpl.frbInternalDcoDecode(raw as List<dynamic>);
-  }
-
-  @protected
-  ProvisionalProposal
-      dco_decode_RustOpaque_payjoin_ffireceivev1ProvisionalProposal(
-          dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return ProvisionalProposalImpl.frbInternalDcoDecode(raw as List<dynamic>);
-  }
-
-  @protected
-  UncheckedProposal dco_decode_RustOpaque_payjoin_ffireceivev1UncheckedProposal(
-      dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return UncheckedProposalImpl.frbInternalDcoDecode(raw as List<dynamic>);
   }
 
   @protected
@@ -3200,41 +2465,9 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
-  FfiMaybeInputsOwned dco_decode_box_autoadd_ffi_maybe_inputs_owned(
-      dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return dco_decode_ffi_maybe_inputs_owned(raw);
-  }
-
-  @protected
-  FfiMaybeInputsSeen dco_decode_box_autoadd_ffi_maybe_inputs_seen(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return dco_decode_ffi_maybe_inputs_seen(raw);
-  }
-
-  @protected
-  FfiMaybeMixedInputScripts
-      dco_decode_box_autoadd_ffi_maybe_mixed_input_scripts(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return dco_decode_ffi_maybe_mixed_input_scripts(raw);
-  }
-
-  @protected
   FfiOhttpKeys dco_decode_box_autoadd_ffi_ohttp_keys(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_ffi_ohttp_keys(raw);
-  }
-
-  @protected
-  FfiOutputsUnknown dco_decode_box_autoadd_ffi_outputs_unknown(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return dco_decode_ffi_outputs_unknown(raw);
-  }
-
-  @protected
-  FfiPayjoinProposal dco_decode_box_autoadd_ffi_payjoin_proposal(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return dco_decode_ffi_payjoin_proposal(raw);
   }
 
   @protected
@@ -3247,13 +2480,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   FfiPjUriBuilder dco_decode_box_autoadd_ffi_pj_uri_builder(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_ffi_pj_uri_builder(raw);
-  }
-
-  @protected
-  FfiProvisionalProposal dco_decode_box_autoadd_ffi_provisional_proposal(
-      dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return dco_decode_ffi_provisional_proposal(raw);
   }
 
   @protected
@@ -3273,13 +2499,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_ffi_session_initializer(raw);
-  }
-
-  @protected
-  FfiUncheckedProposal dco_decode_box_autoadd_ffi_unchecked_proposal(
-      dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return dco_decode_ffi_unchecked_proposal(raw);
   }
 
   @protected
@@ -3341,12 +2560,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_ffi_v_2_unchecked_proposal(raw);
-  }
-
-  @protected
-  Headers dco_decode_box_autoadd_headers(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return dco_decode_headers(raw);
   }
 
   @protected
@@ -3426,42 +2639,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
-  FfiMaybeInputsOwned dco_decode_ffi_maybe_inputs_owned(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    final arr = raw as List<dynamic>;
-    if (arr.length != 1)
-      throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
-    return FfiMaybeInputsOwned(
-      field0:
-          dco_decode_RustOpaque_payjoin_ffireceivev1MaybeInputsOwned(arr[0]),
-    );
-  }
-
-  @protected
-  FfiMaybeInputsSeen dco_decode_ffi_maybe_inputs_seen(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    final arr = raw as List<dynamic>;
-    if (arr.length != 1)
-      throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
-    return FfiMaybeInputsSeen(
-      field0: dco_decode_RustOpaque_payjoin_ffireceivev1MaybeInputsSeen(arr[0]),
-    );
-  }
-
-  @protected
-  FfiMaybeMixedInputScripts dco_decode_ffi_maybe_mixed_input_scripts(
-      dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    final arr = raw as List<dynamic>;
-    if (arr.length != 1)
-      throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
-    return FfiMaybeMixedInputScripts(
-      field0: dco_decode_RustOpaque_payjoin_ffireceivev1MaybeMixedInputScripts(
-          arr[0]),
-    );
-  }
-
-  @protected
   FfiOhttpKeys dco_decode_ffi_ohttp_keys(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
@@ -3469,28 +2646,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
     return FfiOhttpKeys(
       field0: dco_decode_RustOpaque_payjoin_ffitypesOhttpKeys(arr[0]),
-    );
-  }
-
-  @protected
-  FfiOutputsUnknown dco_decode_ffi_outputs_unknown(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    final arr = raw as List<dynamic>;
-    if (arr.length != 1)
-      throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
-    return FfiOutputsUnknown(
-      field0: dco_decode_RustOpaque_payjoin_ffireceivev1OutputsUnknown(arr[0]),
-    );
-  }
-
-  @protected
-  FfiPayjoinProposal dco_decode_ffi_payjoin_proposal(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    final arr = raw as List<dynamic>;
-    if (arr.length != 1)
-      throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
-    return FfiPayjoinProposal(
-      field0: dco_decode_RustOpaque_payjoin_ffireceivev1PayjoinProposal(arr[0]),
     );
   }
 
@@ -3513,18 +2668,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
     return FfiPjUriBuilder(
       internal: dco_decode_RustOpaque_payjoin_ffiuriPjUriBuilder(arr[0]),
-    );
-  }
-
-  @protected
-  FfiProvisionalProposal dco_decode_ffi_provisional_proposal(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    final arr = raw as List<dynamic>;
-    if (arr.length != 1)
-      throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
-    return FfiProvisionalProposal(
-      field0:
-          dco_decode_RustOpaque_payjoin_ffireceivev1ProvisionalProposal(arr[0]),
     );
   }
 
@@ -3559,18 +2702,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
     return FfiSessionInitializer(
       field0:
           dco_decode_RustOpaque_payjoin_ffireceivev2SessionInitializer(arr[0]),
-    );
-  }
-
-  @protected
-  FfiUncheckedProposal dco_decode_ffi_unchecked_proposal(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    final arr = raw as List<dynamic>;
-    if (arr.length != 1)
-      throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
-    return FfiUncheckedProposal(
-      field0:
-          dco_decode_RustOpaque_payjoin_ffireceivev1UncheckedProposal(arr[0]),
     );
   }
 
@@ -3684,17 +2815,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
-  Headers dco_decode_headers(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    final arr = raw as List<dynamic>;
-    if (arr.length != 1)
-      throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
-    return Headers(
-      map: dco_decode_Map_String_String(arr[0]),
-    );
-  }
-
-  @protected
   int dco_decode_i_32(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw as int;
@@ -3722,12 +2842,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   Uint8List dco_decode_list_prim_u_8_strict(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw as Uint8List;
-  }
-
-  @protected
-  List<(String, String)> dco_decode_list_record_string_string(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return (raw as List<dynamic>).map(dco_decode_record_string_string).toList();
   }
 
   @protected
@@ -3919,19 +3033,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
-  (String, String) dco_decode_record_string_string(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    final arr = raw as List<dynamic>;
-    if (arr.length != 2) {
-      throw Exception('Expected 2 elements, got ${arr.length}');
-    }
-    return (
-      dco_decode_String(arr[0]),
-      dco_decode_String(arr[1]),
-    );
-  }
-
-  @protected
   (BigInt, OutPoint) dco_decode_record_u_64_out_point(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
@@ -4013,14 +3114,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
-  Map<String, String> sse_decode_Map_String_String(
-      SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var inner = sse_decode_list_record_string_string(deserializer);
-    return Map.fromEntries(inner.map((e) => MapEntry(e.$1, e.$2)));
-  }
-
-  @protected
   Map<BigInt, OutPoint> sse_decode_Map_u_64_out_point(
       SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
@@ -4050,64 +3143,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return ArcContextV2Impl.frbInternalSseDecode(
-        sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
-  }
-
-  @protected
-  MaybeInputsOwned sse_decode_RustOpaque_payjoin_ffireceivev1MaybeInputsOwned(
-      SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return MaybeInputsOwnedImpl.frbInternalSseDecode(
-        sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
-  }
-
-  @protected
-  MaybeInputsSeen sse_decode_RustOpaque_payjoin_ffireceivev1MaybeInputsSeen(
-      SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return MaybeInputsSeenImpl.frbInternalSseDecode(
-        sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
-  }
-
-  @protected
-  MaybeMixedInputScripts
-      sse_decode_RustOpaque_payjoin_ffireceivev1MaybeMixedInputScripts(
-          SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return MaybeMixedInputScriptsImpl.frbInternalSseDecode(
-        sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
-  }
-
-  @protected
-  OutputsUnknown sse_decode_RustOpaque_payjoin_ffireceivev1OutputsUnknown(
-      SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return OutputsUnknownImpl.frbInternalSseDecode(
-        sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
-  }
-
-  @protected
-  PayjoinProposal sse_decode_RustOpaque_payjoin_ffireceivev1PayjoinProposal(
-      SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return PayjoinProposalImpl.frbInternalSseDecode(
-        sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
-  }
-
-  @protected
-  ProvisionalProposal
-      sse_decode_RustOpaque_payjoin_ffireceivev1ProvisionalProposal(
-          SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return ProvisionalProposalImpl.frbInternalSseDecode(
-        sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
-  }
-
-  @protected
-  UncheckedProposal sse_decode_RustOpaque_payjoin_ffireceivev1UncheckedProposal(
-      SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return UncheckedProposalImpl.frbInternalSseDecode(
         sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
   }
 
@@ -4291,46 +3326,10 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
-  FfiMaybeInputsOwned sse_decode_box_autoadd_ffi_maybe_inputs_owned(
-      SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return (sse_decode_ffi_maybe_inputs_owned(deserializer));
-  }
-
-  @protected
-  FfiMaybeInputsSeen sse_decode_box_autoadd_ffi_maybe_inputs_seen(
-      SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return (sse_decode_ffi_maybe_inputs_seen(deserializer));
-  }
-
-  @protected
-  FfiMaybeMixedInputScripts
-      sse_decode_box_autoadd_ffi_maybe_mixed_input_scripts(
-          SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return (sse_decode_ffi_maybe_mixed_input_scripts(deserializer));
-  }
-
-  @protected
   FfiOhttpKeys sse_decode_box_autoadd_ffi_ohttp_keys(
       SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return (sse_decode_ffi_ohttp_keys(deserializer));
-  }
-
-  @protected
-  FfiOutputsUnknown sse_decode_box_autoadd_ffi_outputs_unknown(
-      SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return (sse_decode_ffi_outputs_unknown(deserializer));
-  }
-
-  @protected
-  FfiPayjoinProposal sse_decode_box_autoadd_ffi_payjoin_proposal(
-      SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return (sse_decode_ffi_payjoin_proposal(deserializer));
   }
 
   @protected
@@ -4344,13 +3343,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return (sse_decode_ffi_pj_uri_builder(deserializer));
-  }
-
-  @protected
-  FfiProvisionalProposal sse_decode_box_autoadd_ffi_provisional_proposal(
-      SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return (sse_decode_ffi_provisional_proposal(deserializer));
   }
 
   @protected
@@ -4372,13 +3364,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return (sse_decode_ffi_session_initializer(deserializer));
-  }
-
-  @protected
-  FfiUncheckedProposal sse_decode_box_autoadd_ffi_unchecked_proposal(
-      SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return (sse_decode_ffi_unchecked_proposal(deserializer));
   }
 
   @protected
@@ -4441,12 +3426,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return (sse_decode_ffi_v_2_unchecked_proposal(deserializer));
-  }
-
-  @protected
-  Headers sse_decode_box_autoadd_headers(SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return (sse_decode_headers(deserializer));
   }
 
   @protected
@@ -4513,57 +3492,11 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
-  FfiMaybeInputsOwned sse_decode_ffi_maybe_inputs_owned(
-      SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_field0 = sse_decode_RustOpaque_payjoin_ffireceivev1MaybeInputsOwned(
-        deserializer);
-    return FfiMaybeInputsOwned(field0: var_field0);
-  }
-
-  @protected
-  FfiMaybeInputsSeen sse_decode_ffi_maybe_inputs_seen(
-      SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_field0 =
-        sse_decode_RustOpaque_payjoin_ffireceivev1MaybeInputsSeen(deserializer);
-    return FfiMaybeInputsSeen(field0: var_field0);
-  }
-
-  @protected
-  FfiMaybeMixedInputScripts sse_decode_ffi_maybe_mixed_input_scripts(
-      SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_field0 =
-        sse_decode_RustOpaque_payjoin_ffireceivev1MaybeMixedInputScripts(
-            deserializer);
-    return FfiMaybeMixedInputScripts(field0: var_field0);
-  }
-
-  @protected
   FfiOhttpKeys sse_decode_ffi_ohttp_keys(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var var_field0 =
         sse_decode_RustOpaque_payjoin_ffitypesOhttpKeys(deserializer);
     return FfiOhttpKeys(field0: var_field0);
-  }
-
-  @protected
-  FfiOutputsUnknown sse_decode_ffi_outputs_unknown(
-      SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_field0 =
-        sse_decode_RustOpaque_payjoin_ffireceivev1OutputsUnknown(deserializer);
-    return FfiOutputsUnknown(field0: var_field0);
-  }
-
-  @protected
-  FfiPayjoinProposal sse_decode_ffi_payjoin_proposal(
-      SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_field0 =
-        sse_decode_RustOpaque_payjoin_ffireceivev1PayjoinProposal(deserializer);
-    return FfiPayjoinProposal(field0: var_field0);
   }
 
   @protected
@@ -4579,16 +3512,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
     var var_internal =
         sse_decode_RustOpaque_payjoin_ffiuriPjUriBuilder(deserializer);
     return FfiPjUriBuilder(internal: var_internal);
-  }
-
-  @protected
-  FfiProvisionalProposal sse_decode_ffi_provisional_proposal(
-      SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_field0 =
-        sse_decode_RustOpaque_payjoin_ffireceivev1ProvisionalProposal(
-            deserializer);
-    return FfiProvisionalProposal(field0: var_field0);
   }
 
   @protected
@@ -4617,16 +3540,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
         sse_decode_RustOpaque_payjoin_ffireceivev2SessionInitializer(
             deserializer);
     return FfiSessionInitializer(field0: var_field0);
-  }
-
-  @protected
-  FfiUncheckedProposal sse_decode_ffi_unchecked_proposal(
-      SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_field0 =
-        sse_decode_RustOpaque_payjoin_ffireceivev1UncheckedProposal(
-            deserializer);
-    return FfiUncheckedProposal(field0: var_field0);
   }
 
   @protected
@@ -4713,13 +3626,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
-  Headers sse_decode_headers(SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_map = sse_decode_Map_String_String(deserializer);
-    return Headers(map: var_map);
-  }
-
-  @protected
   int sse_decode_i_32(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return deserializer.buffer.getInt32();
@@ -4756,19 +3662,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var len_ = sse_decode_i_32(deserializer);
     return deserializer.buffer.getUint8List(len_);
-  }
-
-  @protected
-  List<(String, String)> sse_decode_list_record_string_string(
-      SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-
-    var len_ = sse_decode_i_32(deserializer);
-    var ans_ = <(String, String)>[];
-    for (var idx_ = 0; idx_ < len_; ++idx_) {
-      ans_.add(sse_decode_record_string_string(deserializer));
-    }
-    return ans_;
   }
 
   @protected
@@ -4960,15 +3853,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
-  (String, String) sse_decode_record_string_string(
-      SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_field0 = sse_decode_String(deserializer);
-    var var_field1 = sse_decode_String(deserializer);
-    return (var_field0, var_field1);
-  }
-
-  @protected
   (BigInt, OutPoint) sse_decode_record_u_64_out_point(
       SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
@@ -5085,62 +3969,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
     // Codec=Cst (C-struct based), see doc to use other codecs
 // ignore: invalid_use_of_internal_member
     return (raw as ArcContextV2Impl).frbInternalCstEncode();
-  }
-
-  @protected
-  int cst_encode_RustOpaque_payjoin_ffireceivev1MaybeInputsOwned(
-      MaybeInputsOwned raw) {
-    // Codec=Cst (C-struct based), see doc to use other codecs
-// ignore: invalid_use_of_internal_member
-    return (raw as MaybeInputsOwnedImpl).frbInternalCstEncode();
-  }
-
-  @protected
-  int cst_encode_RustOpaque_payjoin_ffireceivev1MaybeInputsSeen(
-      MaybeInputsSeen raw) {
-    // Codec=Cst (C-struct based), see doc to use other codecs
-// ignore: invalid_use_of_internal_member
-    return (raw as MaybeInputsSeenImpl).frbInternalCstEncode();
-  }
-
-  @protected
-  int cst_encode_RustOpaque_payjoin_ffireceivev1MaybeMixedInputScripts(
-      MaybeMixedInputScripts raw) {
-    // Codec=Cst (C-struct based), see doc to use other codecs
-// ignore: invalid_use_of_internal_member
-    return (raw as MaybeMixedInputScriptsImpl).frbInternalCstEncode();
-  }
-
-  @protected
-  int cst_encode_RustOpaque_payjoin_ffireceivev1OutputsUnknown(
-      OutputsUnknown raw) {
-    // Codec=Cst (C-struct based), see doc to use other codecs
-// ignore: invalid_use_of_internal_member
-    return (raw as OutputsUnknownImpl).frbInternalCstEncode();
-  }
-
-  @protected
-  int cst_encode_RustOpaque_payjoin_ffireceivev1PayjoinProposal(
-      PayjoinProposal raw) {
-    // Codec=Cst (C-struct based), see doc to use other codecs
-// ignore: invalid_use_of_internal_member
-    return (raw as PayjoinProposalImpl).frbInternalCstEncode();
-  }
-
-  @protected
-  int cst_encode_RustOpaque_payjoin_ffireceivev1ProvisionalProposal(
-      ProvisionalProposal raw) {
-    // Codec=Cst (C-struct based), see doc to use other codecs
-// ignore: invalid_use_of_internal_member
-    return (raw as ProvisionalProposalImpl).frbInternalCstEncode();
-  }
-
-  @protected
-  int cst_encode_RustOpaque_payjoin_ffireceivev1UncheckedProposal(
-      UncheckedProposal raw) {
-    // Codec=Cst (C-struct based), see doc to use other codecs
-// ignore: invalid_use_of_internal_member
-    return (raw as UncheckedProposalImpl).frbInternalCstEncode();
   }
 
   @protected
@@ -5364,14 +4192,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
-  void sse_encode_Map_String_String(
-      Map<String, String> self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_list_record_string_string(
-        self.entries.map((e) => (e.key, e.value)).toList(), serializer);
-  }
-
-  @protected
   void sse_encode_Map_u_64_out_point(
       Map<BigInt, OutPoint> self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
@@ -5403,69 +4223,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_usize(
         (self as ArcContextV2Impl).frbInternalSseEncode(move: null),
-        serializer);
-  }
-
-  @protected
-  void sse_encode_RustOpaque_payjoin_ffireceivev1MaybeInputsOwned(
-      MaybeInputsOwned self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_usize(
-        (self as MaybeInputsOwnedImpl).frbInternalSseEncode(move: null),
-        serializer);
-  }
-
-  @protected
-  void sse_encode_RustOpaque_payjoin_ffireceivev1MaybeInputsSeen(
-      MaybeInputsSeen self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_usize(
-        (self as MaybeInputsSeenImpl).frbInternalSseEncode(move: null),
-        serializer);
-  }
-
-  @protected
-  void sse_encode_RustOpaque_payjoin_ffireceivev1MaybeMixedInputScripts(
-      MaybeMixedInputScripts self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_usize(
-        (self as MaybeMixedInputScriptsImpl).frbInternalSseEncode(move: null),
-        serializer);
-  }
-
-  @protected
-  void sse_encode_RustOpaque_payjoin_ffireceivev1OutputsUnknown(
-      OutputsUnknown self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_usize(
-        (self as OutputsUnknownImpl).frbInternalSseEncode(move: null),
-        serializer);
-  }
-
-  @protected
-  void sse_encode_RustOpaque_payjoin_ffireceivev1PayjoinProposal(
-      PayjoinProposal self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_usize(
-        (self as PayjoinProposalImpl).frbInternalSseEncode(move: null),
-        serializer);
-  }
-
-  @protected
-  void sse_encode_RustOpaque_payjoin_ffireceivev1ProvisionalProposal(
-      ProvisionalProposal self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_usize(
-        (self as ProvisionalProposalImpl).frbInternalSseEncode(move: null),
-        serializer);
-  }
-
-  @protected
-  void sse_encode_RustOpaque_payjoin_ffireceivev1UncheckedProposal(
-      UncheckedProposal self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_usize(
-        (self as UncheckedProposalImpl).frbInternalSseEncode(move: null),
         serializer);
   }
 
@@ -5657,45 +4414,10 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
-  void sse_encode_box_autoadd_ffi_maybe_inputs_owned(
-      FfiMaybeInputsOwned self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_ffi_maybe_inputs_owned(self, serializer);
-  }
-
-  @protected
-  void sse_encode_box_autoadd_ffi_maybe_inputs_seen(
-      FfiMaybeInputsSeen self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_ffi_maybe_inputs_seen(self, serializer);
-  }
-
-  @protected
-  void sse_encode_box_autoadd_ffi_maybe_mixed_input_scripts(
-      FfiMaybeMixedInputScripts self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_ffi_maybe_mixed_input_scripts(self, serializer);
-  }
-
-  @protected
   void sse_encode_box_autoadd_ffi_ohttp_keys(
       FfiOhttpKeys self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_ffi_ohttp_keys(self, serializer);
-  }
-
-  @protected
-  void sse_encode_box_autoadd_ffi_outputs_unknown(
-      FfiOutputsUnknown self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_ffi_outputs_unknown(self, serializer);
-  }
-
-  @protected
-  void sse_encode_box_autoadd_ffi_payjoin_proposal(
-      FfiPayjoinProposal self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_ffi_payjoin_proposal(self, serializer);
   }
 
   @protected
@@ -5710,13 +4432,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       FfiPjUriBuilder self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_ffi_pj_uri_builder(self, serializer);
-  }
-
-  @protected
-  void sse_encode_box_autoadd_ffi_provisional_proposal(
-      FfiProvisionalProposal self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_ffi_provisional_proposal(self, serializer);
   }
 
   @protected
@@ -5738,13 +4453,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       FfiSessionInitializer self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_ffi_session_initializer(self, serializer);
-  }
-
-  @protected
-  void sse_encode_box_autoadd_ffi_unchecked_proposal(
-      FfiUncheckedProposal self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_ffi_unchecked_proposal(self, serializer);
   }
 
   @protected
@@ -5809,12 +4517,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
-  void sse_encode_box_autoadd_headers(Headers self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_headers(self, serializer);
-  }
-
-  @protected
   void sse_encode_box_autoadd_out_point(
       OutPoint self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
@@ -5876,49 +4578,9 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
-  void sse_encode_ffi_maybe_inputs_owned(
-      FfiMaybeInputsOwned self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_RustOpaque_payjoin_ffireceivev1MaybeInputsOwned(
-        self.field0, serializer);
-  }
-
-  @protected
-  void sse_encode_ffi_maybe_inputs_seen(
-      FfiMaybeInputsSeen self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_RustOpaque_payjoin_ffireceivev1MaybeInputsSeen(
-        self.field0, serializer);
-  }
-
-  @protected
-  void sse_encode_ffi_maybe_mixed_input_scripts(
-      FfiMaybeMixedInputScripts self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_RustOpaque_payjoin_ffireceivev1MaybeMixedInputScripts(
-        self.field0, serializer);
-  }
-
-  @protected
   void sse_encode_ffi_ohttp_keys(FfiOhttpKeys self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_RustOpaque_payjoin_ffitypesOhttpKeys(self.field0, serializer);
-  }
-
-  @protected
-  void sse_encode_ffi_outputs_unknown(
-      FfiOutputsUnknown self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_RustOpaque_payjoin_ffireceivev1OutputsUnknown(
-        self.field0, serializer);
-  }
-
-  @protected
-  void sse_encode_ffi_payjoin_proposal(
-      FfiPayjoinProposal self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_RustOpaque_payjoin_ffireceivev1PayjoinProposal(
-        self.field0, serializer);
   }
 
   @protected
@@ -5932,14 +4594,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       FfiPjUriBuilder self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_RustOpaque_payjoin_ffiuriPjUriBuilder(self.internal, serializer);
-  }
-
-  @protected
-  void sse_encode_ffi_provisional_proposal(
-      FfiProvisionalProposal self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_RustOpaque_payjoin_ffireceivev1ProvisionalProposal(
-        self.field0, serializer);
   }
 
   @protected
@@ -5963,14 +4617,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       FfiSessionInitializer self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_RustOpaque_payjoin_ffireceivev2SessionInitializer(
-        self.field0, serializer);
-  }
-
-  @protected
-  void sse_encode_ffi_unchecked_proposal(
-      FfiUncheckedProposal self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_RustOpaque_payjoin_ffireceivev1UncheckedProposal(
         self.field0, serializer);
   }
 
@@ -6043,12 +4689,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
-  void sse_encode_headers(Headers self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_Map_String_String(self.map, serializer);
-  }
-
-  @protected
   void sse_encode_i_32(int self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     serializer.buffer.putInt32(self);
@@ -6087,16 +4727,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_i_32(self.length, serializer);
     serializer.buffer.putUint8List(self);
-  }
-
-  @protected
-  void sse_encode_list_record_string_string(
-      List<(String, String)> self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_i_32(self.length, serializer);
-    for (final item in self) {
-      sse_encode_record_string_string(item, serializer);
-    }
   }
 
   @protected
@@ -6272,14 +4902,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
-  void sse_encode_record_string_string(
-      (String, String) self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_String(self.$1, serializer);
-    sse_encode_String(self.$2, serializer);
-  }
-
-  @protected
   void sse_encode_record_u_64_out_point(
       (BigInt, OutPoint) self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
@@ -6414,69 +5036,6 @@ class ArcV2PayjoinProposalImpl extends RustOpaque
 }
 
 @sealed
-class MaybeInputsOwnedImpl extends RustOpaque implements MaybeInputsOwned {
-  // Not to be used by end users
-  MaybeInputsOwnedImpl.frbInternalDcoDecode(List<dynamic> wire)
-      : super.frbInternalDcoDecode(wire, _kStaticData);
-
-  // Not to be used by end users
-  MaybeInputsOwnedImpl.frbInternalSseDecode(
-      BigInt ptr, int externalSizeOnNative)
-      : super.frbInternalSseDecode(ptr, externalSizeOnNative, _kStaticData);
-
-  static final _kStaticData = RustArcStaticData(
-    rustArcIncrementStrongCount:
-        core.instance.api.rust_arc_increment_strong_count_MaybeInputsOwned,
-    rustArcDecrementStrongCount:
-        core.instance.api.rust_arc_decrement_strong_count_MaybeInputsOwned,
-    rustArcDecrementStrongCountPtr:
-        core.instance.api.rust_arc_decrement_strong_count_MaybeInputsOwnedPtr,
-  );
-}
-
-@sealed
-class MaybeInputsSeenImpl extends RustOpaque implements MaybeInputsSeen {
-  // Not to be used by end users
-  MaybeInputsSeenImpl.frbInternalDcoDecode(List<dynamic> wire)
-      : super.frbInternalDcoDecode(wire, _kStaticData);
-
-  // Not to be used by end users
-  MaybeInputsSeenImpl.frbInternalSseDecode(BigInt ptr, int externalSizeOnNative)
-      : super.frbInternalSseDecode(ptr, externalSizeOnNative, _kStaticData);
-
-  static final _kStaticData = RustArcStaticData(
-    rustArcIncrementStrongCount:
-        core.instance.api.rust_arc_increment_strong_count_MaybeInputsSeen,
-    rustArcDecrementStrongCount:
-        core.instance.api.rust_arc_decrement_strong_count_MaybeInputsSeen,
-    rustArcDecrementStrongCountPtr:
-        core.instance.api.rust_arc_decrement_strong_count_MaybeInputsSeenPtr,
-  );
-}
-
-@sealed
-class MaybeMixedInputScriptsImpl extends RustOpaque
-    implements MaybeMixedInputScripts {
-  // Not to be used by end users
-  MaybeMixedInputScriptsImpl.frbInternalDcoDecode(List<dynamic> wire)
-      : super.frbInternalDcoDecode(wire, _kStaticData);
-
-  // Not to be used by end users
-  MaybeMixedInputScriptsImpl.frbInternalSseDecode(
-      BigInt ptr, int externalSizeOnNative)
-      : super.frbInternalSseDecode(ptr, externalSizeOnNative, _kStaticData);
-
-  static final _kStaticData = RustArcStaticData(
-    rustArcIncrementStrongCount: core
-        .instance.api.rust_arc_increment_strong_count_MaybeMixedInputScripts,
-    rustArcDecrementStrongCount: core
-        .instance.api.rust_arc_decrement_strong_count_MaybeMixedInputScripts,
-    rustArcDecrementStrongCountPtr: core
-        .instance.api.rust_arc_decrement_strong_count_MaybeMixedInputScriptsPtr,
-  );
-}
-
-@sealed
 class MutexOptionClientResponseImpl extends RustOpaque
     implements MutexOptionClientResponse {
   // Not to be used by end users
@@ -6519,46 +5078,6 @@ class OhttpKeysImpl extends RustOpaque implements OhttpKeys {
 }
 
 @sealed
-class OutputsUnknownImpl extends RustOpaque implements OutputsUnknown {
-  // Not to be used by end users
-  OutputsUnknownImpl.frbInternalDcoDecode(List<dynamic> wire)
-      : super.frbInternalDcoDecode(wire, _kStaticData);
-
-  // Not to be used by end users
-  OutputsUnknownImpl.frbInternalSseDecode(BigInt ptr, int externalSizeOnNative)
-      : super.frbInternalSseDecode(ptr, externalSizeOnNative, _kStaticData);
-
-  static final _kStaticData = RustArcStaticData(
-    rustArcIncrementStrongCount:
-        core.instance.api.rust_arc_increment_strong_count_OutputsUnknown,
-    rustArcDecrementStrongCount:
-        core.instance.api.rust_arc_decrement_strong_count_OutputsUnknown,
-    rustArcDecrementStrongCountPtr:
-        core.instance.api.rust_arc_decrement_strong_count_OutputsUnknownPtr,
-  );
-}
-
-@sealed
-class PayjoinProposalImpl extends RustOpaque implements PayjoinProposal {
-  // Not to be used by end users
-  PayjoinProposalImpl.frbInternalDcoDecode(List<dynamic> wire)
-      : super.frbInternalDcoDecode(wire, _kStaticData);
-
-  // Not to be used by end users
-  PayjoinProposalImpl.frbInternalSseDecode(BigInt ptr, int externalSizeOnNative)
-      : super.frbInternalSseDecode(ptr, externalSizeOnNative, _kStaticData);
-
-  static final _kStaticData = RustArcStaticData(
-    rustArcIncrementStrongCount:
-        core.instance.api.rust_arc_increment_strong_count_PayjoinProposal,
-    rustArcDecrementStrongCount:
-        core.instance.api.rust_arc_decrement_strong_count_PayjoinProposal,
-    rustArcDecrementStrongCountPtr:
-        core.instance.api.rust_arc_decrement_strong_count_PayjoinProposalPtr,
-  );
-}
-
-@sealed
 class PjUriBuilderImpl extends RustOpaque implements PjUriBuilder {
   // Not to be used by end users
   PjUriBuilderImpl.frbInternalDcoDecode(List<dynamic> wire)
@@ -6595,28 +5114,6 @@ class PjUriImpl extends RustOpaque implements PjUri {
         core.instance.api.rust_arc_decrement_strong_count_PjUri,
     rustArcDecrementStrongCountPtr:
         core.instance.api.rust_arc_decrement_strong_count_PjUriPtr,
-  );
-}
-
-@sealed
-class ProvisionalProposalImpl extends RustOpaque
-    implements ProvisionalProposal {
-  // Not to be used by end users
-  ProvisionalProposalImpl.frbInternalDcoDecode(List<dynamic> wire)
-      : super.frbInternalDcoDecode(wire, _kStaticData);
-
-  // Not to be used by end users
-  ProvisionalProposalImpl.frbInternalSseDecode(
-      BigInt ptr, int externalSizeOnNative)
-      : super.frbInternalSseDecode(ptr, externalSizeOnNative, _kStaticData);
-
-  static final _kStaticData = RustArcStaticData(
-    rustArcIncrementStrongCount:
-        core.instance.api.rust_arc_increment_strong_count_ProvisionalProposal,
-    rustArcDecrementStrongCount:
-        core.instance.api.rust_arc_decrement_strong_count_ProvisionalProposal,
-    rustArcDecrementStrongCountPtr: core
-        .instance.api.rust_arc_decrement_strong_count_ProvisionalProposalPtr,
   );
 }
 
@@ -6678,27 +5175,6 @@ class SessionInitializerImpl extends RustOpaque implements SessionInitializer {
         core.instance.api.rust_arc_decrement_strong_count_SessionInitializer,
     rustArcDecrementStrongCountPtr:
         core.instance.api.rust_arc_decrement_strong_count_SessionInitializerPtr,
-  );
-}
-
-@sealed
-class UncheckedProposalImpl extends RustOpaque implements UncheckedProposal {
-  // Not to be used by end users
-  UncheckedProposalImpl.frbInternalDcoDecode(List<dynamic> wire)
-      : super.frbInternalDcoDecode(wire, _kStaticData);
-
-  // Not to be used by end users
-  UncheckedProposalImpl.frbInternalSseDecode(
-      BigInt ptr, int externalSizeOnNative)
-      : super.frbInternalSseDecode(ptr, externalSizeOnNative, _kStaticData);
-
-  static final _kStaticData = RustArcStaticData(
-    rustArcIncrementStrongCount:
-        core.instance.api.rust_arc_increment_strong_count_UncheckedProposal,
-    rustArcDecrementStrongCount:
-        core.instance.api.rust_arc_decrement_strong_count_UncheckedProposal,
-    rustArcDecrementStrongCountPtr:
-        core.instance.api.rust_arc_decrement_strong_count_UncheckedProposalPtr,
   );
 }
 

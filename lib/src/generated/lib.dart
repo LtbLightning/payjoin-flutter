@@ -15,27 +15,6 @@ abstract class ArcContextV1 implements RustOpaqueInterface {}
 // Rust type: RustOpaqueNom<Arc < payjoin_ffi :: send :: v2 :: ContextV2 >>
 abstract class ArcContextV2 implements RustOpaqueInterface {}
 
-// Rust type: RustOpaqueNom<payjoin_ffi :: receive :: v1 :: MaybeInputsOwned>
-abstract class MaybeInputsOwned implements RustOpaqueInterface {}
-
-// Rust type: RustOpaqueNom<payjoin_ffi :: receive :: v1 :: MaybeInputsSeen>
-abstract class MaybeInputsSeen implements RustOpaqueInterface {}
-
-// Rust type: RustOpaqueNom<payjoin_ffi :: receive :: v1 :: MaybeMixedInputScripts>
-abstract class MaybeMixedInputScripts implements RustOpaqueInterface {}
-
-// Rust type: RustOpaqueNom<payjoin_ffi :: receive :: v1 :: OutputsUnknown>
-abstract class OutputsUnknown implements RustOpaqueInterface {}
-
-// Rust type: RustOpaqueNom<payjoin_ffi :: receive :: v1 :: PayjoinProposal>
-abstract class PayjoinProposal implements RustOpaqueInterface {}
-
-// Rust type: RustOpaqueNom<payjoin_ffi :: receive :: v1 :: ProvisionalProposal>
-abstract class ProvisionalProposal implements RustOpaqueInterface {}
-
-// Rust type: RustOpaqueNom<payjoin_ffi :: receive :: v1 :: UncheckedProposal>
-abstract class UncheckedProposal implements RustOpaqueInterface {}
-
 // Rust type: RustOpaqueNom<payjoin_ffi :: receive :: v2 :: ActiveSession>
 abstract class ActiveSession implements RustOpaqueInterface {}
 

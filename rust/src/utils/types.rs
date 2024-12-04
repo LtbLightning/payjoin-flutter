@@ -1,5 +1,3 @@
-use std::collections::HashMap;
-
 use flutter_rust_bridge::frb;
 pub use payjoin_ffi::types::Network;
 
@@ -35,27 +33,6 @@ use crate::frb_generated::RustOpaque;
 //         }
 //     }
 // }
-
-#[derive(Clone)]
-pub struct Headers {
-    pub map: HashMap<String, String>,
-}
-impl From<Headers> for payjoin_ffi::receive::v1::Headers {
-    fn from(value: Headers) -> Self {
-        payjoin_ffi::receive::v1::Headers(value.map)
-    }
-}
-
-impl From<payjoin_ffi::receive::v1::Headers> for Headers {
-    fn from(value: payjoin_ffi::receive::v1::Headers) -> Self {
-        Headers { map: value.0 }
-    }
-}
-impl Headers {
-    pub fn from_vec(body: Vec<u8>) -> Headers {
-        payjoin_ffi::receive::v1::Headers::from_vec(body).into()
-    }
-}
 
 /// A reference to a transaction output.
 #[derive(Clone, Debug, PartialEq, Eq, Hash)]

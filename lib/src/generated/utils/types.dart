@@ -26,22 +26,6 @@ class ClientResponse {
           field0 == other.field0;
 }
 
-class Headers {
-  final Map<String, String> map;
-
-  const Headers({
-    required this.map,
-  });
-
-  @override
-  int get hashCode => map.hashCode;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is Headers && runtimeType == other.runtimeType && map == other.map;
-}
-
 enum Network {
   ///Bitcoin’s testnet
   testnet,
