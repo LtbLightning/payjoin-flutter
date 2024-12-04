@@ -2,11 +2,11 @@ import 'dart:async';
 
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
-import '../common.dart';
-import '../src/exceptions.dart';
-import '../src/generated/api/receive.dart';
-import '../src/generated/utils/error.dart' as error;
-import '../uri.dart';
+import 'common.dart';
+import 'src/exceptions.dart';
+import 'src/generated/api/receive.dart';
+import 'src/generated/utils/error.dart' as error;
+import 'uri.dart';
 
 class SessionInitializer extends FfiSessionInitializer {
   SessionInitializer._({required super.field0});
