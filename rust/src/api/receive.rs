@@ -76,19 +76,19 @@ impl FfiActiveSession {
         &self,
         body: Vec<u8>,
         ctx: ClientResponse,
-    ) -> Result<Option<FfiV2UncheckedProposal>, PayjoinError> {
+    ) -> Result<Option<FfiUncheckedProposal>, PayjoinError> {
         self.0.process_res(body, ctx.into()).map(|e| e.map(|o| o.into())).map_err(|e| e.into())
     }
 }
 
 #[derive(Clone)]
-pub struct FfiV2UncheckedProposal(pub RustOpaque<payjoin_ffi::receive::v2::V2UncheckedProposal>);
-impl From<payjoin_ffi::receive::v2::V2UncheckedProposal> for FfiV2UncheckedProposal {
+pub struct FfiUncheckedProposal(pub RustOpaque<payjoin_ffi::receive::v2::V2UncheckedProposal>);
+impl From<payjoin_ffi::receive::v2::V2UncheckedProposal> for FfiUncheckedProposal {
     fn from(value: payjoin_ffi::receive::v2::V2UncheckedProposal) -> Self {
         Self(RustOpaque::new(value))
     }
 }
-impl FfiV2UncheckedProposal {
+impl FfiUncheckedProposal {
     ///The Sender’s Original PSBT
     pub fn extract_tx_to_schedule_broadcast(&self) -> Vec<u8> {
         self.0.extract_tx_to_schedule_broadcast()
@@ -104,7 +104,7 @@ impl FfiV2UncheckedProposal {
         &self,
         min_fee_rate: Option<u64>,
         can_broadcast: impl Fn(Vec<u8>) -> DartFnFuture<bool>,
-    ) -> Result<FfiV2MaybeInputsOwned, PayjoinError> {
+    ) -> Result<FfiMaybeInputsOwned, PayjoinError> {
         let runtime = tokio::runtime::Runtime::new().unwrap();
         self.0
             .check_broadcast_suitability(min_fee_rate, |x| {
@@ -118,25 +118,25 @@ impl FfiV2UncheckedProposal {
     ///
     /// So-called "non-interactive" receivers, like payment processors, that allow arbitrary requests are otherwise vulnerable to probing attacks.
     /// Those receivers call `extract_tx_to_check_broadcast()` and `attest_tested_and_scheduled_broadcast()` after making those checks downstream.
-    pub fn assume_interactive_receiver(&self) -> FfiV2MaybeInputsOwned {
+    pub fn assume_interactive_receiver(&self) -> FfiMaybeInputsOwned {
         (*self.0.clone().assume_interactive_receiver()).clone().into()
     }
 }
 #[derive(Clone)]
-pub struct FfiV2MaybeInputsOwned(pub RustOpaque<payjoin_ffi::receive::v2::V2MaybeInputsOwned>);
+pub struct FfiMaybeInputsOwned(pub RustOpaque<payjoin_ffi::receive::v2::V2MaybeInputsOwned>);
 
-impl From<payjoin_ffi::receive::v2::V2MaybeInputsOwned> for FfiV2MaybeInputsOwned {
+impl From<payjoin_ffi::receive::v2::V2MaybeInputsOwned> for FfiMaybeInputsOwned {
     fn from(value: payjoin_ffi::receive::v2::V2MaybeInputsOwned) -> Self {
         Self(RustOpaque::new(value))
     }
 }
-impl FfiV2MaybeInputsOwned {
+impl FfiMaybeInputsOwned {
     ///Check that the Original PSBT has no receiver-owned inputs. Return original-psbt-rejected error or otherwise refuse to sign undesirable inputs.
     /// An attacker could try to spend receiver's own inputs. This check prevents that.
     pub fn check_inputs_not_owned(
         &self,
         is_owned: impl Fn(Vec<u8>) -> DartFnFuture<bool>,
-    ) -> Result<FfiV2MaybeMixedInputScripts, PayjoinError> {
+    ) -> Result<FfiMaybeMixedInputScripts, PayjoinError> {
         let runtime = tokio::runtime::Runtime::new().unwrap();
         self.0
             .check_inputs_not_owned(|o| Ok(runtime.block_on(is_owned(o.clone()))))
@@ -145,22 +145,22 @@ impl FfiV2MaybeInputsOwned {
     }
 }
 
-pub struct FfiV2MaybeMixedInputScripts(
+pub struct FfiMaybeMixedInputScripts(
     pub RustOpaque<payjoin_ffi::receive::v2::V2MaybeMixedInputScripts>,
 );
 
-impl From<payjoin_ffi::receive::v2::V2MaybeMixedInputScripts> for FfiV2MaybeMixedInputScripts {
+impl From<payjoin_ffi::receive::v2::V2MaybeMixedInputScripts> for FfiMaybeMixedInputScripts {
     fn from(value: payjoin_ffi::receive::v2::V2MaybeMixedInputScripts) -> Self {
         Self(RustOpaque::new(value))
     }
 }
-impl FfiV2MaybeMixedInputScripts {
+impl FfiMaybeMixedInputScripts {
     /// Verify the original transaction did not have mixed input types
     /// Call this after checking downstream.
     ///
     /// Note: mixed spends do not necessarily indicate distinct wallet fingerprints.
     /// This check is intended to prevent some types of wallet fingerprinting.
-    pub fn check_no_mixed_input_scripts(&self) -> Result<FfiV2MaybeInputsSeen, PayjoinError> {
+    pub fn check_no_mixed_input_scripts(&self) -> Result<FfiMaybeInputsSeen, PayjoinError> {
         self.0
             .clone()
             .check_no_mixed_input_scripts()
@@ -168,21 +168,21 @@ impl FfiV2MaybeMixedInputScripts {
             .map_err(|e| e.into())
     }
 }
-pub struct FfiV2MaybeInputsSeen(pub RustOpaque<payjoin_ffi::receive::v2::V2MaybeInputsSeen>);
+pub struct FfiMaybeInputsSeen(pub RustOpaque<payjoin_ffi::receive::v2::V2MaybeInputsSeen>);
 
-impl From<payjoin_ffi::receive::v2::V2MaybeInputsSeen> for FfiV2MaybeInputsSeen {
+impl From<payjoin_ffi::receive::v2::V2MaybeInputsSeen> for FfiMaybeInputsSeen {
     fn from(value: payjoin_ffi::receive::v2::V2MaybeInputsSeen) -> Self {
         Self(RustOpaque::new(value))
     }
 }
-impl FfiV2MaybeInputsSeen {
+impl FfiMaybeInputsSeen {
     /// Make sure that the original transaction inputs have never been seen before.
     /// This prevents probing attacks. This prevents reentrant Payjoin, where a sender
     /// proposes a Payjoin PSBT as a new Original PSBT for a new Payjoin.
     pub fn check_no_inputs_seen_before(
         &self,
         is_known: impl Fn(OutPoint) -> DartFnFuture<bool>,
-    ) -> Result<FfiV2OutputsUnknown, PayjoinError> {
+    ) -> Result<FfiOutputsUnknown, PayjoinError> {
         let runtime = tokio::runtime::Runtime::new().unwrap();
         self.0
             .check_no_inputs_seen_before(|o| Ok(runtime.block_on(is_known(o.into()))))
@@ -191,19 +191,19 @@ impl FfiV2MaybeInputsSeen {
     }
 }
 
-pub struct FfiV2OutputsUnknown(pub RustOpaque<payjoin_ffi::receive::v2::V2OutputsUnknown>);
+pub struct FfiOutputsUnknown(pub RustOpaque<payjoin_ffi::receive::v2::V2OutputsUnknown>);
 
-impl From<payjoin_ffi::receive::v2::V2OutputsUnknown> for FfiV2OutputsUnknown {
+impl From<payjoin_ffi::receive::v2::V2OutputsUnknown> for FfiOutputsUnknown {
     fn from(value: payjoin_ffi::receive::v2::V2OutputsUnknown) -> Self {
         Self(RustOpaque::new(value))
     }
 }
-impl FfiV2OutputsUnknown {
+impl FfiOutputsUnknown {
     /// Find which outputs belong to the receiver
     pub fn identify_receiver_outputs(
         &self,
         is_receiver_output: impl Fn(Vec<u8>) -> DartFnFuture<bool>,
-    ) -> Result<FfiV2ProvisionalProposal, PayjoinError> {
+    ) -> Result<FfiProvisionalProposal, PayjoinError> {
         let runtime = tokio::runtime::Runtime::new().unwrap();
         self.0
             .identify_receiver_outputs(|o| Ok(runtime.block_on(is_receiver_output(o.clone()))))
@@ -211,15 +211,13 @@ impl FfiV2OutputsUnknown {
             .map_err(|e| e.into())
     }
 }
-pub struct FfiV2ProvisionalProposal(
-    pub RustOpaque<payjoin_ffi::receive::v2::V2ProvisionalProposal>,
-);
-impl From<payjoin_ffi::receive::v2::V2ProvisionalProposal> for FfiV2ProvisionalProposal {
+pub struct FfiProvisionalProposal(pub RustOpaque<payjoin_ffi::receive::v2::V2ProvisionalProposal>);
+impl From<payjoin_ffi::receive::v2::V2ProvisionalProposal> for FfiProvisionalProposal {
     fn from(value: payjoin_ffi::receive::v2::V2ProvisionalProposal) -> Self {
         Self(RustOpaque::new(value))
     }
 }
-impl FfiV2ProvisionalProposal {
+impl FfiProvisionalProposal {
     pub fn is_output_substitution_disabled(&self) -> bool {
         self.0.is_output_substitution_disabled()
     }
@@ -258,7 +256,7 @@ impl FfiV2ProvisionalProposal {
         &self,
         process_psbt: impl Fn(String) -> DartFnFuture<String>,
         min_fee_rate_sat_per_vb: Option<u64>,
-    ) -> Result<FfiV2PayjoinProposal, PayjoinError> {
+    ) -> Result<FfiPayjoinProposal, PayjoinError> {
         let runtime = tokio::runtime::Runtime::new().unwrap();
         self.0
             .finalize_proposal(
@@ -269,13 +267,13 @@ impl FfiV2ProvisionalProposal {
             .map_err(|e| e.into())
     }
 }
-pub struct FfiV2PayjoinProposal(pub RustOpaque<Arc<payjoin_ffi::receive::v2::V2PayjoinProposal>>);
-impl From<Arc<payjoin_ffi::receive::v2::V2PayjoinProposal>> for FfiV2PayjoinProposal {
+pub struct FfiPayjoinProposal(pub RustOpaque<Arc<payjoin_ffi::receive::v2::V2PayjoinProposal>>);
+impl From<Arc<payjoin_ffi::receive::v2::V2PayjoinProposal>> for FfiPayjoinProposal {
     fn from(value: Arc<payjoin_ffi::receive::v2::V2PayjoinProposal>) -> Self {
         Self(RustOpaque::new(value))
     }
 }
-impl FfiV2PayjoinProposal {
+impl FfiPayjoinProposal {
     pub fn utxos_to_be_locked(&self) -> Vec<OutPoint> {
         self.0.utxos_to_be_locked().iter().map(|x| x.into()).collect()
     }

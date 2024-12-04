@@ -105,7 +105,7 @@ class ActiveSession extends FfiActiveSession {
   }
 }
 
-class UncheckedProposal extends FfiV2UncheckedProposal {
+class UncheckedProposal extends FfiUncheckedProposal {
   UncheckedProposal._({required super.field0});
 
   ///The Sender’s Original PSBT
@@ -150,7 +150,7 @@ class UncheckedProposal extends FfiV2UncheckedProposal {
   }
 }
 
-class MaybeInputsOwned extends FfiV2MaybeInputsOwned {
+class MaybeInputsOwned extends FfiMaybeInputsOwned {
   MaybeInputsOwned._({required super.field0});
 
   ///Check that the Original PSBT has no receiver-owned inputs. Return original-psbt-rejected error or otherwise refuse to sign undesirable inputs.
@@ -167,7 +167,7 @@ class MaybeInputsOwned extends FfiV2MaybeInputsOwned {
   }
 }
 
-class MaybeMixedInputScripts extends FfiV2MaybeMixedInputScripts {
+class MaybeMixedInputScripts extends FfiMaybeMixedInputScripts {
   MaybeMixedInputScripts._({required super.field0});
 
   /// Make sure that the original transaction inputs have never been seen before.
@@ -184,7 +184,7 @@ class MaybeMixedInputScripts extends FfiV2MaybeMixedInputScripts {
   }
 }
 
-class MaybeInputsSeen extends FfiV2MaybeInputsSeen {
+class MaybeInputsSeen extends FfiMaybeInputsSeen {
   MaybeInputsSeen._({required super.field0});
 
   /// Make sure that the original transaction inputs have never been seen before.
@@ -202,7 +202,7 @@ class MaybeInputsSeen extends FfiV2MaybeInputsSeen {
   }
 }
 
-class OutputsUnknown extends FfiV2OutputsUnknown {
+class OutputsUnknown extends FfiOutputsUnknown {
   OutputsUnknown._({required super.field0});
 
   /// Find which outputs belong to the receiver
@@ -220,7 +220,7 @@ class OutputsUnknown extends FfiV2OutputsUnknown {
   }
 }
 
-class ProvisionalProposal extends FfiV2ProvisionalProposal {
+class ProvisionalProposal extends FfiProvisionalProposal {
   ProvisionalProposal._({required super.field0});
 
   @override
@@ -273,7 +273,7 @@ class ProvisionalProposal extends FfiV2ProvisionalProposal {
   }
 }
 
-class PayjoinProposal extends FfiV2PayjoinProposal {
+class PayjoinProposal extends FfiPayjoinProposal {
   PayjoinProposal._({required super.field0});
 
   @override

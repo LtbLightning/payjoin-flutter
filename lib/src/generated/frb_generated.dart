@@ -61,7 +61,7 @@ class core extends BaseEntrypoint<coreApi, coreApiImpl, coreWire> {
   String get codegenVersion => '2.0.0';
 
   @override
-  int get rustContentHash => 801594113;
+  int get rustContentHash => 632406551;
 
   static const kDefaultExternalLibraryLoaderConfig =
       ExternalLibraryLoaderConfig(
@@ -84,13 +84,79 @@ abstract class coreApi extends BaseApi {
   Future<FfiUrl> crateApiReceiveFfiActiveSessionPjUrl(
       {required FfiActiveSession that});
 
-  Future<FfiV2UncheckedProposal?> crateApiReceiveFfiActiveSessionProcessRes(
+  Future<FfiUncheckedProposal?> crateApiReceiveFfiActiveSessionProcessRes(
       {required FfiActiveSession that,
       required List<int> body,
       required ClientResponse ctx});
 
   String crateApiReceiveFfiActiveSessionPublicKey(
       {required FfiActiveSession that});
+
+  Future<FfiMaybeMixedInputScripts>
+      crateApiReceiveFfiMaybeInputsOwnedCheckInputsNotOwned(
+          {required FfiMaybeInputsOwned that,
+          required FutureOr<bool> Function(Uint8List) isOwned});
+
+  Future<FfiOutputsUnknown>
+      crateApiReceiveFfiMaybeInputsSeenCheckNoInputsSeenBefore(
+          {required FfiMaybeInputsSeen that,
+          required FutureOr<bool> Function(OutPoint) isKnown});
+
+  Future<FfiMaybeInputsSeen>
+      crateApiReceiveFfiMaybeMixedInputScriptsCheckNoMixedInputScripts(
+          {required FfiMaybeMixedInputScripts that});
+
+  Future<FfiProvisionalProposal>
+      crateApiReceiveFfiOutputsUnknownIdentifyReceiverOutputs(
+          {required FfiOutputsUnknown that,
+          required FutureOr<bool> Function(Uint8List) isReceiverOutput});
+
+  Future<String> crateApiReceiveFfiPayjoinProposalExtractV1Req(
+      {required FfiPayjoinProposal that});
+
+  Future<(Request, ClientResponse)>
+      crateApiReceiveFfiPayjoinProposalExtractV2Req(
+          {required FfiPayjoinProposal that});
+
+  Future<bool> crateApiReceiveFfiPayjoinProposalIsOutputSubstitutionDisabled(
+      {required FfiPayjoinProposal that});
+
+  Future<Uint64List> crateApiReceiveFfiPayjoinProposalOwnedVouts(
+      {required FfiPayjoinProposal that});
+
+  Future<void> crateApiReceiveFfiPayjoinProposalProcessRes(
+      {required FfiPayjoinProposal that,
+      required List<int> res,
+      required ClientResponse ohttpContext});
+
+  Future<String> crateApiReceiveFfiPayjoinProposalPsbt(
+      {required FfiPayjoinProposal that});
+
+  Future<List<OutPoint>> crateApiReceiveFfiPayjoinProposalUtxosToBeLocked(
+      {required FfiPayjoinProposal that});
+
+  Future<void> crateApiReceiveFfiProvisionalProposalContributeWitnessInput(
+      {required FfiProvisionalProposal that,
+      required TxOut txo,
+      required OutPoint outpoint});
+
+  Future<FfiPayjoinProposal>
+      crateApiReceiveFfiProvisionalProposalFinalizeProposal(
+          {required FfiProvisionalProposal that,
+          required FutureOr<String> Function(String) processPsbt,
+          BigInt? minFeeRateSatPerVb});
+
+  Future<bool>
+      crateApiReceiveFfiProvisionalProposalIsOutputSubstitutionDisabled(
+          {required FfiProvisionalProposal that});
+
+  Future<OutPoint> crateApiReceiveFfiProvisionalProposalTryPreservingPrivacy(
+      {required FfiProvisionalProposal that,
+      required Map<BigInt, OutPoint> candidateInputs});
+
+  Future<void> crateApiReceiveFfiProvisionalProposalTrySubstituteReceiverOutput(
+      {required FfiProvisionalProposal that,
+      required FutureOr<Uint8List> Function() generateScript});
 
   Future<(Request, ClientResponse)>
       crateApiReceiveFfiSessionInitializerExtractReq(
@@ -109,86 +175,19 @@ abstract class coreApi extends BaseApi {
       required List<int> body,
       required ClientResponse ctx});
 
-  Future<FfiV2MaybeMixedInputScripts>
-      crateApiReceiveFfiV2MaybeInputsOwnedCheckInputsNotOwned(
-          {required FfiV2MaybeInputsOwned that,
-          required FutureOr<bool> Function(Uint8List) isOwned});
+  Future<FfiMaybeInputsOwned>
+      crateApiReceiveFfiUncheckedProposalAssumeInteractiveReceiver(
+          {required FfiUncheckedProposal that});
 
-  Future<FfiV2OutputsUnknown>
-      crateApiReceiveFfiV2MaybeInputsSeenCheckNoInputsSeenBefore(
-          {required FfiV2MaybeInputsSeen that,
-          required FutureOr<bool> Function(OutPoint) isKnown});
-
-  Future<FfiV2MaybeInputsSeen>
-      crateApiReceiveFfiV2MaybeMixedInputScriptsCheckNoMixedInputScripts(
-          {required FfiV2MaybeMixedInputScripts that});
-
-  Future<FfiV2ProvisionalProposal>
-      crateApiReceiveFfiV2OutputsUnknownIdentifyReceiverOutputs(
-          {required FfiV2OutputsUnknown that,
-          required FutureOr<bool> Function(Uint8List) isReceiverOutput});
-
-  Future<String> crateApiReceiveFfiV2PayjoinProposalExtractV1Req(
-      {required FfiV2PayjoinProposal that});
-
-  Future<(Request, ClientResponse)>
-      crateApiReceiveFfiV2PayjoinProposalExtractV2Req(
-          {required FfiV2PayjoinProposal that});
-
-  Future<bool> crateApiReceiveFfiV2PayjoinProposalIsOutputSubstitutionDisabled(
-      {required FfiV2PayjoinProposal that});
-
-  Future<Uint64List> crateApiReceiveFfiV2PayjoinProposalOwnedVouts(
-      {required FfiV2PayjoinProposal that});
-
-  Future<void> crateApiReceiveFfiV2PayjoinProposalProcessRes(
-      {required FfiV2PayjoinProposal that,
-      required List<int> res,
-      required ClientResponse ohttpContext});
-
-  Future<String> crateApiReceiveFfiV2PayjoinProposalPsbt(
-      {required FfiV2PayjoinProposal that});
-
-  Future<List<OutPoint>> crateApiReceiveFfiV2PayjoinProposalUtxosToBeLocked(
-      {required FfiV2PayjoinProposal that});
-
-  Future<void> crateApiReceiveFfiV2ProvisionalProposalContributeWitnessInput(
-      {required FfiV2ProvisionalProposal that,
-      required TxOut txo,
-      required OutPoint outpoint});
-
-  Future<FfiV2PayjoinProposal>
-      crateApiReceiveFfiV2ProvisionalProposalFinalizeProposal(
-          {required FfiV2ProvisionalProposal that,
-          required FutureOr<String> Function(String) processPsbt,
-          BigInt? minFeeRateSatPerVb});
-
-  Future<bool>
-      crateApiReceiveFfiV2ProvisionalProposalIsOutputSubstitutionDisabled(
-          {required FfiV2ProvisionalProposal that});
-
-  Future<OutPoint> crateApiReceiveFfiV2ProvisionalProposalTryPreservingPrivacy(
-      {required FfiV2ProvisionalProposal that,
-      required Map<BigInt, OutPoint> candidateInputs});
-
-  Future<void>
-      crateApiReceiveFfiV2ProvisionalProposalTrySubstituteReceiverOutput(
-          {required FfiV2ProvisionalProposal that,
-          required FutureOr<Uint8List> Function() generateScript});
-
-  Future<FfiV2MaybeInputsOwned>
-      crateApiReceiveFfiV2UncheckedProposalAssumeInteractiveReceiver(
-          {required FfiV2UncheckedProposal that});
-
-  Future<FfiV2MaybeInputsOwned>
-      crateApiReceiveFfiV2UncheckedProposalCheckBroadcastSuitability(
-          {required FfiV2UncheckedProposal that,
+  Future<FfiMaybeInputsOwned>
+      crateApiReceiveFfiUncheckedProposalCheckBroadcastSuitability(
+          {required FfiUncheckedProposal that,
           BigInt? minFeeRate,
           required FutureOr<bool> Function(Uint8List) canBroadcast});
 
   Future<Uint8List>
-      crateApiReceiveFfiV2UncheckedProposalExtractTxToScheduleBroadcast(
-          {required FfiV2UncheckedProposal that});
+      crateApiReceiveFfiUncheckedProposalExtractTxToScheduleBroadcast(
+          {required FfiUncheckedProposal that});
 
   Future<String> crateApiSendFfiContextV1ProcessResponse(
       {required FfiContextV1 that, required List<int> response});
@@ -534,7 +533,7 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       );
 
   @override
-  Future<FfiV2UncheckedProposal?> crateApiReceiveFfiActiveSessionProcessRes(
+  Future<FfiUncheckedProposal?> crateApiReceiveFfiActiveSessionProcessRes(
       {required FfiActiveSession that,
       required List<int> body,
       required ClientResponse ctx}) {
@@ -547,8 +546,7 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
             port_, arg0, arg1, arg2);
       },
       codec: DcoCodec(
-        decodeSuccessData:
-            dco_decode_opt_box_autoadd_ffi_v_2_unchecked_proposal,
+        decodeSuccessData: dco_decode_opt_box_autoadd_ffi_unchecked_proposal,
         decodeErrorData: dco_decode_payjoin_error,
       ),
       constMeta: kCrateApiReceiveFfiActiveSessionProcessResConstMeta,
@@ -587,6 +585,482 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
         debugName: "ffi_active_session_public_key",
         argNames: ["that"],
       );
+
+  @override
+  Future<FfiMaybeMixedInputScripts>
+      crateApiReceiveFfiMaybeInputsOwnedCheckInputsNotOwned(
+          {required FfiMaybeInputsOwned that,
+          required FutureOr<bool> Function(Uint8List) isOwned}) {
+    return handler.executeNormal(NormalTask(
+      callFfi: (port_) {
+        var arg0 = cst_encode_box_autoadd_ffi_maybe_inputs_owned(that);
+        var arg1 =
+            cst_encode_DartFn_Inputs_list_prim_u_8_strict_Output_bool_AnyhowException(
+                isOwned);
+        return wire
+            .wire__crate__api__receive__ffi_maybe_inputs_owned_check_inputs_not_owned(
+                port_, arg0, arg1);
+      },
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_ffi_maybe_mixed_input_scripts,
+        decodeErrorData: dco_decode_payjoin_error,
+      ),
+      constMeta:
+          kCrateApiReceiveFfiMaybeInputsOwnedCheckInputsNotOwnedConstMeta,
+      argValues: [that, isOwned],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta
+      get kCrateApiReceiveFfiMaybeInputsOwnedCheckInputsNotOwnedConstMeta =>
+          const TaskConstMeta(
+            debugName: "ffi_maybe_inputs_owned_check_inputs_not_owned",
+            argNames: ["that", "isOwned"],
+          );
+
+  @override
+  Future<FfiOutputsUnknown>
+      crateApiReceiveFfiMaybeInputsSeenCheckNoInputsSeenBefore(
+          {required FfiMaybeInputsSeen that,
+          required FutureOr<bool> Function(OutPoint) isKnown}) {
+    return handler.executeNormal(NormalTask(
+      callFfi: (port_) {
+        var arg0 = cst_encode_box_autoadd_ffi_maybe_inputs_seen(that);
+        var arg1 =
+            cst_encode_DartFn_Inputs_out_point_Output_bool_AnyhowException(
+                isKnown);
+        return wire
+            .wire__crate__api__receive__ffi_maybe_inputs_seen_check_no_inputs_seen_before(
+                port_, arg0, arg1);
+      },
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_ffi_outputs_unknown,
+        decodeErrorData: dco_decode_payjoin_error,
+      ),
+      constMeta:
+          kCrateApiReceiveFfiMaybeInputsSeenCheckNoInputsSeenBeforeConstMeta,
+      argValues: [that, isKnown],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta
+      get kCrateApiReceiveFfiMaybeInputsSeenCheckNoInputsSeenBeforeConstMeta =>
+          const TaskConstMeta(
+            debugName: "ffi_maybe_inputs_seen_check_no_inputs_seen_before",
+            argNames: ["that", "isKnown"],
+          );
+
+  @override
+  Future<FfiMaybeInputsSeen>
+      crateApiReceiveFfiMaybeMixedInputScriptsCheckNoMixedInputScripts(
+          {required FfiMaybeMixedInputScripts that}) {
+    return handler.executeNormal(NormalTask(
+      callFfi: (port_) {
+        var arg0 = cst_encode_box_autoadd_ffi_maybe_mixed_input_scripts(that);
+        return wire
+            .wire__crate__api__receive__ffi_maybe_mixed_input_scripts_check_no_mixed_input_scripts(
+                port_, arg0);
+      },
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_ffi_maybe_inputs_seen,
+        decodeErrorData: dco_decode_payjoin_error,
+      ),
+      constMeta:
+          kCrateApiReceiveFfiMaybeMixedInputScriptsCheckNoMixedInputScriptsConstMeta,
+      argValues: [that],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta
+      get kCrateApiReceiveFfiMaybeMixedInputScriptsCheckNoMixedInputScriptsConstMeta =>
+          const TaskConstMeta(
+            debugName:
+                "ffi_maybe_mixed_input_scripts_check_no_mixed_input_scripts",
+            argNames: ["that"],
+          );
+
+  @override
+  Future<FfiProvisionalProposal>
+      crateApiReceiveFfiOutputsUnknownIdentifyReceiverOutputs(
+          {required FfiOutputsUnknown that,
+          required FutureOr<bool> Function(Uint8List) isReceiverOutput}) {
+    return handler.executeNormal(NormalTask(
+      callFfi: (port_) {
+        var arg0 = cst_encode_box_autoadd_ffi_outputs_unknown(that);
+        var arg1 =
+            cst_encode_DartFn_Inputs_list_prim_u_8_strict_Output_bool_AnyhowException(
+                isReceiverOutput);
+        return wire
+            .wire__crate__api__receive__ffi_outputs_unknown_identify_receiver_outputs(
+                port_, arg0, arg1);
+      },
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_ffi_provisional_proposal,
+        decodeErrorData: dco_decode_payjoin_error,
+      ),
+      constMeta:
+          kCrateApiReceiveFfiOutputsUnknownIdentifyReceiverOutputsConstMeta,
+      argValues: [that, isReceiverOutput],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta
+      get kCrateApiReceiveFfiOutputsUnknownIdentifyReceiverOutputsConstMeta =>
+          const TaskConstMeta(
+            debugName: "ffi_outputs_unknown_identify_receiver_outputs",
+            argNames: ["that", "isReceiverOutput"],
+          );
+
+  @override
+  Future<String> crateApiReceiveFfiPayjoinProposalExtractV1Req(
+      {required FfiPayjoinProposal that}) {
+    return handler.executeNormal(NormalTask(
+      callFfi: (port_) {
+        var arg0 = cst_encode_box_autoadd_ffi_payjoin_proposal(that);
+        return wire
+            .wire__crate__api__receive__ffi_payjoin_proposal_extract_v1_req(
+                port_, arg0);
+      },
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_String,
+        decodeErrorData: null,
+      ),
+      constMeta: kCrateApiReceiveFfiPayjoinProposalExtractV1ReqConstMeta,
+      argValues: [that],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta get kCrateApiReceiveFfiPayjoinProposalExtractV1ReqConstMeta =>
+      const TaskConstMeta(
+        debugName: "ffi_payjoin_proposal_extract_v1_req",
+        argNames: ["that"],
+      );
+
+  @override
+  Future<(Request, ClientResponse)>
+      crateApiReceiveFfiPayjoinProposalExtractV2Req(
+          {required FfiPayjoinProposal that}) {
+    return handler.executeNormal(NormalTask(
+      callFfi: (port_) {
+        var arg0 = cst_encode_box_autoadd_ffi_payjoin_proposal(that);
+        return wire
+            .wire__crate__api__receive__ffi_payjoin_proposal_extract_v2_req(
+                port_, arg0);
+      },
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_record_request_client_response,
+        decodeErrorData: dco_decode_payjoin_error,
+      ),
+      constMeta: kCrateApiReceiveFfiPayjoinProposalExtractV2ReqConstMeta,
+      argValues: [that],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta get kCrateApiReceiveFfiPayjoinProposalExtractV2ReqConstMeta =>
+      const TaskConstMeta(
+        debugName: "ffi_payjoin_proposal_extract_v2_req",
+        argNames: ["that"],
+      );
+
+  @override
+  Future<bool> crateApiReceiveFfiPayjoinProposalIsOutputSubstitutionDisabled(
+      {required FfiPayjoinProposal that}) {
+    return handler.executeNormal(NormalTask(
+      callFfi: (port_) {
+        var arg0 = cst_encode_box_autoadd_ffi_payjoin_proposal(that);
+        return wire
+            .wire__crate__api__receive__ffi_payjoin_proposal_is_output_substitution_disabled(
+                port_, arg0);
+      },
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_bool,
+        decodeErrorData: null,
+      ),
+      constMeta:
+          kCrateApiReceiveFfiPayjoinProposalIsOutputSubstitutionDisabledConstMeta,
+      argValues: [that],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta
+      get kCrateApiReceiveFfiPayjoinProposalIsOutputSubstitutionDisabledConstMeta =>
+          const TaskConstMeta(
+            debugName: "ffi_payjoin_proposal_is_output_substitution_disabled",
+            argNames: ["that"],
+          );
+
+  @override
+  Future<Uint64List> crateApiReceiveFfiPayjoinProposalOwnedVouts(
+      {required FfiPayjoinProposal that}) {
+    return handler.executeNormal(NormalTask(
+      callFfi: (port_) {
+        var arg0 = cst_encode_box_autoadd_ffi_payjoin_proposal(that);
+        return wire.wire__crate__api__receive__ffi_payjoin_proposal_owned_vouts(
+            port_, arg0);
+      },
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_list_prim_u_64_strict,
+        decodeErrorData: null,
+      ),
+      constMeta: kCrateApiReceiveFfiPayjoinProposalOwnedVoutsConstMeta,
+      argValues: [that],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta get kCrateApiReceiveFfiPayjoinProposalOwnedVoutsConstMeta =>
+      const TaskConstMeta(
+        debugName: "ffi_payjoin_proposal_owned_vouts",
+        argNames: ["that"],
+      );
+
+  @override
+  Future<void> crateApiReceiveFfiPayjoinProposalProcessRes(
+      {required FfiPayjoinProposal that,
+      required List<int> res,
+      required ClientResponse ohttpContext}) {
+    return handler.executeNormal(NormalTask(
+      callFfi: (port_) {
+        var arg0 = cst_encode_box_autoadd_ffi_payjoin_proposal(that);
+        var arg1 = cst_encode_list_prim_u_8_loose(res);
+        var arg2 = cst_encode_box_autoadd_client_response(ohttpContext);
+        return wire.wire__crate__api__receive__ffi_payjoin_proposal_process_res(
+            port_, arg0, arg1, arg2);
+      },
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_unit,
+        decodeErrorData: dco_decode_payjoin_error,
+      ),
+      constMeta: kCrateApiReceiveFfiPayjoinProposalProcessResConstMeta,
+      argValues: [that, res, ohttpContext],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta get kCrateApiReceiveFfiPayjoinProposalProcessResConstMeta =>
+      const TaskConstMeta(
+        debugName: "ffi_payjoin_proposal_process_res",
+        argNames: ["that", "res", "ohttpContext"],
+      );
+
+  @override
+  Future<String> crateApiReceiveFfiPayjoinProposalPsbt(
+      {required FfiPayjoinProposal that}) {
+    return handler.executeNormal(NormalTask(
+      callFfi: (port_) {
+        var arg0 = cst_encode_box_autoadd_ffi_payjoin_proposal(that);
+        return wire.wire__crate__api__receive__ffi_payjoin_proposal_psbt(
+            port_, arg0);
+      },
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_String,
+        decodeErrorData: null,
+      ),
+      constMeta: kCrateApiReceiveFfiPayjoinProposalPsbtConstMeta,
+      argValues: [that],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta get kCrateApiReceiveFfiPayjoinProposalPsbtConstMeta =>
+      const TaskConstMeta(
+        debugName: "ffi_payjoin_proposal_psbt",
+        argNames: ["that"],
+      );
+
+  @override
+  Future<List<OutPoint>> crateApiReceiveFfiPayjoinProposalUtxosToBeLocked(
+      {required FfiPayjoinProposal that}) {
+    return handler.executeNormal(NormalTask(
+      callFfi: (port_) {
+        var arg0 = cst_encode_box_autoadd_ffi_payjoin_proposal(that);
+        return wire
+            .wire__crate__api__receive__ffi_payjoin_proposal_utxos_to_be_locked(
+                port_, arg0);
+      },
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_list_out_point,
+        decodeErrorData: null,
+      ),
+      constMeta: kCrateApiReceiveFfiPayjoinProposalUtxosToBeLockedConstMeta,
+      argValues: [that],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta
+      get kCrateApiReceiveFfiPayjoinProposalUtxosToBeLockedConstMeta =>
+          const TaskConstMeta(
+            debugName: "ffi_payjoin_proposal_utxos_to_be_locked",
+            argNames: ["that"],
+          );
+
+  @override
+  Future<void> crateApiReceiveFfiProvisionalProposalContributeWitnessInput(
+      {required FfiProvisionalProposal that,
+      required TxOut txo,
+      required OutPoint outpoint}) {
+    return handler.executeNormal(NormalTask(
+      callFfi: (port_) {
+        var arg0 = cst_encode_box_autoadd_ffi_provisional_proposal(that);
+        var arg1 = cst_encode_box_autoadd_tx_out(txo);
+        var arg2 = cst_encode_box_autoadd_out_point(outpoint);
+        return wire
+            .wire__crate__api__receive__ffi_provisional_proposal_contribute_witness_input(
+                port_, arg0, arg1, arg2);
+      },
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_unit,
+        decodeErrorData: dco_decode_payjoin_error,
+      ),
+      constMeta:
+          kCrateApiReceiveFfiProvisionalProposalContributeWitnessInputConstMeta,
+      argValues: [that, txo, outpoint],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta
+      get kCrateApiReceiveFfiProvisionalProposalContributeWitnessInputConstMeta =>
+          const TaskConstMeta(
+            debugName: "ffi_provisional_proposal_contribute_witness_input",
+            argNames: ["that", "txo", "outpoint"],
+          );
+
+  @override
+  Future<FfiPayjoinProposal>
+      crateApiReceiveFfiProvisionalProposalFinalizeProposal(
+          {required FfiProvisionalProposal that,
+          required FutureOr<String> Function(String) processPsbt,
+          BigInt? minFeeRateSatPerVb}) {
+    return handler.executeNormal(NormalTask(
+      callFfi: (port_) {
+        var arg0 = cst_encode_box_autoadd_ffi_provisional_proposal(that);
+        var arg1 =
+            cst_encode_DartFn_Inputs_String_Output_String_AnyhowException(
+                processPsbt);
+        var arg2 = cst_encode_opt_box_autoadd_u_64(minFeeRateSatPerVb);
+        return wire
+            .wire__crate__api__receive__ffi_provisional_proposal_finalize_proposal(
+                port_, arg0, arg1, arg2);
+      },
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_ffi_payjoin_proposal,
+        decodeErrorData: dco_decode_payjoin_error,
+      ),
+      constMeta:
+          kCrateApiReceiveFfiProvisionalProposalFinalizeProposalConstMeta,
+      argValues: [that, processPsbt, minFeeRateSatPerVb],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta
+      get kCrateApiReceiveFfiProvisionalProposalFinalizeProposalConstMeta =>
+          const TaskConstMeta(
+            debugName: "ffi_provisional_proposal_finalize_proposal",
+            argNames: ["that", "processPsbt", "minFeeRateSatPerVb"],
+          );
+
+  @override
+  Future<bool>
+      crateApiReceiveFfiProvisionalProposalIsOutputSubstitutionDisabled(
+          {required FfiProvisionalProposal that}) {
+    return handler.executeNormal(NormalTask(
+      callFfi: (port_) {
+        var arg0 = cst_encode_box_autoadd_ffi_provisional_proposal(that);
+        return wire
+            .wire__crate__api__receive__ffi_provisional_proposal_is_output_substitution_disabled(
+                port_, arg0);
+      },
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_bool,
+        decodeErrorData: null,
+      ),
+      constMeta:
+          kCrateApiReceiveFfiProvisionalProposalIsOutputSubstitutionDisabledConstMeta,
+      argValues: [that],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta
+      get kCrateApiReceiveFfiProvisionalProposalIsOutputSubstitutionDisabledConstMeta =>
+          const TaskConstMeta(
+            debugName:
+                "ffi_provisional_proposal_is_output_substitution_disabled",
+            argNames: ["that"],
+          );
+
+  @override
+  Future<OutPoint> crateApiReceiveFfiProvisionalProposalTryPreservingPrivacy(
+      {required FfiProvisionalProposal that,
+      required Map<BigInt, OutPoint> candidateInputs}) {
+    return handler.executeNormal(NormalTask(
+      callFfi: (port_) {
+        var arg0 = cst_encode_box_autoadd_ffi_provisional_proposal(that);
+        var arg1 = cst_encode_Map_u_64_out_point(candidateInputs);
+        return wire
+            .wire__crate__api__receive__ffi_provisional_proposal_try_preserving_privacy(
+                port_, arg0, arg1);
+      },
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_out_point,
+        decodeErrorData: dco_decode_payjoin_error,
+      ),
+      constMeta:
+          kCrateApiReceiveFfiProvisionalProposalTryPreservingPrivacyConstMeta,
+      argValues: [that, candidateInputs],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta
+      get kCrateApiReceiveFfiProvisionalProposalTryPreservingPrivacyConstMeta =>
+          const TaskConstMeta(
+            debugName: "ffi_provisional_proposal_try_preserving_privacy",
+            argNames: ["that", "candidateInputs"],
+          );
+
+  @override
+  Future<void> crateApiReceiveFfiProvisionalProposalTrySubstituteReceiverOutput(
+      {required FfiProvisionalProposal that,
+      required FutureOr<Uint8List> Function() generateScript}) {
+    return handler.executeNormal(NormalTask(
+      callFfi: (port_) {
+        var arg0 = cst_encode_box_autoadd_ffi_provisional_proposal(that);
+        var arg1 =
+            cst_encode_DartFn_Inputs__Output_list_prim_u_8_strict_AnyhowException(
+                generateScript);
+        return wire
+            .wire__crate__api__receive__ffi_provisional_proposal_try_substitute_receiver_output(
+                port_, arg0, arg1);
+      },
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_unit,
+        decodeErrorData: dco_decode_payjoin_error,
+      ),
+      constMeta:
+          kCrateApiReceiveFfiProvisionalProposalTrySubstituteReceiverOutputConstMeta,
+      argValues: [that, generateScript],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta
+      get kCrateApiReceiveFfiProvisionalProposalTrySubstituteReceiverOutputConstMeta =>
+          const TaskConstMeta(
+            debugName:
+                "ffi_provisional_proposal_try_substitute_receiver_output",
+            argNames: ["that", "generateScript"],
+          );
 
   @override
   Future<(Request, ClientResponse)>
@@ -695,559 +1169,78 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       );
 
   @override
-  Future<FfiV2MaybeMixedInputScripts>
-      crateApiReceiveFfiV2MaybeInputsOwnedCheckInputsNotOwned(
-          {required FfiV2MaybeInputsOwned that,
-          required FutureOr<bool> Function(Uint8List) isOwned}) {
+  Future<FfiMaybeInputsOwned>
+      crateApiReceiveFfiUncheckedProposalAssumeInteractiveReceiver(
+          {required FfiUncheckedProposal that}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        var arg0 = cst_encode_box_autoadd_ffi_v_2_maybe_inputs_owned(that);
-        var arg1 =
-            cst_encode_DartFn_Inputs_list_prim_u_8_strict_Output_bool_AnyhowException(
-                isOwned);
+        var arg0 = cst_encode_box_autoadd_ffi_unchecked_proposal(that);
         return wire
-            .wire__crate__api__receive__ffi_v_2_maybe_inputs_owned_check_inputs_not_owned(
-                port_, arg0, arg1);
-      },
-      codec: DcoCodec(
-        decodeSuccessData: dco_decode_ffi_v_2_maybe_mixed_input_scripts,
-        decodeErrorData: dco_decode_payjoin_error,
-      ),
-      constMeta:
-          kCrateApiReceiveFfiV2MaybeInputsOwnedCheckInputsNotOwnedConstMeta,
-      argValues: [that, isOwned],
-      apiImpl: this,
-    ));
-  }
-
-  TaskConstMeta
-      get kCrateApiReceiveFfiV2MaybeInputsOwnedCheckInputsNotOwnedConstMeta =>
-          const TaskConstMeta(
-            debugName: "ffi_v_2_maybe_inputs_owned_check_inputs_not_owned",
-            argNames: ["that", "isOwned"],
-          );
-
-  @override
-  Future<FfiV2OutputsUnknown>
-      crateApiReceiveFfiV2MaybeInputsSeenCheckNoInputsSeenBefore(
-          {required FfiV2MaybeInputsSeen that,
-          required FutureOr<bool> Function(OutPoint) isKnown}) {
-    return handler.executeNormal(NormalTask(
-      callFfi: (port_) {
-        var arg0 = cst_encode_box_autoadd_ffi_v_2_maybe_inputs_seen(that);
-        var arg1 =
-            cst_encode_DartFn_Inputs_out_point_Output_bool_AnyhowException(
-                isKnown);
-        return wire
-            .wire__crate__api__receive__ffi_v_2_maybe_inputs_seen_check_no_inputs_seen_before(
-                port_, arg0, arg1);
-      },
-      codec: DcoCodec(
-        decodeSuccessData: dco_decode_ffi_v_2_outputs_unknown,
-        decodeErrorData: dco_decode_payjoin_error,
-      ),
-      constMeta:
-          kCrateApiReceiveFfiV2MaybeInputsSeenCheckNoInputsSeenBeforeConstMeta,
-      argValues: [that, isKnown],
-      apiImpl: this,
-    ));
-  }
-
-  TaskConstMeta
-      get kCrateApiReceiveFfiV2MaybeInputsSeenCheckNoInputsSeenBeforeConstMeta =>
-          const TaskConstMeta(
-            debugName: "ffi_v_2_maybe_inputs_seen_check_no_inputs_seen_before",
-            argNames: ["that", "isKnown"],
-          );
-
-  @override
-  Future<FfiV2MaybeInputsSeen>
-      crateApiReceiveFfiV2MaybeMixedInputScriptsCheckNoMixedInputScripts(
-          {required FfiV2MaybeMixedInputScripts that}) {
-    return handler.executeNormal(NormalTask(
-      callFfi: (port_) {
-        var arg0 =
-            cst_encode_box_autoadd_ffi_v_2_maybe_mixed_input_scripts(that);
-        return wire
-            .wire__crate__api__receive__ffi_v_2_maybe_mixed_input_scripts_check_no_mixed_input_scripts(
+            .wire__crate__api__receive__ffi_unchecked_proposal_assume_interactive_receiver(
                 port_, arg0);
       },
       codec: DcoCodec(
-        decodeSuccessData: dco_decode_ffi_v_2_maybe_inputs_seen,
-        decodeErrorData: dco_decode_payjoin_error,
+        decodeSuccessData: dco_decode_ffi_maybe_inputs_owned,
+        decodeErrorData: null,
       ),
       constMeta:
-          kCrateApiReceiveFfiV2MaybeMixedInputScriptsCheckNoMixedInputScriptsConstMeta,
+          kCrateApiReceiveFfiUncheckedProposalAssumeInteractiveReceiverConstMeta,
       argValues: [that],
       apiImpl: this,
     ));
   }
 
   TaskConstMeta
-      get kCrateApiReceiveFfiV2MaybeMixedInputScriptsCheckNoMixedInputScriptsConstMeta =>
+      get kCrateApiReceiveFfiUncheckedProposalAssumeInteractiveReceiverConstMeta =>
           const TaskConstMeta(
-            debugName:
-                "ffi_v_2_maybe_mixed_input_scripts_check_no_mixed_input_scripts",
+            debugName: "ffi_unchecked_proposal_assume_interactive_receiver",
             argNames: ["that"],
           );
 
   @override
-  Future<FfiV2ProvisionalProposal>
-      crateApiReceiveFfiV2OutputsUnknownIdentifyReceiverOutputs(
-          {required FfiV2OutputsUnknown that,
-          required FutureOr<bool> Function(Uint8List) isReceiverOutput}) {
-    return handler.executeNormal(NormalTask(
-      callFfi: (port_) {
-        var arg0 = cst_encode_box_autoadd_ffi_v_2_outputs_unknown(that);
-        var arg1 =
-            cst_encode_DartFn_Inputs_list_prim_u_8_strict_Output_bool_AnyhowException(
-                isReceiverOutput);
-        return wire
-            .wire__crate__api__receive__ffi_v_2_outputs_unknown_identify_receiver_outputs(
-                port_, arg0, arg1);
-      },
-      codec: DcoCodec(
-        decodeSuccessData: dco_decode_ffi_v_2_provisional_proposal,
-        decodeErrorData: dco_decode_payjoin_error,
-      ),
-      constMeta:
-          kCrateApiReceiveFfiV2OutputsUnknownIdentifyReceiverOutputsConstMeta,
-      argValues: [that, isReceiverOutput],
-      apiImpl: this,
-    ));
-  }
-
-  TaskConstMeta
-      get kCrateApiReceiveFfiV2OutputsUnknownIdentifyReceiverOutputsConstMeta =>
-          const TaskConstMeta(
-            debugName: "ffi_v_2_outputs_unknown_identify_receiver_outputs",
-            argNames: ["that", "isReceiverOutput"],
-          );
-
-  @override
-  Future<String> crateApiReceiveFfiV2PayjoinProposalExtractV1Req(
-      {required FfiV2PayjoinProposal that}) {
-    return handler.executeNormal(NormalTask(
-      callFfi: (port_) {
-        var arg0 = cst_encode_box_autoadd_ffi_v_2_payjoin_proposal(that);
-        return wire
-            .wire__crate__api__receive__ffi_v_2_payjoin_proposal_extract_v1_req(
-                port_, arg0);
-      },
-      codec: DcoCodec(
-        decodeSuccessData: dco_decode_String,
-        decodeErrorData: null,
-      ),
-      constMeta: kCrateApiReceiveFfiV2PayjoinProposalExtractV1ReqConstMeta,
-      argValues: [that],
-      apiImpl: this,
-    ));
-  }
-
-  TaskConstMeta get kCrateApiReceiveFfiV2PayjoinProposalExtractV1ReqConstMeta =>
-      const TaskConstMeta(
-        debugName: "ffi_v_2_payjoin_proposal_extract_v1_req",
-        argNames: ["that"],
-      );
-
-  @override
-  Future<(Request, ClientResponse)>
-      crateApiReceiveFfiV2PayjoinProposalExtractV2Req(
-          {required FfiV2PayjoinProposal that}) {
-    return handler.executeNormal(NormalTask(
-      callFfi: (port_) {
-        var arg0 = cst_encode_box_autoadd_ffi_v_2_payjoin_proposal(that);
-        return wire
-            .wire__crate__api__receive__ffi_v_2_payjoin_proposal_extract_v2_req(
-                port_, arg0);
-      },
-      codec: DcoCodec(
-        decodeSuccessData: dco_decode_record_request_client_response,
-        decodeErrorData: dco_decode_payjoin_error,
-      ),
-      constMeta: kCrateApiReceiveFfiV2PayjoinProposalExtractV2ReqConstMeta,
-      argValues: [that],
-      apiImpl: this,
-    ));
-  }
-
-  TaskConstMeta get kCrateApiReceiveFfiV2PayjoinProposalExtractV2ReqConstMeta =>
-      const TaskConstMeta(
-        debugName: "ffi_v_2_payjoin_proposal_extract_v2_req",
-        argNames: ["that"],
-      );
-
-  @override
-  Future<bool> crateApiReceiveFfiV2PayjoinProposalIsOutputSubstitutionDisabled(
-      {required FfiV2PayjoinProposal that}) {
-    return handler.executeNormal(NormalTask(
-      callFfi: (port_) {
-        var arg0 = cst_encode_box_autoadd_ffi_v_2_payjoin_proposal(that);
-        return wire
-            .wire__crate__api__receive__ffi_v_2_payjoin_proposal_is_output_substitution_disabled(
-                port_, arg0);
-      },
-      codec: DcoCodec(
-        decodeSuccessData: dco_decode_bool,
-        decodeErrorData: null,
-      ),
-      constMeta:
-          kCrateApiReceiveFfiV2PayjoinProposalIsOutputSubstitutionDisabledConstMeta,
-      argValues: [that],
-      apiImpl: this,
-    ));
-  }
-
-  TaskConstMeta
-      get kCrateApiReceiveFfiV2PayjoinProposalIsOutputSubstitutionDisabledConstMeta =>
-          const TaskConstMeta(
-            debugName:
-                "ffi_v_2_payjoin_proposal_is_output_substitution_disabled",
-            argNames: ["that"],
-          );
-
-  @override
-  Future<Uint64List> crateApiReceiveFfiV2PayjoinProposalOwnedVouts(
-      {required FfiV2PayjoinProposal that}) {
-    return handler.executeNormal(NormalTask(
-      callFfi: (port_) {
-        var arg0 = cst_encode_box_autoadd_ffi_v_2_payjoin_proposal(that);
-        return wire
-            .wire__crate__api__receive__ffi_v_2_payjoin_proposal_owned_vouts(
-                port_, arg0);
-      },
-      codec: DcoCodec(
-        decodeSuccessData: dco_decode_list_prim_u_64_strict,
-        decodeErrorData: null,
-      ),
-      constMeta: kCrateApiReceiveFfiV2PayjoinProposalOwnedVoutsConstMeta,
-      argValues: [that],
-      apiImpl: this,
-    ));
-  }
-
-  TaskConstMeta get kCrateApiReceiveFfiV2PayjoinProposalOwnedVoutsConstMeta =>
-      const TaskConstMeta(
-        debugName: "ffi_v_2_payjoin_proposal_owned_vouts",
-        argNames: ["that"],
-      );
-
-  @override
-  Future<void> crateApiReceiveFfiV2PayjoinProposalProcessRes(
-      {required FfiV2PayjoinProposal that,
-      required List<int> res,
-      required ClientResponse ohttpContext}) {
-    return handler.executeNormal(NormalTask(
-      callFfi: (port_) {
-        var arg0 = cst_encode_box_autoadd_ffi_v_2_payjoin_proposal(that);
-        var arg1 = cst_encode_list_prim_u_8_loose(res);
-        var arg2 = cst_encode_box_autoadd_client_response(ohttpContext);
-        return wire
-            .wire__crate__api__receive__ffi_v_2_payjoin_proposal_process_res(
-                port_, arg0, arg1, arg2);
-      },
-      codec: DcoCodec(
-        decodeSuccessData: dco_decode_unit,
-        decodeErrorData: dco_decode_payjoin_error,
-      ),
-      constMeta: kCrateApiReceiveFfiV2PayjoinProposalProcessResConstMeta,
-      argValues: [that, res, ohttpContext],
-      apiImpl: this,
-    ));
-  }
-
-  TaskConstMeta get kCrateApiReceiveFfiV2PayjoinProposalProcessResConstMeta =>
-      const TaskConstMeta(
-        debugName: "ffi_v_2_payjoin_proposal_process_res",
-        argNames: ["that", "res", "ohttpContext"],
-      );
-
-  @override
-  Future<String> crateApiReceiveFfiV2PayjoinProposalPsbt(
-      {required FfiV2PayjoinProposal that}) {
-    return handler.executeNormal(NormalTask(
-      callFfi: (port_) {
-        var arg0 = cst_encode_box_autoadd_ffi_v_2_payjoin_proposal(that);
-        return wire.wire__crate__api__receive__ffi_v_2_payjoin_proposal_psbt(
-            port_, arg0);
-      },
-      codec: DcoCodec(
-        decodeSuccessData: dco_decode_String,
-        decodeErrorData: null,
-      ),
-      constMeta: kCrateApiReceiveFfiV2PayjoinProposalPsbtConstMeta,
-      argValues: [that],
-      apiImpl: this,
-    ));
-  }
-
-  TaskConstMeta get kCrateApiReceiveFfiV2PayjoinProposalPsbtConstMeta =>
-      const TaskConstMeta(
-        debugName: "ffi_v_2_payjoin_proposal_psbt",
-        argNames: ["that"],
-      );
-
-  @override
-  Future<List<OutPoint>> crateApiReceiveFfiV2PayjoinProposalUtxosToBeLocked(
-      {required FfiV2PayjoinProposal that}) {
-    return handler.executeNormal(NormalTask(
-      callFfi: (port_) {
-        var arg0 = cst_encode_box_autoadd_ffi_v_2_payjoin_proposal(that);
-        return wire
-            .wire__crate__api__receive__ffi_v_2_payjoin_proposal_utxos_to_be_locked(
-                port_, arg0);
-      },
-      codec: DcoCodec(
-        decodeSuccessData: dco_decode_list_out_point,
-        decodeErrorData: null,
-      ),
-      constMeta: kCrateApiReceiveFfiV2PayjoinProposalUtxosToBeLockedConstMeta,
-      argValues: [that],
-      apiImpl: this,
-    ));
-  }
-
-  TaskConstMeta
-      get kCrateApiReceiveFfiV2PayjoinProposalUtxosToBeLockedConstMeta =>
-          const TaskConstMeta(
-            debugName: "ffi_v_2_payjoin_proposal_utxos_to_be_locked",
-            argNames: ["that"],
-          );
-
-  @override
-  Future<void> crateApiReceiveFfiV2ProvisionalProposalContributeWitnessInput(
-      {required FfiV2ProvisionalProposal that,
-      required TxOut txo,
-      required OutPoint outpoint}) {
-    return handler.executeNormal(NormalTask(
-      callFfi: (port_) {
-        var arg0 = cst_encode_box_autoadd_ffi_v_2_provisional_proposal(that);
-        var arg1 = cst_encode_box_autoadd_tx_out(txo);
-        var arg2 = cst_encode_box_autoadd_out_point(outpoint);
-        return wire
-            .wire__crate__api__receive__ffi_v_2_provisional_proposal_contribute_witness_input(
-                port_, arg0, arg1, arg2);
-      },
-      codec: DcoCodec(
-        decodeSuccessData: dco_decode_unit,
-        decodeErrorData: dco_decode_payjoin_error,
-      ),
-      constMeta:
-          kCrateApiReceiveFfiV2ProvisionalProposalContributeWitnessInputConstMeta,
-      argValues: [that, txo, outpoint],
-      apiImpl: this,
-    ));
-  }
-
-  TaskConstMeta
-      get kCrateApiReceiveFfiV2ProvisionalProposalContributeWitnessInputConstMeta =>
-          const TaskConstMeta(
-            debugName: "ffi_v_2_provisional_proposal_contribute_witness_input",
-            argNames: ["that", "txo", "outpoint"],
-          );
-
-  @override
-  Future<FfiV2PayjoinProposal>
-      crateApiReceiveFfiV2ProvisionalProposalFinalizeProposal(
-          {required FfiV2ProvisionalProposal that,
-          required FutureOr<String> Function(String) processPsbt,
-          BigInt? minFeeRateSatPerVb}) {
-    return handler.executeNormal(NormalTask(
-      callFfi: (port_) {
-        var arg0 = cst_encode_box_autoadd_ffi_v_2_provisional_proposal(that);
-        var arg1 =
-            cst_encode_DartFn_Inputs_String_Output_String_AnyhowException(
-                processPsbt);
-        var arg2 = cst_encode_opt_box_autoadd_u_64(minFeeRateSatPerVb);
-        return wire
-            .wire__crate__api__receive__ffi_v_2_provisional_proposal_finalize_proposal(
-                port_, arg0, arg1, arg2);
-      },
-      codec: DcoCodec(
-        decodeSuccessData: dco_decode_ffi_v_2_payjoin_proposal,
-        decodeErrorData: dco_decode_payjoin_error,
-      ),
-      constMeta:
-          kCrateApiReceiveFfiV2ProvisionalProposalFinalizeProposalConstMeta,
-      argValues: [that, processPsbt, minFeeRateSatPerVb],
-      apiImpl: this,
-    ));
-  }
-
-  TaskConstMeta
-      get kCrateApiReceiveFfiV2ProvisionalProposalFinalizeProposalConstMeta =>
-          const TaskConstMeta(
-            debugName: "ffi_v_2_provisional_proposal_finalize_proposal",
-            argNames: ["that", "processPsbt", "minFeeRateSatPerVb"],
-          );
-
-  @override
-  Future<bool>
-      crateApiReceiveFfiV2ProvisionalProposalIsOutputSubstitutionDisabled(
-          {required FfiV2ProvisionalProposal that}) {
-    return handler.executeNormal(NormalTask(
-      callFfi: (port_) {
-        var arg0 = cst_encode_box_autoadd_ffi_v_2_provisional_proposal(that);
-        return wire
-            .wire__crate__api__receive__ffi_v_2_provisional_proposal_is_output_substitution_disabled(
-                port_, arg0);
-      },
-      codec: DcoCodec(
-        decodeSuccessData: dco_decode_bool,
-        decodeErrorData: null,
-      ),
-      constMeta:
-          kCrateApiReceiveFfiV2ProvisionalProposalIsOutputSubstitutionDisabledConstMeta,
-      argValues: [that],
-      apiImpl: this,
-    ));
-  }
-
-  TaskConstMeta
-      get kCrateApiReceiveFfiV2ProvisionalProposalIsOutputSubstitutionDisabledConstMeta =>
-          const TaskConstMeta(
-            debugName:
-                "ffi_v_2_provisional_proposal_is_output_substitution_disabled",
-            argNames: ["that"],
-          );
-
-  @override
-  Future<OutPoint> crateApiReceiveFfiV2ProvisionalProposalTryPreservingPrivacy(
-      {required FfiV2ProvisionalProposal that,
-      required Map<BigInt, OutPoint> candidateInputs}) {
-    return handler.executeNormal(NormalTask(
-      callFfi: (port_) {
-        var arg0 = cst_encode_box_autoadd_ffi_v_2_provisional_proposal(that);
-        var arg1 = cst_encode_Map_u_64_out_point(candidateInputs);
-        return wire
-            .wire__crate__api__receive__ffi_v_2_provisional_proposal_try_preserving_privacy(
-                port_, arg0, arg1);
-      },
-      codec: DcoCodec(
-        decodeSuccessData: dco_decode_out_point,
-        decodeErrorData: dco_decode_payjoin_error,
-      ),
-      constMeta:
-          kCrateApiReceiveFfiV2ProvisionalProposalTryPreservingPrivacyConstMeta,
-      argValues: [that, candidateInputs],
-      apiImpl: this,
-    ));
-  }
-
-  TaskConstMeta
-      get kCrateApiReceiveFfiV2ProvisionalProposalTryPreservingPrivacyConstMeta =>
-          const TaskConstMeta(
-            debugName: "ffi_v_2_provisional_proposal_try_preserving_privacy",
-            argNames: ["that", "candidateInputs"],
-          );
-
-  @override
-  Future<void>
-      crateApiReceiveFfiV2ProvisionalProposalTrySubstituteReceiverOutput(
-          {required FfiV2ProvisionalProposal that,
-          required FutureOr<Uint8List> Function() generateScript}) {
-    return handler.executeNormal(NormalTask(
-      callFfi: (port_) {
-        var arg0 = cst_encode_box_autoadd_ffi_v_2_provisional_proposal(that);
-        var arg1 =
-            cst_encode_DartFn_Inputs__Output_list_prim_u_8_strict_AnyhowException(
-                generateScript);
-        return wire
-            .wire__crate__api__receive__ffi_v_2_provisional_proposal_try_substitute_receiver_output(
-                port_, arg0, arg1);
-      },
-      codec: DcoCodec(
-        decodeSuccessData: dco_decode_unit,
-        decodeErrorData: dco_decode_payjoin_error,
-      ),
-      constMeta:
-          kCrateApiReceiveFfiV2ProvisionalProposalTrySubstituteReceiverOutputConstMeta,
-      argValues: [that, generateScript],
-      apiImpl: this,
-    ));
-  }
-
-  TaskConstMeta
-      get kCrateApiReceiveFfiV2ProvisionalProposalTrySubstituteReceiverOutputConstMeta =>
-          const TaskConstMeta(
-            debugName:
-                "ffi_v_2_provisional_proposal_try_substitute_receiver_output",
-            argNames: ["that", "generateScript"],
-          );
-
-  @override
-  Future<FfiV2MaybeInputsOwned>
-      crateApiReceiveFfiV2UncheckedProposalAssumeInteractiveReceiver(
-          {required FfiV2UncheckedProposal that}) {
-    return handler.executeNormal(NormalTask(
-      callFfi: (port_) {
-        var arg0 = cst_encode_box_autoadd_ffi_v_2_unchecked_proposal(that);
-        return wire
-            .wire__crate__api__receive__ffi_v_2_unchecked_proposal_assume_interactive_receiver(
-                port_, arg0);
-      },
-      codec: DcoCodec(
-        decodeSuccessData: dco_decode_ffi_v_2_maybe_inputs_owned,
-        decodeErrorData: null,
-      ),
-      constMeta:
-          kCrateApiReceiveFfiV2UncheckedProposalAssumeInteractiveReceiverConstMeta,
-      argValues: [that],
-      apiImpl: this,
-    ));
-  }
-
-  TaskConstMeta
-      get kCrateApiReceiveFfiV2UncheckedProposalAssumeInteractiveReceiverConstMeta =>
-          const TaskConstMeta(
-            debugName: "ffi_v_2_unchecked_proposal_assume_interactive_receiver",
-            argNames: ["that"],
-          );
-
-  @override
-  Future<FfiV2MaybeInputsOwned>
-      crateApiReceiveFfiV2UncheckedProposalCheckBroadcastSuitability(
-          {required FfiV2UncheckedProposal that,
+  Future<FfiMaybeInputsOwned>
+      crateApiReceiveFfiUncheckedProposalCheckBroadcastSuitability(
+          {required FfiUncheckedProposal that,
           BigInt? minFeeRate,
           required FutureOr<bool> Function(Uint8List) canBroadcast}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        var arg0 = cst_encode_box_autoadd_ffi_v_2_unchecked_proposal(that);
+        var arg0 = cst_encode_box_autoadd_ffi_unchecked_proposal(that);
         var arg1 = cst_encode_opt_box_autoadd_u_64(minFeeRate);
         var arg2 =
             cst_encode_DartFn_Inputs_list_prim_u_8_strict_Output_bool_AnyhowException(
                 canBroadcast);
         return wire
-            .wire__crate__api__receive__ffi_v_2_unchecked_proposal_check_broadcast_suitability(
+            .wire__crate__api__receive__ffi_unchecked_proposal_check_broadcast_suitability(
                 port_, arg0, arg1, arg2);
       },
       codec: DcoCodec(
-        decodeSuccessData: dco_decode_ffi_v_2_maybe_inputs_owned,
+        decodeSuccessData: dco_decode_ffi_maybe_inputs_owned,
         decodeErrorData: dco_decode_payjoin_error,
       ),
       constMeta:
-          kCrateApiReceiveFfiV2UncheckedProposalCheckBroadcastSuitabilityConstMeta,
+          kCrateApiReceiveFfiUncheckedProposalCheckBroadcastSuitabilityConstMeta,
       argValues: [that, minFeeRate, canBroadcast],
       apiImpl: this,
     ));
   }
 
   TaskConstMeta
-      get kCrateApiReceiveFfiV2UncheckedProposalCheckBroadcastSuitabilityConstMeta =>
+      get kCrateApiReceiveFfiUncheckedProposalCheckBroadcastSuitabilityConstMeta =>
           const TaskConstMeta(
-            debugName: "ffi_v_2_unchecked_proposal_check_broadcast_suitability",
+            debugName: "ffi_unchecked_proposal_check_broadcast_suitability",
             argNames: ["that", "minFeeRate", "canBroadcast"],
           );
 
   @override
   Future<Uint8List>
-      crateApiReceiveFfiV2UncheckedProposalExtractTxToScheduleBroadcast(
-          {required FfiV2UncheckedProposal that}) {
+      crateApiReceiveFfiUncheckedProposalExtractTxToScheduleBroadcast(
+          {required FfiUncheckedProposal that}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
-        var arg0 = cst_encode_box_autoadd_ffi_v_2_unchecked_proposal(that);
+        var arg0 = cst_encode_box_autoadd_ffi_unchecked_proposal(that);
         return wire
-            .wire__crate__api__receive__ffi_v_2_unchecked_proposal_extract_tx_to_schedule_broadcast(
+            .wire__crate__api__receive__ffi_unchecked_proposal_extract_tx_to_schedule_broadcast(
                 port_, arg0);
       },
       codec: DcoCodec(
@@ -1255,17 +1248,17 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
         decodeErrorData: null,
       ),
       constMeta:
-          kCrateApiReceiveFfiV2UncheckedProposalExtractTxToScheduleBroadcastConstMeta,
+          kCrateApiReceiveFfiUncheckedProposalExtractTxToScheduleBroadcastConstMeta,
       argValues: [that],
       apiImpl: this,
     ));
   }
 
   TaskConstMeta
-      get kCrateApiReceiveFfiV2UncheckedProposalExtractTxToScheduleBroadcastConstMeta =>
+      get kCrateApiReceiveFfiUncheckedProposalExtractTxToScheduleBroadcastConstMeta =>
           const TaskConstMeta(
             debugName:
-                "ffi_v_2_unchecked_proposal_extract_tx_to_schedule_broadcast",
+                "ffi_unchecked_proposal_extract_tx_to_schedule_broadcast",
             argNames: ["that"],
           );
 
@@ -2465,9 +2458,41 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
+  FfiMaybeInputsOwned dco_decode_box_autoadd_ffi_maybe_inputs_owned(
+      dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_ffi_maybe_inputs_owned(raw);
+  }
+
+  @protected
+  FfiMaybeInputsSeen dco_decode_box_autoadd_ffi_maybe_inputs_seen(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_ffi_maybe_inputs_seen(raw);
+  }
+
+  @protected
+  FfiMaybeMixedInputScripts
+      dco_decode_box_autoadd_ffi_maybe_mixed_input_scripts(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_ffi_maybe_mixed_input_scripts(raw);
+  }
+
+  @protected
   FfiOhttpKeys dco_decode_box_autoadd_ffi_ohttp_keys(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_ffi_ohttp_keys(raw);
+  }
+
+  @protected
+  FfiOutputsUnknown dco_decode_box_autoadd_ffi_outputs_unknown(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_ffi_outputs_unknown(raw);
+  }
+
+  @protected
+  FfiPayjoinProposal dco_decode_box_autoadd_ffi_payjoin_proposal(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_ffi_payjoin_proposal(raw);
   }
 
   @protected
@@ -2480,6 +2505,13 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   FfiPjUriBuilder dco_decode_box_autoadd_ffi_pj_uri_builder(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_ffi_pj_uri_builder(raw);
+  }
+
+  @protected
+  FfiProvisionalProposal dco_decode_box_autoadd_ffi_provisional_proposal(
+      dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_ffi_provisional_proposal(raw);
   }
 
   @protected
@@ -2502,6 +2534,13 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
+  FfiUncheckedProposal dco_decode_box_autoadd_ffi_unchecked_proposal(
+      dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_ffi_unchecked_proposal(raw);
+  }
+
+  @protected
   FfiUri dco_decode_box_autoadd_ffi_uri(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_ffi_uri(raw);
@@ -2511,55 +2550,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   FfiUrl dco_decode_box_autoadd_ffi_url(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_ffi_url(raw);
-  }
-
-  @protected
-  FfiV2MaybeInputsOwned dco_decode_box_autoadd_ffi_v_2_maybe_inputs_owned(
-      dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return dco_decode_ffi_v_2_maybe_inputs_owned(raw);
-  }
-
-  @protected
-  FfiV2MaybeInputsSeen dco_decode_box_autoadd_ffi_v_2_maybe_inputs_seen(
-      dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return dco_decode_ffi_v_2_maybe_inputs_seen(raw);
-  }
-
-  @protected
-  FfiV2MaybeMixedInputScripts
-      dco_decode_box_autoadd_ffi_v_2_maybe_mixed_input_scripts(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return dco_decode_ffi_v_2_maybe_mixed_input_scripts(raw);
-  }
-
-  @protected
-  FfiV2OutputsUnknown dco_decode_box_autoadd_ffi_v_2_outputs_unknown(
-      dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return dco_decode_ffi_v_2_outputs_unknown(raw);
-  }
-
-  @protected
-  FfiV2PayjoinProposal dco_decode_box_autoadd_ffi_v_2_payjoin_proposal(
-      dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return dco_decode_ffi_v_2_payjoin_proposal(raw);
-  }
-
-  @protected
-  FfiV2ProvisionalProposal dco_decode_box_autoadd_ffi_v_2_provisional_proposal(
-      dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return dco_decode_ffi_v_2_provisional_proposal(raw);
-  }
-
-  @protected
-  FfiV2UncheckedProposal dco_decode_box_autoadd_ffi_v_2_unchecked_proposal(
-      dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return dco_decode_ffi_v_2_unchecked_proposal(raw);
   }
 
   @protected
@@ -2639,6 +2629,44 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
+  FfiMaybeInputsOwned dco_decode_ffi_maybe_inputs_owned(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 1)
+      throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
+    return FfiMaybeInputsOwned(
+      field0:
+          dco_decode_RustOpaque_payjoin_ffireceivev2V2MaybeInputsOwned(arr[0]),
+    );
+  }
+
+  @protected
+  FfiMaybeInputsSeen dco_decode_ffi_maybe_inputs_seen(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 1)
+      throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
+    return FfiMaybeInputsSeen(
+      field0:
+          dco_decode_RustOpaque_payjoin_ffireceivev2V2MaybeInputsSeen(arr[0]),
+    );
+  }
+
+  @protected
+  FfiMaybeMixedInputScripts dco_decode_ffi_maybe_mixed_input_scripts(
+      dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 1)
+      throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
+    return FfiMaybeMixedInputScripts(
+      field0:
+          dco_decode_RustOpaque_payjoin_ffireceivev2V2MaybeMixedInputScripts(
+              arr[0]),
+    );
+  }
+
+  @protected
   FfiOhttpKeys dco_decode_ffi_ohttp_keys(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
@@ -2646,6 +2674,30 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
     return FfiOhttpKeys(
       field0: dco_decode_RustOpaque_payjoin_ffitypesOhttpKeys(arr[0]),
+    );
+  }
+
+  @protected
+  FfiOutputsUnknown dco_decode_ffi_outputs_unknown(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 1)
+      throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
+    return FfiOutputsUnknown(
+      field0:
+          dco_decode_RustOpaque_payjoin_ffireceivev2V2OutputsUnknown(arr[0]),
+    );
+  }
+
+  @protected
+  FfiPayjoinProposal dco_decode_ffi_payjoin_proposal(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 1)
+      throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
+    return FfiPayjoinProposal(
+      field0: dco_decode_RustOpaque_Arcpayjoin_ffireceivev2V2PayjoinProposal(
+          arr[0]),
     );
   }
 
@@ -2668,6 +2720,18 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
     return FfiPjUriBuilder(
       internal: dco_decode_RustOpaque_payjoin_ffiuriPjUriBuilder(arr[0]),
+    );
+  }
+
+  @protected
+  FfiProvisionalProposal dco_decode_ffi_provisional_proposal(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 1)
+      throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
+    return FfiProvisionalProposal(
+      field0: dco_decode_RustOpaque_payjoin_ffireceivev2V2ProvisionalProposal(
+          arr[0]),
     );
   }
 
@@ -2706,6 +2770,18 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
+  FfiUncheckedProposal dco_decode_ffi_unchecked_proposal(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 1)
+      throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
+    return FfiUncheckedProposal(
+      field0:
+          dco_decode_RustOpaque_payjoin_ffireceivev2V2UncheckedProposal(arr[0]),
+    );
+  }
+
+  @protected
   FfiUri dco_decode_ffi_uri(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
@@ -2724,93 +2800,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
     return FfiUrl(
       field0: dco_decode_RustOpaque_payjoin_ffiuriUrl(arr[0]),
-    );
-  }
-
-  @protected
-  FfiV2MaybeInputsOwned dco_decode_ffi_v_2_maybe_inputs_owned(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    final arr = raw as List<dynamic>;
-    if (arr.length != 1)
-      throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
-    return FfiV2MaybeInputsOwned(
-      field0:
-          dco_decode_RustOpaque_payjoin_ffireceivev2V2MaybeInputsOwned(arr[0]),
-    );
-  }
-
-  @protected
-  FfiV2MaybeInputsSeen dco_decode_ffi_v_2_maybe_inputs_seen(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    final arr = raw as List<dynamic>;
-    if (arr.length != 1)
-      throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
-    return FfiV2MaybeInputsSeen(
-      field0:
-          dco_decode_RustOpaque_payjoin_ffireceivev2V2MaybeInputsSeen(arr[0]),
-    );
-  }
-
-  @protected
-  FfiV2MaybeMixedInputScripts dco_decode_ffi_v_2_maybe_mixed_input_scripts(
-      dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    final arr = raw as List<dynamic>;
-    if (arr.length != 1)
-      throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
-    return FfiV2MaybeMixedInputScripts(
-      field0:
-          dco_decode_RustOpaque_payjoin_ffireceivev2V2MaybeMixedInputScripts(
-              arr[0]),
-    );
-  }
-
-  @protected
-  FfiV2OutputsUnknown dco_decode_ffi_v_2_outputs_unknown(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    final arr = raw as List<dynamic>;
-    if (arr.length != 1)
-      throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
-    return FfiV2OutputsUnknown(
-      field0:
-          dco_decode_RustOpaque_payjoin_ffireceivev2V2OutputsUnknown(arr[0]),
-    );
-  }
-
-  @protected
-  FfiV2PayjoinProposal dco_decode_ffi_v_2_payjoin_proposal(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    final arr = raw as List<dynamic>;
-    if (arr.length != 1)
-      throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
-    return FfiV2PayjoinProposal(
-      field0: dco_decode_RustOpaque_Arcpayjoin_ffireceivev2V2PayjoinProposal(
-          arr[0]),
-    );
-  }
-
-  @protected
-  FfiV2ProvisionalProposal dco_decode_ffi_v_2_provisional_proposal(
-      dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    final arr = raw as List<dynamic>;
-    if (arr.length != 1)
-      throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
-    return FfiV2ProvisionalProposal(
-      field0: dco_decode_RustOpaque_payjoin_ffireceivev2V2ProvisionalProposal(
-          arr[0]),
-    );
-  }
-
-  @protected
-  FfiV2UncheckedProposal dco_decode_ffi_v_2_unchecked_proposal(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    final arr = raw as List<dynamic>;
-    if (arr.length != 1)
-      throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
-    return FfiV2UncheckedProposal(
-      field0:
-          dco_decode_RustOpaque_payjoin_ffireceivev2V2UncheckedProposal(arr[0]),
     );
   }
 
@@ -2877,12 +2866,12 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
-  FfiV2UncheckedProposal? dco_decode_opt_box_autoadd_ffi_v_2_unchecked_proposal(
+  FfiUncheckedProposal? dco_decode_opt_box_autoadd_ffi_unchecked_proposal(
       dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw == null
         ? null
-        : dco_decode_box_autoadd_ffi_v_2_unchecked_proposal(raw);
+        : dco_decode_box_autoadd_ffi_unchecked_proposal(raw);
   }
 
   @protected
@@ -3326,10 +3315,46 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
+  FfiMaybeInputsOwned sse_decode_box_autoadd_ffi_maybe_inputs_owned(
+      SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_ffi_maybe_inputs_owned(deserializer));
+  }
+
+  @protected
+  FfiMaybeInputsSeen sse_decode_box_autoadd_ffi_maybe_inputs_seen(
+      SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_ffi_maybe_inputs_seen(deserializer));
+  }
+
+  @protected
+  FfiMaybeMixedInputScripts
+      sse_decode_box_autoadd_ffi_maybe_mixed_input_scripts(
+          SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_ffi_maybe_mixed_input_scripts(deserializer));
+  }
+
+  @protected
   FfiOhttpKeys sse_decode_box_autoadd_ffi_ohttp_keys(
       SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return (sse_decode_ffi_ohttp_keys(deserializer));
+  }
+
+  @protected
+  FfiOutputsUnknown sse_decode_box_autoadd_ffi_outputs_unknown(
+      SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_ffi_outputs_unknown(deserializer));
+  }
+
+  @protected
+  FfiPayjoinProposal sse_decode_box_autoadd_ffi_payjoin_proposal(
+      SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_ffi_payjoin_proposal(deserializer));
   }
 
   @protected
@@ -3343,6 +3368,13 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return (sse_decode_ffi_pj_uri_builder(deserializer));
+  }
+
+  @protected
+  FfiProvisionalProposal sse_decode_box_autoadd_ffi_provisional_proposal(
+      SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_ffi_provisional_proposal(deserializer));
   }
 
   @protected
@@ -3367,6 +3399,13 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
+  FfiUncheckedProposal sse_decode_box_autoadd_ffi_unchecked_proposal(
+      SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_ffi_unchecked_proposal(deserializer));
+  }
+
+  @protected
   FfiUri sse_decode_box_autoadd_ffi_uri(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return (sse_decode_ffi_uri(deserializer));
@@ -3376,56 +3415,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   FfiUrl sse_decode_box_autoadd_ffi_url(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return (sse_decode_ffi_url(deserializer));
-  }
-
-  @protected
-  FfiV2MaybeInputsOwned sse_decode_box_autoadd_ffi_v_2_maybe_inputs_owned(
-      SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return (sse_decode_ffi_v_2_maybe_inputs_owned(deserializer));
-  }
-
-  @protected
-  FfiV2MaybeInputsSeen sse_decode_box_autoadd_ffi_v_2_maybe_inputs_seen(
-      SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return (sse_decode_ffi_v_2_maybe_inputs_seen(deserializer));
-  }
-
-  @protected
-  FfiV2MaybeMixedInputScripts
-      sse_decode_box_autoadd_ffi_v_2_maybe_mixed_input_scripts(
-          SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return (sse_decode_ffi_v_2_maybe_mixed_input_scripts(deserializer));
-  }
-
-  @protected
-  FfiV2OutputsUnknown sse_decode_box_autoadd_ffi_v_2_outputs_unknown(
-      SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return (sse_decode_ffi_v_2_outputs_unknown(deserializer));
-  }
-
-  @protected
-  FfiV2PayjoinProposal sse_decode_box_autoadd_ffi_v_2_payjoin_proposal(
-      SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return (sse_decode_ffi_v_2_payjoin_proposal(deserializer));
-  }
-
-  @protected
-  FfiV2ProvisionalProposal sse_decode_box_autoadd_ffi_v_2_provisional_proposal(
-      SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return (sse_decode_ffi_v_2_provisional_proposal(deserializer));
-  }
-
-  @protected
-  FfiV2UncheckedProposal sse_decode_box_autoadd_ffi_v_2_unchecked_proposal(
-      SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return (sse_decode_ffi_v_2_unchecked_proposal(deserializer));
   }
 
   @protected
@@ -3492,11 +3481,60 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
+  FfiMaybeInputsOwned sse_decode_ffi_maybe_inputs_owned(
+      SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_field0 =
+        sse_decode_RustOpaque_payjoin_ffireceivev2V2MaybeInputsOwned(
+            deserializer);
+    return FfiMaybeInputsOwned(field0: var_field0);
+  }
+
+  @protected
+  FfiMaybeInputsSeen sse_decode_ffi_maybe_inputs_seen(
+      SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_field0 =
+        sse_decode_RustOpaque_payjoin_ffireceivev2V2MaybeInputsSeen(
+            deserializer);
+    return FfiMaybeInputsSeen(field0: var_field0);
+  }
+
+  @protected
+  FfiMaybeMixedInputScripts sse_decode_ffi_maybe_mixed_input_scripts(
+      SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_field0 =
+        sse_decode_RustOpaque_payjoin_ffireceivev2V2MaybeMixedInputScripts(
+            deserializer);
+    return FfiMaybeMixedInputScripts(field0: var_field0);
+  }
+
+  @protected
   FfiOhttpKeys sse_decode_ffi_ohttp_keys(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var var_field0 =
         sse_decode_RustOpaque_payjoin_ffitypesOhttpKeys(deserializer);
     return FfiOhttpKeys(field0: var_field0);
+  }
+
+  @protected
+  FfiOutputsUnknown sse_decode_ffi_outputs_unknown(
+      SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_field0 = sse_decode_RustOpaque_payjoin_ffireceivev2V2OutputsUnknown(
+        deserializer);
+    return FfiOutputsUnknown(field0: var_field0);
+  }
+
+  @protected
+  FfiPayjoinProposal sse_decode_ffi_payjoin_proposal(
+      SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_field0 =
+        sse_decode_RustOpaque_Arcpayjoin_ffireceivev2V2PayjoinProposal(
+            deserializer);
+    return FfiPayjoinProposal(field0: var_field0);
   }
 
   @protected
@@ -3512,6 +3550,16 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
     var var_internal =
         sse_decode_RustOpaque_payjoin_ffiuriPjUriBuilder(deserializer);
     return FfiPjUriBuilder(internal: var_internal);
+  }
+
+  @protected
+  FfiProvisionalProposal sse_decode_ffi_provisional_proposal(
+      SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_field0 =
+        sse_decode_RustOpaque_payjoin_ffireceivev2V2ProvisionalProposal(
+            deserializer);
+    return FfiProvisionalProposal(field0: var_field0);
   }
 
   @protected
@@ -3543,6 +3591,16 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
+  FfiUncheckedProposal sse_decode_ffi_unchecked_proposal(
+      SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_field0 =
+        sse_decode_RustOpaque_payjoin_ffireceivev2V2UncheckedProposal(
+            deserializer);
+    return FfiUncheckedProposal(field0: var_field0);
+  }
+
+  @protected
   FfiUri sse_decode_ffi_uri(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var var_field0 = sse_decode_RustOpaque_payjoin_ffiuriUri(deserializer);
@@ -3554,75 +3612,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var var_field0 = sse_decode_RustOpaque_payjoin_ffiuriUrl(deserializer);
     return FfiUrl(field0: var_field0);
-  }
-
-  @protected
-  FfiV2MaybeInputsOwned sse_decode_ffi_v_2_maybe_inputs_owned(
-      SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_field0 =
-        sse_decode_RustOpaque_payjoin_ffireceivev2V2MaybeInputsOwned(
-            deserializer);
-    return FfiV2MaybeInputsOwned(field0: var_field0);
-  }
-
-  @protected
-  FfiV2MaybeInputsSeen sse_decode_ffi_v_2_maybe_inputs_seen(
-      SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_field0 =
-        sse_decode_RustOpaque_payjoin_ffireceivev2V2MaybeInputsSeen(
-            deserializer);
-    return FfiV2MaybeInputsSeen(field0: var_field0);
-  }
-
-  @protected
-  FfiV2MaybeMixedInputScripts sse_decode_ffi_v_2_maybe_mixed_input_scripts(
-      SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_field0 =
-        sse_decode_RustOpaque_payjoin_ffireceivev2V2MaybeMixedInputScripts(
-            deserializer);
-    return FfiV2MaybeMixedInputScripts(field0: var_field0);
-  }
-
-  @protected
-  FfiV2OutputsUnknown sse_decode_ffi_v_2_outputs_unknown(
-      SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_field0 = sse_decode_RustOpaque_payjoin_ffireceivev2V2OutputsUnknown(
-        deserializer);
-    return FfiV2OutputsUnknown(field0: var_field0);
-  }
-
-  @protected
-  FfiV2PayjoinProposal sse_decode_ffi_v_2_payjoin_proposal(
-      SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_field0 =
-        sse_decode_RustOpaque_Arcpayjoin_ffireceivev2V2PayjoinProposal(
-            deserializer);
-    return FfiV2PayjoinProposal(field0: var_field0);
-  }
-
-  @protected
-  FfiV2ProvisionalProposal sse_decode_ffi_v_2_provisional_proposal(
-      SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_field0 =
-        sse_decode_RustOpaque_payjoin_ffireceivev2V2ProvisionalProposal(
-            deserializer);
-    return FfiV2ProvisionalProposal(field0: var_field0);
-  }
-
-  @protected
-  FfiV2UncheckedProposal sse_decode_ffi_v_2_unchecked_proposal(
-      SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_field0 =
-        sse_decode_RustOpaque_payjoin_ffireceivev2V2UncheckedProposal(
-            deserializer);
-    return FfiV2UncheckedProposal(field0: var_field0);
   }
 
   @protected
@@ -3719,12 +3708,12 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
-  FfiV2UncheckedProposal? sse_decode_opt_box_autoadd_ffi_v_2_unchecked_proposal(
+  FfiUncheckedProposal? sse_decode_opt_box_autoadd_ffi_unchecked_proposal(
       SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
 
     if (sse_decode_bool(deserializer)) {
-      return (sse_decode_box_autoadd_ffi_v_2_unchecked_proposal(deserializer));
+      return (sse_decode_box_autoadd_ffi_unchecked_proposal(deserializer));
     } else {
       return null;
     }
@@ -4414,10 +4403,45 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
+  void sse_encode_box_autoadd_ffi_maybe_inputs_owned(
+      FfiMaybeInputsOwned self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_ffi_maybe_inputs_owned(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_ffi_maybe_inputs_seen(
+      FfiMaybeInputsSeen self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_ffi_maybe_inputs_seen(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_ffi_maybe_mixed_input_scripts(
+      FfiMaybeMixedInputScripts self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_ffi_maybe_mixed_input_scripts(self, serializer);
+  }
+
+  @protected
   void sse_encode_box_autoadd_ffi_ohttp_keys(
       FfiOhttpKeys self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_ffi_ohttp_keys(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_ffi_outputs_unknown(
+      FfiOutputsUnknown self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_ffi_outputs_unknown(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_ffi_payjoin_proposal(
+      FfiPayjoinProposal self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_ffi_payjoin_proposal(self, serializer);
   }
 
   @protected
@@ -4432,6 +4456,13 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       FfiPjUriBuilder self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_ffi_pj_uri_builder(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_ffi_provisional_proposal(
+      FfiProvisionalProposal self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_ffi_provisional_proposal(self, serializer);
   }
 
   @protected
@@ -4456,6 +4487,13 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
+  void sse_encode_box_autoadd_ffi_unchecked_proposal(
+      FfiUncheckedProposal self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_ffi_unchecked_proposal(self, serializer);
+  }
+
+  @protected
   void sse_encode_box_autoadd_ffi_uri(FfiUri self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_ffi_uri(self, serializer);
@@ -4465,55 +4503,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   void sse_encode_box_autoadd_ffi_url(FfiUrl self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_ffi_url(self, serializer);
-  }
-
-  @protected
-  void sse_encode_box_autoadd_ffi_v_2_maybe_inputs_owned(
-      FfiV2MaybeInputsOwned self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_ffi_v_2_maybe_inputs_owned(self, serializer);
-  }
-
-  @protected
-  void sse_encode_box_autoadd_ffi_v_2_maybe_inputs_seen(
-      FfiV2MaybeInputsSeen self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_ffi_v_2_maybe_inputs_seen(self, serializer);
-  }
-
-  @protected
-  void sse_encode_box_autoadd_ffi_v_2_maybe_mixed_input_scripts(
-      FfiV2MaybeMixedInputScripts self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_ffi_v_2_maybe_mixed_input_scripts(self, serializer);
-  }
-
-  @protected
-  void sse_encode_box_autoadd_ffi_v_2_outputs_unknown(
-      FfiV2OutputsUnknown self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_ffi_v_2_outputs_unknown(self, serializer);
-  }
-
-  @protected
-  void sse_encode_box_autoadd_ffi_v_2_payjoin_proposal(
-      FfiV2PayjoinProposal self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_ffi_v_2_payjoin_proposal(self, serializer);
-  }
-
-  @protected
-  void sse_encode_box_autoadd_ffi_v_2_provisional_proposal(
-      FfiV2ProvisionalProposal self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_ffi_v_2_provisional_proposal(self, serializer);
-  }
-
-  @protected
-  void sse_encode_box_autoadd_ffi_v_2_unchecked_proposal(
-      FfiV2UncheckedProposal self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_ffi_v_2_unchecked_proposal(self, serializer);
   }
 
   @protected
@@ -4578,9 +4567,49 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
+  void sse_encode_ffi_maybe_inputs_owned(
+      FfiMaybeInputsOwned self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_RustOpaque_payjoin_ffireceivev2V2MaybeInputsOwned(
+        self.field0, serializer);
+  }
+
+  @protected
+  void sse_encode_ffi_maybe_inputs_seen(
+      FfiMaybeInputsSeen self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_RustOpaque_payjoin_ffireceivev2V2MaybeInputsSeen(
+        self.field0, serializer);
+  }
+
+  @protected
+  void sse_encode_ffi_maybe_mixed_input_scripts(
+      FfiMaybeMixedInputScripts self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_RustOpaque_payjoin_ffireceivev2V2MaybeMixedInputScripts(
+        self.field0, serializer);
+  }
+
+  @protected
   void sse_encode_ffi_ohttp_keys(FfiOhttpKeys self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_RustOpaque_payjoin_ffitypesOhttpKeys(self.field0, serializer);
+  }
+
+  @protected
+  void sse_encode_ffi_outputs_unknown(
+      FfiOutputsUnknown self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_RustOpaque_payjoin_ffireceivev2V2OutputsUnknown(
+        self.field0, serializer);
+  }
+
+  @protected
+  void sse_encode_ffi_payjoin_proposal(
+      FfiPayjoinProposal self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_RustOpaque_Arcpayjoin_ffireceivev2V2PayjoinProposal(
+        self.field0, serializer);
   }
 
   @protected
@@ -4594,6 +4623,14 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       FfiPjUriBuilder self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_RustOpaque_payjoin_ffiuriPjUriBuilder(self.internal, serializer);
+  }
+
+  @protected
+  void sse_encode_ffi_provisional_proposal(
+      FfiProvisionalProposal self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_RustOpaque_payjoin_ffireceivev2V2ProvisionalProposal(
+        self.field0, serializer);
   }
 
   @protected
@@ -4621,6 +4658,14 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
+  void sse_encode_ffi_unchecked_proposal(
+      FfiUncheckedProposal self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_RustOpaque_payjoin_ffireceivev2V2UncheckedProposal(
+        self.field0, serializer);
+  }
+
+  @protected
   void sse_encode_ffi_uri(FfiUri self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_RustOpaque_payjoin_ffiuriUri(self.field0, serializer);
@@ -4630,62 +4675,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   void sse_encode_ffi_url(FfiUrl self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_RustOpaque_payjoin_ffiuriUrl(self.field0, serializer);
-  }
-
-  @protected
-  void sse_encode_ffi_v_2_maybe_inputs_owned(
-      FfiV2MaybeInputsOwned self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_RustOpaque_payjoin_ffireceivev2V2MaybeInputsOwned(
-        self.field0, serializer);
-  }
-
-  @protected
-  void sse_encode_ffi_v_2_maybe_inputs_seen(
-      FfiV2MaybeInputsSeen self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_RustOpaque_payjoin_ffireceivev2V2MaybeInputsSeen(
-        self.field0, serializer);
-  }
-
-  @protected
-  void sse_encode_ffi_v_2_maybe_mixed_input_scripts(
-      FfiV2MaybeMixedInputScripts self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_RustOpaque_payjoin_ffireceivev2V2MaybeMixedInputScripts(
-        self.field0, serializer);
-  }
-
-  @protected
-  void sse_encode_ffi_v_2_outputs_unknown(
-      FfiV2OutputsUnknown self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_RustOpaque_payjoin_ffireceivev2V2OutputsUnknown(
-        self.field0, serializer);
-  }
-
-  @protected
-  void sse_encode_ffi_v_2_payjoin_proposal(
-      FfiV2PayjoinProposal self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_RustOpaque_Arcpayjoin_ffireceivev2V2PayjoinProposal(
-        self.field0, serializer);
-  }
-
-  @protected
-  void sse_encode_ffi_v_2_provisional_proposal(
-      FfiV2ProvisionalProposal self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_RustOpaque_payjoin_ffireceivev2V2ProvisionalProposal(
-        self.field0, serializer);
-  }
-
-  @protected
-  void sse_encode_ffi_v_2_unchecked_proposal(
-      FfiV2UncheckedProposal self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_RustOpaque_payjoin_ffireceivev2V2UncheckedProposal(
-        self.field0, serializer);
   }
 
   @protected
@@ -4777,13 +4766,13 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
-  void sse_encode_opt_box_autoadd_ffi_v_2_unchecked_proposal(
-      FfiV2UncheckedProposal? self, SseSerializer serializer) {
+  void sse_encode_opt_box_autoadd_ffi_unchecked_proposal(
+      FfiUncheckedProposal? self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
 
     sse_encode_bool(self != null, serializer);
     if (self != null) {
-      sse_encode_box_autoadd_ffi_v_2_unchecked_proposal(self, serializer);
+      sse_encode_box_autoadd_ffi_unchecked_proposal(self, serializer);
     }
   }
 

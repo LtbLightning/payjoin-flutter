@@ -221,13 +221,34 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   FfiContextV2 dco_decode_box_autoadd_ffi_context_v_2(dynamic raw);
 
   @protected
+  FfiMaybeInputsOwned dco_decode_box_autoadd_ffi_maybe_inputs_owned(
+      dynamic raw);
+
+  @protected
+  FfiMaybeInputsSeen dco_decode_box_autoadd_ffi_maybe_inputs_seen(dynamic raw);
+
+  @protected
+  FfiMaybeMixedInputScripts
+      dco_decode_box_autoadd_ffi_maybe_mixed_input_scripts(dynamic raw);
+
+  @protected
   FfiOhttpKeys dco_decode_box_autoadd_ffi_ohttp_keys(dynamic raw);
+
+  @protected
+  FfiOutputsUnknown dco_decode_box_autoadd_ffi_outputs_unknown(dynamic raw);
+
+  @protected
+  FfiPayjoinProposal dco_decode_box_autoadd_ffi_payjoin_proposal(dynamic raw);
 
   @protected
   FfiPjUri dco_decode_box_autoadd_ffi_pj_uri(dynamic raw);
 
   @protected
   FfiPjUriBuilder dco_decode_box_autoadd_ffi_pj_uri_builder(dynamic raw);
+
+  @protected
+  FfiProvisionalProposal dco_decode_box_autoadd_ffi_provisional_proposal(
+      dynamic raw);
 
   @protected
   FfiRequestBuilder dco_decode_box_autoadd_ffi_request_builder(dynamic raw);
@@ -240,38 +261,14 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
       dynamic raw);
 
   @protected
+  FfiUncheckedProposal dco_decode_box_autoadd_ffi_unchecked_proposal(
+      dynamic raw);
+
+  @protected
   FfiUri dco_decode_box_autoadd_ffi_uri(dynamic raw);
 
   @protected
   FfiUrl dco_decode_box_autoadd_ffi_url(dynamic raw);
-
-  @protected
-  FfiV2MaybeInputsOwned dco_decode_box_autoadd_ffi_v_2_maybe_inputs_owned(
-      dynamic raw);
-
-  @protected
-  FfiV2MaybeInputsSeen dco_decode_box_autoadd_ffi_v_2_maybe_inputs_seen(
-      dynamic raw);
-
-  @protected
-  FfiV2MaybeMixedInputScripts
-      dco_decode_box_autoadd_ffi_v_2_maybe_mixed_input_scripts(dynamic raw);
-
-  @protected
-  FfiV2OutputsUnknown dco_decode_box_autoadd_ffi_v_2_outputs_unknown(
-      dynamic raw);
-
-  @protected
-  FfiV2PayjoinProposal dco_decode_box_autoadd_ffi_v_2_payjoin_proposal(
-      dynamic raw);
-
-  @protected
-  FfiV2ProvisionalProposal dco_decode_box_autoadd_ffi_v_2_provisional_proposal(
-      dynamic raw);
-
-  @protected
-  FfiV2UncheckedProposal dco_decode_box_autoadd_ffi_v_2_unchecked_proposal(
-      dynamic raw);
 
   @protected
   OutPoint dco_decode_box_autoadd_out_point(dynamic raw);
@@ -301,13 +298,32 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   FfiContextV2 dco_decode_ffi_context_v_2(dynamic raw);
 
   @protected
+  FfiMaybeInputsOwned dco_decode_ffi_maybe_inputs_owned(dynamic raw);
+
+  @protected
+  FfiMaybeInputsSeen dco_decode_ffi_maybe_inputs_seen(dynamic raw);
+
+  @protected
+  FfiMaybeMixedInputScripts dco_decode_ffi_maybe_mixed_input_scripts(
+      dynamic raw);
+
+  @protected
   FfiOhttpKeys dco_decode_ffi_ohttp_keys(dynamic raw);
+
+  @protected
+  FfiOutputsUnknown dco_decode_ffi_outputs_unknown(dynamic raw);
+
+  @protected
+  FfiPayjoinProposal dco_decode_ffi_payjoin_proposal(dynamic raw);
 
   @protected
   FfiPjUri dco_decode_ffi_pj_uri(dynamic raw);
 
   @protected
   FfiPjUriBuilder dco_decode_ffi_pj_uri_builder(dynamic raw);
+
+  @protected
+  FfiProvisionalProposal dco_decode_ffi_provisional_proposal(dynamic raw);
 
   @protected
   FfiRequestBuilder dco_decode_ffi_request_builder(dynamic raw);
@@ -319,32 +335,13 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   FfiSessionInitializer dco_decode_ffi_session_initializer(dynamic raw);
 
   @protected
+  FfiUncheckedProposal dco_decode_ffi_unchecked_proposal(dynamic raw);
+
+  @protected
   FfiUri dco_decode_ffi_uri(dynamic raw);
 
   @protected
   FfiUrl dco_decode_ffi_url(dynamic raw);
-
-  @protected
-  FfiV2MaybeInputsOwned dco_decode_ffi_v_2_maybe_inputs_owned(dynamic raw);
-
-  @protected
-  FfiV2MaybeInputsSeen dco_decode_ffi_v_2_maybe_inputs_seen(dynamic raw);
-
-  @protected
-  FfiV2MaybeMixedInputScripts dco_decode_ffi_v_2_maybe_mixed_input_scripts(
-      dynamic raw);
-
-  @protected
-  FfiV2OutputsUnknown dco_decode_ffi_v_2_outputs_unknown(dynamic raw);
-
-  @protected
-  FfiV2PayjoinProposal dco_decode_ffi_v_2_payjoin_proposal(dynamic raw);
-
-  @protected
-  FfiV2ProvisionalProposal dco_decode_ffi_v_2_provisional_proposal(dynamic raw);
-
-  @protected
-  FfiV2UncheckedProposal dco_decode_ffi_v_2_unchecked_proposal(dynamic raw);
 
   @protected
   int dco_decode_i_32(dynamic raw);
@@ -377,7 +374,7 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   FfiOhttpKeys? dco_decode_opt_box_autoadd_ffi_ohttp_keys(dynamic raw);
 
   @protected
-  FfiV2UncheckedProposal? dco_decode_opt_box_autoadd_ffi_v_2_unchecked_proposal(
+  FfiUncheckedProposal? dco_decode_opt_box_autoadd_ffi_unchecked_proposal(
       dynamic raw);
 
   @protected
@@ -544,7 +541,28 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
       SseDeserializer deserializer);
 
   @protected
+  FfiMaybeInputsOwned sse_decode_box_autoadd_ffi_maybe_inputs_owned(
+      SseDeserializer deserializer);
+
+  @protected
+  FfiMaybeInputsSeen sse_decode_box_autoadd_ffi_maybe_inputs_seen(
+      SseDeserializer deserializer);
+
+  @protected
+  FfiMaybeMixedInputScripts
+      sse_decode_box_autoadd_ffi_maybe_mixed_input_scripts(
+          SseDeserializer deserializer);
+
+  @protected
   FfiOhttpKeys sse_decode_box_autoadd_ffi_ohttp_keys(
+      SseDeserializer deserializer);
+
+  @protected
+  FfiOutputsUnknown sse_decode_box_autoadd_ffi_outputs_unknown(
+      SseDeserializer deserializer);
+
+  @protected
+  FfiPayjoinProposal sse_decode_box_autoadd_ffi_payjoin_proposal(
       SseDeserializer deserializer);
 
   @protected
@@ -552,6 +570,10 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
 
   @protected
   FfiPjUriBuilder sse_decode_box_autoadd_ffi_pj_uri_builder(
+      SseDeserializer deserializer);
+
+  @protected
+  FfiProvisionalProposal sse_decode_box_autoadd_ffi_provisional_proposal(
       SseDeserializer deserializer);
 
   @protected
@@ -567,39 +589,14 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
       SseDeserializer deserializer);
 
   @protected
+  FfiUncheckedProposal sse_decode_box_autoadd_ffi_unchecked_proposal(
+      SseDeserializer deserializer);
+
+  @protected
   FfiUri sse_decode_box_autoadd_ffi_uri(SseDeserializer deserializer);
 
   @protected
   FfiUrl sse_decode_box_autoadd_ffi_url(SseDeserializer deserializer);
-
-  @protected
-  FfiV2MaybeInputsOwned sse_decode_box_autoadd_ffi_v_2_maybe_inputs_owned(
-      SseDeserializer deserializer);
-
-  @protected
-  FfiV2MaybeInputsSeen sse_decode_box_autoadd_ffi_v_2_maybe_inputs_seen(
-      SseDeserializer deserializer);
-
-  @protected
-  FfiV2MaybeMixedInputScripts
-      sse_decode_box_autoadd_ffi_v_2_maybe_mixed_input_scripts(
-          SseDeserializer deserializer);
-
-  @protected
-  FfiV2OutputsUnknown sse_decode_box_autoadd_ffi_v_2_outputs_unknown(
-      SseDeserializer deserializer);
-
-  @protected
-  FfiV2PayjoinProposal sse_decode_box_autoadd_ffi_v_2_payjoin_proposal(
-      SseDeserializer deserializer);
-
-  @protected
-  FfiV2ProvisionalProposal sse_decode_box_autoadd_ffi_v_2_provisional_proposal(
-      SseDeserializer deserializer);
-
-  @protected
-  FfiV2UncheckedProposal sse_decode_box_autoadd_ffi_v_2_unchecked_proposal(
-      SseDeserializer deserializer);
 
   @protected
   OutPoint sse_decode_box_autoadd_out_point(SseDeserializer deserializer);
@@ -629,13 +626,37 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   FfiContextV2 sse_decode_ffi_context_v_2(SseDeserializer deserializer);
 
   @protected
+  FfiMaybeInputsOwned sse_decode_ffi_maybe_inputs_owned(
+      SseDeserializer deserializer);
+
+  @protected
+  FfiMaybeInputsSeen sse_decode_ffi_maybe_inputs_seen(
+      SseDeserializer deserializer);
+
+  @protected
+  FfiMaybeMixedInputScripts sse_decode_ffi_maybe_mixed_input_scripts(
+      SseDeserializer deserializer);
+
+  @protected
   FfiOhttpKeys sse_decode_ffi_ohttp_keys(SseDeserializer deserializer);
+
+  @protected
+  FfiOutputsUnknown sse_decode_ffi_outputs_unknown(
+      SseDeserializer deserializer);
+
+  @protected
+  FfiPayjoinProposal sse_decode_ffi_payjoin_proposal(
+      SseDeserializer deserializer);
 
   @protected
   FfiPjUri sse_decode_ffi_pj_uri(SseDeserializer deserializer);
 
   @protected
   FfiPjUriBuilder sse_decode_ffi_pj_uri_builder(SseDeserializer deserializer);
+
+  @protected
+  FfiProvisionalProposal sse_decode_ffi_provisional_proposal(
+      SseDeserializer deserializer);
 
   @protected
   FfiRequestBuilder sse_decode_ffi_request_builder(
@@ -650,38 +671,14 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
       SseDeserializer deserializer);
 
   @protected
+  FfiUncheckedProposal sse_decode_ffi_unchecked_proposal(
+      SseDeserializer deserializer);
+
+  @protected
   FfiUri sse_decode_ffi_uri(SseDeserializer deserializer);
 
   @protected
   FfiUrl sse_decode_ffi_url(SseDeserializer deserializer);
-
-  @protected
-  FfiV2MaybeInputsOwned sse_decode_ffi_v_2_maybe_inputs_owned(
-      SseDeserializer deserializer);
-
-  @protected
-  FfiV2MaybeInputsSeen sse_decode_ffi_v_2_maybe_inputs_seen(
-      SseDeserializer deserializer);
-
-  @protected
-  FfiV2MaybeMixedInputScripts sse_decode_ffi_v_2_maybe_mixed_input_scripts(
-      SseDeserializer deserializer);
-
-  @protected
-  FfiV2OutputsUnknown sse_decode_ffi_v_2_outputs_unknown(
-      SseDeserializer deserializer);
-
-  @protected
-  FfiV2PayjoinProposal sse_decode_ffi_v_2_payjoin_proposal(
-      SseDeserializer deserializer);
-
-  @protected
-  FfiV2ProvisionalProposal sse_decode_ffi_v_2_provisional_proposal(
-      SseDeserializer deserializer);
-
-  @protected
-  FfiV2UncheckedProposal sse_decode_ffi_v_2_unchecked_proposal(
-      SseDeserializer deserializer);
 
   @protected
   int sse_decode_i_32(SseDeserializer deserializer);
@@ -716,7 +713,7 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
       SseDeserializer deserializer);
 
   @protected
-  FfiV2UncheckedProposal? sse_decode_opt_box_autoadd_ffi_v_2_unchecked_proposal(
+  FfiUncheckedProposal? sse_decode_opt_box_autoadd_ffi_unchecked_proposal(
       SseDeserializer deserializer);
 
   @protected
@@ -832,11 +829,57 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   }
 
   @protected
+  ffi.Pointer<wire_cst_ffi_maybe_inputs_owned>
+      cst_encode_box_autoadd_ffi_maybe_inputs_owned(FfiMaybeInputsOwned raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    final ptr = wire.cst_new_box_autoadd_ffi_maybe_inputs_owned();
+    cst_api_fill_to_wire_ffi_maybe_inputs_owned(raw, ptr.ref);
+    return ptr;
+  }
+
+  @protected
+  ffi.Pointer<wire_cst_ffi_maybe_inputs_seen>
+      cst_encode_box_autoadd_ffi_maybe_inputs_seen(FfiMaybeInputsSeen raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    final ptr = wire.cst_new_box_autoadd_ffi_maybe_inputs_seen();
+    cst_api_fill_to_wire_ffi_maybe_inputs_seen(raw, ptr.ref);
+    return ptr;
+  }
+
+  @protected
+  ffi.Pointer<wire_cst_ffi_maybe_mixed_input_scripts>
+      cst_encode_box_autoadd_ffi_maybe_mixed_input_scripts(
+          FfiMaybeMixedInputScripts raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    final ptr = wire.cst_new_box_autoadd_ffi_maybe_mixed_input_scripts();
+    cst_api_fill_to_wire_ffi_maybe_mixed_input_scripts(raw, ptr.ref);
+    return ptr;
+  }
+
+  @protected
   ffi.Pointer<wire_cst_ffi_ohttp_keys> cst_encode_box_autoadd_ffi_ohttp_keys(
       FfiOhttpKeys raw) {
     // Codec=Cst (C-struct based), see doc to use other codecs
     final ptr = wire.cst_new_box_autoadd_ffi_ohttp_keys();
     cst_api_fill_to_wire_ffi_ohttp_keys(raw, ptr.ref);
+    return ptr;
+  }
+
+  @protected
+  ffi.Pointer<wire_cst_ffi_outputs_unknown>
+      cst_encode_box_autoadd_ffi_outputs_unknown(FfiOutputsUnknown raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    final ptr = wire.cst_new_box_autoadd_ffi_outputs_unknown();
+    cst_api_fill_to_wire_ffi_outputs_unknown(raw, ptr.ref);
+    return ptr;
+  }
+
+  @protected
+  ffi.Pointer<wire_cst_ffi_payjoin_proposal>
+      cst_encode_box_autoadd_ffi_payjoin_proposal(FfiPayjoinProposal raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    final ptr = wire.cst_new_box_autoadd_ffi_payjoin_proposal();
+    cst_api_fill_to_wire_ffi_payjoin_proposal(raw, ptr.ref);
     return ptr;
   }
 
@@ -855,6 +898,16 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
     // Codec=Cst (C-struct based), see doc to use other codecs
     final ptr = wire.cst_new_box_autoadd_ffi_pj_uri_builder();
     cst_api_fill_to_wire_ffi_pj_uri_builder(raw, ptr.ref);
+    return ptr;
+  }
+
+  @protected
+  ffi.Pointer<wire_cst_ffi_provisional_proposal>
+      cst_encode_box_autoadd_ffi_provisional_proposal(
+          FfiProvisionalProposal raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    final ptr = wire.cst_new_box_autoadd_ffi_provisional_proposal();
+    cst_api_fill_to_wire_ffi_provisional_proposal(raw, ptr.ref);
     return ptr;
   }
 
@@ -887,6 +940,15 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   }
 
   @protected
+  ffi.Pointer<wire_cst_ffi_unchecked_proposal>
+      cst_encode_box_autoadd_ffi_unchecked_proposal(FfiUncheckedProposal raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    final ptr = wire.cst_new_box_autoadd_ffi_unchecked_proposal();
+    cst_api_fill_to_wire_ffi_unchecked_proposal(raw, ptr.ref);
+    return ptr;
+  }
+
+  @protected
   ffi.Pointer<wire_cst_ffi_uri> cst_encode_box_autoadd_ffi_uri(FfiUri raw) {
     // Codec=Cst (C-struct based), see doc to use other codecs
     final ptr = wire.cst_new_box_autoadd_ffi_uri();
@@ -899,75 +961,6 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
     // Codec=Cst (C-struct based), see doc to use other codecs
     final ptr = wire.cst_new_box_autoadd_ffi_url();
     cst_api_fill_to_wire_ffi_url(raw, ptr.ref);
-    return ptr;
-  }
-
-  @protected
-  ffi.Pointer<wire_cst_ffi_v_2_maybe_inputs_owned>
-      cst_encode_box_autoadd_ffi_v_2_maybe_inputs_owned(
-          FfiV2MaybeInputsOwned raw) {
-    // Codec=Cst (C-struct based), see doc to use other codecs
-    final ptr = wire.cst_new_box_autoadd_ffi_v_2_maybe_inputs_owned();
-    cst_api_fill_to_wire_ffi_v_2_maybe_inputs_owned(raw, ptr.ref);
-    return ptr;
-  }
-
-  @protected
-  ffi.Pointer<wire_cst_ffi_v_2_maybe_inputs_seen>
-      cst_encode_box_autoadd_ffi_v_2_maybe_inputs_seen(
-          FfiV2MaybeInputsSeen raw) {
-    // Codec=Cst (C-struct based), see doc to use other codecs
-    final ptr = wire.cst_new_box_autoadd_ffi_v_2_maybe_inputs_seen();
-    cst_api_fill_to_wire_ffi_v_2_maybe_inputs_seen(raw, ptr.ref);
-    return ptr;
-  }
-
-  @protected
-  ffi.Pointer<wire_cst_ffi_v_2_maybe_mixed_input_scripts>
-      cst_encode_box_autoadd_ffi_v_2_maybe_mixed_input_scripts(
-          FfiV2MaybeMixedInputScripts raw) {
-    // Codec=Cst (C-struct based), see doc to use other codecs
-    final ptr = wire.cst_new_box_autoadd_ffi_v_2_maybe_mixed_input_scripts();
-    cst_api_fill_to_wire_ffi_v_2_maybe_mixed_input_scripts(raw, ptr.ref);
-    return ptr;
-  }
-
-  @protected
-  ffi.Pointer<wire_cst_ffi_v_2_outputs_unknown>
-      cst_encode_box_autoadd_ffi_v_2_outputs_unknown(FfiV2OutputsUnknown raw) {
-    // Codec=Cst (C-struct based), see doc to use other codecs
-    final ptr = wire.cst_new_box_autoadd_ffi_v_2_outputs_unknown();
-    cst_api_fill_to_wire_ffi_v_2_outputs_unknown(raw, ptr.ref);
-    return ptr;
-  }
-
-  @protected
-  ffi.Pointer<wire_cst_ffi_v_2_payjoin_proposal>
-      cst_encode_box_autoadd_ffi_v_2_payjoin_proposal(
-          FfiV2PayjoinProposal raw) {
-    // Codec=Cst (C-struct based), see doc to use other codecs
-    final ptr = wire.cst_new_box_autoadd_ffi_v_2_payjoin_proposal();
-    cst_api_fill_to_wire_ffi_v_2_payjoin_proposal(raw, ptr.ref);
-    return ptr;
-  }
-
-  @protected
-  ffi.Pointer<wire_cst_ffi_v_2_provisional_proposal>
-      cst_encode_box_autoadd_ffi_v_2_provisional_proposal(
-          FfiV2ProvisionalProposal raw) {
-    // Codec=Cst (C-struct based), see doc to use other codecs
-    final ptr = wire.cst_new_box_autoadd_ffi_v_2_provisional_proposal();
-    cst_api_fill_to_wire_ffi_v_2_provisional_proposal(raw, ptr.ref);
-    return ptr;
-  }
-
-  @protected
-  ffi.Pointer<wire_cst_ffi_v_2_unchecked_proposal>
-      cst_encode_box_autoadd_ffi_v_2_unchecked_proposal(
-          FfiV2UncheckedProposal raw) {
-    // Codec=Cst (C-struct based), see doc to use other codecs
-    final ptr = wire.cst_new_box_autoadd_ffi_v_2_unchecked_proposal();
-    cst_api_fill_to_wire_ffi_v_2_unchecked_proposal(raw, ptr.ref);
     return ptr;
   }
 
@@ -1072,13 +1065,13 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   }
 
   @protected
-  ffi.Pointer<wire_cst_ffi_v_2_unchecked_proposal>
-      cst_encode_opt_box_autoadd_ffi_v_2_unchecked_proposal(
-          FfiV2UncheckedProposal? raw) {
+  ffi.Pointer<wire_cst_ffi_unchecked_proposal>
+      cst_encode_opt_box_autoadd_ffi_unchecked_proposal(
+          FfiUncheckedProposal? raw) {
     // Codec=Cst (C-struct based), see doc to use other codecs
     return raw == null
         ? ffi.nullptr
-        : cst_encode_box_autoadd_ffi_v_2_unchecked_proposal(raw);
+        : cst_encode_box_autoadd_ffi_unchecked_proposal(raw);
   }
 
   @protected
@@ -1131,9 +1124,44 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   }
 
   @protected
+  void cst_api_fill_to_wire_box_autoadd_ffi_maybe_inputs_owned(
+      FfiMaybeInputsOwned apiObj,
+      ffi.Pointer<wire_cst_ffi_maybe_inputs_owned> wireObj) {
+    cst_api_fill_to_wire_ffi_maybe_inputs_owned(apiObj, wireObj.ref);
+  }
+
+  @protected
+  void cst_api_fill_to_wire_box_autoadd_ffi_maybe_inputs_seen(
+      FfiMaybeInputsSeen apiObj,
+      ffi.Pointer<wire_cst_ffi_maybe_inputs_seen> wireObj) {
+    cst_api_fill_to_wire_ffi_maybe_inputs_seen(apiObj, wireObj.ref);
+  }
+
+  @protected
+  void cst_api_fill_to_wire_box_autoadd_ffi_maybe_mixed_input_scripts(
+      FfiMaybeMixedInputScripts apiObj,
+      ffi.Pointer<wire_cst_ffi_maybe_mixed_input_scripts> wireObj) {
+    cst_api_fill_to_wire_ffi_maybe_mixed_input_scripts(apiObj, wireObj.ref);
+  }
+
+  @protected
   void cst_api_fill_to_wire_box_autoadd_ffi_ohttp_keys(
       FfiOhttpKeys apiObj, ffi.Pointer<wire_cst_ffi_ohttp_keys> wireObj) {
     cst_api_fill_to_wire_ffi_ohttp_keys(apiObj, wireObj.ref);
+  }
+
+  @protected
+  void cst_api_fill_to_wire_box_autoadd_ffi_outputs_unknown(
+      FfiOutputsUnknown apiObj,
+      ffi.Pointer<wire_cst_ffi_outputs_unknown> wireObj) {
+    cst_api_fill_to_wire_ffi_outputs_unknown(apiObj, wireObj.ref);
+  }
+
+  @protected
+  void cst_api_fill_to_wire_box_autoadd_ffi_payjoin_proposal(
+      FfiPayjoinProposal apiObj,
+      ffi.Pointer<wire_cst_ffi_payjoin_proposal> wireObj) {
+    cst_api_fill_to_wire_ffi_payjoin_proposal(apiObj, wireObj.ref);
   }
 
   @protected
@@ -1147,6 +1175,13 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
       FfiPjUriBuilder apiObj,
       ffi.Pointer<wire_cst_ffi_pj_uri_builder> wireObj) {
     cst_api_fill_to_wire_ffi_pj_uri_builder(apiObj, wireObj.ref);
+  }
+
+  @protected
+  void cst_api_fill_to_wire_box_autoadd_ffi_provisional_proposal(
+      FfiProvisionalProposal apiObj,
+      ffi.Pointer<wire_cst_ffi_provisional_proposal> wireObj) {
+    cst_api_fill_to_wire_ffi_provisional_proposal(apiObj, wireObj.ref);
   }
 
   @protected
@@ -1171,6 +1206,13 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   }
 
   @protected
+  void cst_api_fill_to_wire_box_autoadd_ffi_unchecked_proposal(
+      FfiUncheckedProposal apiObj,
+      ffi.Pointer<wire_cst_ffi_unchecked_proposal> wireObj) {
+    cst_api_fill_to_wire_ffi_unchecked_proposal(apiObj, wireObj.ref);
+  }
+
+  @protected
   void cst_api_fill_to_wire_box_autoadd_ffi_uri(
       FfiUri apiObj, ffi.Pointer<wire_cst_ffi_uri> wireObj) {
     cst_api_fill_to_wire_ffi_uri(apiObj, wireObj.ref);
@@ -1180,55 +1222,6 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   void cst_api_fill_to_wire_box_autoadd_ffi_url(
       FfiUrl apiObj, ffi.Pointer<wire_cst_ffi_url> wireObj) {
     cst_api_fill_to_wire_ffi_url(apiObj, wireObj.ref);
-  }
-
-  @protected
-  void cst_api_fill_to_wire_box_autoadd_ffi_v_2_maybe_inputs_owned(
-      FfiV2MaybeInputsOwned apiObj,
-      ffi.Pointer<wire_cst_ffi_v_2_maybe_inputs_owned> wireObj) {
-    cst_api_fill_to_wire_ffi_v_2_maybe_inputs_owned(apiObj, wireObj.ref);
-  }
-
-  @protected
-  void cst_api_fill_to_wire_box_autoadd_ffi_v_2_maybe_inputs_seen(
-      FfiV2MaybeInputsSeen apiObj,
-      ffi.Pointer<wire_cst_ffi_v_2_maybe_inputs_seen> wireObj) {
-    cst_api_fill_to_wire_ffi_v_2_maybe_inputs_seen(apiObj, wireObj.ref);
-  }
-
-  @protected
-  void cst_api_fill_to_wire_box_autoadd_ffi_v_2_maybe_mixed_input_scripts(
-      FfiV2MaybeMixedInputScripts apiObj,
-      ffi.Pointer<wire_cst_ffi_v_2_maybe_mixed_input_scripts> wireObj) {
-    cst_api_fill_to_wire_ffi_v_2_maybe_mixed_input_scripts(apiObj, wireObj.ref);
-  }
-
-  @protected
-  void cst_api_fill_to_wire_box_autoadd_ffi_v_2_outputs_unknown(
-      FfiV2OutputsUnknown apiObj,
-      ffi.Pointer<wire_cst_ffi_v_2_outputs_unknown> wireObj) {
-    cst_api_fill_to_wire_ffi_v_2_outputs_unknown(apiObj, wireObj.ref);
-  }
-
-  @protected
-  void cst_api_fill_to_wire_box_autoadd_ffi_v_2_payjoin_proposal(
-      FfiV2PayjoinProposal apiObj,
-      ffi.Pointer<wire_cst_ffi_v_2_payjoin_proposal> wireObj) {
-    cst_api_fill_to_wire_ffi_v_2_payjoin_proposal(apiObj, wireObj.ref);
-  }
-
-  @protected
-  void cst_api_fill_to_wire_box_autoadd_ffi_v_2_provisional_proposal(
-      FfiV2ProvisionalProposal apiObj,
-      ffi.Pointer<wire_cst_ffi_v_2_provisional_proposal> wireObj) {
-    cst_api_fill_to_wire_ffi_v_2_provisional_proposal(apiObj, wireObj.ref);
-  }
-
-  @protected
-  void cst_api_fill_to_wire_box_autoadd_ffi_v_2_unchecked_proposal(
-      FfiV2UncheckedProposal apiObj,
-      ffi.Pointer<wire_cst_ffi_v_2_unchecked_proposal> wireObj) {
-    cst_api_fill_to_wire_ffi_v_2_unchecked_proposal(apiObj, wireObj.ref);
   }
 
   @protected
@@ -1273,10 +1266,50 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   }
 
   @protected
+  void cst_api_fill_to_wire_ffi_maybe_inputs_owned(
+      FfiMaybeInputsOwned apiObj, wire_cst_ffi_maybe_inputs_owned wireObj) {
+    wireObj.field0 =
+        cst_encode_RustOpaque_payjoin_ffireceivev2V2MaybeInputsOwned(
+            apiObj.field0);
+  }
+
+  @protected
+  void cst_api_fill_to_wire_ffi_maybe_inputs_seen(
+      FfiMaybeInputsSeen apiObj, wire_cst_ffi_maybe_inputs_seen wireObj) {
+    wireObj.field0 =
+        cst_encode_RustOpaque_payjoin_ffireceivev2V2MaybeInputsSeen(
+            apiObj.field0);
+  }
+
+  @protected
+  void cst_api_fill_to_wire_ffi_maybe_mixed_input_scripts(
+      FfiMaybeMixedInputScripts apiObj,
+      wire_cst_ffi_maybe_mixed_input_scripts wireObj) {
+    wireObj.field0 =
+        cst_encode_RustOpaque_payjoin_ffireceivev2V2MaybeMixedInputScripts(
+            apiObj.field0);
+  }
+
+  @protected
   void cst_api_fill_to_wire_ffi_ohttp_keys(
       FfiOhttpKeys apiObj, wire_cst_ffi_ohttp_keys wireObj) {
     wireObj.field0 =
         cst_encode_RustOpaque_payjoin_ffitypesOhttpKeys(apiObj.field0);
+  }
+
+  @protected
+  void cst_api_fill_to_wire_ffi_outputs_unknown(
+      FfiOutputsUnknown apiObj, wire_cst_ffi_outputs_unknown wireObj) {
+    wireObj.field0 = cst_encode_RustOpaque_payjoin_ffireceivev2V2OutputsUnknown(
+        apiObj.field0);
+  }
+
+  @protected
+  void cst_api_fill_to_wire_ffi_payjoin_proposal(
+      FfiPayjoinProposal apiObj, wire_cst_ffi_payjoin_proposal wireObj) {
+    wireObj.field0 =
+        cst_encode_RustOpaque_Arcpayjoin_ffireceivev2V2PayjoinProposal(
+            apiObj.field0);
   }
 
   @protected
@@ -1290,6 +1323,15 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
       FfiPjUriBuilder apiObj, wire_cst_ffi_pj_uri_builder wireObj) {
     wireObj.internal =
         cst_encode_RustOpaque_payjoin_ffiuriPjUriBuilder(apiObj.internal);
+  }
+
+  @protected
+  void cst_api_fill_to_wire_ffi_provisional_proposal(
+      FfiProvisionalProposal apiObj,
+      wire_cst_ffi_provisional_proposal wireObj) {
+    wireObj.field0 =
+        cst_encode_RustOpaque_payjoin_ffireceivev2V2ProvisionalProposal(
+            apiObj.field0);
   }
 
   @protected
@@ -1315,6 +1357,14 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   }
 
   @protected
+  void cst_api_fill_to_wire_ffi_unchecked_proposal(
+      FfiUncheckedProposal apiObj, wire_cst_ffi_unchecked_proposal wireObj) {
+    wireObj.field0 =
+        cst_encode_RustOpaque_payjoin_ffireceivev2V2UncheckedProposal(
+            apiObj.field0);
+  }
+
+  @protected
   void cst_api_fill_to_wire_ffi_uri(FfiUri apiObj, wire_cst_ffi_uri wireObj) {
     wireObj.field0 = cst_encode_RustOpaque_payjoin_ffiuriUri(apiObj.field0);
   }
@@ -1322,65 +1372,6 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   @protected
   void cst_api_fill_to_wire_ffi_url(FfiUrl apiObj, wire_cst_ffi_url wireObj) {
     wireObj.field0 = cst_encode_RustOpaque_payjoin_ffiuriUrl(apiObj.field0);
-  }
-
-  @protected
-  void cst_api_fill_to_wire_ffi_v_2_maybe_inputs_owned(
-      FfiV2MaybeInputsOwned apiObj,
-      wire_cst_ffi_v_2_maybe_inputs_owned wireObj) {
-    wireObj.field0 =
-        cst_encode_RustOpaque_payjoin_ffireceivev2V2MaybeInputsOwned(
-            apiObj.field0);
-  }
-
-  @protected
-  void cst_api_fill_to_wire_ffi_v_2_maybe_inputs_seen(
-      FfiV2MaybeInputsSeen apiObj, wire_cst_ffi_v_2_maybe_inputs_seen wireObj) {
-    wireObj.field0 =
-        cst_encode_RustOpaque_payjoin_ffireceivev2V2MaybeInputsSeen(
-            apiObj.field0);
-  }
-
-  @protected
-  void cst_api_fill_to_wire_ffi_v_2_maybe_mixed_input_scripts(
-      FfiV2MaybeMixedInputScripts apiObj,
-      wire_cst_ffi_v_2_maybe_mixed_input_scripts wireObj) {
-    wireObj.field0 =
-        cst_encode_RustOpaque_payjoin_ffireceivev2V2MaybeMixedInputScripts(
-            apiObj.field0);
-  }
-
-  @protected
-  void cst_api_fill_to_wire_ffi_v_2_outputs_unknown(
-      FfiV2OutputsUnknown apiObj, wire_cst_ffi_v_2_outputs_unknown wireObj) {
-    wireObj.field0 = cst_encode_RustOpaque_payjoin_ffireceivev2V2OutputsUnknown(
-        apiObj.field0);
-  }
-
-  @protected
-  void cst_api_fill_to_wire_ffi_v_2_payjoin_proposal(
-      FfiV2PayjoinProposal apiObj, wire_cst_ffi_v_2_payjoin_proposal wireObj) {
-    wireObj.field0 =
-        cst_encode_RustOpaque_Arcpayjoin_ffireceivev2V2PayjoinProposal(
-            apiObj.field0);
-  }
-
-  @protected
-  void cst_api_fill_to_wire_ffi_v_2_provisional_proposal(
-      FfiV2ProvisionalProposal apiObj,
-      wire_cst_ffi_v_2_provisional_proposal wireObj) {
-    wireObj.field0 =
-        cst_encode_RustOpaque_payjoin_ffireceivev2V2ProvisionalProposal(
-            apiObj.field0);
-  }
-
-  @protected
-  void cst_api_fill_to_wire_ffi_v_2_unchecked_proposal(
-      FfiV2UncheckedProposal apiObj,
-      wire_cst_ffi_v_2_unchecked_proposal wireObj) {
-    wireObj.field0 =
-        cst_encode_RustOpaque_payjoin_ffireceivev2V2UncheckedProposal(
-            apiObj.field0);
   }
 
   @protected
@@ -1787,8 +1778,28 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
       FfiContextV2 self, SseSerializer serializer);
 
   @protected
+  void sse_encode_box_autoadd_ffi_maybe_inputs_owned(
+      FfiMaybeInputsOwned self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_box_autoadd_ffi_maybe_inputs_seen(
+      FfiMaybeInputsSeen self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_box_autoadd_ffi_maybe_mixed_input_scripts(
+      FfiMaybeMixedInputScripts self, SseSerializer serializer);
+
+  @protected
   void sse_encode_box_autoadd_ffi_ohttp_keys(
       FfiOhttpKeys self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_box_autoadd_ffi_outputs_unknown(
+      FfiOutputsUnknown self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_box_autoadd_ffi_payjoin_proposal(
+      FfiPayjoinProposal self, SseSerializer serializer);
 
   @protected
   void sse_encode_box_autoadd_ffi_pj_uri(
@@ -1797,6 +1808,10 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   @protected
   void sse_encode_box_autoadd_ffi_pj_uri_builder(
       FfiPjUriBuilder self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_box_autoadd_ffi_provisional_proposal(
+      FfiProvisionalProposal self, SseSerializer serializer);
 
   @protected
   void sse_encode_box_autoadd_ffi_request_builder(
@@ -1811,38 +1826,14 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
       FfiSessionInitializer self, SseSerializer serializer);
 
   @protected
+  void sse_encode_box_autoadd_ffi_unchecked_proposal(
+      FfiUncheckedProposal self, SseSerializer serializer);
+
+  @protected
   void sse_encode_box_autoadd_ffi_uri(FfiUri self, SseSerializer serializer);
 
   @protected
   void sse_encode_box_autoadd_ffi_url(FfiUrl self, SseSerializer serializer);
-
-  @protected
-  void sse_encode_box_autoadd_ffi_v_2_maybe_inputs_owned(
-      FfiV2MaybeInputsOwned self, SseSerializer serializer);
-
-  @protected
-  void sse_encode_box_autoadd_ffi_v_2_maybe_inputs_seen(
-      FfiV2MaybeInputsSeen self, SseSerializer serializer);
-
-  @protected
-  void sse_encode_box_autoadd_ffi_v_2_maybe_mixed_input_scripts(
-      FfiV2MaybeMixedInputScripts self, SseSerializer serializer);
-
-  @protected
-  void sse_encode_box_autoadd_ffi_v_2_outputs_unknown(
-      FfiV2OutputsUnknown self, SseSerializer serializer);
-
-  @protected
-  void sse_encode_box_autoadd_ffi_v_2_payjoin_proposal(
-      FfiV2PayjoinProposal self, SseSerializer serializer);
-
-  @protected
-  void sse_encode_box_autoadd_ffi_v_2_provisional_proposal(
-      FfiV2ProvisionalProposal self, SseSerializer serializer);
-
-  @protected
-  void sse_encode_box_autoadd_ffi_v_2_unchecked_proposal(
-      FfiV2UncheckedProposal self, SseSerializer serializer);
 
   @protected
   void sse_encode_box_autoadd_out_point(
@@ -1875,7 +1866,27 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   void sse_encode_ffi_context_v_2(FfiContextV2 self, SseSerializer serializer);
 
   @protected
+  void sse_encode_ffi_maybe_inputs_owned(
+      FfiMaybeInputsOwned self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_ffi_maybe_inputs_seen(
+      FfiMaybeInputsSeen self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_ffi_maybe_mixed_input_scripts(
+      FfiMaybeMixedInputScripts self, SseSerializer serializer);
+
+  @protected
   void sse_encode_ffi_ohttp_keys(FfiOhttpKeys self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_ffi_outputs_unknown(
+      FfiOutputsUnknown self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_ffi_payjoin_proposal(
+      FfiPayjoinProposal self, SseSerializer serializer);
 
   @protected
   void sse_encode_ffi_pj_uri(FfiPjUri self, SseSerializer serializer);
@@ -1883,6 +1894,10 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   @protected
   void sse_encode_ffi_pj_uri_builder(
       FfiPjUriBuilder self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_ffi_provisional_proposal(
+      FfiProvisionalProposal self, SseSerializer serializer);
 
   @protected
   void sse_encode_ffi_request_builder(
@@ -1897,38 +1912,14 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
       FfiSessionInitializer self, SseSerializer serializer);
 
   @protected
+  void sse_encode_ffi_unchecked_proposal(
+      FfiUncheckedProposal self, SseSerializer serializer);
+
+  @protected
   void sse_encode_ffi_uri(FfiUri self, SseSerializer serializer);
 
   @protected
   void sse_encode_ffi_url(FfiUrl self, SseSerializer serializer);
-
-  @protected
-  void sse_encode_ffi_v_2_maybe_inputs_owned(
-      FfiV2MaybeInputsOwned self, SseSerializer serializer);
-
-  @protected
-  void sse_encode_ffi_v_2_maybe_inputs_seen(
-      FfiV2MaybeInputsSeen self, SseSerializer serializer);
-
-  @protected
-  void sse_encode_ffi_v_2_maybe_mixed_input_scripts(
-      FfiV2MaybeMixedInputScripts self, SseSerializer serializer);
-
-  @protected
-  void sse_encode_ffi_v_2_outputs_unknown(
-      FfiV2OutputsUnknown self, SseSerializer serializer);
-
-  @protected
-  void sse_encode_ffi_v_2_payjoin_proposal(
-      FfiV2PayjoinProposal self, SseSerializer serializer);
-
-  @protected
-  void sse_encode_ffi_v_2_provisional_proposal(
-      FfiV2ProvisionalProposal self, SseSerializer serializer);
-
-  @protected
-  void sse_encode_ffi_v_2_unchecked_proposal(
-      FfiV2UncheckedProposal self, SseSerializer serializer);
 
   @protected
   void sse_encode_i_32(int self, SseSerializer serializer);
@@ -1965,8 +1956,8 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
       FfiOhttpKeys? self, SseSerializer serializer);
 
   @protected
-  void sse_encode_opt_box_autoadd_ffi_v_2_unchecked_proposal(
-      FfiV2UncheckedProposal? self, SseSerializer serializer);
+  void sse_encode_opt_box_autoadd_ffi_unchecked_proposal(
+      FfiUncheckedProposal? self, SseSerializer serializer);
 
   @protected
   void sse_encode_opt_box_autoadd_u_64(BigInt? self, SseSerializer serializer);
@@ -2189,6 +2180,404 @@ class coreWire implements BaseWire {
           WireSyncRust2DartDco Function(
               ffi.Pointer<wire_cst_ffi_active_session>)>();
 
+  void wire__crate__api__receive__ffi_maybe_inputs_owned_check_inputs_not_owned(
+    int port_,
+    ffi.Pointer<wire_cst_ffi_maybe_inputs_owned> that,
+    ffi.Pointer<ffi.Void> is_owned,
+  ) {
+    return _wire__crate__api__receive__ffi_maybe_inputs_owned_check_inputs_not_owned(
+      port_,
+      that,
+      is_owned,
+    );
+  }
+
+  late final _wire__crate__api__receive__ffi_maybe_inputs_owned_check_inputs_not_ownedPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Void Function(
+                      ffi.Int64,
+                      ffi.Pointer<wire_cst_ffi_maybe_inputs_owned>,
+                      ffi.Pointer<ffi.Void>)>>(
+          'frbgen_payjoin_flutter_wire__crate__api__receive__ffi_maybe_inputs_owned_check_inputs_not_owned');
+  late final _wire__crate__api__receive__ffi_maybe_inputs_owned_check_inputs_not_owned =
+      _wire__crate__api__receive__ffi_maybe_inputs_owned_check_inputs_not_ownedPtr
+          .asFunction<
+              void Function(int, ffi.Pointer<wire_cst_ffi_maybe_inputs_owned>,
+                  ffi.Pointer<ffi.Void>)>();
+
+  void
+      wire__crate__api__receive__ffi_maybe_inputs_seen_check_no_inputs_seen_before(
+    int port_,
+    ffi.Pointer<wire_cst_ffi_maybe_inputs_seen> that,
+    ffi.Pointer<ffi.Void> is_known,
+  ) {
+    return _wire__crate__api__receive__ffi_maybe_inputs_seen_check_no_inputs_seen_before(
+      port_,
+      that,
+      is_known,
+    );
+  }
+
+  late final _wire__crate__api__receive__ffi_maybe_inputs_seen_check_no_inputs_seen_beforePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Void Function(
+                      ffi.Int64,
+                      ffi.Pointer<wire_cst_ffi_maybe_inputs_seen>,
+                      ffi.Pointer<ffi.Void>)>>(
+          'frbgen_payjoin_flutter_wire__crate__api__receive__ffi_maybe_inputs_seen_check_no_inputs_seen_before');
+  late final _wire__crate__api__receive__ffi_maybe_inputs_seen_check_no_inputs_seen_before =
+      _wire__crate__api__receive__ffi_maybe_inputs_seen_check_no_inputs_seen_beforePtr
+          .asFunction<
+              void Function(int, ffi.Pointer<wire_cst_ffi_maybe_inputs_seen>,
+                  ffi.Pointer<ffi.Void>)>();
+
+  void
+      wire__crate__api__receive__ffi_maybe_mixed_input_scripts_check_no_mixed_input_scripts(
+    int port_,
+    ffi.Pointer<wire_cst_ffi_maybe_mixed_input_scripts> that,
+  ) {
+    return _wire__crate__api__receive__ffi_maybe_mixed_input_scripts_check_no_mixed_input_scripts(
+      port_,
+      that,
+    );
+  }
+
+  late final _wire__crate__api__receive__ffi_maybe_mixed_input_scripts_check_no_mixed_input_scriptsPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Void Function(ffi.Int64,
+                      ffi.Pointer<wire_cst_ffi_maybe_mixed_input_scripts>)>>(
+          'frbgen_payjoin_flutter_wire__crate__api__receive__ffi_maybe_mixed_input_scripts_check_no_mixed_input_scripts');
+  late final _wire__crate__api__receive__ffi_maybe_mixed_input_scripts_check_no_mixed_input_scripts =
+      _wire__crate__api__receive__ffi_maybe_mixed_input_scripts_check_no_mixed_input_scriptsPtr
+          .asFunction<
+              void Function(
+                  int, ffi.Pointer<wire_cst_ffi_maybe_mixed_input_scripts>)>();
+
+  void wire__crate__api__receive__ffi_outputs_unknown_identify_receiver_outputs(
+    int port_,
+    ffi.Pointer<wire_cst_ffi_outputs_unknown> that,
+    ffi.Pointer<ffi.Void> is_receiver_output,
+  ) {
+    return _wire__crate__api__receive__ffi_outputs_unknown_identify_receiver_outputs(
+      port_,
+      that,
+      is_receiver_output,
+    );
+  }
+
+  late final _wire__crate__api__receive__ffi_outputs_unknown_identify_receiver_outputsPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Void Function(
+                      ffi.Int64,
+                      ffi.Pointer<wire_cst_ffi_outputs_unknown>,
+                      ffi.Pointer<ffi.Void>)>>(
+          'frbgen_payjoin_flutter_wire__crate__api__receive__ffi_outputs_unknown_identify_receiver_outputs');
+  late final _wire__crate__api__receive__ffi_outputs_unknown_identify_receiver_outputs =
+      _wire__crate__api__receive__ffi_outputs_unknown_identify_receiver_outputsPtr
+          .asFunction<
+              void Function(int, ffi.Pointer<wire_cst_ffi_outputs_unknown>,
+                  ffi.Pointer<ffi.Void>)>();
+
+  void wire__crate__api__receive__ffi_payjoin_proposal_extract_v1_req(
+    int port_,
+    ffi.Pointer<wire_cst_ffi_payjoin_proposal> that,
+  ) {
+    return _wire__crate__api__receive__ffi_payjoin_proposal_extract_v1_req(
+      port_,
+      that,
+    );
+  }
+
+  late final _wire__crate__api__receive__ffi_payjoin_proposal_extract_v1_reqPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Void Function(
+                      ffi.Int64, ffi.Pointer<wire_cst_ffi_payjoin_proposal>)>>(
+          'frbgen_payjoin_flutter_wire__crate__api__receive__ffi_payjoin_proposal_extract_v1_req');
+  late final _wire__crate__api__receive__ffi_payjoin_proposal_extract_v1_req =
+      _wire__crate__api__receive__ffi_payjoin_proposal_extract_v1_reqPtr
+          .asFunction<
+              void Function(int, ffi.Pointer<wire_cst_ffi_payjoin_proposal>)>();
+
+  void wire__crate__api__receive__ffi_payjoin_proposal_extract_v2_req(
+    int port_,
+    ffi.Pointer<wire_cst_ffi_payjoin_proposal> that,
+  ) {
+    return _wire__crate__api__receive__ffi_payjoin_proposal_extract_v2_req(
+      port_,
+      that,
+    );
+  }
+
+  late final _wire__crate__api__receive__ffi_payjoin_proposal_extract_v2_reqPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Void Function(
+                      ffi.Int64, ffi.Pointer<wire_cst_ffi_payjoin_proposal>)>>(
+          'frbgen_payjoin_flutter_wire__crate__api__receive__ffi_payjoin_proposal_extract_v2_req');
+  late final _wire__crate__api__receive__ffi_payjoin_proposal_extract_v2_req =
+      _wire__crate__api__receive__ffi_payjoin_proposal_extract_v2_reqPtr
+          .asFunction<
+              void Function(int, ffi.Pointer<wire_cst_ffi_payjoin_proposal>)>();
+
+  void
+      wire__crate__api__receive__ffi_payjoin_proposal_is_output_substitution_disabled(
+    int port_,
+    ffi.Pointer<wire_cst_ffi_payjoin_proposal> that,
+  ) {
+    return _wire__crate__api__receive__ffi_payjoin_proposal_is_output_substitution_disabled(
+      port_,
+      that,
+    );
+  }
+
+  late final _wire__crate__api__receive__ffi_payjoin_proposal_is_output_substitution_disabledPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Void Function(
+                      ffi.Int64, ffi.Pointer<wire_cst_ffi_payjoin_proposal>)>>(
+          'frbgen_payjoin_flutter_wire__crate__api__receive__ffi_payjoin_proposal_is_output_substitution_disabled');
+  late final _wire__crate__api__receive__ffi_payjoin_proposal_is_output_substitution_disabled =
+      _wire__crate__api__receive__ffi_payjoin_proposal_is_output_substitution_disabledPtr
+          .asFunction<
+              void Function(int, ffi.Pointer<wire_cst_ffi_payjoin_proposal>)>();
+
+  void wire__crate__api__receive__ffi_payjoin_proposal_owned_vouts(
+    int port_,
+    ffi.Pointer<wire_cst_ffi_payjoin_proposal> that,
+  ) {
+    return _wire__crate__api__receive__ffi_payjoin_proposal_owned_vouts(
+      port_,
+      that,
+    );
+  }
+
+  late final _wire__crate__api__receive__ffi_payjoin_proposal_owned_voutsPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Void Function(
+                      ffi.Int64, ffi.Pointer<wire_cst_ffi_payjoin_proposal>)>>(
+          'frbgen_payjoin_flutter_wire__crate__api__receive__ffi_payjoin_proposal_owned_vouts');
+  late final _wire__crate__api__receive__ffi_payjoin_proposal_owned_vouts =
+      _wire__crate__api__receive__ffi_payjoin_proposal_owned_voutsPtr
+          .asFunction<
+              void Function(int, ffi.Pointer<wire_cst_ffi_payjoin_proposal>)>();
+
+  void wire__crate__api__receive__ffi_payjoin_proposal_process_res(
+    int port_,
+    ffi.Pointer<wire_cst_ffi_payjoin_proposal> that,
+    ffi.Pointer<wire_cst_list_prim_u_8_loose> res,
+    ffi.Pointer<wire_cst_client_response> ohttp_context,
+  ) {
+    return _wire__crate__api__receive__ffi_payjoin_proposal_process_res(
+      port_,
+      that,
+      res,
+      ohttp_context,
+    );
+  }
+
+  late final _wire__crate__api__receive__ffi_payjoin_proposal_process_resPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Void Function(
+                      ffi.Int64,
+                      ffi.Pointer<wire_cst_ffi_payjoin_proposal>,
+                      ffi.Pointer<wire_cst_list_prim_u_8_loose>,
+                      ffi.Pointer<wire_cst_client_response>)>>(
+          'frbgen_payjoin_flutter_wire__crate__api__receive__ffi_payjoin_proposal_process_res');
+  late final _wire__crate__api__receive__ffi_payjoin_proposal_process_res =
+      _wire__crate__api__receive__ffi_payjoin_proposal_process_resPtr
+          .asFunction<
+              void Function(
+                  int,
+                  ffi.Pointer<wire_cst_ffi_payjoin_proposal>,
+                  ffi.Pointer<wire_cst_list_prim_u_8_loose>,
+                  ffi.Pointer<wire_cst_client_response>)>();
+
+  void wire__crate__api__receive__ffi_payjoin_proposal_psbt(
+    int port_,
+    ffi.Pointer<wire_cst_ffi_payjoin_proposal> that,
+  ) {
+    return _wire__crate__api__receive__ffi_payjoin_proposal_psbt(
+      port_,
+      that,
+    );
+  }
+
+  late final _wire__crate__api__receive__ffi_payjoin_proposal_psbtPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Void Function(
+                  ffi.Int64, ffi.Pointer<wire_cst_ffi_payjoin_proposal>)>>(
+      'frbgen_payjoin_flutter_wire__crate__api__receive__ffi_payjoin_proposal_psbt');
+  late final _wire__crate__api__receive__ffi_payjoin_proposal_psbt =
+      _wire__crate__api__receive__ffi_payjoin_proposal_psbtPtr.asFunction<
+          void Function(int, ffi.Pointer<wire_cst_ffi_payjoin_proposal>)>();
+
+  void wire__crate__api__receive__ffi_payjoin_proposal_utxos_to_be_locked(
+    int port_,
+    ffi.Pointer<wire_cst_ffi_payjoin_proposal> that,
+  ) {
+    return _wire__crate__api__receive__ffi_payjoin_proposal_utxos_to_be_locked(
+      port_,
+      that,
+    );
+  }
+
+  late final _wire__crate__api__receive__ffi_payjoin_proposal_utxos_to_be_lockedPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Void Function(
+                      ffi.Int64, ffi.Pointer<wire_cst_ffi_payjoin_proposal>)>>(
+          'frbgen_payjoin_flutter_wire__crate__api__receive__ffi_payjoin_proposal_utxos_to_be_locked');
+  late final _wire__crate__api__receive__ffi_payjoin_proposal_utxos_to_be_locked =
+      _wire__crate__api__receive__ffi_payjoin_proposal_utxos_to_be_lockedPtr
+          .asFunction<
+              void Function(int, ffi.Pointer<wire_cst_ffi_payjoin_proposal>)>();
+
+  void
+      wire__crate__api__receive__ffi_provisional_proposal_contribute_witness_input(
+    int port_,
+    ffi.Pointer<wire_cst_ffi_provisional_proposal> that,
+    ffi.Pointer<wire_cst_tx_out> txo,
+    ffi.Pointer<wire_cst_out_point> outpoint,
+  ) {
+    return _wire__crate__api__receive__ffi_provisional_proposal_contribute_witness_input(
+      port_,
+      that,
+      txo,
+      outpoint,
+    );
+  }
+
+  late final _wire__crate__api__receive__ffi_provisional_proposal_contribute_witness_inputPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Void Function(
+                      ffi.Int64,
+                      ffi.Pointer<wire_cst_ffi_provisional_proposal>,
+                      ffi.Pointer<wire_cst_tx_out>,
+                      ffi.Pointer<wire_cst_out_point>)>>(
+          'frbgen_payjoin_flutter_wire__crate__api__receive__ffi_provisional_proposal_contribute_witness_input');
+  late final _wire__crate__api__receive__ffi_provisional_proposal_contribute_witness_input =
+      _wire__crate__api__receive__ffi_provisional_proposal_contribute_witness_inputPtr
+          .asFunction<
+              void Function(
+                  int,
+                  ffi.Pointer<wire_cst_ffi_provisional_proposal>,
+                  ffi.Pointer<wire_cst_tx_out>,
+                  ffi.Pointer<wire_cst_out_point>)>();
+
+  void wire__crate__api__receive__ffi_provisional_proposal_finalize_proposal(
+    int port_,
+    ffi.Pointer<wire_cst_ffi_provisional_proposal> that,
+    ffi.Pointer<ffi.Void> process_psbt,
+    ffi.Pointer<ffi.Uint64> min_fee_rate_sat_per_vb,
+  ) {
+    return _wire__crate__api__receive__ffi_provisional_proposal_finalize_proposal(
+      port_,
+      that,
+      process_psbt,
+      min_fee_rate_sat_per_vb,
+    );
+  }
+
+  late final _wire__crate__api__receive__ffi_provisional_proposal_finalize_proposalPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Void Function(
+                      ffi.Int64,
+                      ffi.Pointer<wire_cst_ffi_provisional_proposal>,
+                      ffi.Pointer<ffi.Void>,
+                      ffi.Pointer<ffi.Uint64>)>>(
+          'frbgen_payjoin_flutter_wire__crate__api__receive__ffi_provisional_proposal_finalize_proposal');
+  late final _wire__crate__api__receive__ffi_provisional_proposal_finalize_proposal =
+      _wire__crate__api__receive__ffi_provisional_proposal_finalize_proposalPtr
+          .asFunction<
+              void Function(int, ffi.Pointer<wire_cst_ffi_provisional_proposal>,
+                  ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Uint64>)>();
+
+  void
+      wire__crate__api__receive__ffi_provisional_proposal_is_output_substitution_disabled(
+    int port_,
+    ffi.Pointer<wire_cst_ffi_provisional_proposal> that,
+  ) {
+    return _wire__crate__api__receive__ffi_provisional_proposal_is_output_substitution_disabled(
+      port_,
+      that,
+    );
+  }
+
+  late final _wire__crate__api__receive__ffi_provisional_proposal_is_output_substitution_disabledPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Void Function(ffi.Int64,
+                      ffi.Pointer<wire_cst_ffi_provisional_proposal>)>>(
+          'frbgen_payjoin_flutter_wire__crate__api__receive__ffi_provisional_proposal_is_output_substitution_disabled');
+  late final _wire__crate__api__receive__ffi_provisional_proposal_is_output_substitution_disabled =
+      _wire__crate__api__receive__ffi_provisional_proposal_is_output_substitution_disabledPtr
+          .asFunction<
+              void Function(
+                  int, ffi.Pointer<wire_cst_ffi_provisional_proposal>)>();
+
+  void
+      wire__crate__api__receive__ffi_provisional_proposal_try_preserving_privacy(
+    int port_,
+    ffi.Pointer<wire_cst_ffi_provisional_proposal> that,
+    ffi.Pointer<wire_cst_list_record_u_64_out_point> candidate_inputs,
+  ) {
+    return _wire__crate__api__receive__ffi_provisional_proposal_try_preserving_privacy(
+      port_,
+      that,
+      candidate_inputs,
+    );
+  }
+
+  late final _wire__crate__api__receive__ffi_provisional_proposal_try_preserving_privacyPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Void Function(
+                      ffi.Int64,
+                      ffi.Pointer<wire_cst_ffi_provisional_proposal>,
+                      ffi.Pointer<wire_cst_list_record_u_64_out_point>)>>(
+          'frbgen_payjoin_flutter_wire__crate__api__receive__ffi_provisional_proposal_try_preserving_privacy');
+  late final _wire__crate__api__receive__ffi_provisional_proposal_try_preserving_privacy =
+      _wire__crate__api__receive__ffi_provisional_proposal_try_preserving_privacyPtr
+          .asFunction<
+              void Function(int, ffi.Pointer<wire_cst_ffi_provisional_proposal>,
+                  ffi.Pointer<wire_cst_list_record_u_64_out_point>)>();
+
+  void
+      wire__crate__api__receive__ffi_provisional_proposal_try_substitute_receiver_output(
+    int port_,
+    ffi.Pointer<wire_cst_ffi_provisional_proposal> that,
+    ffi.Pointer<ffi.Void> generate_script,
+  ) {
+    return _wire__crate__api__receive__ffi_provisional_proposal_try_substitute_receiver_output(
+      port_,
+      that,
+      generate_script,
+    );
+  }
+
+  late final _wire__crate__api__receive__ffi_provisional_proposal_try_substitute_receiver_outputPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Void Function(
+                      ffi.Int64,
+                      ffi.Pointer<wire_cst_ffi_provisional_proposal>,
+                      ffi.Pointer<ffi.Void>)>>(
+          'frbgen_payjoin_flutter_wire__crate__api__receive__ffi_provisional_proposal_try_substitute_receiver_output');
+  late final _wire__crate__api__receive__ffi_provisional_proposal_try_substitute_receiver_output =
+      _wire__crate__api__receive__ffi_provisional_proposal_try_substitute_receiver_outputPtr
+          .asFunction<
+              void Function(int, ffi.Pointer<wire_cst_ffi_provisional_proposal>,
+                  ffi.Pointer<ffi.Void>)>();
+
   void wire__crate__api__receive__ffi_session_initializer_extract_req(
     int port_,
     ffi.Pointer<wire_cst_ffi_session_initializer> that,
@@ -2286,455 +2675,36 @@ class coreWire implements BaseWire {
                   ffi.Pointer<wire_cst_client_response>)>();
 
   void
-      wire__crate__api__receive__ffi_v_2_maybe_inputs_owned_check_inputs_not_owned(
+      wire__crate__api__receive__ffi_unchecked_proposal_assume_interactive_receiver(
     int port_,
-    ffi.Pointer<wire_cst_ffi_v_2_maybe_inputs_owned> that,
-    ffi.Pointer<ffi.Void> is_owned,
+    ffi.Pointer<wire_cst_ffi_unchecked_proposal> that,
   ) {
-    return _wire__crate__api__receive__ffi_v_2_maybe_inputs_owned_check_inputs_not_owned(
-      port_,
-      that,
-      is_owned,
-    );
-  }
-
-  late final _wire__crate__api__receive__ffi_v_2_maybe_inputs_owned_check_inputs_not_ownedPtr =
-      _lookup<
-              ffi.NativeFunction<
-                  ffi.Void Function(
-                      ffi.Int64,
-                      ffi.Pointer<wire_cst_ffi_v_2_maybe_inputs_owned>,
-                      ffi.Pointer<ffi.Void>)>>(
-          'frbgen_payjoin_flutter_wire__crate__api__receive__ffi_v_2_maybe_inputs_owned_check_inputs_not_owned');
-  late final _wire__crate__api__receive__ffi_v_2_maybe_inputs_owned_check_inputs_not_owned =
-      _wire__crate__api__receive__ffi_v_2_maybe_inputs_owned_check_inputs_not_ownedPtr
-          .asFunction<
-              void Function(
-                  int,
-                  ffi.Pointer<wire_cst_ffi_v_2_maybe_inputs_owned>,
-                  ffi.Pointer<ffi.Void>)>();
-
-  void
-      wire__crate__api__receive__ffi_v_2_maybe_inputs_seen_check_no_inputs_seen_before(
-    int port_,
-    ffi.Pointer<wire_cst_ffi_v_2_maybe_inputs_seen> that,
-    ffi.Pointer<ffi.Void> is_known,
-  ) {
-    return _wire__crate__api__receive__ffi_v_2_maybe_inputs_seen_check_no_inputs_seen_before(
-      port_,
-      that,
-      is_known,
-    );
-  }
-
-  late final _wire__crate__api__receive__ffi_v_2_maybe_inputs_seen_check_no_inputs_seen_beforePtr =
-      _lookup<
-              ffi.NativeFunction<
-                  ffi.Void Function(
-                      ffi.Int64,
-                      ffi.Pointer<wire_cst_ffi_v_2_maybe_inputs_seen>,
-                      ffi.Pointer<ffi.Void>)>>(
-          'frbgen_payjoin_flutter_wire__crate__api__receive__ffi_v_2_maybe_inputs_seen_check_no_inputs_seen_before');
-  late final _wire__crate__api__receive__ffi_v_2_maybe_inputs_seen_check_no_inputs_seen_before =
-      _wire__crate__api__receive__ffi_v_2_maybe_inputs_seen_check_no_inputs_seen_beforePtr
-          .asFunction<
-              void Function(
-                  int,
-                  ffi.Pointer<wire_cst_ffi_v_2_maybe_inputs_seen>,
-                  ffi.Pointer<ffi.Void>)>();
-
-  void
-      wire__crate__api__receive__ffi_v_2_maybe_mixed_input_scripts_check_no_mixed_input_scripts(
-    int port_,
-    ffi.Pointer<wire_cst_ffi_v_2_maybe_mixed_input_scripts> that,
-  ) {
-    return _wire__crate__api__receive__ffi_v_2_maybe_mixed_input_scripts_check_no_mixed_input_scripts(
+    return _wire__crate__api__receive__ffi_unchecked_proposal_assume_interactive_receiver(
       port_,
       that,
     );
   }
 
-  late final _wire__crate__api__receive__ffi_v_2_maybe_mixed_input_scripts_check_no_mixed_input_scriptsPtr =
-      _lookup<
-              ffi.NativeFunction<
-                  ffi.Void Function(
-                      ffi.Int64,
-                      ffi.Pointer<
-                          wire_cst_ffi_v_2_maybe_mixed_input_scripts>)>>(
-          'frbgen_payjoin_flutter_wire__crate__api__receive__ffi_v_2_maybe_mixed_input_scripts_check_no_mixed_input_scripts');
-  late final _wire__crate__api__receive__ffi_v_2_maybe_mixed_input_scripts_check_no_mixed_input_scripts =
-      _wire__crate__api__receive__ffi_v_2_maybe_mixed_input_scripts_check_no_mixed_input_scriptsPtr
-          .asFunction<
-              void Function(int,
-                  ffi.Pointer<wire_cst_ffi_v_2_maybe_mixed_input_scripts>)>();
-
-  void
-      wire__crate__api__receive__ffi_v_2_outputs_unknown_identify_receiver_outputs(
-    int port_,
-    ffi.Pointer<wire_cst_ffi_v_2_outputs_unknown> that,
-    ffi.Pointer<ffi.Void> is_receiver_output,
-  ) {
-    return _wire__crate__api__receive__ffi_v_2_outputs_unknown_identify_receiver_outputs(
-      port_,
-      that,
-      is_receiver_output,
-    );
-  }
-
-  late final _wire__crate__api__receive__ffi_v_2_outputs_unknown_identify_receiver_outputsPtr =
-      _lookup<
-              ffi.NativeFunction<
-                  ffi.Void Function(
-                      ffi.Int64,
-                      ffi.Pointer<wire_cst_ffi_v_2_outputs_unknown>,
-                      ffi.Pointer<ffi.Void>)>>(
-          'frbgen_payjoin_flutter_wire__crate__api__receive__ffi_v_2_outputs_unknown_identify_receiver_outputs');
-  late final _wire__crate__api__receive__ffi_v_2_outputs_unknown_identify_receiver_outputs =
-      _wire__crate__api__receive__ffi_v_2_outputs_unknown_identify_receiver_outputsPtr
-          .asFunction<
-              void Function(int, ffi.Pointer<wire_cst_ffi_v_2_outputs_unknown>,
-                  ffi.Pointer<ffi.Void>)>();
-
-  void wire__crate__api__receive__ffi_v_2_payjoin_proposal_extract_v1_req(
-    int port_,
-    ffi.Pointer<wire_cst_ffi_v_2_payjoin_proposal> that,
-  ) {
-    return _wire__crate__api__receive__ffi_v_2_payjoin_proposal_extract_v1_req(
-      port_,
-      that,
-    );
-  }
-
-  late final _wire__crate__api__receive__ffi_v_2_payjoin_proposal_extract_v1_reqPtr =
+  late final _wire__crate__api__receive__ffi_unchecked_proposal_assume_interactive_receiverPtr =
       _lookup<
               ffi.NativeFunction<
                   ffi.Void Function(ffi.Int64,
-                      ffi.Pointer<wire_cst_ffi_v_2_payjoin_proposal>)>>(
-          'frbgen_payjoin_flutter_wire__crate__api__receive__ffi_v_2_payjoin_proposal_extract_v1_req');
-  late final _wire__crate__api__receive__ffi_v_2_payjoin_proposal_extract_v1_req =
-      _wire__crate__api__receive__ffi_v_2_payjoin_proposal_extract_v1_reqPtr
+                      ffi.Pointer<wire_cst_ffi_unchecked_proposal>)>>(
+          'frbgen_payjoin_flutter_wire__crate__api__receive__ffi_unchecked_proposal_assume_interactive_receiver');
+  late final _wire__crate__api__receive__ffi_unchecked_proposal_assume_interactive_receiver =
+      _wire__crate__api__receive__ffi_unchecked_proposal_assume_interactive_receiverPtr
           .asFunction<
               void Function(
-                  int, ffi.Pointer<wire_cst_ffi_v_2_payjoin_proposal>)>();
-
-  void wire__crate__api__receive__ffi_v_2_payjoin_proposal_extract_v2_req(
-    int port_,
-    ffi.Pointer<wire_cst_ffi_v_2_payjoin_proposal> that,
-  ) {
-    return _wire__crate__api__receive__ffi_v_2_payjoin_proposal_extract_v2_req(
-      port_,
-      that,
-    );
-  }
-
-  late final _wire__crate__api__receive__ffi_v_2_payjoin_proposal_extract_v2_reqPtr =
-      _lookup<
-              ffi.NativeFunction<
-                  ffi.Void Function(ffi.Int64,
-                      ffi.Pointer<wire_cst_ffi_v_2_payjoin_proposal>)>>(
-          'frbgen_payjoin_flutter_wire__crate__api__receive__ffi_v_2_payjoin_proposal_extract_v2_req');
-  late final _wire__crate__api__receive__ffi_v_2_payjoin_proposal_extract_v2_req =
-      _wire__crate__api__receive__ffi_v_2_payjoin_proposal_extract_v2_reqPtr
-          .asFunction<
-              void Function(
-                  int, ffi.Pointer<wire_cst_ffi_v_2_payjoin_proposal>)>();
+                  int, ffi.Pointer<wire_cst_ffi_unchecked_proposal>)>();
 
   void
-      wire__crate__api__receive__ffi_v_2_payjoin_proposal_is_output_substitution_disabled(
+      wire__crate__api__receive__ffi_unchecked_proposal_check_broadcast_suitability(
     int port_,
-    ffi.Pointer<wire_cst_ffi_v_2_payjoin_proposal> that,
-  ) {
-    return _wire__crate__api__receive__ffi_v_2_payjoin_proposal_is_output_substitution_disabled(
-      port_,
-      that,
-    );
-  }
-
-  late final _wire__crate__api__receive__ffi_v_2_payjoin_proposal_is_output_substitution_disabledPtr =
-      _lookup<
-              ffi.NativeFunction<
-                  ffi.Void Function(ffi.Int64,
-                      ffi.Pointer<wire_cst_ffi_v_2_payjoin_proposal>)>>(
-          'frbgen_payjoin_flutter_wire__crate__api__receive__ffi_v_2_payjoin_proposal_is_output_substitution_disabled');
-  late final _wire__crate__api__receive__ffi_v_2_payjoin_proposal_is_output_substitution_disabled =
-      _wire__crate__api__receive__ffi_v_2_payjoin_proposal_is_output_substitution_disabledPtr
-          .asFunction<
-              void Function(
-                  int, ffi.Pointer<wire_cst_ffi_v_2_payjoin_proposal>)>();
-
-  void wire__crate__api__receive__ffi_v_2_payjoin_proposal_owned_vouts(
-    int port_,
-    ffi.Pointer<wire_cst_ffi_v_2_payjoin_proposal> that,
-  ) {
-    return _wire__crate__api__receive__ffi_v_2_payjoin_proposal_owned_vouts(
-      port_,
-      that,
-    );
-  }
-
-  late final _wire__crate__api__receive__ffi_v_2_payjoin_proposal_owned_voutsPtr =
-      _lookup<
-              ffi.NativeFunction<
-                  ffi.Void Function(ffi.Int64,
-                      ffi.Pointer<wire_cst_ffi_v_2_payjoin_proposal>)>>(
-          'frbgen_payjoin_flutter_wire__crate__api__receive__ffi_v_2_payjoin_proposal_owned_vouts');
-  late final _wire__crate__api__receive__ffi_v_2_payjoin_proposal_owned_vouts =
-      _wire__crate__api__receive__ffi_v_2_payjoin_proposal_owned_voutsPtr
-          .asFunction<
-              void Function(
-                  int, ffi.Pointer<wire_cst_ffi_v_2_payjoin_proposal>)>();
-
-  void wire__crate__api__receive__ffi_v_2_payjoin_proposal_process_res(
-    int port_,
-    ffi.Pointer<wire_cst_ffi_v_2_payjoin_proposal> that,
-    ffi.Pointer<wire_cst_list_prim_u_8_loose> res,
-    ffi.Pointer<wire_cst_client_response> ohttp_context,
-  ) {
-    return _wire__crate__api__receive__ffi_v_2_payjoin_proposal_process_res(
-      port_,
-      that,
-      res,
-      ohttp_context,
-    );
-  }
-
-  late final _wire__crate__api__receive__ffi_v_2_payjoin_proposal_process_resPtr =
-      _lookup<
-              ffi.NativeFunction<
-                  ffi.Void Function(
-                      ffi.Int64,
-                      ffi.Pointer<wire_cst_ffi_v_2_payjoin_proposal>,
-                      ffi.Pointer<wire_cst_list_prim_u_8_loose>,
-                      ffi.Pointer<wire_cst_client_response>)>>(
-          'frbgen_payjoin_flutter_wire__crate__api__receive__ffi_v_2_payjoin_proposal_process_res');
-  late final _wire__crate__api__receive__ffi_v_2_payjoin_proposal_process_res =
-      _wire__crate__api__receive__ffi_v_2_payjoin_proposal_process_resPtr
-          .asFunction<
-              void Function(
-                  int,
-                  ffi.Pointer<wire_cst_ffi_v_2_payjoin_proposal>,
-                  ffi.Pointer<wire_cst_list_prim_u_8_loose>,
-                  ffi.Pointer<wire_cst_client_response>)>();
-
-  void wire__crate__api__receive__ffi_v_2_payjoin_proposal_psbt(
-    int port_,
-    ffi.Pointer<wire_cst_ffi_v_2_payjoin_proposal> that,
-  ) {
-    return _wire__crate__api__receive__ffi_v_2_payjoin_proposal_psbt(
-      port_,
-      that,
-    );
-  }
-
-  late final _wire__crate__api__receive__ffi_v_2_payjoin_proposal_psbtPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Int64, ffi.Pointer<wire_cst_ffi_v_2_payjoin_proposal>)>>(
-      'frbgen_payjoin_flutter_wire__crate__api__receive__ffi_v_2_payjoin_proposal_psbt');
-  late final _wire__crate__api__receive__ffi_v_2_payjoin_proposal_psbt =
-      _wire__crate__api__receive__ffi_v_2_payjoin_proposal_psbtPtr.asFunction<
-          void Function(int, ffi.Pointer<wire_cst_ffi_v_2_payjoin_proposal>)>();
-
-  void wire__crate__api__receive__ffi_v_2_payjoin_proposal_utxos_to_be_locked(
-    int port_,
-    ffi.Pointer<wire_cst_ffi_v_2_payjoin_proposal> that,
-  ) {
-    return _wire__crate__api__receive__ffi_v_2_payjoin_proposal_utxos_to_be_locked(
-      port_,
-      that,
-    );
-  }
-
-  late final _wire__crate__api__receive__ffi_v_2_payjoin_proposal_utxos_to_be_lockedPtr =
-      _lookup<
-              ffi.NativeFunction<
-                  ffi.Void Function(ffi.Int64,
-                      ffi.Pointer<wire_cst_ffi_v_2_payjoin_proposal>)>>(
-          'frbgen_payjoin_flutter_wire__crate__api__receive__ffi_v_2_payjoin_proposal_utxos_to_be_locked');
-  late final _wire__crate__api__receive__ffi_v_2_payjoin_proposal_utxos_to_be_locked =
-      _wire__crate__api__receive__ffi_v_2_payjoin_proposal_utxos_to_be_lockedPtr
-          .asFunction<
-              void Function(
-                  int, ffi.Pointer<wire_cst_ffi_v_2_payjoin_proposal>)>();
-
-  void
-      wire__crate__api__receive__ffi_v_2_provisional_proposal_contribute_witness_input(
-    int port_,
-    ffi.Pointer<wire_cst_ffi_v_2_provisional_proposal> that,
-    ffi.Pointer<wire_cst_tx_out> txo,
-    ffi.Pointer<wire_cst_out_point> outpoint,
-  ) {
-    return _wire__crate__api__receive__ffi_v_2_provisional_proposal_contribute_witness_input(
-      port_,
-      that,
-      txo,
-      outpoint,
-    );
-  }
-
-  late final _wire__crate__api__receive__ffi_v_2_provisional_proposal_contribute_witness_inputPtr =
-      _lookup<
-              ffi.NativeFunction<
-                  ffi.Void Function(
-                      ffi.Int64,
-                      ffi.Pointer<wire_cst_ffi_v_2_provisional_proposal>,
-                      ffi.Pointer<wire_cst_tx_out>,
-                      ffi.Pointer<wire_cst_out_point>)>>(
-          'frbgen_payjoin_flutter_wire__crate__api__receive__ffi_v_2_provisional_proposal_contribute_witness_input');
-  late final _wire__crate__api__receive__ffi_v_2_provisional_proposal_contribute_witness_input =
-      _wire__crate__api__receive__ffi_v_2_provisional_proposal_contribute_witness_inputPtr
-          .asFunction<
-              void Function(
-                  int,
-                  ffi.Pointer<wire_cst_ffi_v_2_provisional_proposal>,
-                  ffi.Pointer<wire_cst_tx_out>,
-                  ffi.Pointer<wire_cst_out_point>)>();
-
-  void
-      wire__crate__api__receive__ffi_v_2_provisional_proposal_finalize_proposal(
-    int port_,
-    ffi.Pointer<wire_cst_ffi_v_2_provisional_proposal> that,
-    ffi.Pointer<ffi.Void> process_psbt,
-    ffi.Pointer<ffi.Uint64> min_fee_rate_sat_per_vb,
-  ) {
-    return _wire__crate__api__receive__ffi_v_2_provisional_proposal_finalize_proposal(
-      port_,
-      that,
-      process_psbt,
-      min_fee_rate_sat_per_vb,
-    );
-  }
-
-  late final _wire__crate__api__receive__ffi_v_2_provisional_proposal_finalize_proposalPtr =
-      _lookup<
-              ffi.NativeFunction<
-                  ffi.Void Function(
-                      ffi.Int64,
-                      ffi.Pointer<wire_cst_ffi_v_2_provisional_proposal>,
-                      ffi.Pointer<ffi.Void>,
-                      ffi.Pointer<ffi.Uint64>)>>(
-          'frbgen_payjoin_flutter_wire__crate__api__receive__ffi_v_2_provisional_proposal_finalize_proposal');
-  late final _wire__crate__api__receive__ffi_v_2_provisional_proposal_finalize_proposal =
-      _wire__crate__api__receive__ffi_v_2_provisional_proposal_finalize_proposalPtr
-          .asFunction<
-              void Function(
-                  int,
-                  ffi.Pointer<wire_cst_ffi_v_2_provisional_proposal>,
-                  ffi.Pointer<ffi.Void>,
-                  ffi.Pointer<ffi.Uint64>)>();
-
-  void
-      wire__crate__api__receive__ffi_v_2_provisional_proposal_is_output_substitution_disabled(
-    int port_,
-    ffi.Pointer<wire_cst_ffi_v_2_provisional_proposal> that,
-  ) {
-    return _wire__crate__api__receive__ffi_v_2_provisional_proposal_is_output_substitution_disabled(
-      port_,
-      that,
-    );
-  }
-
-  late final _wire__crate__api__receive__ffi_v_2_provisional_proposal_is_output_substitution_disabledPtr =
-      _lookup<
-              ffi.NativeFunction<
-                  ffi.Void Function(ffi.Int64,
-                      ffi.Pointer<wire_cst_ffi_v_2_provisional_proposal>)>>(
-          'frbgen_payjoin_flutter_wire__crate__api__receive__ffi_v_2_provisional_proposal_is_output_substitution_disabled');
-  late final _wire__crate__api__receive__ffi_v_2_provisional_proposal_is_output_substitution_disabled =
-      _wire__crate__api__receive__ffi_v_2_provisional_proposal_is_output_substitution_disabledPtr
-          .asFunction<
-              void Function(
-                  int, ffi.Pointer<wire_cst_ffi_v_2_provisional_proposal>)>();
-
-  void
-      wire__crate__api__receive__ffi_v_2_provisional_proposal_try_preserving_privacy(
-    int port_,
-    ffi.Pointer<wire_cst_ffi_v_2_provisional_proposal> that,
-    ffi.Pointer<wire_cst_list_record_u_64_out_point> candidate_inputs,
-  ) {
-    return _wire__crate__api__receive__ffi_v_2_provisional_proposal_try_preserving_privacy(
-      port_,
-      that,
-      candidate_inputs,
-    );
-  }
-
-  late final _wire__crate__api__receive__ffi_v_2_provisional_proposal_try_preserving_privacyPtr =
-      _lookup<
-              ffi.NativeFunction<
-                  ffi.Void Function(
-                      ffi.Int64,
-                      ffi.Pointer<wire_cst_ffi_v_2_provisional_proposal>,
-                      ffi.Pointer<wire_cst_list_record_u_64_out_point>)>>(
-          'frbgen_payjoin_flutter_wire__crate__api__receive__ffi_v_2_provisional_proposal_try_preserving_privacy');
-  late final _wire__crate__api__receive__ffi_v_2_provisional_proposal_try_preserving_privacy =
-      _wire__crate__api__receive__ffi_v_2_provisional_proposal_try_preserving_privacyPtr
-          .asFunction<
-              void Function(
-                  int,
-                  ffi.Pointer<wire_cst_ffi_v_2_provisional_proposal>,
-                  ffi.Pointer<wire_cst_list_record_u_64_out_point>)>();
-
-  void
-      wire__crate__api__receive__ffi_v_2_provisional_proposal_try_substitute_receiver_output(
-    int port_,
-    ffi.Pointer<wire_cst_ffi_v_2_provisional_proposal> that,
-    ffi.Pointer<ffi.Void> generate_script,
-  ) {
-    return _wire__crate__api__receive__ffi_v_2_provisional_proposal_try_substitute_receiver_output(
-      port_,
-      that,
-      generate_script,
-    );
-  }
-
-  late final _wire__crate__api__receive__ffi_v_2_provisional_proposal_try_substitute_receiver_outputPtr =
-      _lookup<
-              ffi.NativeFunction<
-                  ffi.Void Function(
-                      ffi.Int64,
-                      ffi.Pointer<wire_cst_ffi_v_2_provisional_proposal>,
-                      ffi.Pointer<ffi.Void>)>>(
-          'frbgen_payjoin_flutter_wire__crate__api__receive__ffi_v_2_provisional_proposal_try_substitute_receiver_output');
-  late final _wire__crate__api__receive__ffi_v_2_provisional_proposal_try_substitute_receiver_output =
-      _wire__crate__api__receive__ffi_v_2_provisional_proposal_try_substitute_receiver_outputPtr
-          .asFunction<
-              void Function(
-                  int,
-                  ffi.Pointer<wire_cst_ffi_v_2_provisional_proposal>,
-                  ffi.Pointer<ffi.Void>)>();
-
-  void
-      wire__crate__api__receive__ffi_v_2_unchecked_proposal_assume_interactive_receiver(
-    int port_,
-    ffi.Pointer<wire_cst_ffi_v_2_unchecked_proposal> that,
-  ) {
-    return _wire__crate__api__receive__ffi_v_2_unchecked_proposal_assume_interactive_receiver(
-      port_,
-      that,
-    );
-  }
-
-  late final _wire__crate__api__receive__ffi_v_2_unchecked_proposal_assume_interactive_receiverPtr =
-      _lookup<
-              ffi.NativeFunction<
-                  ffi.Void Function(ffi.Int64,
-                      ffi.Pointer<wire_cst_ffi_v_2_unchecked_proposal>)>>(
-          'frbgen_payjoin_flutter_wire__crate__api__receive__ffi_v_2_unchecked_proposal_assume_interactive_receiver');
-  late final _wire__crate__api__receive__ffi_v_2_unchecked_proposal_assume_interactive_receiver =
-      _wire__crate__api__receive__ffi_v_2_unchecked_proposal_assume_interactive_receiverPtr
-          .asFunction<
-              void Function(
-                  int, ffi.Pointer<wire_cst_ffi_v_2_unchecked_proposal>)>();
-
-  void
-      wire__crate__api__receive__ffi_v_2_unchecked_proposal_check_broadcast_suitability(
-    int port_,
-    ffi.Pointer<wire_cst_ffi_v_2_unchecked_proposal> that,
+    ffi.Pointer<wire_cst_ffi_unchecked_proposal> that,
     ffi.Pointer<ffi.Uint64> min_fee_rate,
     ffi.Pointer<ffi.Void> can_broadcast,
   ) {
-    return _wire__crate__api__receive__ffi_v_2_unchecked_proposal_check_broadcast_suitability(
+    return _wire__crate__api__receive__ffi_unchecked_proposal_check_broadcast_suitability(
       port_,
       that,
       min_fee_rate,
@@ -2742,46 +2712,43 @@ class coreWire implements BaseWire {
     );
   }
 
-  late final _wire__crate__api__receive__ffi_v_2_unchecked_proposal_check_broadcast_suitabilityPtr =
+  late final _wire__crate__api__receive__ffi_unchecked_proposal_check_broadcast_suitabilityPtr =
       _lookup<
               ffi.NativeFunction<
                   ffi.Void Function(
                       ffi.Int64,
-                      ffi.Pointer<wire_cst_ffi_v_2_unchecked_proposal>,
+                      ffi.Pointer<wire_cst_ffi_unchecked_proposal>,
                       ffi.Pointer<ffi.Uint64>,
                       ffi.Pointer<ffi.Void>)>>(
-          'frbgen_payjoin_flutter_wire__crate__api__receive__ffi_v_2_unchecked_proposal_check_broadcast_suitability');
-  late final _wire__crate__api__receive__ffi_v_2_unchecked_proposal_check_broadcast_suitability =
-      _wire__crate__api__receive__ffi_v_2_unchecked_proposal_check_broadcast_suitabilityPtr
+          'frbgen_payjoin_flutter_wire__crate__api__receive__ffi_unchecked_proposal_check_broadcast_suitability');
+  late final _wire__crate__api__receive__ffi_unchecked_proposal_check_broadcast_suitability =
+      _wire__crate__api__receive__ffi_unchecked_proposal_check_broadcast_suitabilityPtr
           .asFunction<
-              void Function(
-                  int,
-                  ffi.Pointer<wire_cst_ffi_v_2_unchecked_proposal>,
-                  ffi.Pointer<ffi.Uint64>,
-                  ffi.Pointer<ffi.Void>)>();
+              void Function(int, ffi.Pointer<wire_cst_ffi_unchecked_proposal>,
+                  ffi.Pointer<ffi.Uint64>, ffi.Pointer<ffi.Void>)>();
 
   void
-      wire__crate__api__receive__ffi_v_2_unchecked_proposal_extract_tx_to_schedule_broadcast(
+      wire__crate__api__receive__ffi_unchecked_proposal_extract_tx_to_schedule_broadcast(
     int port_,
-    ffi.Pointer<wire_cst_ffi_v_2_unchecked_proposal> that,
+    ffi.Pointer<wire_cst_ffi_unchecked_proposal> that,
   ) {
-    return _wire__crate__api__receive__ffi_v_2_unchecked_proposal_extract_tx_to_schedule_broadcast(
+    return _wire__crate__api__receive__ffi_unchecked_proposal_extract_tx_to_schedule_broadcast(
       port_,
       that,
     );
   }
 
-  late final _wire__crate__api__receive__ffi_v_2_unchecked_proposal_extract_tx_to_schedule_broadcastPtr =
+  late final _wire__crate__api__receive__ffi_unchecked_proposal_extract_tx_to_schedule_broadcastPtr =
       _lookup<
               ffi.NativeFunction<
                   ffi.Void Function(ffi.Int64,
-                      ffi.Pointer<wire_cst_ffi_v_2_unchecked_proposal>)>>(
-          'frbgen_payjoin_flutter_wire__crate__api__receive__ffi_v_2_unchecked_proposal_extract_tx_to_schedule_broadcast');
-  late final _wire__crate__api__receive__ffi_v_2_unchecked_proposal_extract_tx_to_schedule_broadcast =
-      _wire__crate__api__receive__ffi_v_2_unchecked_proposal_extract_tx_to_schedule_broadcastPtr
+                      ffi.Pointer<wire_cst_ffi_unchecked_proposal>)>>(
+          'frbgen_payjoin_flutter_wire__crate__api__receive__ffi_unchecked_proposal_extract_tx_to_schedule_broadcast');
+  late final _wire__crate__api__receive__ffi_unchecked_proposal_extract_tx_to_schedule_broadcast =
+      _wire__crate__api__receive__ffi_unchecked_proposal_extract_tx_to_schedule_broadcastPtr
           .asFunction<
               void Function(
-                  int, ffi.Pointer<wire_cst_ffi_v_2_unchecked_proposal>)>();
+                  int, ffi.Pointer<wire_cst_ffi_unchecked_proposal>)>();
 
   void wire__crate__api__send__ffi_context_v_1_process_response(
     int port_,
@@ -3997,6 +3964,45 @@ class coreWire implements BaseWire {
       _cst_new_box_autoadd_ffi_context_v_2Ptr
           .asFunction<ffi.Pointer<wire_cst_ffi_context_v_2> Function()>();
 
+  ffi.Pointer<wire_cst_ffi_maybe_inputs_owned>
+      cst_new_box_autoadd_ffi_maybe_inputs_owned() {
+    return _cst_new_box_autoadd_ffi_maybe_inputs_owned();
+  }
+
+  late final _cst_new_box_autoadd_ffi_maybe_inputs_ownedPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Pointer<wire_cst_ffi_maybe_inputs_owned> Function()>>(
+      'frbgen_payjoin_flutter_cst_new_box_autoadd_ffi_maybe_inputs_owned');
+  late final _cst_new_box_autoadd_ffi_maybe_inputs_owned =
+      _cst_new_box_autoadd_ffi_maybe_inputs_ownedPtr.asFunction<
+          ffi.Pointer<wire_cst_ffi_maybe_inputs_owned> Function()>();
+
+  ffi.Pointer<wire_cst_ffi_maybe_inputs_seen>
+      cst_new_box_autoadd_ffi_maybe_inputs_seen() {
+    return _cst_new_box_autoadd_ffi_maybe_inputs_seen();
+  }
+
+  late final _cst_new_box_autoadd_ffi_maybe_inputs_seenPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Pointer<wire_cst_ffi_maybe_inputs_seen> Function()>>(
+      'frbgen_payjoin_flutter_cst_new_box_autoadd_ffi_maybe_inputs_seen');
+  late final _cst_new_box_autoadd_ffi_maybe_inputs_seen =
+      _cst_new_box_autoadd_ffi_maybe_inputs_seenPtr
+          .asFunction<ffi.Pointer<wire_cst_ffi_maybe_inputs_seen> Function()>();
+
+  ffi.Pointer<wire_cst_ffi_maybe_mixed_input_scripts>
+      cst_new_box_autoadd_ffi_maybe_mixed_input_scripts() {
+    return _cst_new_box_autoadd_ffi_maybe_mixed_input_scripts();
+  }
+
+  late final _cst_new_box_autoadd_ffi_maybe_mixed_input_scriptsPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Pointer<wire_cst_ffi_maybe_mixed_input_scripts> Function()>>(
+      'frbgen_payjoin_flutter_cst_new_box_autoadd_ffi_maybe_mixed_input_scripts');
+  late final _cst_new_box_autoadd_ffi_maybe_mixed_input_scripts =
+      _cst_new_box_autoadd_ffi_maybe_mixed_input_scriptsPtr.asFunction<
+          ffi.Pointer<wire_cst_ffi_maybe_mixed_input_scripts> Function()>();
+
   ffi.Pointer<wire_cst_ffi_ohttp_keys> cst_new_box_autoadd_ffi_ohttp_keys() {
     return _cst_new_box_autoadd_ffi_ohttp_keys();
   }
@@ -4007,6 +4013,32 @@ class coreWire implements BaseWire {
   late final _cst_new_box_autoadd_ffi_ohttp_keys =
       _cst_new_box_autoadd_ffi_ohttp_keysPtr
           .asFunction<ffi.Pointer<wire_cst_ffi_ohttp_keys> Function()>();
+
+  ffi.Pointer<wire_cst_ffi_outputs_unknown>
+      cst_new_box_autoadd_ffi_outputs_unknown() {
+    return _cst_new_box_autoadd_ffi_outputs_unknown();
+  }
+
+  late final _cst_new_box_autoadd_ffi_outputs_unknownPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Pointer<wire_cst_ffi_outputs_unknown> Function()>>(
+      'frbgen_payjoin_flutter_cst_new_box_autoadd_ffi_outputs_unknown');
+  late final _cst_new_box_autoadd_ffi_outputs_unknown =
+      _cst_new_box_autoadd_ffi_outputs_unknownPtr
+          .asFunction<ffi.Pointer<wire_cst_ffi_outputs_unknown> Function()>();
+
+  ffi.Pointer<wire_cst_ffi_payjoin_proposal>
+      cst_new_box_autoadd_ffi_payjoin_proposal() {
+    return _cst_new_box_autoadd_ffi_payjoin_proposal();
+  }
+
+  late final _cst_new_box_autoadd_ffi_payjoin_proposalPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Pointer<wire_cst_ffi_payjoin_proposal> Function()>>(
+      'frbgen_payjoin_flutter_cst_new_box_autoadd_ffi_payjoin_proposal');
+  late final _cst_new_box_autoadd_ffi_payjoin_proposal =
+      _cst_new_box_autoadd_ffi_payjoin_proposalPtr
+          .asFunction<ffi.Pointer<wire_cst_ffi_payjoin_proposal> Function()>();
 
   ffi.Pointer<wire_cst_ffi_pj_uri> cst_new_box_autoadd_ffi_pj_uri() {
     return _cst_new_box_autoadd_ffi_pj_uri();
@@ -4031,6 +4063,19 @@ class coreWire implements BaseWire {
   late final _cst_new_box_autoadd_ffi_pj_uri_builder =
       _cst_new_box_autoadd_ffi_pj_uri_builderPtr
           .asFunction<ffi.Pointer<wire_cst_ffi_pj_uri_builder> Function()>();
+
+  ffi.Pointer<wire_cst_ffi_provisional_proposal>
+      cst_new_box_autoadd_ffi_provisional_proposal() {
+    return _cst_new_box_autoadd_ffi_provisional_proposal();
+  }
+
+  late final _cst_new_box_autoadd_ffi_provisional_proposalPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Pointer<wire_cst_ffi_provisional_proposal> Function()>>(
+      'frbgen_payjoin_flutter_cst_new_box_autoadd_ffi_provisional_proposal');
+  late final _cst_new_box_autoadd_ffi_provisional_proposal =
+      _cst_new_box_autoadd_ffi_provisional_proposalPtr.asFunction<
+          ffi.Pointer<wire_cst_ffi_provisional_proposal> Function()>();
 
   ffi.Pointer<wire_cst_ffi_request_builder>
       cst_new_box_autoadd_ffi_request_builder() {
@@ -4071,6 +4116,19 @@ class coreWire implements BaseWire {
       _cst_new_box_autoadd_ffi_session_initializerPtr.asFunction<
           ffi.Pointer<wire_cst_ffi_session_initializer> Function()>();
 
+  ffi.Pointer<wire_cst_ffi_unchecked_proposal>
+      cst_new_box_autoadd_ffi_unchecked_proposal() {
+    return _cst_new_box_autoadd_ffi_unchecked_proposal();
+  }
+
+  late final _cst_new_box_autoadd_ffi_unchecked_proposalPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Pointer<wire_cst_ffi_unchecked_proposal> Function()>>(
+      'frbgen_payjoin_flutter_cst_new_box_autoadd_ffi_unchecked_proposal');
+  late final _cst_new_box_autoadd_ffi_unchecked_proposal =
+      _cst_new_box_autoadd_ffi_unchecked_proposalPtr.asFunction<
+          ffi.Pointer<wire_cst_ffi_unchecked_proposal> Function()>();
+
   ffi.Pointer<wire_cst_ffi_uri> cst_new_box_autoadd_ffi_uri() {
     return _cst_new_box_autoadd_ffi_uri();
   }
@@ -4090,98 +4148,6 @@ class coreWire implements BaseWire {
           'frbgen_payjoin_flutter_cst_new_box_autoadd_ffi_url');
   late final _cst_new_box_autoadd_ffi_url = _cst_new_box_autoadd_ffi_urlPtr
       .asFunction<ffi.Pointer<wire_cst_ffi_url> Function()>();
-
-  ffi.Pointer<wire_cst_ffi_v_2_maybe_inputs_owned>
-      cst_new_box_autoadd_ffi_v_2_maybe_inputs_owned() {
-    return _cst_new_box_autoadd_ffi_v_2_maybe_inputs_owned();
-  }
-
-  late final _cst_new_box_autoadd_ffi_v_2_maybe_inputs_ownedPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<wire_cst_ffi_v_2_maybe_inputs_owned> Function()>>(
-      'frbgen_payjoin_flutter_cst_new_box_autoadd_ffi_v_2_maybe_inputs_owned');
-  late final _cst_new_box_autoadd_ffi_v_2_maybe_inputs_owned =
-      _cst_new_box_autoadd_ffi_v_2_maybe_inputs_ownedPtr.asFunction<
-          ffi.Pointer<wire_cst_ffi_v_2_maybe_inputs_owned> Function()>();
-
-  ffi.Pointer<wire_cst_ffi_v_2_maybe_inputs_seen>
-      cst_new_box_autoadd_ffi_v_2_maybe_inputs_seen() {
-    return _cst_new_box_autoadd_ffi_v_2_maybe_inputs_seen();
-  }
-
-  late final _cst_new_box_autoadd_ffi_v_2_maybe_inputs_seenPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<wire_cst_ffi_v_2_maybe_inputs_seen> Function()>>(
-      'frbgen_payjoin_flutter_cst_new_box_autoadd_ffi_v_2_maybe_inputs_seen');
-  late final _cst_new_box_autoadd_ffi_v_2_maybe_inputs_seen =
-      _cst_new_box_autoadd_ffi_v_2_maybe_inputs_seenPtr.asFunction<
-          ffi.Pointer<wire_cst_ffi_v_2_maybe_inputs_seen> Function()>();
-
-  ffi.Pointer<wire_cst_ffi_v_2_maybe_mixed_input_scripts>
-      cst_new_box_autoadd_ffi_v_2_maybe_mixed_input_scripts() {
-    return _cst_new_box_autoadd_ffi_v_2_maybe_mixed_input_scripts();
-  }
-
-  late final _cst_new_box_autoadd_ffi_v_2_maybe_mixed_input_scriptsPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<wire_cst_ffi_v_2_maybe_mixed_input_scripts>
-                  Function()>>(
-      'frbgen_payjoin_flutter_cst_new_box_autoadd_ffi_v_2_maybe_mixed_input_scripts');
-  late final _cst_new_box_autoadd_ffi_v_2_maybe_mixed_input_scripts =
-      _cst_new_box_autoadd_ffi_v_2_maybe_mixed_input_scriptsPtr.asFunction<
-          ffi.Pointer<wire_cst_ffi_v_2_maybe_mixed_input_scripts> Function()>();
-
-  ffi.Pointer<wire_cst_ffi_v_2_outputs_unknown>
-      cst_new_box_autoadd_ffi_v_2_outputs_unknown() {
-    return _cst_new_box_autoadd_ffi_v_2_outputs_unknown();
-  }
-
-  late final _cst_new_box_autoadd_ffi_v_2_outputs_unknownPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<wire_cst_ffi_v_2_outputs_unknown> Function()>>(
-      'frbgen_payjoin_flutter_cst_new_box_autoadd_ffi_v_2_outputs_unknown');
-  late final _cst_new_box_autoadd_ffi_v_2_outputs_unknown =
-      _cst_new_box_autoadd_ffi_v_2_outputs_unknownPtr.asFunction<
-          ffi.Pointer<wire_cst_ffi_v_2_outputs_unknown> Function()>();
-
-  ffi.Pointer<wire_cst_ffi_v_2_payjoin_proposal>
-      cst_new_box_autoadd_ffi_v_2_payjoin_proposal() {
-    return _cst_new_box_autoadd_ffi_v_2_payjoin_proposal();
-  }
-
-  late final _cst_new_box_autoadd_ffi_v_2_payjoin_proposalPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<wire_cst_ffi_v_2_payjoin_proposal> Function()>>(
-      'frbgen_payjoin_flutter_cst_new_box_autoadd_ffi_v_2_payjoin_proposal');
-  late final _cst_new_box_autoadd_ffi_v_2_payjoin_proposal =
-      _cst_new_box_autoadd_ffi_v_2_payjoin_proposalPtr.asFunction<
-          ffi.Pointer<wire_cst_ffi_v_2_payjoin_proposal> Function()>();
-
-  ffi.Pointer<wire_cst_ffi_v_2_provisional_proposal>
-      cst_new_box_autoadd_ffi_v_2_provisional_proposal() {
-    return _cst_new_box_autoadd_ffi_v_2_provisional_proposal();
-  }
-
-  late final _cst_new_box_autoadd_ffi_v_2_provisional_proposalPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<wire_cst_ffi_v_2_provisional_proposal> Function()>>(
-      'frbgen_payjoin_flutter_cst_new_box_autoadd_ffi_v_2_provisional_proposal');
-  late final _cst_new_box_autoadd_ffi_v_2_provisional_proposal =
-      _cst_new_box_autoadd_ffi_v_2_provisional_proposalPtr.asFunction<
-          ffi.Pointer<wire_cst_ffi_v_2_provisional_proposal> Function()>();
-
-  ffi.Pointer<wire_cst_ffi_v_2_unchecked_proposal>
-      cst_new_box_autoadd_ffi_v_2_unchecked_proposal() {
-    return _cst_new_box_autoadd_ffi_v_2_unchecked_proposal();
-  }
-
-  late final _cst_new_box_autoadd_ffi_v_2_unchecked_proposalPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<wire_cst_ffi_v_2_unchecked_proposal> Function()>>(
-      'frbgen_payjoin_flutter_cst_new_box_autoadd_ffi_v_2_unchecked_proposal');
-  late final _cst_new_box_autoadd_ffi_v_2_unchecked_proposal =
-      _cst_new_box_autoadd_ffi_v_2_unchecked_proposalPtr.asFunction<
-          ffi.Pointer<wire_cst_ffi_v_2_unchecked_proposal> Function()>();
 
   ffi.Pointer<wire_cst_out_point> cst_new_box_autoadd_out_point() {
     return _cst_new_box_autoadd_out_point();
@@ -4347,7 +4313,32 @@ final class wire_cst_client_response extends ffi.Struct {
   external int field0;
 }
 
-final class wire_cst_ffi_session_initializer extends ffi.Struct {
+final class wire_cst_ffi_maybe_inputs_owned extends ffi.Struct {
+  @ffi.UintPtr()
+  external int field0;
+}
+
+final class wire_cst_ffi_maybe_inputs_seen extends ffi.Struct {
+  @ffi.UintPtr()
+  external int field0;
+}
+
+final class wire_cst_ffi_maybe_mixed_input_scripts extends ffi.Struct {
+  @ffi.UintPtr()
+  external int field0;
+}
+
+final class wire_cst_ffi_outputs_unknown extends ffi.Struct {
+  @ffi.UintPtr()
+  external int field0;
+}
+
+final class wire_cst_ffi_payjoin_proposal extends ffi.Struct {
+  @ffi.UintPtr()
+  external int field0;
+}
+
+final class wire_cst_ffi_provisional_proposal extends ffi.Struct {
   @ffi.UintPtr()
   external int field0;
 }
@@ -4357,41 +4348,6 @@ final class wire_cst_list_prim_u_8_strict extends ffi.Struct {
 
   @ffi.Int32()
   external int len;
-}
-
-final class wire_cst_ffi_ohttp_keys extends ffi.Struct {
-  @ffi.UintPtr()
-  external int field0;
-}
-
-final class wire_cst_ffi_v_2_maybe_inputs_owned extends ffi.Struct {
-  @ffi.UintPtr()
-  external int field0;
-}
-
-final class wire_cst_ffi_v_2_maybe_inputs_seen extends ffi.Struct {
-  @ffi.UintPtr()
-  external int field0;
-}
-
-final class wire_cst_ffi_v_2_maybe_mixed_input_scripts extends ffi.Struct {
-  @ffi.UintPtr()
-  external int field0;
-}
-
-final class wire_cst_ffi_v_2_outputs_unknown extends ffi.Struct {
-  @ffi.UintPtr()
-  external int field0;
-}
-
-final class wire_cst_ffi_v_2_payjoin_proposal extends ffi.Struct {
-  @ffi.UintPtr()
-  external int field0;
-}
-
-final class wire_cst_ffi_v_2_provisional_proposal extends ffi.Struct {
-  @ffi.UintPtr()
-  external int field0;
 }
 
 final class wire_cst_tx_out extends ffi.Struct {
@@ -4422,7 +4378,17 @@ final class wire_cst_list_record_u_64_out_point extends ffi.Struct {
   external int len;
 }
 
-final class wire_cst_ffi_v_2_unchecked_proposal extends ffi.Struct {
+final class wire_cst_ffi_session_initializer extends ffi.Struct {
+  @ffi.UintPtr()
+  external int field0;
+}
+
+final class wire_cst_ffi_ohttp_keys extends ffi.Struct {
+  @ffi.UintPtr()
+  external int field0;
+}
+
+final class wire_cst_ffi_unchecked_proposal extends ffi.Struct {
   @ffi.UintPtr()
   external int field0;
 }

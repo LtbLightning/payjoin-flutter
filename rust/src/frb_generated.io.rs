@@ -198,11 +198,48 @@ impl CstDecode<crate::api::send::FfiContextV2> for *mut wire_cst_ffi_context_v_2
         CstDecode::<crate::api::send::FfiContextV2>::cst_decode(*wrap).into()
     }
 }
+impl CstDecode<crate::api::receive::FfiMaybeInputsOwned> for *mut wire_cst_ffi_maybe_inputs_owned {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    fn cst_decode(self) -> crate::api::receive::FfiMaybeInputsOwned {
+        let wrap = unsafe { flutter_rust_bridge::for_generated::box_from_leak_ptr(self) };
+        CstDecode::<crate::api::receive::FfiMaybeInputsOwned>::cst_decode(*wrap).into()
+    }
+}
+impl CstDecode<crate::api::receive::FfiMaybeInputsSeen> for *mut wire_cst_ffi_maybe_inputs_seen {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    fn cst_decode(self) -> crate::api::receive::FfiMaybeInputsSeen {
+        let wrap = unsafe { flutter_rust_bridge::for_generated::box_from_leak_ptr(self) };
+        CstDecode::<crate::api::receive::FfiMaybeInputsSeen>::cst_decode(*wrap).into()
+    }
+}
+impl CstDecode<crate::api::receive::FfiMaybeMixedInputScripts>
+    for *mut wire_cst_ffi_maybe_mixed_input_scripts
+{
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    fn cst_decode(self) -> crate::api::receive::FfiMaybeMixedInputScripts {
+        let wrap = unsafe { flutter_rust_bridge::for_generated::box_from_leak_ptr(self) };
+        CstDecode::<crate::api::receive::FfiMaybeMixedInputScripts>::cst_decode(*wrap).into()
+    }
+}
 impl CstDecode<crate::api::uri::FfiOhttpKeys> for *mut wire_cst_ffi_ohttp_keys {
     // Codec=Cst (C-struct based), see doc to use other codecs
     fn cst_decode(self) -> crate::api::uri::FfiOhttpKeys {
         let wrap = unsafe { flutter_rust_bridge::for_generated::box_from_leak_ptr(self) };
         CstDecode::<crate::api::uri::FfiOhttpKeys>::cst_decode(*wrap).into()
+    }
+}
+impl CstDecode<crate::api::receive::FfiOutputsUnknown> for *mut wire_cst_ffi_outputs_unknown {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    fn cst_decode(self) -> crate::api::receive::FfiOutputsUnknown {
+        let wrap = unsafe { flutter_rust_bridge::for_generated::box_from_leak_ptr(self) };
+        CstDecode::<crate::api::receive::FfiOutputsUnknown>::cst_decode(*wrap).into()
+    }
+}
+impl CstDecode<crate::api::receive::FfiPayjoinProposal> for *mut wire_cst_ffi_payjoin_proposal {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    fn cst_decode(self) -> crate::api::receive::FfiPayjoinProposal {
+        let wrap = unsafe { flutter_rust_bridge::for_generated::box_from_leak_ptr(self) };
+        CstDecode::<crate::api::receive::FfiPayjoinProposal>::cst_decode(*wrap).into()
     }
 }
 impl CstDecode<crate::api::uri::FfiPjUri> for *mut wire_cst_ffi_pj_uri {
@@ -217,6 +254,15 @@ impl CstDecode<crate::api::uri::FfiPjUriBuilder> for *mut wire_cst_ffi_pj_uri_bu
     fn cst_decode(self) -> crate::api::uri::FfiPjUriBuilder {
         let wrap = unsafe { flutter_rust_bridge::for_generated::box_from_leak_ptr(self) };
         CstDecode::<crate::api::uri::FfiPjUriBuilder>::cst_decode(*wrap).into()
+    }
+}
+impl CstDecode<crate::api::receive::FfiProvisionalProposal>
+    for *mut wire_cst_ffi_provisional_proposal
+{
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    fn cst_decode(self) -> crate::api::receive::FfiProvisionalProposal {
+        let wrap = unsafe { flutter_rust_bridge::for_generated::box_from_leak_ptr(self) };
+        CstDecode::<crate::api::receive::FfiProvisionalProposal>::cst_decode(*wrap).into()
     }
 }
 impl CstDecode<crate::api::send::FfiRequestBuilder> for *mut wire_cst_ffi_request_builder {
@@ -242,6 +288,13 @@ impl CstDecode<crate::api::receive::FfiSessionInitializer>
         CstDecode::<crate::api::receive::FfiSessionInitializer>::cst_decode(*wrap).into()
     }
 }
+impl CstDecode<crate::api::receive::FfiUncheckedProposal> for *mut wire_cst_ffi_unchecked_proposal {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    fn cst_decode(self) -> crate::api::receive::FfiUncheckedProposal {
+        let wrap = unsafe { flutter_rust_bridge::for_generated::box_from_leak_ptr(self) };
+        CstDecode::<crate::api::receive::FfiUncheckedProposal>::cst_decode(*wrap).into()
+    }
+}
 impl CstDecode<crate::api::uri::FfiUri> for *mut wire_cst_ffi_uri {
     // Codec=Cst (C-struct based), see doc to use other codecs
     fn cst_decode(self) -> crate::api::uri::FfiUri {
@@ -254,67 +307,6 @@ impl CstDecode<crate::api::uri::FfiUrl> for *mut wire_cst_ffi_url {
     fn cst_decode(self) -> crate::api::uri::FfiUrl {
         let wrap = unsafe { flutter_rust_bridge::for_generated::box_from_leak_ptr(self) };
         CstDecode::<crate::api::uri::FfiUrl>::cst_decode(*wrap).into()
-    }
-}
-impl CstDecode<crate::api::receive::FfiV2MaybeInputsOwned>
-    for *mut wire_cst_ffi_v_2_maybe_inputs_owned
-{
-    // Codec=Cst (C-struct based), see doc to use other codecs
-    fn cst_decode(self) -> crate::api::receive::FfiV2MaybeInputsOwned {
-        let wrap = unsafe { flutter_rust_bridge::for_generated::box_from_leak_ptr(self) };
-        CstDecode::<crate::api::receive::FfiV2MaybeInputsOwned>::cst_decode(*wrap).into()
-    }
-}
-impl CstDecode<crate::api::receive::FfiV2MaybeInputsSeen>
-    for *mut wire_cst_ffi_v_2_maybe_inputs_seen
-{
-    // Codec=Cst (C-struct based), see doc to use other codecs
-    fn cst_decode(self) -> crate::api::receive::FfiV2MaybeInputsSeen {
-        let wrap = unsafe { flutter_rust_bridge::for_generated::box_from_leak_ptr(self) };
-        CstDecode::<crate::api::receive::FfiV2MaybeInputsSeen>::cst_decode(*wrap).into()
-    }
-}
-impl CstDecode<crate::api::receive::FfiV2MaybeMixedInputScripts>
-    for *mut wire_cst_ffi_v_2_maybe_mixed_input_scripts
-{
-    // Codec=Cst (C-struct based), see doc to use other codecs
-    fn cst_decode(self) -> crate::api::receive::FfiV2MaybeMixedInputScripts {
-        let wrap = unsafe { flutter_rust_bridge::for_generated::box_from_leak_ptr(self) };
-        CstDecode::<crate::api::receive::FfiV2MaybeMixedInputScripts>::cst_decode(*wrap).into()
-    }
-}
-impl CstDecode<crate::api::receive::FfiV2OutputsUnknown> for *mut wire_cst_ffi_v_2_outputs_unknown {
-    // Codec=Cst (C-struct based), see doc to use other codecs
-    fn cst_decode(self) -> crate::api::receive::FfiV2OutputsUnknown {
-        let wrap = unsafe { flutter_rust_bridge::for_generated::box_from_leak_ptr(self) };
-        CstDecode::<crate::api::receive::FfiV2OutputsUnknown>::cst_decode(*wrap).into()
-    }
-}
-impl CstDecode<crate::api::receive::FfiV2PayjoinProposal>
-    for *mut wire_cst_ffi_v_2_payjoin_proposal
-{
-    // Codec=Cst (C-struct based), see doc to use other codecs
-    fn cst_decode(self) -> crate::api::receive::FfiV2PayjoinProposal {
-        let wrap = unsafe { flutter_rust_bridge::for_generated::box_from_leak_ptr(self) };
-        CstDecode::<crate::api::receive::FfiV2PayjoinProposal>::cst_decode(*wrap).into()
-    }
-}
-impl CstDecode<crate::api::receive::FfiV2ProvisionalProposal>
-    for *mut wire_cst_ffi_v_2_provisional_proposal
-{
-    // Codec=Cst (C-struct based), see doc to use other codecs
-    fn cst_decode(self) -> crate::api::receive::FfiV2ProvisionalProposal {
-        let wrap = unsafe { flutter_rust_bridge::for_generated::box_from_leak_ptr(self) };
-        CstDecode::<crate::api::receive::FfiV2ProvisionalProposal>::cst_decode(*wrap).into()
-    }
-}
-impl CstDecode<crate::api::receive::FfiV2UncheckedProposal>
-    for *mut wire_cst_ffi_v_2_unchecked_proposal
-{
-    // Codec=Cst (C-struct based), see doc to use other codecs
-    fn cst_decode(self) -> crate::api::receive::FfiV2UncheckedProposal {
-        let wrap = unsafe { flutter_rust_bridge::for_generated::box_from_leak_ptr(self) };
-        CstDecode::<crate::api::receive::FfiV2UncheckedProposal>::cst_decode(*wrap).into()
     }
 }
 impl CstDecode<crate::utils::types::OutPoint> for *mut wire_cst_out_point {
@@ -367,10 +359,42 @@ impl CstDecode<crate::api::send::FfiContextV2> for wire_cst_ffi_context_v_2 {
         crate::api::send::FfiContextV2(self.field0.cst_decode())
     }
 }
+impl CstDecode<crate::api::receive::FfiMaybeInputsOwned> for wire_cst_ffi_maybe_inputs_owned {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    fn cst_decode(self) -> crate::api::receive::FfiMaybeInputsOwned {
+        crate::api::receive::FfiMaybeInputsOwned(self.field0.cst_decode())
+    }
+}
+impl CstDecode<crate::api::receive::FfiMaybeInputsSeen> for wire_cst_ffi_maybe_inputs_seen {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    fn cst_decode(self) -> crate::api::receive::FfiMaybeInputsSeen {
+        crate::api::receive::FfiMaybeInputsSeen(self.field0.cst_decode())
+    }
+}
+impl CstDecode<crate::api::receive::FfiMaybeMixedInputScripts>
+    for wire_cst_ffi_maybe_mixed_input_scripts
+{
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    fn cst_decode(self) -> crate::api::receive::FfiMaybeMixedInputScripts {
+        crate::api::receive::FfiMaybeMixedInputScripts(self.field0.cst_decode())
+    }
+}
 impl CstDecode<crate::api::uri::FfiOhttpKeys> for wire_cst_ffi_ohttp_keys {
     // Codec=Cst (C-struct based), see doc to use other codecs
     fn cst_decode(self) -> crate::api::uri::FfiOhttpKeys {
         crate::api::uri::FfiOhttpKeys(self.field0.cst_decode())
+    }
+}
+impl CstDecode<crate::api::receive::FfiOutputsUnknown> for wire_cst_ffi_outputs_unknown {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    fn cst_decode(self) -> crate::api::receive::FfiOutputsUnknown {
+        crate::api::receive::FfiOutputsUnknown(self.field0.cst_decode())
+    }
+}
+impl CstDecode<crate::api::receive::FfiPayjoinProposal> for wire_cst_ffi_payjoin_proposal {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    fn cst_decode(self) -> crate::api::receive::FfiPayjoinProposal {
+        crate::api::receive::FfiPayjoinProposal(self.field0.cst_decode())
     }
 }
 impl CstDecode<crate::api::uri::FfiPjUri> for wire_cst_ffi_pj_uri {
@@ -383,6 +407,12 @@ impl CstDecode<crate::api::uri::FfiPjUriBuilder> for wire_cst_ffi_pj_uri_builder
     // Codec=Cst (C-struct based), see doc to use other codecs
     fn cst_decode(self) -> crate::api::uri::FfiPjUriBuilder {
         crate::api::uri::FfiPjUriBuilder { internal: self.internal.cst_decode() }
+    }
+}
+impl CstDecode<crate::api::receive::FfiProvisionalProposal> for wire_cst_ffi_provisional_proposal {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    fn cst_decode(self) -> crate::api::receive::FfiProvisionalProposal {
+        crate::api::receive::FfiProvisionalProposal(self.field0.cst_decode())
     }
 }
 impl CstDecode<crate::api::send::FfiRequestBuilder> for wire_cst_ffi_request_builder {
@@ -403,6 +433,12 @@ impl CstDecode<crate::api::receive::FfiSessionInitializer> for wire_cst_ffi_sess
         crate::api::receive::FfiSessionInitializer(self.field0.cst_decode())
     }
 }
+impl CstDecode<crate::api::receive::FfiUncheckedProposal> for wire_cst_ffi_unchecked_proposal {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    fn cst_decode(self) -> crate::api::receive::FfiUncheckedProposal {
+        crate::api::receive::FfiUncheckedProposal(self.field0.cst_decode())
+    }
+}
 impl CstDecode<crate::api::uri::FfiUri> for wire_cst_ffi_uri {
     // Codec=Cst (C-struct based), see doc to use other codecs
     fn cst_decode(self) -> crate::api::uri::FfiUri {
@@ -413,54 +449,6 @@ impl CstDecode<crate::api::uri::FfiUrl> for wire_cst_ffi_url {
     // Codec=Cst (C-struct based), see doc to use other codecs
     fn cst_decode(self) -> crate::api::uri::FfiUrl {
         crate::api::uri::FfiUrl(self.field0.cst_decode())
-    }
-}
-impl CstDecode<crate::api::receive::FfiV2MaybeInputsOwned> for wire_cst_ffi_v_2_maybe_inputs_owned {
-    // Codec=Cst (C-struct based), see doc to use other codecs
-    fn cst_decode(self) -> crate::api::receive::FfiV2MaybeInputsOwned {
-        crate::api::receive::FfiV2MaybeInputsOwned(self.field0.cst_decode())
-    }
-}
-impl CstDecode<crate::api::receive::FfiV2MaybeInputsSeen> for wire_cst_ffi_v_2_maybe_inputs_seen {
-    // Codec=Cst (C-struct based), see doc to use other codecs
-    fn cst_decode(self) -> crate::api::receive::FfiV2MaybeInputsSeen {
-        crate::api::receive::FfiV2MaybeInputsSeen(self.field0.cst_decode())
-    }
-}
-impl CstDecode<crate::api::receive::FfiV2MaybeMixedInputScripts>
-    for wire_cst_ffi_v_2_maybe_mixed_input_scripts
-{
-    // Codec=Cst (C-struct based), see doc to use other codecs
-    fn cst_decode(self) -> crate::api::receive::FfiV2MaybeMixedInputScripts {
-        crate::api::receive::FfiV2MaybeMixedInputScripts(self.field0.cst_decode())
-    }
-}
-impl CstDecode<crate::api::receive::FfiV2OutputsUnknown> for wire_cst_ffi_v_2_outputs_unknown {
-    // Codec=Cst (C-struct based), see doc to use other codecs
-    fn cst_decode(self) -> crate::api::receive::FfiV2OutputsUnknown {
-        crate::api::receive::FfiV2OutputsUnknown(self.field0.cst_decode())
-    }
-}
-impl CstDecode<crate::api::receive::FfiV2PayjoinProposal> for wire_cst_ffi_v_2_payjoin_proposal {
-    // Codec=Cst (C-struct based), see doc to use other codecs
-    fn cst_decode(self) -> crate::api::receive::FfiV2PayjoinProposal {
-        crate::api::receive::FfiV2PayjoinProposal(self.field0.cst_decode())
-    }
-}
-impl CstDecode<crate::api::receive::FfiV2ProvisionalProposal>
-    for wire_cst_ffi_v_2_provisional_proposal
-{
-    // Codec=Cst (C-struct based), see doc to use other codecs
-    fn cst_decode(self) -> crate::api::receive::FfiV2ProvisionalProposal {
-        crate::api::receive::FfiV2ProvisionalProposal(self.field0.cst_decode())
-    }
-}
-impl CstDecode<crate::api::receive::FfiV2UncheckedProposal>
-    for wire_cst_ffi_v_2_unchecked_proposal
-{
-    // Codec=Cst (C-struct based), see doc to use other codecs
-    fn cst_decode(self) -> crate::api::receive::FfiV2UncheckedProposal {
-        crate::api::receive::FfiV2UncheckedProposal(self.field0.cst_decode())
     }
 }
 impl CstDecode<Vec<crate::utils::types::OutPoint>> for *mut wire_cst_list_out_point {
@@ -709,12 +697,62 @@ impl Default for wire_cst_ffi_context_v_2 {
         Self::new_with_null_ptr()
     }
 }
+impl NewWithNullPtr for wire_cst_ffi_maybe_inputs_owned {
+    fn new_with_null_ptr() -> Self {
+        Self { field0: Default::default() }
+    }
+}
+impl Default for wire_cst_ffi_maybe_inputs_owned {
+    fn default() -> Self {
+        Self::new_with_null_ptr()
+    }
+}
+impl NewWithNullPtr for wire_cst_ffi_maybe_inputs_seen {
+    fn new_with_null_ptr() -> Self {
+        Self { field0: Default::default() }
+    }
+}
+impl Default for wire_cst_ffi_maybe_inputs_seen {
+    fn default() -> Self {
+        Self::new_with_null_ptr()
+    }
+}
+impl NewWithNullPtr for wire_cst_ffi_maybe_mixed_input_scripts {
+    fn new_with_null_ptr() -> Self {
+        Self { field0: Default::default() }
+    }
+}
+impl Default for wire_cst_ffi_maybe_mixed_input_scripts {
+    fn default() -> Self {
+        Self::new_with_null_ptr()
+    }
+}
 impl NewWithNullPtr for wire_cst_ffi_ohttp_keys {
     fn new_with_null_ptr() -> Self {
         Self { field0: Default::default() }
     }
 }
 impl Default for wire_cst_ffi_ohttp_keys {
+    fn default() -> Self {
+        Self::new_with_null_ptr()
+    }
+}
+impl NewWithNullPtr for wire_cst_ffi_outputs_unknown {
+    fn new_with_null_ptr() -> Self {
+        Self { field0: Default::default() }
+    }
+}
+impl Default for wire_cst_ffi_outputs_unknown {
+    fn default() -> Self {
+        Self::new_with_null_ptr()
+    }
+}
+impl NewWithNullPtr for wire_cst_ffi_payjoin_proposal {
+    fn new_with_null_ptr() -> Self {
+        Self { field0: Default::default() }
+    }
+}
+impl Default for wire_cst_ffi_payjoin_proposal {
     fn default() -> Self {
         Self::new_with_null_ptr()
     }
@@ -735,6 +773,16 @@ impl NewWithNullPtr for wire_cst_ffi_pj_uri_builder {
     }
 }
 impl Default for wire_cst_ffi_pj_uri_builder {
+    fn default() -> Self {
+        Self::new_with_null_ptr()
+    }
+}
+impl NewWithNullPtr for wire_cst_ffi_provisional_proposal {
+    fn new_with_null_ptr() -> Self {
+        Self { field0: Default::default() }
+    }
+}
+impl Default for wire_cst_ffi_provisional_proposal {
     fn default() -> Self {
         Self::new_with_null_ptr()
     }
@@ -769,6 +817,16 @@ impl Default for wire_cst_ffi_session_initializer {
         Self::new_with_null_ptr()
     }
 }
+impl NewWithNullPtr for wire_cst_ffi_unchecked_proposal {
+    fn new_with_null_ptr() -> Self {
+        Self { field0: Default::default() }
+    }
+}
+impl Default for wire_cst_ffi_unchecked_proposal {
+    fn default() -> Self {
+        Self::new_with_null_ptr()
+    }
+}
 impl NewWithNullPtr for wire_cst_ffi_uri {
     fn new_with_null_ptr() -> Self {
         Self { field0: Default::default() }
@@ -785,76 +843,6 @@ impl NewWithNullPtr for wire_cst_ffi_url {
     }
 }
 impl Default for wire_cst_ffi_url {
-    fn default() -> Self {
-        Self::new_with_null_ptr()
-    }
-}
-impl NewWithNullPtr for wire_cst_ffi_v_2_maybe_inputs_owned {
-    fn new_with_null_ptr() -> Self {
-        Self { field0: Default::default() }
-    }
-}
-impl Default for wire_cst_ffi_v_2_maybe_inputs_owned {
-    fn default() -> Self {
-        Self::new_with_null_ptr()
-    }
-}
-impl NewWithNullPtr for wire_cst_ffi_v_2_maybe_inputs_seen {
-    fn new_with_null_ptr() -> Self {
-        Self { field0: Default::default() }
-    }
-}
-impl Default for wire_cst_ffi_v_2_maybe_inputs_seen {
-    fn default() -> Self {
-        Self::new_with_null_ptr()
-    }
-}
-impl NewWithNullPtr for wire_cst_ffi_v_2_maybe_mixed_input_scripts {
-    fn new_with_null_ptr() -> Self {
-        Self { field0: Default::default() }
-    }
-}
-impl Default for wire_cst_ffi_v_2_maybe_mixed_input_scripts {
-    fn default() -> Self {
-        Self::new_with_null_ptr()
-    }
-}
-impl NewWithNullPtr for wire_cst_ffi_v_2_outputs_unknown {
-    fn new_with_null_ptr() -> Self {
-        Self { field0: Default::default() }
-    }
-}
-impl Default for wire_cst_ffi_v_2_outputs_unknown {
-    fn default() -> Self {
-        Self::new_with_null_ptr()
-    }
-}
-impl NewWithNullPtr for wire_cst_ffi_v_2_payjoin_proposal {
-    fn new_with_null_ptr() -> Self {
-        Self { field0: Default::default() }
-    }
-}
-impl Default for wire_cst_ffi_v_2_payjoin_proposal {
-    fn default() -> Self {
-        Self::new_with_null_ptr()
-    }
-}
-impl NewWithNullPtr for wire_cst_ffi_v_2_provisional_proposal {
-    fn new_with_null_ptr() -> Self {
-        Self { field0: Default::default() }
-    }
-}
-impl Default for wire_cst_ffi_v_2_provisional_proposal {
-    fn default() -> Self {
-        Self::new_with_null_ptr()
-    }
-}
-impl NewWithNullPtr for wire_cst_ffi_v_2_unchecked_proposal {
-    fn new_with_null_ptr() -> Self {
-        Self { field0: Default::default() }
-    }
-}
-impl Default for wire_cst_ffi_v_2_unchecked_proposal {
     fn default() -> Self {
         Self::new_with_null_ptr()
     }
@@ -990,6 +978,179 @@ pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_active_s
 }
 
 #[no_mangle]
+pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_maybe_inputs_owned_check_inputs_not_owned(
+    port_: i64,
+    that: *mut wire_cst_ffi_maybe_inputs_owned,
+    is_owned: *const std::ffi::c_void,
+) {
+    wire__crate__api__receive__ffi_maybe_inputs_owned_check_inputs_not_owned_impl(
+        port_, that, is_owned,
+    )
+}
+
+#[no_mangle]
+pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_maybe_inputs_seen_check_no_inputs_seen_before(
+    port_: i64,
+    that: *mut wire_cst_ffi_maybe_inputs_seen,
+    is_known: *const std::ffi::c_void,
+) {
+    wire__crate__api__receive__ffi_maybe_inputs_seen_check_no_inputs_seen_before_impl(
+        port_, that, is_known,
+    )
+}
+
+#[no_mangle]
+pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_maybe_mixed_input_scripts_check_no_mixed_input_scripts(
+    port_: i64,
+    that: *mut wire_cst_ffi_maybe_mixed_input_scripts,
+) {
+    wire__crate__api__receive__ffi_maybe_mixed_input_scripts_check_no_mixed_input_scripts_impl(
+        port_, that,
+    )
+}
+
+#[no_mangle]
+pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_outputs_unknown_identify_receiver_outputs(
+    port_: i64,
+    that: *mut wire_cst_ffi_outputs_unknown,
+    is_receiver_output: *const std::ffi::c_void,
+) {
+    wire__crate__api__receive__ffi_outputs_unknown_identify_receiver_outputs_impl(
+        port_,
+        that,
+        is_receiver_output,
+    )
+}
+
+#[no_mangle]
+pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_payjoin_proposal_extract_v1_req(
+    port_: i64,
+    that: *mut wire_cst_ffi_payjoin_proposal,
+) {
+    wire__crate__api__receive__ffi_payjoin_proposal_extract_v1_req_impl(port_, that)
+}
+
+#[no_mangle]
+pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_payjoin_proposal_extract_v2_req(
+    port_: i64,
+    that: *mut wire_cst_ffi_payjoin_proposal,
+) {
+    wire__crate__api__receive__ffi_payjoin_proposal_extract_v2_req_impl(port_, that)
+}
+
+#[no_mangle]
+pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_payjoin_proposal_is_output_substitution_disabled(
+    port_: i64,
+    that: *mut wire_cst_ffi_payjoin_proposal,
+) {
+    wire__crate__api__receive__ffi_payjoin_proposal_is_output_substitution_disabled_impl(
+        port_, that,
+    )
+}
+
+#[no_mangle]
+pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_payjoin_proposal_owned_vouts(
+    port_: i64,
+    that: *mut wire_cst_ffi_payjoin_proposal,
+) {
+    wire__crate__api__receive__ffi_payjoin_proposal_owned_vouts_impl(port_, that)
+}
+
+#[no_mangle]
+pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_payjoin_proposal_process_res(
+    port_: i64,
+    that: *mut wire_cst_ffi_payjoin_proposal,
+    res: *mut wire_cst_list_prim_u_8_loose,
+    ohttp_context: *mut wire_cst_client_response,
+) {
+    wire__crate__api__receive__ffi_payjoin_proposal_process_res_impl(
+        port_,
+        that,
+        res,
+        ohttp_context,
+    )
+}
+
+#[no_mangle]
+pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_payjoin_proposal_psbt(
+    port_: i64,
+    that: *mut wire_cst_ffi_payjoin_proposal,
+) {
+    wire__crate__api__receive__ffi_payjoin_proposal_psbt_impl(port_, that)
+}
+
+#[no_mangle]
+pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_payjoin_proposal_utxos_to_be_locked(
+    port_: i64,
+    that: *mut wire_cst_ffi_payjoin_proposal,
+) {
+    wire__crate__api__receive__ffi_payjoin_proposal_utxos_to_be_locked_impl(port_, that)
+}
+
+#[no_mangle]
+pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_provisional_proposal_contribute_witness_input(
+    port_: i64,
+    that: *mut wire_cst_ffi_provisional_proposal,
+    txo: *mut wire_cst_tx_out,
+    outpoint: *mut wire_cst_out_point,
+) {
+    wire__crate__api__receive__ffi_provisional_proposal_contribute_witness_input_impl(
+        port_, that, txo, outpoint,
+    )
+}
+
+#[no_mangle]
+pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_provisional_proposal_finalize_proposal(
+    port_: i64,
+    that: *mut wire_cst_ffi_provisional_proposal,
+    process_psbt: *const std::ffi::c_void,
+    min_fee_rate_sat_per_vb: *mut u64,
+) {
+    wire__crate__api__receive__ffi_provisional_proposal_finalize_proposal_impl(
+        port_,
+        that,
+        process_psbt,
+        min_fee_rate_sat_per_vb,
+    )
+}
+
+#[no_mangle]
+pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_provisional_proposal_is_output_substitution_disabled(
+    port_: i64,
+    that: *mut wire_cst_ffi_provisional_proposal,
+) {
+    wire__crate__api__receive__ffi_provisional_proposal_is_output_substitution_disabled_impl(
+        port_, that,
+    )
+}
+
+#[no_mangle]
+pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_provisional_proposal_try_preserving_privacy(
+    port_: i64,
+    that: *mut wire_cst_ffi_provisional_proposal,
+    candidate_inputs: *mut wire_cst_list_record_u_64_out_point,
+) {
+    wire__crate__api__receive__ffi_provisional_proposal_try_preserving_privacy_impl(
+        port_,
+        that,
+        candidate_inputs,
+    )
+}
+
+#[no_mangle]
+pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_provisional_proposal_try_substitute_receiver_output(
+    port_: i64,
+    that: *mut wire_cst_ffi_provisional_proposal,
+    generate_script: *const std::ffi::c_void,
+) {
+    wire__crate__api__receive__ffi_provisional_proposal_try_substitute_receiver_output_impl(
+        port_,
+        that,
+        generate_script,
+    )
+}
+
+#[no_mangle]
 pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_session_initializer_extract_req(
     port_: i64,
     that: *mut wire_cst_ffi_session_initializer,
@@ -1029,196 +1190,21 @@ pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_session_
 }
 
 #[no_mangle]
-pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_v_2_maybe_inputs_owned_check_inputs_not_owned(
+pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_unchecked_proposal_assume_interactive_receiver(
     port_: i64,
-    that: *mut wire_cst_ffi_v_2_maybe_inputs_owned,
-    is_owned: *const std::ffi::c_void,
+    that: *mut wire_cst_ffi_unchecked_proposal,
 ) {
-    wire__crate__api__receive__ffi_v_2_maybe_inputs_owned_check_inputs_not_owned_impl(
-        port_, that, is_owned,
-    )
+    wire__crate__api__receive__ffi_unchecked_proposal_assume_interactive_receiver_impl(port_, that)
 }
 
 #[no_mangle]
-pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_v_2_maybe_inputs_seen_check_no_inputs_seen_before(
+pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_unchecked_proposal_check_broadcast_suitability(
     port_: i64,
-    that: *mut wire_cst_ffi_v_2_maybe_inputs_seen,
-    is_known: *const std::ffi::c_void,
-) {
-    wire__crate__api__receive__ffi_v_2_maybe_inputs_seen_check_no_inputs_seen_before_impl(
-        port_, that, is_known,
-    )
-}
-
-#[no_mangle]
-pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_v_2_maybe_mixed_input_scripts_check_no_mixed_input_scripts(
-    port_: i64,
-    that: *mut wire_cst_ffi_v_2_maybe_mixed_input_scripts,
-) {
-    wire__crate__api__receive__ffi_v_2_maybe_mixed_input_scripts_check_no_mixed_input_scripts_impl(
-        port_, that,
-    )
-}
-
-#[no_mangle]
-pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_v_2_outputs_unknown_identify_receiver_outputs(
-    port_: i64,
-    that: *mut wire_cst_ffi_v_2_outputs_unknown,
-    is_receiver_output: *const std::ffi::c_void,
-) {
-    wire__crate__api__receive__ffi_v_2_outputs_unknown_identify_receiver_outputs_impl(
-        port_,
-        that,
-        is_receiver_output,
-    )
-}
-
-#[no_mangle]
-pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_v_2_payjoin_proposal_extract_v1_req(
-    port_: i64,
-    that: *mut wire_cst_ffi_v_2_payjoin_proposal,
-) {
-    wire__crate__api__receive__ffi_v_2_payjoin_proposal_extract_v1_req_impl(port_, that)
-}
-
-#[no_mangle]
-pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_v_2_payjoin_proposal_extract_v2_req(
-    port_: i64,
-    that: *mut wire_cst_ffi_v_2_payjoin_proposal,
-) {
-    wire__crate__api__receive__ffi_v_2_payjoin_proposal_extract_v2_req_impl(port_, that)
-}
-
-#[no_mangle]
-pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_v_2_payjoin_proposal_is_output_substitution_disabled(
-    port_: i64,
-    that: *mut wire_cst_ffi_v_2_payjoin_proposal,
-) {
-    wire__crate__api__receive__ffi_v_2_payjoin_proposal_is_output_substitution_disabled_impl(
-        port_, that,
-    )
-}
-
-#[no_mangle]
-pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_v_2_payjoin_proposal_owned_vouts(
-    port_: i64,
-    that: *mut wire_cst_ffi_v_2_payjoin_proposal,
-) {
-    wire__crate__api__receive__ffi_v_2_payjoin_proposal_owned_vouts_impl(port_, that)
-}
-
-#[no_mangle]
-pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_v_2_payjoin_proposal_process_res(
-    port_: i64,
-    that: *mut wire_cst_ffi_v_2_payjoin_proposal,
-    res: *mut wire_cst_list_prim_u_8_loose,
-    ohttp_context: *mut wire_cst_client_response,
-) {
-    wire__crate__api__receive__ffi_v_2_payjoin_proposal_process_res_impl(
-        port_,
-        that,
-        res,
-        ohttp_context,
-    )
-}
-
-#[no_mangle]
-pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_v_2_payjoin_proposal_psbt(
-    port_: i64,
-    that: *mut wire_cst_ffi_v_2_payjoin_proposal,
-) {
-    wire__crate__api__receive__ffi_v_2_payjoin_proposal_psbt_impl(port_, that)
-}
-
-#[no_mangle]
-pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_v_2_payjoin_proposal_utxos_to_be_locked(
-    port_: i64,
-    that: *mut wire_cst_ffi_v_2_payjoin_proposal,
-) {
-    wire__crate__api__receive__ffi_v_2_payjoin_proposal_utxos_to_be_locked_impl(port_, that)
-}
-
-#[no_mangle]
-pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_v_2_provisional_proposal_contribute_witness_input(
-    port_: i64,
-    that: *mut wire_cst_ffi_v_2_provisional_proposal,
-    txo: *mut wire_cst_tx_out,
-    outpoint: *mut wire_cst_out_point,
-) {
-    wire__crate__api__receive__ffi_v_2_provisional_proposal_contribute_witness_input_impl(
-        port_, that, txo, outpoint,
-    )
-}
-
-#[no_mangle]
-pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_v_2_provisional_proposal_finalize_proposal(
-    port_: i64,
-    that: *mut wire_cst_ffi_v_2_provisional_proposal,
-    process_psbt: *const std::ffi::c_void,
-    min_fee_rate_sat_per_vb: *mut u64,
-) {
-    wire__crate__api__receive__ffi_v_2_provisional_proposal_finalize_proposal_impl(
-        port_,
-        that,
-        process_psbt,
-        min_fee_rate_sat_per_vb,
-    )
-}
-
-#[no_mangle]
-pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_v_2_provisional_proposal_is_output_substitution_disabled(
-    port_: i64,
-    that: *mut wire_cst_ffi_v_2_provisional_proposal,
-) {
-    wire__crate__api__receive__ffi_v_2_provisional_proposal_is_output_substitution_disabled_impl(
-        port_, that,
-    )
-}
-
-#[no_mangle]
-pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_v_2_provisional_proposal_try_preserving_privacy(
-    port_: i64,
-    that: *mut wire_cst_ffi_v_2_provisional_proposal,
-    candidate_inputs: *mut wire_cst_list_record_u_64_out_point,
-) {
-    wire__crate__api__receive__ffi_v_2_provisional_proposal_try_preserving_privacy_impl(
-        port_,
-        that,
-        candidate_inputs,
-    )
-}
-
-#[no_mangle]
-pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_v_2_provisional_proposal_try_substitute_receiver_output(
-    port_: i64,
-    that: *mut wire_cst_ffi_v_2_provisional_proposal,
-    generate_script: *const std::ffi::c_void,
-) {
-    wire__crate__api__receive__ffi_v_2_provisional_proposal_try_substitute_receiver_output_impl(
-        port_,
-        that,
-        generate_script,
-    )
-}
-
-#[no_mangle]
-pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_v_2_unchecked_proposal_assume_interactive_receiver(
-    port_: i64,
-    that: *mut wire_cst_ffi_v_2_unchecked_proposal,
-) {
-    wire__crate__api__receive__ffi_v_2_unchecked_proposal_assume_interactive_receiver_impl(
-        port_, that,
-    )
-}
-
-#[no_mangle]
-pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_v_2_unchecked_proposal_check_broadcast_suitability(
-    port_: i64,
-    that: *mut wire_cst_ffi_v_2_unchecked_proposal,
+    that: *mut wire_cst_ffi_unchecked_proposal,
     min_fee_rate: *mut u64,
     can_broadcast: *const std::ffi::c_void,
 ) {
-    wire__crate__api__receive__ffi_v_2_unchecked_proposal_check_broadcast_suitability_impl(
+    wire__crate__api__receive__ffi_unchecked_proposal_check_broadcast_suitability_impl(
         port_,
         that,
         min_fee_rate,
@@ -1227,11 +1213,11 @@ pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_v_2_unch
 }
 
 #[no_mangle]
-pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_v_2_unchecked_proposal_extract_tx_to_schedule_broadcast(
+pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_unchecked_proposal_extract_tx_to_schedule_broadcast(
     port_: i64,
-    that: *mut wire_cst_ffi_v_2_unchecked_proposal,
+    that: *mut wire_cst_ffi_unchecked_proposal,
 ) {
-    wire__crate__api__receive__ffi_v_2_unchecked_proposal_extract_tx_to_schedule_broadcast_impl(
+    wire__crate__api__receive__ffi_unchecked_proposal_extract_tx_to_schedule_broadcast_impl(
         port_, that,
     )
 }
@@ -1855,10 +1841,50 @@ pub extern "C" fn frbgen_payjoin_flutter_cst_new_box_autoadd_ffi_context_v_2(
 }
 
 #[no_mangle]
+pub extern "C" fn frbgen_payjoin_flutter_cst_new_box_autoadd_ffi_maybe_inputs_owned(
+) -> *mut wire_cst_ffi_maybe_inputs_owned {
+    flutter_rust_bridge::for_generated::new_leak_box_ptr(
+        wire_cst_ffi_maybe_inputs_owned::new_with_null_ptr(),
+    )
+}
+
+#[no_mangle]
+pub extern "C" fn frbgen_payjoin_flutter_cst_new_box_autoadd_ffi_maybe_inputs_seen(
+) -> *mut wire_cst_ffi_maybe_inputs_seen {
+    flutter_rust_bridge::for_generated::new_leak_box_ptr(
+        wire_cst_ffi_maybe_inputs_seen::new_with_null_ptr(),
+    )
+}
+
+#[no_mangle]
+pub extern "C" fn frbgen_payjoin_flutter_cst_new_box_autoadd_ffi_maybe_mixed_input_scripts(
+) -> *mut wire_cst_ffi_maybe_mixed_input_scripts {
+    flutter_rust_bridge::for_generated::new_leak_box_ptr(
+        wire_cst_ffi_maybe_mixed_input_scripts::new_with_null_ptr(),
+    )
+}
+
+#[no_mangle]
 pub extern "C" fn frbgen_payjoin_flutter_cst_new_box_autoadd_ffi_ohttp_keys(
 ) -> *mut wire_cst_ffi_ohttp_keys {
     flutter_rust_bridge::for_generated::new_leak_box_ptr(
         wire_cst_ffi_ohttp_keys::new_with_null_ptr(),
+    )
+}
+
+#[no_mangle]
+pub extern "C" fn frbgen_payjoin_flutter_cst_new_box_autoadd_ffi_outputs_unknown(
+) -> *mut wire_cst_ffi_outputs_unknown {
+    flutter_rust_bridge::for_generated::new_leak_box_ptr(
+        wire_cst_ffi_outputs_unknown::new_with_null_ptr(),
+    )
+}
+
+#[no_mangle]
+pub extern "C" fn frbgen_payjoin_flutter_cst_new_box_autoadd_ffi_payjoin_proposal(
+) -> *mut wire_cst_ffi_payjoin_proposal {
+    flutter_rust_bridge::for_generated::new_leak_box_ptr(
+        wire_cst_ffi_payjoin_proposal::new_with_null_ptr(),
     )
 }
 
@@ -1873,6 +1899,14 @@ pub extern "C" fn frbgen_payjoin_flutter_cst_new_box_autoadd_ffi_pj_uri_builder(
 ) -> *mut wire_cst_ffi_pj_uri_builder {
     flutter_rust_bridge::for_generated::new_leak_box_ptr(
         wire_cst_ffi_pj_uri_builder::new_with_null_ptr(),
+    )
+}
+
+#[no_mangle]
+pub extern "C" fn frbgen_payjoin_flutter_cst_new_box_autoadd_ffi_provisional_proposal(
+) -> *mut wire_cst_ffi_provisional_proposal {
+    flutter_rust_bridge::for_generated::new_leak_box_ptr(
+        wire_cst_ffi_provisional_proposal::new_with_null_ptr(),
     )
 }
 
@@ -1901,6 +1935,14 @@ pub extern "C" fn frbgen_payjoin_flutter_cst_new_box_autoadd_ffi_session_initial
 }
 
 #[no_mangle]
+pub extern "C" fn frbgen_payjoin_flutter_cst_new_box_autoadd_ffi_unchecked_proposal(
+) -> *mut wire_cst_ffi_unchecked_proposal {
+    flutter_rust_bridge::for_generated::new_leak_box_ptr(
+        wire_cst_ffi_unchecked_proposal::new_with_null_ptr(),
+    )
+}
+
+#[no_mangle]
 pub extern "C" fn frbgen_payjoin_flutter_cst_new_box_autoadd_ffi_uri() -> *mut wire_cst_ffi_uri {
     flutter_rust_bridge::for_generated::new_leak_box_ptr(wire_cst_ffi_uri::new_with_null_ptr())
 }
@@ -1908,62 +1950,6 @@ pub extern "C" fn frbgen_payjoin_flutter_cst_new_box_autoadd_ffi_uri() -> *mut w
 #[no_mangle]
 pub extern "C" fn frbgen_payjoin_flutter_cst_new_box_autoadd_ffi_url() -> *mut wire_cst_ffi_url {
     flutter_rust_bridge::for_generated::new_leak_box_ptr(wire_cst_ffi_url::new_with_null_ptr())
-}
-
-#[no_mangle]
-pub extern "C" fn frbgen_payjoin_flutter_cst_new_box_autoadd_ffi_v_2_maybe_inputs_owned(
-) -> *mut wire_cst_ffi_v_2_maybe_inputs_owned {
-    flutter_rust_bridge::for_generated::new_leak_box_ptr(
-        wire_cst_ffi_v_2_maybe_inputs_owned::new_with_null_ptr(),
-    )
-}
-
-#[no_mangle]
-pub extern "C" fn frbgen_payjoin_flutter_cst_new_box_autoadd_ffi_v_2_maybe_inputs_seen(
-) -> *mut wire_cst_ffi_v_2_maybe_inputs_seen {
-    flutter_rust_bridge::for_generated::new_leak_box_ptr(
-        wire_cst_ffi_v_2_maybe_inputs_seen::new_with_null_ptr(),
-    )
-}
-
-#[no_mangle]
-pub extern "C" fn frbgen_payjoin_flutter_cst_new_box_autoadd_ffi_v_2_maybe_mixed_input_scripts(
-) -> *mut wire_cst_ffi_v_2_maybe_mixed_input_scripts {
-    flutter_rust_bridge::for_generated::new_leak_box_ptr(
-        wire_cst_ffi_v_2_maybe_mixed_input_scripts::new_with_null_ptr(),
-    )
-}
-
-#[no_mangle]
-pub extern "C" fn frbgen_payjoin_flutter_cst_new_box_autoadd_ffi_v_2_outputs_unknown(
-) -> *mut wire_cst_ffi_v_2_outputs_unknown {
-    flutter_rust_bridge::for_generated::new_leak_box_ptr(
-        wire_cst_ffi_v_2_outputs_unknown::new_with_null_ptr(),
-    )
-}
-
-#[no_mangle]
-pub extern "C" fn frbgen_payjoin_flutter_cst_new_box_autoadd_ffi_v_2_payjoin_proposal(
-) -> *mut wire_cst_ffi_v_2_payjoin_proposal {
-    flutter_rust_bridge::for_generated::new_leak_box_ptr(
-        wire_cst_ffi_v_2_payjoin_proposal::new_with_null_ptr(),
-    )
-}
-
-#[no_mangle]
-pub extern "C" fn frbgen_payjoin_flutter_cst_new_box_autoadd_ffi_v_2_provisional_proposal(
-) -> *mut wire_cst_ffi_v_2_provisional_proposal {
-    flutter_rust_bridge::for_generated::new_leak_box_ptr(
-        wire_cst_ffi_v_2_provisional_proposal::new_with_null_ptr(),
-    )
-}
-
-#[no_mangle]
-pub extern "C" fn frbgen_payjoin_flutter_cst_new_box_autoadd_ffi_v_2_unchecked_proposal(
-) -> *mut wire_cst_ffi_v_2_unchecked_proposal {
-    flutter_rust_bridge::for_generated::new_leak_box_ptr(
-        wire_cst_ffi_v_2_unchecked_proposal::new_with_null_ptr(),
-    )
 }
 
 #[no_mangle]
@@ -2070,7 +2056,32 @@ pub struct wire_cst_ffi_context_v_2 {
 }
 #[repr(C)]
 #[derive(Clone, Copy)]
+pub struct wire_cst_ffi_maybe_inputs_owned {
+    field0: usize,
+}
+#[repr(C)]
+#[derive(Clone, Copy)]
+pub struct wire_cst_ffi_maybe_inputs_seen {
+    field0: usize,
+}
+#[repr(C)]
+#[derive(Clone, Copy)]
+pub struct wire_cst_ffi_maybe_mixed_input_scripts {
+    field0: usize,
+}
+#[repr(C)]
+#[derive(Clone, Copy)]
 pub struct wire_cst_ffi_ohttp_keys {
+    field0: usize,
+}
+#[repr(C)]
+#[derive(Clone, Copy)]
+pub struct wire_cst_ffi_outputs_unknown {
+    field0: usize,
+}
+#[repr(C)]
+#[derive(Clone, Copy)]
+pub struct wire_cst_ffi_payjoin_proposal {
     field0: usize,
 }
 #[repr(C)]
@@ -2082,6 +2093,11 @@ pub struct wire_cst_ffi_pj_uri {
 #[derive(Clone, Copy)]
 pub struct wire_cst_ffi_pj_uri_builder {
     internal: usize,
+}
+#[repr(C)]
+#[derive(Clone, Copy)]
+pub struct wire_cst_ffi_provisional_proposal {
+    field0: usize,
 }
 #[repr(C)]
 #[derive(Clone, Copy)]
@@ -2100,47 +2116,17 @@ pub struct wire_cst_ffi_session_initializer {
 }
 #[repr(C)]
 #[derive(Clone, Copy)]
+pub struct wire_cst_ffi_unchecked_proposal {
+    field0: usize,
+}
+#[repr(C)]
+#[derive(Clone, Copy)]
 pub struct wire_cst_ffi_uri {
     field0: usize,
 }
 #[repr(C)]
 #[derive(Clone, Copy)]
 pub struct wire_cst_ffi_url {
-    field0: usize,
-}
-#[repr(C)]
-#[derive(Clone, Copy)]
-pub struct wire_cst_ffi_v_2_maybe_inputs_owned {
-    field0: usize,
-}
-#[repr(C)]
-#[derive(Clone, Copy)]
-pub struct wire_cst_ffi_v_2_maybe_inputs_seen {
-    field0: usize,
-}
-#[repr(C)]
-#[derive(Clone, Copy)]
-pub struct wire_cst_ffi_v_2_maybe_mixed_input_scripts {
-    field0: usize,
-}
-#[repr(C)]
-#[derive(Clone, Copy)]
-pub struct wire_cst_ffi_v_2_outputs_unknown {
-    field0: usize,
-}
-#[repr(C)]
-#[derive(Clone, Copy)]
-pub struct wire_cst_ffi_v_2_payjoin_proposal {
-    field0: usize,
-}
-#[repr(C)]
-#[derive(Clone, Copy)]
-pub struct wire_cst_ffi_v_2_provisional_proposal {
-    field0: usize,
-}
-#[repr(C)]
-#[derive(Clone, Copy)]
-pub struct wire_cst_ffi_v_2_unchecked_proposal {
     field0: usize,
 }
 #[repr(C)]
