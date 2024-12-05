@@ -557,6 +557,12 @@ class _HomeState extends State<Home> {
         uncheckedProposal = proposal;
       });
 
+      // Extract the original transaction from the proposal in case you want
+      //  to broadcast it if the sender doesn't finalize the payjoin
+      final originalTxBytes = await proposal.extractTxToScheduleBroadcast();
+      final originalTx =
+          await bdk.Transaction.fromBytes(transactionBytes: originalTxBytes);
+
       // Process the proposal through the various checks
       final maybeInputsOwned = await proposal.assumeInteractiveReceiver();
 
@@ -611,7 +617,6 @@ class _HomeState extends State<Home> {
         payjoinProposal = finalProposal;
       });
 
-      // Wait for transaction broadcast
       final proposalPsbt = await finalProposal.psbt();
       final proposalTxId = await payjoinManager.getTxIdFromPsbt(proposalPsbt);
       debugPrint('Receiver proposal tx: $proposalTxId');
@@ -628,8 +633,27 @@ class _HomeState extends State<Home> {
         [],
         (previous, element) => previous..addAll(element),
       );
-      finalProposal.processRes(res: responseBody, ohttpContext: proposalCtx);
-      // Await sender broadcast...
+      await finalProposal.processRes(
+          res: responseBody, ohttpContext: proposalCtx);
+
+      // Wait for the payjoin transaction to be broadcasted by the sender
+      //  Still possible the payjoin wasn't finalized and the original tx was
+      //  broadcasted instead by the sender, so also check for that
+      // You could also put a timeout on waiting for the transaction and then
+      //  broadcast the original tx yourself if no transaction is received
+      final receivedTxId = await waitForTransaction(
+        originalTxId: await originalTx.txid(),
+        proposalTxId: proposalTxId,
+      );
+      resetPayjoinSession();
+
+      if (receivedTxId.isNotEmpty) {
+        showBottomSheet(
+          '${receivedTxId == proposalTxId ? 'Payjoin' : 'Original'} tx received!',
+          toCopy: receivedTxId,
+          toUrl: 'https://mutinynet.com/tx/$receivedTxId',
+        );
+      }
     } catch (e) {
       debugPrint(e.toString());
       if (e is PayjoinException) {
@@ -671,6 +695,33 @@ class _HomeState extends State<Home> {
       displayText = pjStr;
       pjUri = pjStr;
     });
+  }
+
+  Future<String> waitForTransaction({
+    required String originalTxId,
+    required String proposalTxId,
+    int timeout = 1,
+  }) async {
+    debugPrint('Waiting for payjoin tx to be sent...');
+    await syncWallet();
+    final txs = wallet.listTransactions(includeRaw: false);
+    try {
+      final tx = txs.firstWhere(
+          (tx) => tx.txid == originalTxId || tx.txid == proposalTxId);
+      debugPrint('Tx found: ${tx.txid}');
+      return tx.txid;
+    } catch (e) {
+      debugPrint('Tx not found, retrying after $timeout second(s)...');
+      if (v2Session == null) {
+        // The session was canceled, stop polling
+        return '';
+      }
+      await Future.delayed(Duration(seconds: timeout));
+      return waitForTransaction(
+        originalTxId: originalTxId,
+        proposalTxId: proposalTxId,
+      );
+    }
   }
 
   void resetPayjoinSession() {
