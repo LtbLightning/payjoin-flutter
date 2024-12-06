@@ -5,12 +5,13 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'common.dart';
 import 'src/exceptions.dart';
 import 'src/generated/api/receive.dart';
-import 'src/generated/api/bitcoin_ffi.dart';
 import 'src/generated/utils/error.dart' as error;
 import 'uri.dart';
+import 'bitcoin_ffi.dart';
 
-class Receiver extends FfiReceiver {
-  Receiver._({required super.field0});
+class Receiver {
+  final FfiReceiver _ffiReceiver;
+  Receiver._({required ffiReceiver}) : _ffiReceiver = ffiReceiver;
 
   static Future<Receiver> create(
       {required String address,
@@ -27,16 +28,15 @@ class Receiver extends FfiReceiver {
           address: address,
           expireAfter: expireAfter,
           network: network);
-      return Receiver._(field0: res.field0);
+      return Receiver._(ffiReceiver: res);
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
     }
   }
 
-  @override
   Future<(Request, ClientResponse)> extractReq() async {
     try {
-      final res = await super.extractReq();
+      final res = await _ffiReceiver.extractReq();
       final request = Request(
         url: await Url.fromStr(res.$1.url.asString()),
         contentType: res.$1.contentType,
@@ -48,13 +48,12 @@ class Receiver extends FfiReceiver {
     }
   }
 
-  @override
   Future<UncheckedProposal?> processRes(
       {required List<int> body, required ClientResponse ctx}) async {
     try {
-      final res = await super.processRes(body: body, ctx: ctx);
+      final res = await _ffiReceiver.processRes(body: body, ctx: ctx);
       if (res != null) {
-        return UncheckedProposal._(field0: res.field0);
+        return UncheckedProposal._(ffiUncheckedProposal: res);
       } else {
         return null;
       }
@@ -65,27 +64,26 @@ class Receiver extends FfiReceiver {
 
   /// The contents of the `&pj=` query parameter including the base64url-encoded public key receiver subdirectory.
   /// This identifies a session at the payjoin directory server.
-  @override
   Future<Url> pjUrl() async {
-    final res = await super.pjUrl();
+    final res = await _ffiReceiver.pjUrl();
     return Url.fromStr(res.asString());
   }
 
-  @override
   PjUriBuilder pjUriBuilder() {
-    final res = super.pjUriBuilder();
+    final res = _ffiReceiver.pjUriBuilder();
     return PjUriBuilder(internal: res.internal);
   }
 }
 
-class UncheckedProposal extends FfiUncheckedProposal {
-  UncheckedProposal._({required super.field0});
+class UncheckedProposal {
+  final FfiUncheckedProposal _ffiUncheckedProposal;
+  UncheckedProposal._({required ffiUncheckedProposal})
+      : _ffiUncheckedProposal = ffiUncheckedProposal;
 
   ///The Sender’s Original PSBT
-  @override
   Future<Uint8List> extractTxToScheduleBroadcast({hint}) async {
     try {
-      return super.extractTxToScheduleBroadcast();
+      return _ffiUncheckedProposal.extractTxToScheduleBroadcast();
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
     }
@@ -95,15 +93,14 @@ class UncheckedProposal extends FfiUncheckedProposal {
   /// Receiver MUST check that the Original PSBT from the sender can be broadcast, i.e. testmempoolaccept bitcoind rpc returns { “allowed”: true,.. } for gettransactiontocheckbroadcast() before calling this method.
   /// Do this check if you generate bitcoin uri to receive Payjoin on sender request without manual human approval, like a payment processor. Such so called “non-interactive” receivers are otherwise vulnerable to probing attacks. If a sender can make requests at will, they can learn which bitcoin the receiver owns at no cost. Broadcasting the Original PSBT after some time in the failure case makes incurs sender cost and prevents probing.
   /// Call this after checking downstream.
-  @override
   Future<MaybeInputsOwned> checkBroadcastSuitability(
       {BigInt? minFeeRate,
       required FutureOr<bool> Function(Uint8List p1) canBroadcast,
       hint}) async {
     try {
-      final res = await super.checkBroadcastSuitability(
+      final res = await _ffiUncheckedProposal.checkBroadcastSuitability(
           minFeeRate: minFeeRate, canBroadcast: canBroadcast);
-      return MaybeInputsOwned._(field0: res.field0);
+      return MaybeInputsOwned._(ffiMaybeInputsOwned: res);
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
     }
@@ -112,120 +109,123 @@ class UncheckedProposal extends FfiUncheckedProposal {
   ///Call this method if the only way to initiate a Payjoin with this receiver requires manual intervention, as in most consumer wallets.
   /// So-called “non-interactive” receivers, like payment processors,
   /// that allow arbitrary requests are otherwise vulnerable to probing attacks. Those receivers call gettransactiontocheckbroadcast() and attesttestedandscheduledbroadcast() after making those checks downstream
-  @override
   Future<MaybeInputsOwned> assumeInteractiveReceiver({hint}) async {
     try {
-      final res = await super.assumeInteractiveReceiver();
-      return MaybeInputsOwned._(field0: res.field0);
+      final res = await _ffiUncheckedProposal.assumeInteractiveReceiver();
+      return MaybeInputsOwned._(ffiMaybeInputsOwned: res);
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
     }
   }
 }
 
-class MaybeInputsOwned extends FfiMaybeInputsOwned {
-  MaybeInputsOwned._({required super.field0});
+class MaybeInputsOwned {
+  final FfiMaybeInputsOwned _ffiMaybeInputsOwned;
+  MaybeInputsOwned._({required ffiMaybeInputsOwned})
+      : _ffiMaybeInputsOwned = ffiMaybeInputsOwned;
 
   ///Check that the Original PSBT has no receiver-owned inputs. Return original-psbt-rejected error or otherwise refuse to sign undesirable inputs.
   /// An attacker could try to spend receiver's own inputs. This check prevents that.
-  @override
   Future<MaybeInputsSeen> checkInputsNotOwned(
       {required FutureOr<bool> Function(Uint8List p1) isOwned, hint}) async {
     try {
-      final res = await super.checkInputsNotOwned(isOwned: isOwned);
-      return MaybeInputsSeen._(field0: res.field0);
+      final res =
+          await _ffiMaybeInputsOwned.checkInputsNotOwned(isOwned: isOwned);
+      return MaybeInputsSeen._(ffiMaybeInputsSeen: res);
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
     }
   }
 }
 
-class MaybeInputsSeen extends FfiMaybeInputsSeen {
-  MaybeInputsSeen._({required super.field0});
+class MaybeInputsSeen {
+  final FfiMaybeInputsSeen _ffiMaybeInputsSeen;
+  MaybeInputsSeen._({required ffiMaybeInputsSeen})
+      : _ffiMaybeInputsSeen = ffiMaybeInputsSeen;
 
   /// Make sure that the original transaction inputs have never been seen before.
   /// This prevents probing attacks. This prevents reentrant Payjoin, where a sender
   /// proposes a Payjoin PSBT as a new Original PSBT for a new Payjoin.
-  @override
   Future<OutputsUnknown> checkNoInputsSeenBefore(
       {required FutureOr<bool> Function(OutPoint p1) isKnown, hint}) async {
     try {
-      final res = await super.checkNoInputsSeenBefore(isKnown: isKnown);
-      return OutputsUnknown._(field0: res.field0);
+      final res =
+          await _ffiMaybeInputsSeen.checkNoInputsSeenBefore(isKnown: isKnown);
+      return OutputsUnknown._(ffiOutputsUnknown: res);
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
     }
   }
 }
 
-class OutputsUnknown extends FfiOutputsUnknown {
-  OutputsUnknown._({required super.field0});
+class OutputsUnknown {
+  final FfiOutputsUnknown _ffiOutputsUnknown;
+  OutputsUnknown._({required ffiOutputsUnknown})
+      : _ffiOutputsUnknown = ffiOutputsUnknown;
 
   /// Find which outputs belong to the receiver
-  @override
   Future<WantsOutputs> identifyReceiverOutputs(
       {required FutureOr<bool> Function(Uint8List p1) isReceiverOutput,
       hint}) async {
     try {
-      final res = await super
-          .identifyReceiverOutputs(isReceiverOutput: isReceiverOutput);
-      return WantsOutputs._(field0: res.field0);
+      final res = await _ffiOutputsUnknown.identifyReceiverOutputs(
+          isReceiverOutput: isReceiverOutput);
+      return WantsOutputs._(ffiWantsOutputs: res);
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
     }
   }
 }
 
-class WantsOutputs extends FfiWantsOutputs {
-  WantsOutputs._({required super.field0});
+class WantsOutputs {
+  final FfiWantsOutputs _ffiWantsOutputs;
+  WantsOutputs._({required ffiWantsOutputs})
+      : _ffiWantsOutputs = ffiWantsOutputs;
 
-  @override
   Future<bool> isOutputSubstitutionDisabled({hint}) {
     try {
-      return super.isOutputSubstitutionDisabled();
+      return _ffiWantsOutputs.isOutputSubstitutionDisabled();
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
     }
   }
 
-  @override
   Future<WantsOutputs> replaceReceiverOutputs(
       {required List<TxOut> replacementOutputs,
-      required FfiScript drainScript}) async {
+      required Script drainScript}) async {
     try {
-      final res = await super.replaceReceiverOutputs(
+      final res = await _ffiWantsOutputs.replaceReceiverOutputs(
           replacementOutputs: replacementOutputs, drainScript: drainScript);
-      return WantsOutputs._(field0: res.field0);
+      return WantsOutputs._(ffiWantsOutputs: res);
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
     }
   }
 
-  @override
   Future<WantsOutputs> substituteReceiverScript(
-      {required FfiScript outputScript}) async {
+      {required Script outputScript}) async {
     try {
-      final res =
-          await super.substituteReceiverScript(outputScript: outputScript);
-      return WantsOutputs._(field0: res.field0);
+      final res = await _ffiWantsOutputs.substituteReceiverScript(
+          outputScript: outputScript);
+      return WantsOutputs._(ffiWantsOutputs: res);
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
     }
   }
 
-  @override
   Future<WantsInputs> commitOutputs() async {
     try {
-      final res = await super.commitOutputs();
-      return WantsInputs._(field0: res.field0);
+      final res = await _ffiWantsOutputs.commitOutputs();
+      return WantsInputs._(ffiWantsInputs: res);
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
     }
   }
 }
 
-class WantsInputs extends FfiWantsInputs {
-  WantsInputs._({required super.field0});
+class WantsInputs {
+  final FfiWantsInputs _ffiWantsInputs;
+  WantsInputs._({required ffiWantsInputs}) : _ffiWantsInputs = ffiWantsInputs;
 
   /// Select receiver input such that the payjoin avoids surveillance.
   /// Return the input chosen that has been applied to the Proposal.
@@ -238,34 +238,31 @@ class WantsInputs extends FfiWantsInputs {
   /// BlockSci UIH1 and UIH2:
   /// if min(out) < min(in) then UIH1 else UIH2
   /// https://eprint.iacr.org/2022/589.pdf
-  @override
   Future<InputPair> tryPreservingPrivacy(
-      {required List<FfiInputPair> candidateInputs}) async {
+      {required List<InputPair> candidateInputs}) async {
     try {
-      final res =
-          await super.tryPreservingPrivacy(candidateInputs: candidateInputs);
+      final res = await _ffiWantsInputs.tryPreservingPrivacy(
+          candidateInputs: candidateInputs);
       return InputPair._(field0: res.field0);
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
     }
   }
 
-  @override
   Future<WantsInputs> contributeInputs(
-      {required List<FfiInputPair> replacementInputs}) async {
+      {required List<InputPair> replacementInputs}) async {
     try {
-      final res =
-          await super.contributeInputs(replacementInputs: replacementInputs);
-      return WantsInputs._(field0: res.field0);
+      final res = await _ffiWantsInputs.contributeInputs(
+          replacementInputs: replacementInputs);
+      return WantsInputs._(ffiWantsInputs: res);
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
     }
   }
 
-  @override
   Future<ProvisionalProposal> commitInputs() async {
     try {
-      final res = await super.commitInputs();
+      final res = await _ffiWantsInputs.commitInputs();
       return ProvisionalProposal._(field0: res.field0);
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
