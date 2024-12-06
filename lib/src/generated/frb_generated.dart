@@ -62,7 +62,7 @@ class core extends BaseEntrypoint<coreApi, coreApiImpl, coreWire> {
   String get codegenVersion => '2.0.0';
 
   @override
-  int get rustContentHash => 1834856689;
+  int get rustContentHash => 1181881048;
 
   static const kDefaultExternalLibraryLoaderConfig =
       ExternalLibraryLoaderConfig(
@@ -139,6 +139,8 @@ abstract class coreApi extends BaseApi {
   Future<(Request, ClientResponse)> crateApiReceiveFfiReceiverExtractReq(
       {required FfiReceiver that});
 
+  FfiReceiver crateApiReceiveFfiReceiverFromJson({required String json});
+
   String crateApiReceiveFfiReceiverId({required FfiReceiver that});
 
   FfiPjUriBuilder crateApiReceiveFfiReceiverPjUriBuilder(
@@ -150,6 +152,8 @@ abstract class coreApi extends BaseApi {
       {required FfiReceiver that,
       required List<int> body,
       required ClientResponse ctx});
+
+  String crateApiReceiveFfiReceiverToJson({required FfiReceiver that});
 
   Future<FfiMaybeInputsOwned>
       crateApiReceiveFfiUncheckedProposalAssumeInteractiveReceiver(
@@ -216,6 +220,10 @@ abstract class coreApi extends BaseApi {
 
   Future<(Request, FfiV2PostContext)> crateApiSendFfiSenderExtractV2(
       {required FfiSender that, required FfiUrl ohttpProxyUrl});
+
+  FfiSender crateApiSendFfiSenderFromJson({required String json});
+
+  String crateApiSendFfiSenderToJson({required FfiSender that});
 
   Future<String> crateApiSendFfiV1ContextProcessResponse(
       {required FfiV1Context that, required List<int> response});
@@ -931,6 +939,29 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       );
 
   @override
+  FfiReceiver crateApiReceiveFfiReceiverFromJson({required String json}) {
+    return handler.executeSync(SyncTask(
+      callFfi: () {
+        var arg0 = cst_encode_String(json);
+        return wire.wire__crate__api__receive__ffi_receiver_from_json(arg0);
+      },
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_ffi_receiver,
+        decodeErrorData: dco_decode_payjoin_error,
+      ),
+      constMeta: kCrateApiReceiveFfiReceiverFromJsonConstMeta,
+      argValues: [json],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta get kCrateApiReceiveFfiReceiverFromJsonConstMeta =>
+      const TaskConstMeta(
+        debugName: "ffi_receiver_from_json",
+        argNames: ["json"],
+      );
+
+  @override
   String crateApiReceiveFfiReceiverId({required FfiReceiver that}) {
     return handler.executeSync(SyncTask(
       callFfi: () {
@@ -1028,6 +1059,29 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       const TaskConstMeta(
         debugName: "ffi_receiver_process_res",
         argNames: ["that", "body", "ctx"],
+      );
+
+  @override
+  String crateApiReceiveFfiReceiverToJson({required FfiReceiver that}) {
+    return handler.executeSync(SyncTask(
+      callFfi: () {
+        var arg0 = cst_encode_box_autoadd_ffi_receiver(that);
+        return wire.wire__crate__api__receive__ffi_receiver_to_json(arg0);
+      },
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_String,
+        decodeErrorData: dco_decode_payjoin_error,
+      ),
+      constMeta: kCrateApiReceiveFfiReceiverToJsonConstMeta,
+      argValues: [that],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta get kCrateApiReceiveFfiReceiverToJsonConstMeta =>
+      const TaskConstMeta(
+        debugName: "ffi_receiver_to_json",
+        argNames: ["that"],
       );
 
   @override
@@ -1527,6 +1581,52 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       const TaskConstMeta(
         debugName: "ffi_sender_extract_v2",
         argNames: ["that", "ohttpProxyUrl"],
+      );
+
+  @override
+  FfiSender crateApiSendFfiSenderFromJson({required String json}) {
+    return handler.executeSync(SyncTask(
+      callFfi: () {
+        var arg0 = cst_encode_String(json);
+        return wire.wire__crate__api__send__ffi_sender_from_json(arg0);
+      },
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_ffi_sender,
+        decodeErrorData: dco_decode_payjoin_error,
+      ),
+      constMeta: kCrateApiSendFfiSenderFromJsonConstMeta,
+      argValues: [json],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta get kCrateApiSendFfiSenderFromJsonConstMeta =>
+      const TaskConstMeta(
+        debugName: "ffi_sender_from_json",
+        argNames: ["json"],
+      );
+
+  @override
+  String crateApiSendFfiSenderToJson({required FfiSender that}) {
+    return handler.executeSync(SyncTask(
+      callFfi: () {
+        var arg0 = cst_encode_box_autoadd_ffi_sender(that);
+        return wire.wire__crate__api__send__ffi_sender_to_json(arg0);
+      },
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_String,
+        decodeErrorData: dco_decode_payjoin_error,
+      ),
+      constMeta: kCrateApiSendFfiSenderToJsonConstMeta,
+      argValues: [that],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta get kCrateApiSendFfiSenderToJsonConstMeta =>
+      const TaskConstMeta(
+        debugName: "ffi_sender_to_json",
+        argNames: ["that"],
       );
 
   @override
@@ -3085,6 +3185,10 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
         return PayjoinError_InputPairError(
           message: dco_decode_String(raw[1]),
         );
+      case 21:
+        return PayjoinError_SerdeJsonError(
+          message: dco_decode_String(raw[1]),
+        );
       default:
         throw Exception("unreachable");
     }
@@ -3989,6 +4093,9 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       case 20:
         var var_message = sse_decode_String(deserializer);
         return PayjoinError_InputPairError(message: var_message);
+      case 21:
+        var var_message = sse_decode_String(deserializer);
+        return PayjoinError_SerdeJsonError(message: var_message);
       default:
         throw UnimplementedError('');
     }
@@ -5106,6 +5213,9 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
         sse_encode_String(message, serializer);
       case PayjoinError_InputPairError(message: final message):
         sse_encode_i_32(20, serializer);
+        sse_encode_String(message, serializer);
+      case PayjoinError_SerdeJsonError(message: final message):
+        sse_encode_i_32(21, serializer);
         sse_encode_String(message, serializer);
       default:
         throw UnimplementedError('');

@@ -73,6 +73,19 @@ class Receiver {
     final res = _ffiReceiver.pjUriBuilder();
     return PjUriBuilder(internal: res.internal);
   }
+
+  String toJson() {
+    return _ffiReceiver.toJson();
+  }
+
+  static Receiver fromJson(String json) {
+    try {
+      final res = FfiReceiver.fromJson(json: json);
+      return Receiver._(ffiReceiver: res.field0);
+    } on error.PayjoinError catch (e) {
+      throw mapPayjoinError(e);
+    }
+  }
 }
 
 class UncheckedProposal {

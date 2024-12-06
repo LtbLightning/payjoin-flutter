@@ -671,6 +671,12 @@ impl CstDecode<crate::utils::error::PayjoinError> for wire_cst_payjoin_error {
                     message: ans.message.cst_decode(),
                 }
             }
+            21 => {
+                let ans = unsafe { self.kind.SerdeJsonError };
+                crate::utils::error::PayjoinError::SerdeJsonError {
+                    message: ans.message.cst_decode(),
+                }
+            }
             _ => unreachable!(),
         }
     }
@@ -1236,6 +1242,13 @@ pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_receiver
 }
 
 #[no_mangle]
+pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_receiver_from_json(
+    json: *mut wire_cst_list_prim_u_8_strict,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartDco {
+    wire__crate__api__receive__ffi_receiver_from_json_impl(json)
+}
+
+#[no_mangle]
 pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_receiver_id(
     that: *mut wire_cst_ffi_receiver,
 ) -> flutter_rust_bridge::for_generated::WireSyncRust2DartDco {
@@ -1265,6 +1278,13 @@ pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_receiver
     ctx: *mut wire_cst_client_response,
 ) {
     wire__crate__api__receive__ffi_receiver_process_res_impl(port_, that, body, ctx)
+}
+
+#[no_mangle]
+pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_receiver_to_json(
+    that: *mut wire_cst_ffi_receiver,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartDco {
+    wire__crate__api__receive__ffi_receiver_to_json_impl(that)
 }
 
 #[no_mangle]
@@ -1454,6 +1474,20 @@ pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__send__ffi_sender_extr
     ohttp_proxy_url: *mut wire_cst_ffi_url,
 ) {
     wire__crate__api__send__ffi_sender_extract_v2_impl(port_, that, ohttp_proxy_url)
+}
+
+#[no_mangle]
+pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__send__ffi_sender_from_json(
+    json: *mut wire_cst_list_prim_u_8_strict,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartDco {
+    wire__crate__api__send__ffi_sender_from_json_impl(json)
+}
+
+#[no_mangle]
+pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__send__ffi_sender_to_json(
+    that: *mut wire_cst_ffi_sender,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartDco {
+    wire__crate__api__send__ffi_sender_to_json_impl(that)
 }
 
 #[no_mangle]
@@ -2455,6 +2489,7 @@ pub union PayjoinErrorKind {
     OutputSubstitutionError: wire_cst_PayjoinError_OutputSubstitutionError,
     InputContributionError: wire_cst_PayjoinError_InputContributionError,
     InputPairError: wire_cst_PayjoinError_InputPairError,
+    SerdeJsonError: wire_cst_PayjoinError_SerdeJsonError,
     nil__: (),
 }
 #[repr(C)]
@@ -2560,6 +2595,11 @@ pub struct wire_cst_PayjoinError_InputContributionError {
 #[repr(C)]
 #[derive(Clone, Copy)]
 pub struct wire_cst_PayjoinError_InputPairError {
+    message: *mut wire_cst_list_prim_u_8_strict,
+}
+#[repr(C)]
+#[derive(Clone, Copy)]
+pub struct wire_cst_PayjoinError_SerdeJsonError {
     message: *mut wire_cst_list_prim_u_8_strict,
 }
 #[repr(C)]
