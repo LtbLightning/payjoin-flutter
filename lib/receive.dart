@@ -62,6 +62,10 @@ class Receiver {
     }
   }
 
+  String id() {
+    return _ffiReceiver.id();
+  }
+
   /// The contents of the `&pj=` query parameter including the base64url-encoded public key receiver subdirectory.
   /// This identifies a session at the payjoin directory server.
   Future<Url> pjUrl() async {
