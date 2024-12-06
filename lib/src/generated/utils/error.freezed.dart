@@ -37,6 +37,9 @@ mixin _$PayjoinError {
     required TResult Function(String message) ohttpError,
     required TResult Function(String message) urlError,
     required TResult Function(String message) ioError,
+    required TResult Function(String message) outputSubstitutionError,
+    required TResult Function(String message) inputContributionError,
+    required TResult Function(String message) inputPairError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -59,6 +62,9 @@ mixin _$PayjoinError {
     TResult? Function(String message)? ohttpError,
     TResult? Function(String message)? urlError,
     TResult? Function(String message)? ioError,
+    TResult? Function(String message)? outputSubstitutionError,
+    TResult? Function(String message)? inputContributionError,
+    TResult? Function(String message)? inputPairError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -81,6 +87,9 @@ mixin _$PayjoinError {
     TResult Function(String message)? ohttpError,
     TResult Function(String message)? urlError,
     TResult Function(String message)? ioError,
+    TResult Function(String message)? outputSubstitutionError,
+    TResult Function(String message)? inputContributionError,
+    TResult Function(String message)? inputPairError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -109,6 +118,11 @@ mixin _$PayjoinError {
     required TResult Function(PayjoinError_OhttpError value) ohttpError,
     required TResult Function(PayjoinError_UrlError value) urlError,
     required TResult Function(PayjoinError_IoError value) ioError,
+    required TResult Function(PayjoinError_OutputSubstitutionError value)
+        outputSubstitutionError,
+    required TResult Function(PayjoinError_InputContributionError value)
+        inputContributionError,
+    required TResult Function(PayjoinError_InputPairError value) inputPairError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -132,6 +146,11 @@ mixin _$PayjoinError {
     TResult? Function(PayjoinError_OhttpError value)? ohttpError,
     TResult? Function(PayjoinError_UrlError value)? urlError,
     TResult? Function(PayjoinError_IoError value)? ioError,
+    TResult? Function(PayjoinError_OutputSubstitutionError value)?
+        outputSubstitutionError,
+    TResult? Function(PayjoinError_InputContributionError value)?
+        inputContributionError,
+    TResult? Function(PayjoinError_InputPairError value)? inputPairError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -154,6 +173,11 @@ mixin _$PayjoinError {
     TResult Function(PayjoinError_OhttpError value)? ohttpError,
     TResult Function(PayjoinError_UrlError value)? urlError,
     TResult Function(PayjoinError_IoError value)? ioError,
+    TResult Function(PayjoinError_OutputSubstitutionError value)?
+        outputSubstitutionError,
+    TResult Function(PayjoinError_InputContributionError value)?
+        inputContributionError,
+    TResult Function(PayjoinError_InputPairError value)? inputPairError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -283,6 +307,9 @@ class _$PayjoinError_InvalidAddressImpl extends PayjoinError_InvalidAddress {
     required TResult Function(String message) ohttpError,
     required TResult Function(String message) urlError,
     required TResult Function(String message) ioError,
+    required TResult Function(String message) outputSubstitutionError,
+    required TResult Function(String message) inputContributionError,
+    required TResult Function(String message) inputPairError,
   }) {
     return invalidAddress(message);
   }
@@ -308,6 +335,9 @@ class _$PayjoinError_InvalidAddressImpl extends PayjoinError_InvalidAddress {
     TResult? Function(String message)? ohttpError,
     TResult? Function(String message)? urlError,
     TResult? Function(String message)? ioError,
+    TResult? Function(String message)? outputSubstitutionError,
+    TResult? Function(String message)? inputContributionError,
+    TResult? Function(String message)? inputPairError,
   }) {
     return invalidAddress?.call(message);
   }
@@ -333,6 +363,9 @@ class _$PayjoinError_InvalidAddressImpl extends PayjoinError_InvalidAddress {
     TResult Function(String message)? ohttpError,
     TResult Function(String message)? urlError,
     TResult Function(String message)? ioError,
+    TResult Function(String message)? outputSubstitutionError,
+    TResult Function(String message)? inputContributionError,
+    TResult Function(String message)? inputPairError,
     required TResult orElse(),
   }) {
     if (invalidAddress != null) {
@@ -367,6 +400,11 @@ class _$PayjoinError_InvalidAddressImpl extends PayjoinError_InvalidAddress {
     required TResult Function(PayjoinError_OhttpError value) ohttpError,
     required TResult Function(PayjoinError_UrlError value) urlError,
     required TResult Function(PayjoinError_IoError value) ioError,
+    required TResult Function(PayjoinError_OutputSubstitutionError value)
+        outputSubstitutionError,
+    required TResult Function(PayjoinError_InputContributionError value)
+        inputContributionError,
+    required TResult Function(PayjoinError_InputPairError value) inputPairError,
   }) {
     return invalidAddress(this);
   }
@@ -393,6 +431,11 @@ class _$PayjoinError_InvalidAddressImpl extends PayjoinError_InvalidAddress {
     TResult? Function(PayjoinError_OhttpError value)? ohttpError,
     TResult? Function(PayjoinError_UrlError value)? urlError,
     TResult? Function(PayjoinError_IoError value)? ioError,
+    TResult? Function(PayjoinError_OutputSubstitutionError value)?
+        outputSubstitutionError,
+    TResult? Function(PayjoinError_InputContributionError value)?
+        inputContributionError,
+    TResult? Function(PayjoinError_InputPairError value)? inputPairError,
   }) {
     return invalidAddress?.call(this);
   }
@@ -418,6 +461,11 @@ class _$PayjoinError_InvalidAddressImpl extends PayjoinError_InvalidAddress {
     TResult Function(PayjoinError_OhttpError value)? ohttpError,
     TResult Function(PayjoinError_UrlError value)? urlError,
     TResult Function(PayjoinError_IoError value)? ioError,
+    TResult Function(PayjoinError_OutputSubstitutionError value)?
+        outputSubstitutionError,
+    TResult Function(PayjoinError_InputContributionError value)?
+        inputContributionError,
+    TResult Function(PayjoinError_InputPairError value)? inputPairError,
     required TResult orElse(),
   }) {
     if (invalidAddress != null) {
@@ -527,6 +575,9 @@ class _$PayjoinError_InvalidScriptImpl extends PayjoinError_InvalidScript {
     required TResult Function(String message) ohttpError,
     required TResult Function(String message) urlError,
     required TResult Function(String message) ioError,
+    required TResult Function(String message) outputSubstitutionError,
+    required TResult Function(String message) inputContributionError,
+    required TResult Function(String message) inputPairError,
   }) {
     return invalidScript(message);
   }
@@ -552,6 +603,9 @@ class _$PayjoinError_InvalidScriptImpl extends PayjoinError_InvalidScript {
     TResult? Function(String message)? ohttpError,
     TResult? Function(String message)? urlError,
     TResult? Function(String message)? ioError,
+    TResult? Function(String message)? outputSubstitutionError,
+    TResult? Function(String message)? inputContributionError,
+    TResult? Function(String message)? inputPairError,
   }) {
     return invalidScript?.call(message);
   }
@@ -577,6 +631,9 @@ class _$PayjoinError_InvalidScriptImpl extends PayjoinError_InvalidScript {
     TResult Function(String message)? ohttpError,
     TResult Function(String message)? urlError,
     TResult Function(String message)? ioError,
+    TResult Function(String message)? outputSubstitutionError,
+    TResult Function(String message)? inputContributionError,
+    TResult Function(String message)? inputPairError,
     required TResult orElse(),
   }) {
     if (invalidScript != null) {
@@ -611,6 +668,11 @@ class _$PayjoinError_InvalidScriptImpl extends PayjoinError_InvalidScript {
     required TResult Function(PayjoinError_OhttpError value) ohttpError,
     required TResult Function(PayjoinError_UrlError value) urlError,
     required TResult Function(PayjoinError_IoError value) ioError,
+    required TResult Function(PayjoinError_OutputSubstitutionError value)
+        outputSubstitutionError,
+    required TResult Function(PayjoinError_InputContributionError value)
+        inputContributionError,
+    required TResult Function(PayjoinError_InputPairError value) inputPairError,
   }) {
     return invalidScript(this);
   }
@@ -637,6 +699,11 @@ class _$PayjoinError_InvalidScriptImpl extends PayjoinError_InvalidScript {
     TResult? Function(PayjoinError_OhttpError value)? ohttpError,
     TResult? Function(PayjoinError_UrlError value)? urlError,
     TResult? Function(PayjoinError_IoError value)? ioError,
+    TResult? Function(PayjoinError_OutputSubstitutionError value)?
+        outputSubstitutionError,
+    TResult? Function(PayjoinError_InputContributionError value)?
+        inputContributionError,
+    TResult? Function(PayjoinError_InputPairError value)? inputPairError,
   }) {
     return invalidScript?.call(this);
   }
@@ -662,6 +729,11 @@ class _$PayjoinError_InvalidScriptImpl extends PayjoinError_InvalidScript {
     TResult Function(PayjoinError_OhttpError value)? ohttpError,
     TResult Function(PayjoinError_UrlError value)? urlError,
     TResult Function(PayjoinError_IoError value)? ioError,
+    TResult Function(PayjoinError_OutputSubstitutionError value)?
+        outputSubstitutionError,
+    TResult Function(PayjoinError_InputContributionError value)?
+        inputContributionError,
+    TResult Function(PayjoinError_InputPairError value)? inputPairError,
     required TResult orElse(),
   }) {
     if (invalidScript != null) {
@@ -775,6 +847,9 @@ class _$PayjoinError_NetworkValidationImpl
     required TResult Function(String message) ohttpError,
     required TResult Function(String message) urlError,
     required TResult Function(String message) ioError,
+    required TResult Function(String message) outputSubstitutionError,
+    required TResult Function(String message) inputContributionError,
+    required TResult Function(String message) inputPairError,
   }) {
     return networkValidation(message);
   }
@@ -800,6 +875,9 @@ class _$PayjoinError_NetworkValidationImpl
     TResult? Function(String message)? ohttpError,
     TResult? Function(String message)? urlError,
     TResult? Function(String message)? ioError,
+    TResult? Function(String message)? outputSubstitutionError,
+    TResult? Function(String message)? inputContributionError,
+    TResult? Function(String message)? inputPairError,
   }) {
     return networkValidation?.call(message);
   }
@@ -825,6 +903,9 @@ class _$PayjoinError_NetworkValidationImpl
     TResult Function(String message)? ohttpError,
     TResult Function(String message)? urlError,
     TResult Function(String message)? ioError,
+    TResult Function(String message)? outputSubstitutionError,
+    TResult Function(String message)? inputContributionError,
+    TResult Function(String message)? inputPairError,
     required TResult orElse(),
   }) {
     if (networkValidation != null) {
@@ -859,6 +940,11 @@ class _$PayjoinError_NetworkValidationImpl
     required TResult Function(PayjoinError_OhttpError value) ohttpError,
     required TResult Function(PayjoinError_UrlError value) urlError,
     required TResult Function(PayjoinError_IoError value) ioError,
+    required TResult Function(PayjoinError_OutputSubstitutionError value)
+        outputSubstitutionError,
+    required TResult Function(PayjoinError_InputContributionError value)
+        inputContributionError,
+    required TResult Function(PayjoinError_InputPairError value) inputPairError,
   }) {
     return networkValidation(this);
   }
@@ -885,6 +971,11 @@ class _$PayjoinError_NetworkValidationImpl
     TResult? Function(PayjoinError_OhttpError value)? ohttpError,
     TResult? Function(PayjoinError_UrlError value)? urlError,
     TResult? Function(PayjoinError_IoError value)? ioError,
+    TResult? Function(PayjoinError_OutputSubstitutionError value)?
+        outputSubstitutionError,
+    TResult? Function(PayjoinError_InputContributionError value)?
+        inputContributionError,
+    TResult? Function(PayjoinError_InputPairError value)? inputPairError,
   }) {
     return networkValidation?.call(this);
   }
@@ -910,6 +1001,11 @@ class _$PayjoinError_NetworkValidationImpl
     TResult Function(PayjoinError_OhttpError value)? ohttpError,
     TResult Function(PayjoinError_UrlError value)? urlError,
     TResult Function(PayjoinError_IoError value)? ioError,
+    TResult Function(PayjoinError_OutputSubstitutionError value)?
+        outputSubstitutionError,
+    TResult Function(PayjoinError_InputContributionError value)?
+        inputContributionError,
+    TResult Function(PayjoinError_InputPairError value)? inputPairError,
     required TResult orElse(),
   }) {
     if (networkValidation != null) {
@@ -1020,6 +1116,9 @@ class _$PayjoinError_PsbtParseErrorImpl extends PayjoinError_PsbtParseError {
     required TResult Function(String message) ohttpError,
     required TResult Function(String message) urlError,
     required TResult Function(String message) ioError,
+    required TResult Function(String message) outputSubstitutionError,
+    required TResult Function(String message) inputContributionError,
+    required TResult Function(String message) inputPairError,
   }) {
     return psbtParseError(message);
   }
@@ -1045,6 +1144,9 @@ class _$PayjoinError_PsbtParseErrorImpl extends PayjoinError_PsbtParseError {
     TResult? Function(String message)? ohttpError,
     TResult? Function(String message)? urlError,
     TResult? Function(String message)? ioError,
+    TResult? Function(String message)? outputSubstitutionError,
+    TResult? Function(String message)? inputContributionError,
+    TResult? Function(String message)? inputPairError,
   }) {
     return psbtParseError?.call(message);
   }
@@ -1070,6 +1172,9 @@ class _$PayjoinError_PsbtParseErrorImpl extends PayjoinError_PsbtParseError {
     TResult Function(String message)? ohttpError,
     TResult Function(String message)? urlError,
     TResult Function(String message)? ioError,
+    TResult Function(String message)? outputSubstitutionError,
+    TResult Function(String message)? inputContributionError,
+    TResult Function(String message)? inputPairError,
     required TResult orElse(),
   }) {
     if (psbtParseError != null) {
@@ -1104,6 +1209,11 @@ class _$PayjoinError_PsbtParseErrorImpl extends PayjoinError_PsbtParseError {
     required TResult Function(PayjoinError_OhttpError value) ohttpError,
     required TResult Function(PayjoinError_UrlError value) urlError,
     required TResult Function(PayjoinError_IoError value) ioError,
+    required TResult Function(PayjoinError_OutputSubstitutionError value)
+        outputSubstitutionError,
+    required TResult Function(PayjoinError_InputContributionError value)
+        inputContributionError,
+    required TResult Function(PayjoinError_InputPairError value) inputPairError,
   }) {
     return psbtParseError(this);
   }
@@ -1130,6 +1240,11 @@ class _$PayjoinError_PsbtParseErrorImpl extends PayjoinError_PsbtParseError {
     TResult? Function(PayjoinError_OhttpError value)? ohttpError,
     TResult? Function(PayjoinError_UrlError value)? urlError,
     TResult? Function(PayjoinError_IoError value)? ioError,
+    TResult? Function(PayjoinError_OutputSubstitutionError value)?
+        outputSubstitutionError,
+    TResult? Function(PayjoinError_InputContributionError value)?
+        inputContributionError,
+    TResult? Function(PayjoinError_InputPairError value)? inputPairError,
   }) {
     return psbtParseError?.call(this);
   }
@@ -1155,6 +1270,11 @@ class _$PayjoinError_PsbtParseErrorImpl extends PayjoinError_PsbtParseError {
     TResult Function(PayjoinError_OhttpError value)? ohttpError,
     TResult Function(PayjoinError_UrlError value)? urlError,
     TResult Function(PayjoinError_IoError value)? ioError,
+    TResult Function(PayjoinError_OutputSubstitutionError value)?
+        outputSubstitutionError,
+    TResult Function(PayjoinError_InputContributionError value)?
+        inputContributionError,
+    TResult Function(PayjoinError_InputPairError value)? inputPairError,
     required TResult orElse(),
   }) {
     if (psbtParseError != null) {
@@ -1264,6 +1384,9 @@ class _$PayjoinError_ResponseErrorImpl extends PayjoinError_ResponseError {
     required TResult Function(String message) ohttpError,
     required TResult Function(String message) urlError,
     required TResult Function(String message) ioError,
+    required TResult Function(String message) outputSubstitutionError,
+    required TResult Function(String message) inputContributionError,
+    required TResult Function(String message) inputPairError,
   }) {
     return responseError(message);
   }
@@ -1289,6 +1412,9 @@ class _$PayjoinError_ResponseErrorImpl extends PayjoinError_ResponseError {
     TResult? Function(String message)? ohttpError,
     TResult? Function(String message)? urlError,
     TResult? Function(String message)? ioError,
+    TResult? Function(String message)? outputSubstitutionError,
+    TResult? Function(String message)? inputContributionError,
+    TResult? Function(String message)? inputPairError,
   }) {
     return responseError?.call(message);
   }
@@ -1314,6 +1440,9 @@ class _$PayjoinError_ResponseErrorImpl extends PayjoinError_ResponseError {
     TResult Function(String message)? ohttpError,
     TResult Function(String message)? urlError,
     TResult Function(String message)? ioError,
+    TResult Function(String message)? outputSubstitutionError,
+    TResult Function(String message)? inputContributionError,
+    TResult Function(String message)? inputPairError,
     required TResult orElse(),
   }) {
     if (responseError != null) {
@@ -1348,6 +1477,11 @@ class _$PayjoinError_ResponseErrorImpl extends PayjoinError_ResponseError {
     required TResult Function(PayjoinError_OhttpError value) ohttpError,
     required TResult Function(PayjoinError_UrlError value) urlError,
     required TResult Function(PayjoinError_IoError value) ioError,
+    required TResult Function(PayjoinError_OutputSubstitutionError value)
+        outputSubstitutionError,
+    required TResult Function(PayjoinError_InputContributionError value)
+        inputContributionError,
+    required TResult Function(PayjoinError_InputPairError value) inputPairError,
   }) {
     return responseError(this);
   }
@@ -1374,6 +1508,11 @@ class _$PayjoinError_ResponseErrorImpl extends PayjoinError_ResponseError {
     TResult? Function(PayjoinError_OhttpError value)? ohttpError,
     TResult? Function(PayjoinError_UrlError value)? urlError,
     TResult? Function(PayjoinError_IoError value)? ioError,
+    TResult? Function(PayjoinError_OutputSubstitutionError value)?
+        outputSubstitutionError,
+    TResult? Function(PayjoinError_InputContributionError value)?
+        inputContributionError,
+    TResult? Function(PayjoinError_InputPairError value)? inputPairError,
   }) {
     return responseError?.call(this);
   }
@@ -1399,6 +1538,11 @@ class _$PayjoinError_ResponseErrorImpl extends PayjoinError_ResponseError {
     TResult Function(PayjoinError_OhttpError value)? ohttpError,
     TResult Function(PayjoinError_UrlError value)? urlError,
     TResult Function(PayjoinError_IoError value)? ioError,
+    TResult Function(PayjoinError_OutputSubstitutionError value)?
+        outputSubstitutionError,
+    TResult Function(PayjoinError_InputContributionError value)?
+        inputContributionError,
+    TResult Function(PayjoinError_InputPairError value)? inputPairError,
     required TResult orElse(),
   }) {
     if (responseError != null) {
@@ -1508,6 +1652,9 @@ class _$PayjoinError_RequestErrorImpl extends PayjoinError_RequestError {
     required TResult Function(String message) ohttpError,
     required TResult Function(String message) urlError,
     required TResult Function(String message) ioError,
+    required TResult Function(String message) outputSubstitutionError,
+    required TResult Function(String message) inputContributionError,
+    required TResult Function(String message) inputPairError,
   }) {
     return requestError(message);
   }
@@ -1533,6 +1680,9 @@ class _$PayjoinError_RequestErrorImpl extends PayjoinError_RequestError {
     TResult? Function(String message)? ohttpError,
     TResult? Function(String message)? urlError,
     TResult? Function(String message)? ioError,
+    TResult? Function(String message)? outputSubstitutionError,
+    TResult? Function(String message)? inputContributionError,
+    TResult? Function(String message)? inputPairError,
   }) {
     return requestError?.call(message);
   }
@@ -1558,6 +1708,9 @@ class _$PayjoinError_RequestErrorImpl extends PayjoinError_RequestError {
     TResult Function(String message)? ohttpError,
     TResult Function(String message)? urlError,
     TResult Function(String message)? ioError,
+    TResult Function(String message)? outputSubstitutionError,
+    TResult Function(String message)? inputContributionError,
+    TResult Function(String message)? inputPairError,
     required TResult orElse(),
   }) {
     if (requestError != null) {
@@ -1592,6 +1745,11 @@ class _$PayjoinError_RequestErrorImpl extends PayjoinError_RequestError {
     required TResult Function(PayjoinError_OhttpError value) ohttpError,
     required TResult Function(PayjoinError_UrlError value) urlError,
     required TResult Function(PayjoinError_IoError value) ioError,
+    required TResult Function(PayjoinError_OutputSubstitutionError value)
+        outputSubstitutionError,
+    required TResult Function(PayjoinError_InputContributionError value)
+        inputContributionError,
+    required TResult Function(PayjoinError_InputPairError value) inputPairError,
   }) {
     return requestError(this);
   }
@@ -1618,6 +1776,11 @@ class _$PayjoinError_RequestErrorImpl extends PayjoinError_RequestError {
     TResult? Function(PayjoinError_OhttpError value)? ohttpError,
     TResult? Function(PayjoinError_UrlError value)? urlError,
     TResult? Function(PayjoinError_IoError value)? ioError,
+    TResult? Function(PayjoinError_OutputSubstitutionError value)?
+        outputSubstitutionError,
+    TResult? Function(PayjoinError_InputContributionError value)?
+        inputContributionError,
+    TResult? Function(PayjoinError_InputPairError value)? inputPairError,
   }) {
     return requestError?.call(this);
   }
@@ -1643,6 +1806,11 @@ class _$PayjoinError_RequestErrorImpl extends PayjoinError_RequestError {
     TResult Function(PayjoinError_OhttpError value)? ohttpError,
     TResult Function(PayjoinError_UrlError value)? urlError,
     TResult Function(PayjoinError_IoError value)? ioError,
+    TResult Function(PayjoinError_OutputSubstitutionError value)?
+        outputSubstitutionError,
+    TResult Function(PayjoinError_InputContributionError value)?
+        inputContributionError,
+    TResult Function(PayjoinError_InputPairError value)? inputPairError,
     required TResult orElse(),
   }) {
     if (requestError != null) {
@@ -1756,6 +1924,9 @@ class _$PayjoinError_TransactionErrorImpl
     required TResult Function(String message) ohttpError,
     required TResult Function(String message) urlError,
     required TResult Function(String message) ioError,
+    required TResult Function(String message) outputSubstitutionError,
+    required TResult Function(String message) inputContributionError,
+    required TResult Function(String message) inputPairError,
   }) {
     return transactionError(message);
   }
@@ -1781,6 +1952,9 @@ class _$PayjoinError_TransactionErrorImpl
     TResult? Function(String message)? ohttpError,
     TResult? Function(String message)? urlError,
     TResult? Function(String message)? ioError,
+    TResult? Function(String message)? outputSubstitutionError,
+    TResult? Function(String message)? inputContributionError,
+    TResult? Function(String message)? inputPairError,
   }) {
     return transactionError?.call(message);
   }
@@ -1806,6 +1980,9 @@ class _$PayjoinError_TransactionErrorImpl
     TResult Function(String message)? ohttpError,
     TResult Function(String message)? urlError,
     TResult Function(String message)? ioError,
+    TResult Function(String message)? outputSubstitutionError,
+    TResult Function(String message)? inputContributionError,
+    TResult Function(String message)? inputPairError,
     required TResult orElse(),
   }) {
     if (transactionError != null) {
@@ -1840,6 +2017,11 @@ class _$PayjoinError_TransactionErrorImpl
     required TResult Function(PayjoinError_OhttpError value) ohttpError,
     required TResult Function(PayjoinError_UrlError value) urlError,
     required TResult Function(PayjoinError_IoError value) ioError,
+    required TResult Function(PayjoinError_OutputSubstitutionError value)
+        outputSubstitutionError,
+    required TResult Function(PayjoinError_InputContributionError value)
+        inputContributionError,
+    required TResult Function(PayjoinError_InputPairError value) inputPairError,
   }) {
     return transactionError(this);
   }
@@ -1866,6 +2048,11 @@ class _$PayjoinError_TransactionErrorImpl
     TResult? Function(PayjoinError_OhttpError value)? ohttpError,
     TResult? Function(PayjoinError_UrlError value)? urlError,
     TResult? Function(PayjoinError_IoError value)? ioError,
+    TResult? Function(PayjoinError_OutputSubstitutionError value)?
+        outputSubstitutionError,
+    TResult? Function(PayjoinError_InputContributionError value)?
+        inputContributionError,
+    TResult? Function(PayjoinError_InputPairError value)? inputPairError,
   }) {
     return transactionError?.call(this);
   }
@@ -1891,6 +2078,11 @@ class _$PayjoinError_TransactionErrorImpl
     TResult Function(PayjoinError_OhttpError value)? ohttpError,
     TResult Function(PayjoinError_UrlError value)? urlError,
     TResult Function(PayjoinError_IoError value)? ioError,
+    TResult Function(PayjoinError_OutputSubstitutionError value)?
+        outputSubstitutionError,
+    TResult Function(PayjoinError_InputContributionError value)?
+        inputContributionError,
+    TResult Function(PayjoinError_InputPairError value)? inputPairError,
     required TResult orElse(),
   }) {
     if (transactionError != null) {
@@ -2001,6 +2193,9 @@ class _$PayjoinError_ServerErrorImpl extends PayjoinError_ServerError {
     required TResult Function(String message) ohttpError,
     required TResult Function(String message) urlError,
     required TResult Function(String message) ioError,
+    required TResult Function(String message) outputSubstitutionError,
+    required TResult Function(String message) inputContributionError,
+    required TResult Function(String message) inputPairError,
   }) {
     return serverError(message);
   }
@@ -2026,6 +2221,9 @@ class _$PayjoinError_ServerErrorImpl extends PayjoinError_ServerError {
     TResult? Function(String message)? ohttpError,
     TResult? Function(String message)? urlError,
     TResult? Function(String message)? ioError,
+    TResult? Function(String message)? outputSubstitutionError,
+    TResult? Function(String message)? inputContributionError,
+    TResult? Function(String message)? inputPairError,
   }) {
     return serverError?.call(message);
   }
@@ -2051,6 +2249,9 @@ class _$PayjoinError_ServerErrorImpl extends PayjoinError_ServerError {
     TResult Function(String message)? ohttpError,
     TResult Function(String message)? urlError,
     TResult Function(String message)? ioError,
+    TResult Function(String message)? outputSubstitutionError,
+    TResult Function(String message)? inputContributionError,
+    TResult Function(String message)? inputPairError,
     required TResult orElse(),
   }) {
     if (serverError != null) {
@@ -2085,6 +2286,11 @@ class _$PayjoinError_ServerErrorImpl extends PayjoinError_ServerError {
     required TResult Function(PayjoinError_OhttpError value) ohttpError,
     required TResult Function(PayjoinError_UrlError value) urlError,
     required TResult Function(PayjoinError_IoError value) ioError,
+    required TResult Function(PayjoinError_OutputSubstitutionError value)
+        outputSubstitutionError,
+    required TResult Function(PayjoinError_InputContributionError value)
+        inputContributionError,
+    required TResult Function(PayjoinError_InputPairError value) inputPairError,
   }) {
     return serverError(this);
   }
@@ -2111,6 +2317,11 @@ class _$PayjoinError_ServerErrorImpl extends PayjoinError_ServerError {
     TResult? Function(PayjoinError_OhttpError value)? ohttpError,
     TResult? Function(PayjoinError_UrlError value)? urlError,
     TResult? Function(PayjoinError_IoError value)? ioError,
+    TResult? Function(PayjoinError_OutputSubstitutionError value)?
+        outputSubstitutionError,
+    TResult? Function(PayjoinError_InputContributionError value)?
+        inputContributionError,
+    TResult? Function(PayjoinError_InputPairError value)? inputPairError,
   }) {
     return serverError?.call(this);
   }
@@ -2136,6 +2347,11 @@ class _$PayjoinError_ServerErrorImpl extends PayjoinError_ServerError {
     TResult Function(PayjoinError_OhttpError value)? ohttpError,
     TResult Function(PayjoinError_UrlError value)? urlError,
     TResult Function(PayjoinError_IoError value)? ioError,
+    TResult Function(PayjoinError_OutputSubstitutionError value)?
+        outputSubstitutionError,
+    TResult Function(PayjoinError_InputContributionError value)?
+        inputContributionError,
+    TResult Function(PayjoinError_InputPairError value)? inputPairError,
     required TResult orElse(),
   }) {
     if (serverError != null) {
@@ -2245,6 +2461,9 @@ class _$PayjoinError_SelectionErrorImpl extends PayjoinError_SelectionError {
     required TResult Function(String message) ohttpError,
     required TResult Function(String message) urlError,
     required TResult Function(String message) ioError,
+    required TResult Function(String message) outputSubstitutionError,
+    required TResult Function(String message) inputContributionError,
+    required TResult Function(String message) inputPairError,
   }) {
     return selectionError(message);
   }
@@ -2270,6 +2489,9 @@ class _$PayjoinError_SelectionErrorImpl extends PayjoinError_SelectionError {
     TResult? Function(String message)? ohttpError,
     TResult? Function(String message)? urlError,
     TResult? Function(String message)? ioError,
+    TResult? Function(String message)? outputSubstitutionError,
+    TResult? Function(String message)? inputContributionError,
+    TResult? Function(String message)? inputPairError,
   }) {
     return selectionError?.call(message);
   }
@@ -2295,6 +2517,9 @@ class _$PayjoinError_SelectionErrorImpl extends PayjoinError_SelectionError {
     TResult Function(String message)? ohttpError,
     TResult Function(String message)? urlError,
     TResult Function(String message)? ioError,
+    TResult Function(String message)? outputSubstitutionError,
+    TResult Function(String message)? inputContributionError,
+    TResult Function(String message)? inputPairError,
     required TResult orElse(),
   }) {
     if (selectionError != null) {
@@ -2329,6 +2554,11 @@ class _$PayjoinError_SelectionErrorImpl extends PayjoinError_SelectionError {
     required TResult Function(PayjoinError_OhttpError value) ohttpError,
     required TResult Function(PayjoinError_UrlError value) urlError,
     required TResult Function(PayjoinError_IoError value) ioError,
+    required TResult Function(PayjoinError_OutputSubstitutionError value)
+        outputSubstitutionError,
+    required TResult Function(PayjoinError_InputContributionError value)
+        inputContributionError,
+    required TResult Function(PayjoinError_InputPairError value) inputPairError,
   }) {
     return selectionError(this);
   }
@@ -2355,6 +2585,11 @@ class _$PayjoinError_SelectionErrorImpl extends PayjoinError_SelectionError {
     TResult? Function(PayjoinError_OhttpError value)? ohttpError,
     TResult? Function(PayjoinError_UrlError value)? urlError,
     TResult? Function(PayjoinError_IoError value)? ioError,
+    TResult? Function(PayjoinError_OutputSubstitutionError value)?
+        outputSubstitutionError,
+    TResult? Function(PayjoinError_InputContributionError value)?
+        inputContributionError,
+    TResult? Function(PayjoinError_InputPairError value)? inputPairError,
   }) {
     return selectionError?.call(this);
   }
@@ -2380,6 +2615,11 @@ class _$PayjoinError_SelectionErrorImpl extends PayjoinError_SelectionError {
     TResult Function(PayjoinError_OhttpError value)? ohttpError,
     TResult Function(PayjoinError_UrlError value)? urlError,
     TResult Function(PayjoinError_IoError value)? ioError,
+    TResult Function(PayjoinError_OutputSubstitutionError value)?
+        outputSubstitutionError,
+    TResult Function(PayjoinError_InputContributionError value)?
+        inputContributionError,
+    TResult Function(PayjoinError_InputPairError value)? inputPairError,
     required TResult orElse(),
   }) {
     if (selectionError != null) {
@@ -2493,6 +2733,9 @@ class _$PayjoinError_CreateRequestErrorImpl
     required TResult Function(String message) ohttpError,
     required TResult Function(String message) urlError,
     required TResult Function(String message) ioError,
+    required TResult Function(String message) outputSubstitutionError,
+    required TResult Function(String message) inputContributionError,
+    required TResult Function(String message) inputPairError,
   }) {
     return createRequestError(message);
   }
@@ -2518,6 +2761,9 @@ class _$PayjoinError_CreateRequestErrorImpl
     TResult? Function(String message)? ohttpError,
     TResult? Function(String message)? urlError,
     TResult? Function(String message)? ioError,
+    TResult? Function(String message)? outputSubstitutionError,
+    TResult? Function(String message)? inputContributionError,
+    TResult? Function(String message)? inputPairError,
   }) {
     return createRequestError?.call(message);
   }
@@ -2543,6 +2789,9 @@ class _$PayjoinError_CreateRequestErrorImpl
     TResult Function(String message)? ohttpError,
     TResult Function(String message)? urlError,
     TResult Function(String message)? ioError,
+    TResult Function(String message)? outputSubstitutionError,
+    TResult Function(String message)? inputContributionError,
+    TResult Function(String message)? inputPairError,
     required TResult orElse(),
   }) {
     if (createRequestError != null) {
@@ -2577,6 +2826,11 @@ class _$PayjoinError_CreateRequestErrorImpl
     required TResult Function(PayjoinError_OhttpError value) ohttpError,
     required TResult Function(PayjoinError_UrlError value) urlError,
     required TResult Function(PayjoinError_IoError value) ioError,
+    required TResult Function(PayjoinError_OutputSubstitutionError value)
+        outputSubstitutionError,
+    required TResult Function(PayjoinError_InputContributionError value)
+        inputContributionError,
+    required TResult Function(PayjoinError_InputPairError value) inputPairError,
   }) {
     return createRequestError(this);
   }
@@ -2603,6 +2857,11 @@ class _$PayjoinError_CreateRequestErrorImpl
     TResult? Function(PayjoinError_OhttpError value)? ohttpError,
     TResult? Function(PayjoinError_UrlError value)? urlError,
     TResult? Function(PayjoinError_IoError value)? ioError,
+    TResult? Function(PayjoinError_OutputSubstitutionError value)?
+        outputSubstitutionError,
+    TResult? Function(PayjoinError_InputContributionError value)?
+        inputContributionError,
+    TResult? Function(PayjoinError_InputPairError value)? inputPairError,
   }) {
     return createRequestError?.call(this);
   }
@@ -2628,6 +2887,11 @@ class _$PayjoinError_CreateRequestErrorImpl
     TResult Function(PayjoinError_OhttpError value)? ohttpError,
     TResult Function(PayjoinError_UrlError value)? urlError,
     TResult Function(PayjoinError_IoError value)? ioError,
+    TResult Function(PayjoinError_OutputSubstitutionError value)?
+        outputSubstitutionError,
+    TResult Function(PayjoinError_InputContributionError value)?
+        inputContributionError,
+    TResult Function(PayjoinError_InputPairError value)? inputPairError,
     required TResult orElse(),
   }) {
     if (createRequestError != null) {
@@ -2738,6 +3002,9 @@ class _$PayjoinError_PjParseErrorImpl extends PayjoinError_PjParseError {
     required TResult Function(String message) ohttpError,
     required TResult Function(String message) urlError,
     required TResult Function(String message) ioError,
+    required TResult Function(String message) outputSubstitutionError,
+    required TResult Function(String message) inputContributionError,
+    required TResult Function(String message) inputPairError,
   }) {
     return pjParseError(message);
   }
@@ -2763,6 +3030,9 @@ class _$PayjoinError_PjParseErrorImpl extends PayjoinError_PjParseError {
     TResult? Function(String message)? ohttpError,
     TResult? Function(String message)? urlError,
     TResult? Function(String message)? ioError,
+    TResult? Function(String message)? outputSubstitutionError,
+    TResult? Function(String message)? inputContributionError,
+    TResult? Function(String message)? inputPairError,
   }) {
     return pjParseError?.call(message);
   }
@@ -2788,6 +3058,9 @@ class _$PayjoinError_PjParseErrorImpl extends PayjoinError_PjParseError {
     TResult Function(String message)? ohttpError,
     TResult Function(String message)? urlError,
     TResult Function(String message)? ioError,
+    TResult Function(String message)? outputSubstitutionError,
+    TResult Function(String message)? inputContributionError,
+    TResult Function(String message)? inputPairError,
     required TResult orElse(),
   }) {
     if (pjParseError != null) {
@@ -2822,6 +3095,11 @@ class _$PayjoinError_PjParseErrorImpl extends PayjoinError_PjParseError {
     required TResult Function(PayjoinError_OhttpError value) ohttpError,
     required TResult Function(PayjoinError_UrlError value) urlError,
     required TResult Function(PayjoinError_IoError value) ioError,
+    required TResult Function(PayjoinError_OutputSubstitutionError value)
+        outputSubstitutionError,
+    required TResult Function(PayjoinError_InputContributionError value)
+        inputContributionError,
+    required TResult Function(PayjoinError_InputPairError value) inputPairError,
   }) {
     return pjParseError(this);
   }
@@ -2848,6 +3126,11 @@ class _$PayjoinError_PjParseErrorImpl extends PayjoinError_PjParseError {
     TResult? Function(PayjoinError_OhttpError value)? ohttpError,
     TResult? Function(PayjoinError_UrlError value)? urlError,
     TResult? Function(PayjoinError_IoError value)? ioError,
+    TResult? Function(PayjoinError_OutputSubstitutionError value)?
+        outputSubstitutionError,
+    TResult? Function(PayjoinError_InputContributionError value)?
+        inputContributionError,
+    TResult? Function(PayjoinError_InputPairError value)? inputPairError,
   }) {
     return pjParseError?.call(this);
   }
@@ -2873,6 +3156,11 @@ class _$PayjoinError_PjParseErrorImpl extends PayjoinError_PjParseError {
     TResult Function(PayjoinError_OhttpError value)? ohttpError,
     TResult Function(PayjoinError_UrlError value)? urlError,
     TResult Function(PayjoinError_IoError value)? ioError,
+    TResult Function(PayjoinError_OutputSubstitutionError value)?
+        outputSubstitutionError,
+    TResult Function(PayjoinError_InputContributionError value)?
+        inputContributionError,
+    TResult Function(PayjoinError_InputPairError value)? inputPairError,
     required TResult orElse(),
   }) {
     if (pjParseError != null) {
@@ -2982,6 +3270,9 @@ class _$PayjoinError_PjNotSupportedImpl extends PayjoinError_PjNotSupported {
     required TResult Function(String message) ohttpError,
     required TResult Function(String message) urlError,
     required TResult Function(String message) ioError,
+    required TResult Function(String message) outputSubstitutionError,
+    required TResult Function(String message) inputContributionError,
+    required TResult Function(String message) inputPairError,
   }) {
     return pjNotSupported(message);
   }
@@ -3007,6 +3298,9 @@ class _$PayjoinError_PjNotSupportedImpl extends PayjoinError_PjNotSupported {
     TResult? Function(String message)? ohttpError,
     TResult? Function(String message)? urlError,
     TResult? Function(String message)? ioError,
+    TResult? Function(String message)? outputSubstitutionError,
+    TResult? Function(String message)? inputContributionError,
+    TResult? Function(String message)? inputPairError,
   }) {
     return pjNotSupported?.call(message);
   }
@@ -3032,6 +3326,9 @@ class _$PayjoinError_PjNotSupportedImpl extends PayjoinError_PjNotSupported {
     TResult Function(String message)? ohttpError,
     TResult Function(String message)? urlError,
     TResult Function(String message)? ioError,
+    TResult Function(String message)? outputSubstitutionError,
+    TResult Function(String message)? inputContributionError,
+    TResult Function(String message)? inputPairError,
     required TResult orElse(),
   }) {
     if (pjNotSupported != null) {
@@ -3066,6 +3363,11 @@ class _$PayjoinError_PjNotSupportedImpl extends PayjoinError_PjNotSupported {
     required TResult Function(PayjoinError_OhttpError value) ohttpError,
     required TResult Function(PayjoinError_UrlError value) urlError,
     required TResult Function(PayjoinError_IoError value) ioError,
+    required TResult Function(PayjoinError_OutputSubstitutionError value)
+        outputSubstitutionError,
+    required TResult Function(PayjoinError_InputContributionError value)
+        inputContributionError,
+    required TResult Function(PayjoinError_InputPairError value) inputPairError,
   }) {
     return pjNotSupported(this);
   }
@@ -3092,6 +3394,11 @@ class _$PayjoinError_PjNotSupportedImpl extends PayjoinError_PjNotSupported {
     TResult? Function(PayjoinError_OhttpError value)? ohttpError,
     TResult? Function(PayjoinError_UrlError value)? urlError,
     TResult? Function(PayjoinError_IoError value)? ioError,
+    TResult? Function(PayjoinError_OutputSubstitutionError value)?
+        outputSubstitutionError,
+    TResult? Function(PayjoinError_InputContributionError value)?
+        inputContributionError,
+    TResult? Function(PayjoinError_InputPairError value)? inputPairError,
   }) {
     return pjNotSupported?.call(this);
   }
@@ -3117,6 +3424,11 @@ class _$PayjoinError_PjNotSupportedImpl extends PayjoinError_PjNotSupported {
     TResult Function(PayjoinError_OhttpError value)? ohttpError,
     TResult Function(PayjoinError_UrlError value)? urlError,
     TResult Function(PayjoinError_IoError value)? ioError,
+    TResult Function(PayjoinError_OutputSubstitutionError value)?
+        outputSubstitutionError,
+    TResult Function(PayjoinError_InputContributionError value)?
+        inputContributionError,
+    TResult Function(PayjoinError_InputPairError value)? inputPairError,
     required TResult orElse(),
   }) {
     if (pjNotSupported != null) {
@@ -3227,6 +3539,9 @@ class _$PayjoinError_ValidationErrorImpl extends PayjoinError_ValidationError {
     required TResult Function(String message) ohttpError,
     required TResult Function(String message) urlError,
     required TResult Function(String message) ioError,
+    required TResult Function(String message) outputSubstitutionError,
+    required TResult Function(String message) inputContributionError,
+    required TResult Function(String message) inputPairError,
   }) {
     return validationError(message);
   }
@@ -3252,6 +3567,9 @@ class _$PayjoinError_ValidationErrorImpl extends PayjoinError_ValidationError {
     TResult? Function(String message)? ohttpError,
     TResult? Function(String message)? urlError,
     TResult? Function(String message)? ioError,
+    TResult? Function(String message)? outputSubstitutionError,
+    TResult? Function(String message)? inputContributionError,
+    TResult? Function(String message)? inputPairError,
   }) {
     return validationError?.call(message);
   }
@@ -3277,6 +3595,9 @@ class _$PayjoinError_ValidationErrorImpl extends PayjoinError_ValidationError {
     TResult Function(String message)? ohttpError,
     TResult Function(String message)? urlError,
     TResult Function(String message)? ioError,
+    TResult Function(String message)? outputSubstitutionError,
+    TResult Function(String message)? inputContributionError,
+    TResult Function(String message)? inputPairError,
     required TResult orElse(),
   }) {
     if (validationError != null) {
@@ -3311,6 +3632,11 @@ class _$PayjoinError_ValidationErrorImpl extends PayjoinError_ValidationError {
     required TResult Function(PayjoinError_OhttpError value) ohttpError,
     required TResult Function(PayjoinError_UrlError value) urlError,
     required TResult Function(PayjoinError_IoError value) ioError,
+    required TResult Function(PayjoinError_OutputSubstitutionError value)
+        outputSubstitutionError,
+    required TResult Function(PayjoinError_InputContributionError value)
+        inputContributionError,
+    required TResult Function(PayjoinError_InputPairError value) inputPairError,
   }) {
     return validationError(this);
   }
@@ -3337,6 +3663,11 @@ class _$PayjoinError_ValidationErrorImpl extends PayjoinError_ValidationError {
     TResult? Function(PayjoinError_OhttpError value)? ohttpError,
     TResult? Function(PayjoinError_UrlError value)? urlError,
     TResult? Function(PayjoinError_IoError value)? ioError,
+    TResult? Function(PayjoinError_OutputSubstitutionError value)?
+        outputSubstitutionError,
+    TResult? Function(PayjoinError_InputContributionError value)?
+        inputContributionError,
+    TResult? Function(PayjoinError_InputPairError value)? inputPairError,
   }) {
     return validationError?.call(this);
   }
@@ -3362,6 +3693,11 @@ class _$PayjoinError_ValidationErrorImpl extends PayjoinError_ValidationError {
     TResult Function(PayjoinError_OhttpError value)? ohttpError,
     TResult Function(PayjoinError_UrlError value)? urlError,
     TResult Function(PayjoinError_IoError value)? ioError,
+    TResult Function(PayjoinError_OutputSubstitutionError value)?
+        outputSubstitutionError,
+    TResult Function(PayjoinError_InputContributionError value)?
+        inputContributionError,
+    TResult Function(PayjoinError_InputPairError value)? inputPairError,
     required TResult orElse(),
   }) {
     if (validationError != null) {
@@ -3471,6 +3807,9 @@ class _$PayjoinError_V2ErrorImpl extends PayjoinError_V2Error {
     required TResult Function(String message) ohttpError,
     required TResult Function(String message) urlError,
     required TResult Function(String message) ioError,
+    required TResult Function(String message) outputSubstitutionError,
+    required TResult Function(String message) inputContributionError,
+    required TResult Function(String message) inputPairError,
   }) {
     return v2Error(message);
   }
@@ -3496,6 +3835,9 @@ class _$PayjoinError_V2ErrorImpl extends PayjoinError_V2Error {
     TResult? Function(String message)? ohttpError,
     TResult? Function(String message)? urlError,
     TResult? Function(String message)? ioError,
+    TResult? Function(String message)? outputSubstitutionError,
+    TResult? Function(String message)? inputContributionError,
+    TResult? Function(String message)? inputPairError,
   }) {
     return v2Error?.call(message);
   }
@@ -3521,6 +3863,9 @@ class _$PayjoinError_V2ErrorImpl extends PayjoinError_V2Error {
     TResult Function(String message)? ohttpError,
     TResult Function(String message)? urlError,
     TResult Function(String message)? ioError,
+    TResult Function(String message)? outputSubstitutionError,
+    TResult Function(String message)? inputContributionError,
+    TResult Function(String message)? inputPairError,
     required TResult orElse(),
   }) {
     if (v2Error != null) {
@@ -3555,6 +3900,11 @@ class _$PayjoinError_V2ErrorImpl extends PayjoinError_V2Error {
     required TResult Function(PayjoinError_OhttpError value) ohttpError,
     required TResult Function(PayjoinError_UrlError value) urlError,
     required TResult Function(PayjoinError_IoError value) ioError,
+    required TResult Function(PayjoinError_OutputSubstitutionError value)
+        outputSubstitutionError,
+    required TResult Function(PayjoinError_InputContributionError value)
+        inputContributionError,
+    required TResult Function(PayjoinError_InputPairError value) inputPairError,
   }) {
     return v2Error(this);
   }
@@ -3581,6 +3931,11 @@ class _$PayjoinError_V2ErrorImpl extends PayjoinError_V2Error {
     TResult? Function(PayjoinError_OhttpError value)? ohttpError,
     TResult? Function(PayjoinError_UrlError value)? urlError,
     TResult? Function(PayjoinError_IoError value)? ioError,
+    TResult? Function(PayjoinError_OutputSubstitutionError value)?
+        outputSubstitutionError,
+    TResult? Function(PayjoinError_InputContributionError value)?
+        inputContributionError,
+    TResult? Function(PayjoinError_InputPairError value)? inputPairError,
   }) {
     return v2Error?.call(this);
   }
@@ -3606,6 +3961,11 @@ class _$PayjoinError_V2ErrorImpl extends PayjoinError_V2Error {
     TResult Function(PayjoinError_OhttpError value)? ohttpError,
     TResult Function(PayjoinError_UrlError value)? urlError,
     TResult Function(PayjoinError_IoError value)? ioError,
+    TResult Function(PayjoinError_OutputSubstitutionError value)?
+        outputSubstitutionError,
+    TResult Function(PayjoinError_InputContributionError value)?
+        inputContributionError,
+    TResult Function(PayjoinError_InputPairError value)? inputPairError,
     required TResult orElse(),
   }) {
     if (v2Error != null) {
@@ -3716,6 +4076,9 @@ class _$PayjoinError_UnexpectedErrorImpl extends PayjoinError_UnexpectedError {
     required TResult Function(String message) ohttpError,
     required TResult Function(String message) urlError,
     required TResult Function(String message) ioError,
+    required TResult Function(String message) outputSubstitutionError,
+    required TResult Function(String message) inputContributionError,
+    required TResult Function(String message) inputPairError,
   }) {
     return unexpectedError(message);
   }
@@ -3741,6 +4104,9 @@ class _$PayjoinError_UnexpectedErrorImpl extends PayjoinError_UnexpectedError {
     TResult? Function(String message)? ohttpError,
     TResult? Function(String message)? urlError,
     TResult? Function(String message)? ioError,
+    TResult? Function(String message)? outputSubstitutionError,
+    TResult? Function(String message)? inputContributionError,
+    TResult? Function(String message)? inputPairError,
   }) {
     return unexpectedError?.call(message);
   }
@@ -3766,6 +4132,9 @@ class _$PayjoinError_UnexpectedErrorImpl extends PayjoinError_UnexpectedError {
     TResult Function(String message)? ohttpError,
     TResult Function(String message)? urlError,
     TResult Function(String message)? ioError,
+    TResult Function(String message)? outputSubstitutionError,
+    TResult Function(String message)? inputContributionError,
+    TResult Function(String message)? inputPairError,
     required TResult orElse(),
   }) {
     if (unexpectedError != null) {
@@ -3800,6 +4169,11 @@ class _$PayjoinError_UnexpectedErrorImpl extends PayjoinError_UnexpectedError {
     required TResult Function(PayjoinError_OhttpError value) ohttpError,
     required TResult Function(PayjoinError_UrlError value) urlError,
     required TResult Function(PayjoinError_IoError value) ioError,
+    required TResult Function(PayjoinError_OutputSubstitutionError value)
+        outputSubstitutionError,
+    required TResult Function(PayjoinError_InputContributionError value)
+        inputContributionError,
+    required TResult Function(PayjoinError_InputPairError value) inputPairError,
   }) {
     return unexpectedError(this);
   }
@@ -3826,6 +4200,11 @@ class _$PayjoinError_UnexpectedErrorImpl extends PayjoinError_UnexpectedError {
     TResult? Function(PayjoinError_OhttpError value)? ohttpError,
     TResult? Function(PayjoinError_UrlError value)? urlError,
     TResult? Function(PayjoinError_IoError value)? ioError,
+    TResult? Function(PayjoinError_OutputSubstitutionError value)?
+        outputSubstitutionError,
+    TResult? Function(PayjoinError_InputContributionError value)?
+        inputContributionError,
+    TResult? Function(PayjoinError_InputPairError value)? inputPairError,
   }) {
     return unexpectedError?.call(this);
   }
@@ -3851,6 +4230,11 @@ class _$PayjoinError_UnexpectedErrorImpl extends PayjoinError_UnexpectedError {
     TResult Function(PayjoinError_OhttpError value)? ohttpError,
     TResult Function(PayjoinError_UrlError value)? urlError,
     TResult Function(PayjoinError_IoError value)? ioError,
+    TResult Function(PayjoinError_OutputSubstitutionError value)?
+        outputSubstitutionError,
+    TResult Function(PayjoinError_InputContributionError value)?
+        inputContributionError,
+    TResult Function(PayjoinError_InputPairError value)? inputPairError,
     required TResult orElse(),
   }) {
     if (unexpectedError != null) {
@@ -3961,6 +4345,9 @@ class _$PayjoinError_OhttpErrorImpl extends PayjoinError_OhttpError {
     required TResult Function(String message) ohttpError,
     required TResult Function(String message) urlError,
     required TResult Function(String message) ioError,
+    required TResult Function(String message) outputSubstitutionError,
+    required TResult Function(String message) inputContributionError,
+    required TResult Function(String message) inputPairError,
   }) {
     return ohttpError(message);
   }
@@ -3986,6 +4373,9 @@ class _$PayjoinError_OhttpErrorImpl extends PayjoinError_OhttpError {
     TResult? Function(String message)? ohttpError,
     TResult? Function(String message)? urlError,
     TResult? Function(String message)? ioError,
+    TResult? Function(String message)? outputSubstitutionError,
+    TResult? Function(String message)? inputContributionError,
+    TResult? Function(String message)? inputPairError,
   }) {
     return ohttpError?.call(message);
   }
@@ -4011,6 +4401,9 @@ class _$PayjoinError_OhttpErrorImpl extends PayjoinError_OhttpError {
     TResult Function(String message)? ohttpError,
     TResult Function(String message)? urlError,
     TResult Function(String message)? ioError,
+    TResult Function(String message)? outputSubstitutionError,
+    TResult Function(String message)? inputContributionError,
+    TResult Function(String message)? inputPairError,
     required TResult orElse(),
   }) {
     if (ohttpError != null) {
@@ -4045,6 +4438,11 @@ class _$PayjoinError_OhttpErrorImpl extends PayjoinError_OhttpError {
     required TResult Function(PayjoinError_OhttpError value) ohttpError,
     required TResult Function(PayjoinError_UrlError value) urlError,
     required TResult Function(PayjoinError_IoError value) ioError,
+    required TResult Function(PayjoinError_OutputSubstitutionError value)
+        outputSubstitutionError,
+    required TResult Function(PayjoinError_InputContributionError value)
+        inputContributionError,
+    required TResult Function(PayjoinError_InputPairError value) inputPairError,
   }) {
     return ohttpError(this);
   }
@@ -4071,6 +4469,11 @@ class _$PayjoinError_OhttpErrorImpl extends PayjoinError_OhttpError {
     TResult? Function(PayjoinError_OhttpError value)? ohttpError,
     TResult? Function(PayjoinError_UrlError value)? urlError,
     TResult? Function(PayjoinError_IoError value)? ioError,
+    TResult? Function(PayjoinError_OutputSubstitutionError value)?
+        outputSubstitutionError,
+    TResult? Function(PayjoinError_InputContributionError value)?
+        inputContributionError,
+    TResult? Function(PayjoinError_InputPairError value)? inputPairError,
   }) {
     return ohttpError?.call(this);
   }
@@ -4096,6 +4499,11 @@ class _$PayjoinError_OhttpErrorImpl extends PayjoinError_OhttpError {
     TResult Function(PayjoinError_OhttpError value)? ohttpError,
     TResult Function(PayjoinError_UrlError value)? urlError,
     TResult Function(PayjoinError_IoError value)? ioError,
+    TResult Function(PayjoinError_OutputSubstitutionError value)?
+        outputSubstitutionError,
+    TResult Function(PayjoinError_InputContributionError value)?
+        inputContributionError,
+    TResult Function(PayjoinError_InputPairError value)? inputPairError,
     required TResult orElse(),
   }) {
     if (ohttpError != null) {
@@ -4204,6 +4612,9 @@ class _$PayjoinError_UrlErrorImpl extends PayjoinError_UrlError {
     required TResult Function(String message) ohttpError,
     required TResult Function(String message) urlError,
     required TResult Function(String message) ioError,
+    required TResult Function(String message) outputSubstitutionError,
+    required TResult Function(String message) inputContributionError,
+    required TResult Function(String message) inputPairError,
   }) {
     return urlError(message);
   }
@@ -4229,6 +4640,9 @@ class _$PayjoinError_UrlErrorImpl extends PayjoinError_UrlError {
     TResult? Function(String message)? ohttpError,
     TResult? Function(String message)? urlError,
     TResult? Function(String message)? ioError,
+    TResult? Function(String message)? outputSubstitutionError,
+    TResult? Function(String message)? inputContributionError,
+    TResult? Function(String message)? inputPairError,
   }) {
     return urlError?.call(message);
   }
@@ -4254,6 +4668,9 @@ class _$PayjoinError_UrlErrorImpl extends PayjoinError_UrlError {
     TResult Function(String message)? ohttpError,
     TResult Function(String message)? urlError,
     TResult Function(String message)? ioError,
+    TResult Function(String message)? outputSubstitutionError,
+    TResult Function(String message)? inputContributionError,
+    TResult Function(String message)? inputPairError,
     required TResult orElse(),
   }) {
     if (urlError != null) {
@@ -4288,6 +4705,11 @@ class _$PayjoinError_UrlErrorImpl extends PayjoinError_UrlError {
     required TResult Function(PayjoinError_OhttpError value) ohttpError,
     required TResult Function(PayjoinError_UrlError value) urlError,
     required TResult Function(PayjoinError_IoError value) ioError,
+    required TResult Function(PayjoinError_OutputSubstitutionError value)
+        outputSubstitutionError,
+    required TResult Function(PayjoinError_InputContributionError value)
+        inputContributionError,
+    required TResult Function(PayjoinError_InputPairError value) inputPairError,
   }) {
     return urlError(this);
   }
@@ -4314,6 +4736,11 @@ class _$PayjoinError_UrlErrorImpl extends PayjoinError_UrlError {
     TResult? Function(PayjoinError_OhttpError value)? ohttpError,
     TResult? Function(PayjoinError_UrlError value)? urlError,
     TResult? Function(PayjoinError_IoError value)? ioError,
+    TResult? Function(PayjoinError_OutputSubstitutionError value)?
+        outputSubstitutionError,
+    TResult? Function(PayjoinError_InputContributionError value)?
+        inputContributionError,
+    TResult? Function(PayjoinError_InputPairError value)? inputPairError,
   }) {
     return urlError?.call(this);
   }
@@ -4339,6 +4766,11 @@ class _$PayjoinError_UrlErrorImpl extends PayjoinError_UrlError {
     TResult Function(PayjoinError_OhttpError value)? ohttpError,
     TResult Function(PayjoinError_UrlError value)? urlError,
     TResult Function(PayjoinError_IoError value)? ioError,
+    TResult Function(PayjoinError_OutputSubstitutionError value)?
+        outputSubstitutionError,
+    TResult Function(PayjoinError_InputContributionError value)?
+        inputContributionError,
+    TResult Function(PayjoinError_InputPairError value)? inputPairError,
     required TResult orElse(),
   }) {
     if (urlError != null) {
@@ -4447,6 +4879,9 @@ class _$PayjoinError_IoErrorImpl extends PayjoinError_IoError {
     required TResult Function(String message) ohttpError,
     required TResult Function(String message) urlError,
     required TResult Function(String message) ioError,
+    required TResult Function(String message) outputSubstitutionError,
+    required TResult Function(String message) inputContributionError,
+    required TResult Function(String message) inputPairError,
   }) {
     return ioError(message);
   }
@@ -4472,6 +4907,9 @@ class _$PayjoinError_IoErrorImpl extends PayjoinError_IoError {
     TResult? Function(String message)? ohttpError,
     TResult? Function(String message)? urlError,
     TResult? Function(String message)? ioError,
+    TResult? Function(String message)? outputSubstitutionError,
+    TResult? Function(String message)? inputContributionError,
+    TResult? Function(String message)? inputPairError,
   }) {
     return ioError?.call(message);
   }
@@ -4497,6 +4935,9 @@ class _$PayjoinError_IoErrorImpl extends PayjoinError_IoError {
     TResult Function(String message)? ohttpError,
     TResult Function(String message)? urlError,
     TResult Function(String message)? ioError,
+    TResult Function(String message)? outputSubstitutionError,
+    TResult Function(String message)? inputContributionError,
+    TResult Function(String message)? inputPairError,
     required TResult orElse(),
   }) {
     if (ioError != null) {
@@ -4531,6 +4972,11 @@ class _$PayjoinError_IoErrorImpl extends PayjoinError_IoError {
     required TResult Function(PayjoinError_OhttpError value) ohttpError,
     required TResult Function(PayjoinError_UrlError value) urlError,
     required TResult Function(PayjoinError_IoError value) ioError,
+    required TResult Function(PayjoinError_OutputSubstitutionError value)
+        outputSubstitutionError,
+    required TResult Function(PayjoinError_InputContributionError value)
+        inputContributionError,
+    required TResult Function(PayjoinError_InputPairError value) inputPairError,
   }) {
     return ioError(this);
   }
@@ -4557,6 +5003,11 @@ class _$PayjoinError_IoErrorImpl extends PayjoinError_IoError {
     TResult? Function(PayjoinError_OhttpError value)? ohttpError,
     TResult? Function(PayjoinError_UrlError value)? urlError,
     TResult? Function(PayjoinError_IoError value)? ioError,
+    TResult? Function(PayjoinError_OutputSubstitutionError value)?
+        outputSubstitutionError,
+    TResult? Function(PayjoinError_InputContributionError value)?
+        inputContributionError,
+    TResult? Function(PayjoinError_InputPairError value)? inputPairError,
   }) {
     return ioError?.call(this);
   }
@@ -4582,6 +5033,11 @@ class _$PayjoinError_IoErrorImpl extends PayjoinError_IoError {
     TResult Function(PayjoinError_OhttpError value)? ohttpError,
     TResult Function(PayjoinError_UrlError value)? urlError,
     TResult Function(PayjoinError_IoError value)? ioError,
+    TResult Function(PayjoinError_OutputSubstitutionError value)?
+        outputSubstitutionError,
+    TResult Function(PayjoinError_InputContributionError value)?
+        inputContributionError,
+    TResult Function(PayjoinError_InputPairError value)? inputPairError,
     required TResult orElse(),
   }) {
     if (ioError != null) {
@@ -4601,5 +5057,821 @@ abstract class PayjoinError_IoError extends PayjoinError {
   @override
   @JsonKey(ignore: true)
   _$$PayjoinError_IoErrorImplCopyWith<_$PayjoinError_IoErrorImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$PayjoinError_OutputSubstitutionErrorImplCopyWith<$Res>
+    implements $PayjoinErrorCopyWith<$Res> {
+  factory _$$PayjoinError_OutputSubstitutionErrorImplCopyWith(
+          _$PayjoinError_OutputSubstitutionErrorImpl value,
+          $Res Function(_$PayjoinError_OutputSubstitutionErrorImpl) then) =
+      __$$PayjoinError_OutputSubstitutionErrorImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String message});
+}
+
+/// @nodoc
+class __$$PayjoinError_OutputSubstitutionErrorImplCopyWithImpl<$Res>
+    extends _$PayjoinErrorCopyWithImpl<$Res,
+        _$PayjoinError_OutputSubstitutionErrorImpl>
+    implements _$$PayjoinError_OutputSubstitutionErrorImplCopyWith<$Res> {
+  __$$PayjoinError_OutputSubstitutionErrorImplCopyWithImpl(
+      _$PayjoinError_OutputSubstitutionErrorImpl _value,
+      $Res Function(_$PayjoinError_OutputSubstitutionErrorImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? message = null,
+  }) {
+    return _then(_$PayjoinError_OutputSubstitutionErrorImpl(
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$PayjoinError_OutputSubstitutionErrorImpl
+    extends PayjoinError_OutputSubstitutionError {
+  const _$PayjoinError_OutputSubstitutionErrorImpl({required this.message})
+      : super._();
+
+  @override
+  final String message;
+
+  @override
+  String toString() {
+    return 'PayjoinError.outputSubstitutionError(message: $message)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$PayjoinError_OutputSubstitutionErrorImpl &&
+            (identical(other.message, message) || other.message == message));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, message);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$PayjoinError_OutputSubstitutionErrorImplCopyWith<
+          _$PayjoinError_OutputSubstitutionErrorImpl>
+      get copyWith => __$$PayjoinError_OutputSubstitutionErrorImplCopyWithImpl<
+          _$PayjoinError_OutputSubstitutionErrorImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String message) invalidAddress,
+    required TResult Function(String message) invalidScript,
+    required TResult Function(String message) networkValidation,
+    required TResult Function(String message) psbtParseError,
+    required TResult Function(String message) responseError,
+    required TResult Function(String message) requestError,
+    required TResult Function(String message) transactionError,
+    required TResult Function(String message) serverError,
+    required TResult Function(String message) selectionError,
+    required TResult Function(String message) createRequestError,
+    required TResult Function(String message) pjParseError,
+    required TResult Function(String message) pjNotSupported,
+    required TResult Function(String message) validationError,
+    required TResult Function(String message) v2Error,
+    required TResult Function(String message) unexpectedError,
+    required TResult Function(String message) ohttpError,
+    required TResult Function(String message) urlError,
+    required TResult Function(String message) ioError,
+    required TResult Function(String message) outputSubstitutionError,
+    required TResult Function(String message) inputContributionError,
+    required TResult Function(String message) inputPairError,
+  }) {
+    return outputSubstitutionError(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String message)? invalidAddress,
+    TResult? Function(String message)? invalidScript,
+    TResult? Function(String message)? networkValidation,
+    TResult? Function(String message)? psbtParseError,
+    TResult? Function(String message)? responseError,
+    TResult? Function(String message)? requestError,
+    TResult? Function(String message)? transactionError,
+    TResult? Function(String message)? serverError,
+    TResult? Function(String message)? selectionError,
+    TResult? Function(String message)? createRequestError,
+    TResult? Function(String message)? pjParseError,
+    TResult? Function(String message)? pjNotSupported,
+    TResult? Function(String message)? validationError,
+    TResult? Function(String message)? v2Error,
+    TResult? Function(String message)? unexpectedError,
+    TResult? Function(String message)? ohttpError,
+    TResult? Function(String message)? urlError,
+    TResult? Function(String message)? ioError,
+    TResult? Function(String message)? outputSubstitutionError,
+    TResult? Function(String message)? inputContributionError,
+    TResult? Function(String message)? inputPairError,
+  }) {
+    return outputSubstitutionError?.call(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String message)? invalidAddress,
+    TResult Function(String message)? invalidScript,
+    TResult Function(String message)? networkValidation,
+    TResult Function(String message)? psbtParseError,
+    TResult Function(String message)? responseError,
+    TResult Function(String message)? requestError,
+    TResult Function(String message)? transactionError,
+    TResult Function(String message)? serverError,
+    TResult Function(String message)? selectionError,
+    TResult Function(String message)? createRequestError,
+    TResult Function(String message)? pjParseError,
+    TResult Function(String message)? pjNotSupported,
+    TResult Function(String message)? validationError,
+    TResult Function(String message)? v2Error,
+    TResult Function(String message)? unexpectedError,
+    TResult Function(String message)? ohttpError,
+    TResult Function(String message)? urlError,
+    TResult Function(String message)? ioError,
+    TResult Function(String message)? outputSubstitutionError,
+    TResult Function(String message)? inputContributionError,
+    TResult Function(String message)? inputPairError,
+    required TResult orElse(),
+  }) {
+    if (outputSubstitutionError != null) {
+      return outputSubstitutionError(message);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(PayjoinError_InvalidAddress value) invalidAddress,
+    required TResult Function(PayjoinError_InvalidScript value) invalidScript,
+    required TResult Function(PayjoinError_NetworkValidation value)
+        networkValidation,
+    required TResult Function(PayjoinError_PsbtParseError value) psbtParseError,
+    required TResult Function(PayjoinError_ResponseError value) responseError,
+    required TResult Function(PayjoinError_RequestError value) requestError,
+    required TResult Function(PayjoinError_TransactionError value)
+        transactionError,
+    required TResult Function(PayjoinError_ServerError value) serverError,
+    required TResult Function(PayjoinError_SelectionError value) selectionError,
+    required TResult Function(PayjoinError_CreateRequestError value)
+        createRequestError,
+    required TResult Function(PayjoinError_PjParseError value) pjParseError,
+    required TResult Function(PayjoinError_PjNotSupported value) pjNotSupported,
+    required TResult Function(PayjoinError_ValidationError value)
+        validationError,
+    required TResult Function(PayjoinError_V2Error value) v2Error,
+    required TResult Function(PayjoinError_UnexpectedError value)
+        unexpectedError,
+    required TResult Function(PayjoinError_OhttpError value) ohttpError,
+    required TResult Function(PayjoinError_UrlError value) urlError,
+    required TResult Function(PayjoinError_IoError value) ioError,
+    required TResult Function(PayjoinError_OutputSubstitutionError value)
+        outputSubstitutionError,
+    required TResult Function(PayjoinError_InputContributionError value)
+        inputContributionError,
+    required TResult Function(PayjoinError_InputPairError value) inputPairError,
+  }) {
+    return outputSubstitutionError(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(PayjoinError_InvalidAddress value)? invalidAddress,
+    TResult? Function(PayjoinError_InvalidScript value)? invalidScript,
+    TResult? Function(PayjoinError_NetworkValidation value)? networkValidation,
+    TResult? Function(PayjoinError_PsbtParseError value)? psbtParseError,
+    TResult? Function(PayjoinError_ResponseError value)? responseError,
+    TResult? Function(PayjoinError_RequestError value)? requestError,
+    TResult? Function(PayjoinError_TransactionError value)? transactionError,
+    TResult? Function(PayjoinError_ServerError value)? serverError,
+    TResult? Function(PayjoinError_SelectionError value)? selectionError,
+    TResult? Function(PayjoinError_CreateRequestError value)?
+        createRequestError,
+    TResult? Function(PayjoinError_PjParseError value)? pjParseError,
+    TResult? Function(PayjoinError_PjNotSupported value)? pjNotSupported,
+    TResult? Function(PayjoinError_ValidationError value)? validationError,
+    TResult? Function(PayjoinError_V2Error value)? v2Error,
+    TResult? Function(PayjoinError_UnexpectedError value)? unexpectedError,
+    TResult? Function(PayjoinError_OhttpError value)? ohttpError,
+    TResult? Function(PayjoinError_UrlError value)? urlError,
+    TResult? Function(PayjoinError_IoError value)? ioError,
+    TResult? Function(PayjoinError_OutputSubstitutionError value)?
+        outputSubstitutionError,
+    TResult? Function(PayjoinError_InputContributionError value)?
+        inputContributionError,
+    TResult? Function(PayjoinError_InputPairError value)? inputPairError,
+  }) {
+    return outputSubstitutionError?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(PayjoinError_InvalidAddress value)? invalidAddress,
+    TResult Function(PayjoinError_InvalidScript value)? invalidScript,
+    TResult Function(PayjoinError_NetworkValidation value)? networkValidation,
+    TResult Function(PayjoinError_PsbtParseError value)? psbtParseError,
+    TResult Function(PayjoinError_ResponseError value)? responseError,
+    TResult Function(PayjoinError_RequestError value)? requestError,
+    TResult Function(PayjoinError_TransactionError value)? transactionError,
+    TResult Function(PayjoinError_ServerError value)? serverError,
+    TResult Function(PayjoinError_SelectionError value)? selectionError,
+    TResult Function(PayjoinError_CreateRequestError value)? createRequestError,
+    TResult Function(PayjoinError_PjParseError value)? pjParseError,
+    TResult Function(PayjoinError_PjNotSupported value)? pjNotSupported,
+    TResult Function(PayjoinError_ValidationError value)? validationError,
+    TResult Function(PayjoinError_V2Error value)? v2Error,
+    TResult Function(PayjoinError_UnexpectedError value)? unexpectedError,
+    TResult Function(PayjoinError_OhttpError value)? ohttpError,
+    TResult Function(PayjoinError_UrlError value)? urlError,
+    TResult Function(PayjoinError_IoError value)? ioError,
+    TResult Function(PayjoinError_OutputSubstitutionError value)?
+        outputSubstitutionError,
+    TResult Function(PayjoinError_InputContributionError value)?
+        inputContributionError,
+    TResult Function(PayjoinError_InputPairError value)? inputPairError,
+    required TResult orElse(),
+  }) {
+    if (outputSubstitutionError != null) {
+      return outputSubstitutionError(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class PayjoinError_OutputSubstitutionError extends PayjoinError {
+  const factory PayjoinError_OutputSubstitutionError(
+          {required final String message}) =
+      _$PayjoinError_OutputSubstitutionErrorImpl;
+  const PayjoinError_OutputSubstitutionError._() : super._();
+
+  @override
+  String get message;
+  @override
+  @JsonKey(ignore: true)
+  _$$PayjoinError_OutputSubstitutionErrorImplCopyWith<
+          _$PayjoinError_OutputSubstitutionErrorImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$PayjoinError_InputContributionErrorImplCopyWith<$Res>
+    implements $PayjoinErrorCopyWith<$Res> {
+  factory _$$PayjoinError_InputContributionErrorImplCopyWith(
+          _$PayjoinError_InputContributionErrorImpl value,
+          $Res Function(_$PayjoinError_InputContributionErrorImpl) then) =
+      __$$PayjoinError_InputContributionErrorImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String message});
+}
+
+/// @nodoc
+class __$$PayjoinError_InputContributionErrorImplCopyWithImpl<$Res>
+    extends _$PayjoinErrorCopyWithImpl<$Res,
+        _$PayjoinError_InputContributionErrorImpl>
+    implements _$$PayjoinError_InputContributionErrorImplCopyWith<$Res> {
+  __$$PayjoinError_InputContributionErrorImplCopyWithImpl(
+      _$PayjoinError_InputContributionErrorImpl _value,
+      $Res Function(_$PayjoinError_InputContributionErrorImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? message = null,
+  }) {
+    return _then(_$PayjoinError_InputContributionErrorImpl(
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$PayjoinError_InputContributionErrorImpl
+    extends PayjoinError_InputContributionError {
+  const _$PayjoinError_InputContributionErrorImpl({required this.message})
+      : super._();
+
+  @override
+  final String message;
+
+  @override
+  String toString() {
+    return 'PayjoinError.inputContributionError(message: $message)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$PayjoinError_InputContributionErrorImpl &&
+            (identical(other.message, message) || other.message == message));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, message);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$PayjoinError_InputContributionErrorImplCopyWith<
+          _$PayjoinError_InputContributionErrorImpl>
+      get copyWith => __$$PayjoinError_InputContributionErrorImplCopyWithImpl<
+          _$PayjoinError_InputContributionErrorImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String message) invalidAddress,
+    required TResult Function(String message) invalidScript,
+    required TResult Function(String message) networkValidation,
+    required TResult Function(String message) psbtParseError,
+    required TResult Function(String message) responseError,
+    required TResult Function(String message) requestError,
+    required TResult Function(String message) transactionError,
+    required TResult Function(String message) serverError,
+    required TResult Function(String message) selectionError,
+    required TResult Function(String message) createRequestError,
+    required TResult Function(String message) pjParseError,
+    required TResult Function(String message) pjNotSupported,
+    required TResult Function(String message) validationError,
+    required TResult Function(String message) v2Error,
+    required TResult Function(String message) unexpectedError,
+    required TResult Function(String message) ohttpError,
+    required TResult Function(String message) urlError,
+    required TResult Function(String message) ioError,
+    required TResult Function(String message) outputSubstitutionError,
+    required TResult Function(String message) inputContributionError,
+    required TResult Function(String message) inputPairError,
+  }) {
+    return inputContributionError(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String message)? invalidAddress,
+    TResult? Function(String message)? invalidScript,
+    TResult? Function(String message)? networkValidation,
+    TResult? Function(String message)? psbtParseError,
+    TResult? Function(String message)? responseError,
+    TResult? Function(String message)? requestError,
+    TResult? Function(String message)? transactionError,
+    TResult? Function(String message)? serverError,
+    TResult? Function(String message)? selectionError,
+    TResult? Function(String message)? createRequestError,
+    TResult? Function(String message)? pjParseError,
+    TResult? Function(String message)? pjNotSupported,
+    TResult? Function(String message)? validationError,
+    TResult? Function(String message)? v2Error,
+    TResult? Function(String message)? unexpectedError,
+    TResult? Function(String message)? ohttpError,
+    TResult? Function(String message)? urlError,
+    TResult? Function(String message)? ioError,
+    TResult? Function(String message)? outputSubstitutionError,
+    TResult? Function(String message)? inputContributionError,
+    TResult? Function(String message)? inputPairError,
+  }) {
+    return inputContributionError?.call(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String message)? invalidAddress,
+    TResult Function(String message)? invalidScript,
+    TResult Function(String message)? networkValidation,
+    TResult Function(String message)? psbtParseError,
+    TResult Function(String message)? responseError,
+    TResult Function(String message)? requestError,
+    TResult Function(String message)? transactionError,
+    TResult Function(String message)? serverError,
+    TResult Function(String message)? selectionError,
+    TResult Function(String message)? createRequestError,
+    TResult Function(String message)? pjParseError,
+    TResult Function(String message)? pjNotSupported,
+    TResult Function(String message)? validationError,
+    TResult Function(String message)? v2Error,
+    TResult Function(String message)? unexpectedError,
+    TResult Function(String message)? ohttpError,
+    TResult Function(String message)? urlError,
+    TResult Function(String message)? ioError,
+    TResult Function(String message)? outputSubstitutionError,
+    TResult Function(String message)? inputContributionError,
+    TResult Function(String message)? inputPairError,
+    required TResult orElse(),
+  }) {
+    if (inputContributionError != null) {
+      return inputContributionError(message);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(PayjoinError_InvalidAddress value) invalidAddress,
+    required TResult Function(PayjoinError_InvalidScript value) invalidScript,
+    required TResult Function(PayjoinError_NetworkValidation value)
+        networkValidation,
+    required TResult Function(PayjoinError_PsbtParseError value) psbtParseError,
+    required TResult Function(PayjoinError_ResponseError value) responseError,
+    required TResult Function(PayjoinError_RequestError value) requestError,
+    required TResult Function(PayjoinError_TransactionError value)
+        transactionError,
+    required TResult Function(PayjoinError_ServerError value) serverError,
+    required TResult Function(PayjoinError_SelectionError value) selectionError,
+    required TResult Function(PayjoinError_CreateRequestError value)
+        createRequestError,
+    required TResult Function(PayjoinError_PjParseError value) pjParseError,
+    required TResult Function(PayjoinError_PjNotSupported value) pjNotSupported,
+    required TResult Function(PayjoinError_ValidationError value)
+        validationError,
+    required TResult Function(PayjoinError_V2Error value) v2Error,
+    required TResult Function(PayjoinError_UnexpectedError value)
+        unexpectedError,
+    required TResult Function(PayjoinError_OhttpError value) ohttpError,
+    required TResult Function(PayjoinError_UrlError value) urlError,
+    required TResult Function(PayjoinError_IoError value) ioError,
+    required TResult Function(PayjoinError_OutputSubstitutionError value)
+        outputSubstitutionError,
+    required TResult Function(PayjoinError_InputContributionError value)
+        inputContributionError,
+    required TResult Function(PayjoinError_InputPairError value) inputPairError,
+  }) {
+    return inputContributionError(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(PayjoinError_InvalidAddress value)? invalidAddress,
+    TResult? Function(PayjoinError_InvalidScript value)? invalidScript,
+    TResult? Function(PayjoinError_NetworkValidation value)? networkValidation,
+    TResult? Function(PayjoinError_PsbtParseError value)? psbtParseError,
+    TResult? Function(PayjoinError_ResponseError value)? responseError,
+    TResult? Function(PayjoinError_RequestError value)? requestError,
+    TResult? Function(PayjoinError_TransactionError value)? transactionError,
+    TResult? Function(PayjoinError_ServerError value)? serverError,
+    TResult? Function(PayjoinError_SelectionError value)? selectionError,
+    TResult? Function(PayjoinError_CreateRequestError value)?
+        createRequestError,
+    TResult? Function(PayjoinError_PjParseError value)? pjParseError,
+    TResult? Function(PayjoinError_PjNotSupported value)? pjNotSupported,
+    TResult? Function(PayjoinError_ValidationError value)? validationError,
+    TResult? Function(PayjoinError_V2Error value)? v2Error,
+    TResult? Function(PayjoinError_UnexpectedError value)? unexpectedError,
+    TResult? Function(PayjoinError_OhttpError value)? ohttpError,
+    TResult? Function(PayjoinError_UrlError value)? urlError,
+    TResult? Function(PayjoinError_IoError value)? ioError,
+    TResult? Function(PayjoinError_OutputSubstitutionError value)?
+        outputSubstitutionError,
+    TResult? Function(PayjoinError_InputContributionError value)?
+        inputContributionError,
+    TResult? Function(PayjoinError_InputPairError value)? inputPairError,
+  }) {
+    return inputContributionError?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(PayjoinError_InvalidAddress value)? invalidAddress,
+    TResult Function(PayjoinError_InvalidScript value)? invalidScript,
+    TResult Function(PayjoinError_NetworkValidation value)? networkValidation,
+    TResult Function(PayjoinError_PsbtParseError value)? psbtParseError,
+    TResult Function(PayjoinError_ResponseError value)? responseError,
+    TResult Function(PayjoinError_RequestError value)? requestError,
+    TResult Function(PayjoinError_TransactionError value)? transactionError,
+    TResult Function(PayjoinError_ServerError value)? serverError,
+    TResult Function(PayjoinError_SelectionError value)? selectionError,
+    TResult Function(PayjoinError_CreateRequestError value)? createRequestError,
+    TResult Function(PayjoinError_PjParseError value)? pjParseError,
+    TResult Function(PayjoinError_PjNotSupported value)? pjNotSupported,
+    TResult Function(PayjoinError_ValidationError value)? validationError,
+    TResult Function(PayjoinError_V2Error value)? v2Error,
+    TResult Function(PayjoinError_UnexpectedError value)? unexpectedError,
+    TResult Function(PayjoinError_OhttpError value)? ohttpError,
+    TResult Function(PayjoinError_UrlError value)? urlError,
+    TResult Function(PayjoinError_IoError value)? ioError,
+    TResult Function(PayjoinError_OutputSubstitutionError value)?
+        outputSubstitutionError,
+    TResult Function(PayjoinError_InputContributionError value)?
+        inputContributionError,
+    TResult Function(PayjoinError_InputPairError value)? inputPairError,
+    required TResult orElse(),
+  }) {
+    if (inputContributionError != null) {
+      return inputContributionError(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class PayjoinError_InputContributionError extends PayjoinError {
+  const factory PayjoinError_InputContributionError(
+          {required final String message}) =
+      _$PayjoinError_InputContributionErrorImpl;
+  const PayjoinError_InputContributionError._() : super._();
+
+  @override
+  String get message;
+  @override
+  @JsonKey(ignore: true)
+  _$$PayjoinError_InputContributionErrorImplCopyWith<
+          _$PayjoinError_InputContributionErrorImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$PayjoinError_InputPairErrorImplCopyWith<$Res>
+    implements $PayjoinErrorCopyWith<$Res> {
+  factory _$$PayjoinError_InputPairErrorImplCopyWith(
+          _$PayjoinError_InputPairErrorImpl value,
+          $Res Function(_$PayjoinError_InputPairErrorImpl) then) =
+      __$$PayjoinError_InputPairErrorImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String message});
+}
+
+/// @nodoc
+class __$$PayjoinError_InputPairErrorImplCopyWithImpl<$Res>
+    extends _$PayjoinErrorCopyWithImpl<$Res, _$PayjoinError_InputPairErrorImpl>
+    implements _$$PayjoinError_InputPairErrorImplCopyWith<$Res> {
+  __$$PayjoinError_InputPairErrorImplCopyWithImpl(
+      _$PayjoinError_InputPairErrorImpl _value,
+      $Res Function(_$PayjoinError_InputPairErrorImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? message = null,
+  }) {
+    return _then(_$PayjoinError_InputPairErrorImpl(
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$PayjoinError_InputPairErrorImpl extends PayjoinError_InputPairError {
+  const _$PayjoinError_InputPairErrorImpl({required this.message}) : super._();
+
+  @override
+  final String message;
+
+  @override
+  String toString() {
+    return 'PayjoinError.inputPairError(message: $message)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$PayjoinError_InputPairErrorImpl &&
+            (identical(other.message, message) || other.message == message));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, message);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$PayjoinError_InputPairErrorImplCopyWith<_$PayjoinError_InputPairErrorImpl>
+      get copyWith => __$$PayjoinError_InputPairErrorImplCopyWithImpl<
+          _$PayjoinError_InputPairErrorImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String message) invalidAddress,
+    required TResult Function(String message) invalidScript,
+    required TResult Function(String message) networkValidation,
+    required TResult Function(String message) psbtParseError,
+    required TResult Function(String message) responseError,
+    required TResult Function(String message) requestError,
+    required TResult Function(String message) transactionError,
+    required TResult Function(String message) serverError,
+    required TResult Function(String message) selectionError,
+    required TResult Function(String message) createRequestError,
+    required TResult Function(String message) pjParseError,
+    required TResult Function(String message) pjNotSupported,
+    required TResult Function(String message) validationError,
+    required TResult Function(String message) v2Error,
+    required TResult Function(String message) unexpectedError,
+    required TResult Function(String message) ohttpError,
+    required TResult Function(String message) urlError,
+    required TResult Function(String message) ioError,
+    required TResult Function(String message) outputSubstitutionError,
+    required TResult Function(String message) inputContributionError,
+    required TResult Function(String message) inputPairError,
+  }) {
+    return inputPairError(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String message)? invalidAddress,
+    TResult? Function(String message)? invalidScript,
+    TResult? Function(String message)? networkValidation,
+    TResult? Function(String message)? psbtParseError,
+    TResult? Function(String message)? responseError,
+    TResult? Function(String message)? requestError,
+    TResult? Function(String message)? transactionError,
+    TResult? Function(String message)? serverError,
+    TResult? Function(String message)? selectionError,
+    TResult? Function(String message)? createRequestError,
+    TResult? Function(String message)? pjParseError,
+    TResult? Function(String message)? pjNotSupported,
+    TResult? Function(String message)? validationError,
+    TResult? Function(String message)? v2Error,
+    TResult? Function(String message)? unexpectedError,
+    TResult? Function(String message)? ohttpError,
+    TResult? Function(String message)? urlError,
+    TResult? Function(String message)? ioError,
+    TResult? Function(String message)? outputSubstitutionError,
+    TResult? Function(String message)? inputContributionError,
+    TResult? Function(String message)? inputPairError,
+  }) {
+    return inputPairError?.call(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String message)? invalidAddress,
+    TResult Function(String message)? invalidScript,
+    TResult Function(String message)? networkValidation,
+    TResult Function(String message)? psbtParseError,
+    TResult Function(String message)? responseError,
+    TResult Function(String message)? requestError,
+    TResult Function(String message)? transactionError,
+    TResult Function(String message)? serverError,
+    TResult Function(String message)? selectionError,
+    TResult Function(String message)? createRequestError,
+    TResult Function(String message)? pjParseError,
+    TResult Function(String message)? pjNotSupported,
+    TResult Function(String message)? validationError,
+    TResult Function(String message)? v2Error,
+    TResult Function(String message)? unexpectedError,
+    TResult Function(String message)? ohttpError,
+    TResult Function(String message)? urlError,
+    TResult Function(String message)? ioError,
+    TResult Function(String message)? outputSubstitutionError,
+    TResult Function(String message)? inputContributionError,
+    TResult Function(String message)? inputPairError,
+    required TResult orElse(),
+  }) {
+    if (inputPairError != null) {
+      return inputPairError(message);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(PayjoinError_InvalidAddress value) invalidAddress,
+    required TResult Function(PayjoinError_InvalidScript value) invalidScript,
+    required TResult Function(PayjoinError_NetworkValidation value)
+        networkValidation,
+    required TResult Function(PayjoinError_PsbtParseError value) psbtParseError,
+    required TResult Function(PayjoinError_ResponseError value) responseError,
+    required TResult Function(PayjoinError_RequestError value) requestError,
+    required TResult Function(PayjoinError_TransactionError value)
+        transactionError,
+    required TResult Function(PayjoinError_ServerError value) serverError,
+    required TResult Function(PayjoinError_SelectionError value) selectionError,
+    required TResult Function(PayjoinError_CreateRequestError value)
+        createRequestError,
+    required TResult Function(PayjoinError_PjParseError value) pjParseError,
+    required TResult Function(PayjoinError_PjNotSupported value) pjNotSupported,
+    required TResult Function(PayjoinError_ValidationError value)
+        validationError,
+    required TResult Function(PayjoinError_V2Error value) v2Error,
+    required TResult Function(PayjoinError_UnexpectedError value)
+        unexpectedError,
+    required TResult Function(PayjoinError_OhttpError value) ohttpError,
+    required TResult Function(PayjoinError_UrlError value) urlError,
+    required TResult Function(PayjoinError_IoError value) ioError,
+    required TResult Function(PayjoinError_OutputSubstitutionError value)
+        outputSubstitutionError,
+    required TResult Function(PayjoinError_InputContributionError value)
+        inputContributionError,
+    required TResult Function(PayjoinError_InputPairError value) inputPairError,
+  }) {
+    return inputPairError(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(PayjoinError_InvalidAddress value)? invalidAddress,
+    TResult? Function(PayjoinError_InvalidScript value)? invalidScript,
+    TResult? Function(PayjoinError_NetworkValidation value)? networkValidation,
+    TResult? Function(PayjoinError_PsbtParseError value)? psbtParseError,
+    TResult? Function(PayjoinError_ResponseError value)? responseError,
+    TResult? Function(PayjoinError_RequestError value)? requestError,
+    TResult? Function(PayjoinError_TransactionError value)? transactionError,
+    TResult? Function(PayjoinError_ServerError value)? serverError,
+    TResult? Function(PayjoinError_SelectionError value)? selectionError,
+    TResult? Function(PayjoinError_CreateRequestError value)?
+        createRequestError,
+    TResult? Function(PayjoinError_PjParseError value)? pjParseError,
+    TResult? Function(PayjoinError_PjNotSupported value)? pjNotSupported,
+    TResult? Function(PayjoinError_ValidationError value)? validationError,
+    TResult? Function(PayjoinError_V2Error value)? v2Error,
+    TResult? Function(PayjoinError_UnexpectedError value)? unexpectedError,
+    TResult? Function(PayjoinError_OhttpError value)? ohttpError,
+    TResult? Function(PayjoinError_UrlError value)? urlError,
+    TResult? Function(PayjoinError_IoError value)? ioError,
+    TResult? Function(PayjoinError_OutputSubstitutionError value)?
+        outputSubstitutionError,
+    TResult? Function(PayjoinError_InputContributionError value)?
+        inputContributionError,
+    TResult? Function(PayjoinError_InputPairError value)? inputPairError,
+  }) {
+    return inputPairError?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(PayjoinError_InvalidAddress value)? invalidAddress,
+    TResult Function(PayjoinError_InvalidScript value)? invalidScript,
+    TResult Function(PayjoinError_NetworkValidation value)? networkValidation,
+    TResult Function(PayjoinError_PsbtParseError value)? psbtParseError,
+    TResult Function(PayjoinError_ResponseError value)? responseError,
+    TResult Function(PayjoinError_RequestError value)? requestError,
+    TResult Function(PayjoinError_TransactionError value)? transactionError,
+    TResult Function(PayjoinError_ServerError value)? serverError,
+    TResult Function(PayjoinError_SelectionError value)? selectionError,
+    TResult Function(PayjoinError_CreateRequestError value)? createRequestError,
+    TResult Function(PayjoinError_PjParseError value)? pjParseError,
+    TResult Function(PayjoinError_PjNotSupported value)? pjNotSupported,
+    TResult Function(PayjoinError_ValidationError value)? validationError,
+    TResult Function(PayjoinError_V2Error value)? v2Error,
+    TResult Function(PayjoinError_UnexpectedError value)? unexpectedError,
+    TResult Function(PayjoinError_OhttpError value)? ohttpError,
+    TResult Function(PayjoinError_UrlError value)? urlError,
+    TResult Function(PayjoinError_IoError value)? ioError,
+    TResult Function(PayjoinError_OutputSubstitutionError value)?
+        outputSubstitutionError,
+    TResult Function(PayjoinError_InputContributionError value)?
+        inputContributionError,
+    TResult Function(PayjoinError_InputPairError value)? inputPairError,
+    required TResult orElse(),
+  }) {
+    if (inputPairError != null) {
+      return inputPairError(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class PayjoinError_InputPairError extends PayjoinError {
+  const factory PayjoinError_InputPairError({required final String message}) =
+      _$PayjoinError_InputPairErrorImpl;
+  const PayjoinError_InputPairError._() : super._();
+
+  @override
+  String get message;
+  @override
+  @JsonKey(ignore: true)
+  _$$PayjoinError_InputPairErrorImplCopyWith<_$PayjoinError_InputPairErrorImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

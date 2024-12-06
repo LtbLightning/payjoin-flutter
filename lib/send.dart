@@ -1,28 +1,28 @@
+import 'package:payjoin_flutter/common.dart';
 import 'package:payjoin_flutter/src/config.dart';
 import 'package:payjoin_flutter/src/exceptions.dart';
 import 'package:payjoin_flutter/uri.dart';
 
-import 'common.dart' as common;
 import 'src/generated/api/send.dart';
 import 'src/generated/api/uri.dart';
 import 'src/generated/utils/error.dart' as error;
 
-class RequestBuilder extends FfiRequestBuilder {
-  RequestBuilder._({required super.field0});
-  static Future<RequestBuilder> fromPsbtAndUri(
+class SenderBuilder extends FfiSenderBuilder {
+  SenderBuilder._({required super.field0});
+  static Future<SenderBuilder> fromPsbtAndUri(
       {required String psbtBase64, required PjUri pjUri}) async {
     try {
       await PConfig.initializeApp();
-      final res = await FfiRequestBuilder.fromPsbtAndUri(
+      final res = await FfiSenderBuilder.fromPsbtAndUri(
           psbtBase64: psbtBase64, pjUri: pjUri);
-      return RequestBuilder._(field0: res.field0);
+      return SenderBuilder._(field0: res.field0);
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
     }
   }
 
   @override
-  Future<RequestContext> buildWithAdditionalFee(
+  Future<Sender> buildWithAdditionalFee(
       {required BigInt maxFeeContribution,
       int? changeIndex,
       required BigInt minFeeRate,
@@ -33,84 +33,84 @@ class RequestBuilder extends FfiRequestBuilder {
           changeIndex: changeIndex,
           minFeeRate: minFeeRate,
           clampFeeContribution: clampFeeContribution);
-      return RequestContext._(field0: res.field0);
+      return Sender._(field0: res.field0);
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
     }
   }
 
   @override
-  Future<RequestContext> buildRecommended(
-      {required BigInt minFeeRate, hBigInt}) async {
+  Future<Sender> buildRecommended({required BigInt minFeeRate, hBigInt}) async {
     try {
       final res = await super.buildRecommended(minFeeRate: minFeeRate);
-      return RequestContext._(field0: res.field0);
+      return Sender._(field0: res.field0);
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
     }
   }
 
   @override
-  Future<RequestContext> buildNonIncentivizing(
-      {required BigInt minFeeRate}) async {
+  Future<Sender> buildNonIncentivizing({required BigInt minFeeRate}) async {
     try {
       final res = await super.buildNonIncentivizing(minFeeRate: minFeeRate);
-      return RequestContext._(field0: res.field0);
+      return Sender._(field0: res.field0);
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
     }
   }
 
   @override
-  Future<RequestBuilder> alwaysDisableOutputSubstitution(
+  Future<SenderBuilder> alwaysDisableOutputSubstitution(
       {required bool disable, hBigInt}) async {
     try {
       final res = await super.alwaysDisableOutputSubstitution(disable: disable);
-      return RequestBuilder._(field0: res.field0);
+      return SenderBuilder._(field0: res.field0);
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
     }
   }
 }
 
-class RequestContext extends FfiRequestContext {
-  RequestContext._({required super.field0});
+class Sender extends FfiSender {
+  Sender._({required super.field0});
 
   @override
-  Future<(common.Request, ContextV1)> extractV1() async {
+  Future<(Request, V1Context)> extractV1() async {
     try {
       final res = await super.extractV1();
-      final request = common.Request(
+      final request = Request(
         url: await Url.fromStr((res.$1.url.asString())),
+        contentType: res.$1.contentType,
         body: res.$1.body,
       );
-      return (request, ContextV1._(field0: res.$2.field0));
+      return (request, V1Context._(field0: res.$2.field0));
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
     }
   }
 
   @override
-  Future<(common.Request, ContextV2)> extractV2({
+  Future<(Request, V2PostContext)> extractV2({
     required FfiUrl ohttpProxyUrl,
   }) async {
     try {
       final res = await super.extractV2(
         ohttpProxyUrl: ohttpProxyUrl,
       );
-      final request = common.Request(
+      final request = Request(
         url: await Url.fromStr((res.$1.url.asString())),
+        contentType: res.$1.contentType,
         body: res.$1.body,
       );
-      return (request, ContextV2._(field0: res.$2.field0));
+      return (request, V2PostContext._(field0: res.$2.field0));
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
     }
   }
 }
 
-class ContextV1 extends FfiContextV1 {
-  ContextV1._({required super.field0});
+class V1Context extends FfiV1Context {
+  V1Context._({required super.field0});
   @override
   Future<String> processResponse({required List<int> response}) {
     try {
@@ -121,14 +121,42 @@ class ContextV1 extends FfiContextV1 {
   }
 }
 
-class ContextV2 extends FfiContextV2 {
-  ContextV2._({required super.field0});
+class V2PostContext extends FfiV2PostContext {
+  V2PostContext._({required super.field0});
   @override
-  Future<String?> processResponse({required List<int> response}) {
+  Future<V2GetContext> processResponse({required List<int> response}) async {
     try {
-      return super.processResponse(response: response);
+      final res = await super.processResponse(response: response);
+      return V2GetContext._(field0: res.field0);
     } on error.PayjoinError catch (e) {
       throw mapPayjoinError(e);
     }
+  }
+}
+
+class V2GetContext extends FfiV2GetContext {
+  V2GetContext._({required super.field0});
+
+  @override
+  Future<(Request, ClientResponse)> extractReq({
+    required FfiUrl ohttpRelay,
+  }) async {
+    final res = await super.extractReq(ohttpRelay: ohttpRelay);
+    return (
+      Request(
+        url: await Url.fromStr(res.$1.url.asString()),
+        contentType: res.$1.contentType,
+        body: res.$1.body,
+      ),
+      ClientResponse(field0: res.$2.field0)
+    );
+  }
+
+  @override
+  Future<String?> processResponse({
+    required List<int> response,
+    required ClientResponse ohttpCtx,
+  }) async {
+    return await super.processResponse(response: response, ohttpCtx: ohttpCtx);
   }
 }

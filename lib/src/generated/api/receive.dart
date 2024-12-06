@@ -7,44 +7,24 @@ import '../frb_generated.dart';
 import '../lib.dart';
 import '../utils/error.dart';
 import '../utils/types.dart';
+import 'bitcoin_ffi.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'uri.dart';
 
-// These functions are ignored because they are not marked as `pub`: `_finalize_proposal`
-// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `clone`, `clone`, `fmt`, `fmt`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`
+// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `clone`, `clone`, `fmt`, `fmt`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`
 
-class FfiActiveSession {
-  final ActiveSession field0;
+class FfiInputPair {
+  final InputPair field0;
 
-  const FfiActiveSession({
+  const FfiInputPair({
     required this.field0,
   });
 
-  Future<(Request, ClientResponse)> extractReq() =>
-      core.instance.api.crateApiReceiveFfiActiveSessionExtractReq(
-        that: this,
-      );
-
-  FfiPjUriBuilder pjUriBuilder() =>
-      core.instance.api.crateApiReceiveFfiActiveSessionPjUriBuilder(
-        that: this,
-      );
-
-  Future<FfiUrl> pjUrl() =>
-      core.instance.api.crateApiReceiveFfiActiveSessionPjUrl(
-        that: this,
-      );
-
-  Future<FfiV2UncheckedProposal?> processRes(
-          {required List<int> body, required ClientResponse ctx}) =>
-      core.instance.api.crateApiReceiveFfiActiveSessionProcessRes(
-          that: this, body: body, ctx: ctx);
-
-  ///The per-session public key to use as an identifier
-  String publicKey() =>
-      core.instance.api.crateApiReceiveFfiActiveSessionPublicKey(
-        that: this,
-      );
+  // HINT: Make it `#[frb(sync)]` to let it become the default constructor of Dart class.
+  static Future<FfiInputPair> newInstance(
+          {required TxIn txin, required PsbtInput psbtin}) =>
+      core.instance.api
+          .crateApiReceiveFfiInputPairNew(txin: txin, psbtin: psbtin);
 
   @override
   int get hashCode => field0.hashCode;
@@ -52,7 +32,7 @@ class FfiActiveSession {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is FfiActiveSession &&
+      other is FfiInputPair &&
           runtimeType == other.runtimeType &&
           field0 == other.field0;
 }
@@ -64,7 +44,9 @@ class FfiMaybeInputsOwned {
     required this.field0,
   });
 
-  Future<FfiMaybeMixedInputScripts> checkInputsNotOwned(
+  ///Check that the Original PSBT has no receiver-owned inputs. Return original-psbt-rejected error or otherwise refuse to sign undesirable inputs.
+  /// An attacker could try to spend receiver's own inputs. This check prevents that.
+  Future<FfiMaybeInputsSeen> checkInputsNotOwned(
           {required FutureOr<bool> Function(Uint8List) isOwned}) =>
       core.instance.api.crateApiReceiveFfiMaybeInputsOwnedCheckInputsNotOwned(
           that: this, isOwned: isOwned);
@@ -87,6 +69,9 @@ class FfiMaybeInputsSeen {
     required this.field0,
   });
 
+  /// Make sure that the original transaction inputs have never been seen before.
+  /// This prevents probing attacks. This prevents reentrant Payjoin, where a sender
+  /// proposes a Payjoin PSBT as a new Original PSBT for a new Payjoin.
   Future<FfiOutputsUnknown> checkNoInputsSeenBefore(
           {required FutureOr<bool> Function(OutPoint) isKnown}) =>
       core.instance.api
@@ -104,29 +89,6 @@ class FfiMaybeInputsSeen {
           field0 == other.field0;
 }
 
-class FfiMaybeMixedInputScripts {
-  final MaybeMixedInputScripts field0;
-
-  const FfiMaybeMixedInputScripts({
-    required this.field0,
-  });
-
-  Future<FfiMaybeInputsSeen> checkNoMixedInputScripts() => core.instance.api
-          .crateApiReceiveFfiMaybeMixedInputScriptsCheckNoMixedInputScripts(
-        that: this,
-      );
-
-  @override
-  int get hashCode => field0.hashCode;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FfiMaybeMixedInputScripts &&
-          runtimeType == other.runtimeType &&
-          field0 == other.field0;
-}
-
 class FfiOutputsUnknown {
   final OutputsUnknown field0;
 
@@ -134,7 +96,8 @@ class FfiOutputsUnknown {
     required this.field0,
   });
 
-  Future<FfiProvisionalProposal> identifyReceiverOutputs(
+  /// Find which outputs belong to the receiver
+  Future<FfiWantsOutputs> identifyReceiverOutputs(
           {required FutureOr<bool> Function(Uint8List) isReceiverOutput}) =>
       core.instance.api.crateApiReceiveFfiOutputsUnknownIdentifyReceiverOutputs(
           that: this, isReceiverOutput: isReceiverOutput);
@@ -157,15 +120,25 @@ class FfiPayjoinProposal {
     required this.field0,
   });
 
+  Future<String> extractV1Req() =>
+      core.instance.api.crateApiReceiveFfiPayjoinProposalExtractV1Req(
+        that: this,
+      );
+
+  Future<(Request, ClientResponse)> extractV2Req() =>
+      core.instance.api.crateApiReceiveFfiPayjoinProposalExtractV2Req(
+        that: this,
+      );
+
   Future<bool> isOutputSubstitutionDisabled() => core.instance.api
           .crateApiReceiveFfiPayjoinProposalIsOutputSubstitutionDisabled(
         that: this,
       );
 
-  Future<Uint64List> ownedVouts() =>
-      core.instance.api.crateApiReceiveFfiPayjoinProposalOwnedVouts(
-        that: this,
-      );
+  Future<void> processRes(
+          {required List<int> res, required ClientResponse ohttpContext}) =>
+      core.instance.api.crateApiReceiveFfiPayjoinProposalProcessRes(
+          that: this, res: res, ohttpContext: ohttpContext);
 
   Future<String> psbt() =>
       core.instance.api.crateApiReceiveFfiPayjoinProposalPsbt(
@@ -195,31 +168,15 @@ class FfiProvisionalProposal {
     required this.field0,
   });
 
-  Future<void> contributeWitnessInput(
-          {required TxOut txo, required OutPoint outpoint}) =>
-      core.instance.api
-          .crateApiReceiveFfiProvisionalProposalContributeWitnessInput(
-              that: this, txo: txo, outpoint: outpoint);
-
   Future<FfiPayjoinProposal> finalizeProposal(
           {required FutureOr<String> Function(String) processPsbt,
-          BigInt? minFeeRateSatPerVb}) =>
+          BigInt? minFeeRateSatPerVb,
+          required BigInt maxFeeRateSatPerVb}) =>
       core.instance.api.crateApiReceiveFfiProvisionalProposalFinalizeProposal(
           that: this,
           processPsbt: processPsbt,
-          minFeeRateSatPerVb: minFeeRateSatPerVb);
-
-  Future<OutPoint> tryPreservingPrivacy(
-          {required Map<BigInt, OutPoint> candidateInputs}) =>
-      core.instance.api
-          .crateApiReceiveFfiProvisionalProposalTryPreservingPrivacy(
-              that: this, candidateInputs: candidateInputs);
-
-  Future<void> trySubstituteReceiverOutput(
-          {required FutureOr<Uint8List> Function() generateScript}) =>
-      core.instance.api
-          .crateApiReceiveFfiProvisionalProposalTrySubstituteReceiverOutput(
-              that: this, generateScript: generateScript);
+          minFeeRateSatPerVb: minFeeRateSatPerVb,
+          maxFeeRateSatPerVb: maxFeeRateSatPerVb);
 
   @override
   int get hashCode => field0.hashCode;
@@ -232,37 +189,65 @@ class FfiProvisionalProposal {
           field0 == other.field0;
 }
 
-class FfiSessionInitializer {
-  final SessionInitializer field0;
+class FfiReceiver {
+  final Receiver field0;
 
-  const FfiSessionInitializer({
+  const FfiReceiver({
     required this.field0,
   });
 
-  Future<(Request, ClientResponse)> extractReq() =>
-      core.instance.api.crateApiReceiveFfiSessionInitializerExtractReq(
-        that: this,
-      );
-
-  // HINT: Make it `#[frb(sync)]` to let it become the default constructor of Dart class.
-  static Future<FfiSessionInitializer> newInstance(
+  /// Creates a new `FfiReceiver` with the provided parameters.
+  ///
+  /// # Parameters
+  /// - `address`: The Bitcoin address for the payjoin session.
+  /// - `network`: The network to use for address verification.
+  /// - `directory`: The URL of the store-and-forward payjoin directory.
+  /// - `ohttp_keys`: The OHTTP keys used for encrypting and decrypting HTTP requests and responses.
+  /// - `ohttp_relay`: The URL of the OHTTP relay, used to keep client IP address confidential.
+  /// - `expire_after`: The duration in seconds after which the session expires.
+  ///
+  /// # Returns
+  /// A new instance of `FfiReceiver`.
+  ///
+  /// # References
+  /// - [BIP 77: Payjoin Version 2: Serverless Payjoin](https://github.com/bitcoin/bips/pull/1483)
+  static Future<FfiReceiver> create(
           {required String address,
-          BigInt? expireAfter,
           required Network network,
           required FfiUrl directory,
           required FfiOhttpKeys ohttpKeys,
-          required FfiUrl ohttpRelay}) =>
-      core.instance.api.crateApiReceiveFfiSessionInitializerNew(
+          required FfiUrl ohttpRelay,
+          BigInt? expireAfter}) =>
+      core.instance.api.crateApiReceiveFfiReceiverCreate(
           address: address,
-          expireAfter: expireAfter,
           network: network,
           directory: directory,
           ohttpKeys: ohttpKeys,
-          ohttpRelay: ohttpRelay);
+          ohttpRelay: ohttpRelay,
+          expireAfter: expireAfter);
 
-  Future<FfiActiveSession> processRes(
+  Future<(Request, ClientResponse)> extractReq() =>
+      core.instance.api.crateApiReceiveFfiReceiverExtractReq(
+        that: this,
+      );
+
+  ///The per-session public key to use as an identifier
+  String id() => core.instance.api.crateApiReceiveFfiReceiverId(
+        that: this,
+      );
+
+  FfiPjUriBuilder pjUriBuilder() =>
+      core.instance.api.crateApiReceiveFfiReceiverPjUriBuilder(
+        that: this,
+      );
+
+  Future<FfiUrl> pjUrl() => core.instance.api.crateApiReceiveFfiReceiverPjUrl(
+        that: this,
+      );
+
+  Future<FfiUncheckedProposal?> processRes(
           {required List<int> body, required ClientResponse ctx}) =>
-      core.instance.api.crateApiReceiveFfiSessionInitializerProcessRes(
+      core.instance.api.crateApiReceiveFfiReceiverProcessRes(
           that: this, body: body, ctx: ctx);
 
   @override
@@ -271,7 +256,7 @@ class FfiSessionInitializer {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is FfiSessionInitializer &&
+      other is FfiReceiver &&
           runtimeType == other.runtimeType &&
           field0 == other.field0;
 }
@@ -283,9 +268,11 @@ class FfiUncheckedProposal {
     required this.field0,
   });
 
-  /// Call this method if the only way to initiate a Payjoin with this receiver requires manual intervention, as in most consumer wallets.
+  /// Call this method if the only way to initiate a Payjoin with this receiver
+  /// requires manual intervention, as in most consumer wallets.
   ///
-  /// So-called “non-interactive” receivers, like payment processors, that allow arbitrary requests are otherwise vulnerable to probing attacks. Those receivers call get_transaction_to_check_broadcast() and attest_tested_and_scheduled_broadcast() after making those checks downstream.
+  /// So-called "non-interactive" receivers, like payment processors, that allow arbitrary requests are otherwise vulnerable to probing attacks.
+  /// Those receivers call `extract_tx_to_check_broadcast()` and `attest_tested_and_scheduled_broadcast()` after making those checks downstream.
   Future<FfiMaybeInputsOwned> assumeInteractiveReceiver() => core.instance.api
           .crateApiReceiveFfiUncheckedProposalAssumeInteractiveReceiver(
         that: this,
@@ -305,18 +292,11 @@ class FfiUncheckedProposal {
           .crateApiReceiveFfiUncheckedProposalCheckBroadcastSuitability(
               that: this, minFeeRate: minFeeRate, canBroadcast: canBroadcast);
 
-  /// The Sender’s Original PSBT
+  ///The Sender’s Original PSBT
   Future<Uint8List> extractTxToScheduleBroadcast() => core.instance.api
           .crateApiReceiveFfiUncheckedProposalExtractTxToScheduleBroadcast(
         that: this,
       );
-
-  static Future<FfiUncheckedProposal> fromRequest(
-          {required List<int> body,
-          required String query,
-          required Headers headers}) =>
-      core.instance.api.crateApiReceiveFfiUncheckedProposalFromRequest(
-          body: body, query: query, headers: headers);
 
   @override
   int get hashCode => field0.hashCode;
@@ -329,99 +309,27 @@ class FfiUncheckedProposal {
           field0 == other.field0;
 }
 
-class FfiV2MaybeInputsOwned {
-  final V2MaybeInputsOwned field0;
+class FfiWantsInputs {
+  final WantsInputs field0;
 
-  const FfiV2MaybeInputsOwned({
+  const FfiWantsInputs({
     required this.field0,
   });
 
-  ///Check that the Original PSBT has no receiver-owned inputs. Return original-psbt-rejected error or otherwise refuse to sign undesirable inputs.
-  /// An attacker could try to spend receiver's own inputs. This check prevents that.
-  Future<FfiV2MaybeMixedInputScripts> checkInputsNotOwned(
-          {required FutureOr<bool> Function(Uint8List) isOwned}) =>
-      core.instance.api.crateApiReceiveFfiV2MaybeInputsOwnedCheckInputsNotOwned(
-          that: this, isOwned: isOwned);
-
-  @override
-  int get hashCode => field0.hashCode;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FfiV2MaybeInputsOwned &&
-          runtimeType == other.runtimeType &&
-          field0 == other.field0;
-}
-
-class FfiV2MaybeInputsSeen {
-  final V2MaybeInputsSeen field0;
-
-  const FfiV2MaybeInputsSeen({
-    required this.field0,
-  });
-
-  /// Make sure that the original transaction inputs have never been seen before.
-  /// This prevents probing attacks. This prevents reentrant Payjoin, where a sender
-  /// proposes a Payjoin PSBT as a new Original PSBT for a new Payjoin.
-  Future<FfiV2OutputsUnknown> checkNoInputsSeenBefore(
-          {required FutureOr<bool> Function(OutPoint) isKnown}) =>
-      core.instance.api
-          .crateApiReceiveFfiV2MaybeInputsSeenCheckNoInputsSeenBefore(
-              that: this, isKnown: isKnown);
-
-  @override
-  int get hashCode => field0.hashCode;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FfiV2MaybeInputsSeen &&
-          runtimeType == other.runtimeType &&
-          field0 == other.field0;
-}
-
-class FfiV2MaybeMixedInputScripts {
-  final V2MaybeMixedInputScripts field0;
-
-  const FfiV2MaybeMixedInputScripts({
-    required this.field0,
-  });
-
-  /// Verify the original transaction did not have mixed input types
-  /// Call this after checking downstream.
-  ///
-  /// Note: mixed spends do not necessarily indicate distinct wallet fingerprints.
-  /// This check is intended to prevent some types of wallet fingerprinting.
-  Future<FfiV2MaybeInputsSeen> checkNoMixedInputScripts() => core.instance.api
-          .crateApiReceiveFfiV2MaybeMixedInputScriptsCheckNoMixedInputScripts(
+  Future<FfiProvisionalProposal> commitInputs() =>
+      core.instance.api.crateApiReceiveFfiWantsInputsCommitInputs(
         that: this,
       );
 
-  @override
-  int get hashCode => field0.hashCode;
+  Future<FfiWantsInputs> contributeInputs(
+          {required List<FfiInputPair> replacementInputs}) =>
+      core.instance.api.crateApiReceiveFfiWantsInputsContributeInputs(
+          that: this, replacementInputs: replacementInputs);
 
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FfiV2MaybeMixedInputScripts &&
-          runtimeType == other.runtimeType &&
-          field0 == other.field0;
-}
-
-class FfiV2OutputsUnknown {
-  final V2OutputsUnknown field0;
-
-  const FfiV2OutputsUnknown({
-    required this.field0,
-  });
-
-  /// Find which outputs belong to the receiver
-  Future<FfiV2ProvisionalProposal> identifyReceiverOutputs(
-          {required FutureOr<bool> Function(Uint8List) isReceiverOutput}) =>
-      core.instance.api
-          .crateApiReceiveFfiV2OutputsUnknownIdentifyReceiverOutputs(
-              that: this, isReceiverOutput: isReceiverOutput);
+  Future<FfiInputPair> tryPreservingPrivacy(
+          {required List<FfiInputPair> candidateInputs}) =>
+      core.instance.api.crateApiReceiveFfiWantsInputsTryPreservingPrivacy(
+          that: this, candidateInputs: candidateInputs);
 
   @override
   int get hashCode => field0.hashCode;
@@ -429,106 +337,40 @@ class FfiV2OutputsUnknown {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is FfiV2OutputsUnknown &&
+      other is FfiWantsInputs &&
           runtimeType == other.runtimeType &&
           field0 == other.field0;
 }
 
-class FfiV2PayjoinProposal {
-  final ArcV2PayjoinProposal field0;
+class FfiWantsOutputs {
+  final WantsOutputs field0;
 
-  const FfiV2PayjoinProposal({
+  const FfiWantsOutputs({
     required this.field0,
   });
 
-  Future<String> extractV1Req() =>
-      core.instance.api.crateApiReceiveFfiV2PayjoinProposalExtractV1Req(
-        that: this,
-      );
-
-  Future<(Request, ClientResponse)> extractV2Req() =>
-      core.instance.api.crateApiReceiveFfiV2PayjoinProposalExtractV2Req(
+  Future<FfiWantsInputs> commitOutputs() =>
+      core.instance.api.crateApiReceiveFfiWantsOutputsCommitOutputs(
         that: this,
       );
 
   Future<bool> isOutputSubstitutionDisabled() => core.instance.api
-          .crateApiReceiveFfiV2PayjoinProposalIsOutputSubstitutionDisabled(
+          .crateApiReceiveFfiWantsOutputsIsOutputSubstitutionDisabled(
         that: this,
       );
 
-  Future<Uint64List> ownedVouts() =>
-      core.instance.api.crateApiReceiveFfiV2PayjoinProposalOwnedVouts(
-        that: this,
-      );
-
-  Future<void> processRes(
-          {required List<int> res, required ClientResponse ohttpContext}) =>
-      core.instance.api.crateApiReceiveFfiV2PayjoinProposalProcessRes(
-          that: this, res: res, ohttpContext: ohttpContext);
-
-  Future<String> psbt() =>
-      core.instance.api.crateApiReceiveFfiV2PayjoinProposalPsbt(
-        that: this,
-      );
-
-  Future<List<OutPoint>> utxosToBeLocked() =>
-      core.instance.api.crateApiReceiveFfiV2PayjoinProposalUtxosToBeLocked(
-        that: this,
-      );
-
-  @override
-  int get hashCode => field0.hashCode;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FfiV2PayjoinProposal &&
-          runtimeType == other.runtimeType &&
-          field0 == other.field0;
-}
-
-class FfiV2ProvisionalProposal {
-  final V2ProvisionalProposal field0;
-
-  const FfiV2ProvisionalProposal({
-    required this.field0,
-  });
-
-  Future<void> contributeWitnessInput(
-          {required TxOut txo, required OutPoint outpoint}) =>
-      core.instance.api
-          .crateApiReceiveFfiV2ProvisionalProposalContributeWitnessInput(
-              that: this, txo: txo, outpoint: outpoint);
-
-  Future<FfiV2PayjoinProposal> finalizeProposal(
-          {required FutureOr<String> Function(String) processPsbt,
-          BigInt? minFeeRateSatPerVb}) =>
-      core.instance.api.crateApiReceiveFfiV2ProvisionalProposalFinalizeProposal(
+  Future<FfiWantsOutputs> replaceReceiverOutputs(
+          {required List<TxOut> replacementOutputs,
+          required FfiScript drainScript}) =>
+      core.instance.api.crateApiReceiveFfiWantsOutputsReplaceReceiverOutputs(
           that: this,
-          processPsbt: processPsbt,
-          minFeeRateSatPerVb: minFeeRateSatPerVb);
+          replacementOutputs: replacementOutputs,
+          drainScript: drainScript);
 
-  Future<bool> isOutputSubstitutionDisabled() => core.instance.api
-          .crateApiReceiveFfiV2ProvisionalProposalIsOutputSubstitutionDisabled(
-        that: this,
-      );
-
-  /// Select receiver input such that the common.dart avoids surveillance. Return the input chosen that has been applied to the Proposal.
-  ///
-  /// Proper coin selection allows common.dart to resemble ordinary transactions. To ensure the resemblance, a number of heuristics must be avoided.
-  ///
-  /// UIH “Unnecessary input heuristic” is one class of them to avoid. We define UIH1 and UIH2 according to the BlockSci practice BlockSci UIH1 and UIH2:
-  Future<OutPoint> tryPreservingPrivacy(
-          {required Map<BigInt, OutPoint> candidateInputs}) =>
-      core.instance.api
-          .crateApiReceiveFfiV2ProvisionalProposalTryPreservingPrivacy(
-              that: this, candidateInputs: candidateInputs);
-
-  Future<void> trySubstituteReceiverOutput(
-          {required FutureOr<Uint8List> Function() generateScript}) =>
-      core.instance.api
-          .crateApiReceiveFfiV2ProvisionalProposalTrySubstituteReceiverOutput(
-              that: this, generateScript: generateScript);
+  Future<FfiWantsOutputs> substituteReceiverScript(
+          {required FfiScript outputScript}) =>
+      core.instance.api.crateApiReceiveFfiWantsOutputsSubstituteReceiverScript(
+          that: this, outputScript: outputScript);
 
   @override
   int get hashCode => field0.hashCode;
@@ -536,55 +378,7 @@ class FfiV2ProvisionalProposal {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is FfiV2ProvisionalProposal &&
-          runtimeType == other.runtimeType &&
-          field0 == other.field0;
-}
-
-class FfiV2UncheckedProposal {
-  final V2UncheckedProposal field0;
-
-  const FfiV2UncheckedProposal({
-    required this.field0,
-  });
-
-  /// Call this method if the only way to initiate a Payjoin with this receiver
-  /// requires manual intervention, as in most consumer wallets.
-  ///
-  /// So-called "non-interactive" receivers, like payment processors, that allow arbitrary requests are otherwise vulnerable to probing attacks.
-  /// Those receivers call `extract_tx_to_check_broadcast()` and `attest_tested_and_scheduled_broadcast()` after making those checks downstream.
-  Future<FfiV2MaybeInputsOwned> assumeInteractiveReceiver() => core.instance.api
-          .crateApiReceiveFfiV2UncheckedProposalAssumeInteractiveReceiver(
-        that: this,
-      );
-
-  /// Call after checking that the Original PSBT can be broadcast.
-  ///
-  /// Receiver MUST check that the Original PSBT from the sender can be broadcast, i.e. testmempoolaccept bitcoind rpc returns { “allowed”: true,.. } for get_transaction_to_check_broadcast() before calling this method.
-  ///
-  /// Do this check if you generate bitcoin uri to receive Payjoin on sender request without manual human approval, like a payment processor. Such so called “non-interactive” receivers are otherwise vulnerable to probing attacks. If a sender can make requests at will, they can learn which bitcoin the receiver owns at no cost. Broadcasting the Original PSBT after some time in the failure case makes incurs sender cost and prevents probing.
-  ///
-  /// Call this after checking downstream.
-  Future<FfiV2MaybeInputsOwned> checkBroadcastSuitability(
-          {BigInt? minFeeRate,
-          required FutureOr<bool> Function(Uint8List) canBroadcast}) =>
-      core.instance.api
-          .crateApiReceiveFfiV2UncheckedProposalCheckBroadcastSuitability(
-              that: this, minFeeRate: minFeeRate, canBroadcast: canBroadcast);
-
-  ///The Sender’s Original PSBT
-  Future<Uint8List> extractTxToScheduleBroadcast() => core.instance.api
-          .crateApiReceiveFfiV2UncheckedProposalExtractTxToScheduleBroadcast(
-        that: this,
-      );
-
-  @override
-  int get hashCode => field0.hashCode;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FfiV2UncheckedProposal &&
+      other is FfiWantsOutputs &&
           runtimeType == other.runtimeType &&
           field0 == other.field0;
 }
