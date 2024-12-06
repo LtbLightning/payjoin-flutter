@@ -75,6 +75,9 @@ pub enum PayjoinError {
     InputPairError {
         message: String,
     },
+    SerdeJsonError {
+        message: String,
+    },
 }
 
 macro_rules! from_payjoin_ffi_error {
@@ -125,7 +128,8 @@ from_payjoin_ffi_error!(
     IoError,
     OutputSubstitutionError,
     InputContributionError,
-    InputPairError
+    InputPairError,
+    SerdeJsonError
 );
 from_payjoin_error!(
     InvalidAddress,
@@ -148,7 +152,8 @@ from_payjoin_error!(
     IoError,
     OutputSubstitutionError,
     InputContributionError,
-    InputPairError
+    InputPairError,
+    SerdeJsonError
 );
 
 #[derive(Debug, PartialEq, Eq)]

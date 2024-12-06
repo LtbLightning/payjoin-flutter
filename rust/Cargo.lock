@@ -1781,14 +1781,15 @@ dependencies = [
 
 [[package]]
 name = "payjoin_ffi"
-version = "0.21.0"
-source = "git+https://github.com/LtbLightning/payjoin-ffi?tag=v0.21.0#5230f1999284659346cbd7c8bac5211061a5a3b2"
+version = "0.21.1"
+source = "git+https://github.com/LtbLightning/payjoin-ffi?tag=v0.21.1#b2dc4318cc01337b9c28990e797fd47534cfb8c4"
 dependencies = [
  "base64 0.22.1",
  "bitcoin-ffi",
  "bitcoin-ohttp",
  "hex",
  "payjoin",
+ "serde_json",
  "thiserror 1.0.69",
  "uniffi",
  "url",

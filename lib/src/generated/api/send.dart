@@ -29,6 +29,13 @@ class FfiSender {
       core.instance.api.crateApiSendFfiSenderExtractV2(
           that: this, ohttpProxyUrl: ohttpProxyUrl);
 
+  static FfiSender fromJson({required String json}) =>
+      core.instance.api.crateApiSendFfiSenderFromJson(json: json);
+
+  String toJson() => core.instance.api.crateApiSendFfiSenderToJson(
+        that: this,
+      );
+
   @override
   int get hashCode => field0.hashCode;
 
