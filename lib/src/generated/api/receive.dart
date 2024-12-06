@@ -231,6 +231,9 @@ class FfiReceiver {
         that: this,
       );
 
+  static FfiReceiver fromJson({required String json}) =>
+      core.instance.api.crateApiReceiveFfiReceiverFromJson(json: json);
+
   ///The per-session public key to use as an identifier
   String id() => core.instance.api.crateApiReceiveFfiReceiverId(
         that: this,
@@ -249,6 +252,10 @@ class FfiReceiver {
           {required List<int> body, required ClientResponse ctx}) =>
       core.instance.api.crateApiReceiveFfiReceiverProcessRes(
           that: this, body: body, ctx: ctx);
+
+  String toJson() => core.instance.api.crateApiReceiveFfiReceiverToJson(
+        that: this,
+      );
 
   @override
   int get hashCode => field0.hashCode;
