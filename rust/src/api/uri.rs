@@ -4,13 +4,13 @@ use crate::frb_generated::RustOpaque;
 use crate::utils::error::PayjoinError;
 
 #[derive(Debug, Clone)]
-pub struct FfiUrl(pub RustOpaque<payjoin_ffi::uri::Url>);
-impl From<payjoin_ffi::uri::Url> for FfiUrl {
-    fn from(value: payjoin_ffi::uri::Url) -> Self {
+pub struct FfiUrl(pub RustOpaque<payjoin_ffi::Url>);
+impl From<payjoin_ffi::Url> for FfiUrl {
+    fn from(value: payjoin_ffi::Url) -> Self {
         Self(RustOpaque::new(value))
     }
 }
-impl From<FfiUrl> for payjoin_ffi::uri::Url {
+impl From<FfiUrl> for payjoin_ffi::Url {
     fn from(value: FfiUrl) -> Self {
         (*value.0).clone()
     }
@@ -18,8 +18,8 @@ impl From<FfiUrl> for payjoin_ffi::uri::Url {
 
 impl FfiUrl {
     #[frb(sync)]
-    pub fn from_str(url: String) -> Result<Self, PayjoinError> {
-        match payjoin_ffi::uri::Url::from_str(url) {
+    pub fn parse(url: String) -> Result<Self, PayjoinError> {
+        match payjoin_ffi::Url::parse(url) {
             Ok(e) => Ok(e.into()),
             Err(e) => Err(e.into()),
         }
@@ -55,8 +55,8 @@ impl FfiPjUri {
     }
     /// Number of btc  requested as payment
     #[frb(sync)]
-    pub fn amount(&self) -> Option<f64> {
-        self.0.clone().amount()
+    pub fn amount_sats(&self) -> Option<u64> {
+        self.0.clone().amount_sats()
     }
     #[frb(sync)]
     pub fn as_string(&self) -> String {
@@ -76,26 +76,12 @@ impl From<payjoin_ffi::uri::PjUriBuilder> for FfiPjUriBuilder {
 }
 
 impl FfiPjUriBuilder {
-    pub fn create(
-        address: String,
-        pj: FfiUrl,
-        ohttp_keys: Option<FfiOhttpKeys>,
-        expiry: Option<u64>,
-    ) -> Result<Self, PayjoinError> {
-        payjoin_ffi::uri::PjUriBuilder::new(
-            address,
-            (*pj.0).clone(),
-            ohttp_keys.map(|e| (*e.0).clone()),
-            expiry,
-        )
-        .map_err(|e| e.into())
-        .map(|e| e.into())
-    }
-    ///Accepts the amount you want to receive in sats and sets it in btc.
+    /// Accepts the amount you want to receive in sats.
     #[frb(sync)]
-    pub fn amount(&self, amount: u64) -> Self {
-        self.internal.amount(amount).into()
+    pub fn amount_sats(&self, amount: u64) -> Self {
+        self.internal.amount_sats(amount).into()
     }
+
     #[frb(sync)]
     /// Set the message.
     pub fn message(&self, message: String) -> Self {
@@ -127,8 +113,8 @@ impl From<payjoin_ffi::uri::Uri> for FfiUri {
 }
 impl FfiUri {
     #[frb(sync)]
-    pub fn from_str(uri: String) -> anyhow::Result<FfiUri, PayjoinError> {
-        match payjoin_ffi::uri::Uri::from_str(uri) {
+    pub fn parse(uri: String) -> anyhow::Result<FfiUri, PayjoinError> {
+        match payjoin_ffi::uri::Uri::parse(uri) {
             Ok(e) => Ok(e.into()),
             Err(e) => Err(PayjoinError::PjParseError { message: e.to_string() }),
         }
@@ -138,9 +124,9 @@ impl FfiUri {
         self.0.address()
     }
     #[frb(sync)]
-    ///Gets the amount in btc.
-    pub fn amount(&self) -> Option<f64> {
-        self.0.amount()
+    /// Gets the amount in sats.
+    pub fn amount_sats(&self) -> Option<u64> {
+        self.0.amount_sats()
     }
     #[frb(sync)]
     pub fn as_string(&self) -> String {
@@ -151,62 +137,21 @@ impl FfiUri {
         self.0.check_pj_supported().map(|e| e.into()).map_err(|e| e.into())
     }
 }
-pub struct FfiOhttpKeys(pub RustOpaque<payjoin_ffi::types::OhttpKeys>);
+pub struct FfiOhttpKeys(pub RustOpaque<payjoin_ffi::OhttpKeys>);
 
-impl From<FfiOhttpKeys> for payjoin_ffi::types::OhttpKeys {
+impl From<FfiOhttpKeys> for payjoin_ffi::OhttpKeys {
     fn from(value: FfiOhttpKeys) -> Self {
         (*value.0).clone()
     }
 }
-impl From<payjoin_ffi::types::OhttpKeys> for FfiOhttpKeys {
-    fn from(value: payjoin_ffi::types::OhttpKeys) -> Self {
+impl From<payjoin_ffi::OhttpKeys> for FfiOhttpKeys {
+    fn from(value: payjoin_ffi::OhttpKeys) -> Self {
         Self(RustOpaque::new(value))
     }
 }
 
 impl FfiOhttpKeys {
     pub fn decode(bytes: Vec<u8>) -> Result<Self, PayjoinError> {
-        payjoin_ffi::types::OhttpKeys::decode(bytes).map(|e| e.into()).map_err(|e| e.into())
-    }
-}
-#[cfg(test)]
-mod tests {
-    use crate::api::uri::{FfiPjUriBuilder, FfiUrl};
-
-    #[test]
-    fn test_ffi_builder() {
-        let https = "https://example.com/";
-        let onion = "http://vjdpwgybvubne5hda6v4c5iaeeevhge6jvo3w2cl6eocbwwvwxp7b7qd.onion/";
-        let base58 = "12c6DSiU4Rq3P4ZxziKxzrL5LmMBrzjrJX";
-        let bech32_upper = "TB1Q6D3A2W975YNY0ASUVD9A67NER4NKS58FF0Q8G4";
-        let bech32_lower = "tb1q6d3a2w975yny0asuvd9a67ner4nks58ff0q8g4";
-
-        for address in [base58, bech32_upper, bech32_lower] {
-            for pj in [https, onion] {
-                let builder = FfiPjUriBuilder::create(
-                    address.to_string(),
-                    FfiUrl::from_str(pj.to_string()).unwrap(),
-                    None,
-                    None,
-                )
-                .unwrap();
-                let uri = builder
-                    .amount(1)
-                    .message("message".to_string())
-                    .pjos(true)
-                    .label("label".to_string())
-                    .build();
-                // assert_eq!(uri.amount(), Some(bitcoin::Amount::ONE_BTC.to_btc()));
-                print!("\n {}", uri.as_string());
-                let expected_address = if address == base58 { base58 } else { bech32_lower };
-                assert_eq!(
-                    uri.as_string(),
-                    format!(
-                        "bitcoin:{}?amount=0.00000001&label=label&message=message&pj={}&pjos=1",
-                        expected_address, pj
-                    )
-                );
-            }
-        }
+        payjoin_ffi::OhttpKeys::decode(bytes).map(|e| e.into()).map_err(|e| e.into())
     }
 }

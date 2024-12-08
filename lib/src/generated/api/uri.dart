@@ -43,7 +43,7 @@ class FfiPjUri {
       );
 
   /// Number of btc  requested as payment
-  double? amount() => core.instance.api.crateApiUriFfiPjUriAmount(
+  BigInt? amountSats() => core.instance.api.crateApiUriFfiPjUriAmountSats(
         that: this,
       );
 
@@ -69,22 +69,14 @@ class FfiPjUriBuilder {
     required this.internal,
   });
 
-  ///Accepts the amount you want to receive in sats and sets it in btc.
-  FfiPjUriBuilder amount({required BigInt amount}) => core.instance.api
-      .crateApiUriFfiPjUriBuilderAmount(that: this, amount: amount);
+  /// Accepts the amount you want to receive in sats.
+  FfiPjUriBuilder amountSats({required BigInt amount}) => core.instance.api
+      .crateApiUriFfiPjUriBuilderAmountSats(that: this, amount: amount);
 
   ///Constructs a Uri with PayjoinParams from the parameters set in the builder.
   FfiPjUri build() => core.instance.api.crateApiUriFfiPjUriBuilderBuild(
         that: this,
       );
-
-  static Future<FfiPjUriBuilder> create(
-          {required String address,
-          required FfiUrl pj,
-          FfiOhttpKeys? ohttpKeys,
-          BigInt? expiry}) =>
-      core.instance.api.crateApiUriFfiPjUriBuilderCreate(
-          address: address, pj: pj, ohttpKeys: ohttpKeys, expiry: expiry);
 
   ///Set the label.
   FfiPjUriBuilder label({required String label}) => core.instance.api
@@ -120,8 +112,8 @@ class FfiUri {
         that: this,
       );
 
-  ///Gets the amount in btc.
-  double? amount() => core.instance.api.crateApiUriFfiUriAmount(
+  /// Gets the amount in sats.
+  BigInt? amountSats() => core.instance.api.crateApiUriFfiUriAmountSats(
         that: this,
       );
 
@@ -134,8 +126,8 @@ class FfiUri {
         that: this,
       );
 
-  static FfiUri fromStr({required String uri}) =>
-      core.instance.api.crateApiUriFfiUriFromStr(uri: uri);
+  static FfiUri parse({required String uri}) =>
+      core.instance.api.crateApiUriFfiUriParse(uri: uri);
 
   @override
   int get hashCode => field0.hashCode;
@@ -159,8 +151,8 @@ class FfiUrl {
         that: this,
       );
 
-  static FfiUrl fromStr({required String url}) =>
-      core.instance.api.crateApiUriFfiUrlFromStr(url: url);
+  static FfiUrl parse({required String url}) =>
+      core.instance.api.crateApiUriFfiUrlParse(url: url);
 
   String? query() => core.instance.api.crateApiUriFfiUrlQuery(
         that: this,
