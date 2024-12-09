@@ -76,4 +76,13 @@ sealed class PayjoinError with _$PayjoinError implements FrbException {
   const factory PayjoinError.ioError({
     required String message,
   }) = PayjoinError_IoError;
+  const factory PayjoinError.outputSubstitutionError({
+    required String message,
+  }) = PayjoinError_OutputSubstitutionError;
+  const factory PayjoinError.inputContributionError({
+    required String message,
+  }) = PayjoinError_InputContributionError;
+  const factory PayjoinError.inputPairError({
+    required String message,
+  }) = PayjoinError_InputPairError;
 }

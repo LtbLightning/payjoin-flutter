@@ -10,117 +10,23 @@ import '../utils/types.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'uri.dart';
 
-// These types are ignored because they are not used by any `pub` functions: `FfiRequestContextV1`, `FfiRequestContextV2`
-// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `from`, `from`, `from`, `from`, `from`, `from`, `from`
+// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `from`, `from`, `from`, `from`, `from`, `from`
 
-class FfiContextV1 {
-  final ArcContextV1 field0;
+class FfiSender {
+  final Sender field0;
 
-  const FfiContextV1({
+  const FfiSender({
     required this.field0,
   });
 
-  Future<String> processResponse({required List<int> response}) => core
-      .instance.api
-      .crateApiSendFfiContextV1ProcessResponse(that: this, response: response);
-
-  @override
-  int get hashCode => field0.hashCode;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FfiContextV1 &&
-          runtimeType == other.runtimeType &&
-          field0 == other.field0;
-}
-
-class FfiContextV2 {
-  final ArcContextV2 field0;
-
-  const FfiContextV2({
-    required this.field0,
-  });
-
-  Future<String?> processResponse({required List<int> response}) => core
-      .instance.api
-      .crateApiSendFfiContextV2ProcessResponse(that: this, response: response);
-
-  @override
-  int get hashCode => field0.hashCode;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FfiContextV2 &&
-          runtimeType == other.runtimeType &&
-          field0 == other.field0;
-}
-
-class FfiRequestBuilder {
-  final RequestBuilder field0;
-
-  const FfiRequestBuilder({
-    required this.field0,
-  });
-
-  Future<FfiRequestBuilder> alwaysDisableOutputSubstitution(
-          {required bool disable}) =>
-      core.instance.api
-          .crateApiSendFfiRequestBuilderAlwaysDisableOutputSubstitution(
-              that: this, disable: disable);
-
-  Future<FfiRequestContext> buildNonIncentivizing(
-          {required BigInt minFeeRate}) =>
-      core.instance.api.crateApiSendFfiRequestBuilderBuildNonIncentivizing(
-          that: this, minFeeRate: minFeeRate);
-
-  Future<FfiRequestContext> buildRecommended({required BigInt minFeeRate}) =>
-      core.instance.api.crateApiSendFfiRequestBuilderBuildRecommended(
-          that: this, minFeeRate: minFeeRate);
-
-  Future<FfiRequestContext> buildWithAdditionalFee(
-          {required BigInt maxFeeContribution,
-          int? changeIndex,
-          required BigInt minFeeRate,
-          required bool clampFeeContribution}) =>
-      core.instance.api.crateApiSendFfiRequestBuilderBuildWithAdditionalFee(
-          that: this,
-          maxFeeContribution: maxFeeContribution,
-          changeIndex: changeIndex,
-          minFeeRate: minFeeRate,
-          clampFeeContribution: clampFeeContribution);
-
-  static Future<FfiRequestBuilder> fromPsbtAndUri(
-          {required String psbtBase64, required FfiPjUri pjUri}) =>
-      core.instance.api.crateApiSendFfiRequestBuilderFromPsbtAndUri(
-          psbtBase64: psbtBase64, pjUri: pjUri);
-
-  @override
-  int get hashCode => field0.hashCode;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FfiRequestBuilder &&
-          runtimeType == other.runtimeType &&
-          field0 == other.field0;
-}
-
-class FfiRequestContext {
-  final RequestContext field0;
-
-  const FfiRequestContext({
-    required this.field0,
-  });
-
-  Future<(Request, FfiContextV1)> extractV1() =>
-      core.instance.api.crateApiSendFfiRequestContextExtractV1(
+  Future<(Request, FfiV1Context)> extractV1() =>
+      core.instance.api.crateApiSendFfiSenderExtractV1(
         that: this,
       );
 
-  Future<(Request, FfiContextV2)> extractV2({required FfiUrl ohttpProxyUrl}) =>
-      core.instance.api.crateApiSendFfiRequestContextExtractV2(
+  Future<(Request, FfiV2PostContext)> extractV2(
+          {required FfiUrl ohttpProxyUrl}) =>
+      core.instance.api.crateApiSendFfiSenderExtractV2(
           that: this, ohttpProxyUrl: ohttpProxyUrl);
 
   @override
@@ -129,7 +35,127 @@ class FfiRequestContext {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is FfiRequestContext &&
+      other is FfiSender &&
+          runtimeType == other.runtimeType &&
+          field0 == other.field0;
+}
+
+class FfiSenderBuilder {
+  final SenderBuilder field0;
+
+  const FfiSenderBuilder({
+    required this.field0,
+  });
+
+  Future<FfiSenderBuilder> alwaysDisableOutputSubstitution(
+          {required bool disable}) =>
+      core.instance.api
+          .crateApiSendFfiSenderBuilderAlwaysDisableOutputSubstitution(
+              that: this, disable: disable);
+
+  Future<FfiSender> buildNonIncentivizing({required BigInt minFeeRate}) =>
+      core.instance.api.crateApiSendFfiSenderBuilderBuildNonIncentivizing(
+          that: this, minFeeRate: minFeeRate);
+
+  Future<FfiSender> buildRecommended({required BigInt minFeeRate}) =>
+      core.instance.api.crateApiSendFfiSenderBuilderBuildRecommended(
+          that: this, minFeeRate: minFeeRate);
+
+  Future<FfiSender> buildWithAdditionalFee(
+          {required BigInt maxFeeContribution,
+          int? changeIndex,
+          required BigInt minFeeRate,
+          required bool clampFeeContribution}) =>
+      core.instance.api.crateApiSendFfiSenderBuilderBuildWithAdditionalFee(
+          that: this,
+          maxFeeContribution: maxFeeContribution,
+          changeIndex: changeIndex,
+          minFeeRate: minFeeRate,
+          clampFeeContribution: clampFeeContribution);
+
+  static Future<FfiSenderBuilder> fromPsbtAndUri(
+          {required String psbtBase64, required FfiPjUri pjUri}) =>
+      core.instance.api.crateApiSendFfiSenderBuilderFromPsbtAndUri(
+          psbtBase64: psbtBase64, pjUri: pjUri);
+
+  @override
+  int get hashCode => field0.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is FfiSenderBuilder &&
+          runtimeType == other.runtimeType &&
+          field0 == other.field0;
+}
+
+class FfiV1Context {
+  final V1Context field0;
+
+  const FfiV1Context({
+    required this.field0,
+  });
+
+  Future<String> processResponse({required List<int> response}) => core
+      .instance.api
+      .crateApiSendFfiV1ContextProcessResponse(that: this, response: response);
+
+  @override
+  int get hashCode => field0.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is FfiV1Context &&
+          runtimeType == other.runtimeType &&
+          field0 == other.field0;
+}
+
+class FfiV2GetContext {
+  final V2GetContext field0;
+
+  const FfiV2GetContext({
+    required this.field0,
+  });
+
+  Future<(Request, ClientResponse)> extractReq({required FfiUrl ohttpRelay}) =>
+      core.instance.api.crateApiSendFfiV2GetContextExtractReq(
+          that: this, ohttpRelay: ohttpRelay);
+
+  Future<String?> processResponse(
+          {required List<int> response, required ClientResponse ohttpCtx}) =>
+      core.instance.api.crateApiSendFfiV2GetContextProcessResponse(
+          that: this, response: response, ohttpCtx: ohttpCtx);
+
+  @override
+  int get hashCode => field0.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is FfiV2GetContext &&
+          runtimeType == other.runtimeType &&
+          field0 == other.field0;
+}
+
+class FfiV2PostContext {
+  final V2PostContext field0;
+
+  const FfiV2PostContext({
+    required this.field0,
+  });
+
+  Future<FfiV2GetContext> processResponse({required List<int> response}) =>
+      core.instance.api.crateApiSendFfiV2PostContextProcessResponse(
+          that: this, response: response);
+
+  @override
+  int get hashCode => field0.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is FfiV2PostContext &&
           runtimeType == other.runtimeType &&
           field0 == other.field0;
 }
