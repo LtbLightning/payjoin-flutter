@@ -3425,6 +3425,22 @@ class coreWire implements BaseWire {
           WireSyncRust2DartDco Function(
               ffi.Pointer<wire_cst_ffi_pj_uri_builder>, bool)>();
 
+  WireSyncRust2DartDco wire__crate__api__uri__ffi_pj_uri_pj_endpoint(
+    ffi.Pointer<wire_cst_ffi_pj_uri> that,
+  ) {
+    return _wire__crate__api__uri__ffi_pj_uri_pj_endpoint(
+      that,
+    );
+  }
+
+  late final _wire__crate__api__uri__ffi_pj_uri_pj_endpointPtr = _lookup<
+          ffi.NativeFunction<
+              WireSyncRust2DartDco Function(ffi.Pointer<wire_cst_ffi_pj_uri>)>>(
+      'frbgen_payjoin_flutter_wire__crate__api__uri__ffi_pj_uri_pj_endpoint');
+  late final _wire__crate__api__uri__ffi_pj_uri_pj_endpoint =
+      _wire__crate__api__uri__ffi_pj_uri_pj_endpointPtr.asFunction<
+          WireSyncRust2DartDco Function(ffi.Pointer<wire_cst_ffi_pj_uri>)>();
+
   WireSyncRust2DartDco wire__crate__api__uri__ffi_uri_address(
     ffi.Pointer<wire_cst_ffi_uri> that,
   ) {

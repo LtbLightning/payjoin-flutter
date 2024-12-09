@@ -62,7 +62,7 @@ class core extends BaseEntrypoint<coreApi, coreApiImpl, coreWire> {
   String get codegenVersion => '2.0.0';
 
   @override
-  int get rustContentHash => 1181881048;
+  int get rustContentHash => 685157858;
 
   static const kDefaultExternalLibraryLoaderConfig =
       ExternalLibraryLoaderConfig(
@@ -261,6 +261,8 @@ abstract class coreApi extends BaseApi {
 
   FfiPjUriBuilder crateApiUriFfiPjUriBuilderPjos(
       {required FfiPjUriBuilder that, required bool pjos});
+
+  String crateApiUriFfiPjUriPjEndpoint({required FfiPjUri that});
 
   String crateApiUriFfiUriAddress({required FfiUri that});
 
@@ -1953,6 +1955,29 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       const TaskConstMeta(
         debugName: "ffi_pj_uri_builder_pjos",
         argNames: ["that", "pjos"],
+      );
+
+  @override
+  String crateApiUriFfiPjUriPjEndpoint({required FfiPjUri that}) {
+    return handler.executeSync(SyncTask(
+      callFfi: () {
+        var arg0 = cst_encode_box_autoadd_ffi_pj_uri(that);
+        return wire.wire__crate__api__uri__ffi_pj_uri_pj_endpoint(arg0);
+      },
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_String,
+        decodeErrorData: null,
+      ),
+      constMeta: kCrateApiUriFfiPjUriPjEndpointConstMeta,
+      argValues: [that],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta get kCrateApiUriFfiPjUriPjEndpointConstMeta =>
+      const TaskConstMeta(
+        debugName: "ffi_pj_uri_pj_endpoint",
+        argNames: ["that"],
       );
 
   @override

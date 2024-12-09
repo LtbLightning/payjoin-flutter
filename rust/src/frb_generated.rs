@@ -39,7 +39,7 @@ flutter_rust_bridge::frb_generated_boilerplate!(
     default_rust_auto_opaque = RustAutoOpaqueNom,
 );
 pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_VERSION: &str = "2.0.0";
-pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = 1181881048;
+pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = 685157858;
 
 // Section: executor
 
@@ -1393,6 +1393,25 @@ fn wire__crate__api__uri__ffi_pj_uri_builder_pjos_impl(
                 let output_ok = Result::<_, ()>::Ok(crate::api::uri::FfiPjUriBuilder::pjos(
                     &api_that, api_pjos,
                 ))?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__api__uri__ffi_pj_uri_pj_endpoint_impl(
+    that: impl CstDecode<crate::api::uri::FfiPjUri>,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartDco {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::DcoCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "ffi_pj_uri_pj_endpoint",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let api_that = that.cst_decode();
+            transform_result_dco::<_, _, ()>((move || {
+                let output_ok =
+                    Result::<_, ()>::Ok(crate::api::uri::FfiPjUri::pj_endpoint(&api_that))?;
                 Ok(output_ok)
             })())
         },
