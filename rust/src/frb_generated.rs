@@ -39,7 +39,7 @@ flutter_rust_bridge::frb_generated_boilerplate!(
     default_rust_auto_opaque = RustAutoOpaqueNom,
 );
 pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_VERSION: &str = "2.0.0";
-pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = 1834856689;
+pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = 685157858;
 
 // Section: executor
 
@@ -485,6 +485,24 @@ fn wire__crate__api__receive__ffi_receiver_extract_req_impl(
         },
     )
 }
+fn wire__crate__api__receive__ffi_receiver_from_json_impl(
+    json: impl CstDecode<String>,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartDco {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::DcoCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "ffi_receiver_from_json",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let api_json = json.cst_decode();
+            transform_result_dco::<_, _, crate::utils::error::PayjoinError>((move || {
+                let output_ok = crate::api::receive::FfiReceiver::from_json(api_json)?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
 fn wire__crate__api__receive__ffi_receiver_id_impl(
     that: impl CstDecode<crate::api::receive::FfiReceiver>,
 ) -> flutter_rust_bridge::for_generated::WireSyncRust2DartDco {
@@ -571,6 +589,24 @@ fn wire__crate__api__receive__ffi_receiver_process_res_impl(
                 })(
                 ))
             }
+        },
+    )
+}
+fn wire__crate__api__receive__ffi_receiver_to_json_impl(
+    that: impl CstDecode<crate::api::receive::FfiReceiver>,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartDco {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::DcoCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "ffi_receiver_to_json",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let api_that = that.cst_decode();
+            transform_result_dco::<_, _, crate::utils::error::PayjoinError>((move || {
+                let output_ok = crate::api::receive::FfiReceiver::to_json(&api_that)?;
+                Ok(output_ok)
+            })())
         },
     )
 }
@@ -1033,6 +1069,42 @@ fn wire__crate__api__send__ffi_sender_extract_v2_impl(
         },
     )
 }
+fn wire__crate__api__send__ffi_sender_from_json_impl(
+    json: impl CstDecode<String>,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartDco {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::DcoCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "ffi_sender_from_json",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let api_json = json.cst_decode();
+            transform_result_dco::<_, _, crate::utils::error::PayjoinError>((move || {
+                let output_ok = crate::api::send::FfiSender::from_json(api_json)?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__api__send__ffi_sender_to_json_impl(
+    that: impl CstDecode<crate::api::send::FfiSender>,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartDco {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::DcoCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "ffi_sender_to_json",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let api_that = that.cst_decode();
+            transform_result_dco::<_, _, crate::utils::error::PayjoinError>((move || {
+                let output_ok = crate::api::send::FfiSender::to_json(&api_that)?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
 fn wire__crate__api__send__ffi_v_1_context_process_response_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
     that: impl CstDecode<crate::api::send::FfiV1Context>,
@@ -1321,6 +1393,25 @@ fn wire__crate__api__uri__ffi_pj_uri_builder_pjos_impl(
                 let output_ok = Result::<_, ()>::Ok(crate::api::uri::FfiPjUriBuilder::pjos(
                     &api_that, api_pjos,
                 ))?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__api__uri__ffi_pj_uri_pj_endpoint_impl(
+    that: impl CstDecode<crate::api::uri::FfiPjUri>,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartDco {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::DcoCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "ffi_pj_uri_pj_endpoint",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let api_that = that.cst_decode();
+            transform_result_dco::<_, _, ()>((move || {
+                let output_ok =
+                    Result::<_, ()>::Ok(crate::api::uri::FfiPjUri::pj_endpoint(&api_that))?;
                 Ok(output_ok)
             })())
         },
@@ -2287,6 +2378,10 @@ impl SseDecode for crate::utils::error::PayjoinError {
                 let mut var_message = <String>::sse_decode(deserializer);
                 return crate::utils::error::PayjoinError::InputPairError { message: var_message };
             }
+            21 => {
+                let mut var_message = <String>::sse_decode(deserializer);
+                return crate::utils::error::PayjoinError::SerdeJsonError { message: var_message };
+            }
             _ => {
                 unimplemented!("");
             }
@@ -2889,6 +2984,9 @@ impl flutter_rust_bridge::IntoDart for crate::utils::error::PayjoinError {
             }
             crate::utils::error::PayjoinError::InputPairError { message } => {
                 [20.into_dart(), message.into_into_dart().into_dart()].into_dart()
+            }
+            crate::utils::error::PayjoinError::SerdeJsonError { message } => {
+                [21.into_dart(), message.into_into_dart().into_dart()].into_dart()
             }
             _ => {
                 unimplemented!("");
@@ -3591,6 +3689,10 @@ impl SseEncode for crate::utils::error::PayjoinError {
             }
             crate::utils::error::PayjoinError::InputPairError { message } => {
                 <i32>::sse_encode(20, serializer);
+                <String>::sse_encode(message, serializer);
+            }
+            crate::utils::error::PayjoinError::SerdeJsonError { message } => {
+                <i32>::sse_encode(21, serializer);
                 <String>::sse_encode(message, serializer);
             }
             _ => {

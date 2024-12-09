@@ -40,6 +40,7 @@ mixin _$PayjoinError {
     required TResult Function(String message) outputSubstitutionError,
     required TResult Function(String message) inputContributionError,
     required TResult Function(String message) inputPairError,
+    required TResult Function(String message) serdeJsonError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -65,6 +66,7 @@ mixin _$PayjoinError {
     TResult? Function(String message)? outputSubstitutionError,
     TResult? Function(String message)? inputContributionError,
     TResult? Function(String message)? inputPairError,
+    TResult? Function(String message)? serdeJsonError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -90,6 +92,7 @@ mixin _$PayjoinError {
     TResult Function(String message)? outputSubstitutionError,
     TResult Function(String message)? inputContributionError,
     TResult Function(String message)? inputPairError,
+    TResult Function(String message)? serdeJsonError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -123,6 +126,7 @@ mixin _$PayjoinError {
     required TResult Function(PayjoinError_InputContributionError value)
         inputContributionError,
     required TResult Function(PayjoinError_InputPairError value) inputPairError,
+    required TResult Function(PayjoinError_SerdeJsonError value) serdeJsonError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -151,6 +155,7 @@ mixin _$PayjoinError {
     TResult? Function(PayjoinError_InputContributionError value)?
         inputContributionError,
     TResult? Function(PayjoinError_InputPairError value)? inputPairError,
+    TResult? Function(PayjoinError_SerdeJsonError value)? serdeJsonError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -178,6 +183,7 @@ mixin _$PayjoinError {
     TResult Function(PayjoinError_InputContributionError value)?
         inputContributionError,
     TResult Function(PayjoinError_InputPairError value)? inputPairError,
+    TResult Function(PayjoinError_SerdeJsonError value)? serdeJsonError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -310,6 +316,7 @@ class _$PayjoinError_InvalidAddressImpl extends PayjoinError_InvalidAddress {
     required TResult Function(String message) outputSubstitutionError,
     required TResult Function(String message) inputContributionError,
     required TResult Function(String message) inputPairError,
+    required TResult Function(String message) serdeJsonError,
   }) {
     return invalidAddress(message);
   }
@@ -338,6 +345,7 @@ class _$PayjoinError_InvalidAddressImpl extends PayjoinError_InvalidAddress {
     TResult? Function(String message)? outputSubstitutionError,
     TResult? Function(String message)? inputContributionError,
     TResult? Function(String message)? inputPairError,
+    TResult? Function(String message)? serdeJsonError,
   }) {
     return invalidAddress?.call(message);
   }
@@ -366,6 +374,7 @@ class _$PayjoinError_InvalidAddressImpl extends PayjoinError_InvalidAddress {
     TResult Function(String message)? outputSubstitutionError,
     TResult Function(String message)? inputContributionError,
     TResult Function(String message)? inputPairError,
+    TResult Function(String message)? serdeJsonError,
     required TResult orElse(),
   }) {
     if (invalidAddress != null) {
@@ -405,6 +414,7 @@ class _$PayjoinError_InvalidAddressImpl extends PayjoinError_InvalidAddress {
     required TResult Function(PayjoinError_InputContributionError value)
         inputContributionError,
     required TResult Function(PayjoinError_InputPairError value) inputPairError,
+    required TResult Function(PayjoinError_SerdeJsonError value) serdeJsonError,
   }) {
     return invalidAddress(this);
   }
@@ -436,6 +446,7 @@ class _$PayjoinError_InvalidAddressImpl extends PayjoinError_InvalidAddress {
     TResult? Function(PayjoinError_InputContributionError value)?
         inputContributionError,
     TResult? Function(PayjoinError_InputPairError value)? inputPairError,
+    TResult? Function(PayjoinError_SerdeJsonError value)? serdeJsonError,
   }) {
     return invalidAddress?.call(this);
   }
@@ -466,6 +477,7 @@ class _$PayjoinError_InvalidAddressImpl extends PayjoinError_InvalidAddress {
     TResult Function(PayjoinError_InputContributionError value)?
         inputContributionError,
     TResult Function(PayjoinError_InputPairError value)? inputPairError,
+    TResult Function(PayjoinError_SerdeJsonError value)? serdeJsonError,
     required TResult orElse(),
   }) {
     if (invalidAddress != null) {
@@ -578,6 +590,7 @@ class _$PayjoinError_InvalidScriptImpl extends PayjoinError_InvalidScript {
     required TResult Function(String message) outputSubstitutionError,
     required TResult Function(String message) inputContributionError,
     required TResult Function(String message) inputPairError,
+    required TResult Function(String message) serdeJsonError,
   }) {
     return invalidScript(message);
   }
@@ -606,6 +619,7 @@ class _$PayjoinError_InvalidScriptImpl extends PayjoinError_InvalidScript {
     TResult? Function(String message)? outputSubstitutionError,
     TResult? Function(String message)? inputContributionError,
     TResult? Function(String message)? inputPairError,
+    TResult? Function(String message)? serdeJsonError,
   }) {
     return invalidScript?.call(message);
   }
@@ -634,6 +648,7 @@ class _$PayjoinError_InvalidScriptImpl extends PayjoinError_InvalidScript {
     TResult Function(String message)? outputSubstitutionError,
     TResult Function(String message)? inputContributionError,
     TResult Function(String message)? inputPairError,
+    TResult Function(String message)? serdeJsonError,
     required TResult orElse(),
   }) {
     if (invalidScript != null) {
@@ -673,6 +688,7 @@ class _$PayjoinError_InvalidScriptImpl extends PayjoinError_InvalidScript {
     required TResult Function(PayjoinError_InputContributionError value)
         inputContributionError,
     required TResult Function(PayjoinError_InputPairError value) inputPairError,
+    required TResult Function(PayjoinError_SerdeJsonError value) serdeJsonError,
   }) {
     return invalidScript(this);
   }
@@ -704,6 +720,7 @@ class _$PayjoinError_InvalidScriptImpl extends PayjoinError_InvalidScript {
     TResult? Function(PayjoinError_InputContributionError value)?
         inputContributionError,
     TResult? Function(PayjoinError_InputPairError value)? inputPairError,
+    TResult? Function(PayjoinError_SerdeJsonError value)? serdeJsonError,
   }) {
     return invalidScript?.call(this);
   }
@@ -734,6 +751,7 @@ class _$PayjoinError_InvalidScriptImpl extends PayjoinError_InvalidScript {
     TResult Function(PayjoinError_InputContributionError value)?
         inputContributionError,
     TResult Function(PayjoinError_InputPairError value)? inputPairError,
+    TResult Function(PayjoinError_SerdeJsonError value)? serdeJsonError,
     required TResult orElse(),
   }) {
     if (invalidScript != null) {
@@ -850,6 +868,7 @@ class _$PayjoinError_NetworkValidationImpl
     required TResult Function(String message) outputSubstitutionError,
     required TResult Function(String message) inputContributionError,
     required TResult Function(String message) inputPairError,
+    required TResult Function(String message) serdeJsonError,
   }) {
     return networkValidation(message);
   }
@@ -878,6 +897,7 @@ class _$PayjoinError_NetworkValidationImpl
     TResult? Function(String message)? outputSubstitutionError,
     TResult? Function(String message)? inputContributionError,
     TResult? Function(String message)? inputPairError,
+    TResult? Function(String message)? serdeJsonError,
   }) {
     return networkValidation?.call(message);
   }
@@ -906,6 +926,7 @@ class _$PayjoinError_NetworkValidationImpl
     TResult Function(String message)? outputSubstitutionError,
     TResult Function(String message)? inputContributionError,
     TResult Function(String message)? inputPairError,
+    TResult Function(String message)? serdeJsonError,
     required TResult orElse(),
   }) {
     if (networkValidation != null) {
@@ -945,6 +966,7 @@ class _$PayjoinError_NetworkValidationImpl
     required TResult Function(PayjoinError_InputContributionError value)
         inputContributionError,
     required TResult Function(PayjoinError_InputPairError value) inputPairError,
+    required TResult Function(PayjoinError_SerdeJsonError value) serdeJsonError,
   }) {
     return networkValidation(this);
   }
@@ -976,6 +998,7 @@ class _$PayjoinError_NetworkValidationImpl
     TResult? Function(PayjoinError_InputContributionError value)?
         inputContributionError,
     TResult? Function(PayjoinError_InputPairError value)? inputPairError,
+    TResult? Function(PayjoinError_SerdeJsonError value)? serdeJsonError,
   }) {
     return networkValidation?.call(this);
   }
@@ -1006,6 +1029,7 @@ class _$PayjoinError_NetworkValidationImpl
     TResult Function(PayjoinError_InputContributionError value)?
         inputContributionError,
     TResult Function(PayjoinError_InputPairError value)? inputPairError,
+    TResult Function(PayjoinError_SerdeJsonError value)? serdeJsonError,
     required TResult orElse(),
   }) {
     if (networkValidation != null) {
@@ -1119,6 +1143,7 @@ class _$PayjoinError_PsbtParseErrorImpl extends PayjoinError_PsbtParseError {
     required TResult Function(String message) outputSubstitutionError,
     required TResult Function(String message) inputContributionError,
     required TResult Function(String message) inputPairError,
+    required TResult Function(String message) serdeJsonError,
   }) {
     return psbtParseError(message);
   }
@@ -1147,6 +1172,7 @@ class _$PayjoinError_PsbtParseErrorImpl extends PayjoinError_PsbtParseError {
     TResult? Function(String message)? outputSubstitutionError,
     TResult? Function(String message)? inputContributionError,
     TResult? Function(String message)? inputPairError,
+    TResult? Function(String message)? serdeJsonError,
   }) {
     return psbtParseError?.call(message);
   }
@@ -1175,6 +1201,7 @@ class _$PayjoinError_PsbtParseErrorImpl extends PayjoinError_PsbtParseError {
     TResult Function(String message)? outputSubstitutionError,
     TResult Function(String message)? inputContributionError,
     TResult Function(String message)? inputPairError,
+    TResult Function(String message)? serdeJsonError,
     required TResult orElse(),
   }) {
     if (psbtParseError != null) {
@@ -1214,6 +1241,7 @@ class _$PayjoinError_PsbtParseErrorImpl extends PayjoinError_PsbtParseError {
     required TResult Function(PayjoinError_InputContributionError value)
         inputContributionError,
     required TResult Function(PayjoinError_InputPairError value) inputPairError,
+    required TResult Function(PayjoinError_SerdeJsonError value) serdeJsonError,
   }) {
     return psbtParseError(this);
   }
@@ -1245,6 +1273,7 @@ class _$PayjoinError_PsbtParseErrorImpl extends PayjoinError_PsbtParseError {
     TResult? Function(PayjoinError_InputContributionError value)?
         inputContributionError,
     TResult? Function(PayjoinError_InputPairError value)? inputPairError,
+    TResult? Function(PayjoinError_SerdeJsonError value)? serdeJsonError,
   }) {
     return psbtParseError?.call(this);
   }
@@ -1275,6 +1304,7 @@ class _$PayjoinError_PsbtParseErrorImpl extends PayjoinError_PsbtParseError {
     TResult Function(PayjoinError_InputContributionError value)?
         inputContributionError,
     TResult Function(PayjoinError_InputPairError value)? inputPairError,
+    TResult Function(PayjoinError_SerdeJsonError value)? serdeJsonError,
     required TResult orElse(),
   }) {
     if (psbtParseError != null) {
@@ -1387,6 +1417,7 @@ class _$PayjoinError_ResponseErrorImpl extends PayjoinError_ResponseError {
     required TResult Function(String message) outputSubstitutionError,
     required TResult Function(String message) inputContributionError,
     required TResult Function(String message) inputPairError,
+    required TResult Function(String message) serdeJsonError,
   }) {
     return responseError(message);
   }
@@ -1415,6 +1446,7 @@ class _$PayjoinError_ResponseErrorImpl extends PayjoinError_ResponseError {
     TResult? Function(String message)? outputSubstitutionError,
     TResult? Function(String message)? inputContributionError,
     TResult? Function(String message)? inputPairError,
+    TResult? Function(String message)? serdeJsonError,
   }) {
     return responseError?.call(message);
   }
@@ -1443,6 +1475,7 @@ class _$PayjoinError_ResponseErrorImpl extends PayjoinError_ResponseError {
     TResult Function(String message)? outputSubstitutionError,
     TResult Function(String message)? inputContributionError,
     TResult Function(String message)? inputPairError,
+    TResult Function(String message)? serdeJsonError,
     required TResult orElse(),
   }) {
     if (responseError != null) {
@@ -1482,6 +1515,7 @@ class _$PayjoinError_ResponseErrorImpl extends PayjoinError_ResponseError {
     required TResult Function(PayjoinError_InputContributionError value)
         inputContributionError,
     required TResult Function(PayjoinError_InputPairError value) inputPairError,
+    required TResult Function(PayjoinError_SerdeJsonError value) serdeJsonError,
   }) {
     return responseError(this);
   }
@@ -1513,6 +1547,7 @@ class _$PayjoinError_ResponseErrorImpl extends PayjoinError_ResponseError {
     TResult? Function(PayjoinError_InputContributionError value)?
         inputContributionError,
     TResult? Function(PayjoinError_InputPairError value)? inputPairError,
+    TResult? Function(PayjoinError_SerdeJsonError value)? serdeJsonError,
   }) {
     return responseError?.call(this);
   }
@@ -1543,6 +1578,7 @@ class _$PayjoinError_ResponseErrorImpl extends PayjoinError_ResponseError {
     TResult Function(PayjoinError_InputContributionError value)?
         inputContributionError,
     TResult Function(PayjoinError_InputPairError value)? inputPairError,
+    TResult Function(PayjoinError_SerdeJsonError value)? serdeJsonError,
     required TResult orElse(),
   }) {
     if (responseError != null) {
@@ -1655,6 +1691,7 @@ class _$PayjoinError_RequestErrorImpl extends PayjoinError_RequestError {
     required TResult Function(String message) outputSubstitutionError,
     required TResult Function(String message) inputContributionError,
     required TResult Function(String message) inputPairError,
+    required TResult Function(String message) serdeJsonError,
   }) {
     return requestError(message);
   }
@@ -1683,6 +1720,7 @@ class _$PayjoinError_RequestErrorImpl extends PayjoinError_RequestError {
     TResult? Function(String message)? outputSubstitutionError,
     TResult? Function(String message)? inputContributionError,
     TResult? Function(String message)? inputPairError,
+    TResult? Function(String message)? serdeJsonError,
   }) {
     return requestError?.call(message);
   }
@@ -1711,6 +1749,7 @@ class _$PayjoinError_RequestErrorImpl extends PayjoinError_RequestError {
     TResult Function(String message)? outputSubstitutionError,
     TResult Function(String message)? inputContributionError,
     TResult Function(String message)? inputPairError,
+    TResult Function(String message)? serdeJsonError,
     required TResult orElse(),
   }) {
     if (requestError != null) {
@@ -1750,6 +1789,7 @@ class _$PayjoinError_RequestErrorImpl extends PayjoinError_RequestError {
     required TResult Function(PayjoinError_InputContributionError value)
         inputContributionError,
     required TResult Function(PayjoinError_InputPairError value) inputPairError,
+    required TResult Function(PayjoinError_SerdeJsonError value) serdeJsonError,
   }) {
     return requestError(this);
   }
@@ -1781,6 +1821,7 @@ class _$PayjoinError_RequestErrorImpl extends PayjoinError_RequestError {
     TResult? Function(PayjoinError_InputContributionError value)?
         inputContributionError,
     TResult? Function(PayjoinError_InputPairError value)? inputPairError,
+    TResult? Function(PayjoinError_SerdeJsonError value)? serdeJsonError,
   }) {
     return requestError?.call(this);
   }
@@ -1811,6 +1852,7 @@ class _$PayjoinError_RequestErrorImpl extends PayjoinError_RequestError {
     TResult Function(PayjoinError_InputContributionError value)?
         inputContributionError,
     TResult Function(PayjoinError_InputPairError value)? inputPairError,
+    TResult Function(PayjoinError_SerdeJsonError value)? serdeJsonError,
     required TResult orElse(),
   }) {
     if (requestError != null) {
@@ -1927,6 +1969,7 @@ class _$PayjoinError_TransactionErrorImpl
     required TResult Function(String message) outputSubstitutionError,
     required TResult Function(String message) inputContributionError,
     required TResult Function(String message) inputPairError,
+    required TResult Function(String message) serdeJsonError,
   }) {
     return transactionError(message);
   }
@@ -1955,6 +1998,7 @@ class _$PayjoinError_TransactionErrorImpl
     TResult? Function(String message)? outputSubstitutionError,
     TResult? Function(String message)? inputContributionError,
     TResult? Function(String message)? inputPairError,
+    TResult? Function(String message)? serdeJsonError,
   }) {
     return transactionError?.call(message);
   }
@@ -1983,6 +2027,7 @@ class _$PayjoinError_TransactionErrorImpl
     TResult Function(String message)? outputSubstitutionError,
     TResult Function(String message)? inputContributionError,
     TResult Function(String message)? inputPairError,
+    TResult Function(String message)? serdeJsonError,
     required TResult orElse(),
   }) {
     if (transactionError != null) {
@@ -2022,6 +2067,7 @@ class _$PayjoinError_TransactionErrorImpl
     required TResult Function(PayjoinError_InputContributionError value)
         inputContributionError,
     required TResult Function(PayjoinError_InputPairError value) inputPairError,
+    required TResult Function(PayjoinError_SerdeJsonError value) serdeJsonError,
   }) {
     return transactionError(this);
   }
@@ -2053,6 +2099,7 @@ class _$PayjoinError_TransactionErrorImpl
     TResult? Function(PayjoinError_InputContributionError value)?
         inputContributionError,
     TResult? Function(PayjoinError_InputPairError value)? inputPairError,
+    TResult? Function(PayjoinError_SerdeJsonError value)? serdeJsonError,
   }) {
     return transactionError?.call(this);
   }
@@ -2083,6 +2130,7 @@ class _$PayjoinError_TransactionErrorImpl
     TResult Function(PayjoinError_InputContributionError value)?
         inputContributionError,
     TResult Function(PayjoinError_InputPairError value)? inputPairError,
+    TResult Function(PayjoinError_SerdeJsonError value)? serdeJsonError,
     required TResult orElse(),
   }) {
     if (transactionError != null) {
@@ -2196,6 +2244,7 @@ class _$PayjoinError_ServerErrorImpl extends PayjoinError_ServerError {
     required TResult Function(String message) outputSubstitutionError,
     required TResult Function(String message) inputContributionError,
     required TResult Function(String message) inputPairError,
+    required TResult Function(String message) serdeJsonError,
   }) {
     return serverError(message);
   }
@@ -2224,6 +2273,7 @@ class _$PayjoinError_ServerErrorImpl extends PayjoinError_ServerError {
     TResult? Function(String message)? outputSubstitutionError,
     TResult? Function(String message)? inputContributionError,
     TResult? Function(String message)? inputPairError,
+    TResult? Function(String message)? serdeJsonError,
   }) {
     return serverError?.call(message);
   }
@@ -2252,6 +2302,7 @@ class _$PayjoinError_ServerErrorImpl extends PayjoinError_ServerError {
     TResult Function(String message)? outputSubstitutionError,
     TResult Function(String message)? inputContributionError,
     TResult Function(String message)? inputPairError,
+    TResult Function(String message)? serdeJsonError,
     required TResult orElse(),
   }) {
     if (serverError != null) {
@@ -2291,6 +2342,7 @@ class _$PayjoinError_ServerErrorImpl extends PayjoinError_ServerError {
     required TResult Function(PayjoinError_InputContributionError value)
         inputContributionError,
     required TResult Function(PayjoinError_InputPairError value) inputPairError,
+    required TResult Function(PayjoinError_SerdeJsonError value) serdeJsonError,
   }) {
     return serverError(this);
   }
@@ -2322,6 +2374,7 @@ class _$PayjoinError_ServerErrorImpl extends PayjoinError_ServerError {
     TResult? Function(PayjoinError_InputContributionError value)?
         inputContributionError,
     TResult? Function(PayjoinError_InputPairError value)? inputPairError,
+    TResult? Function(PayjoinError_SerdeJsonError value)? serdeJsonError,
   }) {
     return serverError?.call(this);
   }
@@ -2352,6 +2405,7 @@ class _$PayjoinError_ServerErrorImpl extends PayjoinError_ServerError {
     TResult Function(PayjoinError_InputContributionError value)?
         inputContributionError,
     TResult Function(PayjoinError_InputPairError value)? inputPairError,
+    TResult Function(PayjoinError_SerdeJsonError value)? serdeJsonError,
     required TResult orElse(),
   }) {
     if (serverError != null) {
@@ -2464,6 +2518,7 @@ class _$PayjoinError_SelectionErrorImpl extends PayjoinError_SelectionError {
     required TResult Function(String message) outputSubstitutionError,
     required TResult Function(String message) inputContributionError,
     required TResult Function(String message) inputPairError,
+    required TResult Function(String message) serdeJsonError,
   }) {
     return selectionError(message);
   }
@@ -2492,6 +2547,7 @@ class _$PayjoinError_SelectionErrorImpl extends PayjoinError_SelectionError {
     TResult? Function(String message)? outputSubstitutionError,
     TResult? Function(String message)? inputContributionError,
     TResult? Function(String message)? inputPairError,
+    TResult? Function(String message)? serdeJsonError,
   }) {
     return selectionError?.call(message);
   }
@@ -2520,6 +2576,7 @@ class _$PayjoinError_SelectionErrorImpl extends PayjoinError_SelectionError {
     TResult Function(String message)? outputSubstitutionError,
     TResult Function(String message)? inputContributionError,
     TResult Function(String message)? inputPairError,
+    TResult Function(String message)? serdeJsonError,
     required TResult orElse(),
   }) {
     if (selectionError != null) {
@@ -2559,6 +2616,7 @@ class _$PayjoinError_SelectionErrorImpl extends PayjoinError_SelectionError {
     required TResult Function(PayjoinError_InputContributionError value)
         inputContributionError,
     required TResult Function(PayjoinError_InputPairError value) inputPairError,
+    required TResult Function(PayjoinError_SerdeJsonError value) serdeJsonError,
   }) {
     return selectionError(this);
   }
@@ -2590,6 +2648,7 @@ class _$PayjoinError_SelectionErrorImpl extends PayjoinError_SelectionError {
     TResult? Function(PayjoinError_InputContributionError value)?
         inputContributionError,
     TResult? Function(PayjoinError_InputPairError value)? inputPairError,
+    TResult? Function(PayjoinError_SerdeJsonError value)? serdeJsonError,
   }) {
     return selectionError?.call(this);
   }
@@ -2620,6 +2679,7 @@ class _$PayjoinError_SelectionErrorImpl extends PayjoinError_SelectionError {
     TResult Function(PayjoinError_InputContributionError value)?
         inputContributionError,
     TResult Function(PayjoinError_InputPairError value)? inputPairError,
+    TResult Function(PayjoinError_SerdeJsonError value)? serdeJsonError,
     required TResult orElse(),
   }) {
     if (selectionError != null) {
@@ -2736,6 +2796,7 @@ class _$PayjoinError_CreateRequestErrorImpl
     required TResult Function(String message) outputSubstitutionError,
     required TResult Function(String message) inputContributionError,
     required TResult Function(String message) inputPairError,
+    required TResult Function(String message) serdeJsonError,
   }) {
     return createRequestError(message);
   }
@@ -2764,6 +2825,7 @@ class _$PayjoinError_CreateRequestErrorImpl
     TResult? Function(String message)? outputSubstitutionError,
     TResult? Function(String message)? inputContributionError,
     TResult? Function(String message)? inputPairError,
+    TResult? Function(String message)? serdeJsonError,
   }) {
     return createRequestError?.call(message);
   }
@@ -2792,6 +2854,7 @@ class _$PayjoinError_CreateRequestErrorImpl
     TResult Function(String message)? outputSubstitutionError,
     TResult Function(String message)? inputContributionError,
     TResult Function(String message)? inputPairError,
+    TResult Function(String message)? serdeJsonError,
     required TResult orElse(),
   }) {
     if (createRequestError != null) {
@@ -2831,6 +2894,7 @@ class _$PayjoinError_CreateRequestErrorImpl
     required TResult Function(PayjoinError_InputContributionError value)
         inputContributionError,
     required TResult Function(PayjoinError_InputPairError value) inputPairError,
+    required TResult Function(PayjoinError_SerdeJsonError value) serdeJsonError,
   }) {
     return createRequestError(this);
   }
@@ -2862,6 +2926,7 @@ class _$PayjoinError_CreateRequestErrorImpl
     TResult? Function(PayjoinError_InputContributionError value)?
         inputContributionError,
     TResult? Function(PayjoinError_InputPairError value)? inputPairError,
+    TResult? Function(PayjoinError_SerdeJsonError value)? serdeJsonError,
   }) {
     return createRequestError?.call(this);
   }
@@ -2892,6 +2957,7 @@ class _$PayjoinError_CreateRequestErrorImpl
     TResult Function(PayjoinError_InputContributionError value)?
         inputContributionError,
     TResult Function(PayjoinError_InputPairError value)? inputPairError,
+    TResult Function(PayjoinError_SerdeJsonError value)? serdeJsonError,
     required TResult orElse(),
   }) {
     if (createRequestError != null) {
@@ -3005,6 +3071,7 @@ class _$PayjoinError_PjParseErrorImpl extends PayjoinError_PjParseError {
     required TResult Function(String message) outputSubstitutionError,
     required TResult Function(String message) inputContributionError,
     required TResult Function(String message) inputPairError,
+    required TResult Function(String message) serdeJsonError,
   }) {
     return pjParseError(message);
   }
@@ -3033,6 +3100,7 @@ class _$PayjoinError_PjParseErrorImpl extends PayjoinError_PjParseError {
     TResult? Function(String message)? outputSubstitutionError,
     TResult? Function(String message)? inputContributionError,
     TResult? Function(String message)? inputPairError,
+    TResult? Function(String message)? serdeJsonError,
   }) {
     return pjParseError?.call(message);
   }
@@ -3061,6 +3129,7 @@ class _$PayjoinError_PjParseErrorImpl extends PayjoinError_PjParseError {
     TResult Function(String message)? outputSubstitutionError,
     TResult Function(String message)? inputContributionError,
     TResult Function(String message)? inputPairError,
+    TResult Function(String message)? serdeJsonError,
     required TResult orElse(),
   }) {
     if (pjParseError != null) {
@@ -3100,6 +3169,7 @@ class _$PayjoinError_PjParseErrorImpl extends PayjoinError_PjParseError {
     required TResult Function(PayjoinError_InputContributionError value)
         inputContributionError,
     required TResult Function(PayjoinError_InputPairError value) inputPairError,
+    required TResult Function(PayjoinError_SerdeJsonError value) serdeJsonError,
   }) {
     return pjParseError(this);
   }
@@ -3131,6 +3201,7 @@ class _$PayjoinError_PjParseErrorImpl extends PayjoinError_PjParseError {
     TResult? Function(PayjoinError_InputContributionError value)?
         inputContributionError,
     TResult? Function(PayjoinError_InputPairError value)? inputPairError,
+    TResult? Function(PayjoinError_SerdeJsonError value)? serdeJsonError,
   }) {
     return pjParseError?.call(this);
   }
@@ -3161,6 +3232,7 @@ class _$PayjoinError_PjParseErrorImpl extends PayjoinError_PjParseError {
     TResult Function(PayjoinError_InputContributionError value)?
         inputContributionError,
     TResult Function(PayjoinError_InputPairError value)? inputPairError,
+    TResult Function(PayjoinError_SerdeJsonError value)? serdeJsonError,
     required TResult orElse(),
   }) {
     if (pjParseError != null) {
@@ -3273,6 +3345,7 @@ class _$PayjoinError_PjNotSupportedImpl extends PayjoinError_PjNotSupported {
     required TResult Function(String message) outputSubstitutionError,
     required TResult Function(String message) inputContributionError,
     required TResult Function(String message) inputPairError,
+    required TResult Function(String message) serdeJsonError,
   }) {
     return pjNotSupported(message);
   }
@@ -3301,6 +3374,7 @@ class _$PayjoinError_PjNotSupportedImpl extends PayjoinError_PjNotSupported {
     TResult? Function(String message)? outputSubstitutionError,
     TResult? Function(String message)? inputContributionError,
     TResult? Function(String message)? inputPairError,
+    TResult? Function(String message)? serdeJsonError,
   }) {
     return pjNotSupported?.call(message);
   }
@@ -3329,6 +3403,7 @@ class _$PayjoinError_PjNotSupportedImpl extends PayjoinError_PjNotSupported {
     TResult Function(String message)? outputSubstitutionError,
     TResult Function(String message)? inputContributionError,
     TResult Function(String message)? inputPairError,
+    TResult Function(String message)? serdeJsonError,
     required TResult orElse(),
   }) {
     if (pjNotSupported != null) {
@@ -3368,6 +3443,7 @@ class _$PayjoinError_PjNotSupportedImpl extends PayjoinError_PjNotSupported {
     required TResult Function(PayjoinError_InputContributionError value)
         inputContributionError,
     required TResult Function(PayjoinError_InputPairError value) inputPairError,
+    required TResult Function(PayjoinError_SerdeJsonError value) serdeJsonError,
   }) {
     return pjNotSupported(this);
   }
@@ -3399,6 +3475,7 @@ class _$PayjoinError_PjNotSupportedImpl extends PayjoinError_PjNotSupported {
     TResult? Function(PayjoinError_InputContributionError value)?
         inputContributionError,
     TResult? Function(PayjoinError_InputPairError value)? inputPairError,
+    TResult? Function(PayjoinError_SerdeJsonError value)? serdeJsonError,
   }) {
     return pjNotSupported?.call(this);
   }
@@ -3429,6 +3506,7 @@ class _$PayjoinError_PjNotSupportedImpl extends PayjoinError_PjNotSupported {
     TResult Function(PayjoinError_InputContributionError value)?
         inputContributionError,
     TResult Function(PayjoinError_InputPairError value)? inputPairError,
+    TResult Function(PayjoinError_SerdeJsonError value)? serdeJsonError,
     required TResult orElse(),
   }) {
     if (pjNotSupported != null) {
@@ -3542,6 +3620,7 @@ class _$PayjoinError_ValidationErrorImpl extends PayjoinError_ValidationError {
     required TResult Function(String message) outputSubstitutionError,
     required TResult Function(String message) inputContributionError,
     required TResult Function(String message) inputPairError,
+    required TResult Function(String message) serdeJsonError,
   }) {
     return validationError(message);
   }
@@ -3570,6 +3649,7 @@ class _$PayjoinError_ValidationErrorImpl extends PayjoinError_ValidationError {
     TResult? Function(String message)? outputSubstitutionError,
     TResult? Function(String message)? inputContributionError,
     TResult? Function(String message)? inputPairError,
+    TResult? Function(String message)? serdeJsonError,
   }) {
     return validationError?.call(message);
   }
@@ -3598,6 +3678,7 @@ class _$PayjoinError_ValidationErrorImpl extends PayjoinError_ValidationError {
     TResult Function(String message)? outputSubstitutionError,
     TResult Function(String message)? inputContributionError,
     TResult Function(String message)? inputPairError,
+    TResult Function(String message)? serdeJsonError,
     required TResult orElse(),
   }) {
     if (validationError != null) {
@@ -3637,6 +3718,7 @@ class _$PayjoinError_ValidationErrorImpl extends PayjoinError_ValidationError {
     required TResult Function(PayjoinError_InputContributionError value)
         inputContributionError,
     required TResult Function(PayjoinError_InputPairError value) inputPairError,
+    required TResult Function(PayjoinError_SerdeJsonError value) serdeJsonError,
   }) {
     return validationError(this);
   }
@@ -3668,6 +3750,7 @@ class _$PayjoinError_ValidationErrorImpl extends PayjoinError_ValidationError {
     TResult? Function(PayjoinError_InputContributionError value)?
         inputContributionError,
     TResult? Function(PayjoinError_InputPairError value)? inputPairError,
+    TResult? Function(PayjoinError_SerdeJsonError value)? serdeJsonError,
   }) {
     return validationError?.call(this);
   }
@@ -3698,6 +3781,7 @@ class _$PayjoinError_ValidationErrorImpl extends PayjoinError_ValidationError {
     TResult Function(PayjoinError_InputContributionError value)?
         inputContributionError,
     TResult Function(PayjoinError_InputPairError value)? inputPairError,
+    TResult Function(PayjoinError_SerdeJsonError value)? serdeJsonError,
     required TResult orElse(),
   }) {
     if (validationError != null) {
@@ -3810,6 +3894,7 @@ class _$PayjoinError_V2ErrorImpl extends PayjoinError_V2Error {
     required TResult Function(String message) outputSubstitutionError,
     required TResult Function(String message) inputContributionError,
     required TResult Function(String message) inputPairError,
+    required TResult Function(String message) serdeJsonError,
   }) {
     return v2Error(message);
   }
@@ -3838,6 +3923,7 @@ class _$PayjoinError_V2ErrorImpl extends PayjoinError_V2Error {
     TResult? Function(String message)? outputSubstitutionError,
     TResult? Function(String message)? inputContributionError,
     TResult? Function(String message)? inputPairError,
+    TResult? Function(String message)? serdeJsonError,
   }) {
     return v2Error?.call(message);
   }
@@ -3866,6 +3952,7 @@ class _$PayjoinError_V2ErrorImpl extends PayjoinError_V2Error {
     TResult Function(String message)? outputSubstitutionError,
     TResult Function(String message)? inputContributionError,
     TResult Function(String message)? inputPairError,
+    TResult Function(String message)? serdeJsonError,
     required TResult orElse(),
   }) {
     if (v2Error != null) {
@@ -3905,6 +3992,7 @@ class _$PayjoinError_V2ErrorImpl extends PayjoinError_V2Error {
     required TResult Function(PayjoinError_InputContributionError value)
         inputContributionError,
     required TResult Function(PayjoinError_InputPairError value) inputPairError,
+    required TResult Function(PayjoinError_SerdeJsonError value) serdeJsonError,
   }) {
     return v2Error(this);
   }
@@ -3936,6 +4024,7 @@ class _$PayjoinError_V2ErrorImpl extends PayjoinError_V2Error {
     TResult? Function(PayjoinError_InputContributionError value)?
         inputContributionError,
     TResult? Function(PayjoinError_InputPairError value)? inputPairError,
+    TResult? Function(PayjoinError_SerdeJsonError value)? serdeJsonError,
   }) {
     return v2Error?.call(this);
   }
@@ -3966,6 +4055,7 @@ class _$PayjoinError_V2ErrorImpl extends PayjoinError_V2Error {
     TResult Function(PayjoinError_InputContributionError value)?
         inputContributionError,
     TResult Function(PayjoinError_InputPairError value)? inputPairError,
+    TResult Function(PayjoinError_SerdeJsonError value)? serdeJsonError,
     required TResult orElse(),
   }) {
     if (v2Error != null) {
@@ -4079,6 +4169,7 @@ class _$PayjoinError_UnexpectedErrorImpl extends PayjoinError_UnexpectedError {
     required TResult Function(String message) outputSubstitutionError,
     required TResult Function(String message) inputContributionError,
     required TResult Function(String message) inputPairError,
+    required TResult Function(String message) serdeJsonError,
   }) {
     return unexpectedError(message);
   }
@@ -4107,6 +4198,7 @@ class _$PayjoinError_UnexpectedErrorImpl extends PayjoinError_UnexpectedError {
     TResult? Function(String message)? outputSubstitutionError,
     TResult? Function(String message)? inputContributionError,
     TResult? Function(String message)? inputPairError,
+    TResult? Function(String message)? serdeJsonError,
   }) {
     return unexpectedError?.call(message);
   }
@@ -4135,6 +4227,7 @@ class _$PayjoinError_UnexpectedErrorImpl extends PayjoinError_UnexpectedError {
     TResult Function(String message)? outputSubstitutionError,
     TResult Function(String message)? inputContributionError,
     TResult Function(String message)? inputPairError,
+    TResult Function(String message)? serdeJsonError,
     required TResult orElse(),
   }) {
     if (unexpectedError != null) {
@@ -4174,6 +4267,7 @@ class _$PayjoinError_UnexpectedErrorImpl extends PayjoinError_UnexpectedError {
     required TResult Function(PayjoinError_InputContributionError value)
         inputContributionError,
     required TResult Function(PayjoinError_InputPairError value) inputPairError,
+    required TResult Function(PayjoinError_SerdeJsonError value) serdeJsonError,
   }) {
     return unexpectedError(this);
   }
@@ -4205,6 +4299,7 @@ class _$PayjoinError_UnexpectedErrorImpl extends PayjoinError_UnexpectedError {
     TResult? Function(PayjoinError_InputContributionError value)?
         inputContributionError,
     TResult? Function(PayjoinError_InputPairError value)? inputPairError,
+    TResult? Function(PayjoinError_SerdeJsonError value)? serdeJsonError,
   }) {
     return unexpectedError?.call(this);
   }
@@ -4235,6 +4330,7 @@ class _$PayjoinError_UnexpectedErrorImpl extends PayjoinError_UnexpectedError {
     TResult Function(PayjoinError_InputContributionError value)?
         inputContributionError,
     TResult Function(PayjoinError_InputPairError value)? inputPairError,
+    TResult Function(PayjoinError_SerdeJsonError value)? serdeJsonError,
     required TResult orElse(),
   }) {
     if (unexpectedError != null) {
@@ -4348,6 +4444,7 @@ class _$PayjoinError_OhttpErrorImpl extends PayjoinError_OhttpError {
     required TResult Function(String message) outputSubstitutionError,
     required TResult Function(String message) inputContributionError,
     required TResult Function(String message) inputPairError,
+    required TResult Function(String message) serdeJsonError,
   }) {
     return ohttpError(message);
   }
@@ -4376,6 +4473,7 @@ class _$PayjoinError_OhttpErrorImpl extends PayjoinError_OhttpError {
     TResult? Function(String message)? outputSubstitutionError,
     TResult? Function(String message)? inputContributionError,
     TResult? Function(String message)? inputPairError,
+    TResult? Function(String message)? serdeJsonError,
   }) {
     return ohttpError?.call(message);
   }
@@ -4404,6 +4502,7 @@ class _$PayjoinError_OhttpErrorImpl extends PayjoinError_OhttpError {
     TResult Function(String message)? outputSubstitutionError,
     TResult Function(String message)? inputContributionError,
     TResult Function(String message)? inputPairError,
+    TResult Function(String message)? serdeJsonError,
     required TResult orElse(),
   }) {
     if (ohttpError != null) {
@@ -4443,6 +4542,7 @@ class _$PayjoinError_OhttpErrorImpl extends PayjoinError_OhttpError {
     required TResult Function(PayjoinError_InputContributionError value)
         inputContributionError,
     required TResult Function(PayjoinError_InputPairError value) inputPairError,
+    required TResult Function(PayjoinError_SerdeJsonError value) serdeJsonError,
   }) {
     return ohttpError(this);
   }
@@ -4474,6 +4574,7 @@ class _$PayjoinError_OhttpErrorImpl extends PayjoinError_OhttpError {
     TResult? Function(PayjoinError_InputContributionError value)?
         inputContributionError,
     TResult? Function(PayjoinError_InputPairError value)? inputPairError,
+    TResult? Function(PayjoinError_SerdeJsonError value)? serdeJsonError,
   }) {
     return ohttpError?.call(this);
   }
@@ -4504,6 +4605,7 @@ class _$PayjoinError_OhttpErrorImpl extends PayjoinError_OhttpError {
     TResult Function(PayjoinError_InputContributionError value)?
         inputContributionError,
     TResult Function(PayjoinError_InputPairError value)? inputPairError,
+    TResult Function(PayjoinError_SerdeJsonError value)? serdeJsonError,
     required TResult orElse(),
   }) {
     if (ohttpError != null) {
@@ -4615,6 +4717,7 @@ class _$PayjoinError_UrlErrorImpl extends PayjoinError_UrlError {
     required TResult Function(String message) outputSubstitutionError,
     required TResult Function(String message) inputContributionError,
     required TResult Function(String message) inputPairError,
+    required TResult Function(String message) serdeJsonError,
   }) {
     return urlError(message);
   }
@@ -4643,6 +4746,7 @@ class _$PayjoinError_UrlErrorImpl extends PayjoinError_UrlError {
     TResult? Function(String message)? outputSubstitutionError,
     TResult? Function(String message)? inputContributionError,
     TResult? Function(String message)? inputPairError,
+    TResult? Function(String message)? serdeJsonError,
   }) {
     return urlError?.call(message);
   }
@@ -4671,6 +4775,7 @@ class _$PayjoinError_UrlErrorImpl extends PayjoinError_UrlError {
     TResult Function(String message)? outputSubstitutionError,
     TResult Function(String message)? inputContributionError,
     TResult Function(String message)? inputPairError,
+    TResult Function(String message)? serdeJsonError,
     required TResult orElse(),
   }) {
     if (urlError != null) {
@@ -4710,6 +4815,7 @@ class _$PayjoinError_UrlErrorImpl extends PayjoinError_UrlError {
     required TResult Function(PayjoinError_InputContributionError value)
         inputContributionError,
     required TResult Function(PayjoinError_InputPairError value) inputPairError,
+    required TResult Function(PayjoinError_SerdeJsonError value) serdeJsonError,
   }) {
     return urlError(this);
   }
@@ -4741,6 +4847,7 @@ class _$PayjoinError_UrlErrorImpl extends PayjoinError_UrlError {
     TResult? Function(PayjoinError_InputContributionError value)?
         inputContributionError,
     TResult? Function(PayjoinError_InputPairError value)? inputPairError,
+    TResult? Function(PayjoinError_SerdeJsonError value)? serdeJsonError,
   }) {
     return urlError?.call(this);
   }
@@ -4771,6 +4878,7 @@ class _$PayjoinError_UrlErrorImpl extends PayjoinError_UrlError {
     TResult Function(PayjoinError_InputContributionError value)?
         inputContributionError,
     TResult Function(PayjoinError_InputPairError value)? inputPairError,
+    TResult Function(PayjoinError_SerdeJsonError value)? serdeJsonError,
     required TResult orElse(),
   }) {
     if (urlError != null) {
@@ -4882,6 +4990,7 @@ class _$PayjoinError_IoErrorImpl extends PayjoinError_IoError {
     required TResult Function(String message) outputSubstitutionError,
     required TResult Function(String message) inputContributionError,
     required TResult Function(String message) inputPairError,
+    required TResult Function(String message) serdeJsonError,
   }) {
     return ioError(message);
   }
@@ -4910,6 +5019,7 @@ class _$PayjoinError_IoErrorImpl extends PayjoinError_IoError {
     TResult? Function(String message)? outputSubstitutionError,
     TResult? Function(String message)? inputContributionError,
     TResult? Function(String message)? inputPairError,
+    TResult? Function(String message)? serdeJsonError,
   }) {
     return ioError?.call(message);
   }
@@ -4938,6 +5048,7 @@ class _$PayjoinError_IoErrorImpl extends PayjoinError_IoError {
     TResult Function(String message)? outputSubstitutionError,
     TResult Function(String message)? inputContributionError,
     TResult Function(String message)? inputPairError,
+    TResult Function(String message)? serdeJsonError,
     required TResult orElse(),
   }) {
     if (ioError != null) {
@@ -4977,6 +5088,7 @@ class _$PayjoinError_IoErrorImpl extends PayjoinError_IoError {
     required TResult Function(PayjoinError_InputContributionError value)
         inputContributionError,
     required TResult Function(PayjoinError_InputPairError value) inputPairError,
+    required TResult Function(PayjoinError_SerdeJsonError value) serdeJsonError,
   }) {
     return ioError(this);
   }
@@ -5008,6 +5120,7 @@ class _$PayjoinError_IoErrorImpl extends PayjoinError_IoError {
     TResult? Function(PayjoinError_InputContributionError value)?
         inputContributionError,
     TResult? Function(PayjoinError_InputPairError value)? inputPairError,
+    TResult? Function(PayjoinError_SerdeJsonError value)? serdeJsonError,
   }) {
     return ioError?.call(this);
   }
@@ -5038,6 +5151,7 @@ class _$PayjoinError_IoErrorImpl extends PayjoinError_IoError {
     TResult Function(PayjoinError_InputContributionError value)?
         inputContributionError,
     TResult Function(PayjoinError_InputPairError value)? inputPairError,
+    TResult Function(PayjoinError_SerdeJsonError value)? serdeJsonError,
     required TResult orElse(),
   }) {
     if (ioError != null) {
@@ -5154,6 +5268,7 @@ class _$PayjoinError_OutputSubstitutionErrorImpl
     required TResult Function(String message) outputSubstitutionError,
     required TResult Function(String message) inputContributionError,
     required TResult Function(String message) inputPairError,
+    required TResult Function(String message) serdeJsonError,
   }) {
     return outputSubstitutionError(message);
   }
@@ -5182,6 +5297,7 @@ class _$PayjoinError_OutputSubstitutionErrorImpl
     TResult? Function(String message)? outputSubstitutionError,
     TResult? Function(String message)? inputContributionError,
     TResult? Function(String message)? inputPairError,
+    TResult? Function(String message)? serdeJsonError,
   }) {
     return outputSubstitutionError?.call(message);
   }
@@ -5210,6 +5326,7 @@ class _$PayjoinError_OutputSubstitutionErrorImpl
     TResult Function(String message)? outputSubstitutionError,
     TResult Function(String message)? inputContributionError,
     TResult Function(String message)? inputPairError,
+    TResult Function(String message)? serdeJsonError,
     required TResult orElse(),
   }) {
     if (outputSubstitutionError != null) {
@@ -5249,6 +5366,7 @@ class _$PayjoinError_OutputSubstitutionErrorImpl
     required TResult Function(PayjoinError_InputContributionError value)
         inputContributionError,
     required TResult Function(PayjoinError_InputPairError value) inputPairError,
+    required TResult Function(PayjoinError_SerdeJsonError value) serdeJsonError,
   }) {
     return outputSubstitutionError(this);
   }
@@ -5280,6 +5398,7 @@ class _$PayjoinError_OutputSubstitutionErrorImpl
     TResult? Function(PayjoinError_InputContributionError value)?
         inputContributionError,
     TResult? Function(PayjoinError_InputPairError value)? inputPairError,
+    TResult? Function(PayjoinError_SerdeJsonError value)? serdeJsonError,
   }) {
     return outputSubstitutionError?.call(this);
   }
@@ -5310,6 +5429,7 @@ class _$PayjoinError_OutputSubstitutionErrorImpl
     TResult Function(PayjoinError_InputContributionError value)?
         inputContributionError,
     TResult Function(PayjoinError_InputPairError value)? inputPairError,
+    TResult Function(PayjoinError_SerdeJsonError value)? serdeJsonError,
     required TResult orElse(),
   }) {
     if (outputSubstitutionError != null) {
@@ -5428,6 +5548,7 @@ class _$PayjoinError_InputContributionErrorImpl
     required TResult Function(String message) outputSubstitutionError,
     required TResult Function(String message) inputContributionError,
     required TResult Function(String message) inputPairError,
+    required TResult Function(String message) serdeJsonError,
   }) {
     return inputContributionError(message);
   }
@@ -5456,6 +5577,7 @@ class _$PayjoinError_InputContributionErrorImpl
     TResult? Function(String message)? outputSubstitutionError,
     TResult? Function(String message)? inputContributionError,
     TResult? Function(String message)? inputPairError,
+    TResult? Function(String message)? serdeJsonError,
   }) {
     return inputContributionError?.call(message);
   }
@@ -5484,6 +5606,7 @@ class _$PayjoinError_InputContributionErrorImpl
     TResult Function(String message)? outputSubstitutionError,
     TResult Function(String message)? inputContributionError,
     TResult Function(String message)? inputPairError,
+    TResult Function(String message)? serdeJsonError,
     required TResult orElse(),
   }) {
     if (inputContributionError != null) {
@@ -5523,6 +5646,7 @@ class _$PayjoinError_InputContributionErrorImpl
     required TResult Function(PayjoinError_InputContributionError value)
         inputContributionError,
     required TResult Function(PayjoinError_InputPairError value) inputPairError,
+    required TResult Function(PayjoinError_SerdeJsonError value) serdeJsonError,
   }) {
     return inputContributionError(this);
   }
@@ -5554,6 +5678,7 @@ class _$PayjoinError_InputContributionErrorImpl
     TResult? Function(PayjoinError_InputContributionError value)?
         inputContributionError,
     TResult? Function(PayjoinError_InputPairError value)? inputPairError,
+    TResult? Function(PayjoinError_SerdeJsonError value)? serdeJsonError,
   }) {
     return inputContributionError?.call(this);
   }
@@ -5584,6 +5709,7 @@ class _$PayjoinError_InputContributionErrorImpl
     TResult Function(PayjoinError_InputContributionError value)?
         inputContributionError,
     TResult Function(PayjoinError_InputPairError value)? inputPairError,
+    TResult Function(PayjoinError_SerdeJsonError value)? serdeJsonError,
     required TResult orElse(),
   }) {
     if (inputContributionError != null) {
@@ -5698,6 +5824,7 @@ class _$PayjoinError_InputPairErrorImpl extends PayjoinError_InputPairError {
     required TResult Function(String message) outputSubstitutionError,
     required TResult Function(String message) inputContributionError,
     required TResult Function(String message) inputPairError,
+    required TResult Function(String message) serdeJsonError,
   }) {
     return inputPairError(message);
   }
@@ -5726,6 +5853,7 @@ class _$PayjoinError_InputPairErrorImpl extends PayjoinError_InputPairError {
     TResult? Function(String message)? outputSubstitutionError,
     TResult? Function(String message)? inputContributionError,
     TResult? Function(String message)? inputPairError,
+    TResult? Function(String message)? serdeJsonError,
   }) {
     return inputPairError?.call(message);
   }
@@ -5754,6 +5882,7 @@ class _$PayjoinError_InputPairErrorImpl extends PayjoinError_InputPairError {
     TResult Function(String message)? outputSubstitutionError,
     TResult Function(String message)? inputContributionError,
     TResult Function(String message)? inputPairError,
+    TResult Function(String message)? serdeJsonError,
     required TResult orElse(),
   }) {
     if (inputPairError != null) {
@@ -5793,6 +5922,7 @@ class _$PayjoinError_InputPairErrorImpl extends PayjoinError_InputPairError {
     required TResult Function(PayjoinError_InputContributionError value)
         inputContributionError,
     required TResult Function(PayjoinError_InputPairError value) inputPairError,
+    required TResult Function(PayjoinError_SerdeJsonError value) serdeJsonError,
   }) {
     return inputPairError(this);
   }
@@ -5824,6 +5954,7 @@ class _$PayjoinError_InputPairErrorImpl extends PayjoinError_InputPairError {
     TResult? Function(PayjoinError_InputContributionError value)?
         inputContributionError,
     TResult? Function(PayjoinError_InputPairError value)? inputPairError,
+    TResult? Function(PayjoinError_SerdeJsonError value)? serdeJsonError,
   }) {
     return inputPairError?.call(this);
   }
@@ -5854,6 +5985,7 @@ class _$PayjoinError_InputPairErrorImpl extends PayjoinError_InputPairError {
     TResult Function(PayjoinError_InputContributionError value)?
         inputContributionError,
     TResult Function(PayjoinError_InputPairError value)? inputPairError,
+    TResult Function(PayjoinError_SerdeJsonError value)? serdeJsonError,
     required TResult orElse(),
   }) {
     if (inputPairError != null) {
@@ -5873,5 +6005,279 @@ abstract class PayjoinError_InputPairError extends PayjoinError {
   @override
   @JsonKey(ignore: true)
   _$$PayjoinError_InputPairErrorImplCopyWith<_$PayjoinError_InputPairErrorImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$PayjoinError_SerdeJsonErrorImplCopyWith<$Res>
+    implements $PayjoinErrorCopyWith<$Res> {
+  factory _$$PayjoinError_SerdeJsonErrorImplCopyWith(
+          _$PayjoinError_SerdeJsonErrorImpl value,
+          $Res Function(_$PayjoinError_SerdeJsonErrorImpl) then) =
+      __$$PayjoinError_SerdeJsonErrorImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String message});
+}
+
+/// @nodoc
+class __$$PayjoinError_SerdeJsonErrorImplCopyWithImpl<$Res>
+    extends _$PayjoinErrorCopyWithImpl<$Res, _$PayjoinError_SerdeJsonErrorImpl>
+    implements _$$PayjoinError_SerdeJsonErrorImplCopyWith<$Res> {
+  __$$PayjoinError_SerdeJsonErrorImplCopyWithImpl(
+      _$PayjoinError_SerdeJsonErrorImpl _value,
+      $Res Function(_$PayjoinError_SerdeJsonErrorImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? message = null,
+  }) {
+    return _then(_$PayjoinError_SerdeJsonErrorImpl(
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$PayjoinError_SerdeJsonErrorImpl extends PayjoinError_SerdeJsonError {
+  const _$PayjoinError_SerdeJsonErrorImpl({required this.message}) : super._();
+
+  @override
+  final String message;
+
+  @override
+  String toString() {
+    return 'PayjoinError.serdeJsonError(message: $message)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$PayjoinError_SerdeJsonErrorImpl &&
+            (identical(other.message, message) || other.message == message));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, message);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$PayjoinError_SerdeJsonErrorImplCopyWith<_$PayjoinError_SerdeJsonErrorImpl>
+      get copyWith => __$$PayjoinError_SerdeJsonErrorImplCopyWithImpl<
+          _$PayjoinError_SerdeJsonErrorImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String message) invalidAddress,
+    required TResult Function(String message) invalidScript,
+    required TResult Function(String message) networkValidation,
+    required TResult Function(String message) psbtParseError,
+    required TResult Function(String message) responseError,
+    required TResult Function(String message) requestError,
+    required TResult Function(String message) transactionError,
+    required TResult Function(String message) serverError,
+    required TResult Function(String message) selectionError,
+    required TResult Function(String message) createRequestError,
+    required TResult Function(String message) pjParseError,
+    required TResult Function(String message) pjNotSupported,
+    required TResult Function(String message) validationError,
+    required TResult Function(String message) v2Error,
+    required TResult Function(String message) unexpectedError,
+    required TResult Function(String message) ohttpError,
+    required TResult Function(String message) urlError,
+    required TResult Function(String message) ioError,
+    required TResult Function(String message) outputSubstitutionError,
+    required TResult Function(String message) inputContributionError,
+    required TResult Function(String message) inputPairError,
+    required TResult Function(String message) serdeJsonError,
+  }) {
+    return serdeJsonError(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String message)? invalidAddress,
+    TResult? Function(String message)? invalidScript,
+    TResult? Function(String message)? networkValidation,
+    TResult? Function(String message)? psbtParseError,
+    TResult? Function(String message)? responseError,
+    TResult? Function(String message)? requestError,
+    TResult? Function(String message)? transactionError,
+    TResult? Function(String message)? serverError,
+    TResult? Function(String message)? selectionError,
+    TResult? Function(String message)? createRequestError,
+    TResult? Function(String message)? pjParseError,
+    TResult? Function(String message)? pjNotSupported,
+    TResult? Function(String message)? validationError,
+    TResult? Function(String message)? v2Error,
+    TResult? Function(String message)? unexpectedError,
+    TResult? Function(String message)? ohttpError,
+    TResult? Function(String message)? urlError,
+    TResult? Function(String message)? ioError,
+    TResult? Function(String message)? outputSubstitutionError,
+    TResult? Function(String message)? inputContributionError,
+    TResult? Function(String message)? inputPairError,
+    TResult? Function(String message)? serdeJsonError,
+  }) {
+    return serdeJsonError?.call(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String message)? invalidAddress,
+    TResult Function(String message)? invalidScript,
+    TResult Function(String message)? networkValidation,
+    TResult Function(String message)? psbtParseError,
+    TResult Function(String message)? responseError,
+    TResult Function(String message)? requestError,
+    TResult Function(String message)? transactionError,
+    TResult Function(String message)? serverError,
+    TResult Function(String message)? selectionError,
+    TResult Function(String message)? createRequestError,
+    TResult Function(String message)? pjParseError,
+    TResult Function(String message)? pjNotSupported,
+    TResult Function(String message)? validationError,
+    TResult Function(String message)? v2Error,
+    TResult Function(String message)? unexpectedError,
+    TResult Function(String message)? ohttpError,
+    TResult Function(String message)? urlError,
+    TResult Function(String message)? ioError,
+    TResult Function(String message)? outputSubstitutionError,
+    TResult Function(String message)? inputContributionError,
+    TResult Function(String message)? inputPairError,
+    TResult Function(String message)? serdeJsonError,
+    required TResult orElse(),
+  }) {
+    if (serdeJsonError != null) {
+      return serdeJsonError(message);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(PayjoinError_InvalidAddress value) invalidAddress,
+    required TResult Function(PayjoinError_InvalidScript value) invalidScript,
+    required TResult Function(PayjoinError_NetworkValidation value)
+        networkValidation,
+    required TResult Function(PayjoinError_PsbtParseError value) psbtParseError,
+    required TResult Function(PayjoinError_ResponseError value) responseError,
+    required TResult Function(PayjoinError_RequestError value) requestError,
+    required TResult Function(PayjoinError_TransactionError value)
+        transactionError,
+    required TResult Function(PayjoinError_ServerError value) serverError,
+    required TResult Function(PayjoinError_SelectionError value) selectionError,
+    required TResult Function(PayjoinError_CreateRequestError value)
+        createRequestError,
+    required TResult Function(PayjoinError_PjParseError value) pjParseError,
+    required TResult Function(PayjoinError_PjNotSupported value) pjNotSupported,
+    required TResult Function(PayjoinError_ValidationError value)
+        validationError,
+    required TResult Function(PayjoinError_V2Error value) v2Error,
+    required TResult Function(PayjoinError_UnexpectedError value)
+        unexpectedError,
+    required TResult Function(PayjoinError_OhttpError value) ohttpError,
+    required TResult Function(PayjoinError_UrlError value) urlError,
+    required TResult Function(PayjoinError_IoError value) ioError,
+    required TResult Function(PayjoinError_OutputSubstitutionError value)
+        outputSubstitutionError,
+    required TResult Function(PayjoinError_InputContributionError value)
+        inputContributionError,
+    required TResult Function(PayjoinError_InputPairError value) inputPairError,
+    required TResult Function(PayjoinError_SerdeJsonError value) serdeJsonError,
+  }) {
+    return serdeJsonError(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(PayjoinError_InvalidAddress value)? invalidAddress,
+    TResult? Function(PayjoinError_InvalidScript value)? invalidScript,
+    TResult? Function(PayjoinError_NetworkValidation value)? networkValidation,
+    TResult? Function(PayjoinError_PsbtParseError value)? psbtParseError,
+    TResult? Function(PayjoinError_ResponseError value)? responseError,
+    TResult? Function(PayjoinError_RequestError value)? requestError,
+    TResult? Function(PayjoinError_TransactionError value)? transactionError,
+    TResult? Function(PayjoinError_ServerError value)? serverError,
+    TResult? Function(PayjoinError_SelectionError value)? selectionError,
+    TResult? Function(PayjoinError_CreateRequestError value)?
+        createRequestError,
+    TResult? Function(PayjoinError_PjParseError value)? pjParseError,
+    TResult? Function(PayjoinError_PjNotSupported value)? pjNotSupported,
+    TResult? Function(PayjoinError_ValidationError value)? validationError,
+    TResult? Function(PayjoinError_V2Error value)? v2Error,
+    TResult? Function(PayjoinError_UnexpectedError value)? unexpectedError,
+    TResult? Function(PayjoinError_OhttpError value)? ohttpError,
+    TResult? Function(PayjoinError_UrlError value)? urlError,
+    TResult? Function(PayjoinError_IoError value)? ioError,
+    TResult? Function(PayjoinError_OutputSubstitutionError value)?
+        outputSubstitutionError,
+    TResult? Function(PayjoinError_InputContributionError value)?
+        inputContributionError,
+    TResult? Function(PayjoinError_InputPairError value)? inputPairError,
+    TResult? Function(PayjoinError_SerdeJsonError value)? serdeJsonError,
+  }) {
+    return serdeJsonError?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(PayjoinError_InvalidAddress value)? invalidAddress,
+    TResult Function(PayjoinError_InvalidScript value)? invalidScript,
+    TResult Function(PayjoinError_NetworkValidation value)? networkValidation,
+    TResult Function(PayjoinError_PsbtParseError value)? psbtParseError,
+    TResult Function(PayjoinError_ResponseError value)? responseError,
+    TResult Function(PayjoinError_RequestError value)? requestError,
+    TResult Function(PayjoinError_TransactionError value)? transactionError,
+    TResult Function(PayjoinError_ServerError value)? serverError,
+    TResult Function(PayjoinError_SelectionError value)? selectionError,
+    TResult Function(PayjoinError_CreateRequestError value)? createRequestError,
+    TResult Function(PayjoinError_PjParseError value)? pjParseError,
+    TResult Function(PayjoinError_PjNotSupported value)? pjNotSupported,
+    TResult Function(PayjoinError_ValidationError value)? validationError,
+    TResult Function(PayjoinError_V2Error value)? v2Error,
+    TResult Function(PayjoinError_UnexpectedError value)? unexpectedError,
+    TResult Function(PayjoinError_OhttpError value)? ohttpError,
+    TResult Function(PayjoinError_UrlError value)? urlError,
+    TResult Function(PayjoinError_IoError value)? ioError,
+    TResult Function(PayjoinError_OutputSubstitutionError value)?
+        outputSubstitutionError,
+    TResult Function(PayjoinError_InputContributionError value)?
+        inputContributionError,
+    TResult Function(PayjoinError_InputPairError value)? inputPairError,
+    TResult Function(PayjoinError_SerdeJsonError value)? serdeJsonError,
+    required TResult orElse(),
+  }) {
+    if (serdeJsonError != null) {
+      return serdeJsonError(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class PayjoinError_SerdeJsonError extends PayjoinError {
+  const factory PayjoinError_SerdeJsonError({required final String message}) =
+      _$PayjoinError_SerdeJsonErrorImpl;
+  const PayjoinError_SerdeJsonError._() : super._();
+
+  @override
+  String get message;
+  @override
+  @JsonKey(ignore: true)
+  _$$PayjoinError_SerdeJsonErrorImplCopyWith<_$PayjoinError_SerdeJsonErrorImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

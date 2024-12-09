@@ -107,6 +107,17 @@ class Sender extends FfiSender {
       throw mapPayjoinError(e);
     }
   }
+
+  // toJson automatically exposed since class extends FfiSender
+
+  static Sender fromJson(String json) {
+    try {
+      final res = FfiSender.fromJson(json: json);
+      return Sender._(field0: res.field0);
+    } on error.PayjoinError catch (e) {
+      throw mapPayjoinError(e);
+    }
+  }
 }
 
 class V1Context extends FfiV1Context {

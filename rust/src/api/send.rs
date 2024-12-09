@@ -1,3 +1,5 @@
+use flutter_rust_bridge::frb;
+
 use super::receive::PayjoinError;
 use crate::api::uri::{FfiPjUri, FfiUrl};
 use crate::frb_generated::RustOpaque;
@@ -76,6 +78,16 @@ impl FfiSender {
             .extract_v2(ohttp_proxy_url.into())
             .map(|(req, ctx)| (req.into(), ctx.into()))
             .map_err(Into::into)
+    }
+
+    #[frb(sync)]
+    pub fn to_json(&self) -> Result<String, PayjoinError> {
+        self.0.to_json().map_err(Into::into)
+    }
+
+    #[frb(sync)]
+    pub fn from_json(json: String) -> Result<Self, PayjoinError> {
+        payjoin_ffi::send::Sender::from_json(&json).map(Into::into).map_err(Into::into)
     }
 }
 

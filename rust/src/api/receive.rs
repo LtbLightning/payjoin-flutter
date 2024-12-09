@@ -76,6 +76,16 @@ impl FfiReceiver {
     ) -> Result<Option<FfiUncheckedProposal>, PayjoinError> {
         self.0.process_res(body, &ctx.into()).map(|e| e.map(|o| o.into())).map_err(|e| e.into())
     }
+
+    #[frb(sync)]
+    pub fn to_json(&self) -> Result<String, PayjoinError> {
+        self.0.to_json().map_err(Into::into)
+    }
+
+    #[frb(sync)]
+    pub fn from_json(json: String) -> Result<Self, PayjoinError> {
+        payjoin_ffi::receive::Receiver::from_json(&json).map(Into::into).map_err(Into::into)
+    }
 }
 
 #[derive(Clone)]

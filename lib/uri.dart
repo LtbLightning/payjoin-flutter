@@ -122,6 +122,15 @@ class PjUri extends FfiPjUri {
       throw mapPayjoinError(e);
     }
   }
+
+  @override
+  String pjEndpoint({hint}) {
+    try {
+      return super.pjEndpoint();
+    } on error.PayjoinError catch (e) {
+      throw mapPayjoinError(e);
+    }
+  }
 }
 
 class Url extends FfiUrl {

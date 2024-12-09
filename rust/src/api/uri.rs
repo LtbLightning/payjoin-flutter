@@ -58,6 +58,12 @@ impl FfiPjUri {
     pub fn amount_sats(&self) -> Option<u64> {
         self.0.clone().amount_sats()
     }
+
+    #[frb(sync)]
+    pub fn pj_endpoint(&self) -> String {
+        self.0.clone().pj_endpoint()
+    }
+
     #[frb(sync)]
     pub fn as_string(&self) -> String {
         self.0.clone().as_string()
