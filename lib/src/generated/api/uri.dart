@@ -51,6 +51,10 @@ class FfiPjUri {
         that: this,
       );
 
+  String pjEndpoint() => core.instance.api.crateApiUriFfiPjUriPjEndpoint(
+        that: this,
+      );
+
   @override
   int get hashCode => field0.hashCode;
 

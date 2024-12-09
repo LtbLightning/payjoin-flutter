@@ -1598,6 +1598,13 @@ pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__uri__ffi_pj_uri_build
 }
 
 #[no_mangle]
+pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__uri__ffi_pj_uri_pj_endpoint(
+    that: *mut wire_cst_ffi_pj_uri,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartDco {
+    wire__crate__api__uri__ffi_pj_uri_pj_endpoint_impl(that)
+}
+
+#[no_mangle]
 pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__uri__ffi_uri_address(
     that: *mut wire_cst_ffi_uri,
 ) -> flutter_rust_bridge::for_generated::WireSyncRust2DartDco {
