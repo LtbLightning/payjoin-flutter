@@ -49,5 +49,6 @@ PayjoinException mapPayjoinError(error.PayjoinError e) {
     outputSubstitutionError: (e) => PayjoinException(message: e.message),
     inputContributionError: (e) => PayjoinException(message: e.message),
     inputPairError: (e) => PayjoinException(message: e.message),
+    serdeJsonError: (e) => PayjoinException(message: e.message),
   );
 }

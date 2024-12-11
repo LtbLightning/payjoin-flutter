@@ -1588,6 +1588,12 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
       wireObj.kind.InputPairError.message = pre_message;
       return;
     }
+    if (apiObj is PayjoinError_SerdeJsonError) {
+      var pre_message = cst_encode_String(apiObj.message);
+      wireObj.tag = 21;
+      wireObj.kind.SerdeJsonError.message = pre_message;
+      return;
+    }
   }
 
   @protected
@@ -2569,6 +2575,24 @@ class coreWire implements BaseWire {
       _wire__crate__api__receive__ffi_receiver_extract_reqPtr
           .asFunction<void Function(int, ffi.Pointer<wire_cst_ffi_receiver>)>();
 
+  WireSyncRust2DartDco wire__crate__api__receive__ffi_receiver_from_json(
+    ffi.Pointer<wire_cst_list_prim_u_8_strict> json,
+  ) {
+    return _wire__crate__api__receive__ffi_receiver_from_json(
+      json,
+    );
+  }
+
+  late final _wire__crate__api__receive__ffi_receiver_from_jsonPtr = _lookup<
+          ffi.NativeFunction<
+              WireSyncRust2DartDco Function(
+                  ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
+      'frbgen_payjoin_flutter_wire__crate__api__receive__ffi_receiver_from_json');
+  late final _wire__crate__api__receive__ffi_receiver_from_json =
+      _wire__crate__api__receive__ffi_receiver_from_jsonPtr.asFunction<
+          WireSyncRust2DartDco Function(
+              ffi.Pointer<wire_cst_list_prim_u_8_strict>)>();
+
   WireSyncRust2DartDco wire__crate__api__receive__ffi_receiver_id(
     ffi.Pointer<wire_cst_ffi_receiver> that,
   ) {
@@ -2651,6 +2675,23 @@ class coreWire implements BaseWire {
               ffi.Pointer<wire_cst_ffi_receiver>,
               ffi.Pointer<wire_cst_list_prim_u_8_loose>,
               ffi.Pointer<wire_cst_client_response>)>();
+
+  WireSyncRust2DartDco wire__crate__api__receive__ffi_receiver_to_json(
+    ffi.Pointer<wire_cst_ffi_receiver> that,
+  ) {
+    return _wire__crate__api__receive__ffi_receiver_to_json(
+      that,
+    );
+  }
+
+  late final _wire__crate__api__receive__ffi_receiver_to_jsonPtr = _lookup<
+          ffi.NativeFunction<
+              WireSyncRust2DartDco Function(
+                  ffi.Pointer<wire_cst_ffi_receiver>)>>(
+      'frbgen_payjoin_flutter_wire__crate__api__receive__ffi_receiver_to_json');
+  late final _wire__crate__api__receive__ffi_receiver_to_json =
+      _wire__crate__api__receive__ffi_receiver_to_jsonPtr.asFunction<
+          WireSyncRust2DartDco Function(ffi.Pointer<wire_cst_ffi_receiver>)>();
 
   void
       wire__crate__api__receive__ffi_unchecked_proposal_assume_interactive_receiver(
@@ -3075,6 +3116,40 @@ class coreWire implements BaseWire {
           void Function(int, ffi.Pointer<wire_cst_ffi_sender>,
               ffi.Pointer<wire_cst_ffi_url>)>();
 
+  WireSyncRust2DartDco wire__crate__api__send__ffi_sender_from_json(
+    ffi.Pointer<wire_cst_list_prim_u_8_strict> json,
+  ) {
+    return _wire__crate__api__send__ffi_sender_from_json(
+      json,
+    );
+  }
+
+  late final _wire__crate__api__send__ffi_sender_from_jsonPtr = _lookup<
+          ffi.NativeFunction<
+              WireSyncRust2DartDco Function(
+                  ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
+      'frbgen_payjoin_flutter_wire__crate__api__send__ffi_sender_from_json');
+  late final _wire__crate__api__send__ffi_sender_from_json =
+      _wire__crate__api__send__ffi_sender_from_jsonPtr.asFunction<
+          WireSyncRust2DartDco Function(
+              ffi.Pointer<wire_cst_list_prim_u_8_strict>)>();
+
+  WireSyncRust2DartDco wire__crate__api__send__ffi_sender_to_json(
+    ffi.Pointer<wire_cst_ffi_sender> that,
+  ) {
+    return _wire__crate__api__send__ffi_sender_to_json(
+      that,
+    );
+  }
+
+  late final _wire__crate__api__send__ffi_sender_to_jsonPtr = _lookup<
+          ffi.NativeFunction<
+              WireSyncRust2DartDco Function(ffi.Pointer<wire_cst_ffi_sender>)>>(
+      'frbgen_payjoin_flutter_wire__crate__api__send__ffi_sender_to_json');
+  late final _wire__crate__api__send__ffi_sender_to_json =
+      _wire__crate__api__send__ffi_sender_to_jsonPtr.asFunction<
+          WireSyncRust2DartDco Function(ffi.Pointer<wire_cst_ffi_sender>)>();
+
   void wire__crate__api__send__ffi_v_1_context_process_response(
     int port_,
     ffi.Pointer<wire_cst_ffi_v_1_context> that,
@@ -3349,6 +3424,22 @@ class coreWire implements BaseWire {
       _wire__crate__api__uri__ffi_pj_uri_builder_pjosPtr.asFunction<
           WireSyncRust2DartDco Function(
               ffi.Pointer<wire_cst_ffi_pj_uri_builder>, bool)>();
+
+  WireSyncRust2DartDco wire__crate__api__uri__ffi_pj_uri_pj_endpoint(
+    ffi.Pointer<wire_cst_ffi_pj_uri> that,
+  ) {
+    return _wire__crate__api__uri__ffi_pj_uri_pj_endpoint(
+      that,
+    );
+  }
+
+  late final _wire__crate__api__uri__ffi_pj_uri_pj_endpointPtr = _lookup<
+          ffi.NativeFunction<
+              WireSyncRust2DartDco Function(ffi.Pointer<wire_cst_ffi_pj_uri>)>>(
+      'frbgen_payjoin_flutter_wire__crate__api__uri__ffi_pj_uri_pj_endpoint');
+  late final _wire__crate__api__uri__ffi_pj_uri_pj_endpoint =
+      _wire__crate__api__uri__ffi_pj_uri_pj_endpointPtr.asFunction<
+          WireSyncRust2DartDco Function(ffi.Pointer<wire_cst_ffi_pj_uri>)>();
 
   WireSyncRust2DartDco wire__crate__api__uri__ffi_uri_address(
     ffi.Pointer<wire_cst_ffi_uri> that,
@@ -4848,6 +4939,10 @@ final class wire_cst_PayjoinError_InputPairError extends ffi.Struct {
   external ffi.Pointer<wire_cst_list_prim_u_8_strict> message;
 }
 
+final class wire_cst_PayjoinError_SerdeJsonError extends ffi.Struct {
+  external ffi.Pointer<wire_cst_list_prim_u_8_strict> message;
+}
+
 final class PayjoinErrorKind extends ffi.Union {
   external wire_cst_PayjoinError_InvalidAddress InvalidAddress;
 
@@ -4891,6 +4986,8 @@ final class PayjoinErrorKind extends ffi.Union {
   external wire_cst_PayjoinError_InputContributionError InputContributionError;
 
   external wire_cst_PayjoinError_InputPairError InputPairError;
+
+  external wire_cst_PayjoinError_SerdeJsonError SerdeJsonError;
 }
 
 final class wire_cst_payjoin_error extends ffi.Struct {

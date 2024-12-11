@@ -356,7 +356,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "0.20.0"
+    version: "0.21.0"
   plugin_platform_interface:
     dependency: transitive
     description:
