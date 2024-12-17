@@ -83,7 +83,7 @@ class PayjoinManager {
         .addRecipient(script, uriAmount)
         .feeAbsolute(BigInt.from(fee))
         .finish(senderWallet);
-    await senderWallet.sign(
+    senderWallet.sign(
       psbt: psbt,
       signOptions: const bdk.SignOptions(
         trustWitnessUtxo: true,
@@ -352,7 +352,7 @@ class PayjoinManager {
   Future<String> processPsbt(String preProcessed, bdk.Wallet wallet) async {
     final psbt = await bdk.PartiallySignedTransaction.fromString(preProcessed);
     debugPrint('PSBT before: ${psbt.toString()}');
-    await wallet.sign(
+    wallet.sign(
       psbt: psbt,
       signOptions: const bdk.SignOptions(
         trustWitnessUtxo: true,

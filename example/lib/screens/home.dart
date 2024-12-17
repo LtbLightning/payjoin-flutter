@@ -117,7 +117,7 @@ class _HomeState extends State<Home> {
     }
   }
 
-  Future<void> getBalance() async {
+  void getBalance() {
     final balanceObj = wallet.getBalance();
     final res = "Total Balance: ${balanceObj.total.toString()}";
     if (kDebugMode) {
@@ -150,14 +150,14 @@ class _HomeState extends State<Home> {
       final txBuilder = bdk.TxBuilder();
       final address = await bdk.Address.fromString(
           s: addressStr, network: bdk.Network.signet);
-      final script = await address.scriptPubkey();
+      final script = address.scriptPubkey();
 
       final psbt = await txBuilder
           .addRecipient(script, BigInt.from(amount))
           .feeRate(1.0)
           .finish(wallet);
 
-      final isFinalized = await wallet.sign(psbt: psbt.$1);
+      final isFinalized = wallet.sign(psbt: psbt.$1);
       if (isFinalized) {
         final tx = psbt.$1.extractTx();
         final res = await blockchain.broadcast(transaction: tx);
@@ -199,8 +199,8 @@ class _HomeState extends State<Home> {
   }
 
   Future<void> syncWallet() async {
-    wallet.sync(blockchain: blockchain);
-    await getBalance();
+    await wallet.sync(blockchain: blockchain);
+    getBalance();
   }
 
   Future<void> changePayjoin(bool value) async {
@@ -642,7 +642,7 @@ class _HomeState extends State<Home> {
       // You could also put a timeout on waiting for the transaction and then
       //  broadcast the original tx yourself if no transaction is received
       final receivedTxId = await waitForTransaction(
-        originalTxId: await originalTx.txid(),
+        originalTxId: originalTx.txid(),
         proposalTxId: proposalTxId,
       );
       resetPayjoinSession();
