@@ -1,3 +1,7 @@
+## [0.22.0]
+
+Update to `payjoin` version `0.22.0`, fixing `Sender` persistence.
+
 ## [0.21.0]
 This release updates the bindings libraries to `payjoin` version `0.21.0`.
 

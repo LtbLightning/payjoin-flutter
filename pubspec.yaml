@@ -1,6 +1,6 @@
 name: payjoin_flutter
 description: "A Flutter library for the [Payjoin Dev Kit](https://payjoindevkit.org/)"
-version: 0.21.0
+version: 0.22.0
 homepage: https://github.com/LtbLightning/payjoin-flutter
 
 environment:
