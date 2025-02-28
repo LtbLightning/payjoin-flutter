@@ -3505,6 +3505,38 @@ class coreWire implements BaseWire {
       _wire__crate__api__uri__ffi_uri_check_pj_supportedPtr.asFunction<
           WireSyncRust2DartDco Function(ffi.Pointer<wire_cst_ffi_uri>)>();
 
+  WireSyncRust2DartDco wire__crate__api__uri__ffi_uri_label(
+    ffi.Pointer<wire_cst_ffi_uri> that,
+  ) {
+    return _wire__crate__api__uri__ffi_uri_label(
+      that,
+    );
+  }
+
+  late final _wire__crate__api__uri__ffi_uri_labelPtr = _lookup<
+          ffi.NativeFunction<
+              WireSyncRust2DartDco Function(ffi.Pointer<wire_cst_ffi_uri>)>>(
+      'frbgen_payjoin_flutter_wire__crate__api__uri__ffi_uri_label');
+  late final _wire__crate__api__uri__ffi_uri_label =
+      _wire__crate__api__uri__ffi_uri_labelPtr.asFunction<
+          WireSyncRust2DartDco Function(ffi.Pointer<wire_cst_ffi_uri>)>();
+
+  WireSyncRust2DartDco wire__crate__api__uri__ffi_uri_message(
+    ffi.Pointer<wire_cst_ffi_uri> that,
+  ) {
+    return _wire__crate__api__uri__ffi_uri_message(
+      that,
+    );
+  }
+
+  late final _wire__crate__api__uri__ffi_uri_messagePtr = _lookup<
+          ffi.NativeFunction<
+              WireSyncRust2DartDco Function(ffi.Pointer<wire_cst_ffi_uri>)>>(
+      'frbgen_payjoin_flutter_wire__crate__api__uri__ffi_uri_message');
+  late final _wire__crate__api__uri__ffi_uri_message =
+      _wire__crate__api__uri__ffi_uri_messagePtr.asFunction<
+          WireSyncRust2DartDco Function(ffi.Pointer<wire_cst_ffi_uri>)>();
+
   WireSyncRust2DartDco wire__crate__api__uri__ffi_uri_parse(
     ffi.Pointer<wire_cst_list_prim_u_8_strict> uri,
   ) {
