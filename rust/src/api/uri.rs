@@ -135,6 +135,14 @@ impl FfiUri {
         self.0.amount_sats()
     }
     #[frb(sync)]
+    pub fn label(&self) -> Option<String> {
+        self.0.label()//.clone().and_then(|l| l.try_into().ok())
+    }
+    #[frb(sync)]
+    pub fn message(&self) -> Option<String> {
+        self.0.message()//.clone().and_then(|m| m.try_into().ok())
+    }
+    #[frb(sync)]
     pub fn as_string(&self) -> String {
         self.0.as_string()
     }
