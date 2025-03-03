@@ -1782,7 +1782,7 @@ dependencies = [
 [[package]]
 name = "payjoin_ffi"
 version = "0.22.0"
-source = "git+https://github.com/LtbLightning/payjoin-ffi?tag=v0.22.0#f3693b0b21f2a5ca8d3689225464ebdfe4b5b6ff"
+source = "git+https://github.com/riverKanies/payjoin-ffi?branch=expose-uri-label-and-message#b28ddb635762a2983095bbedccf7b9f39358614a"
 dependencies = [
  "base64 0.22.1",
  "bitcoin-ffi",

@@ -130,6 +130,14 @@ class FfiUri {
         that: this,
       );
 
+  String? label() => core.instance.api.crateApiUriFfiUriLabel(
+        that: this,
+      );
+
+  String? message() => core.instance.api.crateApiUriFfiUriMessage(
+        that: this,
+      );
+
   static FfiUri parse({required String uri}) =>
       core.instance.api.crateApiUriFfiUriParse(uri: uri);
 
