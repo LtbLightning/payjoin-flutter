@@ -18,9 +18,10 @@ dependencies:
   uuid: ^4.2.1
 
 dev_dependencies:
-  ffigen: ^9.0.0
-  freezed: ^2.3.5
-  build_runner: ^2.4.4
+  ffigen: ^16.1.0
+  freezed: ^2.4.7
+  build_runner: ^2.4.8
+  analyzer: ^6.11.0
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
