@@ -1,5 +1,4 @@
 import 'package:payjoin_flutter/common.dart';
-import 'package:payjoin_flutter/src/config.dart';
 import 'package:payjoin_flutter/src/exceptions.dart';
 import 'package:payjoin_flutter/uri.dart';
 
