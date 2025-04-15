@@ -188,7 +188,9 @@ mixin _$PayjoinError {
   }) =>
       throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PayjoinErrorCopyWith<PayjoinError> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -212,6 +214,8 @@ class _$PayjoinErrorCopyWithImpl<$Res, $Val extends PayjoinError>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -247,6 +251,8 @@ class __$$PayjoinError_InvalidAddressImplCopyWithImpl<$Res>
       $Res Function(_$PayjoinError_InvalidAddressImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -285,7 +291,9 @@ class _$PayjoinError_InvalidAddressImpl extends PayjoinError_InvalidAddress {
   @override
   int get hashCode => Object.hash(runtimeType, message);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PayjoinError_InvalidAddressImplCopyWith<_$PayjoinError_InvalidAddressImpl>
@@ -494,8 +502,11 @@ abstract class PayjoinError_InvalidAddress extends PayjoinError {
 
   @override
   String get message;
+
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PayjoinError_InvalidAddressImplCopyWith<_$PayjoinError_InvalidAddressImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -521,6 +532,8 @@ class __$$PayjoinError_InvalidScriptImplCopyWithImpl<$Res>
       $Res Function(_$PayjoinError_InvalidScriptImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -559,7 +572,9 @@ class _$PayjoinError_InvalidScriptImpl extends PayjoinError_InvalidScript {
   @override
   int get hashCode => Object.hash(runtimeType, message);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PayjoinError_InvalidScriptImplCopyWith<_$PayjoinError_InvalidScriptImpl>
@@ -768,8 +783,11 @@ abstract class PayjoinError_InvalidScript extends PayjoinError {
 
   @override
   String get message;
+
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PayjoinError_InvalidScriptImplCopyWith<_$PayjoinError_InvalidScriptImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -796,6 +814,8 @@ class __$$PayjoinError_NetworkValidationImplCopyWithImpl<$Res>
       $Res Function(_$PayjoinError_NetworkValidationImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -836,7 +856,9 @@ class _$PayjoinError_NetworkValidationImpl
   @override
   int get hashCode => Object.hash(runtimeType, message);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PayjoinError_NetworkValidationImplCopyWith<
@@ -1046,8 +1068,11 @@ abstract class PayjoinError_NetworkValidation extends PayjoinError {
 
   @override
   String get message;
+
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PayjoinError_NetworkValidationImplCopyWith<
           _$PayjoinError_NetworkValidationImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -1074,6 +1099,8 @@ class __$$PayjoinError_PsbtParseErrorImplCopyWithImpl<$Res>
       $Res Function(_$PayjoinError_PsbtParseErrorImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1112,7 +1139,9 @@ class _$PayjoinError_PsbtParseErrorImpl extends PayjoinError_PsbtParseError {
   @override
   int get hashCode => Object.hash(runtimeType, message);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PayjoinError_PsbtParseErrorImplCopyWith<_$PayjoinError_PsbtParseErrorImpl>
@@ -1321,8 +1350,11 @@ abstract class PayjoinError_PsbtParseError extends PayjoinError {
 
   @override
   String get message;
+
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PayjoinError_PsbtParseErrorImplCopyWith<_$PayjoinError_PsbtParseErrorImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -1348,6 +1380,8 @@ class __$$PayjoinError_ResponseErrorImplCopyWithImpl<$Res>
       $Res Function(_$PayjoinError_ResponseErrorImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1386,7 +1420,9 @@ class _$PayjoinError_ResponseErrorImpl extends PayjoinError_ResponseError {
   @override
   int get hashCode => Object.hash(runtimeType, message);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PayjoinError_ResponseErrorImplCopyWith<_$PayjoinError_ResponseErrorImpl>
@@ -1595,8 +1631,11 @@ abstract class PayjoinError_ResponseError extends PayjoinError {
 
   @override
   String get message;
+
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PayjoinError_ResponseErrorImplCopyWith<_$PayjoinError_ResponseErrorImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -1622,6 +1661,8 @@ class __$$PayjoinError_RequestErrorImplCopyWithImpl<$Res>
       $Res Function(_$PayjoinError_RequestErrorImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1660,7 +1701,9 @@ class _$PayjoinError_RequestErrorImpl extends PayjoinError_RequestError {
   @override
   int get hashCode => Object.hash(runtimeType, message);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PayjoinError_RequestErrorImplCopyWith<_$PayjoinError_RequestErrorImpl>
@@ -1869,8 +1912,11 @@ abstract class PayjoinError_RequestError extends PayjoinError {
 
   @override
   String get message;
+
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PayjoinError_RequestErrorImplCopyWith<_$PayjoinError_RequestErrorImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -1897,6 +1943,8 @@ class __$$PayjoinError_TransactionErrorImplCopyWithImpl<$Res>
       $Res Function(_$PayjoinError_TransactionErrorImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1937,7 +1985,9 @@ class _$PayjoinError_TransactionErrorImpl
   @override
   int get hashCode => Object.hash(runtimeType, message);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PayjoinError_TransactionErrorImplCopyWith<
@@ -2147,8 +2197,11 @@ abstract class PayjoinError_TransactionError extends PayjoinError {
 
   @override
   String get message;
+
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PayjoinError_TransactionErrorImplCopyWith<
           _$PayjoinError_TransactionErrorImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -2175,6 +2228,8 @@ class __$$PayjoinError_ServerErrorImplCopyWithImpl<$Res>
       $Res Function(_$PayjoinError_ServerErrorImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -2213,7 +2268,9 @@ class _$PayjoinError_ServerErrorImpl extends PayjoinError_ServerError {
   @override
   int get hashCode => Object.hash(runtimeType, message);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PayjoinError_ServerErrorImplCopyWith<_$PayjoinError_ServerErrorImpl>
@@ -2422,8 +2479,11 @@ abstract class PayjoinError_ServerError extends PayjoinError {
 
   @override
   String get message;
+
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PayjoinError_ServerErrorImplCopyWith<_$PayjoinError_ServerErrorImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -2449,6 +2509,8 @@ class __$$PayjoinError_SelectionErrorImplCopyWithImpl<$Res>
       $Res Function(_$PayjoinError_SelectionErrorImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -2487,7 +2549,9 @@ class _$PayjoinError_SelectionErrorImpl extends PayjoinError_SelectionError {
   @override
   int get hashCode => Object.hash(runtimeType, message);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PayjoinError_SelectionErrorImplCopyWith<_$PayjoinError_SelectionErrorImpl>
@@ -2696,8 +2760,11 @@ abstract class PayjoinError_SelectionError extends PayjoinError {
 
   @override
   String get message;
+
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PayjoinError_SelectionErrorImplCopyWith<_$PayjoinError_SelectionErrorImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -2724,6 +2791,8 @@ class __$$PayjoinError_CreateRequestErrorImplCopyWithImpl<$Res>
       $Res Function(_$PayjoinError_CreateRequestErrorImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -2764,7 +2833,9 @@ class _$PayjoinError_CreateRequestErrorImpl
   @override
   int get hashCode => Object.hash(runtimeType, message);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PayjoinError_CreateRequestErrorImplCopyWith<
@@ -2974,8 +3045,11 @@ abstract class PayjoinError_CreateRequestError extends PayjoinError {
 
   @override
   String get message;
+
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PayjoinError_CreateRequestErrorImplCopyWith<
           _$PayjoinError_CreateRequestErrorImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -3002,6 +3076,8 @@ class __$$PayjoinError_PjParseErrorImplCopyWithImpl<$Res>
       $Res Function(_$PayjoinError_PjParseErrorImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -3040,7 +3116,9 @@ class _$PayjoinError_PjParseErrorImpl extends PayjoinError_PjParseError {
   @override
   int get hashCode => Object.hash(runtimeType, message);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PayjoinError_PjParseErrorImplCopyWith<_$PayjoinError_PjParseErrorImpl>
@@ -3249,8 +3327,11 @@ abstract class PayjoinError_PjParseError extends PayjoinError {
 
   @override
   String get message;
+
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PayjoinError_PjParseErrorImplCopyWith<_$PayjoinError_PjParseErrorImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -3276,6 +3357,8 @@ class __$$PayjoinError_PjNotSupportedImplCopyWithImpl<$Res>
       $Res Function(_$PayjoinError_PjNotSupportedImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -3314,7 +3397,9 @@ class _$PayjoinError_PjNotSupportedImpl extends PayjoinError_PjNotSupported {
   @override
   int get hashCode => Object.hash(runtimeType, message);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PayjoinError_PjNotSupportedImplCopyWith<_$PayjoinError_PjNotSupportedImpl>
@@ -3523,8 +3608,11 @@ abstract class PayjoinError_PjNotSupported extends PayjoinError {
 
   @override
   String get message;
+
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PayjoinError_PjNotSupportedImplCopyWith<_$PayjoinError_PjNotSupportedImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -3550,6 +3638,8 @@ class __$$PayjoinError_ValidationErrorImplCopyWithImpl<$Res>
       $Res Function(_$PayjoinError_ValidationErrorImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -3588,7 +3678,9 @@ class _$PayjoinError_ValidationErrorImpl extends PayjoinError_ValidationError {
   @override
   int get hashCode => Object.hash(runtimeType, message);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PayjoinError_ValidationErrorImplCopyWith<
@@ -3798,8 +3890,11 @@ abstract class PayjoinError_ValidationError extends PayjoinError {
 
   @override
   String get message;
+
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PayjoinError_ValidationErrorImplCopyWith<
           _$PayjoinError_ValidationErrorImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -3824,6 +3919,8 @@ class __$$PayjoinError_V2ErrorImplCopyWithImpl<$Res>
       $Res Function(_$PayjoinError_V2ErrorImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -3862,7 +3959,9 @@ class _$PayjoinError_V2ErrorImpl extends PayjoinError_V2Error {
   @override
   int get hashCode => Object.hash(runtimeType, message);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PayjoinError_V2ErrorImplCopyWith<_$PayjoinError_V2ErrorImpl>
@@ -4072,8 +4171,11 @@ abstract class PayjoinError_V2Error extends PayjoinError {
 
   @override
   String get message;
+
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PayjoinError_V2ErrorImplCopyWith<_$PayjoinError_V2ErrorImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -4099,6 +4201,8 @@ class __$$PayjoinError_UnexpectedErrorImplCopyWithImpl<$Res>
       $Res Function(_$PayjoinError_UnexpectedErrorImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -4137,7 +4241,9 @@ class _$PayjoinError_UnexpectedErrorImpl extends PayjoinError_UnexpectedError {
   @override
   int get hashCode => Object.hash(runtimeType, message);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PayjoinError_UnexpectedErrorImplCopyWith<
@@ -4347,8 +4453,11 @@ abstract class PayjoinError_UnexpectedError extends PayjoinError {
 
   @override
   String get message;
+
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PayjoinError_UnexpectedErrorImplCopyWith<
           _$PayjoinError_UnexpectedErrorImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -4375,6 +4484,8 @@ class __$$PayjoinError_OhttpErrorImplCopyWithImpl<$Res>
       $Res Function(_$PayjoinError_OhttpErrorImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -4413,7 +4524,9 @@ class _$PayjoinError_OhttpErrorImpl extends PayjoinError_OhttpError {
   @override
   int get hashCode => Object.hash(runtimeType, message);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PayjoinError_OhttpErrorImplCopyWith<_$PayjoinError_OhttpErrorImpl>
@@ -4622,8 +4735,11 @@ abstract class PayjoinError_OhttpError extends PayjoinError {
 
   @override
   String get message;
+
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PayjoinError_OhttpErrorImplCopyWith<_$PayjoinError_OhttpErrorImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -4648,6 +4764,8 @@ class __$$PayjoinError_UrlErrorImplCopyWithImpl<$Res>
       $Res Function(_$PayjoinError_UrlErrorImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -4686,7 +4804,9 @@ class _$PayjoinError_UrlErrorImpl extends PayjoinError_UrlError {
   @override
   int get hashCode => Object.hash(runtimeType, message);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PayjoinError_UrlErrorImplCopyWith<_$PayjoinError_UrlErrorImpl>
@@ -4895,8 +5015,11 @@ abstract class PayjoinError_UrlError extends PayjoinError {
 
   @override
   String get message;
+
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PayjoinError_UrlErrorImplCopyWith<_$PayjoinError_UrlErrorImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -4920,6 +5043,8 @@ class __$$PayjoinError_IoErrorImplCopyWithImpl<$Res>
       $Res Function(_$PayjoinError_IoErrorImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -4958,7 +5083,9 @@ class _$PayjoinError_IoErrorImpl extends PayjoinError_IoError {
   @override
   int get hashCode => Object.hash(runtimeType, message);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PayjoinError_IoErrorImplCopyWith<_$PayjoinError_IoErrorImpl>
@@ -5168,8 +5295,11 @@ abstract class PayjoinError_IoError extends PayjoinError {
 
   @override
   String get message;
+
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PayjoinError_IoErrorImplCopyWith<_$PayjoinError_IoErrorImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -5196,6 +5326,8 @@ class __$$PayjoinError_OutputSubstitutionErrorImplCopyWithImpl<$Res>
       $Res Function(_$PayjoinError_OutputSubstitutionErrorImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -5236,7 +5368,9 @@ class _$PayjoinError_OutputSubstitutionErrorImpl
   @override
   int get hashCode => Object.hash(runtimeType, message);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PayjoinError_OutputSubstitutionErrorImplCopyWith<
@@ -5447,8 +5581,11 @@ abstract class PayjoinError_OutputSubstitutionError extends PayjoinError {
 
   @override
   String get message;
+
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PayjoinError_OutputSubstitutionErrorImplCopyWith<
           _$PayjoinError_OutputSubstitutionErrorImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -5476,6 +5613,8 @@ class __$$PayjoinError_InputContributionErrorImplCopyWithImpl<$Res>
       $Res Function(_$PayjoinError_InputContributionErrorImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -5516,7 +5655,9 @@ class _$PayjoinError_InputContributionErrorImpl
   @override
   int get hashCode => Object.hash(runtimeType, message);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PayjoinError_InputContributionErrorImplCopyWith<
@@ -5727,8 +5868,11 @@ abstract class PayjoinError_InputContributionError extends PayjoinError {
 
   @override
   String get message;
+
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PayjoinError_InputContributionErrorImplCopyWith<
           _$PayjoinError_InputContributionErrorImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -5755,6 +5899,8 @@ class __$$PayjoinError_InputPairErrorImplCopyWithImpl<$Res>
       $Res Function(_$PayjoinError_InputPairErrorImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -5793,7 +5939,9 @@ class _$PayjoinError_InputPairErrorImpl extends PayjoinError_InputPairError {
   @override
   int get hashCode => Object.hash(runtimeType, message);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PayjoinError_InputPairErrorImplCopyWith<_$PayjoinError_InputPairErrorImpl>
@@ -6002,8 +6150,11 @@ abstract class PayjoinError_InputPairError extends PayjoinError {
 
   @override
   String get message;
+
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PayjoinError_InputPairErrorImplCopyWith<_$PayjoinError_InputPairErrorImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -6029,6 +6180,8 @@ class __$$PayjoinError_SerdeJsonErrorImplCopyWithImpl<$Res>
       $Res Function(_$PayjoinError_SerdeJsonErrorImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -6067,7 +6220,9 @@ class _$PayjoinError_SerdeJsonErrorImpl extends PayjoinError_SerdeJsonError {
   @override
   int get hashCode => Object.hash(runtimeType, message);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PayjoinError_SerdeJsonErrorImplCopyWith<_$PayjoinError_SerdeJsonErrorImpl>
@@ -6276,8 +6431,11 @@ abstract class PayjoinError_SerdeJsonError extends PayjoinError {
 
   @override
   String get message;
+
+  /// Create a copy of PayjoinError
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PayjoinError_SerdeJsonErrorImplCopyWith<_$PayjoinError_SerdeJsonErrorImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
