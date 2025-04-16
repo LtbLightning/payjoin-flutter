@@ -62,7 +62,7 @@ class core extends BaseEntrypoint<coreApi, coreApiImpl, coreWire> {
   String get codegenVersion => '2.0.0';
 
   @override
-  int get rustContentHash => 685157858;
+  int get rustContentHash => -1997949636;
 
   static const kDefaultExternalLibraryLoaderConfig =
       ExternalLibraryLoaderConfig(
@@ -271,6 +271,10 @@ abstract class coreApi extends BaseApi {
   String crateApiUriFfiUriAsString({required FfiUri that});
 
   FfiPjUri crateApiUriFfiUriCheckPjSupported({required FfiUri that});
+
+  String? crateApiUriFfiUriLabel({required FfiUri that});
+
+  String? crateApiUriFfiUriMessage({required FfiUri that});
 
   FfiUri crateApiUriFfiUriParse({required String uri});
 
@@ -2067,6 +2071,50 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   TaskConstMeta get kCrateApiUriFfiUriCheckPjSupportedConstMeta =>
       const TaskConstMeta(
         debugName: "ffi_uri_check_pj_supported",
+        argNames: ["that"],
+      );
+
+  @override
+  String? crateApiUriFfiUriLabel({required FfiUri that}) {
+    return handler.executeSync(SyncTask(
+      callFfi: () {
+        var arg0 = cst_encode_box_autoadd_ffi_uri(that);
+        return wire.wire__crate__api__uri__ffi_uri_label(arg0);
+      },
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_opt_String,
+        decodeErrorData: null,
+      ),
+      constMeta: kCrateApiUriFfiUriLabelConstMeta,
+      argValues: [that],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta get kCrateApiUriFfiUriLabelConstMeta => const TaskConstMeta(
+        debugName: "ffi_uri_label",
+        argNames: ["that"],
+      );
+
+  @override
+  String? crateApiUriFfiUriMessage({required FfiUri that}) {
+    return handler.executeSync(SyncTask(
+      callFfi: () {
+        var arg0 = cst_encode_box_autoadd_ffi_uri(that);
+        return wire.wire__crate__api__uri__ffi_uri_message(arg0);
+      },
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_opt_String,
+        decodeErrorData: null,
+      ),
+      constMeta: kCrateApiUriFfiUriMessageConstMeta,
+      argValues: [that],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta get kCrateApiUriFfiUriMessageConstMeta => const TaskConstMeta(
+        debugName: "ffi_uri_message",
         argNames: ["that"],
       );
 
