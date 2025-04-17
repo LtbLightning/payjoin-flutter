@@ -11,14 +11,15 @@ pub use crate::utils::error::PayjoinError;
 use crate::utils::types::{ClientResponse, Network, OutPoint, PsbtInput, Request, TxIn, TxOut};
 
 #[derive(Clone, Debug)]
-pub struct FfiReceiver(pub RustOpaque<payjoin_ffi::receive::Receiver>);
+pub struct FfiNewReceiver(pub RustOpaque<payjoin_ffi::receive::NewReceiver>);
 
-impl From<payjoin_ffi::receive::Receiver> for FfiReceiver {
-    fn from(value: payjoin_ffi::receive::Receiver) -> Self {
+impl From<payjoin_ffi::receive::NewReceiver> for FfiNewReceiver {
+    fn from(value: payjoin_ffi::receive::NewReceiver) -> Self {
         Self(RustOpaque::new(value))
     }
 }
-impl FfiReceiver {
+
+impl FfiNewReceiver {
     /// Creates a new `FfiReceiver` with the provided parameters.
     ///
     /// # Parameters
@@ -85,6 +86,15 @@ impl FfiReceiver {
     #[frb(sync)]
     pub fn from_json(json: String) -> Result<Self, PayjoinError> {
         payjoin_ffi::receive::Receiver::from_json(&json).map(Into::into).map_err(Into::into)
+    }
+}
+
+#[derive(Clone, Debug)]
+pub struct FfiReceiver(pub RustOpaque<payjoin_ffi::receive::Receiver>);
+
+impl From<payjoin_ffi::receive::Receiver> for FfiReceiver {
+    fn from(value: payjoin_ffi::receive::Receiver) -> Self {
+        Self(RustOpaque::new(value))
     }
 }
 
