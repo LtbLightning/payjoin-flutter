@@ -1,7 +1,8 @@
 use flutter_rust_bridge::frb;
+use payjoin_ffi::uri::{PjNotSupported, PjParseError};
+use payjoin_ffi::OhttpError;
 
 use crate::frb_generated::RustOpaque;
-use crate::utils::error::PayjoinError;
 
 #[derive(Debug, Clone)]
 pub struct FfiUrl(pub RustOpaque<payjoin_ffi::Url>);
@@ -18,11 +19,10 @@ impl From<FfiUrl> for payjoin_ffi::Url {
 
 impl FfiUrl {
     #[frb(sync)]
-    pub fn parse(url: String) -> Result<Self, PayjoinError> {
-        match payjoin_ffi::Url::parse(url) {
-            Ok(e) => Ok(e.into()),
-            Err(e) => Err(e.into()),
-        }
+    pub fn parse(url: String) -> Result<Self, PjParseError> {
+        payjoin_ffi::Url::parse(url)
+            .map(Into::into)
+            .map_err(|e| PjParseError::from(e.to_string()))
     }
     #[frb(sync)]
     pub fn query(&self) -> Option<String> {
@@ -71,46 +71,6 @@ impl FfiPjUri {
 }
 
 #[derive(Clone)]
-pub struct FfiPjUriBuilder {
-    pub internal: RustOpaque<payjoin_ffi::uri::PjUriBuilder>,
-}
-
-impl From<payjoin_ffi::uri::PjUriBuilder> for FfiPjUriBuilder {
-    fn from(value: payjoin_ffi::uri::PjUriBuilder) -> Self {
-        Self { internal: RustOpaque::new(value) }
-    }
-}
-
-impl FfiPjUriBuilder {
-    /// Accepts the amount you want to receive in sats.
-    #[frb(sync)]
-    pub fn amount_sats(&self, amount: u64) -> Self {
-        self.internal.amount_sats(amount).into()
-    }
-
-    #[frb(sync)]
-    /// Set the message.
-    pub fn message(&self, message: String) -> Self {
-        self.internal.message(message).into()
-    }
-    #[frb(sync)]
-    ///Set the label.
-    pub fn label(&self, label: String) -> Self {
-        self.internal.label(label).into()
-    }
-    ///Set whether payjoin output substitution is allowed.
-    #[frb(sync)]
-    pub fn pjos(&self, pjos: bool) -> Self {
-        self.internal.pjos(pjos).into()
-    }
-    #[frb(sync)]
-    ///Constructs a Uri with PayjoinParams from the parameters set in the builder.
-    pub fn build(&self) -> FfiPjUri {
-        self.internal.build().into()
-    }
-}
-
-#[derive(Clone)]
 pub struct FfiUri(pub RustOpaque<payjoin_ffi::uri::Uri>);
 impl From<payjoin_ffi::uri::Uri> for FfiUri {
     fn from(value: payjoin_ffi::uri::Uri) -> Self {
@@ -119,11 +79,10 @@ impl From<payjoin_ffi::uri::Uri> for FfiUri {
 }
 impl FfiUri {
     #[frb(sync)]
-    pub fn parse(uri: String) -> anyhow::Result<FfiUri, PayjoinError> {
-        match payjoin_ffi::uri::Uri::parse(uri) {
-            Ok(e) => Ok(e.into()),
-            Err(e) => Err(PayjoinError::PjParseError { message: e.to_string() }),
-        }
+    pub fn parse(uri: String) -> Result<FfiUri, PjParseError> {
+        payjoin_ffi::uri::Uri::parse(uri)
+            .map(Into::into)
+            .map_err(|e| PjParseError::from(e.to_string()))
     }
     #[frb(sync)]
     pub fn address(&self) -> String {
@@ -139,10 +98,11 @@ impl FfiUri {
         self.0.as_string()
     }
     #[frb(sync)]
-    pub fn check_pj_supported(&self) -> Result<FfiPjUri, payjoin_ffi::error::PayjoinError> {
+    pub fn check_pj_supported(&self) -> Result<FfiPjUri, PjNotSupported> {
         self.0.check_pj_supported().map(|e| e.into()).map_err(|e| e.into())
     }
 }
+
 pub struct FfiOhttpKeys(pub RustOpaque<payjoin_ffi::OhttpKeys>);
 
 impl From<FfiOhttpKeys> for payjoin_ffi::OhttpKeys {
@@ -157,7 +117,7 @@ impl From<payjoin_ffi::OhttpKeys> for FfiOhttpKeys {
 }
 
 impl FfiOhttpKeys {
-    pub fn decode(bytes: Vec<u8>) -> Result<Self, PayjoinError> {
-        payjoin_ffi::OhttpKeys::decode(bytes).map(|e| e.into()).map_err(|e| e.into())
+    pub fn decode(bytes: Vec<u8>) -> Result<Self, OhttpError> {
+        payjoin_ffi::OhttpKeys::decode(bytes).map(|e| e.into())
     }
 }

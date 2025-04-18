@@ -1,13 +1,15 @@
 pub use std::sync::Arc;
+pub use std::str::FromStr;
 
 use flutter_rust_bridge::{frb, DartFnFuture};
 use payjoin_ffi::bitcoin_ffi;
+use payjoin_ffi::receive::{Error, ImplementationError, InputContributionError, JsonReply, OutputSubstitutionError, PsbtInputError, ReplyableError, SelectionError, SessionError};
+use payjoin_ffi::send::SerdeJsonError;
+use payjoin_ffi::uri::error::IntoUrlError;
 
-use super::uri::FfiOhttpKeys;
+use super::uri::{FfiOhttpKeys, FfiPjUri};
 use crate::api::bitcoin_ffi::FfiScript;
-use crate::api::uri::{FfiPjUriBuilder, FfiUrl};
 use crate::frb_generated::RustOpaque;
-pub use crate::utils::error::PayjoinError;
 use crate::utils::types::{ClientResponse, Network, OutPoint, PsbtInput, Request, TxIn, TxOut};
 
 #[derive(Clone, Debug)]
@@ -38,54 +40,60 @@ impl FfiNewReceiver {
     pub fn create(
         address: String,
         network: Network,
-        directory: FfiUrl,
+        directory: String,
         ohttp_keys: FfiOhttpKeys,
-        ohttp_relay: FfiUrl,
         expire_after: Option<u64>,
-    ) -> Result<Self, PayjoinError> {
-        payjoin_ffi::receive::Receiver::new(
+    ) -> Result<Self, IntoUrlError> {
+        let address = bitcoin_ffi::Address::new(address, network.into())
+            .expect("TODO: handle parse address error, perhaps by passing Address instead of String,Network");
+        payjoin_ffi::receive::NewReceiver::new(
             address,
-            network.into(),
             directory.into(),
             ohttp_keys.into(),
-            ohttp_relay.into(),
             expire_after,
         )
         .map(Into::into)
-        .map_err(Into::into)
     }
+
+    pub fn persist(&self) -> Result<FfiReceiver, ImplementationError> {
+        todo!()
+    }
+}
+
+impl FfiReceiver {
+    pub fn load(_token: String) -> Result<Self, ImplementationError> {
+        todo!()
+    }
+
     ///The per-session public key to use as an identifier
     #[frb(sync)]
     pub fn id(&self) -> String {
         self.0.id()
     }
 
-    pub fn pj_url(&self) -> FfiUrl {
-        self.0.pj_url().into()
+    pub fn pj_uri(&self) -> FfiPjUri {
+        self.0.pj_uri().into()
     }
-    #[frb(sync)]
-    pub fn pj_uri_builder(&self) -> FfiPjUriBuilder {
-        self.0.pj_uri_builder().into()
-    }
-    pub fn extract_req(&self) -> Result<(Request, ClientResponse), PayjoinError> {
-        self.0.extract_req().map(|e| (e.0.into(), e.1.into())).map_err(|e| e.into())
+
+    pub fn extract_req(&self, ohttp_relay: String) -> Result<(Request, ClientResponse), Error> {
+        self.0.extract_req(ohttp_relay).map(|e| (e.0.into(), e.1.into()))
     }
     pub fn process_res(
         &self,
         body: &[u8],
         ctx: &ClientResponse,
-    ) -> Result<Option<FfiUncheckedProposal>, PayjoinError> {
-        self.0.process_res(body, &ctx.into()).map(|e| e.map(|o| o.into())).map_err(|e| e.into())
+    ) -> Result<Option<FfiUncheckedProposal>, Error> {
+        self.0.process_res(body, &ctx.into()).map(|e| e.map(|o| o.into()))
     }
 
     #[frb(sync)]
-    pub fn to_json(&self) -> Result<String, PayjoinError> {
-        self.0.to_json().map_err(Into::into)
+    pub fn to_json(&self) -> Result<String, SerdeJsonError> {
+        self.0.to_json()
     }
 
     #[frb(sync)]
-    pub fn from_json(json: String) -> Result<Self, PayjoinError> {
-        payjoin_ffi::receive::Receiver::from_json(&json).map(Into::into).map_err(Into::into)
+    pub fn from_json(json: String) -> Result<Self, SerdeJsonError> {
+        payjoin_ffi::receive::Receiver::from_json(&json).map(Into::into)
     }
 }
 
@@ -121,14 +129,13 @@ impl FfiUncheckedProposal {
         &self,
         min_fee_rate: Option<u64>,
         can_broadcast: impl Fn(Vec<u8>) -> DartFnFuture<bool>,
-    ) -> Result<FfiMaybeInputsOwned, PayjoinError> {
+    ) -> Result<FfiMaybeInputsOwned, ReplyableError> {
         let runtime = tokio::runtime::Runtime::new().unwrap();
         self.0
             .check_broadcast_suitability(min_fee_rate, |x| {
                 Ok(runtime.block_on(can_broadcast(x.clone())))
             })
             .map(Into::into)
-            .map_err(Into::into)
     }
     /// Call this method if the only way to initiate a Payjoin with this receiver
     /// requires manual intervention, as in most consumer wallets.
@@ -137,6 +144,26 @@ impl FfiUncheckedProposal {
     /// Those receivers call `extract_tx_to_check_broadcast()` and `attest_tested_and_scheduled_broadcast()` after making those checks downstream.
     pub fn assume_interactive_receiver(&self) -> FfiMaybeInputsOwned {
         self.0.clone().assume_interactive_receiver().into()
+    }
+
+    /// Extract an OHTTP Encapsulated HTTP POST request to return
+    /// a Receiver Error Response
+    pub fn extract_err_req(
+        &self,
+        err: &JsonReply,
+        ohttp_relay: String,
+    ) -> Result<(Request, ClientResponse), SessionError> {
+        self.0.extract_err_req(err, ohttp_relay).map(|e| (e.0.into(), e.1.into()))
+    }
+
+     /// Process an OHTTP Encapsulated HTTP POST Error response
+    /// to ensure it has been posted properly
+    pub fn process_err_res(
+        &self,
+        body: &[u8],
+        context: &ClientResponse,
+    ) -> Result<(), SessionError> {
+        self.0.process_err_res(body, &context.into())
     }
 }
 #[derive(Clone)]
@@ -153,12 +180,11 @@ impl FfiMaybeInputsOwned {
     pub fn check_inputs_not_owned(
         &self,
         is_owned: impl Fn(Vec<u8>) -> DartFnFuture<bool>,
-    ) -> Result<FfiMaybeInputsSeen, PayjoinError> {
+    ) -> Result<FfiMaybeInputsSeen, ReplyableError> {
         let runtime = tokio::runtime::Runtime::new().unwrap();
         self.0
             .check_inputs_not_owned(|o| Ok(runtime.block_on(is_owned(o.clone()))))
             .map(Into::into)
-            .map_err(Into::into)
     }
 }
 
@@ -176,12 +202,11 @@ impl FfiMaybeInputsSeen {
     pub fn check_no_inputs_seen_before(
         &self,
         is_known: impl Fn(OutPoint) -> DartFnFuture<bool>,
-    ) -> Result<FfiOutputsUnknown, PayjoinError> {
+    ) -> Result<FfiOutputsUnknown, ReplyableError> {
         let runtime = tokio::runtime::Runtime::new().unwrap();
         self.0
             .check_no_inputs_seen_before(|o| Ok(runtime.block_on(is_known(o.into()))))
             .map(Into::into)
-            .map_err(Into::into)
     }
 }
 
@@ -197,12 +222,11 @@ impl FfiOutputsUnknown {
     pub fn identify_receiver_outputs(
         &self,
         is_receiver_output: impl Fn(Vec<u8>) -> DartFnFuture<bool>,
-    ) -> Result<FfiWantsOutputs, PayjoinError> {
+    ) -> Result<FfiWantsOutputs, ReplyableError> {
         let runtime = tokio::runtime::Runtime::new().unwrap();
         self.0
             .identify_receiver_outputs(|o| Ok(runtime.block_on(is_receiver_output(o.clone()))))
             .map(Into::into)
-            .map_err(Into::into)
     }
 }
 
@@ -216,32 +240,30 @@ impl From<payjoin_ffi::receive::WantsOutputs> for FfiWantsOutputs {
 
 impl FfiWantsOutputs {
     pub fn is_output_substitution_disabled(&self) -> bool {
-        self.0.is_output_substitution_disabled()
+        self.0.output_substitution()
     }
 
     pub fn replace_receiver_outputs(
         &self,
         replacement_outputs: Vec<TxOut>,
         drain_script: &FfiScript,
-    ) -> Result<FfiWantsOutputs, PayjoinError> {
+    ) -> Result<FfiWantsOutputs, OutputSubstitutionError> {
         let replacement_outputs: Vec<bitcoin_ffi::TxOut> =
             replacement_outputs.iter().map(|o| o.clone().into()).collect();
         self.0
             .clone()
             .replace_receiver_outputs(replacement_outputs, &drain_script.into())
             .map(Into::into)
-            .map_err(Into::into)
     }
 
     pub fn substitute_receiver_script(
         &self,
         output_script: &FfiScript,
-    ) -> Result<FfiWantsOutputs, PayjoinError> {
+    ) -> Result<FfiWantsOutputs, OutputSubstitutionError> {
         self.0
             .clone()
             .substitute_receiver_script(&output_script.into())
             .map(Into::into)
-            .map_err(Into::into)
     }
 
     pub fn commit_outputs(&self) -> FfiWantsInputs {
@@ -261,19 +283,19 @@ impl FfiWantsInputs {
     pub fn try_preserving_privacy(
         &self,
         candidate_inputs: Vec<FfiInputPair>,
-    ) -> Result<FfiInputPair, PayjoinError> {
+    ) -> Result<FfiInputPair, SelectionError> {
         let candidate_inputs: Vec<payjoin_ffi::receive::InputPair> =
             candidate_inputs.into_iter().map(Into::into).collect();
-        self.0.clone().try_preserving_privacy(candidate_inputs).map(Into::into).map_err(Into::into)
+        self.0.clone().try_preserving_privacy(candidate_inputs).map(Into::into)
     }
 
     pub fn contribute_inputs(
         &self,
         replacement_inputs: Vec<FfiInputPair>,
-    ) -> Result<FfiWantsInputs, PayjoinError> {
+    ) -> Result<FfiWantsInputs, InputContributionError> {
         let replacement_inputs: Vec<payjoin_ffi::receive::InputPair> =
             replacement_inputs.into_iter().map(Into::into).collect();
-        self.0.clone().contribute_inputs(replacement_inputs).map(Into::into).map_err(Into::into)
+        self.0.clone().contribute_inputs(replacement_inputs).map(Into::into)
     }
 
     pub fn commit_inputs(&self) -> FfiProvisionalProposal {
@@ -285,10 +307,9 @@ impl FfiWantsInputs {
 pub struct FfiInputPair(pub RustOpaque<payjoin_ffi::receive::InputPair>);
 
 impl FfiInputPair {
-    pub fn new(txin: TxIn, psbtin: PsbtInput) -> Result<Self, PayjoinError> {
+    pub fn new(txin: TxIn, psbtin: PsbtInput) -> Result<Self, PsbtInputError> {
         payjoin_ffi::receive::InputPair::new(txin.into(), psbtin.into())
             .map(Into::into)
-            .map_err(Into::into)
     }
 }
 
@@ -313,10 +334,10 @@ impl From<payjoin_ffi::receive::ProvisionalProposal> for FfiProvisionalProposal 
 impl FfiProvisionalProposal {
     pub fn finalize_proposal(
         &self,
-        process_psbt: impl Fn(String) -> DartFnFuture<String>,
+        process_psbt: impl Fn(String) -> DartFnFuture<String>, // TODO return Result<String, ImplementationError>
         min_fee_rate_sat_per_vb: Option<u64>,
-        max_fee_rate_sat_per_vb: u64,
-    ) -> Result<FfiPayjoinProposal, PayjoinError> {
+        max_fee_rate_sat_per_vb: Option<u64>,
+    ) -> Result<FfiPayjoinProposal, ReplyableError> {
         let runtime = tokio::runtime::Runtime::new().unwrap();
         self.0
             .finalize_proposal(
@@ -325,7 +346,6 @@ impl FfiProvisionalProposal {
                 max_fee_rate_sat_per_vb,
             )
             .map(Into::into)
-            .map_err(Into::into)
     }
 }
 pub struct FfiPayjoinProposal(pub RustOpaque<payjoin_ffi::receive::PayjoinProposal>);
@@ -338,24 +358,20 @@ impl FfiPayjoinProposal {
     pub fn utxos_to_be_locked(&self) -> Vec<OutPoint> {
         self.0.utxos_to_be_locked().iter().map(|x| x.into()).collect()
     }
-    pub fn is_output_substitution_disabled(&self) -> bool {
-        self.0.is_output_substitution_disabled()
-    }
+
     pub fn psbt(&self) -> String {
         self.0.psbt()
     }
-    pub fn extract_v1_req(&self) -> String {
-        self.0.extract_v1_req()
-    }
-    pub fn extract_v2_req(&self) -> Result<(Request, ClientResponse), PayjoinError> {
-        self.0.clone().extract_v2_req().map(|e| (e.0.into(), e.1.into())).map_err(|e| e.into())
+
+    pub fn extract_req(&self, ohttp_relay: String) -> Result<(Request, ClientResponse), Error> {
+        self.0.clone().extract_req(ohttp_relay).map(|e| (e.0.into(), e.1.into()))
     }
 
     pub fn process_res(
         &self,
         res: &[u8],
         ohttp_context: &ClientResponse,
-    ) -> Result<(), PayjoinError> {
-        self.0.process_res(res, &ohttp_context.into()).map_err(|e| e.into())
+    ) -> Result<(), Error> {
+        self.0.process_res(res, &ohttp_context.into())
     }
 }
