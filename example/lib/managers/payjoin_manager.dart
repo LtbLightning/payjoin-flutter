@@ -33,32 +33,6 @@ class PayjoinManager {
     }
   }
 
-  Future<(String, receive.Receiver)> buildV2PjStr({
-    int? amount,
-    required String address,
-    required Network network,
-    required int expireAfter,
-  }) async {
-    final session = await startV2ReceiveSession(
-      address: address,
-      network: network,
-      expireAfter: expireAfter,
-    );
-    String pjUriStr;
-    final pjUriBuilder = session.pjUriBuilder();
-    if (amount != null) {
-      final pjUriBuilderWithAmount =
-          pjUriBuilder.amountSats(amount: BigInt.from(amount));
-      final pjUri = pjUriBuilderWithAmount.build();
-      pjUriStr = pjUri.asString();
-    } else {
-      final pjUri = pjUriBuilder.build();
-      pjUriStr = pjUri.asString();
-    }
-
-    return (pjUriStr, session);
-  }
-
   Future<pj_uri.Uri> stringToUri(String pj) async {
     try {
       return await pj_uri.Uri.fromStr(pj);
@@ -106,9 +80,10 @@ class PayjoinManager {
   ) async {
     final senderBuilder = await send.SenderBuilder.fromPsbtAndUri(
         psbtBase64: originalPsbt, pjUri: pjUri.checkPjSupported());
-    final sender =
+    final new_sender =
         await senderBuilder.buildRecommended(minFeeRate: BigInt.from(250));
-
+    final token = await new_sender.persist();
+    final sender = await send.Sender.load(token: token);
     return sender;
   }
 
@@ -140,7 +115,7 @@ class PayjoinManager {
         debugPrint('Polling for V2 Proposal...');
         try {
           final (getReq, ohttpCtx) = await getCtx.extractReq(
-            ohttpRelay: await pj_uri.Url.fromStr(ohttpRelay),
+            ohttpRelay: ohttpRelay,
           );
 
           // Post the loop request to the server
@@ -249,28 +224,6 @@ class PayjoinManager {
     debugPrint('PSBT after: ${psbt.toString()}');
     var transaction = psbt.extractTx();
     return transaction;
-  }
-
-  Future<receive.Receiver> startV2ReceiveSession({
-    required String address,
-    required Network network,
-    required int expireAfter,
-  }) async {
-    final ohttpRelayUrl = await pj_uri.Url.fromStr(ohttpRelay);
-    final payjoinDirectoryUrl = await pj_uri.Url.fromStr(payjoinDirectory);
-    pj_uri.OhttpKeys ohttpKeys = await pj_uri.fetchOhttpKeys(
-      ohttpRelay: ohttpRelayUrl,
-      payjoinDirectory: payjoinDirectoryUrl,
-    );
-
-    return await receive.Receiver.create(
-      address: address,
-      ohttpRelay: ohttpRelayUrl,
-      directory: payjoinDirectoryUrl,
-      ohttpKeys: ohttpKeys,
-      network: Network.signet,
-      expireAfter: BigInt.from(expireAfter),
-    );
   }
 
   // Future<(bdk.Transaction originalTx, receive.PayjoinProposal)>

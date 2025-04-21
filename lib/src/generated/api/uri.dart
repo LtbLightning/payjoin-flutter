@@ -5,10 +5,11 @@
 
 import '../frb_generated.dart';
 import '../lib.dart';
-import '../utils/error.dart';
+import 'ohttp/error.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
+import 'uri/error.dart';
 
-// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `clone`, `clone`, `fmt`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`
+// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `clone`, `fmt`, `from`, `from`, `from`, `from`, `from`, `from`, `from`
 
 class FfiOhttpKeys {
   final OhttpKeys field0;
@@ -64,45 +65,6 @@ class FfiPjUri {
       other is FfiPjUri &&
           runtimeType == other.runtimeType &&
           field0 == other.field0;
-}
-
-class FfiPjUriBuilder {
-  final PjUriBuilder internal;
-
-  const FfiPjUriBuilder({
-    required this.internal,
-  });
-
-  /// Accepts the amount you want to receive in sats.
-  FfiPjUriBuilder amountSats({required BigInt amount}) => core.instance.api
-      .crateApiUriFfiPjUriBuilderAmountSats(that: this, amount: amount);
-
-  ///Constructs a Uri with PayjoinParams from the parameters set in the builder.
-  FfiPjUri build() => core.instance.api.crateApiUriFfiPjUriBuilderBuild(
-        that: this,
-      );
-
-  ///Set the label.
-  FfiPjUriBuilder label({required String label}) => core.instance.api
-      .crateApiUriFfiPjUriBuilderLabel(that: this, label: label);
-
-  /// Set the message.
-  FfiPjUriBuilder message({required String message}) => core.instance.api
-      .crateApiUriFfiPjUriBuilderMessage(that: this, message: message);
-
-  ///Set whether payjoin output substitution is allowed.
-  FfiPjUriBuilder pjos({required bool pjos}) =>
-      core.instance.api.crateApiUriFfiPjUriBuilderPjos(that: this, pjos: pjos);
-
-  @override
-  int get hashCode => internal.hashCode;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FfiPjUriBuilder &&
-          runtimeType == other.runtimeType &&
-          internal == other.internal;
 }
 
 class FfiUri {

@@ -5,7 +5,7 @@
 
 import '../frb_generated.dart';
 import '../lib.dart';
-import '../utils/error.dart';
+import 'io/error.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'uri.dart';
 
@@ -21,6 +21,6 @@ import 'uri.dart';
 /// * `cert_der` (optional): The DER-encoded certificate to use for local HTTPS connections.  This
 /// parameter is only available when the "danger-local-https" feature is enabled.
 Future<FfiOhttpKeys> fetchOhttpKeys(
-        {required FfiUrl ohttpRelay, required FfiUrl payjoinDirectory}) =>
+        {required String ohttpRelay, required String payjoinDirectory}) =>
     core.instance.api.crateApiIoFetchOhttpKeys(
         ohttpRelay: ohttpRelay, payjoinDirectory: payjoinDirectory);

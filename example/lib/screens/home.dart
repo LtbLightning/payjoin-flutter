@@ -13,6 +13,9 @@ import 'package:payjoin_flutter/uri.dart' as pjuri;
 import 'package:url_launcher/url_launcher.dart';
 import '../widgets/widgets.dart';
 
+const payjoinDirectory = "https://payjo.in";
+const ohttpRelay = "https://pj.bobspacebkk.com";
+
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -537,7 +540,8 @@ class _HomeState extends State<Home> {
       final httpClient = HttpClient();
       UncheckedProposal? proposal;
       while (proposal == null) {
-        final (request, clientResponse) = await v2Session!.extractReq();
+        final (request, clientResponse) =
+            await v2Session!.extractReq(ohttpRelay: ohttpRelay);
         final url = Uri.parse(request.url.asString());
         final httpRequest = await httpClient.postUrl(url);
 
@@ -622,7 +626,9 @@ class _HomeState extends State<Home> {
       debugPrint('Receiver proposal tx: $proposalTxId');
 
       // Send the proposal via POST request to directory
-      final (proposalReq, proposalCtx) = await finalProposal.extractV2Req();
+      final (proposalReq, proposalCtx) = await finalProposal.extractReq(
+        ohttpRelay: ohttpRelay,
+      );
       final httpRequest = await httpClient.postUrl(
         Uri.parse(proposalReq.url.asString()),
       );
@@ -656,18 +662,14 @@ class _HomeState extends State<Home> {
       }
     } catch (e) {
       debugPrint(e.toString());
-      if (e is PayjoinException) {
-        showBottomSheet('PayJoin error: ${e.message}');
-        resetPayjoinSession();
-      }
+      showBottomSheet('PayJoin error: ${e.toString()}');
+      resetPayjoinSession();
     }
   }
 
   Future<void> initReceiverSession() async {
     final amountSats = BigInt.parse(amountController.text);
     debugPrint('AMOUNT SATS: $amountSats');
-    final payjoinDirectory = await pjuri.Url.fromStr("https://payjo.in");
-    final ohttpRelay = await pjuri.Url.fromStr("https://pj.bobspacebkk.com");
 
     final ohttpKeys = await pjuri.fetchOhttpKeys(
       ohttpRelay: ohttpRelay,
@@ -675,19 +677,18 @@ class _HomeState extends State<Home> {
     );
     debugPrint('OHTTP KEYS FETCHED ${ohttpKeys.toString()}');
     // Create receiver session with new bindings
-    final receiver = await Receiver.create(
+    final new_receiver = await NewReceiver.create(
       address: recipientAddress.text,
       network: Network.signet,
       directory: payjoinDirectory,
       ohttpKeys: ohttpKeys,
-      ohttpRelay: ohttpRelay,
       expireAfter: BigInt.from(60 * 5), // 5 minutes
     );
+    final token = await new_receiver.persist();
+    final receiver = await Receiver.load(token: token);
     debugPrint('INITIALIZED RECEIVER');
 
-    final pjUrl =
-        receiver.pjUriBuilder().amountSats(amount: amountSats).build();
-    final pjStr = pjUrl.asString();
+    final pjStr = (await receiver.pjUri()).asString();
     debugPrint('PAYJOIN URL: $pjStr');
 
     setState(() {

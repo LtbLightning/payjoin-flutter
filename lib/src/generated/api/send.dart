@@ -3,14 +3,39 @@
 
 // ignore_for_file: invalid_use_of_internal_member, unused_import, unnecessary_import
 
+import '../api.dart';
 import '../frb_generated.dart';
 import '../lib.dart';
-import '../utils/error.dart';
 import '../utils/types.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
+import 'receive/error.dart';
+import 'send/error.dart';
 import 'uri.dart';
 
-// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `from`, `from`, `from`, `from`, `from`, `from`
+// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `from`, `from`, `from`, `from`, `from`, `from`, `from`
+
+class FfiNewSender {
+  final NewSender field0;
+
+  const FfiNewSender({
+    required this.field0,
+  });
+
+  Future<FfiSender> persist() =>
+      core.instance.api.crateApiSendFfiNewSenderPersist(
+        that: this,
+      );
+
+  @override
+  int get hashCode => field0.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is FfiNewSender &&
+          runtimeType == other.runtimeType &&
+          field0 == other.field0;
+}
 
 class FfiSender {
   final Sender field0;
@@ -31,6 +56,9 @@ class FfiSender {
 
   static FfiSender fromJson({required String json}) =>
       core.instance.api.crateApiSendFfiSenderFromJson(json: json);
+
+  static Future<FfiSender> load({required String token}) =>
+      core.instance.api.crateApiSendFfiSenderLoad(token: token);
 
   String toJson() => core.instance.api.crateApiSendFfiSenderToJson(
         that: this,
@@ -54,21 +82,21 @@ class FfiSenderBuilder {
     required this.field0,
   });
 
-  Future<FfiSenderBuilder> alwaysDisableOutputSubstitution(
-          {required bool disable}) =>
+  Future<FfiSenderBuilder> alwaysDisableOutputSubstitution() =>
       core.instance.api
           .crateApiSendFfiSenderBuilderAlwaysDisableOutputSubstitution(
-              that: this, disable: disable);
+        that: this,
+      );
 
-  Future<FfiSender> buildNonIncentivizing({required BigInt minFeeRate}) =>
+  Future<FfiNewSender> buildNonIncentivizing({required BigInt minFeeRate}) =>
       core.instance.api.crateApiSendFfiSenderBuilderBuildNonIncentivizing(
           that: this, minFeeRate: minFeeRate);
 
-  Future<FfiSender> buildRecommended({required BigInt minFeeRate}) =>
+  Future<FfiNewSender> buildRecommended({required BigInt minFeeRate}) =>
       core.instance.api.crateApiSendFfiSenderBuilderBuildRecommended(
           that: this, minFeeRate: minFeeRate);
 
-  Future<FfiSender> buildWithAdditionalFee(
+  Future<FfiNewSender> buildWithAdditionalFee(
           {required BigInt maxFeeContribution,
           int? changeIndex,
           required BigInt minFeeRate,
@@ -125,7 +153,7 @@ class FfiV2GetContext {
     required this.field0,
   });
 
-  Future<(Request, ClientResponse)> extractReq({required FfiUrl ohttpRelay}) =>
+  Future<(Request, ClientResponse)> extractReq({required String ohttpRelay}) =>
       core.instance.api.crateApiSendFfiV2GetContextExtractReq(
           that: this, ohttpRelay: ohttpRelay);
 

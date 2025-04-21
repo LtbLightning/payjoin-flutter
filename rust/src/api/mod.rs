@@ -4,21 +4,26 @@ pub mod receive;
 pub mod send;
 pub mod uri;
 
-    pub use payjoin_ffi::send::error::BuildSenderError;
-    pub use payjoin_ffi::send::error::CreateRequestError;
-    pub use payjoin_ffi::send::error::EncapsulationError;
-    pub use payjoin_ffi::send::error::ResponseError;
-    pub use payjoin_ffi::error::SerdeJsonError;
-    pub use payjoin_ffi::receive::error::ImplementationError;
-    pub use payjoin_ffi::receive::error::InputContributionError;
-    pub use payjoin_ffi::receive::error::OutputSubstitutionError;
-    pub use payjoin_ffi::receive::error::PsbtInputError;
-    pub use payjoin_ffi::receive::error::ReplyableError;
-    pub use payjoin_ffi::receive::error::SelectionError;
-    pub use payjoin_ffi::receive::error::SessionError;
-    pub use payjoin_ffi::receive::error::JsonReply;
-    pub use payjoin_ffi::uri::error::IntoUrlError;
-    pub use payjoin_ffi::uri::error::PjParseError;
-    pub use payjoin_ffi::uri::error::PjNotSupported;
-    pub use payjoin_ffi::io::error::IoError;
-    pub use payjoin_ffi::ohttp::error::OhttpError;
+use crate::frb_generated::RustAutoOpaque;
+
+pub struct FfiSerdeJsonError(pub(crate) RustAutoOpaque<payjoin_ffi::error::SerdeJsonError>);
+
+impl From<payjoin_ffi::error::SerdeJsonError> for FfiSerdeJsonError {
+    fn from(value: payjoin_ffi::error::SerdeJsonError) -> Self {
+        Self(RustAutoOpaque::new(value))
+    }
+}
+
+pub mod ohttp {
+    pub mod error {
+        use crate::frb_generated::RustAutoOpaque;
+
+        pub struct FfiOhttpError(pub(crate) RustAutoOpaque<payjoin_ffi::ohttp::error::OhttpError>);
+
+        impl From<payjoin_ffi::ohttp::error::OhttpError> for FfiOhttpError {
+            fn from(value: payjoin_ffi::ohttp::error::OhttpError) -> Self {
+                Self(RustAutoOpaque::new(value))
+            }
+        }
+    }
+}

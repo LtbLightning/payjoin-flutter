@@ -3,15 +3,17 @@
 
 // ignore_for_file: invalid_use_of_internal_member, unused_import, unnecessary_import
 
+import '../api.dart';
 import '../frb_generated.dart';
 import '../lib.dart';
-import '../utils/error.dart';
 import '../utils/types.dart';
 import 'bitcoin_ffi.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
+import 'receive/error.dart';
 import 'uri.dart';
+import 'uri/error.dart';
 
-// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `clone`, `clone`, `fmt`, `fmt`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`
+// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `clone`, `clone`, `clone`, `fmt`, `fmt`, `fmt`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`
 
 class FfiInputPair {
   final InputPair field0;
@@ -89,6 +91,57 @@ class FfiMaybeInputsSeen {
           field0 == other.field0;
 }
 
+class FfiNewReceiver {
+  final NewReceiver field0;
+
+  const FfiNewReceiver({
+    required this.field0,
+  });
+
+  /// Creates a new `FfiReceiver` with the provided parameters.
+  ///
+  /// # Parameters
+  /// - `address`: The Bitcoin address for the payjoin session.
+  /// - `network`: The network to use for address verification.
+  /// - `directory`: The URL of the store-and-forward payjoin directory.
+  /// - `ohttp_keys`: The OHTTP keys used for encrypting and decrypting HTTP requests and responses.
+  /// - `ohttp_relay`: The URL of the OHTTP relay, used to keep client IP address confidential.
+  /// - `expire_after`: The duration in seconds after which the session expires.
+  ///
+  /// # Returns
+  /// A new instance of `FfiReceiver`.
+  ///
+  /// # References
+  /// - [BIP 77: Payjoin Version 2: Serverless Payjoin](https://github.com/bitcoin/bips/pull/1483)
+  static Future<FfiNewReceiver> create(
+          {required String address,
+          required Network network,
+          required String directory,
+          required FfiOhttpKeys ohttpKeys,
+          BigInt? expireAfter}) =>
+      core.instance.api.crateApiReceiveFfiNewReceiverCreate(
+          address: address,
+          network: network,
+          directory: directory,
+          ohttpKeys: ohttpKeys,
+          expireAfter: expireAfter);
+
+  Future<FfiReceiver> persist() =>
+      core.instance.api.crateApiReceiveFfiNewReceiverPersist(
+        that: this,
+      );
+
+  @override
+  int get hashCode => field0.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is FfiNewReceiver &&
+          runtimeType == other.runtimeType &&
+          field0 == other.field0;
+}
+
 class FfiOutputsUnknown {
   final OutputsUnknown field0;
 
@@ -120,20 +173,9 @@ class FfiPayjoinProposal {
     required this.field0,
   });
 
-  Future<String> extractV1Req() =>
-      core.instance.api.crateApiReceiveFfiPayjoinProposalExtractV1Req(
-        that: this,
-      );
-
-  Future<(Request, ClientResponse)> extractV2Req() =>
-      core.instance.api.crateApiReceiveFfiPayjoinProposalExtractV2Req(
-        that: this,
-      );
-
-  Future<bool> isOutputSubstitutionDisabled() => core.instance.api
-          .crateApiReceiveFfiPayjoinProposalIsOutputSubstitutionDisabled(
-        that: this,
-      );
+  Future<(Request, ClientResponse)> extractReq({required String ohttpRelay}) =>
+      core.instance.api.crateApiReceiveFfiPayjoinProposalExtractReq(
+          that: this, ohttpRelay: ohttpRelay);
 
   Future<void> processRes(
           {required List<int> res, required ClientResponse ohttpContext}) =>
@@ -171,7 +213,7 @@ class FfiProvisionalProposal {
   Future<FfiPayjoinProposal> finalizeProposal(
           {required FutureOr<String> Function(String) processPsbt,
           BigInt? minFeeRateSatPerVb,
-          required BigInt maxFeeRateSatPerVb}) =>
+          BigInt? maxFeeRateSatPerVb}) =>
       core.instance.api.crateApiReceiveFfiProvisionalProposalFinalizeProposal(
           that: this,
           processPsbt: processPsbt,
@@ -196,40 +238,9 @@ class FfiReceiver {
     required this.field0,
   });
 
-  /// Creates a new `FfiReceiver` with the provided parameters.
-  ///
-  /// # Parameters
-  /// - `address`: The Bitcoin address for the payjoin session.
-  /// - `network`: The network to use for address verification.
-  /// - `directory`: The URL of the store-and-forward payjoin directory.
-  /// - `ohttp_keys`: The OHTTP keys used for encrypting and decrypting HTTP requests and responses.
-  /// - `ohttp_relay`: The URL of the OHTTP relay, used to keep client IP address confidential.
-  /// - `expire_after`: The duration in seconds after which the session expires.
-  ///
-  /// # Returns
-  /// A new instance of `FfiReceiver`.
-  ///
-  /// # References
-  /// - [BIP 77: Payjoin Version 2: Serverless Payjoin](https://github.com/bitcoin/bips/pull/1483)
-  static Future<FfiReceiver> create(
-          {required String address,
-          required Network network,
-          required FfiUrl directory,
-          required FfiOhttpKeys ohttpKeys,
-          required FfiUrl ohttpRelay,
-          BigInt? expireAfter}) =>
-      core.instance.api.crateApiReceiveFfiReceiverCreate(
-          address: address,
-          network: network,
-          directory: directory,
-          ohttpKeys: ohttpKeys,
-          ohttpRelay: ohttpRelay,
-          expireAfter: expireAfter);
-
-  Future<(Request, ClientResponse)> extractReq() =>
+  Future<(Request, ClientResponse)> extractReq({required String ohttpRelay}) =>
       core.instance.api.crateApiReceiveFfiReceiverExtractReq(
-        that: this,
-      );
+          that: this, ohttpRelay: ohttpRelay);
 
   static FfiReceiver fromJson({required String json}) =>
       core.instance.api.crateApiReceiveFfiReceiverFromJson(json: json);
@@ -239,12 +250,10 @@ class FfiReceiver {
         that: this,
       );
 
-  FfiPjUriBuilder pjUriBuilder() =>
-      core.instance.api.crateApiReceiveFfiReceiverPjUriBuilder(
-        that: this,
-      );
+  static Future<FfiReceiver> load({required String token}) =>
+      core.instance.api.crateApiReceiveFfiReceiverLoad(token: token);
 
-  Future<FfiUrl> pjUrl() => core.instance.api.crateApiReceiveFfiReceiverPjUrl(
+  Future<FfiPjUri> pjUri() => core.instance.api.crateApiReceiveFfiReceiverPjUri(
         that: this,
       );
 
@@ -299,11 +308,25 @@ class FfiUncheckedProposal {
           .crateApiReceiveFfiUncheckedProposalCheckBroadcastSuitability(
               that: this, minFeeRate: minFeeRate, canBroadcast: canBroadcast);
 
+  /// Extract an OHTTP Encapsulated HTTP POST request to return
+  /// a Receiver Error Response
+  Future<(Request, ClientResponse)> extractErrReq(
+          {required FfiJsonReply err, required String ohttpRelay}) =>
+      core.instance.api.crateApiReceiveFfiUncheckedProposalExtractErrReq(
+          that: this, err: err, ohttpRelay: ohttpRelay);
+
   ///The Sender’s Original PSBT
   Future<Uint8List> extractTxToScheduleBroadcast() => core.instance.api
           .crateApiReceiveFfiUncheckedProposalExtractTxToScheduleBroadcast(
         that: this,
       );
+
+  /// Process an OHTTP Encapsulated HTTP POST Error response
+  /// to ensure it has been posted properly
+  Future<void> processErrRes(
+          {required List<int> body, required ClientResponse context}) =>
+      core.instance.api.crateApiReceiveFfiUncheckedProposalProcessErrRes(
+          that: this, body: body, context: context);
 
   @override
   int get hashCode => field0.hashCode;
