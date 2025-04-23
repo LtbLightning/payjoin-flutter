@@ -1,13 +1,14 @@
 import 'package:payjoin_flutter/common.dart';
-import 'package:payjoin_flutter/uri.dart';
+import 'package:payjoin_flutter/src/generated/api/uri.dart';
+import 'package:payjoin_flutter/src/generated/lib.dart';
+import 'package:payjoin_flutter/uri.dart' as uri;
 
 import 'src/generated/api/send.dart';
-import 'src/generated/api/uri.dart';
 
 class SenderBuilder extends FfiSenderBuilder {
   SenderBuilder._({required super.field0});
   static Future<SenderBuilder> fromPsbtAndUri(
-      {required String psbtBase64, required PjUri pjUri}) async {
+      {required String psbtBase64, required uri.PjUri pjUri}) async {
     final res = await FfiSenderBuilder.fromPsbtAndUri(
         psbtBase64: psbtBase64, pjUri: pjUri);
     return SenderBuilder._(field0: res.field0);
@@ -51,18 +52,21 @@ class NewSender extends FfiNewSender {
 }
 
 class Sender extends FfiSender {
-  Sender._({required super.field0});
+  final FfiSender _ffiSender;
+  Sender._({required ffiSender}) : _ffiSender = ffiSender;
 
-  static Future<Sender> load({required String token}) async {
-    final res = await FfiSender.load(token: token);
-    return Sender._(field0: res.field0);
+  static Future<Sender> load(
+      {required SenderToken token,
+      required DartSenderPersister persister}) async {
+    final res = await FfiSender.load(token: token, persister: persister);
+    return Sender._(ffiSender: res);
   }
 
   @override
   Future<(Request, V1Context)> extractV1() async {
-    final res = await super.extractV1();
+    final res = await _ffiSender.extractV1();
     final request = Request(
-      url: await Url.fromStr((res.$1.url.asString())),
+      url: await uri.Url.fromStr((res.$1.url.asString())),
       contentType: res.$1.contentType,
       body: res.$1.body,
     );
@@ -73,23 +77,39 @@ class Sender extends FfiSender {
   Future<(Request, V2PostContext)> extractV2({
     required FfiUrl ohttpProxyUrl,
   }) async {
-    final res = await super.extractV2(
+    final res = await _ffiSender.extractV2(
       ohttpProxyUrl: ohttpProxyUrl,
     );
     final request = Request(
-      url: await Url.fromStr((res.$1.url.asString())),
+      url: await uri.Url.fromStr((res.$1.url.asString())),
       contentType: res.$1.contentType,
       body: res.$1.body,
     );
     return (request, V2PostContext._(field0: res.$2.field0));
   }
 
-  // toJson automatically exposed since class extends FfiSender
-
   static Sender fromJson(String json) {
     final res = FfiSender.fromJson(json: json);
-    return Sender._(field0: res.field0);
+    return Sender._(ffiSender: res);
   }
+
+  @override
+  Future<SenderToken> key() async {
+    return _ffiSender.key();
+  }
+
+  @override
+  String toJson() {
+    return _ffiSender.toJson();
+  }
+
+  @override
+  void dispose() {
+    _ffiSender.dispose();
+  }
+
+  @override
+  bool get isDisposed => throw UnimplementedError();
 }
 
 class V1Context extends FfiV1Context {
@@ -119,7 +139,7 @@ class V2GetContext extends FfiV2GetContext {
     final res = await super.extractReq(ohttpRelay: ohttpRelay);
     return (
       Request(
-        url: await Url.fromStr(res.$1.url.asString()),
+        url: await uri.Url.fromStr(res.$1.url.asString()),
         contentType: res.$1.contentType,
         body: res.$1.body,
       ),

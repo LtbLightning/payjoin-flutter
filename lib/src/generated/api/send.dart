@@ -12,7 +12,39 @@ import 'receive/error.dart';
 import 'send/error.dart';
 import 'uri.dart';
 
-// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `from`, `from`, `from`, `from`, `from`, `from`, `from`
+// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `load`, `save`
+
+DartSenderPersister makePersister(
+        {required FutureOr<SenderToken> Function(FfiSender) save,
+        required FutureOr<FfiSender> Function(SenderToken) load}) =>
+    core.instance.api.crateApiSendMakePersister(save: save, load: load);
+
+// Rust type: RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<DartSenderPersister>>
+abstract class DartSenderPersister implements RustOpaqueInterface {}
+
+// Rust type: RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<FfiSender>>
+abstract class FfiSender implements RustOpaqueInterface {
+  Future<(Request, FfiV1Context)> extractV1();
+
+  Future<(Request, FfiV2PostContext)> extractV2(
+      {required FfiUrl ohttpProxyUrl});
+
+  static FfiSender fromJson({required String json}) =>
+      core.instance.api.crateApiSendFfiSenderFromJson(json: json);
+
+  Future<SenderToken> key();
+
+  static Future<FfiSender> load(
+          {required SenderToken token,
+          required DartSenderPersister persister}) =>
+      core.instance.api
+          .crateApiSendFfiSenderLoad(token: token, persister: persister);
+
+  String toJson();
+}
+
+// Rust type: RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<SenderToken>>
+abstract class SenderToken implements RustOpaqueInterface {}
 
 class FfiNewSender {
   final NewSender field0;
@@ -21,10 +53,9 @@ class FfiNewSender {
     required this.field0,
   });
 
-  Future<FfiSender> persist() =>
-      core.instance.api.crateApiSendFfiNewSenderPersist(
-        that: this,
-      );
+  Future<SenderToken> persist({required DartSenderPersister persister}) =>
+      core.instance.api
+          .crateApiSendFfiNewSenderPersist(that: this, persister: persister);
 
   @override
   int get hashCode => field0.hashCode;
@@ -33,44 +64,6 @@ class FfiNewSender {
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is FfiNewSender &&
-          runtimeType == other.runtimeType &&
-          field0 == other.field0;
-}
-
-class FfiSender {
-  final Sender field0;
-
-  const FfiSender({
-    required this.field0,
-  });
-
-  Future<(Request, FfiV1Context)> extractV1() =>
-      core.instance.api.crateApiSendFfiSenderExtractV1(
-        that: this,
-      );
-
-  Future<(Request, FfiV2PostContext)> extractV2(
-          {required FfiUrl ohttpProxyUrl}) =>
-      core.instance.api.crateApiSendFfiSenderExtractV2(
-          that: this, ohttpProxyUrl: ohttpProxyUrl);
-
-  static FfiSender fromJson({required String json}) =>
-      core.instance.api.crateApiSendFfiSenderFromJson(json: json);
-
-  static Future<FfiSender> load({required String token}) =>
-      core.instance.api.crateApiSendFfiSenderLoad(token: token);
-
-  String toJson() => core.instance.api.crateApiSendFfiSenderToJson(
-        that: this,
-      );
-
-  @override
-  int get hashCode => field0.hashCode;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FfiSender &&
           runtimeType == other.runtimeType &&
           field0 == other.field0;
 }

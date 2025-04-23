@@ -33,12 +33,27 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   CrossPlatformFinalizerArg get rust_arc_decrement_strong_count_ScriptPtr =>
       wire._rust_arc_decrement_strong_count_RustOpaque_bitcoin_ffiScriptPtr;
 
+  CrossPlatformFinalizerArg
+      get rust_arc_decrement_strong_count_DartReceiverPersisterPtr => wire
+          ._rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartReceiverPersisterPtr;
+
+  CrossPlatformFinalizerArg
+      get rust_arc_decrement_strong_count_DartSenderPersisterPtr => wire
+          ._rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartSenderPersisterPtr;
+
   CrossPlatformFinalizerArg get rust_arc_decrement_strong_count_ErrorPtr => wire
       ._rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerErrorPtr;
 
   CrossPlatformFinalizerArg
       get rust_arc_decrement_strong_count_FfiJsonReplyPtr => wire
           ._rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiJsonReplyPtr;
+
+  CrossPlatformFinalizerArg
+      get rust_arc_decrement_strong_count_FfiReceiverPtr => wire
+          ._rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiverPtr;
+
+  CrossPlatformFinalizerArg get rust_arc_decrement_strong_count_FfiSenderPtr =>
+      wire._rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSenderPtr;
 
   CrossPlatformFinalizerArg
       get rust_arc_decrement_strong_count_ImplementationErrorPtr => wire
@@ -75,6 +90,10 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
           ._rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPsbtInputErrorPtr;
 
   CrossPlatformFinalizerArg
+      get rust_arc_decrement_strong_count_ReceiverTokenPtr => wire
+          ._rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReceiverTokenPtr;
+
+  CrossPlatformFinalizerArg
       get rust_arc_decrement_strong_count_ReplyableErrorPtr => wire
           ._rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReplyableErrorPtr;
 
@@ -85,6 +104,10 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   CrossPlatformFinalizerArg
       get rust_arc_decrement_strong_count_SelectionErrorPtr => wire
           ._rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSelectionErrorPtr;
+
+  CrossPlatformFinalizerArg
+      get rust_arc_decrement_strong_count_SenderTokenPtr => wire
+          ._rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSenderTokenPtr;
 
   CrossPlatformFinalizerArg
       get rust_arc_decrement_strong_count_SerdeJsonErrorPtr => wire
@@ -131,9 +154,6 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
       get rust_arc_decrement_strong_count_ProvisionalProposalPtr => wire
           ._rust_arc_decrement_strong_count_RustOpaque_payjoin_ffireceiveProvisionalProposalPtr;
 
-  CrossPlatformFinalizerArg get rust_arc_decrement_strong_count_ReceiverPtr => wire
-      ._rust_arc_decrement_strong_count_RustOpaque_payjoin_ffireceiveReceiverPtr;
-
   CrossPlatformFinalizerArg
       get rust_arc_decrement_strong_count_UncheckedProposalPtr => wire
           ._rust_arc_decrement_strong_count_RustOpaque_payjoin_ffireceiveUncheckedProposalPtr;
@@ -148,9 +168,6 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
 
   CrossPlatformFinalizerArg get rust_arc_decrement_strong_count_NewSenderPtr =>
       wire._rust_arc_decrement_strong_count_RustOpaque_payjoin_ffisendNewSenderPtr;
-
-  CrossPlatformFinalizerArg get rust_arc_decrement_strong_count_SenderPtr =>
-      wire._rust_arc_decrement_strong_count_RustOpaque_payjoin_ffisendSenderPtr;
 
   CrossPlatformFinalizerArg
       get rust_arc_decrement_strong_count_SenderBuilderPtr => wire
@@ -261,8 +278,83 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
           dynamic raw);
 
   @protected
+  DartReceiverPersister
+      dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartReceiverPersister(
+          dynamic raw);
+
+  @protected
+  DartSenderPersister
+      dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartSenderPersister(
+          dynamic raw);
+
+  @protected
   FfiJsonReply
       dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiJsonReply(
+          dynamic raw);
+
+  @protected
+  FfiReceiver
+      dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver(
+          dynamic raw);
+
+  @protected
+  FfiSender
+      dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender(
+          dynamic raw);
+
+  @protected
+  ImplementationError
+      dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerImplementationError(
+          dynamic raw);
+
+  @protected
+  ReceiverToken
+      dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReceiverToken(
+          dynamic raw);
+
+  @protected
+  SenderToken
+      dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSenderToken(
+          dynamic raw);
+
+  @protected
+  DartReceiverPersister
+      dco_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartReceiverPersister(
+          dynamic raw);
+
+  @protected
+  DartSenderPersister
+      dco_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartSenderPersister(
+          dynamic raw);
+
+  @protected
+  FfiReceiver
+      dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver(
+          dynamic raw);
+
+  @protected
+  FfiSender
+      dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender(
+          dynamic raw);
+
+  @protected
+  FutureOr<ReceiverToken> Function(FfiReceiver)
+      dco_decode_DartFn_Inputs_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver_Output_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReceiverToken_AnyhowException(
+          dynamic raw);
+
+  @protected
+  FutureOr<SenderToken> Function(FfiSender)
+      dco_decode_DartFn_Inputs_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender_Output_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSenderToken_AnyhowException(
+          dynamic raw);
+
+  @protected
+  FutureOr<FfiReceiver> Function(ReceiverToken)
+      dco_decode_DartFn_Inputs_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReceiverToken_Output_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver_AnyhowException(
+          dynamic raw);
+
+  @protected
+  FutureOr<FfiSender> Function(SenderToken)
+      dco_decode_DartFn_Inputs_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSenderToken_Output_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender_AnyhowException(
           dynamic raw);
 
   @protected
@@ -287,6 +379,16 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   Script dco_decode_RustOpaque_bitcoin_ffiScript(dynamic raw);
 
   @protected
+  DartReceiverPersister
+      dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartReceiverPersister(
+          dynamic raw);
+
+  @protected
+  DartSenderPersister
+      dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartSenderPersister(
+          dynamic raw);
+
+  @protected
   Error
       dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerError(
           dynamic raw);
@@ -294,6 +396,16 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   @protected
   FfiJsonReply
       dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiJsonReply(
+          dynamic raw);
+
+  @protected
+  FfiReceiver
+      dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver(
+          dynamic raw);
+
+  @protected
+  FfiSender
+      dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender(
           dynamic raw);
 
   @protected
@@ -342,6 +454,11 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
           dynamic raw);
 
   @protected
+  ReceiverToken
+      dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReceiverToken(
+          dynamic raw);
+
+  @protected
   ReplyableError
       dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReplyableError(
           dynamic raw);
@@ -354,6 +471,11 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   @protected
   SelectionError
       dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSelectionError(
+          dynamic raw);
+
+  @protected
+  SenderToken
+      dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSenderToken(
           dynamic raw);
 
   @protected
@@ -404,9 +526,6 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
       dco_decode_RustOpaque_payjoin_ffireceiveProvisionalProposal(dynamic raw);
 
   @protected
-  Receiver dco_decode_RustOpaque_payjoin_ffireceiveReceiver(dynamic raw);
-
-  @protected
   UncheckedProposal dco_decode_RustOpaque_payjoin_ffireceiveUncheckedProposal(
       dynamic raw);
 
@@ -419,9 +538,6 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
 
   @protected
   NewSender dco_decode_RustOpaque_payjoin_ffisendNewSender(dynamic raw);
-
-  @protected
-  Sender dco_decode_RustOpaque_payjoin_ffisendSender(dynamic raw);
 
   @protected
   SenderBuilder dco_decode_RustOpaque_payjoin_ffisendSenderBuilder(dynamic raw);
@@ -448,6 +564,9 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
 
   @protected
   String dco_decode_String(dynamic raw);
+
+  @protected
+  ReceiverPersister dco_decode_TraitDef_ReceiverPersister(dynamic raw);
 
   @protected
   bool dco_decode_bool(dynamic raw);
@@ -485,13 +604,7 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
       dynamic raw);
 
   @protected
-  FfiReceiver dco_decode_box_autoadd_ffi_receiver(dynamic raw);
-
-  @protected
   FfiScript dco_decode_box_autoadd_ffi_script(dynamic raw);
-
-  @protected
-  FfiSender dco_decode_box_autoadd_ffi_sender(dynamic raw);
 
   @protected
   FfiSenderBuilder dco_decode_box_autoadd_ffi_sender_builder(dynamic raw);
@@ -611,9 +724,6 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   FfiPsbtInputError dco_decode_ffi_psbt_input_error(dynamic raw);
 
   @protected
-  FfiReceiver dco_decode_ffi_receiver(dynamic raw);
-
-  @protected
   FfiReplyableError dco_decode_ffi_replyable_error(dynamic raw);
 
   @protected
@@ -624,9 +734,6 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
 
   @protected
   FfiSelectionError dco_decode_ffi_selection_error(dynamic raw);
-
-  @protected
-  FfiSender dco_decode_ffi_sender(dynamic raw);
 
   @protected
   FfiSenderBuilder dco_decode_ffi_sender_builder(dynamic raw);
@@ -833,8 +940,63 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
           SseDeserializer deserializer);
 
   @protected
+  DartReceiverPersister
+      sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartReceiverPersister(
+          SseDeserializer deserializer);
+
+  @protected
+  DartSenderPersister
+      sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartSenderPersister(
+          SseDeserializer deserializer);
+
+  @protected
   FfiJsonReply
       sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiJsonReply(
+          SseDeserializer deserializer);
+
+  @protected
+  FfiReceiver
+      sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver(
+          SseDeserializer deserializer);
+
+  @protected
+  FfiSender
+      sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender(
+          SseDeserializer deserializer);
+
+  @protected
+  ImplementationError
+      sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerImplementationError(
+          SseDeserializer deserializer);
+
+  @protected
+  ReceiverToken
+      sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReceiverToken(
+          SseDeserializer deserializer);
+
+  @protected
+  SenderToken
+      sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSenderToken(
+          SseDeserializer deserializer);
+
+  @protected
+  DartReceiverPersister
+      sse_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartReceiverPersister(
+          SseDeserializer deserializer);
+
+  @protected
+  DartSenderPersister
+      sse_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartSenderPersister(
+          SseDeserializer deserializer);
+
+  @protected
+  FfiReceiver
+      sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver(
+          SseDeserializer deserializer);
+
+  @protected
+  FfiSender
+      sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender(
           SseDeserializer deserializer);
 
   @protected
@@ -844,6 +1006,16 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   Script sse_decode_RustOpaque_bitcoin_ffiScript(SseDeserializer deserializer);
 
   @protected
+  DartReceiverPersister
+      sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartReceiverPersister(
+          SseDeserializer deserializer);
+
+  @protected
+  DartSenderPersister
+      sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartSenderPersister(
+          SseDeserializer deserializer);
+
+  @protected
   Error
       sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerError(
           SseDeserializer deserializer);
@@ -851,6 +1023,16 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   @protected
   FfiJsonReply
       sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiJsonReply(
+          SseDeserializer deserializer);
+
+  @protected
+  FfiReceiver
+      sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver(
+          SseDeserializer deserializer);
+
+  @protected
+  FfiSender
+      sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender(
           SseDeserializer deserializer);
 
   @protected
@@ -899,6 +1081,11 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
           SseDeserializer deserializer);
 
   @protected
+  ReceiverToken
+      sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReceiverToken(
+          SseDeserializer deserializer);
+
+  @protected
   ReplyableError
       sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReplyableError(
           SseDeserializer deserializer);
@@ -911,6 +1098,11 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   @protected
   SelectionError
       sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSelectionError(
+          SseDeserializer deserializer);
+
+  @protected
+  SenderToken
+      sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSenderToken(
           SseDeserializer deserializer);
 
   @protected
@@ -965,10 +1157,6 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
           SseDeserializer deserializer);
 
   @protected
-  Receiver sse_decode_RustOpaque_payjoin_ffireceiveReceiver(
-      SseDeserializer deserializer);
-
-  @protected
   UncheckedProposal sse_decode_RustOpaque_payjoin_ffireceiveUncheckedProposal(
       SseDeserializer deserializer);
 
@@ -982,10 +1170,6 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
 
   @protected
   NewSender sse_decode_RustOpaque_payjoin_ffisendNewSender(
-      SseDeserializer deserializer);
-
-  @protected
-  Sender sse_decode_RustOpaque_payjoin_ffisendSender(
       SseDeserializer deserializer);
 
   @protected
@@ -1061,13 +1245,7 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
       SseDeserializer deserializer);
 
   @protected
-  FfiReceiver sse_decode_box_autoadd_ffi_receiver(SseDeserializer deserializer);
-
-  @protected
   FfiScript sse_decode_box_autoadd_ffi_script(SseDeserializer deserializer);
-
-  @protected
-  FfiSender sse_decode_box_autoadd_ffi_sender(SseDeserializer deserializer);
 
   @protected
   FfiSenderBuilder sse_decode_box_autoadd_ffi_sender_builder(
@@ -1204,9 +1382,6 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
       SseDeserializer deserializer);
 
   @protected
-  FfiReceiver sse_decode_ffi_receiver(SseDeserializer deserializer);
-
-  @protected
   FfiReplyableError sse_decode_ffi_replyable_error(
       SseDeserializer deserializer);
 
@@ -1219,9 +1394,6 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   @protected
   FfiSelectionError sse_decode_ffi_selection_error(
       SseDeserializer deserializer);
-
-  @protected
-  FfiSender sse_decode_ffi_sender(SseDeserializer deserializer);
 
   @protected
   FfiSenderBuilder sse_decode_ffi_sender_builder(SseDeserializer deserializer);
@@ -1583,29 +1755,11 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   }
 
   @protected
-  ffi.Pointer<wire_cst_ffi_receiver> cst_encode_box_autoadd_ffi_receiver(
-      FfiReceiver raw) {
-    // Codec=Cst (C-struct based), see doc to use other codecs
-    final ptr = wire.cst_new_box_autoadd_ffi_receiver();
-    cst_api_fill_to_wire_ffi_receiver(raw, ptr.ref);
-    return ptr;
-  }
-
-  @protected
   ffi.Pointer<wire_cst_ffi_script> cst_encode_box_autoadd_ffi_script(
       FfiScript raw) {
     // Codec=Cst (C-struct based), see doc to use other codecs
     final ptr = wire.cst_new_box_autoadd_ffi_script();
     cst_api_fill_to_wire_ffi_script(raw, ptr.ref);
-    return ptr;
-  }
-
-  @protected
-  ffi.Pointer<wire_cst_ffi_sender> cst_encode_box_autoadd_ffi_sender(
-      FfiSender raw) {
-    // Codec=Cst (C-struct based), see doc to use other codecs
-    final ptr = wire.cst_new_box_autoadd_ffi_sender();
-    cst_api_fill_to_wire_ffi_sender(raw, ptr.ref);
     return ptr;
   }
 
@@ -1906,21 +2060,9 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   }
 
   @protected
-  void cst_api_fill_to_wire_box_autoadd_ffi_receiver(
-      FfiReceiver apiObj, ffi.Pointer<wire_cst_ffi_receiver> wireObj) {
-    cst_api_fill_to_wire_ffi_receiver(apiObj, wireObj.ref);
-  }
-
-  @protected
   void cst_api_fill_to_wire_box_autoadd_ffi_script(
       FfiScript apiObj, ffi.Pointer<wire_cst_ffi_script> wireObj) {
     cst_api_fill_to_wire_ffi_script(apiObj, wireObj.ref);
-  }
-
-  @protected
-  void cst_api_fill_to_wire_box_autoadd_ffi_sender(
-      FfiSender apiObj, ffi.Pointer<wire_cst_ffi_sender> wireObj) {
-    cst_api_fill_to_wire_ffi_sender(apiObj, wireObj.ref);
   }
 
   @protected
@@ -2179,13 +2321,6 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   }
 
   @protected
-  void cst_api_fill_to_wire_ffi_receiver(
-      FfiReceiver apiObj, wire_cst_ffi_receiver wireObj) {
-    wireObj.field0 =
-        cst_encode_RustOpaque_payjoin_ffireceiveReceiver(apiObj.field0);
-  }
-
-  @protected
   void cst_api_fill_to_wire_ffi_replyable_error(
       FfiReplyableError apiObj, wire_cst_ffi_replyable_error wireObj) {
     wireObj.field0 =
@@ -2213,12 +2348,6 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
     wireObj.field0 =
         cst_encode_AutoExplicit_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSelectionError(
             apiObj.field0);
-  }
-
-  @protected
-  void cst_api_fill_to_wire_ffi_sender(
-      FfiSender apiObj, wire_cst_ffi_sender wireObj) {
-    wireObj.field0 = cst_encode_RustOpaque_payjoin_ffisendSender(apiObj.field0);
   }
 
   @protected
@@ -2370,8 +2499,72 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   }
 
   @protected
+  int cst_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartReceiverPersister(
+      DartReceiverPersister raw);
+
+  @protected
+  int cst_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartSenderPersister(
+      DartSenderPersister raw);
+
+  @protected
   int cst_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiJsonReply(
       FfiJsonReply raw);
+
+  @protected
+  int cst_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver(
+      FfiReceiver raw);
+
+  @protected
+  int cst_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender(
+      FfiSender raw);
+
+  @protected
+  int cst_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerImplementationError(
+      ImplementationError raw);
+
+  @protected
+  int cst_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReceiverToken(
+      ReceiverToken raw);
+
+  @protected
+  int cst_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSenderToken(
+      SenderToken raw);
+
+  @protected
+  int cst_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartReceiverPersister(
+      DartReceiverPersister raw);
+
+  @protected
+  int cst_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartSenderPersister(
+      DartSenderPersister raw);
+
+  @protected
+  int cst_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver(
+      FfiReceiver raw);
+
+  @protected
+  int cst_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender(
+      FfiSender raw);
+
+  @protected
+  PlatformPointer
+      cst_encode_DartFn_Inputs_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver_Output_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReceiverToken_AnyhowException(
+          FutureOr<ReceiverToken> Function(FfiReceiver) raw);
+
+  @protected
+  PlatformPointer
+      cst_encode_DartFn_Inputs_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender_Output_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSenderToken_AnyhowException(
+          FutureOr<SenderToken> Function(FfiSender) raw);
+
+  @protected
+  PlatformPointer
+      cst_encode_DartFn_Inputs_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReceiverToken_Output_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver_AnyhowException(
+          FutureOr<FfiReceiver> Function(ReceiverToken) raw);
+
+  @protected
+  PlatformPointer
+      cst_encode_DartFn_Inputs_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSenderToken_Output_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender_AnyhowException(
+          FutureOr<FfiSender> Function(SenderToken) raw);
 
   @protected
   PlatformPointer cst_encode_DartFn_Inputs_String_Output_String_AnyhowException(
@@ -2394,12 +2587,28 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   int cst_encode_RustOpaque_bitcoin_ffiScript(Script raw);
 
   @protected
+  int cst_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartReceiverPersister(
+      DartReceiverPersister raw);
+
+  @protected
+  int cst_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartSenderPersister(
+      DartSenderPersister raw);
+
+  @protected
   int cst_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerError(
       Error raw);
 
   @protected
   int cst_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiJsonReply(
       FfiJsonReply raw);
+
+  @protected
+  int cst_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver(
+      FfiReceiver raw);
+
+  @protected
+  int cst_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender(
+      FfiSender raw);
 
   @protected
   int cst_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerImplementationError(
@@ -2438,6 +2647,10 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
       PsbtInputError raw);
 
   @protected
+  int cst_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReceiverToken(
+      ReceiverToken raw);
+
+  @protected
   int cst_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReplyableError(
       ReplyableError raw);
 
@@ -2448,6 +2661,10 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   @protected
   int cst_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSelectionError(
       SelectionError raw);
+
+  @protected
+  int cst_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSenderToken(
+      SenderToken raw);
 
   @protected
   int cst_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSerdeJsonError(
@@ -2494,9 +2711,6 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
       ProvisionalProposal raw);
 
   @protected
-  int cst_encode_RustOpaque_payjoin_ffireceiveReceiver(Receiver raw);
-
-  @protected
   int cst_encode_RustOpaque_payjoin_ffireceiveUncheckedProposal(
       UncheckedProposal raw);
 
@@ -2508,9 +2722,6 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
 
   @protected
   int cst_encode_RustOpaque_payjoin_ffisendNewSender(NewSender raw);
-
-  @protected
-  int cst_encode_RustOpaque_payjoin_ffisendSender(Sender raw);
 
   @protected
   int cst_encode_RustOpaque_payjoin_ffisendSenderBuilder(SenderBuilder raw);
@@ -2638,8 +2849,87 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
 
   @protected
   void
+      sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartReceiverPersister(
+          DartReceiverPersister self, SseSerializer serializer);
+
+  @protected
+  void
+      sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartSenderPersister(
+          DartSenderPersister self, SseSerializer serializer);
+
+  @protected
+  void
       sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiJsonReply(
           FfiJsonReply self, SseSerializer serializer);
+
+  @protected
+  void
+      sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver(
+          FfiReceiver self, SseSerializer serializer);
+
+  @protected
+  void
+      sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender(
+          FfiSender self, SseSerializer serializer);
+
+  @protected
+  void
+      sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerImplementationError(
+          ImplementationError self, SseSerializer serializer);
+
+  @protected
+  void
+      sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReceiverToken(
+          ReceiverToken self, SseSerializer serializer);
+
+  @protected
+  void
+      sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSenderToken(
+          SenderToken self, SseSerializer serializer);
+
+  @protected
+  void
+      sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartReceiverPersister(
+          DartReceiverPersister self, SseSerializer serializer);
+
+  @protected
+  void
+      sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartSenderPersister(
+          DartSenderPersister self, SseSerializer serializer);
+
+  @protected
+  void
+      sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver(
+          FfiReceiver self, SseSerializer serializer);
+
+  @protected
+  void
+      sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender(
+          FfiSender self, SseSerializer serializer);
+
+  @protected
+  void
+      sse_encode_DartFn_Inputs_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver_Output_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReceiverToken_AnyhowException(
+          FutureOr<ReceiverToken> Function(FfiReceiver) self,
+          SseSerializer serializer);
+
+  @protected
+  void
+      sse_encode_DartFn_Inputs_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender_Output_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSenderToken_AnyhowException(
+          FutureOr<SenderToken> Function(FfiSender) self,
+          SseSerializer serializer);
+
+  @protected
+  void
+      sse_encode_DartFn_Inputs_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReceiverToken_Output_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver_AnyhowException(
+          FutureOr<FfiReceiver> Function(ReceiverToken) self,
+          SseSerializer serializer);
+
+  @protected
+  void
+      sse_encode_DartFn_Inputs_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSenderToken_Output_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender_AnyhowException(
+          FutureOr<FfiSender> Function(SenderToken) self,
+          SseSerializer serializer);
 
   @protected
   void sse_encode_DartFn_Inputs_String_Output_String_AnyhowException(
@@ -2663,6 +2953,16 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
 
   @protected
   void
+      sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartReceiverPersister(
+          DartReceiverPersister self, SseSerializer serializer);
+
+  @protected
+  void
+      sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartSenderPersister(
+          DartSenderPersister self, SseSerializer serializer);
+
+  @protected
+  void
       sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerError(
           Error self, SseSerializer serializer);
 
@@ -2670,6 +2970,16 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   void
       sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiJsonReply(
           FfiJsonReply self, SseSerializer serializer);
+
+  @protected
+  void
+      sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver(
+          FfiReceiver self, SseSerializer serializer);
+
+  @protected
+  void
+      sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender(
+          FfiSender self, SseSerializer serializer);
 
   @protected
   void
@@ -2718,6 +3028,11 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
 
   @protected
   void
+      sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReceiverToken(
+          ReceiverToken self, SseSerializer serializer);
+
+  @protected
+  void
       sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReplyableError(
           ReplyableError self, SseSerializer serializer);
 
@@ -2730,6 +3045,11 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   void
       sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSelectionError(
           SelectionError self, SseSerializer serializer);
+
+  @protected
+  void
+      sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSenderToken(
+          SenderToken self, SseSerializer serializer);
 
   @protected
   void
@@ -2782,10 +3102,6 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
       ProvisionalProposal self, SseSerializer serializer);
 
   @protected
-  void sse_encode_RustOpaque_payjoin_ffireceiveReceiver(
-      Receiver self, SseSerializer serializer);
-
-  @protected
   void sse_encode_RustOpaque_payjoin_ffireceiveUncheckedProposal(
       UncheckedProposal self, SseSerializer serializer);
 
@@ -2800,10 +3116,6 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   @protected
   void sse_encode_RustOpaque_payjoin_ffisendNewSender(
       NewSender self, SseSerializer serializer);
-
-  @protected
-  void sse_encode_RustOpaque_payjoin_ffisendSender(
-      Sender self, SseSerializer serializer);
 
   @protected
   void sse_encode_RustOpaque_payjoin_ffisendSenderBuilder(
@@ -2881,16 +3193,8 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
       FfiProvisionalProposal self, SseSerializer serializer);
 
   @protected
-  void sse_encode_box_autoadd_ffi_receiver(
-      FfiReceiver self, SseSerializer serializer);
-
-  @protected
   void sse_encode_box_autoadd_ffi_script(
       FfiScript self, SseSerializer serializer);
-
-  @protected
-  void sse_encode_box_autoadd_ffi_sender(
-      FfiSender self, SseSerializer serializer);
 
   @protected
   void sse_encode_box_autoadd_ffi_sender_builder(
@@ -3032,9 +3336,6 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
       FfiPsbtInputError self, SseSerializer serializer);
 
   @protected
-  void sse_encode_ffi_receiver(FfiReceiver self, SseSerializer serializer);
-
-  @protected
   void sse_encode_ffi_replyable_error(
       FfiReplyableError self, SseSerializer serializer);
 
@@ -3048,9 +3349,6 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
   @protected
   void sse_encode_ffi_selection_error(
       FfiSelectionError self, SseSerializer serializer);
-
-  @protected
-  void sse_encode_ffi_sender(FfiSender self, SseSerializer serializer);
 
   @protected
   void sse_encode_ffi_sender_builder(
@@ -3288,6 +3586,177 @@ class coreWire implements BaseWire {
           void Function(int, ffi.Pointer<wire_cst_list_prim_u_8_strict>,
               ffi.Pointer<wire_cst_list_prim_u_8_strict>)>();
 
+  WireSyncRust2DartDco wire__crate__api__receive__DartReceiverPersister_new(
+    ffi.Pointer<ffi.Void> save,
+    ffi.Pointer<ffi.Void> load,
+  ) {
+    return _wire__crate__api__receive__DartReceiverPersister_new(
+      save,
+      load,
+    );
+  }
+
+  late final _wire__crate__api__receive__DartReceiverPersister_newPtr = _lookup<
+          ffi.NativeFunction<
+              WireSyncRust2DartDco Function(
+                  ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>>(
+      'frbgen_payjoin_flutter_wire__crate__api__receive__DartReceiverPersister_new');
+  late final _wire__crate__api__receive__DartReceiverPersister_new =
+      _wire__crate__api__receive__DartReceiverPersister_newPtr.asFunction<
+          WireSyncRust2DartDco Function(
+              ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>();
+
+  void wire__crate__api__receive__FfiReceiver_extract_req(
+    int port_,
+    int that,
+    ffi.Pointer<wire_cst_list_prim_u_8_strict> ohttp_relay,
+  ) {
+    return _wire__crate__api__receive__FfiReceiver_extract_req(
+      port_,
+      that,
+      ohttp_relay,
+    );
+  }
+
+  late final _wire__crate__api__receive__FfiReceiver_extract_reqPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Void Function(ffi.Int64, ffi.UintPtr,
+                  ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
+      'frbgen_payjoin_flutter_wire__crate__api__receive__FfiReceiver_extract_req');
+  late final _wire__crate__api__receive__FfiReceiver_extract_req =
+      _wire__crate__api__receive__FfiReceiver_extract_reqPtr.asFunction<
+          void Function(
+              int, int, ffi.Pointer<wire_cst_list_prim_u_8_strict>)>();
+
+  WireSyncRust2DartDco wire__crate__api__receive__FfiReceiver_from_json(
+    ffi.Pointer<wire_cst_list_prim_u_8_strict> json,
+  ) {
+    return _wire__crate__api__receive__FfiReceiver_from_json(
+      json,
+    );
+  }
+
+  late final _wire__crate__api__receive__FfiReceiver_from_jsonPtr = _lookup<
+          ffi.NativeFunction<
+              WireSyncRust2DartDco Function(
+                  ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
+      'frbgen_payjoin_flutter_wire__crate__api__receive__FfiReceiver_from_json');
+  late final _wire__crate__api__receive__FfiReceiver_from_json =
+      _wire__crate__api__receive__FfiReceiver_from_jsonPtr.asFunction<
+          WireSyncRust2DartDco Function(
+              ffi.Pointer<wire_cst_list_prim_u_8_strict>)>();
+
+  WireSyncRust2DartDco wire__crate__api__receive__FfiReceiver_id(
+    int that,
+  ) {
+    return _wire__crate__api__receive__FfiReceiver_id(
+      that,
+    );
+  }
+
+  late final _wire__crate__api__receive__FfiReceiver_idPtr =
+      _lookup<ffi.NativeFunction<WireSyncRust2DartDco Function(ffi.UintPtr)>>(
+          'frbgen_payjoin_flutter_wire__crate__api__receive__FfiReceiver_id');
+  late final _wire__crate__api__receive__FfiReceiver_id =
+      _wire__crate__api__receive__FfiReceiver_idPtr
+          .asFunction<WireSyncRust2DartDco Function(int)>();
+
+  void wire__crate__api__receive__FfiReceiver_key(
+    int port_,
+    int that,
+  ) {
+    return _wire__crate__api__receive__FfiReceiver_key(
+      port_,
+      that,
+    );
+  }
+
+  late final _wire__crate__api__receive__FfiReceiver_keyPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int64, ffi.UintPtr)>>(
+          'frbgen_payjoin_flutter_wire__crate__api__receive__FfiReceiver_key');
+  late final _wire__crate__api__receive__FfiReceiver_key =
+      _wire__crate__api__receive__FfiReceiver_keyPtr
+          .asFunction<void Function(int, int)>();
+
+  void wire__crate__api__receive__FfiReceiver_load(
+    int port_,
+    int token,
+    int persister,
+  ) {
+    return _wire__crate__api__receive__FfiReceiver_load(
+      port_,
+      token,
+      persister,
+    );
+  }
+
+  late final _wire__crate__api__receive__FfiReceiver_loadPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Void Function(ffi.Int64, ffi.UintPtr, ffi.UintPtr)>>(
+      'frbgen_payjoin_flutter_wire__crate__api__receive__FfiReceiver_load');
+  late final _wire__crate__api__receive__FfiReceiver_load =
+      _wire__crate__api__receive__FfiReceiver_loadPtr
+          .asFunction<void Function(int, int, int)>();
+
+  void wire__crate__api__receive__FfiReceiver_pj_uri(
+    int port_,
+    int that,
+  ) {
+    return _wire__crate__api__receive__FfiReceiver_pj_uri(
+      port_,
+      that,
+    );
+  }
+
+  late final _wire__crate__api__receive__FfiReceiver_pj_uriPtr = _lookup<
+          ffi.NativeFunction<ffi.Void Function(ffi.Int64, ffi.UintPtr)>>(
+      'frbgen_payjoin_flutter_wire__crate__api__receive__FfiReceiver_pj_uri');
+  late final _wire__crate__api__receive__FfiReceiver_pj_uri =
+      _wire__crate__api__receive__FfiReceiver_pj_uriPtr
+          .asFunction<void Function(int, int)>();
+
+  void wire__crate__api__receive__FfiReceiver_process_res(
+    int port_,
+    int that,
+    ffi.Pointer<wire_cst_list_prim_u_8_loose> body,
+    ffi.Pointer<wire_cst_client_response> ctx,
+  ) {
+    return _wire__crate__api__receive__FfiReceiver_process_res(
+      port_,
+      that,
+      body,
+      ctx,
+    );
+  }
+
+  late final _wire__crate__api__receive__FfiReceiver_process_resPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Void Function(
+                  ffi.Int64,
+                  ffi.UintPtr,
+                  ffi.Pointer<wire_cst_list_prim_u_8_loose>,
+                  ffi.Pointer<wire_cst_client_response>)>>(
+      'frbgen_payjoin_flutter_wire__crate__api__receive__FfiReceiver_process_res');
+  late final _wire__crate__api__receive__FfiReceiver_process_res =
+      _wire__crate__api__receive__FfiReceiver_process_resPtr.asFunction<
+          void Function(int, int, ffi.Pointer<wire_cst_list_prim_u_8_loose>,
+              ffi.Pointer<wire_cst_client_response>)>();
+
+  WireSyncRust2DartDco wire__crate__api__receive__FfiReceiver_to_json(
+    int that,
+  ) {
+    return _wire__crate__api__receive__FfiReceiver_to_json(
+      that,
+    );
+  }
+
+  late final _wire__crate__api__receive__FfiReceiver_to_jsonPtr = _lookup<
+          ffi.NativeFunction<WireSyncRust2DartDco Function(ffi.UintPtr)>>(
+      'frbgen_payjoin_flutter_wire__crate__api__receive__FfiReceiver_to_json');
+  late final _wire__crate__api__receive__FfiReceiver_to_json =
+      _wire__crate__api__receive__FfiReceiver_to_jsonPtr
+          .asFunction<WireSyncRust2DartDco Function(int)>();
+
   void wire__crate__api__receive__ffi_input_pair_new(
     int port_,
     ffi.Pointer<wire_cst_tx_in> txin,
@@ -3404,21 +3873,23 @@ class coreWire implements BaseWire {
   void wire__crate__api__receive__ffi_new_receiver_persist(
     int port_,
     ffi.Pointer<wire_cst_ffi_new_receiver> that,
+    int persister,
   ) {
     return _wire__crate__api__receive__ffi_new_receiver_persist(
       port_,
       that,
+      persister,
     );
   }
 
   late final _wire__crate__api__receive__ffi_new_receiver_persistPtr = _lookup<
           ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Int64, ffi.Pointer<wire_cst_ffi_new_receiver>)>>(
+              ffi.Void Function(ffi.Int64,
+                  ffi.Pointer<wire_cst_ffi_new_receiver>, ffi.UintPtr)>>(
       'frbgen_payjoin_flutter_wire__crate__api__receive__ffi_new_receiver_persist');
   late final _wire__crate__api__receive__ffi_new_receiver_persist =
       _wire__crate__api__receive__ffi_new_receiver_persistPtr.asFunction<
-          void Function(int, ffi.Pointer<wire_cst_ffi_new_receiver>)>();
+          void Function(int, ffi.Pointer<wire_cst_ffi_new_receiver>, int)>();
 
   void wire__crate__api__receive__ffi_outputs_unknown_identify_receiver_outputs(
     int port_,
@@ -3579,148 +4050,6 @@ class coreWire implements BaseWire {
                   ffi.Pointer<ffi.Void>,
                   ffi.Pointer<ffi.Uint64>,
                   ffi.Pointer<ffi.Uint64>)>();
-
-  void wire__crate__api__receive__ffi_receiver_extract_req(
-    int port_,
-    ffi.Pointer<wire_cst_ffi_receiver> that,
-    ffi.Pointer<wire_cst_list_prim_u_8_strict> ohttp_relay,
-  ) {
-    return _wire__crate__api__receive__ffi_receiver_extract_req(
-      port_,
-      that,
-      ohttp_relay,
-    );
-  }
-
-  late final _wire__crate__api__receive__ffi_receiver_extract_reqPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(ffi.Int64, ffi.Pointer<wire_cst_ffi_receiver>,
-                  ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
-      'frbgen_payjoin_flutter_wire__crate__api__receive__ffi_receiver_extract_req');
-  late final _wire__crate__api__receive__ffi_receiver_extract_req =
-      _wire__crate__api__receive__ffi_receiver_extract_reqPtr.asFunction<
-          void Function(int, ffi.Pointer<wire_cst_ffi_receiver>,
-              ffi.Pointer<wire_cst_list_prim_u_8_strict>)>();
-
-  WireSyncRust2DartDco wire__crate__api__receive__ffi_receiver_from_json(
-    ffi.Pointer<wire_cst_list_prim_u_8_strict> json,
-  ) {
-    return _wire__crate__api__receive__ffi_receiver_from_json(
-      json,
-    );
-  }
-
-  late final _wire__crate__api__receive__ffi_receiver_from_jsonPtr = _lookup<
-          ffi.NativeFunction<
-              WireSyncRust2DartDco Function(
-                  ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
-      'frbgen_payjoin_flutter_wire__crate__api__receive__ffi_receiver_from_json');
-  late final _wire__crate__api__receive__ffi_receiver_from_json =
-      _wire__crate__api__receive__ffi_receiver_from_jsonPtr.asFunction<
-          WireSyncRust2DartDco Function(
-              ffi.Pointer<wire_cst_list_prim_u_8_strict>)>();
-
-  WireSyncRust2DartDco wire__crate__api__receive__ffi_receiver_id(
-    ffi.Pointer<wire_cst_ffi_receiver> that,
-  ) {
-    return _wire__crate__api__receive__ffi_receiver_id(
-      that,
-    );
-  }
-
-  late final _wire__crate__api__receive__ffi_receiver_idPtr = _lookup<
-          ffi.NativeFunction<
-              WireSyncRust2DartDco Function(
-                  ffi.Pointer<wire_cst_ffi_receiver>)>>(
-      'frbgen_payjoin_flutter_wire__crate__api__receive__ffi_receiver_id');
-  late final _wire__crate__api__receive__ffi_receiver_id =
-      _wire__crate__api__receive__ffi_receiver_idPtr.asFunction<
-          WireSyncRust2DartDco Function(ffi.Pointer<wire_cst_ffi_receiver>)>();
-
-  void wire__crate__api__receive__ffi_receiver_load(
-    int port_,
-    ffi.Pointer<wire_cst_list_prim_u_8_strict> _token,
-  ) {
-    return _wire__crate__api__receive__ffi_receiver_load(
-      port_,
-      _token,
-    );
-  }
-
-  late final _wire__crate__api__receive__ffi_receiver_loadPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Int64, ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
-      'frbgen_payjoin_flutter_wire__crate__api__receive__ffi_receiver_load');
-  late final _wire__crate__api__receive__ffi_receiver_load =
-      _wire__crate__api__receive__ffi_receiver_loadPtr.asFunction<
-          void Function(int, ffi.Pointer<wire_cst_list_prim_u_8_strict>)>();
-
-  void wire__crate__api__receive__ffi_receiver_pj_uri(
-    int port_,
-    ffi.Pointer<wire_cst_ffi_receiver> that,
-  ) {
-    return _wire__crate__api__receive__ffi_receiver_pj_uri(
-      port_,
-      that,
-    );
-  }
-
-  late final _wire__crate__api__receive__ffi_receiver_pj_uriPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Int64, ffi.Pointer<wire_cst_ffi_receiver>)>>(
-      'frbgen_payjoin_flutter_wire__crate__api__receive__ffi_receiver_pj_uri');
-  late final _wire__crate__api__receive__ffi_receiver_pj_uri =
-      _wire__crate__api__receive__ffi_receiver_pj_uriPtr
-          .asFunction<void Function(int, ffi.Pointer<wire_cst_ffi_receiver>)>();
-
-  void wire__crate__api__receive__ffi_receiver_process_res(
-    int port_,
-    ffi.Pointer<wire_cst_ffi_receiver> that,
-    ffi.Pointer<wire_cst_list_prim_u_8_loose> body,
-    ffi.Pointer<wire_cst_client_response> ctx,
-  ) {
-    return _wire__crate__api__receive__ffi_receiver_process_res(
-      port_,
-      that,
-      body,
-      ctx,
-    );
-  }
-
-  late final _wire__crate__api__receive__ffi_receiver_process_resPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Int64,
-                  ffi.Pointer<wire_cst_ffi_receiver>,
-                  ffi.Pointer<wire_cst_list_prim_u_8_loose>,
-                  ffi.Pointer<wire_cst_client_response>)>>(
-      'frbgen_payjoin_flutter_wire__crate__api__receive__ffi_receiver_process_res');
-  late final _wire__crate__api__receive__ffi_receiver_process_res =
-      _wire__crate__api__receive__ffi_receiver_process_resPtr.asFunction<
-          void Function(
-              int,
-              ffi.Pointer<wire_cst_ffi_receiver>,
-              ffi.Pointer<wire_cst_list_prim_u_8_loose>,
-              ffi.Pointer<wire_cst_client_response>)>();
-
-  WireSyncRust2DartDco wire__crate__api__receive__ffi_receiver_to_json(
-    ffi.Pointer<wire_cst_ffi_receiver> that,
-  ) {
-    return _wire__crate__api__receive__ffi_receiver_to_json(
-      that,
-    );
-  }
-
-  late final _wire__crate__api__receive__ffi_receiver_to_jsonPtr = _lookup<
-          ffi.NativeFunction<
-              WireSyncRust2DartDco Function(
-                  ffi.Pointer<wire_cst_ffi_receiver>)>>(
-      'frbgen_payjoin_flutter_wire__crate__api__receive__ffi_receiver_to_json');
-  late final _wire__crate__api__receive__ffi_receiver_to_json =
-      _wire__crate__api__receive__ffi_receiver_to_jsonPtr.asFunction<
-          WireSyncRust2DartDco Function(ffi.Pointer<wire_cst_ffi_receiver>)>();
 
   void
       wire__crate__api__receive__ffi_unchecked_proposal_assume_interactive_receiver(
@@ -4032,24 +4361,134 @@ class coreWire implements BaseWire {
               void Function(int, ffi.Pointer<wire_cst_ffi_wants_outputs>,
                   ffi.Pointer<wire_cst_ffi_script>)>();
 
-  void wire__crate__api__send__ffi_new_sender_persist(
+  void wire__crate__api__send__FfiSender_extract_v1(
     int port_,
-    ffi.Pointer<wire_cst_ffi_new_sender> that,
+    int that,
   ) {
-    return _wire__crate__api__send__ffi_new_sender_persist(
+    return _wire__crate__api__send__FfiSender_extract_v1(
       port_,
       that,
     );
   }
 
-  late final _wire__crate__api__send__ffi_new_sender_persistPtr = _lookup<
+  late final _wire__crate__api__send__FfiSender_extract_v1Ptr = _lookup<
+          ffi.NativeFunction<ffi.Void Function(ffi.Int64, ffi.UintPtr)>>(
+      'frbgen_payjoin_flutter_wire__crate__api__send__FfiSender_extract_v1');
+  late final _wire__crate__api__send__FfiSender_extract_v1 =
+      _wire__crate__api__send__FfiSender_extract_v1Ptr
+          .asFunction<void Function(int, int)>();
+
+  void wire__crate__api__send__FfiSender_extract_v2(
+    int port_,
+    int that,
+    ffi.Pointer<wire_cst_ffi_url> ohttp_proxy_url,
+  ) {
+    return _wire__crate__api__send__FfiSender_extract_v2(
+      port_,
+      that,
+      ohttp_proxy_url,
+    );
+  }
+
+  late final _wire__crate__api__send__FfiSender_extract_v2Ptr = _lookup<
           ffi.NativeFunction<
               ffi.Void Function(
-                  ffi.Int64, ffi.Pointer<wire_cst_ffi_new_sender>)>>(
+                  ffi.Int64, ffi.UintPtr, ffi.Pointer<wire_cst_ffi_url>)>>(
+      'frbgen_payjoin_flutter_wire__crate__api__send__FfiSender_extract_v2');
+  late final _wire__crate__api__send__FfiSender_extract_v2 =
+      _wire__crate__api__send__FfiSender_extract_v2Ptr
+          .asFunction<void Function(int, int, ffi.Pointer<wire_cst_ffi_url>)>();
+
+  WireSyncRust2DartDco wire__crate__api__send__FfiSender_from_json(
+    ffi.Pointer<wire_cst_list_prim_u_8_strict> json,
+  ) {
+    return _wire__crate__api__send__FfiSender_from_json(
+      json,
+    );
+  }
+
+  late final _wire__crate__api__send__FfiSender_from_jsonPtr = _lookup<
+          ffi.NativeFunction<
+              WireSyncRust2DartDco Function(
+                  ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
+      'frbgen_payjoin_flutter_wire__crate__api__send__FfiSender_from_json');
+  late final _wire__crate__api__send__FfiSender_from_json =
+      _wire__crate__api__send__FfiSender_from_jsonPtr.asFunction<
+          WireSyncRust2DartDco Function(
+              ffi.Pointer<wire_cst_list_prim_u_8_strict>)>();
+
+  void wire__crate__api__send__FfiSender_key(
+    int port_,
+    int that,
+  ) {
+    return _wire__crate__api__send__FfiSender_key(
+      port_,
+      that,
+    );
+  }
+
+  late final _wire__crate__api__send__FfiSender_keyPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int64, ffi.UintPtr)>>(
+          'frbgen_payjoin_flutter_wire__crate__api__send__FfiSender_key');
+  late final _wire__crate__api__send__FfiSender_key =
+      _wire__crate__api__send__FfiSender_keyPtr
+          .asFunction<void Function(int, int)>();
+
+  void wire__crate__api__send__FfiSender_load(
+    int port_,
+    int token,
+    int persister,
+  ) {
+    return _wire__crate__api__send__FfiSender_load(
+      port_,
+      token,
+      persister,
+    );
+  }
+
+  late final _wire__crate__api__send__FfiSender_loadPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Void Function(ffi.Int64, ffi.UintPtr, ffi.UintPtr)>>(
+      'frbgen_payjoin_flutter_wire__crate__api__send__FfiSender_load');
+  late final _wire__crate__api__send__FfiSender_load =
+      _wire__crate__api__send__FfiSender_loadPtr
+          .asFunction<void Function(int, int, int)>();
+
+  WireSyncRust2DartDco wire__crate__api__send__FfiSender_to_json(
+    int that,
+  ) {
+    return _wire__crate__api__send__FfiSender_to_json(
+      that,
+    );
+  }
+
+  late final _wire__crate__api__send__FfiSender_to_jsonPtr =
+      _lookup<ffi.NativeFunction<WireSyncRust2DartDco Function(ffi.UintPtr)>>(
+          'frbgen_payjoin_flutter_wire__crate__api__send__FfiSender_to_json');
+  late final _wire__crate__api__send__FfiSender_to_json =
+      _wire__crate__api__send__FfiSender_to_jsonPtr
+          .asFunction<WireSyncRust2DartDco Function(int)>();
+
+  void wire__crate__api__send__ffi_new_sender_persist(
+    int port_,
+    ffi.Pointer<wire_cst_ffi_new_sender> that,
+    int persister,
+  ) {
+    return _wire__crate__api__send__ffi_new_sender_persist(
+      port_,
+      that,
+      persister,
+    );
+  }
+
+  late final _wire__crate__api__send__ffi_new_sender_persistPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Void Function(ffi.Int64, ffi.Pointer<wire_cst_ffi_new_sender>,
+                  ffi.UintPtr)>>(
       'frbgen_payjoin_flutter_wire__crate__api__send__ffi_new_sender_persist');
   late final _wire__crate__api__send__ffi_new_sender_persist =
       _wire__crate__api__send__ffi_new_sender_persistPtr.asFunction<
-          void Function(int, ffi.Pointer<wire_cst_ffi_new_sender>)>();
+          void Function(int, ffi.Pointer<wire_cst_ffi_new_sender>, int)>();
 
   void
       wire__crate__api__send__ffi_sender_builder_always_disable_output_substitution(
@@ -4182,99 +4621,6 @@ class coreWire implements BaseWire {
               void Function(int, ffi.Pointer<wire_cst_list_prim_u_8_strict>,
                   ffi.Pointer<wire_cst_ffi_pj_uri>)>();
 
-  void wire__crate__api__send__ffi_sender_extract_v1(
-    int port_,
-    ffi.Pointer<wire_cst_ffi_sender> that,
-  ) {
-    return _wire__crate__api__send__ffi_sender_extract_v1(
-      port_,
-      that,
-    );
-  }
-
-  late final _wire__crate__api__send__ffi_sender_extract_v1Ptr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(ffi.Int64, ffi.Pointer<wire_cst_ffi_sender>)>>(
-      'frbgen_payjoin_flutter_wire__crate__api__send__ffi_sender_extract_v1');
-  late final _wire__crate__api__send__ffi_sender_extract_v1 =
-      _wire__crate__api__send__ffi_sender_extract_v1Ptr
-          .asFunction<void Function(int, ffi.Pointer<wire_cst_ffi_sender>)>();
-
-  void wire__crate__api__send__ffi_sender_extract_v2(
-    int port_,
-    ffi.Pointer<wire_cst_ffi_sender> that,
-    ffi.Pointer<wire_cst_ffi_url> ohttp_proxy_url,
-  ) {
-    return _wire__crate__api__send__ffi_sender_extract_v2(
-      port_,
-      that,
-      ohttp_proxy_url,
-    );
-  }
-
-  late final _wire__crate__api__send__ffi_sender_extract_v2Ptr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(ffi.Int64, ffi.Pointer<wire_cst_ffi_sender>,
-                  ffi.Pointer<wire_cst_ffi_url>)>>(
-      'frbgen_payjoin_flutter_wire__crate__api__send__ffi_sender_extract_v2');
-  late final _wire__crate__api__send__ffi_sender_extract_v2 =
-      _wire__crate__api__send__ffi_sender_extract_v2Ptr.asFunction<
-          void Function(int, ffi.Pointer<wire_cst_ffi_sender>,
-              ffi.Pointer<wire_cst_ffi_url>)>();
-
-  WireSyncRust2DartDco wire__crate__api__send__ffi_sender_from_json(
-    ffi.Pointer<wire_cst_list_prim_u_8_strict> json,
-  ) {
-    return _wire__crate__api__send__ffi_sender_from_json(
-      json,
-    );
-  }
-
-  late final _wire__crate__api__send__ffi_sender_from_jsonPtr = _lookup<
-          ffi.NativeFunction<
-              WireSyncRust2DartDco Function(
-                  ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
-      'frbgen_payjoin_flutter_wire__crate__api__send__ffi_sender_from_json');
-  late final _wire__crate__api__send__ffi_sender_from_json =
-      _wire__crate__api__send__ffi_sender_from_jsonPtr.asFunction<
-          WireSyncRust2DartDco Function(
-              ffi.Pointer<wire_cst_list_prim_u_8_strict>)>();
-
-  void wire__crate__api__send__ffi_sender_load(
-    int port_,
-    ffi.Pointer<wire_cst_list_prim_u_8_strict> _token,
-  ) {
-    return _wire__crate__api__send__ffi_sender_load(
-      port_,
-      _token,
-    );
-  }
-
-  late final _wire__crate__api__send__ffi_sender_loadPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(
-                  ffi.Int64, ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
-      'frbgen_payjoin_flutter_wire__crate__api__send__ffi_sender_load');
-  late final _wire__crate__api__send__ffi_sender_load =
-      _wire__crate__api__send__ffi_sender_loadPtr.asFunction<
-          void Function(int, ffi.Pointer<wire_cst_list_prim_u_8_strict>)>();
-
-  WireSyncRust2DartDco wire__crate__api__send__ffi_sender_to_json(
-    ffi.Pointer<wire_cst_ffi_sender> that,
-  ) {
-    return _wire__crate__api__send__ffi_sender_to_json(
-      that,
-    );
-  }
-
-  late final _wire__crate__api__send__ffi_sender_to_jsonPtr = _lookup<
-          ffi.NativeFunction<
-              WireSyncRust2DartDco Function(ffi.Pointer<wire_cst_ffi_sender>)>>(
-      'frbgen_payjoin_flutter_wire__crate__api__send__ffi_sender_to_json');
-  late final _wire__crate__api__send__ffi_sender_to_json =
-      _wire__crate__api__send__ffi_sender_to_jsonPtr.asFunction<
-          WireSyncRust2DartDco Function(ffi.Pointer<wire_cst_ffi_sender>)>();
-
   void wire__crate__api__send__ffi_v_1_context_process_response(
     int port_,
     ffi.Pointer<wire_cst_ffi_v_1_context> that,
@@ -4380,6 +4726,26 @@ class coreWire implements BaseWire {
           .asFunction<
               void Function(int, ffi.Pointer<wire_cst_ffi_v_2_post_context>,
                   ffi.Pointer<wire_cst_list_prim_u_8_loose>)>();
+
+  WireSyncRust2DartDco wire__crate__api__send__make_persister(
+    ffi.Pointer<ffi.Void> save,
+    ffi.Pointer<ffi.Void> load,
+  ) {
+    return _wire__crate__api__send__make_persister(
+      save,
+      load,
+    );
+  }
+
+  late final _wire__crate__api__send__make_persisterPtr = _lookup<
+          ffi.NativeFunction<
+              WireSyncRust2DartDco Function(
+                  ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>>(
+      'frbgen_payjoin_flutter_wire__crate__api__send__make_persister');
+  late final _wire__crate__api__send__make_persister =
+      _wire__crate__api__send__make_persisterPtr.asFunction<
+          WireSyncRust2DartDco Function(
+              ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>();
 
   void wire__crate__api__uri__ffi_ohttp_keys_decode(
     int port_,
@@ -4627,6 +4993,70 @@ class coreWire implements BaseWire {
           .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
 
   void
+      rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartReceiverPersister(
+    ffi.Pointer<ffi.Void> ptr,
+  ) {
+    return _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartReceiverPersister(
+      ptr,
+    );
+  }
+
+  late final _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartReceiverPersisterPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
+          'frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartReceiverPersister');
+  late final _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartReceiverPersister =
+      _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartReceiverPersisterPtr
+          .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
+
+  void
+      rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartReceiverPersister(
+    ffi.Pointer<ffi.Void> ptr,
+  ) {
+    return _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartReceiverPersister(
+      ptr,
+    );
+  }
+
+  late final _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartReceiverPersisterPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
+          'frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartReceiverPersister');
+  late final _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartReceiverPersister =
+      _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartReceiverPersisterPtr
+          .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
+
+  void
+      rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartSenderPersister(
+    ffi.Pointer<ffi.Void> ptr,
+  ) {
+    return _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartSenderPersister(
+      ptr,
+    );
+  }
+
+  late final _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartSenderPersisterPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
+          'frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartSenderPersister');
+  late final _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartSenderPersister =
+      _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartSenderPersisterPtr
+          .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
+
+  void
+      rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartSenderPersister(
+    ffi.Pointer<ffi.Void> ptr,
+  ) {
+    return _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartSenderPersister(
+      ptr,
+    );
+  }
+
+  late final _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartSenderPersisterPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
+          'frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartSenderPersister');
+  late final _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartSenderPersister =
+      _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartSenderPersisterPtr
+          .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
+
+  void
       rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerError(
     ffi.Pointer<ffi.Void> ptr,
   ) {
@@ -4688,6 +5118,70 @@ class coreWire implements BaseWire {
           'frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiJsonReply');
   late final _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiJsonReply =
       _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiJsonReplyPtr
+          .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
+
+  void
+      rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver(
+    ffi.Pointer<ffi.Void> ptr,
+  ) {
+    return _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver(
+      ptr,
+    );
+  }
+
+  late final _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiverPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
+          'frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver');
+  late final _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver =
+      _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiverPtr
+          .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
+
+  void
+      rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver(
+    ffi.Pointer<ffi.Void> ptr,
+  ) {
+    return _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver(
+      ptr,
+    );
+  }
+
+  late final _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiverPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
+          'frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver');
+  late final _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver =
+      _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiverPtr
+          .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
+
+  void
+      rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender(
+    ffi.Pointer<ffi.Void> ptr,
+  ) {
+    return _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender(
+      ptr,
+    );
+  }
+
+  late final _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSenderPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
+          'frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender');
+  late final _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender =
+      _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSenderPtr
+          .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
+
+  void
+      rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender(
+    ffi.Pointer<ffi.Void> ptr,
+  ) {
+    return _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender(
+      ptr,
+    );
+  }
+
+  late final _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSenderPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
+          'frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender');
+  late final _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender =
+      _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSenderPtr
           .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
 
   void
@@ -4979,6 +5473,38 @@ class coreWire implements BaseWire {
           .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
 
   void
+      rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReceiverToken(
+    ffi.Pointer<ffi.Void> ptr,
+  ) {
+    return _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReceiverToken(
+      ptr,
+    );
+  }
+
+  late final _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReceiverTokenPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
+          'frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReceiverToken');
+  late final _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReceiverToken =
+      _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReceiverTokenPtr
+          .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
+
+  void
+      rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReceiverToken(
+    ffi.Pointer<ffi.Void> ptr,
+  ) {
+    return _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReceiverToken(
+      ptr,
+    );
+  }
+
+  late final _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReceiverTokenPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
+          'frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReceiverToken');
+  late final _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReceiverToken =
+      _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReceiverTokenPtr
+          .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
+
+  void
       rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReplyableError(
     ffi.Pointer<ffi.Void> ptr,
   ) {
@@ -5072,6 +5598,38 @@ class coreWire implements BaseWire {
           'frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSelectionError');
   late final _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSelectionError =
       _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSelectionErrorPtr
+          .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
+
+  void
+      rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSenderToken(
+    ffi.Pointer<ffi.Void> ptr,
+  ) {
+    return _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSenderToken(
+      ptr,
+    );
+  }
+
+  late final _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSenderTokenPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
+          'frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSenderToken');
+  late final _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSenderToken =
+      _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSenderTokenPtr
+          .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
+
+  void
+      rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSenderToken(
+    ffi.Pointer<ffi.Void> ptr,
+  ) {
+    return _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSenderToken(
+      ptr,
+    );
+  }
+
+  late final _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSenderTokenPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
+          'frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSenderToken');
+  late final _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSenderToken =
+      _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSenderTokenPtr
           .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
 
   void
@@ -5450,36 +6008,6 @@ class coreWire implements BaseWire {
       _rust_arc_decrement_strong_count_RustOpaque_payjoin_ffireceiveProvisionalProposalPtr
           .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
 
-  void rust_arc_increment_strong_count_RustOpaque_payjoin_ffireceiveReceiver(
-    ffi.Pointer<ffi.Void> ptr,
-  ) {
-    return _rust_arc_increment_strong_count_RustOpaque_payjoin_ffireceiveReceiver(
-      ptr,
-    );
-  }
-
-  late final _rust_arc_increment_strong_count_RustOpaque_payjoin_ffireceiveReceiverPtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
-          'frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_payjoin_ffireceiveReceiver');
-  late final _rust_arc_increment_strong_count_RustOpaque_payjoin_ffireceiveReceiver =
-      _rust_arc_increment_strong_count_RustOpaque_payjoin_ffireceiveReceiverPtr
-          .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
-
-  void rust_arc_decrement_strong_count_RustOpaque_payjoin_ffireceiveReceiver(
-    ffi.Pointer<ffi.Void> ptr,
-  ) {
-    return _rust_arc_decrement_strong_count_RustOpaque_payjoin_ffireceiveReceiver(
-      ptr,
-    );
-  }
-
-  late final _rust_arc_decrement_strong_count_RustOpaque_payjoin_ffireceiveReceiverPtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
-          'frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_payjoin_ffireceiveReceiver');
-  late final _rust_arc_decrement_strong_count_RustOpaque_payjoin_ffireceiveReceiver =
-      _rust_arc_decrement_strong_count_RustOpaque_payjoin_ffireceiveReceiverPtr
-          .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
-
   void
       rust_arc_increment_strong_count_RustOpaque_payjoin_ffireceiveUncheckedProposal(
     ffi.Pointer<ffi.Void> ptr,
@@ -5602,36 +6130,6 @@ class coreWire implements BaseWire {
           'frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_payjoin_ffisendNewSender');
   late final _rust_arc_decrement_strong_count_RustOpaque_payjoin_ffisendNewSender =
       _rust_arc_decrement_strong_count_RustOpaque_payjoin_ffisendNewSenderPtr
-          .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
-
-  void rust_arc_increment_strong_count_RustOpaque_payjoin_ffisendSender(
-    ffi.Pointer<ffi.Void> ptr,
-  ) {
-    return _rust_arc_increment_strong_count_RustOpaque_payjoin_ffisendSender(
-      ptr,
-    );
-  }
-
-  late final _rust_arc_increment_strong_count_RustOpaque_payjoin_ffisendSenderPtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
-          'frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_payjoin_ffisendSender');
-  late final _rust_arc_increment_strong_count_RustOpaque_payjoin_ffisendSender =
-      _rust_arc_increment_strong_count_RustOpaque_payjoin_ffisendSenderPtr
-          .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
-
-  void rust_arc_decrement_strong_count_RustOpaque_payjoin_ffisendSender(
-    ffi.Pointer<ffi.Void> ptr,
-  ) {
-    return _rust_arc_decrement_strong_count_RustOpaque_payjoin_ffisendSender(
-      ptr,
-    );
-  }
-
-  late final _rust_arc_decrement_strong_count_RustOpaque_payjoin_ffisendSenderPtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
-          'frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_payjoin_ffisendSender');
-  late final _rust_arc_decrement_strong_count_RustOpaque_payjoin_ffisendSender =
-      _rust_arc_decrement_strong_count_RustOpaque_payjoin_ffisendSenderPtr
           .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
 
   void rust_arc_increment_strong_count_RustOpaque_payjoin_ffisendSenderBuilder(
@@ -5968,17 +6466,6 @@ class coreWire implements BaseWire {
       _cst_new_box_autoadd_ffi_provisional_proposalPtr.asFunction<
           ffi.Pointer<wire_cst_ffi_provisional_proposal> Function()>();
 
-  ffi.Pointer<wire_cst_ffi_receiver> cst_new_box_autoadd_ffi_receiver() {
-    return _cst_new_box_autoadd_ffi_receiver();
-  }
-
-  late final _cst_new_box_autoadd_ffi_receiverPtr = _lookup<
-          ffi.NativeFunction<ffi.Pointer<wire_cst_ffi_receiver> Function()>>(
-      'frbgen_payjoin_flutter_cst_new_box_autoadd_ffi_receiver');
-  late final _cst_new_box_autoadd_ffi_receiver =
-      _cst_new_box_autoadd_ffi_receiverPtr
-          .asFunction<ffi.Pointer<wire_cst_ffi_receiver> Function()>();
-
   ffi.Pointer<wire_cst_ffi_script> cst_new_box_autoadd_ffi_script() {
     return _cst_new_box_autoadd_ffi_script();
   }
@@ -5989,17 +6476,6 @@ class coreWire implements BaseWire {
   late final _cst_new_box_autoadd_ffi_script =
       _cst_new_box_autoadd_ffi_scriptPtr
           .asFunction<ffi.Pointer<wire_cst_ffi_script> Function()>();
-
-  ffi.Pointer<wire_cst_ffi_sender> cst_new_box_autoadd_ffi_sender() {
-    return _cst_new_box_autoadd_ffi_sender();
-  }
-
-  late final _cst_new_box_autoadd_ffi_senderPtr =
-      _lookup<ffi.NativeFunction<ffi.Pointer<wire_cst_ffi_sender> Function()>>(
-          'frbgen_payjoin_flutter_cst_new_box_autoadd_ffi_sender');
-  late final _cst_new_box_autoadd_ffi_sender =
-      _cst_new_box_autoadd_ffi_senderPtr
-          .asFunction<ffi.Pointer<wire_cst_ffi_sender> Function()>();
 
   ffi.Pointer<wire_cst_ffi_sender_builder>
       cst_new_box_autoadd_ffi_sender_builder() {
@@ -6301,6 +6777,11 @@ final class wire_cst_list_prim_u_8_strict extends ffi.Struct {
   external int len;
 }
 
+final class wire_cst_client_response extends ffi.Struct {
+  @ffi.UintPtr()
+  external int field0;
+}
+
 final class wire_cst_out_point extends ffi.Struct {
   external ffi.Pointer<wire_cst_list_prim_u_8_strict> txid;
 
@@ -6371,17 +6852,7 @@ final class wire_cst_ffi_payjoin_proposal extends ffi.Struct {
   external int field0;
 }
 
-final class wire_cst_client_response extends ffi.Struct {
-  @ffi.UintPtr()
-  external int field0;
-}
-
 final class wire_cst_ffi_provisional_proposal extends ffi.Struct {
-  @ffi.UintPtr()
-  external int field0;
-}
-
-final class wire_cst_ffi_receiver extends ffi.Struct {
   @ffi.UintPtr()
   external int field0;
 }
@@ -6420,6 +6891,11 @@ final class wire_cst_list_tx_out extends ffi.Struct {
   external int len;
 }
 
+final class wire_cst_ffi_url extends ffi.Struct {
+  @ffi.UintPtr()
+  external int field0;
+}
+
 final class wire_cst_ffi_new_sender extends ffi.Struct {
   @ffi.UintPtr()
   external int field0;
@@ -6431,16 +6907,6 @@ final class wire_cst_ffi_sender_builder extends ffi.Struct {
 }
 
 final class wire_cst_ffi_pj_uri extends ffi.Struct {
-  @ffi.UintPtr()
-  external int field0;
-}
-
-final class wire_cst_ffi_sender extends ffi.Struct {
-  @ffi.UintPtr()
-  external int field0;
-}
-
-final class wire_cst_ffi_url extends ffi.Struct {
   @ffi.UintPtr()
   external int field0;
 }

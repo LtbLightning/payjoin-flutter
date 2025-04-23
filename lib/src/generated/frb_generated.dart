@@ -67,7 +67,7 @@ class core extends BaseEntrypoint<coreApi, coreApiImpl, coreWire> {
   String get codegenVersion => '2.0.0';
 
   @override
-  int get rustContentHash => 2000887930;
+  int get rustContentHash => -1383824922;
 
   static const kDefaultExternalLibraryLoaderConfig =
       ExternalLibraryLoaderConfig(
@@ -86,6 +86,32 @@ abstract class coreApi extends BaseApi {
 
   Future<FfiOhttpKeys> crateApiIoFetchOhttpKeys(
       {required String ohttpRelay, required String payjoinDirectory});
+
+  DartReceiverPersister crateApiReceiveDartReceiverPersisterNew(
+      {required FutureOr<ReceiverToken> Function(FfiReceiver) save,
+      required FutureOr<FfiReceiver> Function(ReceiverToken) load});
+
+  Future<(Request, ClientResponse)> crateApiReceiveFfiReceiverExtractReq(
+      {required FfiReceiver that, required String ohttpRelay});
+
+  FfiReceiver crateApiReceiveFfiReceiverFromJson({required String json});
+
+  String crateApiReceiveFfiReceiverId({required FfiReceiver that});
+
+  Future<ReceiverToken> crateApiReceiveFfiReceiverKey(
+      {required FfiReceiver that});
+
+  Future<FfiReceiver> crateApiReceiveFfiReceiverLoad(
+      {required ReceiverToken token, required DartReceiverPersister persister});
+
+  Future<FfiPjUri> crateApiReceiveFfiReceiverPjUri({required FfiReceiver that});
+
+  Future<FfiUncheckedProposal?> crateApiReceiveFfiReceiverProcessRes(
+      {required FfiReceiver that,
+      required List<int> body,
+      required ClientResponse ctx});
+
+  String crateApiReceiveFfiReceiverToJson({required FfiReceiver that});
 
   Future<FfiInputPair> crateApiReceiveFfiInputPairNew(
       {required TxIn txin, required PsbtInput psbtin});
@@ -107,8 +133,8 @@ abstract class coreApi extends BaseApi {
       required FfiOhttpKeys ohttpKeys,
       BigInt? expireAfter});
 
-  Future<FfiReceiver> crateApiReceiveFfiNewReceiverPersist(
-      {required FfiNewReceiver that});
+  Future<ReceiverToken> crateApiReceiveFfiNewReceiverPersist(
+      {required FfiNewReceiver that, required DartReceiverPersister persister});
 
   Future<FfiWantsOutputs>
       crateApiReceiveFfiOutputsUnknownIdentifyReceiverOutputs(
@@ -135,24 +161,6 @@ abstract class coreApi extends BaseApi {
           required FutureOr<String> Function(String) processPsbt,
           BigInt? minFeeRateSatPerVb,
           BigInt? maxFeeRateSatPerVb});
-
-  Future<(Request, ClientResponse)> crateApiReceiveFfiReceiverExtractReq(
-      {required FfiReceiver that, required String ohttpRelay});
-
-  FfiReceiver crateApiReceiveFfiReceiverFromJson({required String json});
-
-  String crateApiReceiveFfiReceiverId({required FfiReceiver that});
-
-  Future<FfiReceiver> crateApiReceiveFfiReceiverLoad({required String token});
-
-  Future<FfiPjUri> crateApiReceiveFfiReceiverPjUri({required FfiReceiver that});
-
-  Future<FfiUncheckedProposal?> crateApiReceiveFfiReceiverProcessRes(
-      {required FfiReceiver that,
-      required List<int> body,
-      required ClientResponse ctx});
-
-  String crateApiReceiveFfiReceiverToJson({required FfiReceiver that});
 
   Future<FfiMaybeInputsOwned>
       crateApiReceiveFfiUncheckedProposalAssumeInteractiveReceiver(
@@ -205,8 +213,23 @@ abstract class coreApi extends BaseApi {
       crateApiReceiveFfiWantsOutputsSubstituteReceiverScript(
           {required FfiWantsOutputs that, required FfiScript outputScript});
 
-  Future<FfiSender> crateApiSendFfiNewSenderPersist(
-      {required FfiNewSender that});
+  Future<(Request, FfiV1Context)> crateApiSendFfiSenderExtractV1(
+      {required FfiSender that});
+
+  Future<(Request, FfiV2PostContext)> crateApiSendFfiSenderExtractV2(
+      {required FfiSender that, required FfiUrl ohttpProxyUrl});
+
+  FfiSender crateApiSendFfiSenderFromJson({required String json});
+
+  Future<SenderToken> crateApiSendFfiSenderKey({required FfiSender that});
+
+  Future<FfiSender> crateApiSendFfiSenderLoad(
+      {required SenderToken token, required DartSenderPersister persister});
+
+  String crateApiSendFfiSenderToJson({required FfiSender that});
+
+  Future<SenderToken> crateApiSendFfiNewSenderPersist(
+      {required FfiNewSender that, required DartSenderPersister persister});
 
   Future<FfiSenderBuilder>
       crateApiSendFfiSenderBuilderAlwaysDisableOutputSubstitution(
@@ -228,18 +251,6 @@ abstract class coreApi extends BaseApi {
   Future<FfiSenderBuilder> crateApiSendFfiSenderBuilderFromPsbtAndUri(
       {required String psbtBase64, required FfiPjUri pjUri});
 
-  Future<(Request, FfiV1Context)> crateApiSendFfiSenderExtractV1(
-      {required FfiSender that});
-
-  Future<(Request, FfiV2PostContext)> crateApiSendFfiSenderExtractV2(
-      {required FfiSender that, required FfiUrl ohttpProxyUrl});
-
-  FfiSender crateApiSendFfiSenderFromJson({required String json});
-
-  Future<FfiSender> crateApiSendFfiSenderLoad({required String token});
-
-  String crateApiSendFfiSenderToJson({required FfiSender that});
-
   Future<String> crateApiSendFfiV1ContextProcessResponse(
       {required FfiV1Context that, required List<int> response});
 
@@ -253,6 +264,10 @@ abstract class coreApi extends BaseApi {
 
   Future<FfiV2GetContext> crateApiSendFfiV2PostContextProcessResponse(
       {required FfiV2PostContext that, required List<int> response});
+
+  DartSenderPersister crateApiSendMakePersister(
+      {required FutureOr<SenderToken> Function(FfiSender) save,
+      required FutureOr<FfiSender> Function(SenderToken) load});
 
   Future<FfiOhttpKeys> crateApiUriFfiOhttpKeysDecode(
       {required List<int> bytes});
@@ -287,6 +302,24 @@ abstract class coreApi extends BaseApi {
 
   CrossPlatformFinalizerArg get rust_arc_decrement_strong_count_ScriptPtr;
 
+  RustArcIncrementStrongCountFnType
+      get rust_arc_increment_strong_count_DartReceiverPersister;
+
+  RustArcDecrementStrongCountFnType
+      get rust_arc_decrement_strong_count_DartReceiverPersister;
+
+  CrossPlatformFinalizerArg
+      get rust_arc_decrement_strong_count_DartReceiverPersisterPtr;
+
+  RustArcIncrementStrongCountFnType
+      get rust_arc_increment_strong_count_DartSenderPersister;
+
+  RustArcDecrementStrongCountFnType
+      get rust_arc_decrement_strong_count_DartSenderPersister;
+
+  CrossPlatformFinalizerArg
+      get rust_arc_decrement_strong_count_DartSenderPersisterPtr;
+
   RustArcIncrementStrongCountFnType get rust_arc_increment_strong_count_Error;
 
   RustArcDecrementStrongCountFnType get rust_arc_decrement_strong_count_Error;
@@ -300,6 +333,22 @@ abstract class coreApi extends BaseApi {
       get rust_arc_decrement_strong_count_FfiJsonReply;
 
   CrossPlatformFinalizerArg get rust_arc_decrement_strong_count_FfiJsonReplyPtr;
+
+  RustArcIncrementStrongCountFnType
+      get rust_arc_increment_strong_count_FfiReceiver;
+
+  RustArcDecrementStrongCountFnType
+      get rust_arc_decrement_strong_count_FfiReceiver;
+
+  CrossPlatformFinalizerArg get rust_arc_decrement_strong_count_FfiReceiverPtr;
+
+  RustArcIncrementStrongCountFnType
+      get rust_arc_increment_strong_count_FfiSender;
+
+  RustArcDecrementStrongCountFnType
+      get rust_arc_decrement_strong_count_FfiSender;
+
+  CrossPlatformFinalizerArg get rust_arc_decrement_strong_count_FfiSenderPtr;
 
   RustArcIncrementStrongCountFnType
       get rust_arc_increment_strong_count_ImplementationError;
@@ -377,6 +426,15 @@ abstract class coreApi extends BaseApi {
       get rust_arc_decrement_strong_count_PsbtInputErrorPtr;
 
   RustArcIncrementStrongCountFnType
+      get rust_arc_increment_strong_count_ReceiverToken;
+
+  RustArcDecrementStrongCountFnType
+      get rust_arc_decrement_strong_count_ReceiverToken;
+
+  CrossPlatformFinalizerArg
+      get rust_arc_decrement_strong_count_ReceiverTokenPtr;
+
+  RustArcIncrementStrongCountFnType
       get rust_arc_increment_strong_count_ReplyableError;
 
   RustArcDecrementStrongCountFnType
@@ -402,6 +460,14 @@ abstract class coreApi extends BaseApi {
 
   CrossPlatformFinalizerArg
       get rust_arc_decrement_strong_count_SelectionErrorPtr;
+
+  RustArcIncrementStrongCountFnType
+      get rust_arc_increment_strong_count_SenderToken;
+
+  RustArcDecrementStrongCountFnType
+      get rust_arc_decrement_strong_count_SenderToken;
+
+  CrossPlatformFinalizerArg get rust_arc_decrement_strong_count_SenderTokenPtr;
 
   RustArcIncrementStrongCountFnType
       get rust_arc_increment_strong_count_SerdeJsonError;
@@ -505,14 +571,6 @@ abstract class coreApi extends BaseApi {
       get rust_arc_decrement_strong_count_ProvisionalProposalPtr;
 
   RustArcIncrementStrongCountFnType
-      get rust_arc_increment_strong_count_Receiver;
-
-  RustArcDecrementStrongCountFnType
-      get rust_arc_decrement_strong_count_Receiver;
-
-  CrossPlatformFinalizerArg get rust_arc_decrement_strong_count_ReceiverPtr;
-
-  RustArcIncrementStrongCountFnType
       get rust_arc_increment_strong_count_UncheckedProposal;
 
   RustArcDecrementStrongCountFnType
@@ -544,12 +602,6 @@ abstract class coreApi extends BaseApi {
       get rust_arc_decrement_strong_count_NewSender;
 
   CrossPlatformFinalizerArg get rust_arc_decrement_strong_count_NewSenderPtr;
-
-  RustArcIncrementStrongCountFnType get rust_arc_increment_strong_count_Sender;
-
-  RustArcDecrementStrongCountFnType get rust_arc_decrement_strong_count_Sender;
-
-  CrossPlatformFinalizerArg get rust_arc_decrement_strong_count_SenderPtr;
 
   RustArcIncrementStrongCountFnType
       get rust_arc_increment_strong_count_SenderBuilder;
@@ -689,6 +741,256 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       );
 
   @override
+  DartReceiverPersister crateApiReceiveDartReceiverPersisterNew(
+      {required FutureOr<ReceiverToken> Function(FfiReceiver) save,
+      required FutureOr<FfiReceiver> Function(ReceiverToken) load}) {
+    return handler.executeSync(SyncTask(
+      callFfi: () {
+        var arg0 =
+            cst_encode_DartFn_Inputs_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver_Output_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReceiverToken_AnyhowException(
+                save);
+        var arg1 =
+            cst_encode_DartFn_Inputs_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReceiverToken_Output_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver_AnyhowException(
+                load);
+        return wire.wire__crate__api__receive__DartReceiverPersister_new(
+            arg0, arg1);
+      },
+      codec: DcoCodec(
+        decodeSuccessData:
+            dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartReceiverPersister,
+        decodeErrorData: null,
+      ),
+      constMeta: kCrateApiReceiveDartReceiverPersisterNewConstMeta,
+      argValues: [save, load],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta get kCrateApiReceiveDartReceiverPersisterNewConstMeta =>
+      const TaskConstMeta(
+        debugName: "DartReceiverPersister_new",
+        argNames: ["save", "load"],
+      );
+
+  @override
+  Future<(Request, ClientResponse)> crateApiReceiveFfiReceiverExtractReq(
+      {required FfiReceiver that, required String ohttpRelay}) {
+    return handler.executeNormal(NormalTask(
+      callFfi: (port_) {
+        var arg0 =
+            cst_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver(
+                that);
+        var arg1 = cst_encode_String(ohttpRelay);
+        return wire.wire__crate__api__receive__FfiReceiver_extract_req(
+            port_, arg0, arg1);
+      },
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_record_request_client_response,
+        decodeErrorData: dco_decode_ffi_error,
+      ),
+      constMeta: kCrateApiReceiveFfiReceiverExtractReqConstMeta,
+      argValues: [that, ohttpRelay],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta get kCrateApiReceiveFfiReceiverExtractReqConstMeta =>
+      const TaskConstMeta(
+        debugName: "FfiReceiver_extract_req",
+        argNames: ["that", "ohttpRelay"],
+      );
+
+  @override
+  FfiReceiver crateApiReceiveFfiReceiverFromJson({required String json}) {
+    return handler.executeSync(SyncTask(
+      callFfi: () {
+        var arg0 = cst_encode_String(json);
+        return wire.wire__crate__api__receive__FfiReceiver_from_json(arg0);
+      },
+      codec: DcoCodec(
+        decodeSuccessData:
+            dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver,
+        decodeErrorData: dco_decode_ffi_serde_json_error,
+      ),
+      constMeta: kCrateApiReceiveFfiReceiverFromJsonConstMeta,
+      argValues: [json],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta get kCrateApiReceiveFfiReceiverFromJsonConstMeta =>
+      const TaskConstMeta(
+        debugName: "FfiReceiver_from_json",
+        argNames: ["json"],
+      );
+
+  @override
+  String crateApiReceiveFfiReceiverId({required FfiReceiver that}) {
+    return handler.executeSync(SyncTask(
+      callFfi: () {
+        var arg0 =
+            cst_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver(
+                that);
+        return wire.wire__crate__api__receive__FfiReceiver_id(arg0);
+      },
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_String,
+        decodeErrorData: null,
+      ),
+      constMeta: kCrateApiReceiveFfiReceiverIdConstMeta,
+      argValues: [that],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta get kCrateApiReceiveFfiReceiverIdConstMeta =>
+      const TaskConstMeta(
+        debugName: "FfiReceiver_id",
+        argNames: ["that"],
+      );
+
+  @override
+  Future<ReceiverToken> crateApiReceiveFfiReceiverKey(
+      {required FfiReceiver that}) {
+    return handler.executeNormal(NormalTask(
+      callFfi: (port_) {
+        var arg0 =
+            cst_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver(
+                that);
+        return wire.wire__crate__api__receive__FfiReceiver_key(port_, arg0);
+      },
+      codec: DcoCodec(
+        decodeSuccessData:
+            dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReceiverToken,
+        decodeErrorData: null,
+      ),
+      constMeta: kCrateApiReceiveFfiReceiverKeyConstMeta,
+      argValues: [that],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta get kCrateApiReceiveFfiReceiverKeyConstMeta =>
+      const TaskConstMeta(
+        debugName: "FfiReceiver_key",
+        argNames: ["that"],
+      );
+
+  @override
+  Future<FfiReceiver> crateApiReceiveFfiReceiverLoad(
+      {required ReceiverToken token,
+      required DartReceiverPersister persister}) {
+    return handler.executeNormal(NormalTask(
+      callFfi: (port_) {
+        var arg0 =
+            cst_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReceiverToken(
+                token);
+        var arg1 =
+            cst_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartReceiverPersister(
+                persister);
+        return wire.wire__crate__api__receive__FfiReceiver_load(
+            port_, arg0, arg1);
+      },
+      codec: DcoCodec(
+        decodeSuccessData:
+            dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver,
+        decodeErrorData: dco_decode_ffi_implementation_error,
+      ),
+      constMeta: kCrateApiReceiveFfiReceiverLoadConstMeta,
+      argValues: [token, persister],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta get kCrateApiReceiveFfiReceiverLoadConstMeta =>
+      const TaskConstMeta(
+        debugName: "FfiReceiver_load",
+        argNames: ["token", "persister"],
+      );
+
+  @override
+  Future<FfiPjUri> crateApiReceiveFfiReceiverPjUri(
+      {required FfiReceiver that}) {
+    return handler.executeNormal(NormalTask(
+      callFfi: (port_) {
+        var arg0 =
+            cst_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver(
+                that);
+        return wire.wire__crate__api__receive__FfiReceiver_pj_uri(port_, arg0);
+      },
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_ffi_pj_uri,
+        decodeErrorData: null,
+      ),
+      constMeta: kCrateApiReceiveFfiReceiverPjUriConstMeta,
+      argValues: [that],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta get kCrateApiReceiveFfiReceiverPjUriConstMeta =>
+      const TaskConstMeta(
+        debugName: "FfiReceiver_pj_uri",
+        argNames: ["that"],
+      );
+
+  @override
+  Future<FfiUncheckedProposal?> crateApiReceiveFfiReceiverProcessRes(
+      {required FfiReceiver that,
+      required List<int> body,
+      required ClientResponse ctx}) {
+    return handler.executeNormal(NormalTask(
+      callFfi: (port_) {
+        var arg0 =
+            cst_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver(
+                that);
+        var arg1 = cst_encode_list_prim_u_8_loose(body);
+        var arg2 = cst_encode_box_autoadd_client_response(ctx);
+        return wire.wire__crate__api__receive__FfiReceiver_process_res(
+            port_, arg0, arg1, arg2);
+      },
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_opt_box_autoadd_ffi_unchecked_proposal,
+        decodeErrorData: dco_decode_ffi_error,
+      ),
+      constMeta: kCrateApiReceiveFfiReceiverProcessResConstMeta,
+      argValues: [that, body, ctx],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta get kCrateApiReceiveFfiReceiverProcessResConstMeta =>
+      const TaskConstMeta(
+        debugName: "FfiReceiver_process_res",
+        argNames: ["that", "body", "ctx"],
+      );
+
+  @override
+  String crateApiReceiveFfiReceiverToJson({required FfiReceiver that}) {
+    return handler.executeSync(SyncTask(
+      callFfi: () {
+        var arg0 =
+            cst_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver(
+                that);
+        return wire.wire__crate__api__receive__FfiReceiver_to_json(arg0);
+      },
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_String,
+        decodeErrorData: dco_decode_ffi_serde_json_error,
+      ),
+      constMeta: kCrateApiReceiveFfiReceiverToJsonConstMeta,
+      argValues: [that],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta get kCrateApiReceiveFfiReceiverToJsonConstMeta =>
+      const TaskConstMeta(
+        debugName: "FfiReceiver_to_json",
+        argNames: ["that"],
+      );
+
+  @override
   Future<FfiInputPair> crateApiReceiveFfiInputPairNew(
       {required TxIn txin, required PsbtInput psbtin}) {
     return handler.executeNormal(NormalTask(
@@ -820,20 +1122,25 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       );
 
   @override
-  Future<FfiReceiver> crateApiReceiveFfiNewReceiverPersist(
-      {required FfiNewReceiver that}) {
+  Future<ReceiverToken> crateApiReceiveFfiNewReceiverPersist(
+      {required FfiNewReceiver that,
+      required DartReceiverPersister persister}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
         var arg0 = cst_encode_box_autoadd_ffi_new_receiver(that);
+        var arg1 =
+            cst_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartReceiverPersister(
+                persister);
         return wire.wire__crate__api__receive__ffi_new_receiver_persist(
-            port_, arg0);
+            port_, arg0, arg1);
       },
       codec: DcoCodec(
-        decodeSuccessData: dco_decode_ffi_receiver,
+        decodeSuccessData:
+            dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReceiverToken,
         decodeErrorData: dco_decode_ffi_implementation_error,
       ),
       constMeta: kCrateApiReceiveFfiNewReceiverPersistConstMeta,
-      argValues: [that],
+      argValues: [that, persister],
       apiImpl: this,
     ));
   }
@@ -841,7 +1148,7 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   TaskConstMeta get kCrateApiReceiveFfiNewReceiverPersistConstMeta =>
       const TaskConstMeta(
         debugName: "ffi_new_receiver_persist",
-        argNames: ["that"],
+        argNames: ["that", "persister"],
       );
 
   @override
@@ -1025,177 +1332,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
               "maxFeeRateSatPerVb"
             ],
           );
-
-  @override
-  Future<(Request, ClientResponse)> crateApiReceiveFfiReceiverExtractReq(
-      {required FfiReceiver that, required String ohttpRelay}) {
-    return handler.executeNormal(NormalTask(
-      callFfi: (port_) {
-        var arg0 = cst_encode_box_autoadd_ffi_receiver(that);
-        var arg1 = cst_encode_String(ohttpRelay);
-        return wire.wire__crate__api__receive__ffi_receiver_extract_req(
-            port_, arg0, arg1);
-      },
-      codec: DcoCodec(
-        decodeSuccessData: dco_decode_record_request_client_response,
-        decodeErrorData: dco_decode_ffi_error,
-      ),
-      constMeta: kCrateApiReceiveFfiReceiverExtractReqConstMeta,
-      argValues: [that, ohttpRelay],
-      apiImpl: this,
-    ));
-  }
-
-  TaskConstMeta get kCrateApiReceiveFfiReceiverExtractReqConstMeta =>
-      const TaskConstMeta(
-        debugName: "ffi_receiver_extract_req",
-        argNames: ["that", "ohttpRelay"],
-      );
-
-  @override
-  FfiReceiver crateApiReceiveFfiReceiverFromJson({required String json}) {
-    return handler.executeSync(SyncTask(
-      callFfi: () {
-        var arg0 = cst_encode_String(json);
-        return wire.wire__crate__api__receive__ffi_receiver_from_json(arg0);
-      },
-      codec: DcoCodec(
-        decodeSuccessData: dco_decode_ffi_receiver,
-        decodeErrorData: dco_decode_ffi_serde_json_error,
-      ),
-      constMeta: kCrateApiReceiveFfiReceiverFromJsonConstMeta,
-      argValues: [json],
-      apiImpl: this,
-    ));
-  }
-
-  TaskConstMeta get kCrateApiReceiveFfiReceiverFromJsonConstMeta =>
-      const TaskConstMeta(
-        debugName: "ffi_receiver_from_json",
-        argNames: ["json"],
-      );
-
-  @override
-  String crateApiReceiveFfiReceiverId({required FfiReceiver that}) {
-    return handler.executeSync(SyncTask(
-      callFfi: () {
-        var arg0 = cst_encode_box_autoadd_ffi_receiver(that);
-        return wire.wire__crate__api__receive__ffi_receiver_id(arg0);
-      },
-      codec: DcoCodec(
-        decodeSuccessData: dco_decode_String,
-        decodeErrorData: null,
-      ),
-      constMeta: kCrateApiReceiveFfiReceiverIdConstMeta,
-      argValues: [that],
-      apiImpl: this,
-    ));
-  }
-
-  TaskConstMeta get kCrateApiReceiveFfiReceiverIdConstMeta =>
-      const TaskConstMeta(
-        debugName: "ffi_receiver_id",
-        argNames: ["that"],
-      );
-
-  @override
-  Future<FfiReceiver> crateApiReceiveFfiReceiverLoad({required String token}) {
-    return handler.executeNormal(NormalTask(
-      callFfi: (port_) {
-        var arg0 = cst_encode_String(token);
-        return wire.wire__crate__api__receive__ffi_receiver_load(port_, arg0);
-      },
-      codec: DcoCodec(
-        decodeSuccessData: dco_decode_ffi_receiver,
-        decodeErrorData: dco_decode_ffi_implementation_error,
-      ),
-      constMeta: kCrateApiReceiveFfiReceiverLoadConstMeta,
-      argValues: [token],
-      apiImpl: this,
-    ));
-  }
-
-  TaskConstMeta get kCrateApiReceiveFfiReceiverLoadConstMeta =>
-      const TaskConstMeta(
-        debugName: "ffi_receiver_load",
-        argNames: ["token"],
-      );
-
-  @override
-  Future<FfiPjUri> crateApiReceiveFfiReceiverPjUri(
-      {required FfiReceiver that}) {
-    return handler.executeNormal(NormalTask(
-      callFfi: (port_) {
-        var arg0 = cst_encode_box_autoadd_ffi_receiver(that);
-        return wire.wire__crate__api__receive__ffi_receiver_pj_uri(port_, arg0);
-      },
-      codec: DcoCodec(
-        decodeSuccessData: dco_decode_ffi_pj_uri,
-        decodeErrorData: null,
-      ),
-      constMeta: kCrateApiReceiveFfiReceiverPjUriConstMeta,
-      argValues: [that],
-      apiImpl: this,
-    ));
-  }
-
-  TaskConstMeta get kCrateApiReceiveFfiReceiverPjUriConstMeta =>
-      const TaskConstMeta(
-        debugName: "ffi_receiver_pj_uri",
-        argNames: ["that"],
-      );
-
-  @override
-  Future<FfiUncheckedProposal?> crateApiReceiveFfiReceiverProcessRes(
-      {required FfiReceiver that,
-      required List<int> body,
-      required ClientResponse ctx}) {
-    return handler.executeNormal(NormalTask(
-      callFfi: (port_) {
-        var arg0 = cst_encode_box_autoadd_ffi_receiver(that);
-        var arg1 = cst_encode_list_prim_u_8_loose(body);
-        var arg2 = cst_encode_box_autoadd_client_response(ctx);
-        return wire.wire__crate__api__receive__ffi_receiver_process_res(
-            port_, arg0, arg1, arg2);
-      },
-      codec: DcoCodec(
-        decodeSuccessData: dco_decode_opt_box_autoadd_ffi_unchecked_proposal,
-        decodeErrorData: dco_decode_ffi_error,
-      ),
-      constMeta: kCrateApiReceiveFfiReceiverProcessResConstMeta,
-      argValues: [that, body, ctx],
-      apiImpl: this,
-    ));
-  }
-
-  TaskConstMeta get kCrateApiReceiveFfiReceiverProcessResConstMeta =>
-      const TaskConstMeta(
-        debugName: "ffi_receiver_process_res",
-        argNames: ["that", "body", "ctx"],
-      );
-
-  @override
-  String crateApiReceiveFfiReceiverToJson({required FfiReceiver that}) {
-    return handler.executeSync(SyncTask(
-      callFfi: () {
-        var arg0 = cst_encode_box_autoadd_ffi_receiver(that);
-        return wire.wire__crate__api__receive__ffi_receiver_to_json(arg0);
-      },
-      codec: DcoCodec(
-        decodeSuccessData: dco_decode_String,
-        decodeErrorData: dco_decode_ffi_serde_json_error,
-      ),
-      constMeta: kCrateApiReceiveFfiReceiverToJsonConstMeta,
-      argValues: [that],
-      apiImpl: this,
-    ));
-  }
-
-  TaskConstMeta get kCrateApiReceiveFfiReceiverToJsonConstMeta =>
-      const TaskConstMeta(
-        debugName: "ffi_receiver_to_json",
-        argNames: ["that"],
-      );
 
   @override
   Future<FfiMaybeInputsOwned>
@@ -1553,19 +1689,181 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
           );
 
   @override
-  Future<FfiSender> crateApiSendFfiNewSenderPersist(
-      {required FfiNewSender that}) {
+  Future<(Request, FfiV1Context)> crateApiSendFfiSenderExtractV1(
+      {required FfiSender that}) {
+    return handler.executeNormal(NormalTask(
+      callFfi: (port_) {
+        var arg0 =
+            cst_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender(
+                that);
+        return wire.wire__crate__api__send__FfiSender_extract_v1(port_, arg0);
+      },
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_record_request_ffi_v_1_context,
+        decodeErrorData: null,
+      ),
+      constMeta: kCrateApiSendFfiSenderExtractV1ConstMeta,
+      argValues: [that],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta get kCrateApiSendFfiSenderExtractV1ConstMeta =>
+      const TaskConstMeta(
+        debugName: "FfiSender_extract_v1",
+        argNames: ["that"],
+      );
+
+  @override
+  Future<(Request, FfiV2PostContext)> crateApiSendFfiSenderExtractV2(
+      {required FfiSender that, required FfiUrl ohttpProxyUrl}) {
+    return handler.executeNormal(NormalTask(
+      callFfi: (port_) {
+        var arg0 =
+            cst_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender(
+                that);
+        var arg1 = cst_encode_box_autoadd_ffi_url(ohttpProxyUrl);
+        return wire.wire__crate__api__send__FfiSender_extract_v2(
+            port_, arg0, arg1);
+      },
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_record_request_ffi_v_2_post_context,
+        decodeErrorData: dco_decode_ffi_create_request_error,
+      ),
+      constMeta: kCrateApiSendFfiSenderExtractV2ConstMeta,
+      argValues: [that, ohttpProxyUrl],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta get kCrateApiSendFfiSenderExtractV2ConstMeta =>
+      const TaskConstMeta(
+        debugName: "FfiSender_extract_v2",
+        argNames: ["that", "ohttpProxyUrl"],
+      );
+
+  @override
+  FfiSender crateApiSendFfiSenderFromJson({required String json}) {
+    return handler.executeSync(SyncTask(
+      callFfi: () {
+        var arg0 = cst_encode_String(json);
+        return wire.wire__crate__api__send__FfiSender_from_json(arg0);
+      },
+      codec: DcoCodec(
+        decodeSuccessData:
+            dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender,
+        decodeErrorData: dco_decode_ffi_serde_json_error,
+      ),
+      constMeta: kCrateApiSendFfiSenderFromJsonConstMeta,
+      argValues: [json],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta get kCrateApiSendFfiSenderFromJsonConstMeta =>
+      const TaskConstMeta(
+        debugName: "FfiSender_from_json",
+        argNames: ["json"],
+      );
+
+  @override
+  Future<SenderToken> crateApiSendFfiSenderKey({required FfiSender that}) {
+    return handler.executeNormal(NormalTask(
+      callFfi: (port_) {
+        var arg0 =
+            cst_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender(
+                that);
+        return wire.wire__crate__api__send__FfiSender_key(port_, arg0);
+      },
+      codec: DcoCodec(
+        decodeSuccessData:
+            dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSenderToken,
+        decodeErrorData: null,
+      ),
+      constMeta: kCrateApiSendFfiSenderKeyConstMeta,
+      argValues: [that],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta get kCrateApiSendFfiSenderKeyConstMeta => const TaskConstMeta(
+        debugName: "FfiSender_key",
+        argNames: ["that"],
+      );
+
+  @override
+  Future<FfiSender> crateApiSendFfiSenderLoad(
+      {required SenderToken token, required DartSenderPersister persister}) {
+    return handler.executeNormal(NormalTask(
+      callFfi: (port_) {
+        var arg0 =
+            cst_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSenderToken(
+                token);
+        var arg1 =
+            cst_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartSenderPersister(
+                persister);
+        return wire.wire__crate__api__send__FfiSender_load(port_, arg0, arg1);
+      },
+      codec: DcoCodec(
+        decodeSuccessData:
+            dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender,
+        decodeErrorData: dco_decode_ffi_implementation_error,
+      ),
+      constMeta: kCrateApiSendFfiSenderLoadConstMeta,
+      argValues: [token, persister],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta get kCrateApiSendFfiSenderLoadConstMeta => const TaskConstMeta(
+        debugName: "FfiSender_load",
+        argNames: ["token", "persister"],
+      );
+
+  @override
+  String crateApiSendFfiSenderToJson({required FfiSender that}) {
+    return handler.executeSync(SyncTask(
+      callFfi: () {
+        var arg0 =
+            cst_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender(
+                that);
+        return wire.wire__crate__api__send__FfiSender_to_json(arg0);
+      },
+      codec: DcoCodec(
+        decodeSuccessData: dco_decode_String,
+        decodeErrorData: dco_decode_ffi_serde_json_error,
+      ),
+      constMeta: kCrateApiSendFfiSenderToJsonConstMeta,
+      argValues: [that],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta get kCrateApiSendFfiSenderToJsonConstMeta =>
+      const TaskConstMeta(
+        debugName: "FfiSender_to_json",
+        argNames: ["that"],
+      );
+
+  @override
+  Future<SenderToken> crateApiSendFfiNewSenderPersist(
+      {required FfiNewSender that, required DartSenderPersister persister}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
         var arg0 = cst_encode_box_autoadd_ffi_new_sender(that);
-        return wire.wire__crate__api__send__ffi_new_sender_persist(port_, arg0);
+        var arg1 =
+            cst_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartSenderPersister(
+                persister);
+        return wire.wire__crate__api__send__ffi_new_sender_persist(
+            port_, arg0, arg1);
       },
       codec: DcoCodec(
-        decodeSuccessData: dco_decode_ffi_sender,
+        decodeSuccessData:
+            dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSenderToken,
         decodeErrorData: dco_decode_ffi_implementation_error,
       ),
       constMeta: kCrateApiSendFfiNewSenderPersistConstMeta,
-      argValues: [that],
+      argValues: [that, persister],
       apiImpl: this,
     ));
   }
@@ -1573,7 +1871,7 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   TaskConstMeta get kCrateApiSendFfiNewSenderPersistConstMeta =>
       const TaskConstMeta(
         debugName: "ffi_new_sender_persist",
-        argNames: ["that"],
+        argNames: ["that", "persister"],
       );
 
   @override
@@ -1735,124 +2033,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       );
 
   @override
-  Future<(Request, FfiV1Context)> crateApiSendFfiSenderExtractV1(
-      {required FfiSender that}) {
-    return handler.executeNormal(NormalTask(
-      callFfi: (port_) {
-        var arg0 = cst_encode_box_autoadd_ffi_sender(that);
-        return wire.wire__crate__api__send__ffi_sender_extract_v1(port_, arg0);
-      },
-      codec: DcoCodec(
-        decodeSuccessData: dco_decode_record_request_ffi_v_1_context,
-        decodeErrorData: null,
-      ),
-      constMeta: kCrateApiSendFfiSenderExtractV1ConstMeta,
-      argValues: [that],
-      apiImpl: this,
-    ));
-  }
-
-  TaskConstMeta get kCrateApiSendFfiSenderExtractV1ConstMeta =>
-      const TaskConstMeta(
-        debugName: "ffi_sender_extract_v1",
-        argNames: ["that"],
-      );
-
-  @override
-  Future<(Request, FfiV2PostContext)> crateApiSendFfiSenderExtractV2(
-      {required FfiSender that, required FfiUrl ohttpProxyUrl}) {
-    return handler.executeNormal(NormalTask(
-      callFfi: (port_) {
-        var arg0 = cst_encode_box_autoadd_ffi_sender(that);
-        var arg1 = cst_encode_box_autoadd_ffi_url(ohttpProxyUrl);
-        return wire.wire__crate__api__send__ffi_sender_extract_v2(
-            port_, arg0, arg1);
-      },
-      codec: DcoCodec(
-        decodeSuccessData: dco_decode_record_request_ffi_v_2_post_context,
-        decodeErrorData: dco_decode_ffi_create_request_error,
-      ),
-      constMeta: kCrateApiSendFfiSenderExtractV2ConstMeta,
-      argValues: [that, ohttpProxyUrl],
-      apiImpl: this,
-    ));
-  }
-
-  TaskConstMeta get kCrateApiSendFfiSenderExtractV2ConstMeta =>
-      const TaskConstMeta(
-        debugName: "ffi_sender_extract_v2",
-        argNames: ["that", "ohttpProxyUrl"],
-      );
-
-  @override
-  FfiSender crateApiSendFfiSenderFromJson({required String json}) {
-    return handler.executeSync(SyncTask(
-      callFfi: () {
-        var arg0 = cst_encode_String(json);
-        return wire.wire__crate__api__send__ffi_sender_from_json(arg0);
-      },
-      codec: DcoCodec(
-        decodeSuccessData: dco_decode_ffi_sender,
-        decodeErrorData: dco_decode_ffi_serde_json_error,
-      ),
-      constMeta: kCrateApiSendFfiSenderFromJsonConstMeta,
-      argValues: [json],
-      apiImpl: this,
-    ));
-  }
-
-  TaskConstMeta get kCrateApiSendFfiSenderFromJsonConstMeta =>
-      const TaskConstMeta(
-        debugName: "ffi_sender_from_json",
-        argNames: ["json"],
-      );
-
-  @override
-  Future<FfiSender> crateApiSendFfiSenderLoad({required String token}) {
-    return handler.executeNormal(NormalTask(
-      callFfi: (port_) {
-        var arg0 = cst_encode_String(token);
-        return wire.wire__crate__api__send__ffi_sender_load(port_, arg0);
-      },
-      codec: DcoCodec(
-        decodeSuccessData: dco_decode_ffi_sender,
-        decodeErrorData: dco_decode_ffi_implementation_error,
-      ),
-      constMeta: kCrateApiSendFfiSenderLoadConstMeta,
-      argValues: [token],
-      apiImpl: this,
-    ));
-  }
-
-  TaskConstMeta get kCrateApiSendFfiSenderLoadConstMeta => const TaskConstMeta(
-        debugName: "ffi_sender_load",
-        argNames: ["token"],
-      );
-
-  @override
-  String crateApiSendFfiSenderToJson({required FfiSender that}) {
-    return handler.executeSync(SyncTask(
-      callFfi: () {
-        var arg0 = cst_encode_box_autoadd_ffi_sender(that);
-        return wire.wire__crate__api__send__ffi_sender_to_json(arg0);
-      },
-      codec: DcoCodec(
-        decodeSuccessData: dco_decode_String,
-        decodeErrorData: dco_decode_ffi_serde_json_error,
-      ),
-      constMeta: kCrateApiSendFfiSenderToJsonConstMeta,
-      argValues: [that],
-      apiImpl: this,
-    ));
-  }
-
-  TaskConstMeta get kCrateApiSendFfiSenderToJsonConstMeta =>
-      const TaskConstMeta(
-        debugName: "ffi_sender_to_json",
-        argNames: ["that"],
-      );
-
-  @override
   Future<String> crateApiSendFfiV1ContextProcessResponse(
       {required FfiV1Context that, required List<int> response}) {
     return handler.executeNormal(NormalTask(
@@ -1959,6 +2139,36 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       const TaskConstMeta(
         debugName: "ffi_v_2_post_context_process_response",
         argNames: ["that", "response"],
+      );
+
+  @override
+  DartSenderPersister crateApiSendMakePersister(
+      {required FutureOr<SenderToken> Function(FfiSender) save,
+      required FutureOr<FfiSender> Function(SenderToken) load}) {
+    return handler.executeSync(SyncTask(
+      callFfi: () {
+        var arg0 =
+            cst_encode_DartFn_Inputs_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender_Output_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSenderToken_AnyhowException(
+                save);
+        var arg1 =
+            cst_encode_DartFn_Inputs_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSenderToken_Output_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender_AnyhowException(
+                load);
+        return wire.wire__crate__api__send__make_persister(arg0, arg1);
+      },
+      codec: DcoCodec(
+        decodeSuccessData:
+            dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartSenderPersister,
+        decodeErrorData: null,
+      ),
+      constMeta: kCrateApiSendMakePersisterConstMeta,
+      argValues: [save, load],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta get kCrateApiSendMakePersisterConstMeta => const TaskConstMeta(
+        debugName: "make_persister",
+        argNames: ["save", "load"],
       );
 
   @override
@@ -2255,6 +2465,150 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       );
 
   Future<void> Function(int, dynamic)
+      encode_DartFn_Inputs_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver_Output_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReceiverToken_AnyhowException(
+          FutureOr<ReceiverToken> Function(FfiReceiver) raw) {
+    return (callId, rawArg0) async {
+      final arg0 =
+          dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver(
+              rawArg0);
+
+      Box<ReceiverToken>? rawOutput;
+      Box<AnyhowException>? rawError;
+      try {
+        rawOutput = Box(await raw(arg0));
+      } catch (e, s) {
+        rawError = Box(AnyhowException("$e\n\n$s"));
+      }
+
+      final serializer = SseSerializer(generalizedFrbRustBinding);
+      assert((rawOutput != null) ^ (rawError != null));
+      if (rawOutput != null) {
+        serializer.buffer.putUint8(0);
+        sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReceiverToken(
+            rawOutput.value, serializer);
+      } else {
+        serializer.buffer.putUint8(1);
+        sse_encode_AnyhowException(rawError!.value, serializer);
+      }
+      final output = serializer.intoRaw();
+
+      generalizedFrbRustBinding.dartFnDeliverOutput(
+          callId: callId,
+          ptr: output.ptr,
+          rustVecLen: output.rustVecLen,
+          dataLen: output.dataLen);
+    };
+  }
+
+  Future<void> Function(int, dynamic)
+      encode_DartFn_Inputs_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender_Output_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSenderToken_AnyhowException(
+          FutureOr<SenderToken> Function(FfiSender) raw) {
+    return (callId, rawArg0) async {
+      final arg0 =
+          dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender(
+              rawArg0);
+
+      Box<SenderToken>? rawOutput;
+      Box<AnyhowException>? rawError;
+      try {
+        rawOutput = Box(await raw(arg0));
+      } catch (e, s) {
+        rawError = Box(AnyhowException("$e\n\n$s"));
+      }
+
+      final serializer = SseSerializer(generalizedFrbRustBinding);
+      assert((rawOutput != null) ^ (rawError != null));
+      if (rawOutput != null) {
+        serializer.buffer.putUint8(0);
+        sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSenderToken(
+            rawOutput.value, serializer);
+      } else {
+        serializer.buffer.putUint8(1);
+        sse_encode_AnyhowException(rawError!.value, serializer);
+      }
+      final output = serializer.intoRaw();
+
+      generalizedFrbRustBinding.dartFnDeliverOutput(
+          callId: callId,
+          ptr: output.ptr,
+          rustVecLen: output.rustVecLen,
+          dataLen: output.dataLen);
+    };
+  }
+
+  Future<void> Function(int, dynamic)
+      encode_DartFn_Inputs_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReceiverToken_Output_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver_AnyhowException(
+          FutureOr<FfiReceiver> Function(ReceiverToken) raw) {
+    return (callId, rawArg0) async {
+      final arg0 =
+          dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReceiverToken(
+              rawArg0);
+
+      Box<FfiReceiver>? rawOutput;
+      Box<AnyhowException>? rawError;
+      try {
+        rawOutput = Box(await raw(arg0));
+      } catch (e, s) {
+        rawError = Box(AnyhowException("$e\n\n$s"));
+      }
+
+      final serializer = SseSerializer(generalizedFrbRustBinding);
+      assert((rawOutput != null) ^ (rawError != null));
+      if (rawOutput != null) {
+        serializer.buffer.putUint8(0);
+        sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver(
+            rawOutput.value, serializer);
+      } else {
+        serializer.buffer.putUint8(1);
+        sse_encode_AnyhowException(rawError!.value, serializer);
+      }
+      final output = serializer.intoRaw();
+
+      generalizedFrbRustBinding.dartFnDeliverOutput(
+          callId: callId,
+          ptr: output.ptr,
+          rustVecLen: output.rustVecLen,
+          dataLen: output.dataLen);
+    };
+  }
+
+  Future<void> Function(int, dynamic)
+      encode_DartFn_Inputs_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSenderToken_Output_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender_AnyhowException(
+          FutureOr<FfiSender> Function(SenderToken) raw) {
+    return (callId, rawArg0) async {
+      final arg0 =
+          dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSenderToken(
+              rawArg0);
+
+      Box<FfiSender>? rawOutput;
+      Box<AnyhowException>? rawError;
+      try {
+        rawOutput = Box(await raw(arg0));
+      } catch (e, s) {
+        rawError = Box(AnyhowException("$e\n\n$s"));
+      }
+
+      final serializer = SseSerializer(generalizedFrbRustBinding);
+      assert((rawOutput != null) ^ (rawError != null));
+      if (rawOutput != null) {
+        serializer.buffer.putUint8(0);
+        sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender(
+            rawOutput.value, serializer);
+      } else {
+        serializer.buffer.putUint8(1);
+        sse_encode_AnyhowException(rawError!.value, serializer);
+      }
+      final output = serializer.intoRaw();
+
+      generalizedFrbRustBinding.dartFnDeliverOutput(
+          callId: callId,
+          ptr: output.ptr,
+          rustVecLen: output.rustVecLen,
+          dataLen: output.dataLen);
+    };
+  }
+
+  Future<void> Function(int, dynamic)
       encode_DartFn_Inputs_String_Output_String_AnyhowException(
           FutureOr<String> Function(String) raw) {
     return (callId, rawArg0) async {
@@ -2361,6 +2715,22 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       get rust_arc_decrement_strong_count_Script =>
           wire.rust_arc_decrement_strong_count_RustOpaque_bitcoin_ffiScript;
 
+  RustArcIncrementStrongCountFnType
+      get rust_arc_increment_strong_count_DartReceiverPersister => wire
+          .rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartReceiverPersister;
+
+  RustArcDecrementStrongCountFnType
+      get rust_arc_decrement_strong_count_DartReceiverPersister => wire
+          .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartReceiverPersister;
+
+  RustArcIncrementStrongCountFnType
+      get rust_arc_increment_strong_count_DartSenderPersister => wire
+          .rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartSenderPersister;
+
+  RustArcDecrementStrongCountFnType
+      get rust_arc_decrement_strong_count_DartSenderPersister => wire
+          .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartSenderPersister;
+
   RustArcIncrementStrongCountFnType get rust_arc_increment_strong_count_Error =>
       wire.rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerError;
 
@@ -2374,6 +2744,22 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   RustArcDecrementStrongCountFnType
       get rust_arc_decrement_strong_count_FfiJsonReply => wire
           .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiJsonReply;
+
+  RustArcIncrementStrongCountFnType
+      get rust_arc_increment_strong_count_FfiReceiver => wire
+          .rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver;
+
+  RustArcDecrementStrongCountFnType
+      get rust_arc_decrement_strong_count_FfiReceiver => wire
+          .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver;
+
+  RustArcIncrementStrongCountFnType
+      get rust_arc_increment_strong_count_FfiSender => wire
+          .rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender;
+
+  RustArcDecrementStrongCountFnType
+      get rust_arc_decrement_strong_count_FfiSender => wire
+          .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender;
 
   RustArcIncrementStrongCountFnType
       get rust_arc_increment_strong_count_ImplementationError => wire
@@ -2448,6 +2834,14 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
           .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPsbtInputError;
 
   RustArcIncrementStrongCountFnType
+      get rust_arc_increment_strong_count_ReceiverToken => wire
+          .rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReceiverToken;
+
+  RustArcDecrementStrongCountFnType
+      get rust_arc_decrement_strong_count_ReceiverToken => wire
+          .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReceiverToken;
+
+  RustArcIncrementStrongCountFnType
       get rust_arc_increment_strong_count_ReplyableError => wire
           .rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReplyableError;
 
@@ -2470,6 +2864,14 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   RustArcDecrementStrongCountFnType
       get rust_arc_decrement_strong_count_SelectionError => wire
           .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSelectionError;
+
+  RustArcIncrementStrongCountFnType
+      get rust_arc_increment_strong_count_SenderToken => wire
+          .rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSenderToken;
+
+  RustArcDecrementStrongCountFnType
+      get rust_arc_decrement_strong_count_SenderToken => wire
+          .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSenderToken;
 
   RustArcIncrementStrongCountFnType
       get rust_arc_increment_strong_count_SerdeJsonError => wire
@@ -2566,14 +2968,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
           .rust_arc_decrement_strong_count_RustOpaque_payjoin_ffireceiveProvisionalProposal;
 
   RustArcIncrementStrongCountFnType
-      get rust_arc_increment_strong_count_Receiver => wire
-          .rust_arc_increment_strong_count_RustOpaque_payjoin_ffireceiveReceiver;
-
-  RustArcDecrementStrongCountFnType
-      get rust_arc_decrement_strong_count_Receiver => wire
-          .rust_arc_decrement_strong_count_RustOpaque_payjoin_ffireceiveReceiver;
-
-  RustArcIncrementStrongCountFnType
       get rust_arc_increment_strong_count_UncheckedProposal => wire
           .rust_arc_increment_strong_count_RustOpaque_payjoin_ffireceiveUncheckedProposal;
 
@@ -2604,14 +2998,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   RustArcDecrementStrongCountFnType
       get rust_arc_decrement_strong_count_NewSender => wire
           .rust_arc_decrement_strong_count_RustOpaque_payjoin_ffisendNewSender;
-
-  RustArcIncrementStrongCountFnType
-      get rust_arc_increment_strong_count_Sender =>
-          wire.rust_arc_increment_strong_count_RustOpaque_payjoin_ffisendSender;
-
-  RustArcDecrementStrongCountFnType
-      get rust_arc_decrement_strong_count_Sender =>
-          wire.rust_arc_decrement_strong_count_RustOpaque_payjoin_ffisendSender;
 
   RustArcIncrementStrongCountFnType
       get rust_arc_increment_strong_count_SenderBuilder => wire
@@ -2816,11 +3202,131 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
+  DartReceiverPersister
+      dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartReceiverPersister(
+          dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return DartReceiverPersisterImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
+  DartSenderPersister
+      dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartSenderPersister(
+          dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return DartSenderPersisterImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
   FfiJsonReply
       dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiJsonReply(
           dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return FfiJsonReplyImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
+  FfiReceiver
+      dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver(
+          dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return FfiReceiverImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
+  FfiSender
+      dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender(
+          dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return FfiSenderImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
+  ImplementationError
+      dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerImplementationError(
+          dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return ImplementationErrorImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
+  ReceiverToken
+      dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReceiverToken(
+          dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return ReceiverTokenImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
+  SenderToken
+      dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSenderToken(
+          dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return SenderTokenImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
+  DartReceiverPersister
+      dco_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartReceiverPersister(
+          dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return DartReceiverPersisterImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
+  DartSenderPersister
+      dco_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartSenderPersister(
+          dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return DartSenderPersisterImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
+  FfiReceiver
+      dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver(
+          dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return FfiReceiverImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
+  FfiSender
+      dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender(
+          dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return FfiSenderImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
+  FutureOr<ReceiverToken> Function(FfiReceiver)
+      dco_decode_DartFn_Inputs_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver_Output_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReceiverToken_AnyhowException(
+          dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    throw UnimplementedError('');
+  }
+
+  @protected
+  FutureOr<SenderToken> Function(FfiSender)
+      dco_decode_DartFn_Inputs_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender_Output_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSenderToken_AnyhowException(
+          dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    throw UnimplementedError('');
+  }
+
+  @protected
+  FutureOr<FfiReceiver> Function(ReceiverToken)
+      dco_decode_DartFn_Inputs_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReceiverToken_Output_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver_AnyhowException(
+          dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    throw UnimplementedError('');
+  }
+
+  @protected
+  FutureOr<FfiSender> Function(SenderToken)
+      dco_decode_DartFn_Inputs_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSenderToken_Output_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender_AnyhowException(
+          dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    throw UnimplementedError('');
   }
 
   @protected
@@ -2860,6 +3366,22 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
+  DartReceiverPersister
+      dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartReceiverPersister(
+          dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return DartReceiverPersisterImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
+  DartSenderPersister
+      dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartSenderPersister(
+          dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return DartSenderPersisterImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
   Error
       dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerError(
           dynamic raw) {
@@ -2873,6 +3395,22 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
           dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return FfiJsonReplyImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
+  FfiReceiver
+      dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver(
+          dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return FfiReceiverImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
+  FfiSender
+      dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender(
+          dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return FfiSenderImpl.frbInternalDcoDecode(raw as List<dynamic>);
   }
 
   @protected
@@ -2950,6 +3488,14 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
+  ReceiverToken
+      dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReceiverToken(
+          dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return ReceiverTokenImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
   ReplyableError
       dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReplyableError(
           dynamic raw) {
@@ -2971,6 +3517,14 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
           dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return SelectionErrorImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
+  SenderToken
+      dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSenderToken(
+          dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return SenderTokenImpl.frbInternalDcoDecode(raw as List<dynamic>);
   }
 
   @protected
@@ -3057,12 +3611,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
-  Receiver dco_decode_RustOpaque_payjoin_ffireceiveReceiver(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return ReceiverImpl.frbInternalDcoDecode(raw as List<dynamic>);
-  }
-
-  @protected
   UncheckedProposal dco_decode_RustOpaque_payjoin_ffireceiveUncheckedProposal(
       dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
@@ -3086,12 +3634,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   NewSender dco_decode_RustOpaque_payjoin_ffisendNewSender(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return NewSenderImpl.frbInternalDcoDecode(raw as List<dynamic>);
-  }
-
-  @protected
-  Sender dco_decode_RustOpaque_payjoin_ffisendSender(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return SenderImpl.frbInternalDcoDecode(raw as List<dynamic>);
   }
 
   @protected
@@ -3145,6 +3687,12 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   String dco_decode_String(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw as String;
+  }
+
+  @protected
+  ReceiverPersister dco_decode_TraitDef_ReceiverPersister(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    throw UnimplementedError();
   }
 
   @protected
@@ -3216,21 +3764,9 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
-  FfiReceiver dco_decode_box_autoadd_ffi_receiver(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return dco_decode_ffi_receiver(raw);
-  }
-
-  @protected
   FfiScript dco_decode_box_autoadd_ffi_script(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_ffi_script(raw);
-  }
-
-  @protected
-  FfiSender dco_decode_box_autoadd_ffi_sender(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return dco_decode_ffi_sender(raw);
   }
 
   @protected
@@ -3608,17 +4144,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
-  FfiReceiver dco_decode_ffi_receiver(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    final arr = raw as List<dynamic>;
-    if (arr.length != 1)
-      throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
-    return FfiReceiver(
-      field0: dco_decode_RustOpaque_payjoin_ffireceiveReceiver(arr[0]),
-    );
-  }
-
-  @protected
   FfiReplyableError dco_decode_ffi_replyable_error(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
@@ -3665,17 +4190,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       field0:
           dco_decode_AutoExplicit_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSelectionError(
               arr[0]),
-    );
-  }
-
-  @protected
-  FfiSender dco_decode_ffi_sender(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    final arr = raw as List<dynamic>;
-    if (arr.length != 1)
-      throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
-    return FfiSender(
-      field0: dco_decode_RustOpaque_payjoin_ffisendSender(arr[0]),
     );
   }
 
@@ -4224,11 +4738,110 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
+  DartReceiverPersister
+      sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartReceiverPersister(
+          SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return DartReceiverPersisterImpl.frbInternalSseDecode(
+        sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
+  }
+
+  @protected
+  DartSenderPersister
+      sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartSenderPersister(
+          SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return DartSenderPersisterImpl.frbInternalSseDecode(
+        sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
+  }
+
+  @protected
   FfiJsonReply
       sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiJsonReply(
           SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return FfiJsonReplyImpl.frbInternalSseDecode(
+        sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
+  }
+
+  @protected
+  FfiReceiver
+      sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver(
+          SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return FfiReceiverImpl.frbInternalSseDecode(
+        sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
+  }
+
+  @protected
+  FfiSender
+      sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender(
+          SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return FfiSenderImpl.frbInternalSseDecode(
+        sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
+  }
+
+  @protected
+  ImplementationError
+      sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerImplementationError(
+          SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return ImplementationErrorImpl.frbInternalSseDecode(
+        sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
+  }
+
+  @protected
+  ReceiverToken
+      sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReceiverToken(
+          SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return ReceiverTokenImpl.frbInternalSseDecode(
+        sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
+  }
+
+  @protected
+  SenderToken
+      sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSenderToken(
+          SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return SenderTokenImpl.frbInternalSseDecode(
+        sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
+  }
+
+  @protected
+  DartReceiverPersister
+      sse_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartReceiverPersister(
+          SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return DartReceiverPersisterImpl.frbInternalSseDecode(
+        sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
+  }
+
+  @protected
+  DartSenderPersister
+      sse_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartSenderPersister(
+          SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return DartSenderPersisterImpl.frbInternalSseDecode(
+        sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
+  }
+
+  @protected
+  FfiReceiver
+      sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver(
+          SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return FfiReceiverImpl.frbInternalSseDecode(
+        sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
+  }
+
+  @protected
+  FfiSender
+      sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender(
+          SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return FfiSenderImpl.frbInternalSseDecode(
         sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
   }
 
@@ -4247,6 +4860,24 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
+  DartReceiverPersister
+      sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartReceiverPersister(
+          SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return DartReceiverPersisterImpl.frbInternalSseDecode(
+        sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
+  }
+
+  @protected
+  DartSenderPersister
+      sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartSenderPersister(
+          SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return DartSenderPersisterImpl.frbInternalSseDecode(
+        sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
+  }
+
+  @protected
   Error
       sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerError(
           SseDeserializer deserializer) {
@@ -4261,6 +4892,24 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
           SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return FfiJsonReplyImpl.frbInternalSseDecode(
+        sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
+  }
+
+  @protected
+  FfiReceiver
+      sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver(
+          SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return FfiReceiverImpl.frbInternalSseDecode(
+        sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
+  }
+
+  @protected
+  FfiSender
+      sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender(
+          SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return FfiSenderImpl.frbInternalSseDecode(
         sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
   }
 
@@ -4346,6 +4995,15 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
+  ReceiverToken
+      sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReceiverToken(
+          SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return ReceiverTokenImpl.frbInternalSseDecode(
+        sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
+  }
+
+  @protected
   ReplyableError
       sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReplyableError(
           SseDeserializer deserializer) {
@@ -4369,6 +5027,15 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
           SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return SelectionErrorImpl.frbInternalSseDecode(
+        sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
+  }
+
+  @protected
+  SenderToken
+      sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSenderToken(
+          SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return SenderTokenImpl.frbInternalSseDecode(
         sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
   }
 
@@ -4472,14 +5139,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
-  Receiver sse_decode_RustOpaque_payjoin_ffireceiveReceiver(
-      SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return ReceiverImpl.frbInternalSseDecode(
-        sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
-  }
-
-  @protected
   UncheckedProposal sse_decode_RustOpaque_payjoin_ffireceiveUncheckedProposal(
       SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
@@ -4508,14 +5167,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return NewSenderImpl.frbInternalSseDecode(
-        sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
-  }
-
-  @protected
-  Sender sse_decode_RustOpaque_payjoin_ffisendSender(
-      SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return SenderImpl.frbInternalSseDecode(
         sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
   }
 
@@ -4658,22 +5309,9 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
-  FfiReceiver sse_decode_box_autoadd_ffi_receiver(
-      SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return (sse_decode_ffi_receiver(deserializer));
-  }
-
-  @protected
   FfiScript sse_decode_box_autoadd_ffi_script(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return (sse_decode_ffi_script(deserializer));
-  }
-
-  @protected
-  FfiSender sse_decode_box_autoadd_ffi_sender(SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return (sse_decode_ffi_sender(deserializer));
   }
 
   @protected
@@ -4980,14 +5618,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
-  FfiReceiver sse_decode_ffi_receiver(SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_field0 =
-        sse_decode_RustOpaque_payjoin_ffireceiveReceiver(deserializer);
-    return FfiReceiver(field0: var_field0);
-  }
-
-  @protected
   FfiReplyableError sse_decode_ffi_replyable_error(
       SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
@@ -5021,13 +5651,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
         sse_decode_AutoExplicit_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSelectionError(
             deserializer);
     return FfiSelectionError(field0: var_field0);
-  }
-
-  @protected
-  FfiSender sse_decode_ffi_sender(SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_field0 = sse_decode_RustOpaque_payjoin_ffisendSender(deserializer);
-    return FfiSender(field0: var_field0);
   }
 
   @protected
@@ -5384,11 +6007,139 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
+  int cst_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartReceiverPersister(
+      DartReceiverPersister raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+// ignore: invalid_use_of_internal_member
+    return (raw as DartReceiverPersisterImpl).frbInternalCstEncode(move: true);
+  }
+
+  @protected
+  int cst_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartSenderPersister(
+      DartSenderPersister raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+// ignore: invalid_use_of_internal_member
+    return (raw as DartSenderPersisterImpl).frbInternalCstEncode(move: true);
+  }
+
+  @protected
   int cst_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiJsonReply(
       FfiJsonReply raw) {
     // Codec=Cst (C-struct based), see doc to use other codecs
 // ignore: invalid_use_of_internal_member
     return (raw as FfiJsonReplyImpl).frbInternalCstEncode(move: true);
+  }
+
+  @protected
+  int cst_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver(
+      FfiReceiver raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+// ignore: invalid_use_of_internal_member
+    return (raw as FfiReceiverImpl).frbInternalCstEncode(move: true);
+  }
+
+  @protected
+  int cst_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender(
+      FfiSender raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+// ignore: invalid_use_of_internal_member
+    return (raw as FfiSenderImpl).frbInternalCstEncode(move: true);
+  }
+
+  @protected
+  int cst_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerImplementationError(
+      ImplementationError raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+// ignore: invalid_use_of_internal_member
+    return (raw as ImplementationErrorImpl).frbInternalCstEncode(move: true);
+  }
+
+  @protected
+  int cst_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReceiverToken(
+      ReceiverToken raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+// ignore: invalid_use_of_internal_member
+    return (raw as ReceiverTokenImpl).frbInternalCstEncode(move: true);
+  }
+
+  @protected
+  int cst_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSenderToken(
+      SenderToken raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+// ignore: invalid_use_of_internal_member
+    return (raw as SenderTokenImpl).frbInternalCstEncode(move: true);
+  }
+
+  @protected
+  int cst_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartReceiverPersister(
+      DartReceiverPersister raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+// ignore: invalid_use_of_internal_member
+    return (raw as DartReceiverPersisterImpl).frbInternalCstEncode(move: false);
+  }
+
+  @protected
+  int cst_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartSenderPersister(
+      DartSenderPersister raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+// ignore: invalid_use_of_internal_member
+    return (raw as DartSenderPersisterImpl).frbInternalCstEncode(move: false);
+  }
+
+  @protected
+  int cst_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver(
+      FfiReceiver raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+// ignore: invalid_use_of_internal_member
+    return (raw as FfiReceiverImpl).frbInternalCstEncode(move: false);
+  }
+
+  @protected
+  int cst_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender(
+      FfiSender raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+// ignore: invalid_use_of_internal_member
+    return (raw as FfiSenderImpl).frbInternalCstEncode(move: false);
+  }
+
+  @protected
+  PlatformPointer
+      cst_encode_DartFn_Inputs_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver_Output_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReceiverToken_AnyhowException(
+          FutureOr<ReceiverToken> Function(FfiReceiver) raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return cst_encode_DartOpaque(
+        encode_DartFn_Inputs_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver_Output_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReceiverToken_AnyhowException(
+            raw));
+  }
+
+  @protected
+  PlatformPointer
+      cst_encode_DartFn_Inputs_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender_Output_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSenderToken_AnyhowException(
+          FutureOr<SenderToken> Function(FfiSender) raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return cst_encode_DartOpaque(
+        encode_DartFn_Inputs_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender_Output_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSenderToken_AnyhowException(
+            raw));
+  }
+
+  @protected
+  PlatformPointer
+      cst_encode_DartFn_Inputs_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReceiverToken_Output_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver_AnyhowException(
+          FutureOr<FfiReceiver> Function(ReceiverToken) raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return cst_encode_DartOpaque(
+        encode_DartFn_Inputs_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReceiverToken_Output_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver_AnyhowException(
+            raw));
+  }
+
+  @protected
+  PlatformPointer
+      cst_encode_DartFn_Inputs_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSenderToken_Output_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender_AnyhowException(
+          FutureOr<FfiSender> Function(SenderToken) raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    return cst_encode_DartOpaque(
+        encode_DartFn_Inputs_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSenderToken_Output_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender_AnyhowException(
+            raw));
   }
 
   @protected
@@ -5433,6 +6184,22 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
+  int cst_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartReceiverPersister(
+      DartReceiverPersister raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+// ignore: invalid_use_of_internal_member
+    return (raw as DartReceiverPersisterImpl).frbInternalCstEncode();
+  }
+
+  @protected
+  int cst_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartSenderPersister(
+      DartSenderPersister raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+// ignore: invalid_use_of_internal_member
+    return (raw as DartSenderPersisterImpl).frbInternalCstEncode();
+  }
+
+  @protected
   int cst_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerError(
       Error raw) {
     // Codec=Cst (C-struct based), see doc to use other codecs
@@ -5446,6 +6213,22 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
     // Codec=Cst (C-struct based), see doc to use other codecs
 // ignore: invalid_use_of_internal_member
     return (raw as FfiJsonReplyImpl).frbInternalCstEncode();
+  }
+
+  @protected
+  int cst_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver(
+      FfiReceiver raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+// ignore: invalid_use_of_internal_member
+    return (raw as FfiReceiverImpl).frbInternalCstEncode();
+  }
+
+  @protected
+  int cst_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender(
+      FfiSender raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+// ignore: invalid_use_of_internal_member
+    return (raw as FfiSenderImpl).frbInternalCstEncode();
   }
 
   @protected
@@ -5521,6 +6304,14 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
+  int cst_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReceiverToken(
+      ReceiverToken raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+// ignore: invalid_use_of_internal_member
+    return (raw as ReceiverTokenImpl).frbInternalCstEncode();
+  }
+
+  @protected
   int cst_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReplyableError(
       ReplyableError raw) {
     // Codec=Cst (C-struct based), see doc to use other codecs
@@ -5542,6 +6333,14 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
     // Codec=Cst (C-struct based), see doc to use other codecs
 // ignore: invalid_use_of_internal_member
     return (raw as SelectionErrorImpl).frbInternalCstEncode();
+  }
+
+  @protected
+  int cst_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSenderToken(
+      SenderToken raw) {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+// ignore: invalid_use_of_internal_member
+    return (raw as SenderTokenImpl).frbInternalCstEncode();
   }
 
   @protected
@@ -5637,13 +6436,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
-  int cst_encode_RustOpaque_payjoin_ffireceiveReceiver(Receiver raw) {
-    // Codec=Cst (C-struct based), see doc to use other codecs
-// ignore: invalid_use_of_internal_member
-    return (raw as ReceiverImpl).frbInternalCstEncode();
-  }
-
-  @protected
   int cst_encode_RustOpaque_payjoin_ffireceiveUncheckedProposal(
       UncheckedProposal raw) {
     // Codec=Cst (C-struct based), see doc to use other codecs
@@ -5670,13 +6462,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
     // Codec=Cst (C-struct based), see doc to use other codecs
 // ignore: invalid_use_of_internal_member
     return (raw as NewSenderImpl).frbInternalCstEncode();
-  }
-
-  @protected
-  int cst_encode_RustOpaque_payjoin_ffisendSender(Sender raw) {
-    // Codec=Cst (C-struct based), see doc to use other codecs
-// ignore: invalid_use_of_internal_member
-    return (raw as SenderImpl).frbInternalCstEncode();
   }
 
   @protected
@@ -5918,11 +6703,165 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
 
   @protected
   void
+      sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartReceiverPersister(
+          DartReceiverPersister self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+        (self as DartReceiverPersisterImpl).frbInternalSseEncode(move: true),
+        serializer);
+  }
+
+  @protected
+  void
+      sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartSenderPersister(
+          DartSenderPersister self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+        (self as DartSenderPersisterImpl).frbInternalSseEncode(move: true),
+        serializer);
+  }
+
+  @protected
+  void
       sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiJsonReply(
           FfiJsonReply self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_usize(
         (self as FfiJsonReplyImpl).frbInternalSseEncode(move: true),
+        serializer);
+  }
+
+  @protected
+  void
+      sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver(
+          FfiReceiver self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+        (self as FfiReceiverImpl).frbInternalSseEncode(move: true), serializer);
+  }
+
+  @protected
+  void
+      sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender(
+          FfiSender self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+        (self as FfiSenderImpl).frbInternalSseEncode(move: true), serializer);
+  }
+
+  @protected
+  void
+      sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerImplementationError(
+          ImplementationError self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+        (self as ImplementationErrorImpl).frbInternalSseEncode(move: true),
+        serializer);
+  }
+
+  @protected
+  void
+      sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReceiverToken(
+          ReceiverToken self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+        (self as ReceiverTokenImpl).frbInternalSseEncode(move: true),
+        serializer);
+  }
+
+  @protected
+  void
+      sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSenderToken(
+          SenderToken self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+        (self as SenderTokenImpl).frbInternalSseEncode(move: true), serializer);
+  }
+
+  @protected
+  void
+      sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartReceiverPersister(
+          DartReceiverPersister self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+        (self as DartReceiverPersisterImpl).frbInternalSseEncode(move: false),
+        serializer);
+  }
+
+  @protected
+  void
+      sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartSenderPersister(
+          DartSenderPersister self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+        (self as DartSenderPersisterImpl).frbInternalSseEncode(move: false),
+        serializer);
+  }
+
+  @protected
+  void
+      sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver(
+          FfiReceiver self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+        (self as FfiReceiverImpl).frbInternalSseEncode(move: false),
+        serializer);
+  }
+
+  @protected
+  void
+      sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender(
+          FfiSender self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+        (self as FfiSenderImpl).frbInternalSseEncode(move: false), serializer);
+  }
+
+  @protected
+  void
+      sse_encode_DartFn_Inputs_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver_Output_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReceiverToken_AnyhowException(
+          FutureOr<ReceiverToken> Function(FfiReceiver) self,
+          SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_DartOpaque(
+        encode_DartFn_Inputs_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver_Output_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReceiverToken_AnyhowException(
+            self),
+        serializer);
+  }
+
+  @protected
+  void
+      sse_encode_DartFn_Inputs_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender_Output_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSenderToken_AnyhowException(
+          FutureOr<SenderToken> Function(FfiSender) self,
+          SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_DartOpaque(
+        encode_DartFn_Inputs_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender_Output_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSenderToken_AnyhowException(
+            self),
+        serializer);
+  }
+
+  @protected
+  void
+      sse_encode_DartFn_Inputs_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReceiverToken_Output_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver_AnyhowException(
+          FutureOr<FfiReceiver> Function(ReceiverToken) self,
+          SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_DartOpaque(
+        encode_DartFn_Inputs_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReceiverToken_Output_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver_AnyhowException(
+            self),
+        serializer);
+  }
+
+  @protected
+  void
+      sse_encode_DartFn_Inputs_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSenderToken_Output_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender_AnyhowException(
+          FutureOr<FfiSender> Function(SenderToken) self,
+          SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_DartOpaque(
+        encode_DartFn_Inputs_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSenderToken_Output_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender_AnyhowException(
+            self),
         serializer);
   }
 
@@ -5975,6 +6914,26 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
 
   @protected
   void
+      sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartReceiverPersister(
+          DartReceiverPersister self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+        (self as DartReceiverPersisterImpl).frbInternalSseEncode(move: null),
+        serializer);
+  }
+
+  @protected
+  void
+      sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartSenderPersister(
+          DartSenderPersister self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+        (self as DartSenderPersisterImpl).frbInternalSseEncode(move: null),
+        serializer);
+  }
+
+  @protected
+  void
       sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerError(
           Error self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
@@ -5990,6 +6949,24 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
     sse_encode_usize(
         (self as FfiJsonReplyImpl).frbInternalSseEncode(move: null),
         serializer);
+  }
+
+  @protected
+  void
+      sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver(
+          FfiReceiver self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+        (self as FfiReceiverImpl).frbInternalSseEncode(move: null), serializer);
+  }
+
+  @protected
+  void
+      sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender(
+          FfiSender self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+        (self as FfiSenderImpl).frbInternalSseEncode(move: null), serializer);
   }
 
   @protected
@@ -6082,6 +7059,16 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
 
   @protected
   void
+      sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReceiverToken(
+          ReceiverToken self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+        (self as ReceiverTokenImpl).frbInternalSseEncode(move: null),
+        serializer);
+  }
+
+  @protected
+  void
       sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReplyableError(
           ReplyableError self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
@@ -6108,6 +7095,15 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
     sse_encode_usize(
         (self as SelectionErrorImpl).frbInternalSseEncode(move: null),
         serializer);
+  }
+
+  @protected
+  void
+      sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSenderToken(
+          SenderToken self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+        (self as SenderTokenImpl).frbInternalSseEncode(move: null), serializer);
   }
 
   @protected
@@ -6218,14 +7214,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
-  void sse_encode_RustOpaque_payjoin_ffireceiveReceiver(
-      Receiver self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_usize(
-        (self as ReceiverImpl).frbInternalSseEncode(move: null), serializer);
-  }
-
-  @protected
   void sse_encode_RustOpaque_payjoin_ffireceiveUncheckedProposal(
       UncheckedProposal self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
@@ -6257,14 +7245,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_usize(
         (self as NewSenderImpl).frbInternalSseEncode(move: null), serializer);
-  }
-
-  @protected
-  void sse_encode_RustOpaque_payjoin_ffisendSender(
-      Sender self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_usize(
-        (self as SenderImpl).frbInternalSseEncode(move: null), serializer);
   }
 
   @protected
@@ -6412,24 +7392,10 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
-  void sse_encode_box_autoadd_ffi_receiver(
-      FfiReceiver self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_ffi_receiver(self, serializer);
-  }
-
-  @protected
   void sse_encode_box_autoadd_ffi_script(
       FfiScript self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_ffi_script(self, serializer);
-  }
-
-  @protected
-  void sse_encode_box_autoadd_ffi_sender(
-      FfiSender self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_ffi_sender(self, serializer);
   }
 
   @protected
@@ -6704,12 +7670,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   }
 
   @protected
-  void sse_encode_ffi_receiver(FfiReceiver self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_RustOpaque_payjoin_ffireceiveReceiver(self.field0, serializer);
-  }
-
-  @protected
   void sse_encode_ffi_replyable_error(
       FfiReplyableError self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
@@ -6737,12 +7697,6 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_AutoExplicit_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSelectionError(
         self.field0, serializer);
-  }
-
-  @protected
-  void sse_encode_ffi_sender(FfiSender self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_RustOpaque_payjoin_ffisendSender(self.field0, serializer);
   }
 
   @protected
@@ -7057,6 +8011,50 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
 }
 
 @sealed
+class DartReceiverPersisterImpl extends RustOpaque
+    implements DartReceiverPersister {
+  // Not to be used by end users
+  DartReceiverPersisterImpl.frbInternalDcoDecode(List<dynamic> wire)
+      : super.frbInternalDcoDecode(wire, _kStaticData);
+
+  // Not to be used by end users
+  DartReceiverPersisterImpl.frbInternalSseDecode(
+      BigInt ptr, int externalSizeOnNative)
+      : super.frbInternalSseDecode(ptr, externalSizeOnNative, _kStaticData);
+
+  static final _kStaticData = RustArcStaticData(
+    rustArcIncrementStrongCount:
+        core.instance.api.rust_arc_increment_strong_count_DartReceiverPersister,
+    rustArcDecrementStrongCount:
+        core.instance.api.rust_arc_decrement_strong_count_DartReceiverPersister,
+    rustArcDecrementStrongCountPtr: core
+        .instance.api.rust_arc_decrement_strong_count_DartReceiverPersisterPtr,
+  );
+}
+
+@sealed
+class DartSenderPersisterImpl extends RustOpaque
+    implements DartSenderPersister {
+  // Not to be used by end users
+  DartSenderPersisterImpl.frbInternalDcoDecode(List<dynamic> wire)
+      : super.frbInternalDcoDecode(wire, _kStaticData);
+
+  // Not to be used by end users
+  DartSenderPersisterImpl.frbInternalSseDecode(
+      BigInt ptr, int externalSizeOnNative)
+      : super.frbInternalSseDecode(ptr, externalSizeOnNative, _kStaticData);
+
+  static final _kStaticData = RustArcStaticData(
+    rustArcIncrementStrongCount:
+        core.instance.api.rust_arc_increment_strong_count_DartSenderPersister,
+    rustArcDecrementStrongCount:
+        core.instance.api.rust_arc_decrement_strong_count_DartSenderPersister,
+    rustArcDecrementStrongCountPtr: core
+        .instance.api.rust_arc_decrement_strong_count_DartSenderPersisterPtr,
+  );
+}
+
+@sealed
 class ErrorImpl extends RustOpaque implements Error {
   // Not to be used by end users
   ErrorImpl.frbInternalDcoDecode(List<dynamic> wire)
@@ -7094,6 +8092,91 @@ class FfiJsonReplyImpl extends RustOpaque implements FfiJsonReply {
     rustArcDecrementStrongCountPtr:
         core.instance.api.rust_arc_decrement_strong_count_FfiJsonReplyPtr,
   );
+}
+
+@sealed
+class FfiReceiverImpl extends RustOpaque implements FfiReceiver {
+  // Not to be used by end users
+  FfiReceiverImpl.frbInternalDcoDecode(List<dynamic> wire)
+      : super.frbInternalDcoDecode(wire, _kStaticData);
+
+  // Not to be used by end users
+  FfiReceiverImpl.frbInternalSseDecode(BigInt ptr, int externalSizeOnNative)
+      : super.frbInternalSseDecode(ptr, externalSizeOnNative, _kStaticData);
+
+  static final _kStaticData = RustArcStaticData(
+    rustArcIncrementStrongCount:
+        core.instance.api.rust_arc_increment_strong_count_FfiReceiver,
+    rustArcDecrementStrongCount:
+        core.instance.api.rust_arc_decrement_strong_count_FfiReceiver,
+    rustArcDecrementStrongCountPtr:
+        core.instance.api.rust_arc_decrement_strong_count_FfiReceiverPtr,
+  );
+
+  Future<(Request, ClientResponse)> extractReq({required String ohttpRelay}) =>
+      core.instance.api.crateApiReceiveFfiReceiverExtractReq(
+          that: this, ohttpRelay: ohttpRelay);
+
+  ///The per-session public key to use as an identifier
+  String id() => core.instance.api.crateApiReceiveFfiReceiverId(
+        that: this,
+      );
+
+  Future<ReceiverToken> key() =>
+      core.instance.api.crateApiReceiveFfiReceiverKey(
+        that: this,
+      );
+
+  Future<FfiPjUri> pjUri() => core.instance.api.crateApiReceiveFfiReceiverPjUri(
+        that: this,
+      );
+
+  Future<FfiUncheckedProposal?> processRes(
+          {required List<int> body, required ClientResponse ctx}) =>
+      core.instance.api.crateApiReceiveFfiReceiverProcessRes(
+          that: this, body: body, ctx: ctx);
+
+  String toJson() => core.instance.api.crateApiReceiveFfiReceiverToJson(
+        that: this,
+      );
+}
+
+@sealed
+class FfiSenderImpl extends RustOpaque implements FfiSender {
+  // Not to be used by end users
+  FfiSenderImpl.frbInternalDcoDecode(List<dynamic> wire)
+      : super.frbInternalDcoDecode(wire, _kStaticData);
+
+  // Not to be used by end users
+  FfiSenderImpl.frbInternalSseDecode(BigInt ptr, int externalSizeOnNative)
+      : super.frbInternalSseDecode(ptr, externalSizeOnNative, _kStaticData);
+
+  static final _kStaticData = RustArcStaticData(
+    rustArcIncrementStrongCount:
+        core.instance.api.rust_arc_increment_strong_count_FfiSender,
+    rustArcDecrementStrongCount:
+        core.instance.api.rust_arc_decrement_strong_count_FfiSender,
+    rustArcDecrementStrongCountPtr:
+        core.instance.api.rust_arc_decrement_strong_count_FfiSenderPtr,
+  );
+
+  Future<(Request, FfiV1Context)> extractV1() =>
+      core.instance.api.crateApiSendFfiSenderExtractV1(
+        that: this,
+      );
+
+  Future<(Request, FfiV2PostContext)> extractV2(
+          {required FfiUrl ohttpProxyUrl}) =>
+      core.instance.api.crateApiSendFfiSenderExtractV2(
+          that: this, ohttpProxyUrl: ohttpProxyUrl);
+
+  Future<SenderToken> key() => core.instance.api.crateApiSendFfiSenderKey(
+        that: this,
+      );
+
+  String toJson() => core.instance.api.crateApiSendFfiSenderToJson(
+        that: this,
+      );
 }
 
 @sealed
@@ -7508,22 +8591,22 @@ class PsbtInputErrorImpl extends RustOpaque implements PsbtInputError {
 }
 
 @sealed
-class ReceiverImpl extends RustOpaque implements Receiver {
+class ReceiverTokenImpl extends RustOpaque implements ReceiverToken {
   // Not to be used by end users
-  ReceiverImpl.frbInternalDcoDecode(List<dynamic> wire)
+  ReceiverTokenImpl.frbInternalDcoDecode(List<dynamic> wire)
       : super.frbInternalDcoDecode(wire, _kStaticData);
 
   // Not to be used by end users
-  ReceiverImpl.frbInternalSseDecode(BigInt ptr, int externalSizeOnNative)
+  ReceiverTokenImpl.frbInternalSseDecode(BigInt ptr, int externalSizeOnNative)
       : super.frbInternalSseDecode(ptr, externalSizeOnNative, _kStaticData);
 
   static final _kStaticData = RustArcStaticData(
     rustArcIncrementStrongCount:
-        core.instance.api.rust_arc_increment_strong_count_Receiver,
+        core.instance.api.rust_arc_increment_strong_count_ReceiverToken,
     rustArcDecrementStrongCount:
-        core.instance.api.rust_arc_decrement_strong_count_Receiver,
+        core.instance.api.rust_arc_decrement_strong_count_ReceiverToken,
     rustArcDecrementStrongCountPtr:
-        core.instance.api.rust_arc_decrement_strong_count_ReceiverPtr,
+        core.instance.api.rust_arc_decrement_strong_count_ReceiverTokenPtr,
   );
 }
 
@@ -7628,22 +8711,22 @@ class SenderBuilderImpl extends RustOpaque implements SenderBuilder {
 }
 
 @sealed
-class SenderImpl extends RustOpaque implements Sender {
+class SenderTokenImpl extends RustOpaque implements SenderToken {
   // Not to be used by end users
-  SenderImpl.frbInternalDcoDecode(List<dynamic> wire)
+  SenderTokenImpl.frbInternalDcoDecode(List<dynamic> wire)
       : super.frbInternalDcoDecode(wire, _kStaticData);
 
   // Not to be used by end users
-  SenderImpl.frbInternalSseDecode(BigInt ptr, int externalSizeOnNative)
+  SenderTokenImpl.frbInternalSseDecode(BigInt ptr, int externalSizeOnNative)
       : super.frbInternalSseDecode(ptr, externalSizeOnNative, _kStaticData);
 
   static final _kStaticData = RustArcStaticData(
     rustArcIncrementStrongCount:
-        core.instance.api.rust_arc_increment_strong_count_Sender,
+        core.instance.api.rust_arc_increment_strong_count_SenderToken,
     rustArcDecrementStrongCount:
-        core.instance.api.rust_arc_decrement_strong_count_Sender,
+        core.instance.api.rust_arc_decrement_strong_count_SenderToken,
     rustArcDecrementStrongCountPtr:
-        core.instance.api.rust_arc_decrement_strong_count_SenderPtr,
+        core.instance.api.rust_arc_decrement_strong_count_SenderTokenPtr,
   );
 }
 

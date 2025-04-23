@@ -1,4 +1,8 @@
-use flutter_rust_bridge::frb;
+use std::sync::Arc;
+use payjoin::persist::Persister;
+pub use payjoin::send::v2::SenderToken;
+
+use flutter_rust_bridge::{frb, DartFnFuture};
 use error::{FfiBuildSenderError, FfiCreateRequestError, FfiEncapsulationError, FfiResponseError};
 
 use crate::api::uri::{FfiPjUri, FfiUrl};
@@ -70,27 +74,34 @@ impl From<payjoin_ffi::send::NewSender> for FfiNewSender {
 }
 
 impl FfiNewSender {
-    pub fn persist(&self) -> Result<FfiSender, FfiImplementationError> {
-        todo!()
+    pub fn persist(&self, persister: &mut DartSenderPersister) -> Result<SenderToken, FfiImplementationError> {
+        self.0.persist(persister).map_err(Into::into)
     }
 }
 
-pub struct FfiSender(pub RustOpaque<payjoin_ffi::send::Sender>);
+#[derive(Clone)]
+pub struct FfiSender(pub(crate) payjoin_ffi::send::Sender);
 
 impl From<payjoin_ffi::send::Sender> for FfiSender {
     fn from(value: payjoin_ffi::send::Sender) -> Self {
-        Self(RustOpaque::new(value))
+        Self(value)
+    }
+}
+
+impl From<FfiSender> for payjoin::send::v2::Sender {
+    fn from(value: FfiSender) -> Self {
+        payjoin::send::v2::Sender::from(value.0)
     }
 }
 
 impl From<FfiSender> for payjoin_ffi::send::Sender {
     fn from(value: FfiSender) -> Self {
-        (*value.0).clone()
+        value.0
     }
 }
 impl FfiSender {
-    pub fn load(_token: String) -> Result<FfiSender, FfiImplementationError> {
-        todo!()
+    pub fn load(token: SenderToken, persister: DartSenderPersister) -> Result<FfiSender, FfiImplementationError> {
+        persister.load(token).map(|sender| FfiSender::from(payjoin_ffi::send::Sender::from(sender))).map_err(Into::into)
     }
 
     pub fn extract_v1(&self) -> (Request, FfiV1Context) {
@@ -116,6 +127,10 @@ impl FfiSender {
     #[frb(sync)]
     pub fn from_json(json: String) -> Result<Self, FfiSerdeJsonError> {
         payjoin_ffi::send::Sender::from_json(&json).map(Into::into).map_err(Into::into)
+    }
+
+    pub fn key(&self) -> SenderToken {
+        self.0.key()
     }
 }
 
@@ -173,5 +188,58 @@ impl FfiV2GetContext {
         ohttp_ctx: &ClientResponse,
     ) -> Result<Option<String>, FfiResponseError> {
         self.0.process_response(response, &ohttp_ctx.into()).map_err(Into::into)
+    }
+}
+
+#[frb(opaque)]
+pub struct DartSenderPersister {
+    save_cb: Box<
+        dyn Fn(FfiSender) -> DartFnFuture<Result<SenderToken, anyhow::Error>> + Send + Sync
+    >,
+    load_cb: Box<
+        dyn Fn(SenderToken) -> DartFnFuture<Result<FfiSender, anyhow::Error>> + Send + Sync
+    >,
+}
+
+impl payjoin::persist::Persister<payjoin::send::v2::Sender> for DartSenderPersister {
+    type Token = SenderToken;
+    type Error = payjoin_ffi::receive::ImplementationError;
+
+    fn save(
+        &mut self,
+        sender: payjoin::send::v2::Sender,
+    ) -> Result<Self::Token, Self::Error> {
+        let sender = FfiSender::from(payjoin_ffi::send::Sender::from(sender));
+        tokio::runtime::Handle::current().block_on(async {
+            (self.save_cb)(sender).await.map_err(|e| {
+                payjoin_ffi::receive::ImplementationError::from(e.to_string())
+            })
+        })
+    }
+
+    fn load(&self, token: Self::Token) -> Result<payjoin::send::v2::Sender, Self::Error> {
+        tokio::runtime::Handle::current().block_on(async {
+            (self.load_cb)(token).await.map(|sender| {
+                let ffi_sender = sender.0;
+                payjoin::send::v2::Sender::from(ffi_sender)
+            }).map_err(|e| {
+                payjoin_ffi::receive::ImplementationError::from(e.to_string())
+            })
+        })
+    }
+}
+
+#[frb(sync)]
+pub fn make_persister(
+    save: impl Fn(FfiSender)
+                 -> DartFnFuture<Result<SenderToken, anyhow::Error>>
+           + Send + Sync + 'static,
+    load: impl Fn(SenderToken)
+                 -> DartFnFuture<Result<FfiSender, anyhow::Error>>
+           + Send + Sync + 'static,
+) -> DartSenderPersister {
+    DartSenderPersister {
+        save_cb: Box::new(save),
+        load_cb: Box::new(load),
     }
 }

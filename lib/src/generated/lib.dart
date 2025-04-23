@@ -84,9 +84,6 @@ abstract class PayjoinProposal implements RustOpaqueInterface {}
 // Rust type: RustOpaqueNom<payjoin_ffi :: receive :: ProvisionalProposal>
 abstract class ProvisionalProposal implements RustOpaqueInterface {}
 
-// Rust type: RustOpaqueNom<payjoin_ffi :: receive :: Receiver>
-abstract class Receiver implements RustOpaqueInterface {}
-
 // Rust type: RustOpaqueNom<payjoin_ffi :: receive :: UncheckedProposal>
 abstract class UncheckedProposal implements RustOpaqueInterface {}
 
@@ -98,9 +95,6 @@ abstract class WantsOutputs implements RustOpaqueInterface {}
 
 // Rust type: RustOpaqueNom<payjoin_ffi :: send :: NewSender>
 abstract class NewSender implements RustOpaqueInterface {}
-
-// Rust type: RustOpaqueNom<payjoin_ffi :: send :: Sender>
-abstract class Sender implements RustOpaqueInterface {}
 
 // Rust type: RustOpaqueNom<payjoin_ffi :: send :: SenderBuilder>
 abstract class SenderBuilder implements RustOpaqueInterface {}

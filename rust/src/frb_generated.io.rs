@@ -9,6 +9,8 @@ use flutter_rust_bridge::{Handler, IntoIntoDart};
 
 use super::*;
 use crate::api::receive::error::*;
+use crate::api::receive::*;
+use crate::api::send::*;
 use crate::*;
 
 // Section: boilerplate
@@ -121,11 +123,87 @@ impl CstDecode<RustAutoOpaqueNom<UrlParseError>> for usize {
         flutter_rust_bridge::for_generated::rust_auto_opaque_explicit_decode(self.cst_decode())
     }
 }
+impl CstDecode<DartReceiverPersister> for usize {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    fn cst_decode(self) -> DartReceiverPersister {
+        flutter_rust_bridge::for_generated::rust_auto_opaque_decode_owned(CstDecode::<
+            RustOpaqueNom<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<DartReceiverPersister>,
+            >,
+        >::cst_decode(
+            self
+        ))
+    }
+}
+impl CstDecode<DartSenderPersister> for usize {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    fn cst_decode(self) -> DartSenderPersister {
+        flutter_rust_bridge::for_generated::rust_auto_opaque_decode_owned(CstDecode::<
+            RustOpaqueNom<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<DartSenderPersister>,
+            >,
+        >::cst_decode(
+            self
+        ))
+    }
+}
 impl CstDecode<FfiJsonReply> for usize {
     // Codec=Cst (C-struct based), see doc to use other codecs
     fn cst_decode(self) -> FfiJsonReply {
         flutter_rust_bridge::for_generated::rust_auto_opaque_decode_owned(CstDecode::<
             RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<FfiJsonReply>>,
+        >::cst_decode(
+            self
+        ))
+    }
+}
+impl CstDecode<FfiReceiver> for usize {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    fn cst_decode(self) -> FfiReceiver {
+        flutter_rust_bridge::for_generated::rust_auto_opaque_decode_owned(CstDecode::<
+            RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<FfiReceiver>>,
+        >::cst_decode(
+            self
+        ))
+    }
+}
+impl CstDecode<FfiSender> for usize {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    fn cst_decode(self) -> FfiSender {
+        flutter_rust_bridge::for_generated::rust_auto_opaque_decode_owned(CstDecode::<
+            RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<FfiSender>>,
+        >::cst_decode(
+            self
+        ))
+    }
+}
+impl CstDecode<ImplementationError> for usize {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    fn cst_decode(self) -> ImplementationError {
+        flutter_rust_bridge::for_generated::rust_auto_opaque_decode_owned(CstDecode::<
+            RustOpaqueNom<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ImplementationError>,
+            >,
+        >::cst_decode(
+            self
+        ))
+    }
+}
+impl CstDecode<ReceiverToken> for usize {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    fn cst_decode(self) -> ReceiverToken {
+        flutter_rust_bridge::for_generated::rust_auto_opaque_decode_owned(CstDecode::<
+            RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ReceiverToken>>,
+        >::cst_decode(
+            self
+        ))
+    }
+}
+impl CstDecode<SenderToken> for usize {
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    fn cst_decode(self) -> SenderToken {
+        flutter_rust_bridge::for_generated::rust_auto_opaque_decode_owned(CstDecode::<
+            RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<SenderToken>>,
         >::cst_decode(
             self
         ))
@@ -140,6 +218,34 @@ impl CstDecode<flutter_rust_bridge::DartOpaque> for *const std::ffi::c_void {
 impl CstDecode<RustOpaqueNom<bitcoin_ffi::Script>> for usize {
     // Codec=Cst (C-struct based), see doc to use other codecs
     fn cst_decode(self) -> RustOpaqueNom<bitcoin_ffi::Script> {
+        unsafe { decode_rust_opaque_nom(self as _) }
+    }
+}
+impl
+    CstDecode<
+        RustOpaqueNom<
+            flutter_rust_bridge::for_generated::RustAutoOpaqueInner<DartReceiverPersister>,
+        >,
+    > for usize
+{
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    fn cst_decode(
+        self,
+    ) -> RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<DartReceiverPersister>>
+    {
+        unsafe { decode_rust_opaque_nom(self as _) }
+    }
+}
+impl
+    CstDecode<
+        RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<DartSenderPersister>>,
+    > for usize
+{
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    fn cst_decode(
+        self,
+    ) -> RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<DartSenderPersister>>
+    {
         unsafe { decode_rust_opaque_nom(self as _) }
     }
 }
@@ -160,6 +266,26 @@ impl CstDecode<RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueI
     fn cst_decode(
         self,
     ) -> RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<FfiJsonReply>> {
+        unsafe { decode_rust_opaque_nom(self as _) }
+    }
+}
+impl CstDecode<RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<FfiReceiver>>>
+    for usize
+{
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    fn cst_decode(
+        self,
+    ) -> RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<FfiReceiver>> {
+        unsafe { decode_rust_opaque_nom(self as _) }
+    }
+}
+impl CstDecode<RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<FfiSender>>>
+    for usize
+{
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    fn cst_decode(
+        self,
+    ) -> RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<FfiSender>> {
         unsafe { decode_rust_opaque_nom(self as _) }
     }
 }
@@ -275,6 +401,17 @@ impl
     }
 }
 impl
+    CstDecode<RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ReceiverToken>>>
+    for usize
+{
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    fn cst_decode(
+        self,
+    ) -> RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ReceiverToken>> {
+        unsafe { decode_rust_opaque_nom(self as _) }
+    }
+}
+impl
     CstDecode<
         RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ReplyableError>>,
     > for usize
@@ -308,6 +445,16 @@ impl
         self,
     ) -> RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<SelectionError>>
     {
+        unsafe { decode_rust_opaque_nom(self as _) }
+    }
+}
+impl CstDecode<RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<SenderToken>>>
+    for usize
+{
+    // Codec=Cst (C-struct based), see doc to use other codecs
+    fn cst_decode(
+        self,
+    ) -> RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<SenderToken>> {
         unsafe { decode_rust_opaque_nom(self as _) }
     }
 }
@@ -399,12 +546,6 @@ impl CstDecode<RustOpaqueNom<payjoin_ffi::receive::ProvisionalProposal>> for usi
         unsafe { decode_rust_opaque_nom(self as _) }
     }
 }
-impl CstDecode<RustOpaqueNom<payjoin_ffi::receive::Receiver>> for usize {
-    // Codec=Cst (C-struct based), see doc to use other codecs
-    fn cst_decode(self) -> RustOpaqueNom<payjoin_ffi::receive::Receiver> {
-        unsafe { decode_rust_opaque_nom(self as _) }
-    }
-}
 impl CstDecode<RustOpaqueNom<payjoin_ffi::receive::UncheckedProposal>> for usize {
     // Codec=Cst (C-struct based), see doc to use other codecs
     fn cst_decode(self) -> RustOpaqueNom<payjoin_ffi::receive::UncheckedProposal> {
@@ -426,12 +567,6 @@ impl CstDecode<RustOpaqueNom<payjoin_ffi::receive::WantsOutputs>> for usize {
 impl CstDecode<RustOpaqueNom<payjoin_ffi::send::NewSender>> for usize {
     // Codec=Cst (C-struct based), see doc to use other codecs
     fn cst_decode(self) -> RustOpaqueNom<payjoin_ffi::send::NewSender> {
-        unsafe { decode_rust_opaque_nom(self as _) }
-    }
-}
-impl CstDecode<RustOpaqueNom<payjoin_ffi::send::Sender>> for usize {
-    // Codec=Cst (C-struct based), see doc to use other codecs
-    fn cst_decode(self) -> RustOpaqueNom<payjoin_ffi::send::Sender> {
         unsafe { decode_rust_opaque_nom(self as _) }
     }
 }
@@ -560,25 +695,11 @@ impl CstDecode<crate::api::receive::FfiProvisionalProposal>
         CstDecode::<crate::api::receive::FfiProvisionalProposal>::cst_decode(*wrap).into()
     }
 }
-impl CstDecode<crate::api::receive::FfiReceiver> for *mut wire_cst_ffi_receiver {
-    // Codec=Cst (C-struct based), see doc to use other codecs
-    fn cst_decode(self) -> crate::api::receive::FfiReceiver {
-        let wrap = unsafe { flutter_rust_bridge::for_generated::box_from_leak_ptr(self) };
-        CstDecode::<crate::api::receive::FfiReceiver>::cst_decode(*wrap).into()
-    }
-}
 impl CstDecode<crate::api::bitcoin_ffi::FfiScript> for *mut wire_cst_ffi_script {
     // Codec=Cst (C-struct based), see doc to use other codecs
     fn cst_decode(self) -> crate::api::bitcoin_ffi::FfiScript {
         let wrap = unsafe { flutter_rust_bridge::for_generated::box_from_leak_ptr(self) };
         CstDecode::<crate::api::bitcoin_ffi::FfiScript>::cst_decode(*wrap).into()
-    }
-}
-impl CstDecode<crate::api::send::FfiSender> for *mut wire_cst_ffi_sender {
-    // Codec=Cst (C-struct based), see doc to use other codecs
-    fn cst_decode(self) -> crate::api::send::FfiSender {
-        let wrap = unsafe { flutter_rust_bridge::for_generated::box_from_leak_ptr(self) };
-        CstDecode::<crate::api::send::FfiSender>::cst_decode(*wrap).into()
     }
 }
 impl CstDecode<crate::api::send::FfiSenderBuilder> for *mut wire_cst_ffi_sender_builder {
@@ -831,12 +952,6 @@ impl CstDecode<crate::api::receive::error::FfiPsbtInputError> for wire_cst_ffi_p
         crate::api::receive::error::FfiPsbtInputError(self.field0.cst_decode())
     }
 }
-impl CstDecode<crate::api::receive::FfiReceiver> for wire_cst_ffi_receiver {
-    // Codec=Cst (C-struct based), see doc to use other codecs
-    fn cst_decode(self) -> crate::api::receive::FfiReceiver {
-        crate::api::receive::FfiReceiver(self.field0.cst_decode())
-    }
-}
 impl CstDecode<crate::api::receive::error::FfiReplyableError> for wire_cst_ffi_replyable_error {
     // Codec=Cst (C-struct based), see doc to use other codecs
     fn cst_decode(self) -> crate::api::receive::error::FfiReplyableError {
@@ -859,12 +974,6 @@ impl CstDecode<crate::api::receive::error::FfiSelectionError> for wire_cst_ffi_s
     // Codec=Cst (C-struct based), see doc to use other codecs
     fn cst_decode(self) -> crate::api::receive::error::FfiSelectionError {
         crate::api::receive::error::FfiSelectionError(self.field0.cst_decode())
-    }
-}
-impl CstDecode<crate::api::send::FfiSender> for wire_cst_ffi_sender {
-    // Codec=Cst (C-struct based), see doc to use other codecs
-    fn cst_decode(self) -> crate::api::send::FfiSender {
-        crate::api::send::FfiSender(self.field0.cst_decode())
     }
 }
 impl CstDecode<crate::api::send::FfiSenderBuilder> for wire_cst_ffi_sender_builder {
@@ -1307,16 +1416,6 @@ impl Default for wire_cst_ffi_psbt_input_error {
         Self::new_with_null_ptr()
     }
 }
-impl NewWithNullPtr for wire_cst_ffi_receiver {
-    fn new_with_null_ptr() -> Self {
-        Self { field0: Default::default() }
-    }
-}
-impl Default for wire_cst_ffi_receiver {
-    fn default() -> Self {
-        Self::new_with_null_ptr()
-    }
-}
 impl NewWithNullPtr for wire_cst_ffi_replyable_error {
     fn new_with_null_ptr() -> Self {
         Self { field0: Default::default() }
@@ -1353,16 +1452,6 @@ impl NewWithNullPtr for wire_cst_ffi_selection_error {
     }
 }
 impl Default for wire_cst_ffi_selection_error {
-    fn default() -> Self {
-        Self::new_with_null_ptr()
-    }
-}
-impl NewWithNullPtr for wire_cst_ffi_sender {
-    fn new_with_null_ptr() -> Self {
-        Self { field0: Default::default() }
-    }
-}
-impl Default for wire_cst_ffi_sender {
     fn default() -> Self {
         Self::new_with_null_ptr()
     }
@@ -1607,6 +1696,79 @@ pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__io__fetch_ohttp_keys(
 }
 
 #[no_mangle]
+pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__DartReceiverPersister_new(
+    save: *const std::ffi::c_void,
+    load: *const std::ffi::c_void,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartDco {
+    wire__crate__api__receive__DartReceiverPersister_new_impl(save, load)
+}
+
+#[no_mangle]
+pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__FfiReceiver_extract_req(
+    port_: i64,
+    that: usize,
+    ohttp_relay: *mut wire_cst_list_prim_u_8_strict,
+) {
+    wire__crate__api__receive__FfiReceiver_extract_req_impl(port_, that, ohttp_relay)
+}
+
+#[no_mangle]
+pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__FfiReceiver_from_json(
+    json: *mut wire_cst_list_prim_u_8_strict,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartDco {
+    wire__crate__api__receive__FfiReceiver_from_json_impl(json)
+}
+
+#[no_mangle]
+pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__FfiReceiver_id(
+    that: usize,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartDco {
+    wire__crate__api__receive__FfiReceiver_id_impl(that)
+}
+
+#[no_mangle]
+pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__FfiReceiver_key(
+    port_: i64,
+    that: usize,
+) {
+    wire__crate__api__receive__FfiReceiver_key_impl(port_, that)
+}
+
+#[no_mangle]
+pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__FfiReceiver_load(
+    port_: i64,
+    token: usize,
+    persister: usize,
+) {
+    wire__crate__api__receive__FfiReceiver_load_impl(port_, token, persister)
+}
+
+#[no_mangle]
+pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__FfiReceiver_pj_uri(
+    port_: i64,
+    that: usize,
+) {
+    wire__crate__api__receive__FfiReceiver_pj_uri_impl(port_, that)
+}
+
+#[no_mangle]
+pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__FfiReceiver_process_res(
+    port_: i64,
+    that: usize,
+    body: *mut wire_cst_list_prim_u_8_loose,
+    ctx: *mut wire_cst_client_response,
+) {
+    wire__crate__api__receive__FfiReceiver_process_res_impl(port_, that, body, ctx)
+}
+
+#[no_mangle]
+pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__FfiReceiver_to_json(
+    that: usize,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartDco {
+    wire__crate__api__receive__FfiReceiver_to_json_impl(that)
+}
+
+#[no_mangle]
 pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_input_pair_new(
     port_: i64,
     txin: *mut wire_cst_tx_in,
@@ -1660,8 +1822,9 @@ pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_new_rece
 pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_new_receiver_persist(
     port_: i64,
     that: *mut wire_cst_ffi_new_receiver,
+    persister: usize,
 ) {
-    wire__crate__api__receive__ffi_new_receiver_persist_impl(port_, that)
+    wire__crate__api__receive__ffi_new_receiver_persist_impl(port_, that, persister)
 }
 
 #[no_mangle]
@@ -1732,62 +1895,6 @@ pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_provisio
         min_fee_rate_sat_per_vb,
         max_fee_rate_sat_per_vb,
     )
-}
-
-#[no_mangle]
-pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_receiver_extract_req(
-    port_: i64,
-    that: *mut wire_cst_ffi_receiver,
-    ohttp_relay: *mut wire_cst_list_prim_u_8_strict,
-) {
-    wire__crate__api__receive__ffi_receiver_extract_req_impl(port_, that, ohttp_relay)
-}
-
-#[no_mangle]
-pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_receiver_from_json(
-    json: *mut wire_cst_list_prim_u_8_strict,
-) -> flutter_rust_bridge::for_generated::WireSyncRust2DartDco {
-    wire__crate__api__receive__ffi_receiver_from_json_impl(json)
-}
-
-#[no_mangle]
-pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_receiver_id(
-    that: *mut wire_cst_ffi_receiver,
-) -> flutter_rust_bridge::for_generated::WireSyncRust2DartDco {
-    wire__crate__api__receive__ffi_receiver_id_impl(that)
-}
-
-#[no_mangle]
-pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_receiver_load(
-    port_: i64,
-    _token: *mut wire_cst_list_prim_u_8_strict,
-) {
-    wire__crate__api__receive__ffi_receiver_load_impl(port_, _token)
-}
-
-#[no_mangle]
-pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_receiver_pj_uri(
-    port_: i64,
-    that: *mut wire_cst_ffi_receiver,
-) {
-    wire__crate__api__receive__ffi_receiver_pj_uri_impl(port_, that)
-}
-
-#[no_mangle]
-pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_receiver_process_res(
-    port_: i64,
-    that: *mut wire_cst_ffi_receiver,
-    body: *mut wire_cst_list_prim_u_8_loose,
-    ctx: *mut wire_cst_client_response,
-) {
-    wire__crate__api__receive__ffi_receiver_process_res_impl(port_, that, body, ctx)
-}
-
-#[no_mangle]
-pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_receiver_to_json(
-    that: *mut wire_cst_ffi_receiver,
-) -> flutter_rust_bridge::for_generated::WireSyncRust2DartDco {
-    wire__crate__api__receive__ffi_receiver_to_json_impl(that)
 }
 
 #[no_mangle]
@@ -1929,11 +2036,60 @@ pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__receive__ffi_wants_ou
 }
 
 #[no_mangle]
+pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__send__FfiSender_extract_v1(
+    port_: i64,
+    that: usize,
+) {
+    wire__crate__api__send__FfiSender_extract_v1_impl(port_, that)
+}
+
+#[no_mangle]
+pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__send__FfiSender_extract_v2(
+    port_: i64,
+    that: usize,
+    ohttp_proxy_url: *mut wire_cst_ffi_url,
+) {
+    wire__crate__api__send__FfiSender_extract_v2_impl(port_, that, ohttp_proxy_url)
+}
+
+#[no_mangle]
+pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__send__FfiSender_from_json(
+    json: *mut wire_cst_list_prim_u_8_strict,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartDco {
+    wire__crate__api__send__FfiSender_from_json_impl(json)
+}
+
+#[no_mangle]
+pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__send__FfiSender_key(
+    port_: i64,
+    that: usize,
+) {
+    wire__crate__api__send__FfiSender_key_impl(port_, that)
+}
+
+#[no_mangle]
+pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__send__FfiSender_load(
+    port_: i64,
+    token: usize,
+    persister: usize,
+) {
+    wire__crate__api__send__FfiSender_load_impl(port_, token, persister)
+}
+
+#[no_mangle]
+pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__send__FfiSender_to_json(
+    that: usize,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartDco {
+    wire__crate__api__send__FfiSender_to_json_impl(that)
+}
+
+#[no_mangle]
 pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__send__ffi_new_sender_persist(
     port_: i64,
     that: *mut wire_cst_ffi_new_sender,
+    persister: usize,
 ) {
-    wire__crate__api__send__ffi_new_sender_persist_impl(port_, that)
+    wire__crate__api__send__ffi_new_sender_persist_impl(port_, that, persister)
 }
 
 #[no_mangle]
@@ -1995,45 +2151,6 @@ pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__send__ffi_sender_buil
 }
 
 #[no_mangle]
-pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__send__ffi_sender_extract_v1(
-    port_: i64,
-    that: *mut wire_cst_ffi_sender,
-) {
-    wire__crate__api__send__ffi_sender_extract_v1_impl(port_, that)
-}
-
-#[no_mangle]
-pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__send__ffi_sender_extract_v2(
-    port_: i64,
-    that: *mut wire_cst_ffi_sender,
-    ohttp_proxy_url: *mut wire_cst_ffi_url,
-) {
-    wire__crate__api__send__ffi_sender_extract_v2_impl(port_, that, ohttp_proxy_url)
-}
-
-#[no_mangle]
-pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__send__ffi_sender_from_json(
-    json: *mut wire_cst_list_prim_u_8_strict,
-) -> flutter_rust_bridge::for_generated::WireSyncRust2DartDco {
-    wire__crate__api__send__ffi_sender_from_json_impl(json)
-}
-
-#[no_mangle]
-pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__send__ffi_sender_load(
-    port_: i64,
-    _token: *mut wire_cst_list_prim_u_8_strict,
-) {
-    wire__crate__api__send__ffi_sender_load_impl(port_, _token)
-}
-
-#[no_mangle]
-pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__send__ffi_sender_to_json(
-    that: *mut wire_cst_ffi_sender,
-) -> flutter_rust_bridge::for_generated::WireSyncRust2DartDco {
-    wire__crate__api__send__ffi_sender_to_json_impl(that)
-}
-
-#[no_mangle]
 pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__send__ffi_v_1_context_process_response(
     port_: i64,
     that: *mut wire_cst_ffi_v_1_context,
@@ -2070,6 +2187,14 @@ pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__send__ffi_v_2_post_co
     response: *mut wire_cst_list_prim_u_8_loose,
 ) {
     wire__crate__api__send__ffi_v_2_post_context_process_response_impl(port_, that, response)
+}
+
+#[no_mangle]
+pub extern "C" fn frbgen_payjoin_flutter_wire__crate__api__send__make_persister(
+    save: *const std::ffi::c_void,
+    load: *const std::ffi::c_void,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartDco {
+    wire__crate__api__send__make_persister_impl(save, load)
 }
 
 #[no_mangle]
@@ -2183,6 +2308,42 @@ pub extern "C" fn frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpa
 }
 
 #[no_mangle]
+pub extern "C" fn frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartReceiverPersister(
+    ptr: *const std::ffi::c_void,
+) {
+    unsafe {
+        StdArc::<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<DartReceiverPersister>>::increment_strong_count(ptr as _);
+    }
+}
+
+#[no_mangle]
+pub extern "C" fn frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartReceiverPersister(
+    ptr: *const std::ffi::c_void,
+) {
+    unsafe {
+        StdArc::<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<DartReceiverPersister>>::decrement_strong_count(ptr as _);
+    }
+}
+
+#[no_mangle]
+pub extern "C" fn frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartSenderPersister(
+    ptr: *const std::ffi::c_void,
+) {
+    unsafe {
+        StdArc::<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<DartSenderPersister>>::increment_strong_count(ptr as _);
+    }
+}
+
+#[no_mangle]
+pub extern "C" fn frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartSenderPersister(
+    ptr: *const std::ffi::c_void,
+) {
+    unsafe {
+        StdArc::<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<DartSenderPersister>>::decrement_strong_count(ptr as _);
+    }
+}
+
+#[no_mangle]
 pub extern "C" fn frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerError(
     ptr: *const std::ffi::c_void,
 ) {
@@ -2215,6 +2376,42 @@ pub extern "C" fn frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpa
 ) {
     unsafe {
         StdArc::<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<FfiJsonReply>>::decrement_strong_count(ptr as _);
+    }
+}
+
+#[no_mangle]
+pub extern "C" fn frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver(
+    ptr: *const std::ffi::c_void,
+) {
+    unsafe {
+        StdArc::<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<FfiReceiver>>::increment_strong_count(ptr as _);
+    }
+}
+
+#[no_mangle]
+pub extern "C" fn frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver(
+    ptr: *const std::ffi::c_void,
+) {
+    unsafe {
+        StdArc::<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<FfiReceiver>>::decrement_strong_count(ptr as _);
+    }
+}
+
+#[no_mangle]
+pub extern "C" fn frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender(
+    ptr: *const std::ffi::c_void,
+) {
+    unsafe {
+        StdArc::<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<FfiSender>>::increment_strong_count(ptr as _);
+    }
+}
+
+#[no_mangle]
+pub extern "C" fn frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender(
+    ptr: *const std::ffi::c_void,
+) {
+    unsafe {
+        StdArc::<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<FfiSender>>::decrement_strong_count(ptr as _);
     }
 }
 
@@ -2381,6 +2578,24 @@ pub extern "C" fn frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpa
 }
 
 #[no_mangle]
+pub extern "C" fn frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReceiverToken(
+    ptr: *const std::ffi::c_void,
+) {
+    unsafe {
+        StdArc::<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ReceiverToken>>::increment_strong_count(ptr as _);
+    }
+}
+
+#[no_mangle]
+pub extern "C" fn frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReceiverToken(
+    ptr: *const std::ffi::c_void,
+) {
+    unsafe {
+        StdArc::<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ReceiverToken>>::decrement_strong_count(ptr as _);
+    }
+}
+
+#[no_mangle]
 pub extern "C" fn frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerReplyableError(
     ptr: *const std::ffi::c_void,
 ) {
@@ -2431,6 +2646,24 @@ pub extern "C" fn frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpa
 ) {
     unsafe {
         StdArc::<flutter_rust_bridge::for_generated::RustAutoOpaqueInner< SelectionError>>::decrement_strong_count(ptr as _);
+    }
+}
+
+#[no_mangle]
+pub extern "C" fn frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSenderToken(
+    ptr: *const std::ffi::c_void,
+) {
+    unsafe {
+        StdArc::<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<SenderToken>>::increment_strong_count(ptr as _);
+    }
+}
+
+#[no_mangle]
+pub extern "C" fn frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSenderToken(
+    ptr: *const std::ffi::c_void,
+) {
+    unsafe {
+        StdArc::<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<SenderToken>>::decrement_strong_count(ptr as _);
     }
 }
 
@@ -2651,24 +2884,6 @@ pub extern "C" fn frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpa
 }
 
 #[no_mangle]
-pub extern "C" fn frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_payjoin_ffireceiveReceiver(
-    ptr: *const std::ffi::c_void,
-) {
-    unsafe {
-        StdArc::<payjoin_ffi::receive::Receiver>::increment_strong_count(ptr as _);
-    }
-}
-
-#[no_mangle]
-pub extern "C" fn frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_payjoin_ffireceiveReceiver(
-    ptr: *const std::ffi::c_void,
-) {
-    unsafe {
-        StdArc::<payjoin_ffi::receive::Receiver>::decrement_strong_count(ptr as _);
-    }
-}
-
-#[no_mangle]
 pub extern "C" fn frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_payjoin_ffireceiveUncheckedProposal(
     ptr: *const std::ffi::c_void,
 ) {
@@ -2737,24 +2952,6 @@ pub extern "C" fn frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpa
 ) {
     unsafe {
         StdArc::<payjoin_ffi::send::NewSender>::decrement_strong_count(ptr as _);
-    }
-}
-
-#[no_mangle]
-pub extern "C" fn frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_payjoin_ffisendSender(
-    ptr: *const std::ffi::c_void,
-) {
-    unsafe {
-        StdArc::<payjoin_ffi::send::Sender>::increment_strong_count(ptr as _);
-    }
-}
-
-#[no_mangle]
-pub extern "C" fn frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_payjoin_ffisendSender(
-    ptr: *const std::ffi::c_void,
-) {
-    unsafe {
-        StdArc::<payjoin_ffi::send::Sender>::decrement_strong_count(ptr as _);
     }
 }
 
@@ -2963,21 +3160,9 @@ pub extern "C" fn frbgen_payjoin_flutter_cst_new_box_autoadd_ffi_provisional_pro
 }
 
 #[no_mangle]
-pub extern "C" fn frbgen_payjoin_flutter_cst_new_box_autoadd_ffi_receiver(
-) -> *mut wire_cst_ffi_receiver {
-    flutter_rust_bridge::for_generated::new_leak_box_ptr(wire_cst_ffi_receiver::new_with_null_ptr())
-}
-
-#[no_mangle]
 pub extern "C" fn frbgen_payjoin_flutter_cst_new_box_autoadd_ffi_script() -> *mut wire_cst_ffi_script
 {
     flutter_rust_bridge::for_generated::new_leak_box_ptr(wire_cst_ffi_script::new_with_null_ptr())
-}
-
-#[no_mangle]
-pub extern "C" fn frbgen_payjoin_flutter_cst_new_box_autoadd_ffi_sender() -> *mut wire_cst_ffi_sender
-{
-    flutter_rust_bridge::for_generated::new_leak_box_ptr(wire_cst_ffi_sender::new_with_null_ptr())
 }
 
 #[no_mangle]
@@ -3272,11 +3457,6 @@ pub struct wire_cst_ffi_psbt_input_error {
 }
 #[repr(C)]
 #[derive(Clone, Copy)]
-pub struct wire_cst_ffi_receiver {
-    field0: usize,
-}
-#[repr(C)]
-#[derive(Clone, Copy)]
 pub struct wire_cst_ffi_replyable_error {
     field0: usize,
 }
@@ -3293,11 +3473,6 @@ pub struct wire_cst_ffi_script {
 #[repr(C)]
 #[derive(Clone, Copy)]
 pub struct wire_cst_ffi_selection_error {
-    field0: usize,
-}
-#[repr(C)]
-#[derive(Clone, Copy)]
-pub struct wire_cst_ffi_sender {
     field0: usize,
 }
 #[repr(C)]

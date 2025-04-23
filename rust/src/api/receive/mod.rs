@@ -2,6 +2,7 @@ pub use std::sync::Arc;
 pub use std::str::FromStr;
 
 use flutter_rust_bridge::{frb, DartFnFuture};
+use payjoin::persist::Persister;
 pub use payjoin::receive::v2::ReceiverToken;
 use payjoin_ffi::bitcoin_ffi;
 use crate::api::receive::error::{FfiError, FfiImplementationError, FfiInputContributionError, FfiJsonReply, FfiOutputSubstitutionError, FfiPsbtInputError, FfiReplyableError, FfiSelectionError, FfiSessionError};
@@ -59,14 +60,14 @@ impl FfiNewReceiver {
         .map_err(Into::into)
     }
 
-    pub fn persist(&self,) -> Result<ReceiverToken, FfiImplementationError> {
-        todo!()
+    pub fn persist(&self, persister: &mut DartReceiverPersister) -> Result<ReceiverToken, FfiImplementationError> {
+        self.0.persist(persister).map_err(Into::into)
     }
 }
 
 impl FfiReceiver {
-    pub fn load(_token: String) -> Result<Self, FfiImplementationError> {
-        todo!()
+    pub fn load(token: ReceiverToken, persister: DartReceiverPersister) -> Result<Self, FfiImplementationError> {
+        persister.load(token).map(|receiver| FfiReceiver::from(payjoin_ffi::receive::Receiver::from(receiver))).map_err(Into::into)
     }
 
     ///The per-session public key to use as an identifier
@@ -99,20 +100,18 @@ impl FfiReceiver {
     pub fn from_json(json: String) -> Result<Self, FfiSerdeJsonError> {
         payjoin_ffi::receive::Receiver::from_json(&json).map(Into::into).map_err(Into::into)
     }
-}
 
-#[derive(Clone, Debug)]
-pub struct FfiReceiver(pub RustOpaque<payjoin_ffi::receive::Receiver>);
-
-impl From<payjoin_ffi::receive::Receiver> for FfiReceiver {
-    fn from(value: payjoin_ffi::receive::Receiver) -> Self {
-        Self(RustOpaque::new(value))
+    pub fn key(&self) -> ReceiverToken {
+        self.0.key()
     }
 }
 
-impl From<FfiReceiver> for payjoin_ffi::receive::Receiver {
-    fn from(value: FfiReceiver) -> Self {
-        value.0.try_into().unwrap()
+#[derive(Clone, Debug)]
+pub struct FfiReceiver(pub(crate) payjoin_ffi::receive::Receiver);
+
+impl From<payjoin_ffi::receive::Receiver> for FfiReceiver {
+    fn from(value: payjoin_ffi::receive::Receiver) -> Self {
+        Self(value)
     }
 }
 
@@ -395,22 +394,38 @@ impl FfiPayjoinProposal {
 }
 
 pub trait ReceiverPersister: Send + Sync {
-    fn save(&self, receiver: Arc<FfiReceiver>) -> Result<ReceiverToken, payjoin_ffi::receive::ImplementationError>;
-    fn load(&self, token: Arc<ReceiverToken>) -> Result<FfiReceiver, payjoin_ffi::receive::ImplementationError>;
+    fn save(&self, receiver: FfiReceiver) -> Result<ReceiverToken, payjoin_ffi::receive::ImplementationError>;
+    fn load(&self, token: ReceiverToken) -> Result<FfiReceiver, payjoin_ffi::receive::ImplementationError>;
 }
 
-/// Adapter for the ReceiverPersister trait to use the save and load callbacks.
-struct CallbackPersisterAdapter {
-    callback_persister: Arc<dyn ReceiverPersister>,
+#[frb(opaque)]
+pub struct DartReceiverPersister {
+    save_cb: Box<
+        dyn Fn(FfiReceiver) -> DartFnFuture<Result<ReceiverToken, anyhow::Error>> + Send + Sync
+    >,
+    load_cb: Box<
+        dyn Fn(ReceiverToken) -> DartFnFuture<Result<FfiReceiver, anyhow::Error>> + Send + Sync
+    >,
 }
 
-impl CallbackPersisterAdapter {
-    pub fn new(callback_persister: Arc<dyn ReceiverPersister>) -> Self {
-        Self { callback_persister }
+impl DartReceiverPersister {
+    #[frb(sync)]
+    pub fn new(
+        save: impl Fn(FfiReceiver)
+                    -> DartFnFuture<Result<ReceiverToken, anyhow::Error>>
+            + Send + Sync + 'static,
+        load: impl Fn(ReceiverToken)
+                    -> DartFnFuture<Result<FfiReceiver, anyhow::Error>>
+            + Send + Sync + 'static,
+    ) -> DartReceiverPersister {
+        DartReceiverPersister {
+            save_cb: Box::new(save),
+            load_cb: Box::new(load),
+        }
     }
 }
 
-impl payjoin::persist::Persister<payjoin::receive::v2::Receiver> for CallbackPersisterAdapter {
+impl payjoin::persist::Persister<payjoin::receive::v2::Receiver> for DartReceiverPersister {
     type Token = ReceiverToken;
     type Error = payjoin_ffi::receive::ImplementationError;
 
@@ -419,10 +434,21 @@ impl payjoin::persist::Persister<payjoin::receive::v2::Receiver> for CallbackPer
         receiver: payjoin::receive::v2::Receiver,
     ) -> Result<Self::Token, Self::Error> {
         let receiver = FfiReceiver::from(payjoin_ffi::receive::Receiver::from(receiver));
-        self.callback_persister.save(receiver.into())
+        tokio::runtime::Handle::current().block_on(async {
+            (self.save_cb)(receiver).await.map_err(|e| {
+                payjoin_ffi::receive::ImplementationError::from(e.to_string())
+            })
+        })
     }
 
     fn load(&self, token: Self::Token) -> Result<payjoin::receive::v2::Receiver, Self::Error> {
-        self.callback_persister.load(token.into()).map(|receiver| receiver.0 .0)
+        tokio::runtime::Handle::current().block_on(async {
+            (self.load_cb)(token).await.map(|receiver| {
+                let ffi_receiver = receiver.0;
+                payjoin::receive::v2::Receiver::from(ffi_receiver)
+            }).map_err(|e| {
+                payjoin_ffi::receive::ImplementationError::from(e.to_string())
+            })
+        })
     }
 }

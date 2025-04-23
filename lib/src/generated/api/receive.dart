@@ -13,7 +13,51 @@ import 'receive/error.dart';
 import 'uri.dart';
 import 'uri/error.dart';
 
-// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `clone`, `clone`, `clone`, `fmt`, `fmt`, `fmt`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`
+// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `clone`, `clone`, `clone`, `fmt`, `fmt`, `fmt`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `load`, `save`
+
+// Rust type: RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<DartReceiverPersister>>
+abstract class DartReceiverPersister implements RustOpaqueInterface {
+  factory DartReceiverPersister(
+          {required FutureOr<ReceiverToken> Function(FfiReceiver) save,
+          required FutureOr<FfiReceiver> Function(ReceiverToken) load}) =>
+      core.instance.api
+          .crateApiReceiveDartReceiverPersisterNew(save: save, load: load);
+}
+
+// Rust type: RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<FfiReceiver>>
+abstract class FfiReceiver implements RustOpaqueInterface {
+  Future<(Request, ClientResponse)> extractReq({required String ohttpRelay});
+
+  static FfiReceiver fromJson({required String json}) =>
+      core.instance.api.crateApiReceiveFfiReceiverFromJson(json: json);
+
+  ///The per-session public key to use as an identifier
+  String id();
+
+  Future<ReceiverToken> key();
+
+  static Future<FfiReceiver> load(
+          {required ReceiverToken token,
+          required DartReceiverPersister persister}) =>
+      core.instance.api
+          .crateApiReceiveFfiReceiverLoad(token: token, persister: persister);
+
+  Future<FfiPjUri> pjUri();
+
+  Future<FfiUncheckedProposal?> processRes(
+      {required List<int> body, required ClientResponse ctx});
+
+  String toJson();
+}
+
+// Rust type: RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ReceiverToken>>
+abstract class ReceiverToken implements RustOpaqueInterface {}
+
+abstract class ReceiverPersister {
+  Future<FfiReceiver> load({required ReceiverToken token});
+
+  Future<ReceiverToken> save({required FfiReceiver receiver});
+}
 
 class FfiInputPair {
   final InputPair field0;
@@ -126,10 +170,9 @@ class FfiNewReceiver {
           ohttpKeys: ohttpKeys,
           expireAfter: expireAfter);
 
-  Future<FfiReceiver> persist() =>
+  Future<ReceiverToken> persist({required DartReceiverPersister persister}) =>
       core.instance.api.crateApiReceiveFfiNewReceiverPersist(
-        that: this,
-      );
+          that: this, persister: persister);
 
   @override
   int get hashCode => field0.hashCode;
@@ -227,52 +270,6 @@ class FfiProvisionalProposal {
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is FfiProvisionalProposal &&
-          runtimeType == other.runtimeType &&
-          field0 == other.field0;
-}
-
-class FfiReceiver {
-  final Receiver field0;
-
-  const FfiReceiver({
-    required this.field0,
-  });
-
-  Future<(Request, ClientResponse)> extractReq({required String ohttpRelay}) =>
-      core.instance.api.crateApiReceiveFfiReceiverExtractReq(
-          that: this, ohttpRelay: ohttpRelay);
-
-  static FfiReceiver fromJson({required String json}) =>
-      core.instance.api.crateApiReceiveFfiReceiverFromJson(json: json);
-
-  ///The per-session public key to use as an identifier
-  String id() => core.instance.api.crateApiReceiveFfiReceiverId(
-        that: this,
-      );
-
-  static Future<FfiReceiver> load({required String token}) =>
-      core.instance.api.crateApiReceiveFfiReceiverLoad(token: token);
-
-  Future<FfiPjUri> pjUri() => core.instance.api.crateApiReceiveFfiReceiverPjUri(
-        that: this,
-      );
-
-  Future<FfiUncheckedProposal?> processRes(
-          {required List<int> body, required ClientResponse ctx}) =>
-      core.instance.api.crateApiReceiveFfiReceiverProcessRes(
-          that: this, body: body, ctx: ctx);
-
-  String toJson() => core.instance.api.crateApiReceiveFfiReceiverToJson(
-        that: this,
-      );
-
-  @override
-  int get hashCode => field0.hashCode;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FfiReceiver &&
           runtimeType == other.runtimeType &&
           field0 == other.field0;
 }

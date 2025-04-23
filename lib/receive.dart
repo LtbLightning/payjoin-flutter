@@ -2,11 +2,12 @@ import 'dart:async';
 
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'package:payjoin_flutter/src/generated/api/uri.dart';
+import 'package:payjoin_flutter/src/generated/lib.dart';
 
 import 'common.dart';
 import 'src/generated/api/receive.dart';
-import 'uri.dart';
-import 'bitcoin_ffi.dart';
+import 'uri.dart' as uri;
+import 'bitcoin_ffi.dart' as bitcoin;
 
 class NewReceiver {
   final FfiNewReceiver _ffiNewReceiver;
@@ -16,7 +17,7 @@ class NewReceiver {
       {required String address,
       required Network network,
       required String directory,
-      required OhttpKeys ohttpKeys,
+      required uri.OhttpKeys ohttpKeys,
       BigInt? expireAfter}) async {
     final res = await FfiNewReceiver.create(
         directory: directory,
@@ -26,14 +27,21 @@ class NewReceiver {
         network: network);
     return NewReceiver._(ffiNewReceiver: res);
   }
+
+  Future<ReceiverToken> persist(
+      {required DartReceiverPersister persister}) async {
+    return await _ffiNewReceiver.persist(persister: persister);
+  }
 }
 
 class Receiver {
   final FfiReceiver _ffiReceiver;
   Receiver._({required ffiReceiver}) : _ffiReceiver = ffiReceiver;
 
-  static Future<Receiver> load({required String token}) async {
-    final res = await FfiReceiver.load(token: token);
+  static Future<Receiver> load(
+      {required DartReceiverPersister persister,
+      required ReceiverToken token}) async {
+    final res = await FfiReceiver.load(token: token, persister: persister);
     return Receiver._(ffiReceiver: res);
   }
 
@@ -41,7 +49,7 @@ class Receiver {
       {required String ohttpRelay}) async {
     final res = await _ffiReceiver.extractReq(ohttpRelay: ohttpRelay);
     final request = Request(
-      url: await Url.fromStr(res.$1.url.asString()),
+      url: await uri.Url.fromStr(res.$1.url.asString()),
       contentType: res.$1.contentType,
       body: res.$1.body,
     );
@@ -73,6 +81,10 @@ class Receiver {
   static Receiver fromJson(String json) {
     final res = FfiReceiver.fromJson(json: json);
     return Receiver._(ffiReceiver: res);
+  }
+
+  Future<ReceiverToken> key() async {
+    return _ffiReceiver.key();
   }
 }
 
@@ -165,14 +177,14 @@ class WantsOutputs {
 
   Future<WantsOutputs> replaceReceiverOutputs(
       {required List<TxOut> replacementOutputs,
-      required Script drainScript}) async {
+      required bitcoin.Script drainScript}) async {
     final res = await _ffiWantsOutputs.replaceReceiverOutputs(
         replacementOutputs: replacementOutputs, drainScript: drainScript);
     return WantsOutputs._(ffiWantsOutputs: res);
   }
 
   Future<WantsOutputs> substituteReceiverScript(
-      {required Script outputScript}) async {
+      {required bitcoin.Script outputScript}) async {
     final res = await _ffiWantsOutputs.substituteReceiverScript(
         outputScript: outputScript);
     return WantsOutputs._(ffiWantsOutputs: res);
@@ -260,7 +272,7 @@ class PayjoinProposal extends FfiPayjoinProposal {
       {required String ohttpRelay}) async {
     final res = await super.extractReq(ohttpRelay: ohttpRelay);
     final request = Request(
-      url: await Url.fromStr(res.$1.url.asString()),
+      url: await uri.Url.fromStr(res.$1.url.asString()),
       contentType: res.$1.contentType,
       body: res.$1.body,
     );

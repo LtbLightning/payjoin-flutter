@@ -12,6 +12,8 @@ import 'package:payjoin_flutter/send.dart';
 import 'package:payjoin_flutter/uri.dart' as pjuri;
 import 'package:url_launcher/url_launcher.dart';
 import '../widgets/widgets.dart';
+import 'package:payjoin_flutter/src/generated/api/send.dart';
+import 'package:payjoin_flutter/src/generated/api/receive.dart';
 
 const payjoinDirectory = "https://payjo.in";
 const ohttpRelay = "https://pj.bobspacebkk.com";
@@ -677,15 +679,23 @@ class _HomeState extends State<Home> {
     );
     debugPrint('OHTTP KEYS FETCHED ${ohttpKeys.toString()}');
     // Create receiver session with new bindings
-    final new_receiver = await NewReceiver.create(
+    final newReceiver = await NewReceiver.create(
       address: recipientAddress.text,
       network: Network.signet,
       directory: payjoinDirectory,
       ohttpKeys: ohttpKeys,
       expireAfter: BigInt.from(60 * 5), // 5 minutes
     );
-    final token = await new_receiver.persist();
-    final receiver = await Receiver.load(token: token);
+    final persister = DartReceiverPersister(
+      save: (receiver) async {
+        return await InMemoryReceiverPersister().save(receiver: receiver);
+      },
+      load: (token) async {
+        return await InMemoryReceiverPersister().load(token: token);
+      },
+    );
+    final token = await newReceiver.persist(persister: persister);
+    final receiver = await Receiver.load(token: token, persister: persister);
     debugPrint('INITIALIZED RECEIVER');
 
     final pjStr = (await receiver.pjUri()).asString();
@@ -740,4 +750,33 @@ class _HomeState extends State<Home> {
     receiverPsbtController.clear();
     psbtController.clear();
   }
+}
+
+/// A simple in-memory implementation of the `SenderPersister` interface.
+/// This class stores the sender data in memory and allows saving and loading
+/// of `FfiSender` instances using a token as a key.
+class InMemoryReceiverPersister {
+  final Map<ReceiverToken, FfiReceiver> _store = {};
+
+  Future<ReceiverToken> save({required FfiReceiver receiver}) async {
+    final token = await receiver.key();
+    _store[token] = receiver;
+    return token;
+  }
+
+  Future<FfiReceiver> load({required ReceiverToken token}) async {
+    final receiver = _store[token];
+    if (receiver == null) {
+      throw Exception('Receiver not found for the provided token.');
+    }
+    return receiver;
+  }
+
+  @override
+  void dispose() {
+    _store.clear();
+  }
+
+  @override
+  bool get isDisposed => _store.isEmpty;
 }

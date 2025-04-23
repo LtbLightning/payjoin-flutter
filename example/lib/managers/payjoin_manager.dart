@@ -9,6 +9,8 @@ import 'package:payjoin_flutter/receive.dart' as receive;
 import 'package:payjoin_flutter/common.dart';
 import 'package:payjoin_flutter/uri.dart' as pj_uri;
 import 'package:payjoin_flutter/send.dart' as send;
+import 'package:payjoin_flutter/src/generated/api/send.dart';
+import 'package:payjoin_flutter/src/generated/lib.dart' as lib;
 
 class PayjoinManager {
   static const pjUrl = "https://localhost:8088";
@@ -80,10 +82,18 @@ class PayjoinManager {
   ) async {
     final senderBuilder = await send.SenderBuilder.fromPsbtAndUri(
         psbtBase64: originalPsbt, pjUri: pjUri.checkPjSupported());
-    final new_sender =
+    final newSender =
         await senderBuilder.buildRecommended(minFeeRate: BigInt.from(250));
-    final token = await new_sender.persist();
-    final sender = await send.Sender.load(token: token);
+    final persister = makePersister(
+      save: (sender) async {
+        return await InMemorySenderPersister().save(sender: sender);
+      },
+      load: (token) async {
+        return await InMemorySenderPersister().load(token: token);
+      },
+    );
+    final token = await newSender.persist(persister: persister);
+    final sender = await send.Sender.load(token: token, persister: persister);
     return sender;
   }
 
@@ -318,4 +328,33 @@ class PayjoinManager {
     debugPrint('PSBT after: ${psbt.toString()}');
     return psbt.asString();
   }
+}
+
+/// A simple in-memory implementation of the `SenderPersister` interface.
+/// This class stores the sender data in memory and allows saving and loading
+/// of `FfiSender` instances using a token as a key.
+class InMemorySenderPersister {
+  final Map<SenderToken, FfiSender> _store = {};
+
+  Future<SenderToken> save({required FfiSender sender}) async {
+    final token = await sender.key();
+    _store[token] = sender;
+    return token;
+  }
+
+  Future<FfiSender> load({required SenderToken token}) async {
+    final sender = _store[token];
+    if (sender == null) {
+      throw Exception('Sender not found for the provided token.');
+    }
+    return sender;
+  }
+
+  @override
+  void dispose() {
+    _store.clear();
+  }
+
+  @override
+  bool get isDisposed => _store.isEmpty;
 }
