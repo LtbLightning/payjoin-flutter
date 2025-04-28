@@ -1,5 +1,5 @@
-name: bdk_flutter_demo
-description: A new Flutter project.
+name: payjoin_flutter_demo
+description: Demonstrates how to use the payjoin_flutter plugin.
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
 version: 0.3.0
 environment:
@@ -8,7 +8,7 @@ dependencies:
   bdk_flutter:
     git:
       url: https://github.com/LtbLightning/bdk-flutter
-      ref: upgrade-31.3
+      ref: frb-upgrade
   cupertino_icons: ^1.0.2
   flutter:
     sdk: flutter

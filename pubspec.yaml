@@ -1,6 +1,6 @@
 name: payjoin_flutter
 description: "A Flutter library for the [Payjoin Dev Kit](https://payjoindevkit.org/)"
-version: 0.22.0
+version: 0.23.0-dev.1
 homepage: https://github.com/LtbLightning/payjoin-flutter
 
 environment:
@@ -10,21 +10,21 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  collection: ^1.17.1
-  ffi: ^2.0.1
-  flutter_rust_bridge: ">=2.0.0 <=2.3.0"
-  freezed_annotation: ^2.2.0
-  meta: ^1.10.0
+  flutter_rust_bridge: ">2.8.0 <=2.9.0"
+  ffi: ^2.1.4
+  freezed_annotation: ^3.0.0
+  mockito: ^5.4.5
+  collection: ^1.18.0
+  meta: ^1.15.0
   uuid: ^4.2.1
 
 dev_dependencies:
-  ffigen: ^16.1.0
-  freezed: ^2.4.7
-  build_runner: ^2.4.8
-  analyzer: ^6.11.0
+  ffigen: ^18.1.0
+  freezed: ^3.0.6
+  build_runner: ^2.4.15
+  lints: ^5.1.1
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
 flutter:
   plugin:
     platforms:
