@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:bdk_flutter/bdk_flutter.dart' as bdk;
-import 'package:bdk_flutter_demo/managers/payjoin_manager.dart';
+import 'package:payjoin_flutter_demo/managers/payjoin_manager.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -92,7 +92,6 @@ class _HomeState extends State<Home> {
     String mnemonic,
     bdk.Network network,
     String? password,
-    String path, //TODO: Derived error: Address contains key path
   ) async {
     try {
       final descriptors = await getDescriptors(mnemonic);
@@ -270,8 +269,11 @@ class _HomeState extends State<Home> {
                     SubmitButton(
                       text: "Create Wallet",
                       callback: () async {
-                        await createOrRestoreWallet(mnemonic.text,
-                            bdk.Network.signet, "password", "m/84'/1'/0'");
+                        await createOrRestoreWallet(
+                          mnemonic.text,
+                          bdk.Network.signet,
+                          "password",
+                        );
                       },
                     ),
                     SubmitButton(
@@ -567,13 +569,10 @@ class _HomeState extends State<Home> {
       final maybeInputsOwned = await proposal.assumeInteractiveReceiver();
 
       final maybeInputsSeen = await maybeInputsOwned.checkInputsNotOwned(
-          isOwned: (outpoint) async =>
-              false // TODO Implement actual ownership check
-          );
+          isOwned: (outpoint) async => false);
 
       final outputsUnknown = await maybeInputsSeen.checkNoInputsSeenBefore(
-          isKnown: (outpoint) async => false // TODO Implement actual seen check
-          );
+          isKnown: (outpoint) async => false);
 
       final wantsOutputs = await outputsUnknown.identifyReceiverOutputs(
           isReceiverOutput: (script) async {

@@ -14,15 +14,6 @@ void store_dart_post_cobject(DartPostCObjectFnType ptr);
 // EXTRA END
 typedef struct _Dart_Handle* Dart_Handle;
 
-typedef struct wire_cst_list_prim_u_8_loose {
-  uint8_t *ptr;
-  int32_t len;
-} wire_cst_list_prim_u_8_loose;
-
-typedef struct wire_cst_ffi_script {
-  uintptr_t field0;
-} wire_cst_ffi_script;
-
 typedef struct wire_cst_ffi_url {
   uintptr_t field0;
 } wire_cst_ffi_url;
@@ -36,6 +27,10 @@ typedef struct wire_cst_out_point {
   struct wire_cst_list_prim_u_8_strict *txid;
   uint32_t vout;
 } wire_cst_out_point;
+
+typedef struct wire_cst_ffi_script {
+  uintptr_t field0;
+} wire_cst_ffi_script;
 
 typedef struct wire_cst_list_list_prim_u_8_strict {
   struct wire_cst_list_prim_u_8_strict **ptr;
@@ -68,6 +63,11 @@ typedef struct wire_cst_ffi_maybe_inputs_seen {
   uintptr_t field0;
 } wire_cst_ffi_maybe_inputs_seen;
 
+typedef struct wire_cst_list_prim_u_8_loose {
+  uint8_t *ptr;
+  int32_t len;
+} wire_cst_list_prim_u_8_loose;
+
 typedef struct wire_cst_ffi_outputs_unknown {
   uintptr_t field0;
 } wire_cst_ffi_outputs_unknown;
@@ -79,6 +79,14 @@ typedef struct wire_cst_ffi_payjoin_proposal {
 typedef struct wire_cst_client_response {
   uintptr_t field0;
 } wire_cst_client_response;
+
+typedef struct wire_cst_ffi_pj_uri {
+  uintptr_t field0;
+} wire_cst_ffi_pj_uri;
+
+typedef struct wire_cst_ffi_pj_uri_builder {
+  uintptr_t internal;
+} wire_cst_ffi_pj_uri_builder;
 
 typedef struct wire_cst_ffi_provisional_proposal {
   uintptr_t field0;
@@ -92,9 +100,33 @@ typedef struct wire_cst_ffi_receiver {
   uintptr_t field0;
 } wire_cst_ffi_receiver;
 
+typedef struct wire_cst_ffi_sender_builder {
+  uintptr_t field0;
+} wire_cst_ffi_sender_builder;
+
+typedef struct wire_cst_ffi_sender {
+  uintptr_t field0;
+} wire_cst_ffi_sender;
+
 typedef struct wire_cst_ffi_unchecked_proposal {
   uintptr_t field0;
 } wire_cst_ffi_unchecked_proposal;
+
+typedef struct wire_cst_ffi_uri {
+  uintptr_t field0;
+} wire_cst_ffi_uri;
+
+typedef struct wire_cst_ffi_v_1_context {
+  uintptr_t field0;
+} wire_cst_ffi_v_1_context;
+
+typedef struct wire_cst_ffi_v_2_get_context {
+  uintptr_t field0;
+} wire_cst_ffi_v_2_get_context;
+
+typedef struct wire_cst_ffi_v_2_post_context {
+  uintptr_t field0;
+} wire_cst_ffi_v_2_post_context;
 
 typedef struct wire_cst_ffi_wants_inputs {
   uintptr_t field0;
@@ -117,38 +149,6 @@ typedef struct wire_cst_list_tx_out {
   struct wire_cst_tx_out *ptr;
   int32_t len;
 } wire_cst_list_tx_out;
-
-typedef struct wire_cst_ffi_sender_builder {
-  uintptr_t field0;
-} wire_cst_ffi_sender_builder;
-
-typedef struct wire_cst_ffi_pj_uri {
-  uintptr_t field0;
-} wire_cst_ffi_pj_uri;
-
-typedef struct wire_cst_ffi_sender {
-  uintptr_t field0;
-} wire_cst_ffi_sender;
-
-typedef struct wire_cst_ffi_v_1_context {
-  uintptr_t field0;
-} wire_cst_ffi_v_1_context;
-
-typedef struct wire_cst_ffi_v_2_get_context {
-  uintptr_t field0;
-} wire_cst_ffi_v_2_get_context;
-
-typedef struct wire_cst_ffi_v_2_post_context {
-  uintptr_t field0;
-} wire_cst_ffi_v_2_post_context;
-
-typedef struct wire_cst_ffi_pj_uri_builder {
-  uintptr_t internal;
-} wire_cst_ffi_pj_uri_builder;
-
-typedef struct wire_cst_ffi_uri {
-  uintptr_t field0;
-} wire_cst_ffi_uri;
 
 typedef struct wire_cst_list_out_point {
   struct wire_cst_out_point *ptr;
@@ -294,12 +294,6 @@ typedef struct wire_cst_record_request_ffi_v_2_post_context {
   struct wire_cst_ffi_v_2_post_context field1;
 } wire_cst_record_request_ffi_v_2_post_context;
 
-void frbgen_payjoin_flutter_wire__crate__api__bitcoin_ffi__ffi_script_new(int64_t port_,
-                                                                          struct wire_cst_list_prim_u_8_loose *raw_output_script);
-
-void frbgen_payjoin_flutter_wire__crate__api__bitcoin_ffi__ffi_script_to_bytes(int64_t port_,
-                                                                               struct wire_cst_ffi_script *that);
-
 void frbgen_payjoin_flutter_wire__crate__api__io__fetch_ohttp_keys(int64_t port_,
                                                                    struct wire_cst_ffi_url *ohttp_relay,
                                                                    struct wire_cst_ffi_url *payjoin_directory);
@@ -315,6 +309,9 @@ void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_maybe_inputs_owned_ch
 void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_maybe_inputs_seen_check_no_inputs_seen_before(int64_t port_,
                                                                                                          struct wire_cst_ffi_maybe_inputs_seen *that,
                                                                                                          const void *is_known);
+
+void frbgen_payjoin_flutter_wire__crate__api__uri__ffi_ohttp_keys_decode(int64_t port_,
+                                                                         struct wire_cst_list_prim_u_8_loose *bytes);
 
 void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_outputs_unknown_identify_receiver_outputs(int64_t port_,
                                                                                                      struct wire_cst_ffi_outputs_unknown *that,
@@ -339,6 +336,28 @@ void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_payjoin_proposal_psbt
 
 void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_payjoin_proposal_utxos_to_be_locked(int64_t port_,
                                                                                                struct wire_cst_ffi_payjoin_proposal *that);
+
+WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__uri__ffi_pj_uri_address(struct wire_cst_ffi_pj_uri *that);
+
+WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__uri__ffi_pj_uri_amount_sats(struct wire_cst_ffi_pj_uri *that);
+
+WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__uri__ffi_pj_uri_as_string(struct wire_cst_ffi_pj_uri *that);
+
+WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__uri__ffi_pj_uri_builder_amount_sats(struct wire_cst_ffi_pj_uri_builder *that,
+                                                                                                  uint64_t amount);
+
+WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__uri__ffi_pj_uri_builder_build(struct wire_cst_ffi_pj_uri_builder *that);
+
+WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__uri__ffi_pj_uri_builder_label(struct wire_cst_ffi_pj_uri_builder *that,
+                                                                                            struct wire_cst_list_prim_u_8_strict *label);
+
+WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__uri__ffi_pj_uri_builder_message(struct wire_cst_ffi_pj_uri_builder *that,
+                                                                                              struct wire_cst_list_prim_u_8_strict *message);
+
+WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__uri__ffi_pj_uri_builder_pjos(struct wire_cst_ffi_pj_uri_builder *that,
+                                                                                           bool pjos);
+
+WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__uri__ffi_pj_uri_pj_endpoint(struct wire_cst_ffi_pj_uri *that);
 
 void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_provisional_proposal_finalize_proposal(int64_t port_,
                                                                                                   struct wire_cst_ffi_provisional_proposal *that,
@@ -373,42 +392,11 @@ void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_receiver_process_res(
 
 WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__receive__ffi_receiver_to_json(struct wire_cst_ffi_receiver *that);
 
-void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_unchecked_proposal_assume_interactive_receiver(int64_t port_,
-                                                                                                          struct wire_cst_ffi_unchecked_proposal *that);
+void frbgen_payjoin_flutter_wire__crate__api__bitcoin_ffi__ffi_script_new(int64_t port_,
+                                                                          struct wire_cst_list_prim_u_8_loose *raw_output_script);
 
-void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_unchecked_proposal_check_broadcast_suitability(int64_t port_,
-                                                                                                          struct wire_cst_ffi_unchecked_proposal *that,
-                                                                                                          uint64_t *min_fee_rate,
-                                                                                                          const void *can_broadcast);
-
-void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_unchecked_proposal_extract_tx_to_schedule_broadcast(int64_t port_,
-                                                                                                               struct wire_cst_ffi_unchecked_proposal *that);
-
-void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_wants_inputs_commit_inputs(int64_t port_,
-                                                                                      struct wire_cst_ffi_wants_inputs *that);
-
-void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_wants_inputs_contribute_inputs(int64_t port_,
-                                                                                          struct wire_cst_ffi_wants_inputs *that,
-                                                                                          struct wire_cst_list_ffi_input_pair *replacement_inputs);
-
-void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_wants_inputs_try_preserving_privacy(int64_t port_,
-                                                                                               struct wire_cst_ffi_wants_inputs *that,
-                                                                                               struct wire_cst_list_ffi_input_pair *candidate_inputs);
-
-void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_wants_outputs_commit_outputs(int64_t port_,
-                                                                                        struct wire_cst_ffi_wants_outputs *that);
-
-void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_wants_outputs_is_output_substitution_disabled(int64_t port_,
-                                                                                                         struct wire_cst_ffi_wants_outputs *that);
-
-void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_wants_outputs_replace_receiver_outputs(int64_t port_,
-                                                                                                  struct wire_cst_ffi_wants_outputs *that,
-                                                                                                  struct wire_cst_list_tx_out *replacement_outputs,
-                                                                                                  struct wire_cst_ffi_script *drain_script);
-
-void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_wants_outputs_substitute_receiver_script(int64_t port_,
-                                                                                                    struct wire_cst_ffi_wants_outputs *that,
-                                                                                                    struct wire_cst_ffi_script *output_script);
+void frbgen_payjoin_flutter_wire__crate__api__bitcoin_ffi__ffi_script_to_bytes(int64_t port_,
+                                                                               struct wire_cst_ffi_script *that);
 
 void frbgen_payjoin_flutter_wire__crate__api__send__ffi_sender_builder_always_disable_output_substitution(int64_t port_,
                                                                                                           struct wire_cst_ffi_sender_builder *that,
@@ -444,6 +432,33 @@ WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__send__ffi_sender_f
 
 WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__send__ffi_sender_to_json(struct wire_cst_ffi_sender *that);
 
+void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_unchecked_proposal_assume_interactive_receiver(int64_t port_,
+                                                                                                          struct wire_cst_ffi_unchecked_proposal *that);
+
+void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_unchecked_proposal_check_broadcast_suitability(int64_t port_,
+                                                                                                          struct wire_cst_ffi_unchecked_proposal *that,
+                                                                                                          uint64_t *min_fee_rate,
+                                                                                                          const void *can_broadcast);
+
+void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_unchecked_proposal_extract_tx_to_schedule_broadcast(int64_t port_,
+                                                                                                               struct wire_cst_ffi_unchecked_proposal *that);
+
+WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__uri__ffi_uri_address(struct wire_cst_ffi_uri *that);
+
+WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__uri__ffi_uri_amount_sats(struct wire_cst_ffi_uri *that);
+
+WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__uri__ffi_uri_as_string(struct wire_cst_ffi_uri *that);
+
+WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__uri__ffi_uri_check_pj_supported(struct wire_cst_ffi_uri *that);
+
+WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__uri__ffi_uri_parse(struct wire_cst_list_prim_u_8_strict *uri);
+
+WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__uri__ffi_url_as_string(struct wire_cst_ffi_url *that);
+
+WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__uri__ffi_url_parse(struct wire_cst_list_prim_u_8_strict *url);
+
+WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__uri__ffi_url_query(struct wire_cst_ffi_url *that);
+
 void frbgen_payjoin_flutter_wire__crate__api__send__ffi_v_1_context_process_response(int64_t port_,
                                                                                      struct wire_cst_ffi_v_1_context *that,
                                                                                      struct wire_cst_list_prim_u_8_loose *response);
@@ -461,46 +476,31 @@ void frbgen_payjoin_flutter_wire__crate__api__send__ffi_v_2_post_context_process
                                                                                           struct wire_cst_ffi_v_2_post_context *that,
                                                                                           struct wire_cst_list_prim_u_8_loose *response);
 
-void frbgen_payjoin_flutter_wire__crate__api__uri__ffi_ohttp_keys_decode(int64_t port_,
-                                                                         struct wire_cst_list_prim_u_8_loose *bytes);
+void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_wants_inputs_commit_inputs(int64_t port_,
+                                                                                      struct wire_cst_ffi_wants_inputs *that);
 
-WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__uri__ffi_pj_uri_address(struct wire_cst_ffi_pj_uri *that);
+void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_wants_inputs_contribute_inputs(int64_t port_,
+                                                                                          struct wire_cst_ffi_wants_inputs *that,
+                                                                                          struct wire_cst_list_ffi_input_pair *replacement_inputs);
 
-WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__uri__ffi_pj_uri_amount_sats(struct wire_cst_ffi_pj_uri *that);
+void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_wants_inputs_try_preserving_privacy(int64_t port_,
+                                                                                               struct wire_cst_ffi_wants_inputs *that,
+                                                                                               struct wire_cst_list_ffi_input_pair *candidate_inputs);
 
-WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__uri__ffi_pj_uri_as_string(struct wire_cst_ffi_pj_uri *that);
+void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_wants_outputs_commit_outputs(int64_t port_,
+                                                                                        struct wire_cst_ffi_wants_outputs *that);
 
-WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__uri__ffi_pj_uri_builder_amount_sats(struct wire_cst_ffi_pj_uri_builder *that,
-                                                                                                  uint64_t amount);
+void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_wants_outputs_is_output_substitution_disabled(int64_t port_,
+                                                                                                         struct wire_cst_ffi_wants_outputs *that);
 
-WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__uri__ffi_pj_uri_builder_build(struct wire_cst_ffi_pj_uri_builder *that);
+void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_wants_outputs_replace_receiver_outputs(int64_t port_,
+                                                                                                  struct wire_cst_ffi_wants_outputs *that,
+                                                                                                  struct wire_cst_list_tx_out *replacement_outputs,
+                                                                                                  struct wire_cst_ffi_script *drain_script);
 
-WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__uri__ffi_pj_uri_builder_label(struct wire_cst_ffi_pj_uri_builder *that,
-                                                                                            struct wire_cst_list_prim_u_8_strict *label);
-
-WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__uri__ffi_pj_uri_builder_message(struct wire_cst_ffi_pj_uri_builder *that,
-                                                                                              struct wire_cst_list_prim_u_8_strict *message);
-
-WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__uri__ffi_pj_uri_builder_pjos(struct wire_cst_ffi_pj_uri_builder *that,
-                                                                                           bool pjos);
-
-WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__uri__ffi_pj_uri_pj_endpoint(struct wire_cst_ffi_pj_uri *that);
-
-WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__uri__ffi_uri_address(struct wire_cst_ffi_uri *that);
-
-WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__uri__ffi_uri_amount_sats(struct wire_cst_ffi_uri *that);
-
-WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__uri__ffi_uri_as_string(struct wire_cst_ffi_uri *that);
-
-WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__uri__ffi_uri_check_pj_supported(struct wire_cst_ffi_uri *that);
-
-WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__uri__ffi_uri_parse(struct wire_cst_list_prim_u_8_strict *uri);
-
-WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__uri__ffi_url_as_string(struct wire_cst_ffi_url *that);
-
-WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__uri__ffi_url_parse(struct wire_cst_list_prim_u_8_strict *url);
-
-WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__uri__ffi_url_query(struct wire_cst_ffi_url *that);
+void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_wants_outputs_substitute_receiver_script(int64_t port_,
+                                                                                                    struct wire_cst_ffi_wants_outputs *that,
+                                                                                                    struct wire_cst_ffi_script *output_script);
 
 void frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_bitcoin_ffiScript(const void *ptr);
 

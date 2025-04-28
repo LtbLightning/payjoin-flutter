@@ -174,8 +174,10 @@ enum FeeRangeEnum {
 }
 
 class FeesRangeOptions extends StatefulWidget {
-  FeesRangeOptions({super.key, this.feeRange = FeeRangeEnum.high});
-  FeeRangeEnum? feeRange;
+  const FeesRangeOptions(
+      {super.key, this.feeRange = FeeRangeEnum.high, this.onFeeRangeChanged});
+  final FeeRangeEnum? feeRange;
+  final Function(FeeRangeEnum?)? onFeeRangeChanged;
   @override
   State<FeesRangeOptions> createState() => _FeesRangeOptionsState();
 }
@@ -220,10 +222,10 @@ class _FeesRangeOptionsState extends State<FeesRangeOptions> {
   }
 
   onChangeFeeRange(FeeRangeEnum? value) {
-    setState(() {
-      widget.feeRange = value;
-      Navigator.pop(context, widget.feeRange);
-    });
+    if (widget.onFeeRangeChanged != null) {
+      widget.onFeeRangeChanged!(value);
+    }
+    Navigator.pop(context, value);
   }
 }
 

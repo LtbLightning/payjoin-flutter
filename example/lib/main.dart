@@ -1,5 +1,5 @@
-import 'package:bdk_flutter_demo/screens/home.dart';
-import 'package:bdk_flutter_demo/styles/theme.dart';
+import 'package:payjoin_flutter_demo/screens/home.dart';
+import 'package:payjoin_flutter_demo/styles/theme.dart';
 import 'package:flutter/material.dart';
 
 void main() {
