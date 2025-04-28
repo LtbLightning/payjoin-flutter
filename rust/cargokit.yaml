@@ -1,11 +1,13 @@
 cargo:
   debug: # Configuration of cargo execution during debug builds
-    toolchain: stable # default
+    toolchain: stable
   release: # Configuration of cargo execution for release builds
-    toolchain: nightly # rustup will be invoked with nightly toolchain
-    extra_flags: # extra arguments passed to cargo build
-      - -Z
-      - build-std=panic_abort,std
+    toolchain: stable
+  # release: # Configuration of cargo execution for release builds
+  #   toolchain: nightly # rustup will be invoked with nightly toolchain
+  #   extra_flags: # extra arguments passed to cargo build
+  #     - -Z
+  #     - build-std=panic_abort,std
 precompiled_binaries:
   url_prefix: https://github.com/LtbLightning/payjoin-flutter/releases/download/precompiled_
   public_key: acc9fbea1d5cca0660ed71b0e516663d36f0180a9826a6e5ba06ca26d4850de7
