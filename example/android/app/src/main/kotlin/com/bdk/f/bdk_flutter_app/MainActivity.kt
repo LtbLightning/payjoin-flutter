@@ -1,4 +1,4 @@
-package com.bdk.f.bdk_flutter_app
+package io.payjoin.flutter.payjoin_flutter_demo
 
 import io.flutter.embedding.android.FlutterActivity
 
