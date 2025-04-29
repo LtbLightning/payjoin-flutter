@@ -17,7 +17,10 @@ pub async fn fetch_ohttp_keys(
     ohttp_relay: String,
     payjoin_directory: String,
 ) -> Result<FfiOhttpKeys, FfiIoError> {
-    payjoin_ffi::io::fetch_ohttp_keys(&ohttp_relay, &payjoin_directory).await.map(Into::into).map_err(Into::into)
+    payjoin_ffi::io::fetch_ohttp_keys(&ohttp_relay, &payjoin_directory)
+        .await
+        .map(Into::into)
+        .map_err(Into::into)
 }
 
 /// Fetch the ohttp keys from the specified payjoin directory via proxy.
@@ -36,17 +39,15 @@ pub async fn fetch_ohttp_keys_with_cert(
     payjoin_directory: String,
     cert_der: Vec<u8>,
 ) -> Result<FfiOhttpKeys, FfiIoError> {
-    payjoin_ffi::io::fetch_ohttp_keys(
-        ohttp_relay,
-        payjoin_directory,
-        cert_der,
-    ).await.map(Into::into)
+    payjoin_ffi::io::fetch_ohttp_keys(ohttp_relay, payjoin_directory, cert_der)
+        .await
+        .map(Into::into)
 }
 
 pub mod error {
     use crate::frb_generated::RustAutoOpaque;
 
-    pub struct FfiIoError(pub(crate)RustAutoOpaque<payjoin_ffi::io::IoError>);
+    pub struct FfiIoError(pub(crate) RustAutoOpaque<payjoin_ffi::io::IoError>);
 
     impl From<payjoin_ffi::io::IoError> for FfiIoError {
         fn from(value: payjoin_ffi::io::IoError) -> Self {

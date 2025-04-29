@@ -11,6 +11,21 @@ import 'uri/error.dart';
 
 // These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `clone`, `fmt`, `from`, `from`, `from`, `from`, `from`, `from`, `from`
 
+// Rust type: RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<FfiPjUri>>
+abstract class FfiPjUri implements RustOpaqueInterface {
+  String address();
+
+  /// Number of btc  requested as payment
+  BigInt? amountSats();
+
+  String asString();
+
+  String pjEndpoint();
+
+  /// Sets the amount in sats and returns a new FfiPjUri
+  FfiPjUri setAmountSats({required BigInt amount});
+}
+
 class FfiOhttpKeys {
   final OhttpKeys field0;
 
@@ -28,41 +43,6 @@ class FfiOhttpKeys {
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is FfiOhttpKeys &&
-          runtimeType == other.runtimeType &&
-          field0 == other.field0;
-}
-
-class FfiPjUri {
-  final PjUri field0;
-
-  const FfiPjUri({
-    required this.field0,
-  });
-
-  String address() => core.instance.api.crateApiUriFfiPjUriAddress(
-        that: this,
-      );
-
-  /// Number of btc  requested as payment
-  BigInt? amountSats() => core.instance.api.crateApiUriFfiPjUriAmountSats(
-        that: this,
-      );
-
-  String asString() => core.instance.api.crateApiUriFfiPjUriAsString(
-        that: this,
-      );
-
-  String pjEndpoint() => core.instance.api.crateApiUriFfiPjUriPjEndpoint(
-        that: this,
-      );
-
-  @override
-  int get hashCode => field0.hashCode;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FfiPjUri &&
           runtimeType == other.runtimeType &&
           field0 == other.field0;
 }

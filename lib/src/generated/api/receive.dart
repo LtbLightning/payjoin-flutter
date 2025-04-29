@@ -13,7 +13,7 @@ import 'receive/error.dart';
 import 'uri.dart';
 import 'uri/error.dart';
 
-// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `clone`, `clone`, `clone`, `fmt`, `fmt`, `fmt`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `load`, `save`
+// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `clone`, `clone`, `clone`, `fmt`, `fmt`, `fmt`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `load`, `save`
 
 // Rust type: RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<DartReceiverPersister>>
 abstract class DartReceiverPersister implements RustOpaqueInterface {
@@ -34,7 +34,7 @@ abstract class FfiReceiver implements RustOpaqueInterface {
   ///The per-session public key to use as an identifier
   String id();
 
-  Future<ReceiverToken> key();
+  ReceiverToken key();
 
   static Future<FfiReceiver> load(
           {required ReceiverToken token,
@@ -50,8 +50,15 @@ abstract class FfiReceiver implements RustOpaqueInterface {
   String toJson();
 }
 
+// Rust type: RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<OutputSubstitution>>
+abstract class OutputSubstitution implements RustOpaqueInterface {}
+
 // Rust type: RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ReceiverToken>>
-abstract class ReceiverToken implements RustOpaqueInterface {}
+abstract class ReceiverToken implements RustOpaqueInterface {
+  /// Convert the receiver token to a byte array
+  /// This is most useful when storing the token as a key in a map
+  Uint8List toBytes();
+}
 
 abstract class ReceiverPersister {
   Future<FfiReceiver> load({required ReceiverToken token});
@@ -157,7 +164,7 @@ class FfiNewReceiver {
   ///
   /// # References
   /// - [BIP 77: Payjoin Version 2: Serverless Payjoin](https://github.com/bitcoin/bips/pull/1483)
-  static Future<FfiNewReceiver> create(
+  static FfiNewReceiver create(
           {required String address,
           required Network network,
           required String directory,
@@ -381,8 +388,8 @@ class FfiWantsOutputs {
         that: this,
       );
 
-  Future<bool> isOutputSubstitutionDisabled() => core.instance.api
-          .crateApiReceiveFfiWantsOutputsIsOutputSubstitutionDisabled(
+  Future<OutputSubstitution> outputSubstitution() =>
+      core.instance.api.crateApiReceiveFfiWantsOutputsOutputSubstitution(
         that: this,
       );
 

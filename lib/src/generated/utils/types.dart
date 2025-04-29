@@ -28,17 +28,20 @@ class ClientResponse {
 }
 
 enum Network {
-  ///Bitcoin’s testnet
-  testnet,
-
-  ///Bitcoin’s regtest
-  regtest,
-
   ///Classic Bitcoin
   bitcoin,
 
+  ///Bitcoin’s testnet
+  testnet,
+
+  ///Bitcoin’s testnet4
+  testnet4,
+
   ///Bitcoin’s signet
   signet,
+
+  ///Bitcoin’s regtest
+  regtest,
   ;
 }
 

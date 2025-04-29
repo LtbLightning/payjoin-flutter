@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:bdk_flutter/bdk_flutter.dart' as bdk;
@@ -679,6 +680,8 @@ class _HomeState extends State<Home> {
     );
     debugPrint('OHTTP KEYS FETCHED ${ohttpKeys.toString()}');
     // Create receiver session with new bindings
+    debugPrint('INITIALIZING PERSISTER');
+
     final newReceiver = await NewReceiver.create(
       address: recipientAddress.text,
       network: Network.signet,
@@ -686,19 +689,40 @@ class _HomeState extends State<Home> {
       ohttpKeys: ohttpKeys,
       expireAfter: BigInt.from(60 * 5), // 5 minutes
     );
+    debugPrint('INITIALIZING PERSISTER');
+    final completer = Completer<ReceiverToken>();
+    final imp = InMemoryReceiverPersister();
     final persister = DartReceiverPersister(
       save: (receiver) async {
-        return await InMemoryReceiverPersister().save(receiver: receiver);
+        try {
+          debugPrint('SAVING RECEIVER');
+          final token = await imp.save(receiver: receiver);
+          completer.complete(token);
+          return token;
+        } catch (e) {
+          debugPrint('Error saving receiver: $e');
+          rethrow;
+        }
       },
       load: (token) async {
-        return await InMemoryReceiverPersister().load(token: token);
+        try {
+          debugPrint('LOADING RECEIVER');
+          final receiver = await imp.load(token: token);
+          return receiver;
+        } catch (e) {
+          debugPrint('Error loading receiver: $e');
+          rethrow;
+        }
       },
     );
+    debugPrint('INITIALIZing RECEIVER');
     final token = await newReceiver.persist(persister: persister);
     final receiver = await Receiver.load(token: token, persister: persister);
     debugPrint('INITIALIZED RECEIVER');
 
-    final pjStr = (await receiver.pjUri()).asString();
+    final receiverPjUri = (await receiver.pjUri())
+        .setAmountSats(amount: BigInt.parse(amountController.text));
+    final pjStr = receiverPjUri.asString();
     debugPrint('PAYJOIN URL: $pjStr');
 
     setState(() {
@@ -752,20 +776,24 @@ class _HomeState extends State<Home> {
   }
 }
 
-/// A simple in-memory implementation of the `SenderPersister` interface.
-/// This class stores the sender data in memory and allows saving and loading
-/// of `FfiSender` instances using a token as a key.
+/// A simple in-memory implementation of the `ReceiverPersister` interface.
+/// This class stores the receiver data in memory and allows saving and loading
+/// of `FfiReceiver` instances using a token as a key.
 class InMemoryReceiverPersister {
-  final Map<ReceiverToken, FfiReceiver> _store = {};
+  final Map<String, FfiReceiver> _store = {};
 
   Future<ReceiverToken> save({required FfiReceiver receiver}) async {
-    final token = await receiver.key();
-    _store[token] = receiver;
+    debugPrint('SAVING RECEIVER');
+    final token = receiver.key();
+    debugPrint('TOKEN GET: ${token.toBytes()}');
+    // print token to console
+    _store[token.toBytes().toString()] = receiver;
     return token;
   }
 
   Future<FfiReceiver> load({required ReceiverToken token}) async {
-    final receiver = _store[token];
+    debugPrint('LOADING RECEIVER ${token.toBytes()}');
+    final receiver = _store[token.toBytes().toString()];
     if (receiver == null) {
       throw Exception('Receiver not found for the provided token.');
     }

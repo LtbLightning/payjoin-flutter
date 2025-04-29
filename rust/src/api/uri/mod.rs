@@ -1,5 +1,8 @@
+use std::sync::Arc;
+
 use error::{FfiPjNotSupported, FfiPjParseError, FfiUrlParseError};
 use flutter_rust_bridge::frb;
+
 use crate::api::ohttp::error::FfiOhttpError;
 use crate::frb_generated::RustOpaque;
 
@@ -21,9 +24,7 @@ impl From<FfiUrl> for payjoin_ffi::Url {
 impl FfiUrl {
     #[frb(sync)]
     pub fn parse(url: String) -> Result<Self, FfiUrlParseError> {
-        payjoin_ffi::Url::parse(url)
-            .map(Into::into)
-            .map_err(Into::into)
+        payjoin_ffi::Url::parse(url).map(Into::into).map_err(Into::into)
     }
     #[frb(sync)]
     pub fn query(&self) -> Option<String> {
@@ -36,11 +37,11 @@ impl FfiUrl {
 }
 
 #[derive(Clone)]
-pub struct FfiPjUri(pub RustOpaque<payjoin_ffi::uri::PjUri>);
+pub struct FfiPjUri(Arc<payjoin_ffi::uri::PjUri>);
 
 impl From<payjoin_ffi::uri::PjUri> for FfiPjUri {
     fn from(value: payjoin_ffi::uri::PjUri) -> Self {
-        Self(RustOpaque::new(value))
+        Self(Arc::new(value))
     }
 }
 impl From<FfiPjUri> for payjoin_ffi::uri::PjUri {
@@ -58,6 +59,13 @@ impl FfiPjUri {
     #[frb(sync)]
     pub fn amount_sats(&self) -> Option<u64> {
         self.0.clone().amount_sats()
+    }
+
+    #[frb(sync)]
+    /// Sets the amount in sats and returns a new FfiPjUri
+    pub fn set_amount_sats(&self, amount: u64) -> Self {
+        let uri = (*self.0).clone().set_amount_sats(amount);
+        FfiPjUri(Arc::new(uri))
     }
 
     #[frb(sync)]
@@ -81,9 +89,7 @@ impl From<payjoin_ffi::uri::Uri> for FfiUri {
 impl FfiUri {
     #[frb(sync)]
     pub fn parse(uri: String) -> Result<FfiUri, FfiPjParseError> {
-        payjoin_ffi::uri::Uri::parse(uri)
-            .map(Into::into)
-            .map_err(Into::into)
+        payjoin_ffi::uri::Uri::parse(uri).map(Into::into).map_err(Into::into)
     }
     #[frb(sync)]
     pub fn address(&self) -> String {

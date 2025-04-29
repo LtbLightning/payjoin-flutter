@@ -8,7 +8,7 @@ import 'src/generated/api/send.dart';
 class SenderBuilder extends FfiSenderBuilder {
   SenderBuilder._({required super.field0});
   static Future<SenderBuilder> fromPsbtAndUri(
-      {required String psbtBase64, required uri.PjUri pjUri}) async {
+      {required String psbtBase64, required FfiPjUri pjUri}) async {
     final res = await FfiSenderBuilder.fromPsbtAndUri(
         psbtBase64: psbtBase64, pjUri: pjUri);
     return SenderBuilder._(field0: res.field0);
@@ -94,7 +94,7 @@ class Sender extends FfiSender {
   }
 
   @override
-  Future<SenderToken> key() async {
+  SenderToken key() {
     return _ffiSender.key();
   }
 

@@ -126,10 +126,6 @@ typedef struct wire_cst_ffi_sender_builder {
   uintptr_t field0;
 } wire_cst_ffi_sender_builder;
 
-typedef struct wire_cst_ffi_pj_uri {
-  uintptr_t field0;
-} wire_cst_ffi_pj_uri;
-
 typedef struct wire_cst_ffi_v_1_context {
   uintptr_t field0;
 } wire_cst_ffi_v_1_context;
@@ -269,8 +265,7 @@ WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__receive__FfiReceiv
 
 WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__receive__FfiReceiver_id(uintptr_t that);
 
-void frbgen_payjoin_flutter_wire__crate__api__receive__FfiReceiver_key(int64_t port_,
-                                                                       uintptr_t that);
+WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__receive__FfiReceiver_key(uintptr_t that);
 
 void frbgen_payjoin_flutter_wire__crate__api__receive__FfiReceiver_load(int64_t port_,
                                                                         uintptr_t token,
@@ -286,6 +281,8 @@ void frbgen_payjoin_flutter_wire__crate__api__receive__FfiReceiver_process_res(i
 
 WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__receive__FfiReceiver_to_json(uintptr_t that);
 
+WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__receive__ReceiverToken_to_bytes(uintptr_t that);
+
 void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_input_pair_new(int64_t port_,
                                                                           struct wire_cst_tx_in *txin,
                                                                           struct wire_cst_psbt_input *psbtin);
@@ -298,12 +295,11 @@ void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_maybe_inputs_seen_che
                                                                                                          struct wire_cst_ffi_maybe_inputs_seen *that,
                                                                                                          const void *is_known);
 
-void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_new_receiver_create(int64_t port_,
-                                                                               struct wire_cst_list_prim_u_8_strict *address,
-                                                                               int32_t network,
-                                                                               struct wire_cst_list_prim_u_8_strict *directory,
-                                                                               struct wire_cst_ffi_ohttp_keys *ohttp_keys,
-                                                                               uint64_t *expire_after);
+WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__receive__ffi_new_receiver_create(struct wire_cst_list_prim_u_8_strict *address,
+                                                                                               int32_t network,
+                                                                                               struct wire_cst_list_prim_u_8_strict *directory,
+                                                                                               struct wire_cst_ffi_ohttp_keys *ohttp_keys,
+                                                                                               uint64_t *expire_after);
 
 void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_new_receiver_persist(int64_t port_,
                                                                                 struct wire_cst_ffi_new_receiver *that,
@@ -369,8 +365,8 @@ void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_wants_inputs_try_pres
 void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_wants_outputs_commit_outputs(int64_t port_,
                                                                                         struct wire_cst_ffi_wants_outputs *that);
 
-void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_wants_outputs_is_output_substitution_disabled(int64_t port_,
-                                                                                                         struct wire_cst_ffi_wants_outputs *that);
+void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_wants_outputs_output_substitution(int64_t port_,
+                                                                                             struct wire_cst_ffi_wants_outputs *that);
 
 void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_wants_outputs_replace_receiver_outputs(int64_t port_,
                                                                                                   struct wire_cst_ffi_wants_outputs *that,
@@ -381,6 +377,9 @@ void frbgen_payjoin_flutter_wire__crate__api__receive__ffi_wants_outputs_substit
                                                                                                     struct wire_cst_ffi_wants_outputs *that,
                                                                                                     struct wire_cst_ffi_script *output_script);
 
+WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__send__DartSenderPersister_new(const void *save,
+                                                                                            const void *load);
+
 void frbgen_payjoin_flutter_wire__crate__api__send__FfiSender_extract_v1(int64_t port_,
                                                                          uintptr_t that);
 
@@ -390,13 +389,15 @@ void frbgen_payjoin_flutter_wire__crate__api__send__FfiSender_extract_v2(int64_t
 
 WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__send__FfiSender_from_json(struct wire_cst_list_prim_u_8_strict *json);
 
-void frbgen_payjoin_flutter_wire__crate__api__send__FfiSender_key(int64_t port_, uintptr_t that);
+WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__send__FfiSender_key(uintptr_t that);
 
 void frbgen_payjoin_flutter_wire__crate__api__send__FfiSender_load(int64_t port_,
                                                                    uintptr_t token,
                                                                    uintptr_t persister);
 
 WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__send__FfiSender_to_json(uintptr_t that);
+
+WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__send__SenderToken_to_bytes(uintptr_t that);
 
 void frbgen_payjoin_flutter_wire__crate__api__send__ffi_new_sender_persist(int64_t port_,
                                                                            struct wire_cst_ffi_new_sender *that,
@@ -422,7 +423,7 @@ void frbgen_payjoin_flutter_wire__crate__api__send__ffi_sender_builder_build_wit
 
 void frbgen_payjoin_flutter_wire__crate__api__send__ffi_sender_builder_from_psbt_and_uri(int64_t port_,
                                                                                          struct wire_cst_list_prim_u_8_strict *psbt_base64,
-                                                                                         struct wire_cst_ffi_pj_uri *pj_uri);
+                                                                                         uintptr_t pj_uri);
 
 void frbgen_payjoin_flutter_wire__crate__api__send__ffi_v_1_context_process_response(int64_t port_,
                                                                                      struct wire_cst_ffi_v_1_context *that,
@@ -441,19 +442,19 @@ void frbgen_payjoin_flutter_wire__crate__api__send__ffi_v_2_post_context_process
                                                                                           struct wire_cst_ffi_v_2_post_context *that,
                                                                                           struct wire_cst_list_prim_u_8_loose *response);
 
-WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__send__make_persister(const void *save,
-                                                                                   const void *load);
+WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__uri__FfiPjUri_address(uintptr_t that);
+
+WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__uri__FfiPjUri_amount_sats(uintptr_t that);
+
+WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__uri__FfiPjUri_as_string(uintptr_t that);
+
+WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__uri__FfiPjUri_pj_endpoint(uintptr_t that);
+
+WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__uri__FfiPjUri_set_amount_sats(uintptr_t that,
+                                                                                            uint64_t amount);
 
 void frbgen_payjoin_flutter_wire__crate__api__uri__ffi_ohttp_keys_decode(int64_t port_,
                                                                          struct wire_cst_list_prim_u_8_loose *bytes);
-
-WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__uri__ffi_pj_uri_address(struct wire_cst_ffi_pj_uri *that);
-
-WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__uri__ffi_pj_uri_amount_sats(struct wire_cst_ffi_pj_uri *that);
-
-WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__uri__ffi_pj_uri_as_string(struct wire_cst_ffi_pj_uri *that);
-
-WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__uri__ffi_pj_uri_pj_endpoint(struct wire_cst_ffi_pj_uri *that);
 
 WireSyncRust2DartDco frbgen_payjoin_flutter_wire__crate__api__uri__ffi_uri_address(struct wire_cst_ffi_uri *that);
 
@@ -491,6 +492,10 @@ void frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_flutter_r
 
 void frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiJsonReply(const void *ptr);
 
+void frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiPjUri(const void *ptr);
+
+void frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiPjUri(const void *ptr);
+
 void frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver(const void *ptr);
 
 void frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver(const void *ptr);
@@ -518,6 +523,10 @@ void frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_flutter_r
 void frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerOhttpError(const void *ptr);
 
 void frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerOhttpError(const void *ptr);
+
+void frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerOutputSubstitution(const void *ptr);
+
+void frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerOutputSubstitution(const void *ptr);
 
 void frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerOutputSubstitutionError(const void *ptr);
 
@@ -635,10 +644,6 @@ void frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_payjoin_f
 
 void frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_payjoin_ffisendV2PostContext(const void *ptr);
 
-void frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_payjoin_ffiuriPjUri(const void *ptr);
-
-void frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_payjoin_ffiuriPjUri(const void *ptr);
-
 void frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_payjoin_ffiuriUri(const void *ptr);
 
 void frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_payjoin_ffiuriUri(const void *ptr);
@@ -662,8 +667,6 @@ struct wire_cst_ffi_ohttp_keys *frbgen_payjoin_flutter_cst_new_box_autoadd_ffi_o
 struct wire_cst_ffi_outputs_unknown *frbgen_payjoin_flutter_cst_new_box_autoadd_ffi_outputs_unknown(void);
 
 struct wire_cst_ffi_payjoin_proposal *frbgen_payjoin_flutter_cst_new_box_autoadd_ffi_payjoin_proposal(void);
-
-struct wire_cst_ffi_pj_uri *frbgen_payjoin_flutter_cst_new_box_autoadd_ffi_pj_uri(void);
 
 struct wire_cst_ffi_provisional_proposal *frbgen_payjoin_flutter_cst_new_box_autoadd_ffi_provisional_proposal(void);
 
@@ -718,7 +721,6 @@ static int64_t dummy_method_to_enforce_bundling(void) {
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_cst_new_box_autoadd_ffi_ohttp_keys);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_cst_new_box_autoadd_ffi_outputs_unknown);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_cst_new_box_autoadd_ffi_payjoin_proposal);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_cst_new_box_autoadd_ffi_pj_uri);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_cst_new_box_autoadd_ffi_provisional_proposal);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_cst_new_box_autoadd_ffi_script);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_cst_new_box_autoadd_ffi_sender_builder);
@@ -746,6 +748,7 @@ static int64_t dummy_method_to_enforce_bundling(void) {
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartSenderPersister);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerError);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiJsonReply);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiPjUri);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerImplementationError);
@@ -753,6 +756,7 @@ static int64_t dummy_method_to_enforce_bundling(void) {
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerIntoUrlError);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerIoError);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerOhttpError);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerOutputSubstitution);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerOutputSubstitutionError);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPjNotSupported);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPjParseError);
@@ -782,7 +786,6 @@ static int64_t dummy_method_to_enforce_bundling(void) {
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_payjoin_ffisendV1Context);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_payjoin_ffisendV2GetContext);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_payjoin_ffisendV2PostContext);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_payjoin_ffiuriPjUri);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_payjoin_ffiuriUri);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_rust_arc_decrement_strong_count_RustOpaque_stdsyncMutexcoreoptionOptionpayjoin_ffiClientResponse);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_bitcoin_ffiScript);
@@ -790,6 +793,7 @@ static int64_t dummy_method_to_enforce_bundling(void) {
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerDartSenderPersister);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerError);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiJsonReply);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiPjUri);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiReceiver);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFfiSender);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerImplementationError);
@@ -797,6 +801,7 @@ static int64_t dummy_method_to_enforce_bundling(void) {
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerIntoUrlError);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerIoError);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerOhttpError);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerOutputSubstitution);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerOutputSubstitutionError);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPjNotSupported);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPjParseError);
@@ -826,7 +831,6 @@ static int64_t dummy_method_to_enforce_bundling(void) {
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_payjoin_ffisendV1Context);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_payjoin_ffisendV2GetContext);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_payjoin_ffisendV2PostContext);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_payjoin_ffiuriPjUri);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_payjoin_ffiuriUri);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_rust_arc_increment_strong_count_RustOpaque_stdsyncMutexcoreoptionOptionpayjoin_ffiClientResponse);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__bitcoin_ffi__ffi_script_new);
@@ -841,6 +845,7 @@ static int64_t dummy_method_to_enforce_bundling(void) {
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__receive__FfiReceiver_pj_uri);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__receive__FfiReceiver_process_res);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__receive__FfiReceiver_to_json);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__receive__ReceiverToken_to_bytes);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__receive__ffi_input_pair_new);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__receive__ffi_maybe_inputs_owned_check_inputs_not_owned);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__receive__ffi_maybe_inputs_seen_check_no_inputs_seen_before);
@@ -861,15 +866,17 @@ static int64_t dummy_method_to_enforce_bundling(void) {
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__receive__ffi_wants_inputs_contribute_inputs);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__receive__ffi_wants_inputs_try_preserving_privacy);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__receive__ffi_wants_outputs_commit_outputs);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__receive__ffi_wants_outputs_is_output_substitution_disabled);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__receive__ffi_wants_outputs_output_substitution);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__receive__ffi_wants_outputs_replace_receiver_outputs);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__receive__ffi_wants_outputs_substitute_receiver_script);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__send__DartSenderPersister_new);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__send__FfiSender_extract_v1);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__send__FfiSender_extract_v2);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__send__FfiSender_from_json);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__send__FfiSender_key);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__send__FfiSender_load);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__send__FfiSender_to_json);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__send__SenderToken_to_bytes);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__send__ffi_new_sender_persist);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__send__ffi_sender_builder_always_disable_output_substitution);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__send__ffi_sender_builder_build_non_incentivizing);
@@ -880,12 +887,12 @@ static int64_t dummy_method_to_enforce_bundling(void) {
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__send__ffi_v_2_get_context_extract_req);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__send__ffi_v_2_get_context_process_response);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__send__ffi_v_2_post_context_process_response);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__send__make_persister);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__uri__FfiPjUri_address);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__uri__FfiPjUri_amount_sats);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__uri__FfiPjUri_as_string);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__uri__FfiPjUri_pj_endpoint);
+    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__uri__FfiPjUri_set_amount_sats);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__uri__ffi_ohttp_keys_decode);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__uri__ffi_pj_uri_address);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__uri__ffi_pj_uri_amount_sats);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__uri__ffi_pj_uri_as_string);
-    dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__uri__ffi_pj_uri_pj_endpoint);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__uri__ffi_uri_address);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__uri__ffi_uri_amount_sats);
     dummy_var ^= ((int64_t) (void*) frbgen_payjoin_flutter_wire__crate__api__uri__ffi_uri_as_string);

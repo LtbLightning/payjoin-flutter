@@ -1,16 +1,21 @@
-pub use std::sync::Arc;
 pub use std::str::FromStr;
+pub use std::sync::Arc;
 
 use flutter_rust_bridge::{frb, DartFnFuture};
 use payjoin::persist::Persister;
-pub use payjoin::receive::v2::ReceiverToken;
+use payjoin::receive::v2 as inner;
+pub use payjoin::OutputSubstitution;
 use payjoin_ffi::bitcoin_ffi;
-use crate::api::receive::error::{FfiError, FfiImplementationError, FfiInputContributionError, FfiJsonReply, FfiOutputSubstitutionError, FfiPsbtInputError, FfiReplyableError, FfiSelectionError, FfiSessionError};
-use crate::api::FfiSerdeJsonError;
-use crate::api::uri::error::FfiIntoUrlError;
 
 use super::uri::{FfiOhttpKeys, FfiPjUri};
 use crate::api::bitcoin_ffi::FfiScript;
+use crate::api::receive::error::{
+    FfiError, FfiImplementationError, FfiInputContributionError, FfiJsonReply,
+    FfiOutputSubstitutionError, FfiPsbtInputError, FfiReplyableError, FfiSelectionError,
+    FfiSessionError,
+};
+use crate::api::uri::error::FfiIntoUrlError;
+use crate::api::FfiSerdeJsonError;
 use crate::frb_generated::RustOpaque;
 use crate::utils::types::{ClientResponse, Network, OutPoint, PsbtInput, Request, TxIn, TxOut};
 
@@ -41,6 +46,7 @@ impl FfiNewReceiver {
     ///
     /// # References
     /// - [BIP 77: Payjoin Version 2: Serverless Payjoin](https://github.com/bitcoin/bips/pull/1483)
+    #[frb(sync)]
     pub fn create(
         address: String,
         network: Network,
@@ -60,14 +66,23 @@ impl FfiNewReceiver {
         .map_err(Into::into)
     }
 
-    pub fn persist(&self, persister: &mut DartReceiverPersister) -> Result<ReceiverToken, FfiImplementationError> {
-        self.0.persist(persister).map_err(Into::into)
+    pub fn persist(
+        &self,
+        persister: &mut DartReceiverPersister,
+    ) -> Result<ReceiverToken, FfiImplementationError> {
+        self.0.persist(persister).map(Into::into).map_err(Into::into)
     }
 }
 
 impl FfiReceiver {
-    pub fn load(token: ReceiverToken, persister: DartReceiverPersister) -> Result<Self, FfiImplementationError> {
-        persister.load(token).map(|receiver| FfiReceiver::from(payjoin_ffi::receive::Receiver::from(receiver))).map_err(Into::into)
+    pub fn load(
+        token: ReceiverToken,
+        persister: DartReceiverPersister,
+    ) -> Result<Self, FfiImplementationError> {
+        persister
+            .load(token.into())
+            .map(|receiver| FfiReceiver::from(payjoin_ffi::receive::Receiver::from(receiver)))
+            .map_err(Into::into)
     }
 
     ///The per-session public key to use as an identifier
@@ -101,8 +116,9 @@ impl FfiReceiver {
         payjoin_ffi::receive::Receiver::from_json(&json).map(Into::into).map_err(Into::into)
     }
 
+    #[frb(sync)]
     pub fn key(&self) -> ReceiverToken {
-        self.0.key()
+        self.0.key().into()
     }
 }
 
@@ -163,10 +179,13 @@ impl FfiUncheckedProposal {
         err: FfiJsonReply,
         ohttp_relay: String,
     ) -> Result<(Request, ClientResponse), FfiSessionError> {
-        self.0.extract_err_req(&(err.into()), ohttp_relay).map(|e| (e.0.into(), e.1.into())).map_err(Into::into)
+        self.0
+            .extract_err_req(&(err.into()), ohttp_relay)
+            .map(|e| (e.0.into(), e.1.into()))
+            .map_err(Into::into)
     }
 
-     /// Process an OHTTP Encapsulated HTTP POST Error response
+    /// Process an OHTTP Encapsulated HTTP POST Error response
     /// to ensure it has been posted properly
     pub fn process_err_res(
         &self,
@@ -252,7 +271,7 @@ impl From<payjoin_ffi::receive::WantsOutputs> for FfiWantsOutputs {
 }
 
 impl FfiWantsOutputs {
-    pub fn is_output_substitution_disabled(&self) -> bool {
+    pub fn output_substitution(&self) -> OutputSubstitution {
         self.0.output_substitution()
     }
 
@@ -381,74 +400,110 @@ impl FfiPayjoinProposal {
     }
 
     pub fn extract_req(&self, ohttp_relay: String) -> Result<(Request, ClientResponse), FfiError> {
-        self.0.clone().extract_req(ohttp_relay).map(|e| (e.0.into(), e.1.into())).map_err(Into::into)
+        self.0
+            .clone()
+            .extract_req(ohttp_relay)
+            .map(|e| (e.0.into(), e.1.into()))
+            .map_err(Into::into)
     }
 
-    pub fn process_res(
-        &self,
-        res: &[u8],
-        ohttp_context: &ClientResponse,
-    ) -> Result<(), FfiError> {
+    pub fn process_res(&self, res: &[u8], ohttp_context: &ClientResponse) -> Result<(), FfiError> {
         self.0.process_res(res, &ohttp_context.into()).map_err(Into::into)
     }
 }
 
+pub struct ReceiverToken(pub(crate) Arc<inner::ReceiverToken>);
+
+impl From<inner::ReceiverToken> for ReceiverToken {
+    fn from(value: inner::ReceiverToken) -> Self {
+        Self(Arc::new(value))
+    }
+}
+
+impl From<ReceiverToken> for inner::ReceiverToken {
+    fn from(value: ReceiverToken) -> Self {
+        (*value.0).clone()
+    }
+}
+
+impl ReceiverToken {
+    /// Convert the receiver token to a byte array
+    /// This is most useful when storing the token as a key in a map
+    #[frb(sync)]
+    pub fn to_bytes(&self) -> Vec<u8> {
+        (*self.0).as_ref().to_vec()
+    }
+}
+
 pub trait ReceiverPersister: Send + Sync {
-    fn save(&self, receiver: FfiReceiver) -> Result<ReceiverToken, payjoin_ffi::receive::ImplementationError>;
-    fn load(&self, token: ReceiverToken) -> Result<FfiReceiver, payjoin_ffi::receive::ImplementationError>;
+    fn save(
+        &self,
+        receiver: FfiReceiver,
+    ) -> Result<ReceiverToken, payjoin_ffi::receive::ImplementationError>;
+    fn load(
+        &self,
+        token: ReceiverToken,
+    ) -> Result<FfiReceiver, payjoin_ffi::receive::ImplementationError>;
 }
 
 #[frb(opaque)]
 pub struct DartReceiverPersister {
     save_cb: Box<
-        dyn Fn(FfiReceiver) -> DartFnFuture<Result<ReceiverToken, anyhow::Error>> + Send + Sync
+        dyn Fn(FfiReceiver) -> DartFnFuture<Result<ReceiverToken, anyhow::Error>> + Send + Sync,
     >,
     load_cb: Box<
-        dyn Fn(ReceiverToken) -> DartFnFuture<Result<FfiReceiver, anyhow::Error>> + Send + Sync
+        dyn Fn(ReceiverToken) -> DartFnFuture<Result<FfiReceiver, anyhow::Error>> + Send + Sync,
     >,
 }
 
 impl DartReceiverPersister {
     #[frb(sync)]
     pub fn new(
-        save: impl Fn(FfiReceiver)
-                    -> DartFnFuture<Result<ReceiverToken, anyhow::Error>>
-            + Send + Sync + 'static,
-        load: impl Fn(ReceiverToken)
-                    -> DartFnFuture<Result<FfiReceiver, anyhow::Error>>
-            + Send + Sync + 'static,
+        save: impl Fn(FfiReceiver) -> DartFnFuture<Result<ReceiverToken, anyhow::Error>>
+            + Send
+            + Sync
+            + 'static,
+        load: impl Fn(ReceiverToken) -> DartFnFuture<Result<FfiReceiver, anyhow::Error>>
+            + Send
+            + Sync
+            + 'static,
     ) -> DartReceiverPersister {
-        DartReceiverPersister {
-            save_cb: Box::new(save),
-            load_cb: Box::new(load),
-        }
+        DartReceiverPersister { save_cb: Box::new(save), load_cb: Box::new(load) }
     }
 }
 
 impl payjoin::persist::Persister<payjoin::receive::v2::Receiver> for DartReceiverPersister {
-    type Token = ReceiverToken;
+    type Token = inner::ReceiverToken;
     type Error = payjoin_ffi::receive::ImplementationError;
 
     fn save(
         &mut self,
         receiver: payjoin::receive::v2::Receiver,
     ) -> Result<Self::Token, Self::Error> {
+        println!("Rust: Entering Persister:save");
         let receiver = FfiReceiver::from(payjoin_ffi::receive::Receiver::from(receiver));
-        tokio::runtime::Handle::current().block_on(async {
-            (self.save_cb)(receiver).await.map_err(|e| {
-                payjoin_ffi::receive::ImplementationError::from(e.to_string())
-            })
-        })
+        println!("Rust: Calling save_cb");
+        let result = tokio::runtime::Runtime::new()
+            .expect("Failed to create Tokio runtime")
+            .block_on(async {
+                (self.save_cb)(receiver)
+                    .await
+                    .map(Into::into)
+                    .map_err(|e| payjoin_ffi::receive::ImplementationError::from(e.to_string()))
+            });
+        println!("Rust: save_cb returned");
+        result
     }
 
     fn load(&self, token: Self::Token) -> Result<payjoin::receive::v2::Receiver, Self::Error> {
-        tokio::runtime::Handle::current().block_on(async {
-            (self.load_cb)(token).await.map(|receiver| {
-                let ffi_receiver = receiver.0;
-                payjoin::receive::v2::Receiver::from(ffi_receiver)
-            }).map_err(|e| {
-                payjoin_ffi::receive::ImplementationError::from(e.to_string())
-            })
+        tokio::runtime::Runtime::new().expect("Failed to create Tokio runtime").block_on(async {
+            (self.load_cb)(token.into())
+                .await
+                .map(|receiver| {
+                    let ffi_receiver = receiver.0;
+                    payjoin::receive::v2::Receiver::from(ffi_receiver)
+                })
+                .map_err(|e| payjoin_ffi::receive::ImplementationError::from(e.to_string()))
         })
     }
 }

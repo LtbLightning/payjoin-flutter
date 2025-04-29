@@ -1,20 +1,19 @@
 use std::sync::Arc;
-use payjoin::persist::Persister;
-pub use payjoin::send::v2::SenderToken;
 
-use flutter_rust_bridge::{frb, DartFnFuture};
 use error::{FfiBuildSenderError, FfiCreateRequestError, FfiEncapsulationError, FfiResponseError};
+use flutter_rust_bridge::{frb, DartFnFuture};
+use payjoin::persist::Persister;
+use payjoin::send::v2 as inner;
 
+use super::receive::error::FfiImplementationError;
+use super::FfiSerdeJsonError;
 use crate::api::uri::{FfiPjUri, FfiUrl};
 use crate::frb_generated::RustOpaque;
 use crate::utils::types::{ClientResponse, Request};
 
-use super::receive::error::FfiImplementationError;
-use super::FfiSerdeJsonError;
-
 pub mod error;
 
-pub struct FfiSenderBuilder(pub RustOpaque<payjoin_ffi::send::SenderBuilder>);
+pub struct FfiSenderBuilder(pub(crate) RustOpaque<payjoin_ffi::send::SenderBuilder>);
 impl From<payjoin_ffi::send::SenderBuilder> for FfiSenderBuilder {
     fn from(value: payjoin_ffi::send::SenderBuilder) -> Self {
         Self(RustOpaque::new(value))
@@ -33,10 +32,11 @@ impl FfiSenderBuilder {
     pub fn always_disable_output_substitution(&self) -> FfiSenderBuilder {
         self.0.always_disable_output_substitution().into()
     }
-    pub fn build_recommended(&self, min_fee_rate: u64) -> Result<FfiNewSender, FfiBuildSenderError> {
-        self.0.build_recommended(min_fee_rate)
-            .map(Into::into)
-            .map_err(Into::into)
+    pub fn build_recommended(
+        &self,
+        min_fee_rate: u64,
+    ) -> Result<FfiNewSender, FfiBuildSenderError> {
+        self.0.build_recommended(min_fee_rate).map(Into::into).map_err(Into::into)
     }
     pub fn build_with_additional_fee(
         &self,
@@ -60,9 +60,7 @@ impl FfiSenderBuilder {
         &self,
         min_fee_rate: u64,
     ) -> Result<FfiNewSender, FfiBuildSenderError> {
-        self.0.build_non_incentivizing(min_fee_rate)
-            .map(Into::into)
-            .map_err(Into::into)
+        self.0.build_non_incentivizing(min_fee_rate).map(Into::into).map_err(Into::into)
     }
 }
 
@@ -74,8 +72,11 @@ impl From<payjoin_ffi::send::NewSender> for FfiNewSender {
 }
 
 impl FfiNewSender {
-    pub fn persist(&self, persister: &mut DartSenderPersister) -> Result<SenderToken, FfiImplementationError> {
-        self.0.persist(persister).map_err(Into::into)
+    pub fn persist(
+        &self,
+        persister: &mut DartSenderPersister,
+    ) -> Result<SenderToken, FfiImplementationError> {
+        self.0.persist(persister).map(Into::into).map_err(Into::into)
     }
 }
 
@@ -100,8 +101,14 @@ impl From<FfiSender> for payjoin_ffi::send::Sender {
     }
 }
 impl FfiSender {
-    pub fn load(token: SenderToken, persister: DartSenderPersister) -> Result<FfiSender, FfiImplementationError> {
-        persister.load(token).map(|sender| FfiSender::from(payjoin_ffi::send::Sender::from(sender))).map_err(Into::into)
+    pub fn load(
+        token: SenderToken,
+        persister: DartSenderPersister,
+    ) -> Result<FfiSender, FfiImplementationError> {
+        persister
+            .load(token.into())
+            .map(|sender| FfiSender::from(payjoin_ffi::send::Sender::from(sender)))
+            .map_err(Into::into)
     }
 
     pub fn extract_v1(&self) -> (Request, FfiV1Context) {
@@ -129,8 +136,9 @@ impl FfiSender {
         payjoin_ffi::send::Sender::from_json(&json).map(Into::into).map_err(Into::into)
     }
 
+    #[frb(sync)]
     pub fn key(&self) -> SenderToken {
-        self.0.key()
+        self.0.key().into()
     }
 }
 
@@ -159,9 +167,7 @@ impl FfiV2PostContext {
         &self,
         response: &[u8],
     ) -> Result<FfiV2GetContext, FfiEncapsulationError> {
-        self.0.clone().process_response(response)
-            .map(Into::into)
-            .map_err(Into::into)
+        self.0.clone().process_response(response).map(Into::into).map_err(Into::into)
     }
 }
 
@@ -191,55 +197,76 @@ impl FfiV2GetContext {
     }
 }
 
+pub struct SenderToken(pub(crate) Arc<inner::SenderToken>);
+
+impl From<inner::SenderToken> for SenderToken {
+    fn from(value: inner::SenderToken) -> Self {
+        Self(Arc::new(value))
+    }
+}
+
+impl From<SenderToken> for inner::SenderToken {
+    fn from(value: SenderToken) -> Self {
+        (*value.0).clone()
+    }
+}
+
+impl SenderToken {
+    /// Convert the sender token to a byte array
+    /// This is most useful when storing the token as a key in a map
+    #[frb(sync)]
+    pub fn to_bytes(&self) -> Vec<u8> {
+        (*self.0).as_ref().to_vec()
+    }
+}
+
 #[frb(opaque)]
 pub struct DartSenderPersister {
-    save_cb: Box<
-        dyn Fn(FfiSender) -> DartFnFuture<Result<SenderToken, anyhow::Error>> + Send + Sync
-    >,
-    load_cb: Box<
-        dyn Fn(SenderToken) -> DartFnFuture<Result<FfiSender, anyhow::Error>> + Send + Sync
-    >,
+    save_cb:
+        Box<dyn Fn(FfiSender) -> DartFnFuture<Result<SenderToken, anyhow::Error>> + Send + Sync>,
+    load_cb:
+        Box<dyn Fn(SenderToken) -> DartFnFuture<Result<FfiSender, anyhow::Error>> + Send + Sync>,
+}
+
+impl DartSenderPersister {
+    #[frb(sync)]
+    pub fn new(
+        save: impl Fn(FfiSender) -> DartFnFuture<Result<SenderToken, anyhow::Error>>
+            + Send
+            + Sync
+            + 'static,
+        load: impl Fn(SenderToken) -> DartFnFuture<Result<FfiSender, anyhow::Error>>
+            + Send
+            + Sync
+            + 'static,
+    ) -> Self {
+        Self { save_cb: Box::new(save), load_cb: Box::new(load) }
+    }
 }
 
 impl payjoin::persist::Persister<payjoin::send::v2::Sender> for DartSenderPersister {
-    type Token = SenderToken;
+    type Token = inner::SenderToken;
     type Error = payjoin_ffi::receive::ImplementationError;
 
-    fn save(
-        &mut self,
-        sender: payjoin::send::v2::Sender,
-    ) -> Result<Self::Token, Self::Error> {
+    fn save(&mut self, sender: payjoin::send::v2::Sender) -> Result<Self::Token, Self::Error> {
         let sender = FfiSender::from(payjoin_ffi::send::Sender::from(sender));
-        tokio::runtime::Handle::current().block_on(async {
-            (self.save_cb)(sender).await.map_err(|e| {
-                payjoin_ffi::receive::ImplementationError::from(e.to_string())
-            })
+        tokio::runtime::Runtime::new().expect("Failed to create Tokio runtime").block_on(async {
+            (self.save_cb)(sender)
+                .await
+                .map(Into::into)
+                .map_err(|e| payjoin_ffi::receive::ImplementationError::from(e.to_string()))
         })
     }
 
     fn load(&self, token: Self::Token) -> Result<payjoin::send::v2::Sender, Self::Error> {
-        tokio::runtime::Handle::current().block_on(async {
-            (self.load_cb)(token).await.map(|sender| {
-                let ffi_sender = sender.0;
-                payjoin::send::v2::Sender::from(ffi_sender)
-            }).map_err(|e| {
-                payjoin_ffi::receive::ImplementationError::from(e.to_string())
-            })
+        tokio::runtime::Runtime::new().expect("Failed to create Tokio runtime").block_on(async {
+            (self.load_cb)(token.into())
+                .await
+                .map(|sender| {
+                    let ffi_sender = sender.0;
+                    payjoin::send::v2::Sender::from(ffi_sender)
+                })
+                .map_err(|e| payjoin_ffi::receive::ImplementationError::from(e.to_string()))
         })
-    }
-}
-
-#[frb(sync)]
-pub fn make_persister(
-    save: impl Fn(FfiSender)
-                 -> DartFnFuture<Result<SenderToken, anyhow::Error>>
-           + Send + Sync + 'static,
-    load: impl Fn(SenderToken)
-                 -> DartFnFuture<Result<FfiSender, anyhow::Error>>
-           + Send + Sync + 'static,
-) -> DartSenderPersister {
-    DartSenderPersister {
-        save_cb: Box::new(save),
-        load_cb: Box::new(load),
     }
 }

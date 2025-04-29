@@ -60,24 +60,27 @@ impl From<bitcoin_ffi::TxOut> for TxOut {
 #[frb(mirror(bitcoin_ffi::Network))]
 #[non_exhaustive]
 pub enum Network {
-    ///Bitcoin’s testnet
-    Testnet,
-    ///Bitcoin’s regtest
-    Regtest,
     #[default]
     ///Classic Bitcoin
     Bitcoin,
+    ///Bitcoin’s testnet
+    Testnet,
+    ///Bitcoin’s testnet4
+    Testnet4,
     ///Bitcoin’s signet
     Signet,
+    ///Bitcoin’s regtest
+    Regtest,
 }
 
 impl From<Network> for bitcoin_ffi::Network {
     fn from(value: Network) -> Self {
         match value {
-            Network::Testnet => bitcoin_ffi::Network::Testnet,
-            Network::Regtest => bitcoin_ffi::Network::Regtest,
             Network::Bitcoin => bitcoin_ffi::Network::Bitcoin,
+            Network::Testnet => bitcoin_ffi::Network::Testnet,
+            Network::Testnet4 => bitcoin_ffi::Network::Testnet4,
             Network::Signet => bitcoin_ffi::Network::Signet,
+            Network::Regtest => bitcoin_ffi::Network::Regtest,
         }
     }
 }
@@ -85,11 +88,12 @@ impl From<Network> for bitcoin_ffi::Network {
 impl From<bitcoin_ffi::Network> for Network {
     fn from(value: bitcoin_ffi::Network) -> Self {
         match value {
-            bitcoin_ffi::Network::Testnet => Network::Testnet,
-            bitcoin_ffi::Network::Regtest => Network::Regtest,
             bitcoin_ffi::Network::Bitcoin => Network::Bitcoin,
+            bitcoin_ffi::Network::Testnet => Network::Testnet,
+            bitcoin_ffi::Network::Testnet4 => Network::Testnet4,
+            bitcoin_ffi::Network::Regtest => Network::Regtest,
             bitcoin_ffi::Network::Signet => Network::Signet,
-            _ => unreachable!(),
+            _ => unimplemented!(),
         }
     }
 }

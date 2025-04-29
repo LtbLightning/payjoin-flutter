@@ -84,12 +84,13 @@ class PayjoinManager {
         psbtBase64: originalPsbt, pjUri: pjUri.checkPjSupported());
     final newSender =
         await senderBuilder.buildRecommended(minFeeRate: BigInt.from(250));
-    final persister = makePersister(
+    final imp = InMemorySenderPersister();
+    final persister = DartSenderPersister(
       save: (sender) async {
-        return await InMemorySenderPersister().save(sender: sender);
+        return await imp.save(sender: sender);
       },
       load: (token) async {
-        return await InMemorySenderPersister().load(token: token);
+        return await imp.load(token: token);
       },
     );
     final token = await newSender.persist(persister: persister);
@@ -333,17 +334,19 @@ class PayjoinManager {
 /// A simple in-memory implementation of the `SenderPersister` interface.
 /// This class stores the sender data in memory and allows saving and loading
 /// of `FfiSender` instances using a token as a key.
-class InMemorySenderPersister {
-  final Map<SenderToken, FfiSender> _store = {};
+class InMemorySenderPersister implements DartSenderPersister {
+  final Map<String, FfiSender> _store = {};
 
   Future<SenderToken> save({required FfiSender sender}) async {
-    final token = await sender.key();
-    _store[token] = sender;
+    final token = sender.key();
+    debugPrint('TOKEN SAVE: ${token.toBytes()}');
+    _store[token.toBytes().toString()] = sender;
     return token;
   }
 
   Future<FfiSender> load({required SenderToken token}) async {
-    final sender = _store[token];
+    debugPrint('TOKEN LOAD: ${token.toBytes()}');
+    final sender = _store[token.toBytes().toString()];
     if (sender == null) {
       throw Exception('Sender not found for the provided token.');
     }

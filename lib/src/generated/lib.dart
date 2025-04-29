@@ -108,9 +108,6 @@ abstract class V2GetContext implements RustOpaqueInterface {}
 // Rust type: RustOpaqueNom<payjoin_ffi :: send :: V2PostContext>
 abstract class V2PostContext implements RustOpaqueInterface {}
 
-// Rust type: RustOpaqueNom<payjoin_ffi :: uri :: PjUri>
-abstract class PjUri implements RustOpaqueInterface {}
-
 // Rust type: RustOpaqueNom<payjoin_ffi :: uri :: Uri>
 abstract class Uri implements RustOpaqueInterface {}
 

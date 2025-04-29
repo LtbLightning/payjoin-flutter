@@ -19,31 +19,6 @@ class Uri extends FfiUri {
   String address({hint}) {
     return super.address();
   }
-
-  @override
-  PjUri checkPjSupported({hint}) {
-    return PjUri._(field0: super.checkPjSupported().field0);
-  }
-}
-
-class PjUri extends FfiPjUri {
-  PjUri._({required super.field0});
-
-  ///Gets the amount in btc.
-  @override
-  BigInt? amountSats({hint}) {
-    return super.amountSats();
-  }
-
-  @override
-  String address({hint}) {
-    return super.address();
-  }
-
-  @override
-  String pjEndpoint({hint}) {
-    return super.pjEndpoint();
-  }
 }
 
 class Url extends FfiUrl {

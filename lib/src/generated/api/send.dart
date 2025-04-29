@@ -12,15 +12,16 @@ import 'receive/error.dart';
 import 'send/error.dart';
 import 'uri.dart';
 
-// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `load`, `save`
-
-DartSenderPersister makePersister(
-        {required FutureOr<SenderToken> Function(FfiSender) save,
-        required FutureOr<FfiSender> Function(SenderToken) load}) =>
-    core.instance.api.crateApiSendMakePersister(save: save, load: load);
+// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `load`, `save`
 
 // Rust type: RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<DartSenderPersister>>
-abstract class DartSenderPersister implements RustOpaqueInterface {}
+abstract class DartSenderPersister implements RustOpaqueInterface {
+  factory DartSenderPersister(
+          {required FutureOr<SenderToken> Function(FfiSender) save,
+          required FutureOr<FfiSender> Function(SenderToken) load}) =>
+      core.instance.api
+          .crateApiSendDartSenderPersisterNew(save: save, load: load);
+}
 
 // Rust type: RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<FfiSender>>
 abstract class FfiSender implements RustOpaqueInterface {
@@ -32,7 +33,7 @@ abstract class FfiSender implements RustOpaqueInterface {
   static FfiSender fromJson({required String json}) =>
       core.instance.api.crateApiSendFfiSenderFromJson(json: json);
 
-  Future<SenderToken> key();
+  SenderToken key();
 
   static Future<FfiSender> load(
           {required SenderToken token,
@@ -44,7 +45,11 @@ abstract class FfiSender implements RustOpaqueInterface {
 }
 
 // Rust type: RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<SenderToken>>
-abstract class SenderToken implements RustOpaqueInterface {}
+abstract class SenderToken implements RustOpaqueInterface {
+  /// Convert the sender token to a byte array
+  /// This is most useful when storing the token as a key in a map
+  Uint8List toBytes();
+}
 
 class FfiNewSender {
   final NewSender field0;

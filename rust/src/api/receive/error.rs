@@ -1,6 +1,5 @@
 use crate::frb_generated::RustAutoOpaque;
 
-
 pub struct FfiError(pub(crate) RustAutoOpaque<payjoin_ffi::receive::Error>);
 
 impl From<payjoin_ffi::receive::Error> for FfiError {
@@ -9,7 +8,9 @@ impl From<payjoin_ffi::receive::Error> for FfiError {
     }
 }
 
-pub struct FfiImplementationError(pub(crate) RustAutoOpaque<payjoin_ffi::receive::ImplementationError>);
+pub struct FfiImplementationError(
+    pub(crate) RustAutoOpaque<payjoin_ffi::receive::ImplementationError>,
+);
 
 impl From<payjoin_ffi::receive::ImplementationError> for FfiImplementationError {
     fn from(value: payjoin_ffi::receive::ImplementationError) -> Self {
@@ -25,7 +26,9 @@ impl From<payjoin_ffi::receive::SessionError> for FfiSessionError {
     }
 }
 
-pub struct FfiInputContributionError(pub RustAutoOpaque<payjoin_ffi::receive::InputContributionError>);
+pub struct FfiInputContributionError(
+    pub RustAutoOpaque<payjoin_ffi::receive::InputContributionError>,
+);
 
 impl From<payjoin_ffi::receive::InputContributionError> for FfiInputContributionError {
     fn from(value: payjoin_ffi::receive::InputContributionError) -> Self {
@@ -33,7 +36,9 @@ impl From<payjoin_ffi::receive::InputContributionError> for FfiInputContribution
     }
 }
 
-pub struct FfiOutputSubstitutionError(pub(crate) RustAutoOpaque<payjoin_ffi::receive::OutputSubstitutionError>);
+pub struct FfiOutputSubstitutionError(
+    pub(crate) RustAutoOpaque<payjoin_ffi::receive::OutputSubstitutionError>,
+);
 
 impl From<payjoin_ffi::receive::OutputSubstitutionError> for FfiOutputSubstitutionError {
     fn from(value: payjoin_ffi::receive::OutputSubstitutionError) -> Self {

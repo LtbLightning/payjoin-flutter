@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'package:payjoin_flutter/src/generated/api/uri.dart';
 import 'package:payjoin_flutter/src/generated/lib.dart';
@@ -19,18 +20,23 @@ class NewReceiver {
       required String directory,
       required uri.OhttpKeys ohttpKeys,
       BigInt? expireAfter}) async {
-    final res = await FfiNewReceiver.create(
+    debugPrint('CREATING NEW RECEIVER');
+    final res = FfiNewReceiver.create(
         directory: directory,
         ohttpKeys: ohttpKeys,
         address: address,
         expireAfter: expireAfter,
         network: network);
+    debugPrint('NEW RECEIVER CREATED');
     return NewReceiver._(ffiNewReceiver: res);
   }
 
   Future<ReceiverToken> persist(
       {required DartReceiverPersister persister}) async {
-    return await _ffiNewReceiver.persist(persister: persister);
+    debugPrint('PERSISTING NEW RECEIVER');
+    final res = await _ffiNewReceiver.persist(persister: persister);
+    debugPrint('PERSISTED NEW RECEIVER');
+    return res;
   }
 }
 
@@ -83,7 +89,7 @@ class Receiver {
     return Receiver._(ffiReceiver: res);
   }
 
-  Future<ReceiverToken> key() async {
+  ReceiverToken key() {
     return _ffiReceiver.key();
   }
 }
@@ -171,8 +177,8 @@ class WantsOutputs {
   WantsOutputs._({required ffiWantsOutputs})
       : _ffiWantsOutputs = ffiWantsOutputs;
 
-  Future<bool> isOutputSubstitutionDisabled({hint}) {
-    return _ffiWantsOutputs.isOutputSubstitutionDisabled();
+  Future<OutputSubstitution> outputSubstitution({hint}) {
+    return _ffiWantsOutputs.outputSubstitution();
   }
 
   Future<WantsOutputs> replaceReceiverOutputs(
