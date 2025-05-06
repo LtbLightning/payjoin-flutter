@@ -9,6 +9,8 @@ import 'package:payjoin_flutter/receive.dart' as receive;
 import 'package:payjoin_flutter/common.dart';
 import 'package:payjoin_flutter/uri.dart' as pj_uri;
 import 'package:payjoin_flutter/send.dart' as send;
+import 'package:payjoin_flutter/src/generated/api/send.dart';
+import 'package:payjoin_flutter/src/generated/lib.dart' as lib;
 
 class PayjoinManager {
   static const pjUrl = "https://localhost:8088";
@@ -31,32 +33,6 @@ class PayjoinManager {
       debugPrint(e.toString());
       rethrow;
     }
-  }
-
-  Future<(String, receive.Receiver)> buildV2PjStr({
-    int? amount,
-    required String address,
-    required Network network,
-    required int expireAfter,
-  }) async {
-    final session = await startV2ReceiveSession(
-      address: address,
-      network: network,
-      expireAfter: expireAfter,
-    );
-    String pjUriStr;
-    final pjUriBuilder = session.pjUriBuilder();
-    if (amount != null) {
-      final pjUriBuilderWithAmount =
-          pjUriBuilder.amountSats(amount: BigInt.from(amount));
-      final pjUri = pjUriBuilderWithAmount.build();
-      pjUriStr = pjUri.asString();
-    } else {
-      final pjUri = pjUriBuilder.build();
-      pjUriStr = pjUri.asString();
-    }
-
-    return (pjUriStr, session);
   }
 
   Future<pj_uri.Uri> stringToUri(String pj) async {
@@ -106,9 +82,19 @@ class PayjoinManager {
   ) async {
     final senderBuilder = await send.SenderBuilder.fromPsbtAndUri(
         psbtBase64: originalPsbt, pjUri: pjUri.checkPjSupported());
-    final sender =
+    final newSender =
         await senderBuilder.buildRecommended(minFeeRate: BigInt.from(250));
-
+    final imp = InMemorySenderPersister();
+    final persister = DartSenderPersister(
+      save: (sender) async {
+        return await imp.save(sender: sender);
+      },
+      load: (token) async {
+        return await imp.load(token: token);
+      },
+    );
+    final token = await newSender.persist(persister: persister);
+    final sender = await send.Sender.load(token: token, persister: persister);
     return sender;
   }
 
@@ -140,7 +126,7 @@ class PayjoinManager {
         debugPrint('Polling for V2 Proposal...');
         try {
           final (getReq, ohttpCtx) = await getCtx.extractReq(
-            ohttpRelay: await pj_uri.Url.fromStr(ohttpRelay),
+            ohttpRelay: ohttpRelay,
           );
 
           // Post the loop request to the server
@@ -251,28 +237,6 @@ class PayjoinManager {
     return transaction;
   }
 
-  Future<receive.Receiver> startV2ReceiveSession({
-    required String address,
-    required Network network,
-    required int expireAfter,
-  }) async {
-    final ohttpRelayUrl = await pj_uri.Url.fromStr(ohttpRelay);
-    final payjoinDirectoryUrl = await pj_uri.Url.fromStr(payjoinDirectory);
-    pj_uri.OhttpKeys ohttpKeys = await pj_uri.fetchOhttpKeys(
-      ohttpRelay: ohttpRelayUrl,
-      payjoinDirectory: payjoinDirectoryUrl,
-    );
-
-    return await receive.Receiver.create(
-      address: address,
-      ohttpRelay: ohttpRelayUrl,
-      directory: payjoinDirectoryUrl,
-      ohttpKeys: ohttpKeys,
-      network: Network.signet,
-      expireAfter: BigInt.from(expireAfter),
-    );
-  }
-
   // Future<(bdk.Transaction originalTx, receive.PayjoinProposal)>
   //     _handleV2Request({
   //   required receive.UncheckedProposal proposal,
@@ -365,4 +329,35 @@ class PayjoinManager {
     debugPrint('PSBT after: ${psbt.toString()}');
     return psbt.asString();
   }
+}
+
+/// A simple in-memory implementation of the `SenderPersister` interface.
+/// This class stores the sender data in memory and allows saving and loading
+/// of `FfiSender` instances using a token as a key.
+class InMemorySenderPersister implements DartSenderPersister {
+  final Map<String, FfiSender> _store = {};
+
+  Future<SenderToken> save({required FfiSender sender}) async {
+    final token = sender.key();
+    debugPrint('TOKEN SAVE: ${token.toBytes()}');
+    _store[token.toBytes().toString()] = sender;
+    return token;
+  }
+
+  Future<FfiSender> load({required SenderToken token}) async {
+    debugPrint('TOKEN LOAD: ${token.toBytes()}');
+    final sender = _store[token.toBytes().toString()];
+    if (sender == null) {
+      throw Exception('Sender not found for the provided token.');
+    }
+    return sender;
+  }
+
+  @override
+  void dispose() {
+    _store.clear();
+  }
+
+  @override
+  bool get isDisposed => _store.isEmpty;
 }

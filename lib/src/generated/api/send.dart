@@ -3,38 +3,64 @@
 
 // ignore_for_file: invalid_use_of_internal_member, unused_import, unnecessary_import
 
+import '../api.dart';
 import '../frb_generated.dart';
 import '../lib.dart';
-import '../utils/error.dart';
 import '../utils/types.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
+import 'receive/error.dart';
+import 'send/error.dart';
 import 'uri.dart';
 
-// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `from`, `from`, `from`, `from`, `from`, `from`
+// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `from`, `load`, `save`
 
-class FfiSender {
-  final Sender field0;
+// Rust type: RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<DartSenderPersister>>
+abstract class DartSenderPersister implements RustOpaqueInterface {
+  factory DartSenderPersister(
+          {required FutureOr<SenderToken> Function(FfiSender) save,
+          required FutureOr<FfiSender> Function(SenderToken) load}) =>
+      core.instance.api
+          .crateApiSendDartSenderPersisterNew(save: save, load: load);
+}
 
-  const FfiSender({
-    required this.field0,
-  });
-
-  Future<(Request, FfiV1Context)> extractV1() =>
-      core.instance.api.crateApiSendFfiSenderExtractV1(
-        that: this,
-      );
+// Rust type: RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<FfiSender>>
+abstract class FfiSender implements RustOpaqueInterface {
+  Future<(Request, FfiV1Context)> extractV1();
 
   Future<(Request, FfiV2PostContext)> extractV2(
-          {required FfiUrl ohttpProxyUrl}) =>
-      core.instance.api.crateApiSendFfiSenderExtractV2(
-          that: this, ohttpProxyUrl: ohttpProxyUrl);
+      {required FfiUrl ohttpProxyUrl});
 
   static FfiSender fromJson({required String json}) =>
       core.instance.api.crateApiSendFfiSenderFromJson(json: json);
 
-  String toJson() => core.instance.api.crateApiSendFfiSenderToJson(
-        that: this,
-      );
+  SenderToken key();
+
+  static Future<FfiSender> load(
+          {required SenderToken token,
+          required DartSenderPersister persister}) =>
+      core.instance.api
+          .crateApiSendFfiSenderLoad(token: token, persister: persister);
+
+  String toJson();
+}
+
+// Rust type: RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<SenderToken>>
+abstract class SenderToken implements RustOpaqueInterface {
+  /// Convert the sender token to a byte array
+  /// This is most useful when storing the token as a key in a map
+  Uint8List toBytes();
+}
+
+class FfiNewSender {
+  final NewSender field0;
+
+  const FfiNewSender({
+    required this.field0,
+  });
+
+  Future<SenderToken> persist({required DartSenderPersister persister}) =>
+      core.instance.api
+          .crateApiSendFfiNewSenderPersist(that: this, persister: persister);
 
   @override
   int get hashCode => field0.hashCode;
@@ -42,7 +68,7 @@ class FfiSender {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is FfiSender &&
+      other is FfiNewSender &&
           runtimeType == other.runtimeType &&
           field0 == other.field0;
 }
@@ -54,21 +80,21 @@ class FfiSenderBuilder {
     required this.field0,
   });
 
-  Future<FfiSenderBuilder> alwaysDisableOutputSubstitution(
-          {required bool disable}) =>
+  Future<FfiSenderBuilder> alwaysDisableOutputSubstitution() =>
       core.instance.api
           .crateApiSendFfiSenderBuilderAlwaysDisableOutputSubstitution(
-              that: this, disable: disable);
+        that: this,
+      );
 
-  Future<FfiSender> buildNonIncentivizing({required BigInt minFeeRate}) =>
+  Future<FfiNewSender> buildNonIncentivizing({required BigInt minFeeRate}) =>
       core.instance.api.crateApiSendFfiSenderBuilderBuildNonIncentivizing(
           that: this, minFeeRate: minFeeRate);
 
-  Future<FfiSender> buildRecommended({required BigInt minFeeRate}) =>
+  Future<FfiNewSender> buildRecommended({required BigInt minFeeRate}) =>
       core.instance.api.crateApiSendFfiSenderBuilderBuildRecommended(
           that: this, minFeeRate: minFeeRate);
 
-  Future<FfiSender> buildWithAdditionalFee(
+  Future<FfiNewSender> buildWithAdditionalFee(
           {required BigInt maxFeeContribution,
           int? changeIndex,
           required BigInt minFeeRate,
@@ -125,7 +151,7 @@ class FfiV2GetContext {
     required this.field0,
   });
 
-  Future<(Request, ClientResponse)> extractReq({required FfiUrl ohttpRelay}) =>
+  Future<(Request, ClientResponse)> extractReq({required String ohttpRelay}) =>
       core.instance.api.crateApiSendFfiV2GetContextExtractReq(
           that: this, ohttpRelay: ohttpRelay);
 

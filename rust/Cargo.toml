@@ -1,6 +1,6 @@
 [package]
-name = "payjoin_flutter"
-version = "0.21.0"
+name = "payjoin-flutter"
+version = "0.23.0"
 edition = "2021"
 
 [lib]
@@ -15,8 +15,10 @@ bdk = { version = "0.29.0", features = [
 bitcoincore-rpc = "0.19.0"
 anyhow = "1.0.68"
 [dependencies]
-bitcoin-ffi = { git = "https://github.com/bitcoindevkit/bitcoin-ffi.git", rev = "4cd8e644dbf4e001d71d5fffb232480fa5ff2246" }
-payjoin_ffi = { git = "https://github.com/LtbLightning/payjoin-ffi", tag = "v0.22.0" }
+lazy_static = "1.4.0"
+bitcoin-ffi = { git = "https://github.com/bitcoindevkit/bitcoin-ffi.git", rev = "6b1d131" }
+payjoin = { version = "0.23.0", features = ["io"] }
+payjoin-ffi = { git = "https://github.com/LtbLightning/payjoin-ffi", tag = "v0.23.0" }
 flutter_rust_bridge = "=2.0.0"
 anyhow = "1.0.68"
 tokio = "1.36.0"
@@ -30,4 +32,4 @@ codegen-units = 1
 panic = "abort"
 
 [features]
-_danger-local-https = ["payjoin_ffi/_danger-local-https"]
+_danger-local-https = ["payjoin-ffi/_danger-local-https"]

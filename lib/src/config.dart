@@ -1,4 +1,3 @@
-import 'exceptions.dart';
 import 'generated/frb_generated.dart';
 
 class PConfig {
@@ -8,7 +7,7 @@ class PConfig {
         await core.init();
       }
     } catch (e) {
-      throw PayjoinException(message: "failed to initialize payjoin");
+      throw "failed to initialize payjoin";
     }
   }
 }

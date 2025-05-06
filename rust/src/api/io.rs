@@ -1,5 +1,6 @@
-use crate::api::uri::{FfiOhttpKeys, FfiUrl};
-use crate::utils::error::PayjoinError;
+use error::FfiIoError;
+
+use crate::api::uri::FfiOhttpKeys;
 
 /// Fetch the ohttp keys from the specified payjoin directory via proxy.
 ///
@@ -13,18 +14,44 @@ use crate::utils::error::PayjoinError;
 /// * `cert_der` (optional): The DER-encoded certificate to use for local HTTPS connections.  This
 /// parameter is only available when the "danger-local-https" feature is enabled.
 pub async fn fetch_ohttp_keys(
-    ohttp_relay: FfiUrl,
-    payjoin_directory: FfiUrl,
-    #[cfg(feature = "_danger-local-https")] cert_der: Vec<u8>,
-) -> Result<FfiOhttpKeys, PayjoinError> {
-    #[cfg(not(feature = "_danger-local-https"))]
-    let res =
-        payjoin_ffi::io::fetch_ohttp_keys((*ohttp_relay.0).clone(), (*payjoin_directory.0).clone());
-    #[cfg(feature = "_danger-local-https")]
-    let res = payjoin_ffi::io::fetch_ohttp_keys(
-        (*ohttp_relay.0).clone(),
-        (*payjoin_directory.0).clone(),
-        cert_der,
-    );
-    res.await.map(|e| e.into()).map_err(|e| e.into())
+    ohttp_relay: String,
+    payjoin_directory: String,
+) -> Result<FfiOhttpKeys, FfiIoError> {
+    payjoin_ffi::io::fetch_ohttp_keys(&ohttp_relay, &payjoin_directory)
+        .await
+        .map(Into::into)
+        .map_err(Into::into)
+}
+
+/// Fetch the ohttp keys from the specified payjoin directory via proxy.
+///
+/// * `ohttp_relay`: The http CONNNECT method proxy to request the ohttp keys from a payjoin
+///   directory.  Proxying requests for ohttp keys ensures a client IP address is never revealed to
+///   the payjoin directory.
+///
+/// * `payjoin_directory`: The payjoin directory from which to fetch the ohttp keys.  This
+///   directory stores and forwards payjoin client payloads.
+///
+/// * `cert_der`: The DER-encoded certificate to use for local HTTPS connections.
+#[cfg(feature = "_danger-local-https")]
+pub async fn fetch_ohttp_keys_with_cert(
+    ohttp_relay: String,
+    payjoin_directory: String,
+    cert_der: Vec<u8>,
+) -> Result<FfiOhttpKeys, FfiIoError> {
+    payjoin_ffi::io::fetch_ohttp_keys(ohttp_relay, payjoin_directory, cert_der)
+        .await
+        .map(Into::into)
+}
+
+pub mod error {
+    use crate::frb_generated::RustAutoOpaque;
+
+    pub struct FfiIoError(pub(crate) RustAutoOpaque<payjoin_ffi::io::IoError>);
+
+    impl From<payjoin_ffi::io::IoError> for FfiIoError {
+        fn from(value: payjoin_ffi::io::IoError) -> Self {
+            Self(RustAutoOpaque::new(value))
+        }
+    }
 }

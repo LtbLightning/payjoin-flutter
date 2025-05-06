@@ -9,6 +9,54 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 // Rust type: RustOpaqueNom<bitcoin_ffi :: Script>
 abstract class Script implements RustOpaqueInterface {}
 
+// Rust type: RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner< Error>>
+abstract class Error implements RustOpaqueInterface {}
+
+// Rust type: RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner< ImplementationError>>
+abstract class ImplementationError implements RustOpaqueInterface {}
+
+// Rust type: RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner< InputContributionError>>
+abstract class InputContributionError implements RustOpaqueInterface {}
+
+// Rust type: RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner< IntoUrlError>>
+abstract class IntoUrlError implements RustOpaqueInterface {}
+
+// Rust type: RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner< IoError>>
+abstract class IoError implements RustOpaqueInterface {}
+
+// Rust type: RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner< OhttpError>>
+abstract class OhttpError implements RustOpaqueInterface {}
+
+// Rust type: RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner< OutputSubstitutionError>>
+abstract class OutputSubstitutionError implements RustOpaqueInterface {}
+
+// Rust type: RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner< PjNotSupported>>
+abstract class PjNotSupported implements RustOpaqueInterface {}
+
+// Rust type: RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner< PjParseError>>
+abstract class PjParseError implements RustOpaqueInterface {}
+
+// Rust type: RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner< PsbtInputError>>
+abstract class PsbtInputError implements RustOpaqueInterface {}
+
+// Rust type: RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner< ReplyableError>>
+abstract class ReplyableError implements RustOpaqueInterface {}
+
+// Rust type: RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner< ResponseError>>
+abstract class ResponseError implements RustOpaqueInterface {}
+
+// Rust type: RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner< SelectionError>>
+abstract class SelectionError implements RustOpaqueInterface {}
+
+// Rust type: RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner< SerdeJsonError>>
+abstract class SerdeJsonError implements RustOpaqueInterface {}
+
+// Rust type: RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner< SessionError>>
+abstract class SessionError implements RustOpaqueInterface {}
+
+// Rust type: RustOpaqueNom<flutter_rust_bridge::for_generated::RustAutoOpaqueInner< UrlParseError>>
+abstract class UrlParseError implements RustOpaqueInterface {}
+
 // Rust type: RustOpaqueNom<payjoin_ffi :: OhttpKeys>
 abstract class OhttpKeys implements RustOpaqueInterface {}
 
@@ -24,6 +72,9 @@ abstract class MaybeInputsOwned implements RustOpaqueInterface {}
 // Rust type: RustOpaqueNom<payjoin_ffi :: receive :: MaybeInputsSeen>
 abstract class MaybeInputsSeen implements RustOpaqueInterface {}
 
+// Rust type: RustOpaqueNom<payjoin_ffi :: receive :: NewReceiver>
+abstract class NewReceiver implements RustOpaqueInterface {}
+
 // Rust type: RustOpaqueNom<payjoin_ffi :: receive :: OutputsUnknown>
 abstract class OutputsUnknown implements RustOpaqueInterface {}
 
@@ -32,9 +83,6 @@ abstract class PayjoinProposal implements RustOpaqueInterface {}
 
 // Rust type: RustOpaqueNom<payjoin_ffi :: receive :: ProvisionalProposal>
 abstract class ProvisionalProposal implements RustOpaqueInterface {}
-
-// Rust type: RustOpaqueNom<payjoin_ffi :: receive :: Receiver>
-abstract class Receiver implements RustOpaqueInterface {}
 
 // Rust type: RustOpaqueNom<payjoin_ffi :: receive :: UncheckedProposal>
 abstract class UncheckedProposal implements RustOpaqueInterface {}
@@ -45,8 +93,8 @@ abstract class WantsInputs implements RustOpaqueInterface {}
 // Rust type: RustOpaqueNom<payjoin_ffi :: receive :: WantsOutputs>
 abstract class WantsOutputs implements RustOpaqueInterface {}
 
-// Rust type: RustOpaqueNom<payjoin_ffi :: send :: Sender>
-abstract class Sender implements RustOpaqueInterface {}
+// Rust type: RustOpaqueNom<payjoin_ffi :: send :: NewSender>
+abstract class NewSender implements RustOpaqueInterface {}
 
 // Rust type: RustOpaqueNom<payjoin_ffi :: send :: SenderBuilder>
 abstract class SenderBuilder implements RustOpaqueInterface {}
@@ -59,12 +107,6 @@ abstract class V2GetContext implements RustOpaqueInterface {}
 
 // Rust type: RustOpaqueNom<payjoin_ffi :: send :: V2PostContext>
 abstract class V2PostContext implements RustOpaqueInterface {}
-
-// Rust type: RustOpaqueNom<payjoin_ffi :: uri :: PjUri>
-abstract class PjUri implements RustOpaqueInterface {}
-
-// Rust type: RustOpaqueNom<payjoin_ffi :: uri :: PjUriBuilder>
-abstract class PjUriBuilder implements RustOpaqueInterface {}
 
 // Rust type: RustOpaqueNom<payjoin_ffi :: uri :: Uri>
 abstract class Uri implements RustOpaqueInterface {}
