@@ -1,5 +1,5 @@
 [package]
-name = "payjoin-flutter"
+name = "payjoin_flutter"
 version = "0.23.0"
 edition = "2021"
 
@@ -19,10 +19,11 @@ lazy_static = "1.4.0"
 bitcoin-ffi = { git = "https://github.com/bitcoindevkit/bitcoin-ffi.git", rev = "6b1d131" }
 payjoin = { version = "0.23.0", features = ["io"] }
 payjoin-ffi = { git = "https://github.com/LtbLightning/payjoin-ffi", tag = "v0.23.0" }
-flutter_rust_bridge = "=2.0.0"
+flutter_rust_bridge = "=2.9.0"
 anyhow = "1.0.68"
 tokio = "1.36.0"
 base64 = "0.22.1"
+flutter_rust_bridge_macros = "=2.9.0"
 
 [profile.release]
 strip = true
@@ -33,3 +34,6 @@ panic = "abort"
 
 [features]
 _danger-local-https = ["payjoin-ffi/_danger-local-https"]
+
+[lints.rust]
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(has_foo)'] }

@@ -1,7 +1,7 @@
 use std::sync::Arc;
 
 use error::{FfiPjNotSupported, FfiPjParseError, FfiUrlParseError};
-use flutter_rust_bridge::frb;
+use flutter_rust_bridge_macros::frb;
 
 use crate::api::ohttp::error::FfiOhttpError;
 use crate::frb_generated::RustOpaque;
