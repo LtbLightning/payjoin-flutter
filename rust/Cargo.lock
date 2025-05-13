@@ -1714,7 +1714,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "payjoin-flutter"
+name = "payjoin_flutter"
 version = "0.23.0"
 dependencies = [
  "anyhow",

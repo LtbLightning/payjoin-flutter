@@ -1,5 +1,5 @@
 [package]
-name = "payjoin-flutter"
+name = "payjoin_flutter"
 version = "0.23.0"
 edition = "2021"
 
