@@ -1,6 +1,8 @@
 import 'src/generated/api/io.dart' as io;
 import 'src/generated/api/uri.dart';
 
+typedef PjUri = FfiPjUri;
+
 class Uri extends FfiUri {
   Uri._({required super.field0});
 

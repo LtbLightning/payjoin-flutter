@@ -4,13 +4,8 @@ import 'dart:typed_data';
 import 'package:bdk_flutter/bdk_flutter.dart' as bdk;
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
-import 'package:payjoin_flutter/receive.dart' as receive;
-// ignore: implementation_imports
-import 'package:payjoin_flutter/common.dart';
 import 'package:payjoin_flutter/uri.dart' as pj_uri;
-import 'package:payjoin_flutter/send.dart' as send;
-import 'package:payjoin_flutter/src/generated/api/send.dart';
-import 'package:payjoin_flutter/src/generated/lib.dart' as lib;
+import 'package:payjoin_flutter/send.dart';
 
 class PayjoinManager {
   static const pjUrl = "https://localhost:8088";
@@ -75,12 +70,12 @@ class PayjoinManager {
     return psbtBase64;
   }
 
-  Future<send.Sender> buildPayjoinRequest(
+  Future<Sender> buildPayjoinRequest(
     String originalPsbt,
     pj_uri.Uri pjUri,
     int fee,
   ) async {
-    final senderBuilder = await send.SenderBuilder.fromPsbtAndUri(
+    final senderBuilder = await SenderBuilder.fromPsbtAndUri(
         psbtBase64: originalPsbt, pjUri: pjUri.checkPjSupported());
     final newSender =
         await senderBuilder.buildRecommended(minFeeRate: BigInt.from(250));
@@ -94,12 +89,12 @@ class PayjoinManager {
       },
     );
     final token = await newSender.persist(persister: persister);
-    final sender = await send.Sender.load(token: token, persister: persister);
+    final sender = await Sender.load(token: token, persister: persister);
     return sender;
   }
 
   Future<String> requestAndPollV2Proposal(
-    send.Sender sender,
+    Sender sender,
   ) async {
     debugPrint('Sending V2 Proposal Request...');
     try {
@@ -196,7 +191,7 @@ class PayjoinManager {
   }
 
   Future<String> processV1Proposal(
-    send.Sender sender,
+    Sender sender,
     String proposalPsbt,
   ) async {
     final (_, ctx) = await sender.extractV1();
@@ -335,16 +330,16 @@ class PayjoinManager {
 /// This class stores the sender data in memory and allows saving and loading
 /// of `FfiSender` instances using a token as a key.
 class InMemorySenderPersister implements DartSenderPersister {
-  final Map<String, FfiSender> _store = {};
+  final Map<String, Sender> _store = {};
 
-  Future<SenderToken> save({required FfiSender sender}) async {
+  Future<SenderToken> save({required Sender sender}) async {
     final token = sender.key();
     debugPrint('TOKEN SAVE: ${token.toBytes()}');
     _store[token.toBytes().toString()] = sender;
     return token;
   }
 
-  Future<FfiSender> load({required SenderToken token}) async {
+  Future<Sender> load({required SenderToken token}) async {
     debugPrint('TOKEN LOAD: ${token.toBytes()}');
     final sender = _store[token.toBytes().toString()];
     if (sender == null) {
