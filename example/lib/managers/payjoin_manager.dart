@@ -4,7 +4,6 @@ import 'dart:typed_data';
 import 'package:bdk_flutter/bdk_flutter.dart' as bdk;
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
-import 'package:payjoin_flutter/receive.dart' as receive;
 // ignore: implementation_imports
 import 'package:payjoin_flutter/common.dart';
 import 'package:payjoin_flutter/uri.dart' as pj_uri;

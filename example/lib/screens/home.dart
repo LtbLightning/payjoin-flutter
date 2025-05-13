@@ -13,8 +13,6 @@ import 'package:payjoin_flutter/send.dart';
 import 'package:payjoin_flutter/uri.dart' as pjuri;
 import 'package:url_launcher/url_launcher.dart';
 import '../widgets/widgets.dart';
-import 'package:payjoin_flutter/src/generated/api/send.dart';
-import 'package:payjoin_flutter/src/generated/api/receive.dart';
 
 const payjoinDirectory = "https://payjo.in";
 const ohttpRelay = "https://pj.bobspacebkk.com";
@@ -606,7 +604,7 @@ class _HomeState extends State<Home> {
             scriptSig: await Script.newInstance(rawOutputScript: []),
             witness: [],
             sequence: 0);
-        final ip = await InputPair.newInstance(txin, psbtin);
+        final ip = await InputPair.newInstance(txin: txin, psbtin: psbtin);
         candidateInputs.add(ip);
       }
       final inputPair = await wantsInputs.tryPreservingPrivacy(
@@ -780,9 +778,9 @@ class _HomeState extends State<Home> {
 /// This class stores the receiver data in memory and allows saving and loading
 /// of `FfiReceiver` instances using a token as a key.
 class InMemoryReceiverPersister {
-  final Map<String, FfiReceiver> _store = {};
+  final Map<String, Receiver> _store = {};
 
-  Future<ReceiverToken> save({required FfiReceiver receiver}) async {
+  Future<ReceiverToken> save({required Receiver receiver}) async {
     debugPrint('SAVING RECEIVER');
     final token = receiver.key();
     debugPrint('TOKEN GET: ${token.toBytes()}');
@@ -791,7 +789,7 @@ class InMemoryReceiverPersister {
     return token;
   }
 
-  Future<FfiReceiver> load({required ReceiverToken token}) async {
+  Future<Receiver> load({required ReceiverToken token}) async {
     debugPrint('LOADING RECEIVER ${token.toBytes()}');
     final receiver = _store[token.toBytes().toString()];
     if (receiver == null) {
