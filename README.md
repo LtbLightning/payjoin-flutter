@@ -8,11 +8,11 @@ To use the `payjoin_flutter` package in your project, add it as a dependency in 
 
 ```dart
 dependencies:
-payjoin_flutter: 0.22.0
+payjoin_flutter: 0.23.0
 ```
 ### Requirements
 
-- Flutter : 3.0 or higher
+- Flutter : 3.3 or higher
 - Android minSdkVersion. : API 23 or higher.
 - Deployment target : iOS 12.0 or greater.
 
