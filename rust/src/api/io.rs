@@ -45,13 +45,7 @@ pub async fn fetch_ohttp_keys_with_cert(
 }
 
 pub mod error {
-    use crate::frb_generated::RustAutoOpaque;
+    use crate::ffi_opaque_wrapper;
 
-    pub struct FfiIoError(pub(crate) RustAutoOpaque<payjoin_ffi::io::IoError>);
-
-    impl From<payjoin_ffi::io::IoError> for FfiIoError {
-        fn from(value: payjoin_ffi::io::IoError) -> Self {
-            Self(RustAutoOpaque::new(value))
-        }
-    }
+    ffi_opaque_wrapper!(FfiIoError, payjoin_ffi::io::IoError);
 }

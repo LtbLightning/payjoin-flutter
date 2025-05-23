@@ -1,4 +1,4 @@
-use crate::frb_generated::RustAutoOpaque;
+use crate::ffi_opaque_wrapper;
 
 pub struct FfiBuildSenderError {
     pub(crate) msg: String,
@@ -30,20 +30,6 @@ impl From<payjoin_ffi::send::EncapsulationError> for FfiEncapsulationError {
     }
 }
 
-pub struct FfiValidationError(pub(crate) RustAutoOpaque<payjoin_ffi::send::error::ValidationError>);
-
-impl From<payjoin_ffi::send::error::ValidationError> for FfiValidationError {
-    fn from(value: payjoin_ffi::send::error::ValidationError) -> Self {
-        Self(RustAutoOpaque::new(value))
-    }
-}
-
-pub struct FfiWellKnownError(pub(crate) RustAutoOpaque<payjoin_ffi::send::error::WellKnownError>);
-
-pub struct FfiResponseError(pub(crate) RustAutoOpaque<payjoin_ffi::send::error::ResponseError>);
-
-impl From<payjoin_ffi::send::error::ResponseError> for FfiResponseError {
-    fn from(value: payjoin_ffi::send::error::ResponseError) -> Self {
-        Self(RustAutoOpaque::new(value))
-    }
-}
+ffi_opaque_wrapper!(FfiValidationError, payjoin_ffi::send::error::ValidationError);
+ffi_opaque_wrapper!(FfiWellKnownError, payjoin_ffi::send::error::WellKnownError);
+ffi_opaque_wrapper!(FfiResponseError, payjoin_ffi::send::error::ResponseError);
