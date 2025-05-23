@@ -13,6 +13,12 @@ macro_rules! ffi_opaque_wrapper {
                 Self(crate::frb_generated::RustAutoOpaque::new(value))
             }
         }
+        impl $wrapper {
+            #[flutter_rust_bridge::frb(sync)]
+            pub fn message(&self) -> String {
+                self.0.blocking_read().to_string()
+            }
+        }
     };
 }
 
