@@ -4,26 +4,22 @@ pub mod receive;
 pub mod send;
 pub mod uri;
 
-use crate::frb_generated::RustAutoOpaque;
-
-pub struct FfiSerdeJsonError(pub(crate) RustAutoOpaque<payjoin_ffi::error::SerdeJsonError>);
-
-impl From<payjoin_ffi::error::SerdeJsonError> for FfiSerdeJsonError {
-    fn from(value: payjoin_ffi::error::SerdeJsonError) -> Self {
-        Self(RustAutoOpaque::new(value))
-    }
+#[macro_export]
+macro_rules! ffi_opaque_wrapper {
+    ($wrapper:ident, $inner:path) => {
+        pub struct $wrapper(pub(crate) crate::frb_generated::RustAutoOpaque<$inner>);
+        impl From<$inner> for $wrapper {
+            fn from(value: $inner) -> Self {
+                Self(crate::frb_generated::RustAutoOpaque::new(value))
+            }
+        }
+    };
 }
+
+ffi_opaque_wrapper!(FfiSerdeJsonError, payjoin_ffi::error::SerdeJsonError);
 
 pub mod ohttp {
     pub mod error {
-        use crate::frb_generated::RustAutoOpaque;
-
-        pub struct FfiOhttpError(pub(crate) RustAutoOpaque<payjoin_ffi::ohttp::error::OhttpError>);
-
-        impl From<payjoin_ffi::ohttp::error::OhttpError> for FfiOhttpError {
-            fn from(value: payjoin_ffi::ohttp::error::OhttpError) -> Self {
-                Self(RustAutoOpaque::new(value))
-            }
-        }
+        ffi_opaque_wrapper!(FfiOhttpError, payjoin_ffi::ohttp::error::OhttpError);
     }
 }
