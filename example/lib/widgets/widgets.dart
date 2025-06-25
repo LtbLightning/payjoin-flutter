@@ -174,13 +174,21 @@ enum FeeRangeEnum {
 }
 
 class FeesRangeOptions extends StatefulWidget {
-  FeesRangeOptions({super.key, this.feeRange = FeeRangeEnum.high});
-  FeeRangeEnum? feeRange;
+  const FeesRangeOptions({super.key, this.feeRange = FeeRangeEnum.high});
+  final FeeRangeEnum? feeRange;
   @override
   State<FeesRangeOptions> createState() => _FeesRangeOptionsState();
 }
 
 class _FeesRangeOptionsState extends State<FeesRangeOptions> {
+  late FeeRangeEnum? currentFeeRange;
+
+  @override
+  void initState() {
+    super.initState();
+    currentFeeRange = widget.feeRange;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -192,7 +200,7 @@ class _FeesRangeOptionsState extends State<FeesRangeOptions> {
             trailing: Text(FeeRangeEnum.high.toString()),
           ),
           value: FeeRangeEnum.high,
-          groupValue: widget.feeRange,
+          groupValue: currentFeeRange,
           onChanged: onChangeFeeRange,
         ),
         RadioListTile<FeeRangeEnum>(
@@ -202,7 +210,7 @@ class _FeesRangeOptionsState extends State<FeesRangeOptions> {
             trailing: Text(FeeRangeEnum.medium.toString()),
           ),
           value: FeeRangeEnum.medium,
-          groupValue: widget.feeRange,
+          groupValue: currentFeeRange,
           onChanged: onChangeFeeRange,
         ),
         RadioListTile<FeeRangeEnum>(
@@ -212,7 +220,7 @@ class _FeesRangeOptionsState extends State<FeesRangeOptions> {
             trailing: Text(FeeRangeEnum.low.toString()),
           ),
           value: FeeRangeEnum.low,
-          groupValue: widget.feeRange,
+          groupValue: currentFeeRange,
           onChanged: onChangeFeeRange,
         ),
       ],
@@ -221,8 +229,8 @@ class _FeesRangeOptionsState extends State<FeesRangeOptions> {
 
   onChangeFeeRange(FeeRangeEnum? value) {
     setState(() {
-      widget.feeRange = value;
-      Navigator.pop(context, widget.feeRange);
+      currentFeeRange = value;
+      Navigator.pop(context, currentFeeRange);
     });
   }
 }

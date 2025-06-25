@@ -12,6 +12,7 @@ import 'package:payjoin_flutter/receive.dart';
 import 'package:payjoin_flutter/send.dart';
 import 'package:payjoin_flutter/uri.dart' as pjuri;
 import 'package:url_launcher/url_launcher.dart';
+
 import '../widgets/widgets.dart';
 
 const payjoinDirectory = "https://payjo.in";
@@ -680,7 +681,7 @@ class _HomeState extends State<Home> {
     // Create receiver session with new bindings
     debugPrint('INITIALIZING PERSISTER');
 
-    final newReceiver = await NewReceiver.create(
+    final newReceiver = NewReceiver.create(
       address: recipientAddress.text,
       network: Network.signet,
       directory: payjoinDirectory,
@@ -798,11 +799,9 @@ class InMemoryReceiverPersister {
     return receiver;
   }
 
-  @override
   void dispose() {
     _store.clear();
   }
 
-  @override
   bool get isDisposed => _store.isEmpty;
 }
