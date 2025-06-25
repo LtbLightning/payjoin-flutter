@@ -1,8 +1,9 @@
 ## [0.23.0]
 
-Update to `payjoin-ffi` version ` 0.23.0` ([see
+- Update to `payjoin-ffi` version ` 0.23.0` ([see
 changelog](https://github.com/LtbLightning/payjoin-ffi/blob/main/CHANGELOG.md#0230))
 which depends on `rust-payjoin` version `0.23.0` ([see changelog](https://github.com/payjoin/rust-payjoin/blob/master/payjoin/CHANGELOG.md#0230)).
+- Update `flutter_rust_bridge` to `2.9.0`.
 
 ## [0.22.0]
 
