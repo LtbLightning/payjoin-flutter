@@ -1,11 +1,10 @@
 import 'dart:convert';
-import 'dart:typed_data';
 
 import 'package:bdk_flutter/bdk_flutter.dart' as bdk;
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
-import 'package:payjoin_flutter/uri.dart' as pj_uri;
 import 'package:payjoin_flutter/send.dart';
+import 'package:payjoin_flutter/uri.dart' as pj_uri;
 
 class PayjoinManager {
   static const pjUrl = "https://localhost:8088";
@@ -301,11 +300,6 @@ class PayjoinManager {
   //     rethrow;
   //   }
   // }
-
-  Future<bool> _isOwned(Uint8List bytes, bdk.Wallet wallet) async {
-    final script = bdk.ScriptBuf(bytes: bytes);
-    return wallet.isMine(script: script);
-  }
 
   Future<String> processPsbt(String preProcessed, bdk.Wallet wallet) async {
     final psbt = await bdk.PartiallySignedTransaction.fromString(preProcessed);

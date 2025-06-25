@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 ThemeData theme() {
   Color secondaryColor = Colors.orange;
-  Color primaryColor = Colors.blue.withOpacity(.8);
+  Color primaryColor = Colors.blue.withValues(alpha: 0.8);
   return ThemeData(
       primaryColor: primaryColor,
       secondaryHeaderColor: secondaryColor,
@@ -17,7 +17,7 @@ ThemeData theme() {
           displayMedium: const TextStyle(
               color: Colors.black, fontWeight: FontWeight.w900, fontSize: 14.5),
           bodyLarge: TextStyle(
-              color: Colors.black.withOpacity(.8),
+              color: Colors.black.withValues(alpha: 0.8),
               fontWeight: FontWeight.w500,
               fontSize: 12),
           labelLarge: const TextStyle(
@@ -26,7 +26,7 @@ ThemeData theme() {
         border: InputBorder.none,
         contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
         hintStyle: TextStyle(
-            color: Colors.black.withOpacity(.4),
+            color: Colors.black.withValues(alpha: 0.4),
             fontWeight: FontWeight.w500,
             fontSize: 10),
       ));
