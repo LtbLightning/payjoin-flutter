@@ -53,8 +53,6 @@ flutter pub cache repair
 
 [Payjoin Dev Kit](https://payjoindevkit.org/)
 
-[mozilla/uniffi-rs](https://github.com/mozilla/uniffi-rs)
-
 ## Release Status and Disclaimer
 
 This project is in active development and currently in its Alpha stage. **Please proceed with caution**, particularly when using real funds.
